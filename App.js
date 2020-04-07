@@ -7,7 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AuthContext } from "./context";
 import { SignIn } from './screens/auth/SignInScreen';
 import { SignUp } from './screens/auth/SignUpScreen';
-import { ClientHome } from './screens/client/ClientHomeScreen';
+import { ClientHomeScreen } from './screens/client/ClientHomeScreen';
 import { ClientProfile } from './screens/client/ClientProfileScreen';
 import { PilotHome } from './screens/pilot/PilotHomeScreen';
 import { PilotProfile } from './screens/pilot/PilotProfileScreen';
@@ -22,7 +22,7 @@ SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
 
 export default () => {
-  const [userToken, setUserToken] = React.useState("clientToken");
+  const [userToken, setUserToken] = React.useState(null);
 
   const authContext = React.useMemo(() => {
     return {
@@ -61,8 +61,8 @@ return (
         )
       ) : (
         <AuthStack.Navigator>
-          <AuthStack.Screen name='SignIn' component={SignIn} />
-          <AuthStack.Screen name='SignUp' component={SignUp} />
+          <AuthStack.Screen name='SignIn' component={SignIn} options={{ title: 'Sign In'}}/>
+          <AuthStack.Screen name='SignUp' component={SignUp} options={{ title: 'Create Account'}}/>
         </AuthStack.Navigator>
       )
     }

@@ -5,44 +5,75 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AuthContext } from "./context";
-import { SignIn } from './screens/SignInScreen';
-import { SignUp } from './screens/SignUpScreen';
-import { Home } from './screens/HomeScreen';
-import { Profile } from './screens/ProfileScreen';
+import { SignIn } from './screens/auth/SignInScreen';
+import { SignUp } from './screens/auth/SignUpScreen';
+import { ClientHome } from './screens/client/ClientHomeScreen';
+import { ClientProfile } from './screens/client/ClientProfileScreen';
+import { PilotHome } from './screens/pilot/PilotHomeScreen';
+import { PilotProfile } from './screens/pilot/PilotProfileScreen';
 
 const AuthStack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
-const HomeStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const HomeStackScreen = () => (
-  <HomeStack.Navigator>
-    <HomeStack.Screen name='Home' component={Home} />
-  </HomeStack.Navigator>
+// Client Stuff
+
+const ClientHomeStack = createStackNavigator();
+const ClientProfileStack = createStackNavigator();
+
+const ClientHomeStackScreen = () => (
+  <ClientHomeStack.Navigator>
+    <ClientHomeStack.Screen name='ClientHome' component={ClientHome} />
+  </ClientHomeStack.Navigator>
 )
 
-const ProfileStackScreen = () => (
-  <ProfileStack.Navigator>
-    <ProfileStack.Screen name='Profile' component={Profile} />
-  </ProfileStack.Navigator>
+const ClientProfileStackScreen = () => (
+  <ClientProfileStack.Navigator>
+    <ClientProfileStack.Screen name='ClientProfile' component={ClientProfile} />
+  </ClientProfileStack.Navigator>
 )
 
-const TabsScreen = () => (
+const ClientTabsScreen = () => (
   <Tabs.Navigator>
-    <Tabs.Screen name='Home' component={HomeStackScreen} />
-    <Tabs.Screen name='Profile' component={ProfileStackScreen} />
+    <Tabs.Screen name='ClientHome' component={ClientHomeStackScreen} />
+    <Tabs.Screen name='ClientProfile' component={ClientProfileStackScreen} />
   </Tabs.Navigator>
 )
 
-const Drawer = createDrawerNavigator();
+// Pilot Stuff
+
+const PilotHomeStack = createStackNavigator();
+const PilotProfileStack = createStackNavigator();
+
+const PilotHomeStackScreen = () => (
+  <PilotHomeStack.Navigator>
+    <PilotHomeStack.Screen name='PilotHome' component={PilotHome} />
+  </PilotHomeStack.Navigator>
+)
+
+const PilotProfileStackScreen = () => (
+  <PilotProfileStack.Navigator>
+    <PilotProfileStack.Screen name='PilotProfile' component={PilotProfile} />
+  </PilotProfileStack.Navigator>
+)
+
+const PilotTabsScreen = () => (
+  <Tabs.Navigator>
+    <Tabs.Screen name='PilotHome' component={PilotHomeStackScreen} />
+    <Tabs.Screen name='PilotProfile' component={PilotProfileStackScreen} />
+  </Tabs.Navigator>
+)
 
 export default () => {
-  const [userToken, setUserToken] = React.useState('token');
+  const [userToken, setUserToken] = React.useState('clientToken');
 
   const authContext = React.useMemo(() => {
     return {
-      signIn: () => {
-        setUserToken('thisisausertoken');
+      signInPilot: () => {
+        setUserToken('pilotToken');
+      },
+      signInClient: () => {
+        setUserToken('clientToken');
       },
       signUp: () => {
         setUserToken('thisisausertoken');
@@ -53,24 +84,41 @@ export default () => {
     }
   }, [])
 
-  return (
-    <AuthContext.Provider>
-      <NavigationContainer>
-        {userToken ? (
+  if (userToken === 'clientToken') {
+    return (
+      <AuthContext.Provider>
+        <NavigationContainer>
           <Drawer.Navigator>
-            <Drawer.Screen name='Home' component={TabsScreen} />
-            <Drawer.Screen name='Profile' component={ProfileStackScreen} />
+            <Drawer.Screen name='ClientHome' component={ClientTabsScreen} />
+            <Drawer.Screen name='ClientProfile' component={ClientProfileStackScreen} />
           </Drawer.Navigator>
-        ) : (
+        </NavigationContainer>
+      </AuthContext.Provider>
+    )
+  } else if (userToken === 'pilotToken') {
+    return (
+      <AuthContext.Provider>
+        <NavigationContainer>
+          <Drawer.Navigator>
+            <Drawer.Screen name='PilotHome' component={PilotTabsScreen} />
+            <Drawer.Screen name='PilotProfile' component={PilotProfileStackScreen} />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </AuthContext.Provider>
+    )
+  } else {
+    return (
+      <AuthContext.Provider>
+        <NavigationContainer>
           <AuthStack.Navigator>
             <AuthStack.Screen name='SignIn' component={SignIn} />
             <AuthStack.Screen name='SignUp' component={SignUp} />
           </AuthStack.Navigator>
-        )}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    )
+  }
 
-      </NavigationContainer>
-    </AuthContext.Provider>
-  )
 }
 
 const styles = StyleSheet.create({

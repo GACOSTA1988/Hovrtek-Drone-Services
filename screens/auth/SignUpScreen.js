@@ -1,13 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { AuthContext } from "../context";
+import { AuthContext } from "../../context";
 
-export const Home = ({ navigation }) => (
-  <View style={styles.container}>
-    <Text>Master List Screen</Text>
-    <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
-  </View>
-);
+export const SignUp = ({ navigation }) => {
+  const signUp = React.useContext(AuthContext);
+
+  return (
+    <View style={styles.container}>
+      <Text>Sign Up Screen</Text>
+      <Button title='Sign Up' onPress={() => signUp()} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

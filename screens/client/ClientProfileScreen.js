@@ -1,13 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { AuthContext } from "../context";
+import { AuthContext } from "../../context";
 
-export const Profile = ({ navigation }) => {
+export const ClientProfile = ({ navigation }) => {
   const signOut = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
-      <Text>Profile Screen</Text>
+      <Text>Client Profile Screen</Text>
       <Button title='Go to home' onPress={() => {
         navigation.navigate('Home') }} />
       <Button title='Sign Out' onPress={() => signOut()} />

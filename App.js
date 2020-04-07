@@ -7,7 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AuthContext } from "./context";
 import { SignIn } from './screens/auth/SignInScreen';
 import { SignUp } from './screens/auth/SignUpScreen';
-import { ClientHome } from './screens/client/ClientHomeScreen';
+import { ClientHomeScreen } from './screens/client/ClientHomeScreen';
 import { ClientProfile } from './screens/client/ClientProfileScreen';
 import { PilotHome } from './screens/pilot/PilotHomeScreen';
 import { PilotProfile } from './screens/pilot/PilotProfileScreen';
@@ -23,7 +23,7 @@ const ClientProfileStack = createStackNavigator();
 
 const ClientHomeStackScreen = () => (
   <ClientHomeStack.Navigator>
-    <ClientHomeStack.Screen name='ClientHome' component={ClientHome} />
+    <ClientHomeStack.Screen name='ClientHomeScreen' component={ClientHomeScreen} />
   </ClientHomeStack.Navigator>
 )
 
@@ -33,6 +33,7 @@ const ClientProfileStackScreen = () => (
   </ClientProfileStack.Navigator>
 )
 
+// possibly delete?
 const ClientTabsScreen = () => (
   <Tabs.Navigator>
     <Tabs.Screen name='ClientHome' component={ClientHomeStackScreen} />

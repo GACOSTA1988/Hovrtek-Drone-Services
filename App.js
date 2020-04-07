@@ -75,8 +75,11 @@ export default () => {
       signInClient: () => {
         setUserToken('clientToken');
       },
-      signUp: () => {
-        setUserToken('thisisausertoken');
+      signUpPilot: () => {
+        setUserToken('pilotToken');
+      },
+      signUpClient: () => {
+        setUserToken('clientToken');
       },
       signOut: () => {
         setUserToken(null);
@@ -86,7 +89,7 @@ export default () => {
 
   if (userToken === 'clientToken') {
     return (
-      <AuthContext.Provider>
+      <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           <Drawer.Navigator>
             <Drawer.Screen name='ClientHome' component={ClientTabsScreen} />
@@ -97,7 +100,7 @@ export default () => {
     )
   } else if (userToken === 'pilotToken') {
     return (
-      <AuthContext.Provider>
+      <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           <Drawer.Navigator>
             <Drawer.Screen name='PilotHome' component={PilotTabsScreen} />
@@ -108,7 +111,7 @@ export default () => {
     )
   } else {
     return (
-      <AuthContext.Provider>
+      <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           <AuthStack.Navigator>
             <AuthStack.Screen name='SignIn' component={SignIn} />

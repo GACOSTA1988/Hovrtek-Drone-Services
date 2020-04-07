@@ -9,7 +9,7 @@ export const PilotProfile = ({ navigation }) => {
     <View style={styles.container}>
       <Text>Pilot Profile Screen</Text>
       <Button title='Go to home' onPress={() => {
-        navigation.navigate('Home') }} />
+        navigation.navigate('PilotHome') }} />
       <Button title='Sign Out' onPress={() => signOut()} />
     </View>
   )

@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -13,34 +13,38 @@ import { PilotHome } from './screens/pilot/PilotHomeScreen';
 import { PilotProfile } from './screens/pilot/PilotProfileScreen';
 import { ClientHomeStack, ClientProfileStack, ClientHomeStackScreen, ClientProfileStackScreen, ClientTabsScreen } from './navigation/ClientNavigation';
 import { PilotHomeStack, PilotProfileStack, PilotHomeStackScreen, PilotProfileStackScreen, PilotTabsScreen } from './navigation/PilotNavigation';
+import { SplashScreen } from "expo";
 
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+SplashScreen.preventAutoHide();
+setTimeout(SplashScreen.hide, 3500);
+
 export default () => {
-  const [userToken, setUserToken] = React.useState('clientToken');
+  const [userToken, setUserToken] = React.useState("clientToken");
 
   const authContext = React.useMemo(() => {
     return {
       signInPilot: () => {
-        setUserToken('pilotToken');
+        setUserToken("pilotToken");
       },
       signInClient: () => {
-        setUserToken('clientToken');
+        setUserToken("clientToken");
       },
       signUpPilot: () => {
-        setUserToken('pilotToken');
+        setUserToken("pilotToken");
       },
       signUpClient: () => {
-        setUserToken('clientToken');
+        setUserToken("clientToken");
       },
       signOut: () => {
         setUserToken(null);
       }
-    }
-  }, [])
+    };
+  }, []);
 
-  return (
+return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
       {userToken ? (
@@ -65,13 +69,14 @@ export default () => {
     </NavigationContainer>
   </AuthContext.Provider>
   )
-}
+
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });

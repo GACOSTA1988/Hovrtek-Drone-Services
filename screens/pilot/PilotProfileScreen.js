@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { AuthContext } from "../../context";
 
 export const PilotProfile = ({ navigation }) => {
-  const signOut = React.useContext(AuthContext);
+  const { signOut } = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>

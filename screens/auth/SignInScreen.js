@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { AuthContext } from "../../context";
 
 export const SignIn = ({ navigation }) => {
-  const signInPilot = React.useContext(AuthContext);
-  const signInClient = React.useContext(AuthContext);
+  const { signInPilot } = React.useContext(AuthContext);
+  const { signInClient } = React.useContext(AuthContext);
 
 
   return (

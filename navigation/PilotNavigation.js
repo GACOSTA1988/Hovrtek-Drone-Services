@@ -12,13 +12,13 @@ export const PilotHomeStack = createStackNavigator();
 export const PilotProfileStack = createStackNavigator();
 
 export const PilotHomeStackScreen = () => (
-  <PilotHomeStack.Navigator>
+  <PilotHomeStack.Navigator screenOptions={{headerShown: false}}>
     <PilotHomeStack.Screen name='PilotHome' component={PilotHome} />
   </PilotHomeStack.Navigator>
 )
 
 export const PilotProfileStackScreen = () => (
-  <PilotProfileStack.Navigator>
+  <PilotProfileStack.Navigator screenOptions={{headerShown: false}}>
     <PilotProfileStack.Screen name='PilotProfile' component={PilotProfile} />
   </PilotProfileStack.Navigator>
 )

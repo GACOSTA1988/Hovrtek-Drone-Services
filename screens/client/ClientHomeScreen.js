@@ -9,7 +9,7 @@ import NewProject from './NewProjectScreen.js';
 // import Footer from '../components/Footer.js'
 const Drawer = createDrawerNavigator();
 
-export const ClientHomeScreen = ({ navigation }) => {
+export const ClientHome = ({ navigation }) => {
 
   // Conditional Rendering state for ProjectList / New Project Tab
   const [newProjectViewActive, setNewProjectViewAcitve ] = useState(false);
@@ -33,7 +33,12 @@ const handleNewProjectView = () => {
     return <ProjectList/>
   }
 };
-console.log(newProjectViewActive);
+
+
+// const handleNewProjectView = () = {
+//   return newProjectViewActive ? <NewProject/> :  <ProjectList/>
+// }
+
 
    return (
   <View style={styles.clientWrapper}>
@@ -43,7 +48,7 @@ console.log(newProjectViewActive);
         toggleNewProjectState={()=> toggleNewProjectState()}
         />
           {handleNewProjectView()}
-    <Text>Client Home Screen</Text>
+
     <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
 
   </View>

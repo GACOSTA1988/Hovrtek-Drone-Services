@@ -32,12 +32,10 @@ const handleNewProjectView = () => {
   return newProjectViewActive ? <NewProject/> :  <ProjectList/>
 }
 
-
-
-
    return (
   <View style={styles.clientWrapper}>
     <ClientHeader/>
+
     <ClientHomeToggle
         toggleProjectListState={()=> toggleProjectListState()}
         toggleNewProjectState={()=> toggleNewProjectState()}

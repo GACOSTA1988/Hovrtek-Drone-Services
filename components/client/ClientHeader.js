@@ -5,9 +5,11 @@ import hovrtekLogo from '../../assets/hovrtek_logo.png';
 import { useNavigation } from '@react-navigation/native';
 
 
-const ClientHeader = ({navigation, pushBurger }) => {
+const ClientHeader = ({navigation}) => {
 
+ const openBurger = () => {
 
+}
 
   return (
 <View style={styles.clientHeaderWrapper}>
@@ -17,7 +19,7 @@ const ClientHeader = ({navigation, pushBurger }) => {
   style={styles.hovrtekLogo}
   />
     <Ionicons style={styles.hamburger}
-    onPress={() => alert('fart')}
+    onPress={openBurger} 
       name="ios-menu"
       size={45}
       color="white"

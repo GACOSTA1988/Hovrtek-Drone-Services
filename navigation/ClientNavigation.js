@@ -20,6 +20,8 @@ export const ClientHomeStackScreen = () => (
 export const ClientProfileStackScreen = () => (
   <ClientProfileStack.Navigator screenOptions={{headerShown: false}}>
     <ClientProfileStack.Screen name='ClientProfile' component={ClientProfile} />
+    <ClientProfileStack.Screen name='AboutScreen' component={AboutScreen} />
+    <ClientProfileStack.Screen name='SupportScreen' component={SupportScreen} />
   </ClientProfileStack.Navigator>
 )
 

@@ -14,6 +14,8 @@ import { PilotProfile } from './screens/pilot/PilotProfileScreen';
 import { ClientHomeStack, ClientProfileStack, ClientHomeStackScreen, ClientProfileStackScreen, ClientTabsScreen } from './navigation/ClientNavigation';
 import { PilotHomeStack, PilotProfileStack, PilotHomeStackScreen, PilotProfileStackScreen, PilotTabsScreen } from './navigation/PilotNavigation';
 import { SplashScreen } from "expo";
+import Footer from './components/Footer';
+import PilotHeader from './components/pilot/PilotHeader';
 
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -22,7 +24,7 @@ SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
 
 export default () => {
-  const [userToken, setUserToken] = React.useState("clientToken");
+  const [userToken, setUserToken] = React.useState(null);
 
   const authContext = React.useMemo(() => {
     return {
@@ -47,25 +49,26 @@ export default () => {
 return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-      {userToken ? (
-        (userToken === 'clientToken') ? (
-          <Drawer.Navigator>
-            <Drawer.Screen name='ClientHome' component={ClientTabsScreen} />
-            <Drawer.Screen name='ClientProfile' component={ClientProfileStackScreen} />
-          </Drawer.Navigator>
+        {userToken ? (
+          (userToken === 'clientToken') ? (
+            <Drawer.Navigator headerMode='none'>
+              <Drawer.Screen name='ClientHome' component={ClientTabsScreen}  headerMode='none'/>
+              <Drawer.Screen name='ClientProfile' component={ClientProfileStackScreen} />
+            </Drawer.Navigator>
+          ) : (
+            <Drawer.Navigator headerMode='none'>
+              <Drawer.Screen name='PilotHome' component={PilotTabsScreen} />
+              <Drawer.Screen name='PilotProfile' component={PilotProfileStackScreen} />
+            </Drawer.Navigator>
+          )
         ) : (
-          <Drawer.Navigator>
-            <Drawer.Screen name='PilotHome' component={PilotTabsScreen} />
-            <Drawer.Screen name='PilotProfile' component={PilotProfileStackScreen} />
-          </Drawer.Navigator>
+          <AuthStack.Navigator headerMode='none'>
+            <AuthStack.Screen name='SignIn' component={SignIn} />
+            <AuthStack.Screen name='SignUp' component={SignUp} />
+          </AuthStack.Navigator>
         )
-      ) : (
-        <AuthStack.Navigator>
-          <AuthStack.Screen name='SignIn' component={SignIn} />
-          <AuthStack.Screen name='SignUp' component={SignUp} />
-        </AuthStack.Navigator>
-      )
-    }
+      }
+      <Footer />
     </NavigationContainer>
   </AuthContext.Provider>
   )

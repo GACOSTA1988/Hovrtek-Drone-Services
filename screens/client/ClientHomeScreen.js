@@ -9,7 +9,7 @@ import NewProject from './NewProjectScreen.js';
 // import Footer from '../components/Footer.js'
 const Drawer = createDrawerNavigator();
 
-export const ClientHomeScreen = ({ navigation }) => {
+export const ClientHome = ({ navigation }) => {
 
   // Conditional Rendering state for ProjectList / New Project Tab
   const [newProjectViewActive, setNewProjectViewAcitve ] = useState(false);
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightgray',
     alignItems: 'center',
- 
+
   },
   contentClientContainer: {
     marginTop: 20,

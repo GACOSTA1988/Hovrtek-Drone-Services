@@ -7,7 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AuthContext } from "./context";
 import { SignIn } from './screens/auth/SignInScreen';
 import { SignUp } from './screens/auth/SignUpScreen';
-import { ClientHome } from './screens/client/ClientHomeScreen';
+import { ClientHomeScreen } from './screens/client/ClientHomeScreen';
 import { ClientProfile } from './screens/client/ClientProfileScreen';
 import { PilotHome } from './screens/pilot/PilotHomeScreen';
 import { PilotProfile } from './screens/pilot/PilotProfileScreen';
@@ -61,14 +61,14 @@ return (
               <Drawer.Screen name='PilotProfile' component={PilotProfileStackScreen} />
             </Drawer.Navigator>
           )
-        ) : (
-          <AuthStack.Navigator headerMode='none'>
-            <AuthStack.Screen name='SignIn' component={SignIn} />
-            <AuthStack.Screen name='SignUp' component={SignUp} />
-          </AuthStack.Navigator>
-        )
-      }
-      <Footer />
+      ) : (
+        <AuthStack.Navigator>
+          <AuthStack.Screen name='SignIn' component={SignIn} options={{ title: 'Sign In'}}/>
+          <AuthStack.Screen name='SignUp' component={SignUp} options={{ title: 'Create Account'}}/>
+        </AuthStack.Navigator>
+      )
+    }
+    <Footer />
     </NavigationContainer>
   </AuthContext.Provider>
   )

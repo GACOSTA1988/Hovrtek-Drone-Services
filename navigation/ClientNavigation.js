@@ -12,13 +12,13 @@ export const ClientHomeStack = createStackNavigator();
 export const ClientProfileStack = createStackNavigator();
 
 export const ClientHomeStackScreen = () => (
-  <ClientHomeStack.Navigator>
+  <ClientHomeStack.Navigator screenOptions={{headerShown: false}}>
     <ClientHomeStack.Screen name='ClientHome' component={ClientHome} />
   </ClientHomeStack.Navigator>
 )
 
 export const ClientProfileStackScreen = () => (
-  <ClientProfileStack.Navigator>
+  <ClientProfileStack.Navigator screenOptions={{headerShown: false}}>
     <ClientProfileStack.Screen name='ClientProfile' component={ClientProfile} />
   </ClientProfileStack.Navigator>
 )

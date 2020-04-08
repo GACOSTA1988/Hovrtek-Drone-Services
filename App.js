@@ -16,6 +16,9 @@ import { PilotHomeStack, PilotProfileStack, PilotHomeStackScreen, PilotProfileSt
 import { SplashScreen } from "expo";
 import Footer from './components/Footer';
 import PilotHeader from './components/pilot/PilotHeader';
+import AboutScreen from './screens/client/AboutScreen'
+import SupportScreen from './screens/client/SupportScreen'
+
 
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -24,7 +27,7 @@ SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
 
 export default () => {
-  const [userToken, setUserToken] = React.useState(null);
+  const [userToken, setUserToken] = React.useState('clientToken');
 
   const authContext = React.useMemo(() => {
     return {
@@ -54,6 +57,8 @@ return (
             <Drawer.Navigator headerMode='none'>
               <Drawer.Screen name='ClientHome' component={ClientTabsScreen}  headerMode='none'/>
               <Drawer.Screen name='ClientProfile' component={ClientProfileStackScreen} />
+              <Drawer.Screen name='AboutScreen' component={AboutScreen} />
+              <Drawer.Screen name='SupportScreen' component={SupportScreen} />
             </Drawer.Navigator>
           ) : (
             <Drawer.Navigator headerMode='none'>

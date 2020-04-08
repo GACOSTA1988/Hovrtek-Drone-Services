@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   projectsNewProjectsWrapper: {
-    marginTop: 59,
+    marginTop: 80,
     flexDirection:'row-reverse',
     height: 40,
   },

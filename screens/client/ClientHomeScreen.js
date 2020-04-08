@@ -26,18 +26,10 @@ setNewProjectViewAcitve(true)
 setNewProjectViewAcitve(false)
 }
 
+
 const handleNewProjectView = () => {
-  if (newProjectViewActive) {
-    return <NewProject/>
-  } else {
-    return <ProjectList/>
-  }
-};
-
-
-// const handleNewProjectView = () = {
-//   return newProjectViewActive ? <NewProject/> :  <ProjectList/>
-// }
+  return newProjectViewActive ? <NewProject/> :  <ProjectList/>
+}
 
 
    return (

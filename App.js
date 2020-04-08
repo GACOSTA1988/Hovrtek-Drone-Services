@@ -9,7 +9,7 @@ import { SignIn } from './screens/auth/SignInScreen';
 import { SignUp } from './screens/auth/SignUpScreen';
 
 import { ClientProfile } from './screens/client/ClientProfileScreen';
-import { PilotHome } from './screens/pilot/PilotHomeScreen';
+import PilotHome from './screens/pilot/PilotHomeScreen';
 import { PilotProfile } from './screens/pilot/PilotProfileScreen';
 import { ClientHomeStack, ClientProfileStack, ClientHomeStackScreen, ClientProfileStackScreen, ClientTabsScreen } from './navigation/ClientNavigation';
 import { PilotHomeStack, PilotProfileStack, PilotHomeStackScreen, PilotProfileStackScreen, PilotTabsScreen } from './navigation/PilotNavigation';
@@ -27,7 +27,7 @@ SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
 
 export default () => {
-  const [userToken, setUserToken] = React.useState('clientToken');
+  const [userToken, setUserToken] = React.useState(null);
 
   const authContext = React.useMemo(() => {
     return {

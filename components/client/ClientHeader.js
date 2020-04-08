@@ -3,27 +3,25 @@ import { Text, View, StyleSheet, Header, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
 import { useNavigation } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 
-
-const ClientHeader = ({navigation, pushBurger }) => {
-
-
+const ClientHeader = (props) => {
 
   return (
-<View style={styles.clientHeaderWrapper}>
-  <View style={styles.headerText}></View>
-  <Image
-  source={hovrtekLogo}
-  style={styles.hovrtekLogo}
-  />
-    <Ionicons style={styles.hamburger}
-    onPress={() => alert('fart')}
-      name="ios-menu"
-      size={45}
-      color="white"
-      resizeMode="contain"
-      /> 
-</View>
+    <View style={styles.clientHeaderWrapper}>
+      <View style={styles.headerText}></View>
+      <Image
+      source={hovrtekLogo}
+      style={styles.hovrtekLogo}
+      />
+      <Ionicons style={styles.hamburger}
+      onPress={() => props.pushBurger()}
+        name="ios-menu"
+        size={45}
+        color="white"
+        resizeMode="contain"
+      />
+    </View>
   )
 }
 
@@ -52,5 +50,9 @@ const styles = StyleSheet.create({
 
   }
 });
+
+ClientHeader.propTypes = {
+  pushBurger: PropTypes.func.isRequired
+}
 
 export default ClientHeader

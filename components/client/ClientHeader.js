@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 const ClientHeader = ({navigation}) => {
 
  const openBurger = () => {
-
+  navigation.toggleDrawer()
 }
 
   return (
@@ -19,7 +19,7 @@ const ClientHeader = ({navigation}) => {
   style={styles.hovrtekLogo}
   />
     <Ionicons style={styles.hamburger}
-    onPress={openBurger} 
+    onPress={openBurger}
       name="ios-menu"
       size={45}
       color="white"

@@ -8,10 +8,6 @@ import NewProject from './NewProjectScreen.js';
 // import Footer from '../components/Footer.js'
 import { useNavigation } from '@react-navigation/native';
 
-
-
-
-
 const ClientHomeScreen = ({ navigation }) => {
 
 // Conditional Rendering state for ProjectList / New Project Tab

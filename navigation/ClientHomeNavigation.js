@@ -20,8 +20,8 @@ const ClientHomeNavigation = () => {
   <Drawer.Screen 
   name='ClientHomeScreen' 
   component={ClientHomeScreen}  headerMode='none'
-  options={({ navigation, route }) => ({
-    headerTitle: props => <ClientHeader navigation={navigation}/>,
+  NavigationOptions={({ navigation, route }) => ({
+    clientHeader: props => <ClientHeader navigation={navigation}/>,
   })}
   />
   <Drawer.Screen name='AboutScreen' component={AboutScreen}  headerMode='none'/>

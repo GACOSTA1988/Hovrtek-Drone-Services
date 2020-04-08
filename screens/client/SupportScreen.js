@@ -10,6 +10,7 @@ const SupportScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ClientHeader />
       <Text>Support Screen</Text>
+      <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
     </View>
   )
 };

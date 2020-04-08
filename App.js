@@ -7,7 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AuthContext } from "./context";
 import { SignIn } from './screens/auth/SignInScreen';
 import { SignUp } from './screens/auth/SignUpScreen';
-import { ClientHomeScreen } from './screens/client/ClientHomeScreen';
+
 import { ClientProfile } from './screens/client/ClientProfileScreen';
 import { PilotHome } from './screens/pilot/PilotHomeScreen';
 import { PilotProfile } from './screens/pilot/PilotProfileScreen';
@@ -18,7 +18,7 @@ import Footer from './components/Footer';
 import PilotHeader from './components/pilot/PilotHeader';
 import AboutScreen from './screens/client/AboutScreen'
 import SupportScreen from './screens/client/SupportScreen'
-
+import ClientHomeScreen from './screens/client/ClientHomeScreen';
 
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -55,10 +55,9 @@ return (
         {userToken ? (
           (userToken === 'clientToken') ? (
             <Drawer.Navigator headerMode='none'>
-              <Drawer.Screen name='ClientHome' component={ClientTabsScreen}  headerMode='none'/>
-              <Drawer.Screen name='ClientProfile' component={ClientProfileStackScreen} />
-              <Drawer.Screen name='AboutScreen' component={AboutScreen} />
-              <Drawer.Screen name='SupportScreen' component={SupportScreen} />
+              <Drawer.Screen name='ClientHomeScreen' component={ClientHomeScreen} headerMode='none'/>
+              <Drawer.Screen name='AboutScreen' component={AboutScreen}  headerMode='none'/>
+              <Drawer.Screen name='SupportScreen' component={SupportScreen}  headerMode='none'/>
             </Drawer.Navigator>
           ) : (
             <Drawer.Navigator headerMode='none'>

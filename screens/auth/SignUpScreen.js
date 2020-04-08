@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { AuthContext } from "../../context";
+import AuthHeader from '../../components/auth/AuthHeader';
 
 export const SignUp = ({ navigation }) => {
   const { signUpPilot } = React.useContext(AuthContext);
@@ -9,6 +10,7 @@ export const SignUp = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <AuthHeader/>
       <Text>Sign Up Screen</Text>
       <Button title='Sign Up As Pilot' onPress={() => signUpPilot()} />
       <Button title='Sign Up as Client' onPress={() => signUpClient()} />

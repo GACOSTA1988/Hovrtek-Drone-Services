@@ -3,7 +3,11 @@ import { Text, View, StyleSheet, Header, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
 import { useNavigation } from '@react-navigation/native';
-const ClientHeader = ({navigation}) => {
+
+
+const ClientHeader = ({navigation, pushBurger }) => {
+
+
 
   return (
 <View style={styles.clientHeaderWrapper}>

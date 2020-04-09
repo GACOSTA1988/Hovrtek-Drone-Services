@@ -4,7 +4,7 @@ import { AuthContext } from "../../context";
 import ClientHeader from '../../components/client/ClientHeader'
 
 const SupportScreen = ({ navigation }) => {
-  
+
 
   return (
     <View style={styles.container}>

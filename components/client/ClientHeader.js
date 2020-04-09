@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 const ClientHeader = (props) => {
+  console.warn("these are the props in header: ");
+  console.warn(props);
 
   return (
     <View style={styles.clientHeaderWrapper}>
@@ -24,8 +26,6 @@ const ClientHeader = (props) => {
     </View>
   )
 }
-
-// onPress={() => navigation.toggleDrawer()}
 
 const styles = StyleSheet.create({
   clientHeaderWrapper: {
@@ -46,9 +46,7 @@ const styles = StyleSheet.create({
     left: 5,
     right: 0,
     top: 13,
-
-
-  }
+    }
 });
 
 ClientHeader.propTypes = {

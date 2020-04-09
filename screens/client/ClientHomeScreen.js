@@ -4,58 +4,50 @@ import ClientHomeToggle from '../../components/client/ClientHomeToggle.js';
 import ClientHeader from '../../components/client/ClientHeader.js';
 import ProjectList from './ProjectListScreen.js';
 import NewProject from './NewProjectScreen.js';
-// import Footer from '../components/Footer.js'
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
-class ClientHomeScreen extends React.Component {
+export default function ClientHomeScreen(props) {
+  const navigation = useNavigation();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      burgerPushed: false,
-    };
-    this.handlePushBurger = this.handlePushBurger.bind(this);
+  console.warn("these are the props in home: ");
+  console.warn(props);
+
+  // Hamburger menu push function. Works in android and not ios
+  function handlePushBurger(e) {
+    navigation.toggleDrawer();
   }
 
   // Conditional Rendering state for ProjectList / New Project Tab
+  const [ newProjectViewActive, setNewProjectViewActive ] = useState(false);
+  const [ projectsViewActive, setProjectsViewActive ] = useState(true);
 
-  // [ newProjectViewActive, setNewProjectViewAcitve ] = useState(false);
-  // [ projectsViewActive, setProjectsViewActive ] = useState(true);
-  //
-  // toggleProjectListState() {
-  //   setNewProjectViewAcitve(true)
-  //   setProjectsViewActive(false)
-  // }
-  //
-  // toggleNewProjectState() {
-  //   setNewProjectViewAcitve(true)
-  //   setNewProjectViewAcitve(false)
-  // }
+  const toggleProjectListState = () => {
+    setNewProjectViewActive(true)
+    setProjectsViewActive(false)
+  }
 
-  handleNewProjectView() {
+  const toggleNewProjectState = () => {
+    setNewProjectViewActive(true)
+    setNewProjectViewActive(false)
+  }
+
+  const handleNewProjectView = () => {
     return newProjectViewActive ? <NewProject/> :  <ProjectList/>
   }
 
-  handlePushBurger() {
-    this.props.navigation.toggleDrawer()
-  }
-
-  render() {
-   return (
+  return (
     <View style={styles.clientWrapper}>
-      <ClientHeader pushBurger={this.handlePushBurger}/>
+      <ClientHeader pushBurger={() => handlePushBurger()}/>
       <ClientHomeToggle
-          toggleProjectListState={()=> this.toggleProjectListState()}
-          toggleNewProjectState={()=> this.toggleNewProjectState()}
-          />
-
-      <Button title='Drawer' onPress={() => this.props.navigation.toggleDrawer()} />
-
+        toggleProjectListState={()=> toggleProjectListState()}
+        toggleNewProjectState={()=> toggleNewProjectState()}
+      />
+      <ScrollView style={styles.ClientListcontainer} contentContainerStyle={styles.contentClientContainer}>{handleNewProjectView()}</ScrollView>
     </View>
   )
-  }
-};
+
+}
 
 const styles = StyleSheet.create({
   clientWrapper: {
@@ -69,6 +61,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-
-export default ClientHomeScreen;

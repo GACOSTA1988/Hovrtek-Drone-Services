@@ -2,6 +2,7 @@ import React from 'react'
 import {Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getLightEstimationEnabled } from 'expo/build/AR';
 
+
 const ClientHomeToggle= ({toggleProjectListState, toggleNewProjectState}) => {
 
   return(
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   projectsNewProjectsWrapper: {
-    marginTop: 80,
+    marginTop: 10,
     flexDirection:'row-reverse',
     height: 40,
   },

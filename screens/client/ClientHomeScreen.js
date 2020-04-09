@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightgray',
     alignItems: 'center',
+  },
 
-  },
-  contentClientContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
+  // contentClientContainer: {
+  //   marginTop: 20,
+  //   alignItems: 'center',
+  // },
 });

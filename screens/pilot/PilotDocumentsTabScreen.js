@@ -6,7 +6,7 @@ import PilotHeader from '../../components/pilot/PilotHeader';
 export const PilotDocumentsTab = ({ navigation }) => (
     <View style={styles.container}>
         <PilotHeader />
-        <Text>All documents (licenses, etc.) will be listed here.</Text>
+        <Text>All pilot documents (licenses, etc.) will be listed here.</Text>
     </View>
 );
 

@@ -49,32 +49,32 @@ export default () => {
     };
   }, []);
 
-return (
+  return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {userToken ? (
           (userToken === 'clientToken') ? (
             <Drawer.Navigator headerMode='none'>
-              <Drawer.Screen name='ClientHomeScreen' component={ClientHomeScreen} headerMode='none'/>
-              <Drawer.Screen name='AboutScreen' component={AboutScreen}  headerMode='none'/>
-              <Drawer.Screen name='SupportScreen' component={SupportScreen}  headerMode='none'/>
+              <Drawer.Screen name='ClientHomeScreen' component={ClientHomeScreen} headerMode='none' />
+              <Drawer.Screen name='AboutScreen' component={AboutScreen} headerMode='none' />
+              <Drawer.Screen name='SupportScreen' component={SupportScreen} headerMode='none' />
             </Drawer.Navigator>
           ) : (
             <Drawer.Navigator headerMode='none'>
               <Drawer.Screen name='PilotHomeScreen' component={PilotHomeScreen} />
               <Drawer.Screen name='PilotProfileScreen' component={PilotProfileStackScreen} />
             </Drawer.Navigator>
+            )
+        ) : (
+            <AuthStack.Navigator>
+              <AuthStack.Screen name='SignIn' component={SignIn} options={{ title: 'Sign In' }} />
+              <AuthStack.Screen name='SignUp' component={SignUp} options={{ title: 'Create Account' }} />
+            </AuthStack.Navigator>
           )
-      ) : (
-        <AuthStack.Navigator>
-          <AuthStack.Screen name='SignIn' component={SignIn} options={{ title: 'Sign In'}}/>
-          <AuthStack.Screen name='SignUp' component={SignUp} options={{ title: 'Create Account'}}/>
-        </AuthStack.Navigator>
-      )
-    }
-    <Footer />
-    </NavigationContainer>
-  </AuthContext.Provider>
+        }
+        <Footer />
+      </NavigationContainer>
+    </AuthContext.Provider>
   )
 
 };

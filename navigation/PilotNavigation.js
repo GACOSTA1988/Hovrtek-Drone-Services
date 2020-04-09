@@ -12,8 +12,10 @@ export const PilotHomeStack = createStackNavigator();
 export const PilotProfileStack = createStackNavigator();
 
 export const PilotHomeStackScreen = () => (
+
   <PilotHomeStack.Navigator screenOptions={{headerShown: false}}>
     <PilotHomeStack.Screen name='PilotHomeScreen' component={PilotHomeScreen} />
+
   </PilotHomeStack.Navigator>
 )
 

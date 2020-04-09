@@ -2,6 +2,7 @@
   "expo": {
     "name": "test-auth",
     "slug": "test-auth",
+    "sdkVersion":"36.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",

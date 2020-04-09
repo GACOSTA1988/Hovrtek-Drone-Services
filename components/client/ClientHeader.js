@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 const ClientHeader = ({navigation}) => {
 
  const openBurger = () => {
-  navigation.toggleDrawer()
+  alert('fart')
 }
 
   return (

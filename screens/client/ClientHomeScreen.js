@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, StatusBar, Image, ScrollView, Button } from 'react-native';
 import ClientHomeToggle from '../../components/client/ClientHomeToggle.js';
@@ -7,41 +6,62 @@ import ProjectList from './ProjectListScreen.js';
 import NewProject from './NewProjectScreen.js';
 // import Footer from '../components/Footer.js'
 import { useNavigation } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 
-const ClientHomeScreen = ({ navigation }) => {
+class ClientHomeScreen extends React.Component {
 
-// Conditional Rendering state for ProjectList / New Project Tab
-const [newProjectViewActive, setNewProjectViewAcitve ] = useState(false);
-const [projectsViewActive, setProjectsViewActive ] = useState(true);
+  constructor(props) {
+    super(props);
+    this.state = {
+      burgerPushed: false,
+      newProjectViewActive: false,
+      projectsViewActive: true
+    };
+    this.handlePushBurger = this.handlePushBurger.bind(this);
+    this.toggleProjectListState = this.toggleProjectListState.bind(this);
+  }
 
-const toggleProjectListState = () => {
-setNewProjectViewAcitve(true)
-setProjectsViewActive(false)
-}
+  toggleProjectListState= () => {
+    this.setState(prevState => ({
+      newProjectViewActive: true,
+      projectsViewActive: false
+    }));
+  }
 
-const toggleNewProjectState = () => {
-setNewProjectViewAcitve(true)
-setNewProjectViewAcitve(false)
-}
+  toggleNewProjectState= () => {
+    this.setState(prevState => ({
+      newProjectViewActive: false,
+      projectsViewActive: true
+    }));
+  }
 
-const handleNewProjectView = () => {
-  return newProjectViewActive ? <NewProject/> :  <ProjectList/>
-}
+
+  handleNewProjectView() {
+    return this.state.newProjectViewActive ? <NewProject/> :  <ProjectList/>
+  }
+
+  handlePushBurger() {
+    this.props.navigation.toggleDrawer()
+  }
+
+  render() {
+console.log('new Project shown', this.state.newProjectViewActive); 
+console.log('projects shown', this.state.projectsViewActive); 
 
    return (
-  <View style={styles.clientWrapper}>
-    <ClientHeader/>
+    <View style={styles.clientWrapper}>
+      <ClientHeader pushBurger={this.handlePushBurger}/>
+      <ClientHomeToggle
+          toggleProjectListState={()=> this.toggleProjectListState()}
+          toggleNewProjectState={()=> this.toggleNewProjectState()}
+          />
+      {this.handleNewProjectView()}
+      <Button title='Drawer' onPress={() => this.props.navigation.toggleDrawer()} />
 
-    <ClientHomeToggle
-        toggleProjectListState={()=> toggleProjectListState()}
-        toggleNewProjectState={()=> toggleNewProjectState()}
-        />
-          {handleNewProjectView()}
-
-    <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
-
-  </View>
-)};
+    </View>
+  )
+  }
+};
 
 const styles = StyleSheet.create({
   clientWrapper: {
@@ -57,4 +77,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ClientHomeScreen
+export default ClientHomeScreen;

@@ -2,6 +2,7 @@ import React from 'react'
 import {Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getLightEstimationEnabled } from 'expo/build/AR';
 
+
 const ClientHomeToggle= ({toggleProjectListState, toggleNewProjectState}) => {
 
   return(

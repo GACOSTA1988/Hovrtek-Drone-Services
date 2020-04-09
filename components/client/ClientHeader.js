@@ -1,35 +1,39 @@
 import React from 'react';
-import { Text, View, StyleSheet, Header, Image } from 'react-native';
+import { Text, View, StyleSheet, Header, Image, ShadowPropTypesIOS } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
-import { useNavigation } from '@react-navigation/native';
 
 
 const ClientHeader = ({navigation}) => {
 
- const openBurger = () => {
-  alert('fart')
-}
+//  const openBurger = () => {
+//  alert('fart')
+// }
+
 
   return (
-<View style={styles.clientHeaderWrapper}>
-  <View style={styles.headerText}></View>
-  <Image
-  source={hovrtekLogo}
-  style={styles.hovrtekLogo}
-  />
-    <Ionicons style={styles.hamburger}
-    onPress={openBurger}
-      name="ios-menu"
-      size={45}
-      color="white"
-      resizeMode="contain"
-      /> 
-</View>
+
+  <View style={styles.clientHeaderWrapper}>
+      <View style={styles.headerText}></View>
+        <Image
+        source={hovrtekLogo}
+        style={styles.hovrtekLogo}
+        />
+        <Ionicons style={styles.hamburger}
+  
+          name="ios-menu"
+          size={45}
+          color="white"
+          resizeMode="contain"
+          /> 
+    </View>
   )
 }
 
 // onPress={() => navigation.toggleDrawer()}
+// const openBurger = () => {
+//   navigation.toggleDrawer()
+// }
 
 const styles = StyleSheet.create({
   clientHeaderWrapper: {

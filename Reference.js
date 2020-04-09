@@ -23,3 +23,10 @@
 // in ClientHomeToggle to call 
 <TouchableOpacity style={styles.projectsButton}
 onPress={toggleNewProjectState}>
+
+
+  -------------------
+
+
+
+  <ClientHeader pushBurger={this.handlePushBurger}/>

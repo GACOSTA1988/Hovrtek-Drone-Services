@@ -7,7 +7,7 @@ const AboutScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ClientHeader />
+      <ClientHeader/>
       <Text>About Screen</Text>
       <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
     </View>

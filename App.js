@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, Image, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -20,6 +20,8 @@ import {DrawerNavigator} from './navigation/ClientHomeNavigation'
 import ClientHomeNavigation from './navigation/ClientHomeNavigation'
 import ClientHeader from './components/client/ClientHeader'
 
+
+
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const RootClientStack = createStackNavigator();
@@ -27,7 +29,7 @@ const RootClientStack = createStackNavigator();
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
 
-export default () => {
+export default ({navigation}) => {
   const [userToken, setUserToken] = React.useState('clientToken');
 
   const authContext = React.useMemo(() => {
@@ -55,16 +57,36 @@ return (
 
 
       <NavigationContainer>
-  
+      
         {userToken ? (
           (userToken === 'clientToken') ? (
    
-            <RootClientStack.Navigator headerMode='none'>
-              <RootClientStack.Screen name='ClientHomeScreen' component={ClientHomeNavigation} headerMode='none' />
+            <RootClientStack.Navigator>
+              <RootClientStack.Screen 
+              name='ClientHomeScreen' 
+              component={ClientHomeNavigation} 
+              options={{ 
+
+                headerStyle: {
+                  backgroundColor: '#092455',
+                },
+                headerTitle: props => <LogoTitle {...props} />,
+                headerRight: () => (
+                  <Button
+                    onPress={() => navigation.toggleDrawer()}
+                    title="Info"
+                    color="#fff"
+                  />
+                ),
+              }}
+             
+              
+              />
             </RootClientStack.Navigator>
 
           ) : (
             <Drawer.Navigator headerMode='none'>
+              <StaturBar barStyle='light-content' backgroundColor='#6a51ae'/>
               <Drawer.Screen name='PilotHome' component={PilotTabsScreen} />
               <Drawer.Screen name='PilotProfile' component={PilotProfileStackScreen} />
             </Drawer.Navigator>
@@ -77,6 +99,7 @@ return (
       )
     }
     <Footer />
+
     </NavigationContainer>
   </AuthContext.Provider>
   )
@@ -91,3 +114,14 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+
+// Header Logo
+const LogoTitle = () => {
+  return (
+    <Image
+    style={{ width: 130, height: 22, marginTop: 0 }}
+    source={require('./assets/hovrtek_logo.png')}
+    />
+  )
+}

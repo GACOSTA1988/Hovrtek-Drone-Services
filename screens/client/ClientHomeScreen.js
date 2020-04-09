@@ -5,8 +5,7 @@ import ClientHeader from '../../components/client/ClientHeader.js';
 import ProjectList from './ProjectListScreen.js';
 import NewProject from './NewProjectScreen.js';
 // import Footer from '../components/Footer.js'
-import { useNavigation } from '@react-navigation/native';
-import PropTypes from 'prop-types';
+import { Ionicons } from '@expo/vector-icons';
 
 class ClientHomeScreen extends React.Component {
 
@@ -35,6 +34,9 @@ class ClientHomeScreen extends React.Component {
     }));
   }
 
+  fart = () => {
+    alert("tooooot")
+  }
 
   handleNewProjectView() {
     return this.state.newProjectViewActive ? <NewProject/> :  <ProjectList/>
@@ -44,13 +46,15 @@ class ClientHomeScreen extends React.Component {
     this.props.navigation.toggleDrawer()
   }
 
+
+  //  <ClientHeader fart={this.fart}/>
   render() {
 console.log('new Project shown', this.state.newProjectViewActive); 
 console.log('projects shown', this.state.projectsViewActive); 
 
    return (
     <View style={styles.clientWrapper}>
-      <ClientHeader pushBurger={this.handlePushBurger}/>
+
       <ClientHomeToggle
           toggleProjectListState={()=> this.toggleProjectListState()}
           toggleNewProjectState={()=> this.toggleNewProjectState()}
@@ -68,12 +72,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightgray',
     alignItems: 'center',
+  },
 
-  },
-  contentClientContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
+  // contentClientContainer: {
+  //   marginTop: 20,
+  //   alignItems: 'center',
+  // },
 });
 
 

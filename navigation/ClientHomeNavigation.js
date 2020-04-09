@@ -6,7 +6,7 @@ import ClientHomeScreen from '../screens/client/ClientHomeScreen';
 import { ClientProfile } from '../screens/client/ClientProfileScreen';
 import AboutScreen from '../screens/client/AboutScreen'
 import SupportScreen from '../screens/client/SupportScreen'
-
+import ClientHeader from '../components/client/ClientHeader'
 
 const Drawer = createDrawerNavigator();
 
@@ -16,12 +16,11 @@ export const ClientProfileStack = createStackNavigator();
 const ClientHomeNavigation = () => {
 
   return (
-  <Drawer.Navigator headerMode='none'>
+  <Drawer.Navigator>
     <Drawer.Screen 
       name='ClientHomeScreen' 
       component={ClientHomeScreen}  
-      headerMode='none'
-      options={{title: 'Home'}}
+
  
     />
     <Drawer.Screen 

@@ -3,60 +3,66 @@ import { Text, View, StyleSheet, Header, Image, ShadowPropTypesIOS } from 'react
 import { Ionicons } from '@expo/vector-icons';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
 
+import {useNavigation, DrawerActions} from '@react-navigation/native';
 
-const ClientHeader = ({navigation}) => {
+const ClientHeader = () => {
 
-//  const openBurger = () => {
-//  alert('fart')
-// }
+const navigation = useNavigation();
+console.log(navigation);
+
+ const openBurger = () => {
+ navigation.toggleDrawer()
+}
 
 
   return (
 
   <View style={styles.clientHeaderWrapper}>
-      <View style={styles.headerText}></View>
-        <Image
+
+      <Image
+      onPress={openBurger}
         source={hovrtekLogo}
         style={styles.hovrtekLogo}
         />
         <Ionicons style={styles.hamburger}
-  
-          name="ios-menu"
-          size={45}
-          color="white"
-          resizeMode="contain"
-          /> 
+        onPress={() => {
+        navigation.dispatch(DrawerActions.openDrawer());
+        }}
+        name="ios-menu"
+        size={45}
+        color="white"
+        resizeMode="contain"
+        />  
+
     </View>
   )
 }
 
-// onPress={() => navigation.toggleDrawer()}
-// const openBurger = () => {
-//   navigation.toggleDrawer()
-// }
-
 const styles = StyleSheet.create({
-  clientHeaderWrapper: {
-  position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 25,
-  backgroundColor: '#092455'
-  },
-  hamburger: {
-    alignSelf:'flex-end',
-    margin: 5
-  },
-  hovrtekLogo: {
-    width: 170,
-    height: 30,
-    position: 'absolute',
-    left: 5,
-    right: 0,
-    top: 13,
+    clientHeaderWrapper: {
+        marginTop: 18,
+        backgroundColor: '#092455',
+        width: 375,
+        height:50,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    hovrtekLogo: {
+        width: 170,
+        height: 30,
+        position: 'absolute',
+        left: 0,
+        right: 10,
+        top: 7,
+        },
 
-
-  }
+        hamburger: {
+        alignSelf:'flex-end',
+        marginLeft: 300,
+        margin: 0
+        }
 });
 
-export default ClientHeader
+export default ClientHeader;
+

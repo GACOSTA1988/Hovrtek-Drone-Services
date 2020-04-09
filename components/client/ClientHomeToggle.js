@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   projectsNewProjectsWrapper: {
-    marginTop: 80,
+    marginTop: 10,
     flexDirection:'row-reverse',
     height: 40,
   },

@@ -73,7 +73,7 @@ return (
               <RootClientStack.Screen 
               name='ClientHomeScreen' 
               component={ClientHomeNavigation} 
-              options={{ headerTitle: () => <TestHeader/> }}
+              options={{ headerTitle: () => <ClientHeader/> }}
               
               />
             </RootClientStack.Navigator>

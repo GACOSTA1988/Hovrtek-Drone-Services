@@ -6,6 +6,7 @@ import ProjectList from './ProjectListScreen.js';
 import NewProject from './NewProjectScreen.js';
 // import Footer from '../components/Footer.js'
 import { Ionicons } from '@expo/vector-icons';
+import TestHeader from '../../components/client/TestHeader'
 
 class ClientHomeScreen extends React.Component {
 
@@ -34,9 +35,7 @@ class ClientHomeScreen extends React.Component {
     }));
   }
 
-  fart = () => {
-    alert("tooooot")
-  }
+
 
   handleNewProjectView() {
     return this.state.newProjectViewActive ? <NewProject/> :  <ProjectList/>

@@ -20,8 +20,11 @@ const ClientHomeNavigation = () => {
     <Drawer.Screen 
       name='ClientHomeScreen' 
       component={ClientHomeScreen}  
-
- 
+      options={({navigation})=> {
+        return {
+          headerTitle: () => <TestHeader navigation = {navigation}/>
+        }
+      }}
     />
     <Drawer.Screen 
       name='AboutScreen' 
@@ -36,6 +39,17 @@ const ClientHomeNavigation = () => {
       options={{title: 'Support'}}
     />
   </Drawer.Navigator>  
+  )
+}
+
+
+
+const LogoTitle = () => {
+  return (
+    <Image
+    style={{ width: 130, height: 22, marginTop: 0 }}
+    source={require('../assets/hovrtek_logo.png')}
+    />
   )
 }
 

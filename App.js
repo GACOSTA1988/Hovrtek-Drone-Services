@@ -19,6 +19,7 @@ import ClientHomeScreen from './screens/client/ClientHomeScreen';
 import {DrawerNavigator} from './navigation/ClientHomeNavigation'
 import ClientHomeNavigation from './navigation/ClientHomeNavigation'
 import ClientHeader from './components/client/ClientHeader'
+import TestHeader from './components/client/TestHeader'
 
 
 
@@ -28,6 +29,13 @@ const RootClientStack = createStackNavigator();
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
+
+const pushBurger = () => {
+  navigation.toggleDrawer()
+}
+
+
+
 
 export default ({navigation}) => {
   const [userToken, setUserToken] = React.useState('clientToken');
@@ -51,7 +59,7 @@ export default ({navigation}) => {
       }
     };
   }, []);
-
+  // options={{ headerTitle: () => <TestHeader/> }}
 return (
     <AuthContext.Provider value={authContext}>
 
@@ -65,21 +73,7 @@ return (
               <RootClientStack.Screen 
               name='ClientHomeScreen' 
               component={ClientHomeNavigation} 
-              options={{ 
-
-                headerStyle: {
-                  backgroundColor: '#092455',
-                },
-                headerTitle: props => <LogoTitle {...props} />,
-                headerRight: () => (
-                  <Button
-                    onPress={() => navigation.toggleDrawer()}
-                    title="Info"
-                    color="#fff"
-                  />
-                ),
-              }}
-             
+              options={{ headerTitle: () => <TestHeader/> }}
               
               />
             </RootClientStack.Navigator>
@@ -106,6 +100,7 @@ return (
 
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -125,3 +120,5 @@ const LogoTitle = () => {
     />
   )
 }
+
+

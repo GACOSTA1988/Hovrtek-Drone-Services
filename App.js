@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AuthContext } from "./context";
 import { SignIn } from './screens/auth/SignInScreen';
@@ -19,7 +18,7 @@ import ClientHomeScreen from './screens/client/ClientHomeScreen';
 import {DrawerNavigator} from './navigation/ClientHomeNavigation'
 import ClientHomeNavigation from './navigation/ClientHomeNavigation'
 import ClientHeader from './components/client/ClientHeader'
-import TestHeader from './components/client/TestHeader'
+
 
 
 
@@ -33,9 +32,6 @@ setTimeout(SplashScreen.hide, 3500);
 const pushBurger = () => {
   navigation.toggleDrawer()
 }
-
-
-
 
 export default ({navigation}) => {
   const [userToken, setUserToken] = React.useState('clientToken');
@@ -71,9 +67,13 @@ return (
    
             <RootClientStack.Navigator>
               <RootClientStack.Screen 
-              name='ClientHomeScreen' 
+              name='Client' 
               component={ClientHomeNavigation} 
-              options={{ headerTitle: () => <ClientHeader/> }}
+              options={{ 
+                title: 'Home',
+                headerTitle: () => <ClientHeader/>,
+                          
+              }}
               
               />
             </RootClientStack.Navigator>
@@ -100,7 +100,6 @@ return (
 
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -109,7 +108,6 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
 
 // Header Logo
 const LogoTitle = () => {

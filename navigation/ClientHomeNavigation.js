@@ -18,13 +18,9 @@ const ClientHomeNavigation = () => {
   return (
   <Drawer.Navigator>
     <Drawer.Screen 
-      name='ClientHomeScreen' 
+      name='Client Home' 
       component={ClientHomeScreen}  
-      options={({navigation})=> {
-        return {
-          headerTitle: () => <TestHeader navigation = {navigation}/>
-        }
-      }}
+
     />
     <Drawer.Screen 
       name='AboutScreen' 

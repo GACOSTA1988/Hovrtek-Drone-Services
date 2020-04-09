@@ -9,7 +9,7 @@ const SupportScreen = ({ navigation }) => {
     <View style={styles.container}>
 
       <Text>Support Screen</Text>
-      <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
+
     </View>
   )
 };

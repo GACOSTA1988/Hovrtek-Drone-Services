@@ -10,17 +10,12 @@ const ClientHeader = () => {
 const navigation = useNavigation();
 console.log(navigation);
 
- const openBurger = () => {
- navigation.toggleDrawer()
-}
-
-
   return (
 
   <View style={styles.clientHeaderWrapper}>
 
       <Image
-      onPress={openBurger}
+
         source={hovrtekLogo}
         style={styles.hovrtekLogo}
         />

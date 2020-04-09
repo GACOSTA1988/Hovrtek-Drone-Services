@@ -35,8 +35,6 @@ class ClientHomeScreen extends React.Component {
     }));
   }
 
-
-
   handleNewProjectView() {
     return this.state.newProjectViewActive ? <NewProject/> :  <ProjectList/>
   }
@@ -45,11 +43,7 @@ class ClientHomeScreen extends React.Component {
     this.props.navigation.toggleDrawer()
   }
 
-
-  //  <ClientHeader fart={this.fart}/>
   render() {
-console.log('new Project shown', this.state.newProjectViewActive); 
-console.log('projects shown', this.state.projectsViewActive); 
 
    return (
     <View style={styles.clientWrapper}>
@@ -59,7 +53,7 @@ console.log('projects shown', this.state.projectsViewActive);
           toggleNewProjectState={()=> this.toggleNewProjectState()}
           />
       {this.handleNewProjectView()}
-      <Button title='Drawer' onPress={() => this.props.navigation.toggleDrawer()} />
+    
 
     </View>
   )

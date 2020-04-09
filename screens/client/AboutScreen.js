@@ -9,7 +9,7 @@ const AboutScreen = ({ navigation }) => {
     <View style={styles.container}>
 
       <Text>About Screen</Text>
-      <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
+
     </View>
   )
 };

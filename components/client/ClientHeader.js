@@ -2,12 +2,13 @@ import React from 'react';
 import { Text, View, StyleSheet, Header, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 const ClientHeader = (props) => {
-  console.warn("these are the props in header: ");
   console.warn(props);
+
+  const navigation = useNavigation();
 
   return (
     <View style={styles.clientHeaderWrapper}>
@@ -17,7 +18,7 @@ const ClientHeader = (props) => {
       style={styles.hovrtekLogo}
       />
       <Ionicons style={styles.hamburger}
-      onPress={() => props.pushBurger()}
+      onPress={() => {navigation.dispatch(DrawerActions.openDrawer())}}
         name="ios-menu"
         size={45}
         color="white"

@@ -9,8 +9,8 @@ import { SignIn } from './screens/auth/SignInScreen';
 import { SignUp } from './screens/auth/SignUpScreen';
 
 import { ClientProfile } from './screens/client/ClientProfileScreen';
-import PilotHome from './screens/pilot/PilotHomeScreen';
-import { PilotProfile } from './screens/pilot/PilotProfileScreen';
+import PilotHomeScreen from './screens/pilot/PilotHomeScreen';
+import PilotProfileScreen from './screens/pilot/PilotProfileScreen';
 import { ClientHomeStack, ClientProfileStack, ClientHomeStackScreen, ClientProfileStackScreen, ClientTabsScreen } from './navigation/ClientNavigation';
 import { PilotHomeStack, PilotProfileStack, PilotHomeStackScreen, PilotProfileStackScreen, PilotTabsScreen } from './navigation/PilotNavigation';
 import { SplashScreen } from "expo";
@@ -61,8 +61,8 @@ return (
             </Drawer.Navigator>
           ) : (
             <Drawer.Navigator headerMode='none'>
-              <Drawer.Screen name='PilotHome' component={PilotTabsScreen} />
-              <Drawer.Screen name='PilotProfile' component={PilotProfileStackScreen} />
+              <Drawer.Screen name='PilotHomeScreen' component={PilotHomeScreen} />
+              <Drawer.Screen name='PilotProfileScreen' component={PilotProfileStackScreen} />
             </Drawer.Navigator>
           )
       ) : (

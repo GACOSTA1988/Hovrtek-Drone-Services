@@ -1,28 +1,36 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { AuthContext } from "../../context";
-import PilotHeader from '../../components/pilot/PilotHeader';
-import Jobs from '../../components/pilot/Jobs';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import PilotHeader from '../../components/pilot/PilotHeader.js';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 
-export const PilotHome = ({ navigation }) => (
-  <View style={styles.container}>
-    <PilotHeader/>
-    <Text>Pilot Home Screen</Text>
-    <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
-    <Jobs />
-  </View>
-);
+export default function PilotHomeScreen(props) {
+  const navigation = useNavigation();
+
+  // Hamburger menu push function. Works in android and not ios
+  // function handlePushBurger(e) {
+  //   navigation.dispatch(DrawerActions.openDrawer())
+  // }
+
+  return (
+    <View style={styles.pilotWrapper}>
+      <PilotHeader pushBurger={() => navigation.dispatch(DrawerActions.openDrawer())}/>
+      <Text style={styles.contentPilotContainer}>Pilot home page</Text>
+    </View>
+  )
+
+}
 
 const styles = StyleSheet.create({
-  container: {
+  pilotWrapper: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    backgroundColor: 'lightgray',
+    alignItems: 'center',
+
   },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5
+  contentPilotContainer: {
+    marginTop: 400,
+    alignItems: 'center',
+    fontSize: 50
   }
 });

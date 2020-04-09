@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { AuthContext } from "../../context";
 import ClientHeader from '../../components/client/ClientHeader'
 
 const SupportScreen = ({ navigation }) => {
@@ -10,7 +9,7 @@ const SupportScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ClientHeader />
       <Text>Support Screen</Text>
-      <Button />
+      <Button title='Drawer' onPress={() => navigation.toggleDrawer()} />
     </View>
   )
 };

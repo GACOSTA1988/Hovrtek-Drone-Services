@@ -15,6 +15,7 @@ export const ClientProfile = ({ navigation }) => {
   )
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

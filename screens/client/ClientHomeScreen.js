@@ -4,61 +4,50 @@ import ClientHomeToggle from '../../components/client/ClientHomeToggle.js';
 import ClientHeader from '../../components/client/ClientHeader.js';
 import ProjectList from './ProjectListScreen.js';
 import NewProject from './NewProjectScreen.js';
-// import Footer from '../components/Footer.js'
-import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 
+export default function ClientHomeScreen(props) {
+  const navigation = useNavigation();
 
-class ClientHomeScreen extends React.Component {
+  console.warn("these are the props in home: ");
+  console.warn(props);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      burgerPushed: false,
-      newProjectViewActive: false,
-      projectsViewActive: true
-    };
-    this.handlePushBurger = this.handlePushBurger.bind(this);
-    this.toggleProjectListState = this.toggleProjectListState.bind(this);
+  // Hamburger menu push function. Works in android and not ios
+  function handlePushBurger(e) {
+    navigation.toggleDrawer();
   }
 
-  toggleProjectListState= () => {
-    this.setState(prevState => ({
-      newProjectViewActive: true,
-      projectsViewActive: false
-    }));
+  // Conditional Rendering state for ProjectList / New Project Tab
+  const [ newProjectViewActive, setNewProjectViewActive ] = useState(false);
+  const [ projectsViewActive, setProjectsViewActive ] = useState(true);
+
+  const toggleProjectListState = () => {
+    setNewProjectViewActive(true)
+    setProjectsViewActive(false)
   }
 
-  toggleNewProjectState= () => {
-    this.setState(prevState => ({
-      newProjectViewActive: false,
-      projectsViewActive: true
-    }));
+  const toggleNewProjectState = () => {
+    setNewProjectViewActive(true)
+    setNewProjectViewActive(false)
   }
 
-  handleNewProjectView() {
-    return this.state.newProjectViewActive ? <NewProject/> :  <ProjectList/>
+  const handleNewProjectView = () => {
+    return newProjectViewActive ? <NewProject/> :  <ProjectList/>
   }
 
-  handlePushBurger() {
-    this.props.navigation.toggleDrawer()
-  }
-
-  render() {
-
-   return (
+  return (
     <View style={styles.clientWrapper}>
-
+      <ClientHeader pushBurger={() => handlePushBurger()}/>
       <ClientHomeToggle
-          toggleProjectListState={()=> this.toggleProjectListState()}
-          toggleNewProjectState={()=> this.toggleNewProjectState()}
-          />
-      {this.handleNewProjectView()}
-    
-
+        toggleProjectListState={()=> toggleProjectListState()}
+        toggleNewProjectState={()=> toggleNewProjectState()}
+      />
+      <ScrollView style={styles.ClientListcontainer} contentContainerStyle={styles.contentClientContainer}>{handleNewProjectView()}</ScrollView>
     </View>
   )
-  }
-};
+
+}
 
 const styles = StyleSheet.create({
   clientWrapper: {
@@ -72,6 +61,3 @@ const styles = StyleSheet.create({
   //   alignItems: 'center',
   // },
 });
-
-
-export default ClientHomeScreen;

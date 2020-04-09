@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import ClientHeader from '../../components/client/ClientHeader'
 
 const SupportScreen = ({ navigation }) => {
-  
+
 
   return (
     <View style={styles.container}>

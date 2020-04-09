@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Header, Image, ShadowPropTypesIOS } from 'react
 import { Ionicons } from '@expo/vector-icons';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
 
+
 import {useNavigation, DrawerActions} from '@react-navigation/native';
 
 const ClientHeader = () => {
@@ -23,12 +24,12 @@ console.log(navigation);
         onPress={() => {
         navigation.dispatch(DrawerActions.openDrawer());
         }}
+
         name="ios-menu"
         size={45}
         color="white"
         resizeMode="contain"
         />  
-
     </View>
   )
 }
@@ -60,4 +61,3 @@ const styles = StyleSheet.create({
 });
 
 export default ClientHeader;
-

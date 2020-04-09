@@ -6,8 +6,10 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AuthContext } from "./context";
 import { SignIn } from './screens/auth/SignInScreen';
 import { SignUp } from './screens/auth/SignUpScreen';
-import { PilotHome } from './screens/pilot/PilotHomeScreen';
-import { PilotProfile } from './screens/pilot/PilotProfileScreen';
+import { ClientProfile } from './screens/client/ClientProfileScreen';
+import PilotHomeScreen from './screens/pilot/PilotHomeScreen';
+import PilotProfileScreen from './screens/pilot/PilotProfileScreen';
+import { ClientHomeStack, ClientProfileStack, ClientHomeStackScreen, ClientProfileStackScreen, ClientTabsScreen } from './navigation/ClientNavigation';
 import { PilotHomeStack, PilotProfileStack, PilotHomeStackScreen, PilotProfileStackScreen, PilotTabsScreen } from './navigation/PilotNavigation';
 import { SplashScreen } from "expo";
 import Footer from './components/Footer';
@@ -29,12 +31,9 @@ const RootClientStack = createStackNavigator();
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
 
-const pushBurger = () => {
-  navigation.toggleDrawer()
-}
 
-export default ({navigation}) => {
-  const [userToken, setUserToken] = React.useState('clientToken');
+export default () => {
+  const [userToken, setUserToken] = React.useState(null);
 
   const authContext = React.useMemo(() => {
     return {
@@ -56,7 +55,7 @@ export default ({navigation}) => {
     };
   }, []);
 
-return (
+  return (
     <AuthContext.Provider value={authContext}>
 
 
@@ -64,6 +63,7 @@ return (
       
         {userToken ? (
           (userToken === 'clientToken') ? (
+
    
             <RootClientStack.Navigator>
               <RootClientStack.Screen 
@@ -80,22 +80,23 @@ return (
 
           ) : (
             <Drawer.Navigator headerMode='none'>
-              <StaturBar barStyle='light-content' backgroundColor='#6a51ae'/>
-              <Drawer.Screen name='PilotHome' component={PilotTabsScreen} />
-              <Drawer.Screen name='PilotProfile' component={PilotProfileStackScreen} />
-            </Drawer.Navigator>
-          )
-      ) : (
-        <AuthStack.Navigator>
-          <AuthStack.Screen name='SignIn' component={SignIn} options={{ title: 'Sign In'}}/>
-          <AuthStack.Screen name='SignUp' component={SignUp} options={{ title: 'Create Account'}}/>
-        </AuthStack.Navigator>
-      )
-    }
-    <Footer />
+              <StatusBar barStyle='light-content' backgroundColor='#6a51ae'/>
+              <Drawer.Screen name='PilotHomeScreen' component={PilotHomeScreen} />
+              <Drawer.Screen name='PilotProfileScreen' component={PilotProfileStackScreen} />
 
-    </NavigationContainer>
-  </AuthContext.Provider>
+            </Drawer.Navigator>
+            )
+        ) : (
+            <AuthStack.Navigator>
+              <AuthStack.Screen name='SignIn' component={SignIn} options={{ title: 'Sign In' }} />
+              <AuthStack.Screen name='SignUp' component={SignUp} options={{ title: 'Create Account' }} />
+            </AuthStack.Navigator>
+          )
+
+        }
+        <Footer />
+      </NavigationContainer>
+    </AuthContext.Provider>
   )
 
 };

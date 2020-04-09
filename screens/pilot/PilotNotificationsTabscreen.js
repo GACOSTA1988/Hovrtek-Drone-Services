@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { AuthContext } from "../../context";
 import PilotHeader from '../../components/pilot/PilotHeader';
 
-export const PilotMessage = ({ navigation }) => (
+export const PilotNotificationsTab = ({ navigation }) => (
     <View style={styles.container}>
         <PilotHeader />
-        <Text>The message form for pilots will be built here.</Text>
+        <Text>All pilot notifications will be listed here.</Text>
     </View>
 );
 

@@ -55,7 +55,7 @@ export default ({navigation}) => {
       }
     };
   }, []);
-  // options={{ headerTitle: () => <TestHeader/> }}
+
 return (
     <AuthContext.Provider value={authContext}>
 

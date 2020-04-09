@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { PilotHome } from '../screens/pilot/PilotHomeScreen';
+import { PilotSignIn } from '../screens/pilot/PilotSignInScreen';
 import { PilotProfile } from '../screens/pilot/PilotProfileScreen';
 
 const Tabs = createBottomTabNavigator();
@@ -12,13 +13,14 @@ export const PilotHomeStack = createStackNavigator();
 export const PilotProfileStack = createStackNavigator();
 
 export const PilotHomeStackScreen = () => (
-  <PilotHomeStack.Navigator screenOptions={{headerShown: false}}>
+  <PilotHomeStack.Navigator screenOptions={{ headerShown: false }}>
+    <PilotHomeStack.Screen name='PilotSignIn' component={PilotSignIn} />
     <PilotHomeStack.Screen name='PilotHome' component={PilotHome} />
   </PilotHomeStack.Navigator>
 )
 
 export const PilotProfileStackScreen = () => (
-  <PilotProfileStack.Navigator screenOptions={{headerShown: false}}>
+  <PilotProfileStack.Navigator screenOptions={{ headerShown: false }}>
     <PilotProfileStack.Screen name='PilotProfile' component={PilotProfile} />
   </PilotProfileStack.Navigator>
 )

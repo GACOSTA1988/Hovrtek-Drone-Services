@@ -38,7 +38,7 @@ export default function ClientHomeScreen(props) {
 
   return (
     <View style={styles.clientWrapper}>
-      <ClientHeader pushBurger={() => handlePushBurger()}/>
+  
       <ClientHomeToggle
         toggleProjectListState={()=> toggleProjectListState()}
         toggleNewProjectState={()=> toggleNewProjectState()}

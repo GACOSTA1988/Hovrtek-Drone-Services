@@ -9,7 +9,6 @@ import { SignUp } from './screens/auth/SignUpScreen';
 import { ClientProfile } from './screens/client/ClientProfileScreen';
 import PilotHomeScreen from './screens/pilot/PilotHomeScreen';
 import PilotProfileScreen from './screens/pilot/PilotProfileScreen';
-import { ClientHomeStack, ClientProfileStack, ClientHomeStackScreen, ClientProfileStackScreen, ClientTabsScreen } from './navigation/ClientNavigation';
 import { PilotHomeStack, PilotProfileStack, PilotHomeStackScreen, PilotProfileStackScreen, PilotTabsScreen } from './navigation/PilotNavigation';
 import { SplashScreen } from "expo";
 import Footer from './components/Footer';
@@ -17,10 +16,8 @@ import PilotHeader from './components/pilot/PilotHeader';
 import AboutScreen from './screens/client/AboutScreen'
 import SupportScreen from './screens/client/SupportScreen'
 import ClientHomeScreen from './screens/client/ClientHomeScreen';
-import {DrawerNavigator} from './navigation/ClientHomeNavigation'
-import ClientHomeNavigation from './navigation/ClientHomeNavigation'
 import ClientHeader from './components/client/ClientHeader'
-
+import ClientHomeNavigation from './navigation/ClientHomeNavigation'
 
 
 

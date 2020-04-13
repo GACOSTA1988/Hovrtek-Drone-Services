@@ -17,6 +17,12 @@ import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
 
+// REDUX STUFF
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
+import reducers from "./reducers/index";
+
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const RootClientStack = createStackNavigator();
@@ -26,6 +32,9 @@ SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
 
 export default () => {
+  // REDUX STATE
+  const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
   const [userToken, setUserToken] = React.useState(null);
 
   const authContext = React.useMemo(() => {
@@ -49,49 +58,51 @@ export default () => {
   }, []);
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {userToken ? (
-          userToken === "clientToken" ? (
-            <RootClientStack.Navigator>
-              <RootClientStack.Screen
-                name="Client"
-                component={ClientHomeNavigation}
-                options={{
-                  title: "Home",
-                  headerTitle: () => <ClientHeader />
-                }}
-              />
-            </RootClientStack.Navigator>
+    <Provider store={state}>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer>
+          {userToken ? (
+            userToken === "clientToken" ? (
+              <RootClientStack.Navigator>
+                <RootClientStack.Screen
+                  name="Client"
+                  component={ClientHomeNavigation}
+                  options={{
+                    title: "Home",
+                    headerTitle: () => <ClientHeader />
+                  }}
+                />
+              </RootClientStack.Navigator>
+            ) : (
+              <RootPilotStack.Navigator>
+                <RootPilotStack.Screen
+                  name="Pilot"
+                  component={PilotHomeNavigation}
+                  options={{
+                    title: "Home",
+                    headerTitle: () => <PilotHeader />
+                  }}
+                />
+              </RootPilotStack.Navigator>
+            )
           ) : (
-            <RootPilotStack.Navigator>
-              <RootPilotStack.Screen
-                name="Pilot"
-                component={PilotHomeNavigation}
-                options={{
-                  title: "Home",
-                  headerTitle: () => <PilotHeader />
-                }}
+            <AuthStack.Navigator>
+              <AuthStack.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{ title: "Sign In" }}
               />
-            </RootPilotStack.Navigator>
-          )
-        ) : (
-          <AuthStack.Navigator>
-            <AuthStack.Screen
-              name="SignIn"
-              component={SignIn}
-              options={{ title: "Sign In" }}
-            />
-            <AuthStack.Screen
-              name="SignUp"
-              component={SignUp}
-              options={{ title: "Create Account" }}
-            />
-          </AuthStack.Navigator>
-        )}
-        <Footer />
-      </NavigationContainer>
-    </AuthContext.Provider>
+              <AuthStack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{ title: "Create Account" }}
+              />
+            </AuthStack.Navigator>
+          )}
+          <Footer />
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </Provider>
   );
 };
 

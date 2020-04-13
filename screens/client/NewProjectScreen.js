@@ -1,44 +1,68 @@
-import React from 'react';
-import {  Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { Component } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Button
+} from "react-native";
+import { postProjects } from "../../actions/index";
+import { connect } from "react-redux";
 
-const NewProjectScreen = () => {
+class NewProjectScreen extends Component {
+  state = {
+    title: "",
+    content: ""
+  };
+  submit = () => {
+    this.props.postProjects(this.state.title, this.state.content);
+    this.setState({
+      title: "",
+      content: ""
+    });
+    this.props.navigation.navigate("ProjectListScreen");
+  };
 
-  return (
-    <View style={styles.newProjectListWrapper}>
-    <TouchableOpacity style={styles.newProjectListTextWrapper}>
-    <Text style={styles.newProjectText}>Create a New Project</Text>
-    </TouchableOpacity>
-
-    <View style={styles.newProjectListForm}>
-      <TouchableOpacity>
-      <Text> This is a big ass form </Text>
-            <Text> This is a big ass form</Text>
-        <Text> This is a big ass form</Text>
+  render() {
+    return (
+      <View style={styles.newProjectListWrapper}>
+        <TouchableOpacity style={styles.newProjectListTextWrapper}>
+          <Text style={styles.newProjectText}>Create a New Project</Text>
+          <TextInput
+            placeholder="title"
+            onChangeText={title => this.setState({ title })}
+            value={this.state.title}
+          />
+          <TextInput
+            placeholder="content"
+            onChangeText={content => this.setState({ content })}
+            value={this.state.content}
+          />
+          <Button title="Submit" onPress={this.submit} />
         </TouchableOpacity>
       </View>
-  </View>
-
-
-  )
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  newProjectListWrapper:{
-    alignItems: 'center'
+  newProjectListWrapper: {
+    alignItems: "center"
   },
   newProjectListForm: {
-    backgroundColor: 'darkgray',
+    backgroundColor: "darkgray",
     width: 380,
     borderWidth: 1,
     padding: 6
   },
   newProjectText: {
     fontSize: 30,
-    color: 'darkblue'
+    color: "darkblue"
   },
   newProjectListTextWrapper: {
-    marginBottom: 20,
-  },
+    marginBottom: 20
+  }
 });
 
-export default NewProjectScreen
+export default connect(null, { postProjects })(NewProjectScreen);

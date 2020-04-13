@@ -1,43 +1,79 @@
-import React from 'react';
-import {  Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { Component } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Button,
+  FlatList
+} from "react-native";
+import { connect } from "react-redux";
+import { getProjects } from "../../actions/index";
+import _ from "lodash";
 
-const ProjectListScreen = () => {
-
-  return (
-    <View style={styles.projectListWrapper}>
-    <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
-    <Text style={styles.clientText}>Current Projects</Text>
-    </TouchableOpacity>
-
-    <View style={styles.projectCard}>
-      <TouchableOpacity>
-      <Text> This is a Project. </Text>
-            <Text> When: April 20th, 2020 </Text>
-        <Text> Notes: I want a drone to spy on my neighbor </Text>
+class ProjectListScreen extends Component {
+  componentDidMount() {
+    this.props.getProjects();
+  }
+  render() {
+    return (
+      <View style={styles.projectListWrapper}>
+        <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
+          <Text style={styles.clientText}>Current Projects</Text>
         </TouchableOpacity>
-      </View>
-  </View>
 
-  )
+        <View style={styles.projectCard}>
+          <TouchableOpacity>
+            <Text> CURRENT PROJECTS </Text>
+            <FlatList
+              style={{ width: "100%" }}
+              data={this.props.listOfProjects}
+              keyExtractor={item => item.key}
+              renderItem={({ item }) => {
+                return (
+                  <View>
+                    <Text> {item.title} </Text>
+                  </View>
+                );
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   projectCard: {
-    backgroundColor: 'darkgray',
+    backgroundColor: "darkgray",
     width: 380,
     borderWidth: 1,
     padding: 6
   },
   clientText: {
     fontSize: 30,
-    color: 'darkblue'
+    color: "darkblue"
   },
   ClientProjectListTextWrapper: {
-    marginBottom: 20,
+    marginBottom: 20
   },
   projectListWrapper: {
-    alignItems: 'center'
+    alignItems: "center"
   }
 });
 
-export default ProjectListScreen
+function mapStateToProps(state) {
+  const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  return {
+    listOfProjects
+  };
+}
+
+export default connect(mapStateToProps, { getProjects })(ProjectListScreen);

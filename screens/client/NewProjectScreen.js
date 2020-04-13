@@ -30,11 +30,13 @@ class NewProjectScreen extends Component {
         <TouchableOpacity style={styles.newProjectListTextWrapper}>
           <Text style={styles.newProjectText}>Create a New Project</Text>
           <TextInput
+           style={styles.input}
             placeholder="title"
             onChangeText={title => this.setState({ title })}
             value={this.state.title}
           />
           <TextInput
+            style={styles.input}
             placeholder="content"
             onChangeText={content => this.setState({ content })}
             value={this.state.content}
@@ -58,10 +60,18 @@ const styles = StyleSheet.create({
   },
   newProjectText: {
     fontSize: 30,
-    color: "darkblue"
+    color: "darkblue",
+    marginBottom: 20,
   },
   newProjectListTextWrapper: {
     marginBottom: 20
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 3,
+    height: 30,
+    marginBottom: 5
+  
   }
 });
 

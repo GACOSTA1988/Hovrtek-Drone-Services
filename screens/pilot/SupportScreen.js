@@ -1,20 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { AuthContext } from "../../context";
+import PilotHeader from "../../components/pilot/PilotHeader";
 
-export const PilotProfile = ({ navigation }) => {
-  const { signOut } = React.useContext(AuthContext);
-
+const SupportScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Pilot Profile Screen</Text>
-      <Button
-        title="Go to home"
-        onPress={() => {
-          navigation.navigate("PilotHome");
-        }}
-      />
-      <Button title="Sign Out" onPress={() => signOut()} />
+      <Text>Support Screen</Text>
     </View>
   );
 };
@@ -32,3 +23,5 @@ const styles = StyleSheet.create({
     borderRadius: 5
   }
 });
+
+export default SupportScreen;

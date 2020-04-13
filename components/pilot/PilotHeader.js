@@ -1,56 +1,62 @@
-import React from 'react';
-import { Text, View, StyleSheet, Header, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import hovrtekLogo from '../../assets/hovrtek_logo.png';
-import { useNavigation } from '@react-navigation/native';
-import PropTypes from 'prop-types';
+import React from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Header,
+  Image,
+  ShadowPropTypesIOS
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import hovrtekLogo from "../../assets/hovrtek_logo.png";
 
-const PilotHeader = (props) => {
-  console.warn(props);
-  console.warn("these are the props in header: ");
+import { useNavigation, DrawerActions } from "@react-navigation/native";
+
+const PilotHeader = () => {
+  const navigation = useNavigation();
+  console.log(navigation);
 
   return (
-    <View style={styles.clientHeaderWrapper}>
-      <View style={styles.headerText}></View>
-      <Image
-      source={hovrtekLogo}
-      style={styles.hovrtekLogo}
-      />
-      <Ionicons style={styles.hamburger}
-      onPress={() => props.pushBurger()}
+    <View style={styles.pilotHeaderWrapper}>
+      <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+      <Ionicons
+        style={styles.hamburger}
+        onPress={() => {
+          navigation.dispatch(DrawerActions.openDrawer());
+        }}
         name="ios-menu"
         size={45}
         color="white"
         resizeMode="contain"
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  clientHeaderWrapper: {
-  position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 25,
-  backgroundColor: '#092455'
-  },
-  hamburger: {
-    alignSelf:'flex-end',
-    margin: 5
+  pilotHeaderWrapper: {
+    marginTop: 18,
+    backgroundColor: "#092455",
+    width: 375,
+    height: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   },
   hovrtekLogo: {
     width: 170,
     height: 30,
-    position: 'absolute',
-    left: 5,
-    right: 0,
-    top: 13,
-    }
-});
+    position: "absolute",
+    left: 0,
+    right: 10,
+    top: 7
+  },
 
-PilotHeader.propTypes = {
-  pushBurger: PropTypes.func.isRequired
-}
+  hamburger: {
+    alignSelf: "flex-end",
+    marginLeft: 300,
+    margin: 0
+  }
+});
 
 export default PilotHeader;

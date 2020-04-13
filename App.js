@@ -7,26 +7,20 @@ import { AuthContext } from "./context";
 import { SignIn } from "./screens/auth/SignInScreen";
 import { SignUp } from "./screens/auth/SignUpScreen";
 import { ClientProfile } from "./screens/client/ClientProfileScreen";
-import PilotHomeScreen from "./screens/pilot/PilotHomeScreen";
-import PilotProfileScreen from "./screens/pilot/PilotProfileScreen";
-import {
-  PilotHomeStack,
-  PilotProfileStack,
-  PilotHomeStackScreen,
-  PilotProfileStackScreen,
-  PilotTabsScreen
-} from "./navigation/PilotNavigation";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
-import PilotHeader from "./components/pilot/PilotHeader";
+// import PilotHeader from "./components/pilot/PilotHeader";
 import AboutScreen from "./screens/client/AboutScreen";
 import SupportScreen from "./screens/client/SupportScreen";
 import ClientHeader from "./components/client/ClientHeader";
 import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
+import PilotHeader from "./components/pilot/PilotHeader";
+import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
 
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const RootClientStack = createStackNavigator();
+const RootPilotStack = createStackNavigator();
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
@@ -70,17 +64,16 @@ export default () => {
               />
             </RootClientStack.Navigator>
           ) : (
-            <Drawer.Navigator headerMode="none">
-              <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-              <Drawer.Screen
-                name="PilotHomeScreen"
-                component={PilotHomeScreen}
+            <RootPilotStack.Navigator>
+              <RootPilotStack.Screen
+                name="Pilot"
+                component={PilotHomeNavigation}
+                options={{
+                  title: "Home",
+                  headerTitle: () => <PilotHeader />
+                }}
               />
-              <Drawer.Screen
-                name="PilotProfileScreen"
-                component={PilotProfileStackScreen}
-              />
-            </Drawer.Navigator>
+            </RootPilotStack.Navigator>
           )
         ) : (
           <AuthStack.Navigator>

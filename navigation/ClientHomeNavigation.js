@@ -8,6 +8,10 @@ import AboutScreen from "../screens/client/AboutScreen";
 import SupportScreen from "../screens/client/SupportScreen";
 import ClientHeader from "../components/client/ClientHeader";
 import ProjectsNewProjectTabNavigation from "./ProjectsNewProjectTabNavigation";
+import AccountScreen from '../screens/client/AccountScreen'
+import LocationScreen from '../screens/client/LocationScreen'
+import ServicesScreen from '../screens/client/ServicesScreen'
+
 
 const ClientDrawer = createDrawerNavigator();
 
@@ -15,20 +19,33 @@ const ClientHomeNavigation = () => {
   return (
     <ClientDrawer.Navigator>
       <ClientDrawer.Screen
-        name="ProjectsNewProjectTabNavigation"
+        name="Home"
         component={ProjectsNewProjectTabNavigation}
       />
       <ClientDrawer.Screen
-        name="AboutScreen"
-        component={AboutScreen}
-        headerMode="none"
-        options={{ title: "About" }}
+        name='AccountScreen'
+        component={AccountScreen}
+        options={{ title: 'Account' }}
       />
       <ClientDrawer.Screen
-        name="SupportScreen"
+        name='ServicesScreen'
+        component={ServicesScreen}
+        options={{ title: 'Services' }}
+      />
+      <ClientDrawer.Screen
+        name='LocationScreen'
+        component={LocationScreen}
+        options={{ title: 'Location' }}
+      />
+      <ClientDrawer.Screen
+        name='AboutScreen'
+        component={AboutScreen}
+        options={{ title: 'About' }}
+      />
+      <ClientDrawer.Screen
+        name='SupportScreen'
         component={SupportScreen}
-        headerMode="none"
-        options={{ title: "Support" }}
+        options={{ title: 'Support' }}
       />
     </ClientDrawer.Navigator>
   );

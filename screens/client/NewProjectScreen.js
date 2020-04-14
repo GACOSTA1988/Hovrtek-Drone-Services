@@ -11,9 +11,12 @@ import { postProjects } from "../../actions/index";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
-
+import { useNavigation } from '@react-navigation/native';
 
 function NewProjectScreen(props, {postProjects}) {
+
+  const navigation = useNavigation();
+
 
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
@@ -40,7 +43,7 @@ function NewProjectScreen(props, {postProjects}) {
     e.preventDefault();
     console.log("New Project Props", props);
     props.postProjects(location, date, recording, light);
-
+    navigation.navigate("ProjectListScreen")
   }
 
     // RADIO BUTTON STUFF

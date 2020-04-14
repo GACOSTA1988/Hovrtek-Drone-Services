@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { getProjects } from "../../actions/index";
 import _ from "lodash";
 
+
 class ProjectListScreen extends Component {
   componentDidMount() {
     this.props.getProjects();
@@ -25,7 +26,6 @@ class ProjectListScreen extends Component {
 
         <View style={styles.projectCard}>
           <TouchableOpacity>
-            <Text> CURRENT PROJECTS </Text>
             <FlatList
               style={{ width: "100%" }}
               data={this.props.listOfProjects}

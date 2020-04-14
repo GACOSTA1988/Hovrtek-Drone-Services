@@ -1,4 +1,18 @@
-// Jay- Funcional hook state for conditional Rendering of ProjectList / New Project Tab on client home screen. Was re-factored into class. In case we go back to function
+
+//in submit
+
+const submit = (e) => {
+  e.preventDefault();
+  console.log("New Project Props", props);
+  props.postProjects(location, date, recording, light);
+  setState({
+    date: "",
+    location: "",
+    recording: "",
+    light: 1
+  });
+}
+
 
 // ClientHomeScreen.js
   [ newProjectViewActive, setNewProjectViewAcitve ] = useState(false);

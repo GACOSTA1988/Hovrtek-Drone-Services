@@ -8,9 +8,11 @@ import AboutScreen from "../screens/client/AboutScreen";
 import SupportScreen from "../screens/client/SupportScreen";
 import ClientHeader from "../components/client/ClientHeader";
 import ProjectsNewProjectTabNavigation from "./ProjectsNewProjectTabNavigation";
-import AccountScreen from '../screens/client/AccountScreen'
-import LocationScreen from '../screens/client/LocationScreen'
-import ServicesScreen from '../screens/client/ServicesScreen'
+import AccountScreen from '../screens/client/AccountScreen';
+import LocationScreen from '../screens/client/LocationScreen';
+import ServicesScreen from '../screens/client/ServicesScreen';
+import SignOutScreen from '../screens/auth/SignOutScreen';
+import { AuthContext } from "../context";
 
 
 const ClientDrawer = createDrawerNavigator();
@@ -46,6 +48,12 @@ const ClientHomeNavigation = () => {
         name='SupportScreen'
         component={SupportScreen}
         options={{ title: 'Support' }}
+      />
+      <ClientDrawer.Screen
+        name="SignOutScreen"
+        component={SignOutScreen}
+        headerMode="none"
+        options={{ title: "Sign Out" }}
       />
     </ClientDrawer.Navigator>
   );

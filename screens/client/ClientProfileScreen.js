@@ -8,8 +8,6 @@ export const ClientProfile = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Client Profile Screen</Text>
-      <Button title='Go to home' onPress={() => {
-        navigation.navigate('ClientHome') }} />
       <Button title='Sign Out' onPress={() => signOut()} />
     </View>
   )

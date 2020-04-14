@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import { Button } from 'react-native';
 import AboutScreen from "../screens/pilot/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
 import PilotHeader from "../components/pilot/PilotHeader";
@@ -10,10 +10,13 @@ import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
 import CreateProfileScreen from '../screens/pilot/CreateProfileScreen';
 import PilotProfileScreen from '../screens/pilot/PilotProfileScreen';
 import ProfileListScreen from '../screens/pilot/ProfileListScreen';
+import SignOutScreen from '../screens/auth/SignOutScreen';
+import { AuthContext } from "../context";
 
 const PilotDrawer = createDrawerNavigator();
 
 const PilotHomeNavigation = () => {
+  const { signOut } = React.useContext(AuthContext);
   return (
     <PilotDrawer.Navigator>
       <PilotDrawer.Screen
@@ -49,6 +52,12 @@ const PilotHomeNavigation = () => {
         component={ProfileListScreen}
         headerMode="none"
         options={{ title: "All Profiles" }}
+      />
+      <PilotDrawer.Screen
+        name="SignOutScreen"
+        component={SignOutScreen}
+        headerMode="none"
+        options={{ title: "Sign Out" }}
       />
     </PilotDrawer.Navigator>
   );

@@ -25,7 +25,7 @@ class CreateProfileScreen extends Component {
       equipment: "",
       availability: ""
     });
-    this.props.navigation.navigate("PilotProfileScreen");
+    this.props.navigation.navigate("ProfileListScreen");
   };
 
   render() {

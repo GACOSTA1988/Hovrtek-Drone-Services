@@ -10,6 +10,7 @@ import PilotHeader from "../components/pilot/PilotHeader";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
 import CreateProfileScreen from '../screens/pilot/CreateProfileScreen';
 import PilotProfileScreen from '../screens/pilot/PilotProfileScreen';
+import ProfileListScreen from '../screens/pilot/ProfileListScreen';
 
 const PilotDrawer = createDrawerNavigator();
 
@@ -43,6 +44,12 @@ const PilotHomeNavigation = () => {
         component={PilotProfileScreen}
         headerMode="none"
         options={{ title: "Your Profile" }}
+      />
+      <PilotDrawer.Screen
+        name="ProfileListScreen"
+        component={ProfileListScreen}
+        headerMode="none"
+        options={{ title: "All Profiles" }}
       />
     </PilotDrawer.Navigator>
   );

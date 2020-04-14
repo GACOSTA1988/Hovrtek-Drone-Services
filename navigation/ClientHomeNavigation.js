@@ -8,9 +8,10 @@ import AboutScreen from "../screens/client/AboutScreen";
 import SupportScreen from "../screens/client/SupportScreen";
 import ClientHeader from "../components/client/ClientHeader";
 import ProjectsNewProjectTabNavigation from "./ProjectsNewProjectTabNavigation";
-import AccountScreen from '../screens/client/AccountScreen'
-import LocationScreen from '../screens/client/LocationScreen'
-import ServicesScreen from '../screens/client/ServicesScreen'
+import AccountScreen from '../screens/client/AccountScreen';
+import LocationScreen from '../screens/client/LocationScreen';
+import ServicesScreen from '../screens/client/ServicesScreen';
+import ClientProfileScreen from '../screens/client/ClientProfileScreen';
 
 
 const ClientDrawer = createDrawerNavigator();
@@ -46,6 +47,12 @@ const ClientHomeNavigation = () => {
         name='SupportScreen'
         component={SupportScreen}
         options={{ title: 'Support' }}
+      />
+      <ClientDrawer.Screen
+        name="ClientProfileScreen"
+        component={ClientProfileScreen}
+        headerMode="none"
+        options={{ title: "Your Profile" }}
       />
     </ClientDrawer.Navigator>
   );

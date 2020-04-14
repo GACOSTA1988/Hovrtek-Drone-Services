@@ -9,37 +9,76 @@ import {
 } from "react-native";
 import { postProjects } from "../../actions/index";
 import { connect } from "react-redux";
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+
+//BUTTON FUNCTIONALITY
+// let radio_props = [
+//   { label: 'Yes', value: 0 },
+//   { label: 'No', value: 1 }
+// ];
+
+
 
 class NewProjectScreen extends Component {
   state = {
-    title: "",
-    content: ""
+    location: "",
+    date: "",
+    recording: "",
+
+
   };
   submit = () => {
-    this.props.postProjects(this.state.title, this.state.content);
+    this.props.postProjects(this.state.date, this.state.location, this.state.recording, this.state.lightSpecs);
     this.setState({
-      title: "",
-      content: ""
+      date: "",
+      location: "",
+      recording: "",
+
     });
     this.props.navigation.navigate("ProjectListScreen");
   };
 
+
   render() {
+    var radio_props = [
+      { label: 'Yes', value: 0 },
+      { label: 'No', value: 1 }
+    ];
+    console.log("radio button", radio_props);
+    
     return (
       <View style={styles.newProjectListWrapper}>
         <TouchableOpacity style={styles.newProjectListTextWrapper}>
           <Text style={styles.newProjectText}>Create a New Project</Text>
           <TextInput
-           style={styles.input}
-            placeholder="title"
-            onChangeText={title => this.setState({ title })}
-            value={this.state.title}
+            style={styles.input}
+            placeholder="Location"
+            onChangeText={location => this.setState({ location })}
+            value={this.state.location}
           />
           <TextInput
+           style={styles.input}
+            placeholder="Date"
+            onChangeText={date => this.setState({ date })}
+            value={this.state.date}
+          />
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
             style={styles.input}
-            placeholder="content"
-            onChangeText={content => this.setState({ content })}
-            value={this.state.content}
+            placeholder="What will your Drone Services be recording?"
+            onChangeText={recording => this.setState({ recording })}
+            value={this.state.recording}
+          />
+          <Text>Do you have any light specification?</Text>
+          <RadioForm
+            formHorizontal={true}
+            labelHorizontal={false}
+            buttonColor={'#092455'}
+            selectedButtonColor={'#092455'}
+            radio_props={radio_props}
+            initial={1}
+            onPress={(value) => { this.setState({ value: value }) }}
           />
           <Button title="Submit" onPress={this.submit} />
         </TouchableOpacity>

@@ -33,7 +33,9 @@ class ProjectListScreen extends Component {
               renderItem={({ item }) => {
                 return (
                   <View>
-                    <Text> {item.title} </Text>
+                    <Text style={styles.testText}> {item.location} </Text>
+                    <Text> {item.date} </Text>
+                    <Text> {item.recording} </Text>
                   </View>
                 );
               }}
@@ -61,6 +63,10 @@ const styles = StyleSheet.create({
   },
   projectListWrapper: {
     alignItems: "center"
+  },
+  testText: {
+    fontWeight: 'bold',
+    fontSize: 17
   }
 });
 

@@ -35,7 +35,7 @@ export default () => {
   // REDUX STATE
   const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-  const [userToken, setUserToken] = React.useState(null);
+  const [userToken, setUserToken] = React.useState('clientToken');
 
   const authContext = React.useMemo(() => {
     return {

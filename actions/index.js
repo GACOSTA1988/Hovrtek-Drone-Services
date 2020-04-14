@@ -14,34 +14,11 @@ export function getProjects() {
   };
 }
 
-export function postProjects(title, content) {
+export function postProjects(location, date, recording, light) {
   return dispatch => {
     firebase
       .database()
       .ref("/projects")
-      .push({ title, content });
-  };
-}
-
-export function getProfiles() {
-  return dispatch => {
-    firebase
-      .database()
-      .ref("/profiles")
-      .on("value", snapshot => {
-        dispatch({
-          type: "PROFILES_FETCH",
-          payload: snapshot.val()
-        });
-      });
-  };
-}
-
-export function postProfiles(name, overview, equipment, availability) {
-  return dispatch => {
-    firebase
-      .database()
-      .ref("/profiles")
-      .push({ name, overview, equipment, availability });
+      .push({ location, date, recording, light });
   };
 }

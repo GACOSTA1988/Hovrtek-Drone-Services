@@ -6,7 +6,6 @@ const AboutScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>About Screen</Text>
-
     </View>
   );
 };

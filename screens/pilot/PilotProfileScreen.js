@@ -2,12 +2,18 @@ import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { AuthContext } from "../../context";
 
-const PilotProfileScreen = ({ navigation }) => {
+export const PilotProfile = ({ navigation }) => {
   const { signOut } = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <Text>Pilot Profile Screen</Text>
+      <Button
+        title="Go to home"
+        onPress={() => {
+          navigation.navigate("PilotHome");
+        }}
+      />
       <Button title="Sign Out" onPress={() => signOut()} />
     </View>
   );
@@ -26,5 +32,3 @@ const styles = StyleSheet.create({
     borderRadius: 5
   }
 });
-
-export default PilotProfileScreen;

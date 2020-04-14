@@ -24,27 +24,31 @@ class NewProjectScreen extends Component {
     location: "",
     date: "",
     recording: "",
-
-
+    light: 1
   };
+
   submit = () => {
-    this.props.postProjects(this.state.date, this.state.location, this.state.recording, this.state.lightSpecs);
+    this.props.postProjects(this.state.date, this.state.location, this.state.recording, this.state.light);
     this.setState({
       date: "",
       location: "",
       recording: "",
-
+      light: 1
     });
     this.props.navigation.navigate("ProjectListScreen");
   };
 
 
   render() {
-    var radio_props = [
+console.log(this.state);
+
+    // RADIO BUTTON STUFF
+    
+    let radio_props = [
       { label: 'Yes', value: 0 },
       { label: 'No', value: 1 }
     ];
-    console.log("radio button", radio_props);
+
     
     return (
       <View style={styles.newProjectListWrapper}>
@@ -73,7 +77,7 @@ class NewProjectScreen extends Component {
           <Text>Do you have any light specification?</Text>
           <RadioForm
             formHorizontal={true}
-            labelHorizontal={false}
+            labelHorizontal={true}
             buttonColor={'#092455'}
             selectedButtonColor={'#092455'}
             radio_props={radio_props}

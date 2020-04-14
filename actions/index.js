@@ -14,11 +14,11 @@ export function getProjects() {
   };
 }
 
-export function postProjects(location, date, recording) {
+export function postProjects(location, date, recording, light) {
   return dispatch => {
     firebase
       .database()
       .ref("/projects")
-      .push({ location, date, recording });
+      .push({ location, date, recording, light });
   };
 }

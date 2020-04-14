@@ -36,6 +36,7 @@ class ProjectListScreen extends Component {
                     <Text style={styles.testText}> {item.location} </Text>
                     <Text> {item.date} </Text>
                     <Text> {item.recording} </Text>
+                    <Text> {item.light} </Text>
                   </View>
                 );
               }}

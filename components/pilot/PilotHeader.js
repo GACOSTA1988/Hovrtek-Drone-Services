@@ -15,7 +15,6 @@ import { useNavigation, DrawerActions } from "@react-navigation/native";
 
 const PilotHeader = () => {
   const navigation = useNavigation();
-  console.log(navigation);
 
   return (
     <View style={styles.pilotHeaderWrapper}>

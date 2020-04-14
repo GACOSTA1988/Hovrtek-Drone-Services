@@ -38,6 +38,7 @@ export function getProfiles() {
 }
 
 export function postProfiles(name, overview, equipment, availability) {
+  console.log("index.js line 41. got to post profiles. this is overview: ", overview);
   return dispatch => {
     firebase
       .database()

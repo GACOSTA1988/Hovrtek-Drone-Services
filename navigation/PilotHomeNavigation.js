@@ -8,8 +8,6 @@ import AboutScreen from "../screens/pilot/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
 import PilotHeader from "../components/pilot/PilotHeader";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
-import CreateProfileScreen from '../screens/pilot/CreateProfileScreen';
-import PilotProfileScreen from '../screens/pilot/PilotProfileScreen';
 
 const PilotDrawer = createDrawerNavigator();
 
@@ -31,18 +29,6 @@ const PilotHomeNavigation = () => {
         component={SupportScreen}
         headerMode="none"
         options={{ title: "Support" }}
-      />
-      <PilotDrawer.Screen
-        name="CreateProfileScreen"
-        component={CreateProfileScreen}
-        headerMode="none"
-        options={{ title: "Create/Edit Profile" }}
-      />
-      <PilotDrawer.Screen
-        name="PilotProfileScreen"
-        component={PilotProfileScreen}
-        headerMode="none"
-        options={{ title: "Your Profile" }}
       />
     </PilotDrawer.Navigator>
   );

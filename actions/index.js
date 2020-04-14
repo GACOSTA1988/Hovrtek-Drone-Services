@@ -22,3 +22,26 @@ export function postProjects(title, content) {
       .push({ title, content });
   };
 }
+
+export function getProfiles() {
+  return dispatch => {
+    firebase
+      .database()
+      .ref("/profiles")
+      .on("value", snapshot => {
+        dispatch({
+          type: "PROFILES_FETCH",
+          payload: snapshot.val()
+        });
+      });
+  };
+}
+
+export function postProfiles(name, overview, equipment, availability) {
+  return dispatch => {
+    firebase
+      .database()
+      .ref("/profiles")
+      .push({ name, overview, equipment, availability });
+  };
+}

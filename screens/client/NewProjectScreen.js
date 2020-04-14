@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -8,39 +8,40 @@ import {
   Button
 } from "react-native";
 import { postProjects } from "../../actions/index";
-import { connect } from "react-redux";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
-
-//BUTTON FUNCTIONALITY
-// let radio_props = [
-//   { label: 'Yes', value: 0 },
-//   { label: 'No', value: 1 }
-// ];
+import { postProfiles } from "../../actions/index";
+import { connect } from "react-redux";
 
 
+function NewProjectScreen(props, {postProjects}) {
 
-class NewProjectScreen extends Component {
-  state = {
-    location: "",
-    date: "",
-    recording: "",
-    light: 1
-  };
+  const [location, setLocation] = useState('');
+  const [date, setDate] = useState('');
+  const [recording, setRecording] = useState('');
+  const [light, setLight] = useState(1);
 
-  submit = () => {
-    this.props.postProjects(this.state.date, this.state.location, this.state.recording, this.state.light);
-    this.setState({
-      date: "",
-      location: "",
-      recording: "",
-      light: 1
-    });
-    this.props.navigation.navigate("ProjectListScreen");
-  };
+  function handleLocationChange(text) {
+    setLocation(text);
+  }
 
+  function handleDateChange(text) {
+    setDate(text);
+  }
 
-  render() {
-console.log(this.state);
+  function handleRecordingChange(text) {
+    setRecording(text);
+  }
+
+  function handleLightChange(text) {
+    (value) => { setLight({ value: value }) }
+  }
+
+  const submit = (e) => {
+    e.preventDefault();
+    console.log("New Project Props", props);
+    props.postProjects(location, date, recording, light);
+
+  }
 
     // RADIO BUTTON STUFF
     
@@ -57,22 +58,22 @@ console.log(this.state);
           <TextInput
             style={styles.input}
             placeholder="Location"
-            onChangeText={location => this.setState({ location })}
-            value={this.state.location}
+            onChangeText={handleLocationChange}
+            value={location}
           />
           <TextInput
            style={styles.input}
             placeholder="Date"
-            onChangeText={date => this.setState({ date })}
-            value={this.state.date}
+            onChangeText={handleDateChange}
+            value={date}
           />
           <TextInput
             multiline={true}
             numberOfLines={4}
             style={styles.input}
             placeholder="What will your Drone Services be recording?"
-            onChangeText={recording => this.setState({ recording })}
-            value={this.state.recording}
+            onChangeText={handleRecordingChange}
+            value={recording}
           />
           <Text>Do you have any light specification?</Text>
           <RadioForm
@@ -82,14 +83,14 @@ console.log(this.state);
             selectedButtonColor={'#092455'}
             radio_props={radio_props}
             initial={1}
-            onPress={(value) => { this.setState({ value: value }) }}
+            onPress={handleLightChange}
           />
-          <Button title="Submit" onPress={this.submit} />
+          <Button title="Submit" onPress={submit} />
         </TouchableOpacity>
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   newProjectListWrapper: {

@@ -11,11 +11,15 @@ import {
 import { connect } from "react-redux";
 import { getProjects } from "../../actions/index";
 import _ from "lodash";
+import { Ionicons } from "@expo/vector-icons";
+
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 class ProjectListScreen extends Component {
   componentDidMount() {
     this.props.getProjects();
   }
+
   render() {
     return (
       <View style={styles.projectListWrapper}>
@@ -34,6 +38,21 @@ class ProjectListScreen extends Component {
                 return (
                   <View>
                     <Text> {item.title} </Text>
+                    <Text> {item.content} </Text>
+                    <View>
+                      <TouchableHighlight
+                        onPress={() => this.props.navigation.navigate("Edit")}
+                      >
+                        <View>
+                          <Ionicons name="ios-pizza" size={32} color="green" />
+                        </View>
+                      </TouchableHighlight>
+                      <TouchableHighlight>
+                        <View>
+                          <Ionicons name="ios-pizza" size={32} color="red" />
+                        </View>
+                      </TouchableHighlight>
+                    </View>
                   </View>
                 );
               }}

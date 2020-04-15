@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Header,
   Image,
-  ShadowPropTypesIOS
+  ShadowPropTypesIOS,
+  Dimensions
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../../assets/hovrtek_logo.png";
@@ -22,7 +23,7 @@ const PilotHeader = () => {
       <Ionicons
         style={styles.hamburger}
         onPress={() => {
-          navigation.dispatch(DrawerActions.openDrawer());
+          navigation.dispatch(DrawerActions.toggleDrawer());
         }}
         name="ios-menu"
         size={45}
@@ -58,5 +59,33 @@ const styles = StyleSheet.create({
     margin: 0
   }
 });
+
+// Android-compatible styling - todo: conditional rendering
+
+// const width = Dimensions.get('window').width;
+//
+// const styles = StyleSheet.create({
+//   pilotHeaderWrapper: {
+//     backgroundColor: '#092455',
+//     left: -16,
+//     top: 5,
+//     alignSelf: 'stretch',
+//     width: width,
+//     height: 67,
+//   },
+//   hovrtekLogo: {
+//     width: 170,
+//     height: 30,
+//     position: 'absolute',
+//     left: 10,
+//     top: 20,
+//   },
+//
+//   hamburger: {
+//     alignSelf:'flex-end',
+//     right: 10,
+//     top: 10
+//   }
+// });
 
 export default PilotHeader;

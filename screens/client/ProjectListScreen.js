@@ -15,7 +15,6 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { TouchableHighlight } from "react-native-gesture-handler";
 
-
 class ProjectListScreen extends Component {
   componentDidMount() {
     this.props.getProjects();
@@ -38,10 +37,19 @@ class ProjectListScreen extends Component {
               renderItem={({ item }) => {
                 return (
                   <View>
-
-                    <Text> {item.location} </Text>
-                    <Text> {item.date} </Text>
-                    <Text> {item.recording} </Text>
+                    <TouchableHighlight
+                      onPress={() =>
+                        this.props.navigation.navigate("ProjectDetailsScreen", {
+                          ...item
+                        })
+                      }
+                    >
+                      <View>
+                        <Text> {item.location} </Text>
+                        <Text> {item.date} </Text>
+                        <Text> {item.recording} </Text>
+                      </View>
+                    </TouchableHighlight>
                     <View>
                       <TouchableHighlight
                         onPress={() =>
@@ -62,7 +70,6 @@ class ProjectListScreen extends Component {
                         </View>
                       </TouchableHighlight>
                     </View>
-
                   </View>
                 );
               }}
@@ -92,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   testText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 17
   }
 });

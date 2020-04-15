@@ -50,13 +50,8 @@ function NewProjectScreen(props, { postProjects }) {
     e.preventDefault();
     console.log("New Project Props", props);
     props.postProjects(location, date, recording, light);
-    // this.setState({
-    //   location: "",
-    //   date: "",
-    //   recording: "",
-    //   light: ""
-    // });
     navigation.navigate("ProjectListScreen");
+    setDate(""), setLight(""), setLocation(""), setRecording("");
   };
 
   // RADIO BUTTON STUFF

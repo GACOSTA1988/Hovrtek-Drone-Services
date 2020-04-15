@@ -1,19 +1,32 @@
 import React from "react";
-import { View, Button, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 function WhichSignUpScreen( {navigation} ) {
 
   return (
     <View style={styles.whichSignUpBody}>
-      <Button title="Sign up as a pilot" onPress={() => {navigation.push('PilotSignUpScreen')}} />
-      <Button title="Sign up as a client" onPress={() => {navigation.push('ClientSignUpScreen')}} />
+      <TouchableOpacity style={styles.button} onPress={() => {navigation.push('PilotSignUpScreen')}} >
+      <Text> Sign up as a pilot</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => {navigation.push('ClientSignUpScreen')}} >
+      <Text> Sign up as a client</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   whichSignUpBody: {
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flex: .5
+  },
+  button: {
+    marginTop: 20,
+    padding: 10,
+    width: "90%",
+    alignItems: "center",
+    backgroundColor: "lightblue"
   }
 });
 

@@ -39,12 +39,14 @@ function PilotSignInScreen( {navigation} ) {
           placeholder="email"
           value={email}
           onChangeText={setEmail}
+          style={styles.input}
         />
         <TextInput
           placeholder="password"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
+          style={styles.input}
         />
         <Button title="Sign in" onPress={signIn} />
       </TouchableOpacity>
@@ -54,7 +56,9 @@ function PilotSignInScreen( {navigation} ) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flex: .5
   },
   text: {
     fontSize: 30,
@@ -62,6 +66,13 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     marginBottom: 20
+  },
+  input: {
+    height: 40,
+    borderColor: "grey",
+    borderWidth: 1,
+    margin: 10,
+    width: 200
   }
 });
 

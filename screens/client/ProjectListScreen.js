@@ -9,7 +9,7 @@ import {
   FlatList
 } from "react-native";
 import { connect } from "react-redux";
-import { getProjects } from "../../actions/index";
+import { getProjects, deleteProject } from "../../actions/index";
 import _ from "lodash";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -41,13 +41,17 @@ class ProjectListScreen extends Component {
                     <Text> {item.content} </Text>
                     <View>
                       <TouchableHighlight
-                        onPress={() => this.props.navigation.navigate("Edit")}
+                        onPress={() =>
+                          this.props.navigation.navigate("EditProjectScreen")
+                        }
                       >
                         <View>
                           <Ionicons name="ios-pizza" size={32} color="green" />
                         </View>
                       </TouchableHighlight>
-                      <TouchableHighlight>
+                      <TouchableHighlight
+                        onPress={() => this.props.deleteProject(item.key)}
+                      >
                         <View>
                           <Ionicons name="ios-pizza" size={32} color="red" />
                         </View>
@@ -95,4 +99,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getProjects })(ProjectListScreen);
+export default connect(mapStateToProps, { getProjects, deleteProject })(
+  ProjectListScreen
+);

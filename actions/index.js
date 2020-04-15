@@ -22,3 +22,22 @@ export function postProjects(title, content) {
       .push({ title, content });
   };
 }
+
+export function deleteProject(key) {
+  return dispatch => {
+    firebase
+      .database()
+      .ref(`/projects/${key}`)
+      .remove();
+  };
+}
+
+export function editProject(title, content, key) {
+  return dispatch => {
+    firebase
+      .database()
+      .ref(`/projects`)
+      .child(key)
+      .update({ title, content });
+  };
+}

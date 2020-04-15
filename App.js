@@ -16,6 +16,7 @@ import ClientHeader from "./components/client/ClientHeader";
 import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
+import SignUpNavigation from './navigation/SignUpNavigation';
 
 // REDUX STUFF
 import { Provider } from "react-redux";
@@ -94,8 +95,8 @@ export default () => {
               />
               <AuthStack.Screen
                 name="SignUp"
-                component={SignUp}
-                options={{ title: "Create Account" }}
+                component={SignUpNavigation}
+                options={{ title: "Sign Up" }}
               />
             </AuthStack.Navigator>
           )}

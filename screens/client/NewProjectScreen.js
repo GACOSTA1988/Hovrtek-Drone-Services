@@ -5,13 +5,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Button
+  Button,
+  Alert
 } from "react-native";
 import { postProjects } from "../../actions/index";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
+import * as firebase from "firebase";
 
 function NewProjectScreen(props, {postProjects}) {
 
@@ -53,8 +56,9 @@ function NewProjectScreen(props, {postProjects}) {
       { label: 'No', value: 1 }
     ];
 
-    
+
     return (
+    
       <View style={styles.newProjectListWrapper}>
         <TouchableOpacity style={styles.newProjectListTextWrapper}>
           <Text style={styles.newProjectText}>Create a New Project</Text>
@@ -78,6 +82,7 @@ function NewProjectScreen(props, {postProjects}) {
             onChangeText={handleRecordingChange}
             value={recording}
           />
+
           <Text>Do you have any light specification?</Text>
           <RadioForm
             formHorizontal={true}
@@ -90,6 +95,9 @@ function NewProjectScreen(props, {postProjects}) {
           />
           <Button title="Submit" onPress={submit} />
         </TouchableOpacity>
+
+        <Text>Upload an Image</Text>
+  
       </View>
     );
   }

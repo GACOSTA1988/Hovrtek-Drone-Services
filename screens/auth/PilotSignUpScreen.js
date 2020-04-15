@@ -8,6 +8,7 @@ import {
   Button
 } from "react-native";
 import { AuthContext } from "../../context";
+import * as firebase from "firebase";
 
 //
 // export default class App extends React.Component {
@@ -32,14 +33,23 @@ import { AuthContext } from "../../context";
 
 
 function PilotSignUpScreen() {
+
   const { signUpPilot } = React.useContext(AuthContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const email = useState('');
-  const password = useState('');
-
-  const submit = (e) => {
+  const signUp = (e) => {
     e.preventDefault();
-    signUpPilot();
+    console.log(email);
+    try {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(user => { console.log(user) });
+      signUpPilot();
+    } catch (error) {
+      console.log(error.toString(error));
+    }
   }
 
   return (
@@ -49,12 +59,15 @@ function PilotSignUpScreen() {
         <TextInput
           placeholder="email"
           value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           placeholder="password"
+          secureTextEntry={true}
           value={password}
+          onChangeText={setPassword}
         />
-        <Button title="Sign up" onPress={submit} />
+        <Button title="Sign up" onPress={signUp} />
       </TouchableOpacity>
     </View>
   );

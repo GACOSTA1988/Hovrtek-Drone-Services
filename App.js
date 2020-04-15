@@ -9,13 +9,14 @@ import { SignUp } from "./screens/auth/SignUpScreen";
 import { ClientProfile } from "./screens/client/ClientProfileScreen";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
-// import PilotHeader from "./components/pilot/PilotHeader";
 import AboutScreen from "./screens/client/AboutScreen";
 import SupportScreen from "./screens/client/SupportScreen";
 import ClientHeader from "./components/client/ClientHeader";
 import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
+import SignUpNavigation from './navigation/SignUpNavigation';
+import SignInNavigation from './navigation/SignInNavigation';
 
 // REDUX STUFF
 import { Provider } from "react-redux";
@@ -89,13 +90,13 @@ export default () => {
             <AuthStack.Navigator>
               <AuthStack.Screen
                 name="SignIn"
-                component={SignIn}
+                component={SignInNavigation}
                 options={{ title: "Sign In" }}
               />
               <AuthStack.Screen
                 name="SignUp"
-                component={SignUp}
-                options={{ title: "Create Account" }}
+                component={SignUpNavigation}
+                options={{ title: "Sign Up" }}
               />
             </AuthStack.Navigator>
           )}

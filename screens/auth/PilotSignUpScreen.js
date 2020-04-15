@@ -10,28 +10,6 @@ import {
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 
-//
-// export default class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       email: "",
-//       password: ""
-//     };
-//   }
-//   SignUp = (email, password) => {
-//     try {
-//       firebase
-//           .auth()
-//           .createUserWithEmailAndPassword(email, password)
-//           .then(user => {
-//                  console.log(user);
-//            });} catch (error) {
-//       console.log(error.toString(error));
-//     }
-//   };
-
-
 function PilotSignUpScreen() {
 
   const { signUpPilot } = React.useContext(AuthContext);
@@ -40,22 +18,21 @@ function PilotSignUpScreen() {
 
   const signUp = (e) => {
     e.preventDefault();
-    console.log(email);
     try {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(user => { console.log(user) });
+        .then(user => { console.warn(user) });
       signUpPilot();
     } catch (error) {
-      console.log(error.toString(error));
+      console.warn(error.toString(error));
     }
   }
 
   return (
-    <View style={styles.createProfileWrapper}>
-      <TouchableOpacity style={styles.createProfileTextWrapper}>
-        <Text style={styles.createProfileText}>Create your account</Text>
+    <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.textWrapper}>
+        <Text style={styles.text}>Create your pilot account</Text>
         <TextInput
           placeholder="email"
           value={email}
@@ -74,20 +51,14 @@ function PilotSignUpScreen() {
 }
 
 const styles = StyleSheet.create({
-  createProfileWrapper: {
+  wrapper: {
     alignItems: "center"
   },
-  createProfileForm: {
-    backgroundColor: "darkgray",
-    width: 380,
-    borderWidth: 1,
-    padding: 6
-  },
-  createProfileText: {
+  text: {
     fontSize: 30,
     color: "darkblue"
   },
-  createProfileTextWrapper: {
+  textWrapper: {
     marginBottom: 20
   }
 });

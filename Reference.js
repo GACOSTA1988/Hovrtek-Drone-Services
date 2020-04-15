@@ -6,15 +6,18 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  Alert
+  Alert,
+  ScrollView
 } from "react-native";
 import { postProjects } from "../../actions/index";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import * as ImagePicker from 'expo-image-picker';
+// import * as ImagePicker from 'expo-image-picker';
 import * as firebase from "firebase";
+import * as Permissions from 'expo-permissions';
+import ImagePicker from '../../components/client/ImagePicker'
 
 function NewProjectScreen(props, { postProjects }) {
 
@@ -49,17 +52,6 @@ function NewProjectScreen(props, { postProjects }) {
     navigation.navigate("ProjectListScreen")
   }
 
-
-  // let openImagePickerAsync = async () => {
-  //   let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
-  //   if (permissionResult.granted === false) {
-  //     alert('Permission to access camera roll is required!');
-  //     return;
-  //   }
-  //   let pickerResult = await ImagePicker.launchImageLibraryAsync();
-  //   if (pickerResult.cancelled === true) {
-  //     return;
-  //   }
 
 
 
@@ -98,44 +90,57 @@ function NewProjectScreen(props, { postProjects }) {
   return (
 
     <View style={styles.newProjectListWrapper}>
-      <TouchableOpacity style={styles.newProjectListTextWrapper}>
-        <Text style={styles.newProjectText}>Create a New Project</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Location"
-          onChangeText={handleLocationChange}
-          value={location}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Date"
-          onChangeText={handleDateChange}
-          value={date}
-        />
-        <TextInput
-          multiline={true}
-          numberOfLines={4}
-          style={styles.input}
-          placeholder="What will your Drone Services be recording?"
-          onChangeText={handleRecordingChange}
-          value={recording}
-        />
+      <ScrollView>
+        <TouchableOpacity style={styles.newProjectListTextWrapper}>
+          <Text style={styles.newProjectText}>Create a New Project</Text>
+          <Text style={styles.labelText}>Where is the location you want your Drone Service?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Location"
+            onChangeText={handleLocationChange}
+            value={location}
+          />
 
-        <Text>Do you have any light specification?</Text>
-        <RadioForm
-          formHorizontal={true}
-          labelHorizontal={true}
-          buttonColor={'#092455'}
-          selectedButtonColor={'#092455'}
-          radio_props={radio_props}
-          initial={1}
-          onPress={handleLightChange}
-        />
-        <Button title="Submit" onPress={submit} />
-      </TouchableOpacity>
+          <Text style={styles.labelText}>What is the date of your Drone shoot?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Date"
+            onChangeText={handleDateChange}
+            value={date}
+          />
+          <Text style={styles.labelText}>What will the Drone Service be recording?</Text>
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
+            style={styles.input}
+            placeholder="What?"
+            onChangeText={handleRecordingChange}
+            value={recording}
+          />
 
-      <Text>Upload an Image</Text>
-      <Button title='Choose Image' onPress={onChooseImagePress} />
+          <Text style={styles.labelText} >Do you have any light specification?</Text>
+          <RadioForm
+            formHorizontal={true}
+            labelHorizontal={true}
+            buttonColor={'#092455'}
+            selectedButtonColor={'#092455'}
+            radio_props={radio_props}
+            initial={1}
+            onPress={handleLightChange}
+          />
+
+          <Button title="Submit" onPress={submit} />
+        </TouchableOpacity>
+
+
+        <Text>Upload an Image</Text>
+
+        <Button style={styles.imageButton} title='Choose Image' onPress={onChooseImagePress} />
+
+        <ImagePicker />
+
+        <Text style={styles.dummy}>Dummy text until I invstigate ScrollView more thoroughly</Text>
+      </ScrollView>
     </View>
   );
 }
@@ -163,8 +168,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     height: 30,
-    marginBottom: 5
-
+    marginBottom: 50
+  },
+  imageButton: {
+    height: 30,
+    width: 20,
+    marginBottom: 1000,
+    backgroundColor: 'red'
+  },
+  labelText: {
+    marginBottom: 50
+  },
+  dummy: {
+    marginTop: 100,
+    marginBottom: 200
   }
 });
 

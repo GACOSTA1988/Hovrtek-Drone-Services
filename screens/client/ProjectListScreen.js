@@ -39,8 +39,9 @@ class ProjectListScreen extends Component {
                 return (
                   <View>
 
-                    <Text> {item.title} </Text>
-                    <Text> {item.content} </Text>
+                    <Text> {item.location} </Text>
+                    <Text> {item.date} </Text>
+                    <Text> {item.recording} </Text>
                     <View>
                       <TouchableHighlight
                         onPress={() =>

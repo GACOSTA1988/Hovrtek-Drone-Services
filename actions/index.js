@@ -56,12 +56,12 @@ export function deleteProject(key) {
   };
 }
 
-export function editProject(title, content, key) {
+export function editProject(location, date, recording, key) {
   return dispatch => {
     firebase
       .database()
       .ref(`/projects`)
       .child(key)
-      .update({ title, content });
+      .update({ location, date, recording });
   };
 }

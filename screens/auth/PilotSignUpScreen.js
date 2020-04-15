@@ -12,7 +12,7 @@ import * as firebase from "firebase";
 
 function PilotSignUpScreen() {
 
-  const { signUpPilot } = React.useContext(AuthContext);
+  const { signInPilot } = React.useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,7 +23,7 @@ function PilotSignUpScreen() {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(user => { console.warn(user) });
-      signUpPilot();
+      signInPilot();
     } catch (error) {
       console.warn(error.toString(error));
     }

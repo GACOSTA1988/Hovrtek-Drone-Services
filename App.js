@@ -46,12 +46,6 @@ export default () => {
       signInClient: () => {
         setUserToken("clientToken");
       },
-      signUpPilot: () => {
-        setUserToken("pilotToken");
-      },
-      signUpClient: () => {
-        setUserToken("clientToken");
-      },
       signOut: () => {
         setUserToken(null);
       }

@@ -11,7 +11,7 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 
 function ClientSignUpScreen() {
-  const { signUpClient } = React.useContext(AuthContext);
+  const { signInClient } = React.useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +24,7 @@ function ClientSignUpScreen() {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(user => { console.warn(user) });
-      signUpClient();
+      signInClient();
     } catch (error) {
       console.log(error.toString(error));
     }

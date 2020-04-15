@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { AuthContext } from "../../context";
 
 function WhichSignInScreen( {navigation} ) {
@@ -8,21 +8,43 @@ function WhichSignInScreen( {navigation} ) {
 
   return (
     <View style={styles.whichSignInBody}>
-      <Button style={styles.button} title="Sign in as a pilot" onPress={() => {navigation.push('PilotSignInScreen')}} />
-      <Button style={styles.button} title="Sign in as a client" onPress={() => {navigation.push('ClientSignInScreen')}} />
-      <Button style={styles.button} title='Create Account' onPress={() => navigation.push('SignUp')} />
-      <Button style={styles.button} title='Pilot Shortcut' onPress={() => signInPilot()} />
-      <Button style={styles.button} title='Client Shortcut' onPress={() => signInClient()} />
+      <TouchableOpacity style={styles.button} onPress={() => {navigation.push('PilotSignInScreen')}} >
+      <Text>Sign in as a pilot</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => {navigation.push('ClientSignInScreen')}} >
+      <Text>Sign in as a client</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.push('SignUp')} >
+      <Text>Create Account</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonShortcut} onPress={() => signInPilot()} >
+      <Text>Pilot Shortcut</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonShortcut} onPress={() => signInClient()} >
+      <Text>Client Shortcut</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   whichSignInBody: {
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flex: .5
   },
   button: {
     marginTop: 20,
+    padding: 10,
+    width: "90%",
+    alignItems: "center",
+    backgroundColor: "lightblue"
+  },
+  buttonShortcut: {
+    marginTop: 20,
+    padding: 10,
+    width: "90%",
+    alignItems: "center",
     backgroundColor: "lightgreen"
   }
 });

@@ -1,63 +1,71 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Button
-} from "react-native";
-import { editProjects } from "../../actions/index";
+import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { editProject } from "../../actions/index";
 import { connect } from "react-redux";
 
 class EditProjectScreen extends Component {
   state = {
-    title: "",
-    content: ""
+    title: this.props.route.params.title,
+    content: this.props.route.params.content,
+    key: this.props.route.params.key
   };
+
   submit = () => {
-    this.props.navigation.navigate("ProjectListScreen");
+    this.props.editProject(
+      this.state.title,
+      this.state.content,
+      this.state.key
+    );
+
+    this.setState({
+      title: "",
+      content: "",
+      key: ""
+    });
+
+    this.props.navigation.navigate("Projects");
   };
 
   render() {
+    console.log("00000000000000000", this.props.route.params.title);
     return (
-      <View style={styles.editProjectListWrapper}>
-        <TouchableOpacity style={styles.editProjectListTextWrapper}>
-          <Text style={styles.editProjectText}>Edit Project!!</Text>
-          <TextInput
-            placeholder="title"
-            onChangeText={title => this.setState({ title })}
-            value={this.state.title}
-          />
-          <TextInput
-            placeholder="content"
-            onChangeText={content => this.setState({ content })}
-            value={this.state.content}
-          />
-          <Button title="Submit Updates!" onPress={this.submit} />
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <Text>Post</Text>
+        <TextInput
+          style={{
+            marginTop: 20,
+            height: 40,
+            borderColor: "gray",
+            borderWidth: 1
+          }}
+          placeholder="title"
+          onChangeText={title => this.setState({ title })}
+          value={this.state.title}
+        />
+        <TextInput
+          style={{
+            marginTop: 20,
+            height: 90,
+            borderColor: "gray",
+            borderWidth: 1
+          }}
+          placeholder="content"
+          onChangeText={content => this.setState({ content })}
+          value={this.state.content}
+        />
+        <Button title="Submit" onPress={this.submit} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  editProjectListWrapper: {
-    alignItems: "center"
-  },
-  editProjectListForm: {
-    backgroundColor: "darkgray",
-    width: 380,
-    borderWidth: 1,
-    padding: 6
-  },
-  editProjectText: {
-    fontSize: 30,
-    color: "darkblue"
-  },
-  editProjectListTextWrapper: {
-    marginBottom: 20
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 30,
+    backgroundColor: "#fff"
   }
 });
 
-export default connect(null, { editProjects })(EditProjectScreen);
+export default connect(null, { editProject })(EditProjectScreen);

@@ -33,6 +33,7 @@ class ProjectListScreen extends Component {
             <FlatList
               style={{ width: "100%" }}
               data={this.props.listOfProjects}
+              showsVerticalScrollIndicator={false}
               keyExtractor={item => item.key}
               renderItem={({ item }) => {
                 return (
@@ -42,7 +43,9 @@ class ProjectListScreen extends Component {
                     <View>
                       <TouchableHighlight
                         onPress={() =>
-                          this.props.navigation.navigate("EditProjectScreen")
+                          this.props.navigation.navigate("EditProjectScreen", {
+                            ...item
+                          })
                         }
                       >
                         <View>

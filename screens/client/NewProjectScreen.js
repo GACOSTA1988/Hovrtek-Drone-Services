@@ -5,13 +5,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Button
+  Button,
+  Alert
 } from "react-native";
 import { postProjects } from "../../actions/index";
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
+import * as firebase from "firebase";
 
 function NewProjectScreen(props, {postProjects}) {
 
@@ -46,6 +49,43 @@ function NewProjectScreen(props, {postProjects}) {
     navigation.navigate("ProjectListScreen")
   }
 
+
+  // let openImagePickerAsync = async () => {
+  //   let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+  //   if (permissionResult.granted === false) {
+  //     alert('Permission to access camera roll is required!');
+  //     return;
+  //   }
+  //   let pickerResult = await ImagePicker.launchImageLibraryAsync();
+  //   if (pickerResult.cancelled === true) {
+  //     return;
+  //   }
+
+
+
+  const onChooseImagePress = async () => {
+    let result = await ImagePicker.launchCameraAsync();
+    //let result = await ImagePicker.launchImageLibraryAsync();
+
+    if (!result.cancelled) {
+      uploadImage(result.uri, "test-image")
+        .then(() => {
+          Alert.alert("Success");
+        })
+        .catch((error) => {
+          Alert.alert(error);
+        });
+    }
+  }
+
+  const uploadImage = async (uri, imageName) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    var ref = firebase.storage().ref().child("images/" + imageName);
+    return ref.put(blob);
+  }
+
     // RADIO BUTTON STUFF
     
     let radio_props = [
@@ -78,6 +118,7 @@ function NewProjectScreen(props, {postProjects}) {
             onChangeText={handleRecordingChange}
             value={recording}
           />
+
           <Text>Do you have any light specification?</Text>
           <RadioForm
             formHorizontal={true}
@@ -90,6 +131,9 @@ function NewProjectScreen(props, {postProjects}) {
           />
           <Button title="Submit" onPress={submit} />
         </TouchableOpacity>
+
+        <Text>Upload an Image</Text>
+        <Button title='Choose Image' onPress={onChooseImagePress} />
       </View>
     );
   }

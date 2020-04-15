@@ -23,7 +23,7 @@ class EditProjectScreen extends Component {
       key: ""
     });
 
-    this.props.navigation.navigate("Projects");
+    this.props.navigation.navigate("ProjectListScreen");
   };
 
   render() {

@@ -1,8 +1,5 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Button } from 'react-native';
 import AboutScreen from "../screens/pilot/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
 import PilotHeader from "../components/pilot/PilotHeader";

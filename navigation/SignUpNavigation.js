@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { AuthContext } from "../context";
 import WhichSignUpScreen from '../screens/auth/WhichSignUpScreen';
 import PilotSignUpScreen from '../screens/auth/PilotSignUpScreen';
 import ClientSignUpScreen from '../screens/auth/ClientSignUpScreen';

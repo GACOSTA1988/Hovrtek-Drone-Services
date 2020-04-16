@@ -2,8 +2,6 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
-import { ClientProfile } from "../screens/client/ClientProfileScreen";
 import AboutScreen from "../screens/client/AboutScreen";
 import SupportScreen from "../screens/client/SupportScreen";
 import ClientHeader from "../components/client/ClientHeader";
@@ -13,7 +11,6 @@ import LocationScreen from '../screens/client/LocationScreen';
 import ServicesScreen from '../screens/client/ServicesScreen';
 import SignOutScreen from '../screens/auth/SignOutScreen';
 import { AuthContext } from "../context";
-
 
 const ClientDrawer = createDrawerNavigator();
 

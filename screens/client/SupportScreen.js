@@ -1,15 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import ClientHeader from '../../components/client/ClientHeader'
 
-const SupportScreen = ({ navigation }) => {
-
-
+const SupportScreen = () => {
   return (
     <View style={styles.container}>
-
       <Text>Support Screen</Text>
-
     </View>
   )
 };
@@ -28,4 +23,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SupportScreen
+export default SupportScreen;

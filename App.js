@@ -62,7 +62,7 @@ export default () => {
     <Provider store={state}>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
-          {loggedIn ? (
+          {userType ? (
             userType === "client" ? (
               <RootClientStack.Navigator>
                 <RootClientStack.Screen

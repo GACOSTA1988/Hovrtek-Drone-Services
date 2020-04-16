@@ -24,7 +24,7 @@ function ClientSignInScreen() {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-      signIn();
+      signInClient();
     } catch (error) {
       console.warn(error.toString(error));
     }

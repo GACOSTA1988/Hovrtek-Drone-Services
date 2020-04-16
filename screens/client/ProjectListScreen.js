@@ -135,7 +135,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   projectListWrapper: {
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 10
   }
 });
 

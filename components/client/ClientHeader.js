@@ -24,8 +24,8 @@ const ClientHeader = () => {
         resizeMode="contain"
       />
     </View>
-  )
-}
+  );
+};
 
 const width = Dimensions.get('window').width;
 
@@ -89,34 +89,5 @@ const styles = StyleSheet.create({
   }
 
 });
-
-
-// Android-compatible styling - todo: conditional rendering
-
-// const width = Dimensions.get('window').width;
-//
-// const styles = StyleSheet.create({
-//   clientHeaderWrapper: {
-//     backgroundColor: '#092455',
-//     left: -16,
-//     top: 5,
-//     alignSelf: 'stretch',
-//     width: width,
-//     height: 67,
-//   },
-//   hovrtekLogo: {
-//     width: 170,
-//     height: 30,
-//     position: 'absolute',
-//     left: 10,
-//     top: 20,
-//   },
-//
-//   hamburger: {
-// alignSelf:'flex-end',
-// right: 10,
-// top: 10
-//   }
-// });
 
 export default ClientHeader;

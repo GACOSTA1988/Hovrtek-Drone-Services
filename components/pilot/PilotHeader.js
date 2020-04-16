@@ -1,11 +1,8 @@
 import React from "react";
 import {
-  View,
-  StyleSheet,
-  Header,
-  Image,
-  ShadowPropTypesIOS,
-  Dimensions
+
+  Text, View, StyleSheet, Header, Image, ShadowPropTypesIOS, Platform, Dimensions
+
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../../assets/hovrtek_logo.png";
@@ -33,58 +30,66 @@ const PilotHeader = () => {
   );
 };
 
+const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
+
   pilotHeaderWrapper: {
-    marginTop: 18,
-    backgroundColor: "#092455",
-    width: 375,
-    height: 50,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
+    ...Platform.select({
+      ios: {
+        marginTop: 18,
+        backgroundColor: "#092455",
+        width: 375,
+        height: 50,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+      },
+      android: {
+        backgroundColor: '#092455',
+        left: -16,
+        top: 5,
+        alignSelf: 'stretch',
+        width: width,
+        height: 67,
+      }
+    })
   },
+
   hovrtekLogo: {
-    width: 170,
-    height: 30,
-    position: "absolute",
-    left: 0,
-    right: 10,
-    top: 7
+    ...Platform.select({
+      ios: {
+        width: 170,
+        height: 30,
+        position: "absolute",
+        left: 0,
+        right: 10,
+        top: 7
+      },
+      android: {
+        width: 170,
+        height: 30,
+        position: 'absolute',
+        left: 10,
+        top: 20,
+      }
+    })
   },
 
   hamburger: {
-    alignSelf: "flex-end",
-    marginLeft: 300,
-    margin: 0
+    ...Platform.select({
+      ios: {
+        alignSelf: "flex-end",
+        marginLeft: 300,
+        margin: 0
+      },
+      android: {
+        alignSelf: 'flex-end',
+        right: 10,
+        top: 10
+      }
+    })
   }
+
 });
-
-// Android-compatible styling - todo: conditional rendering
-
-// const width = Dimensions.get('window').width;
-//
-// const styles = StyleSheet.create({
-//   pilotHeaderWrapper: {
-//     backgroundColor: '#092455',
-//     left: -16,
-//     top: 5,
-//     alignSelf: 'stretch',
-//     width: width,
-//     height: 67,
-//   },
-//   hovrtekLogo: {
-//     width: 170,
-//     height: 30,
-//     position: 'absolute',
-//     left: 10,
-//     top: 20,
-//   },
-//
-//   hamburger: {
-//     alignSelf:'flex-end',
-//     right: 10,
-//     top: 10
-//   }
-// });
 
 export default PilotHeader;

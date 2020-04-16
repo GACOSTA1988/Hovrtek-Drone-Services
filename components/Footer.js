@@ -6,14 +6,21 @@ const Footer = () => {
   return (
     <View style={styles.footerWrapper}>
       <Text style={styles.mediaButton}>
-        <Icon name="facebook" size={20} color="white"></Icon>
+        <Icon
+          name="facebook"
+          size={30}
+          color="white"
+          style={{ marginRight: 10 }}
+        ></Icon>
+        <Text>**</Text>
         <Icon
           name="instagram"
-          size={20}
+          size={30}
           color="white"
           style={styles.icon}
         ></Icon>
-        <Icon name="linkedin" size={20} color="white"></Icon>
+        <Text>**</Text>
+        <Icon name="linkedin" size={35} color="white"></Icon>
       </Text>
     </View>
   );

@@ -6,19 +6,18 @@ import * as firebase from 'firebase';
 
 export default class ImageUploader extends React.Component {
     state = {
-        image: null,
+        thumbnail: null,
     };
 
     render() {
-        let { image } = this.state;
+        let { thumbnail } = this.state;
         return (
             <View >
                 <Button title="Upload Image" onPress={this.pushIt} />
-                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+                {thumbnail && <Image source={{ uri: thumbnail }} style={{ width: 200, height: 200 }} />}
             </View>
         );
     }
-
 
     componentDidMount() {
         this.getPermissionAsync();
@@ -42,7 +41,7 @@ export default class ImageUploader extends React.Component {
                 .catch((error) => {
                     Alert.alert(error);
                 });
-            this.setState({ image: result.uri });
+            this.setState({ thumbnail: result.uri });
         }
     }
 

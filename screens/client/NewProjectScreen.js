@@ -102,14 +102,18 @@ function NewProjectScreen(props, { postProjects }) {
             radio_props={radio_props}
             initial={1}
             onPress={handleLightChange}
-          />
+            />
 
-          <Button title="Submit" onPress={submit} />
+            <Text style={styles.uploaderText}>Upload an Image Here!</Text>
+          <ImageUploader style={styles.uploaderObject}/>
+
+          <TouchableOpacity onPress={submit}><Text style={styles.submitButton}>Submit Form</Text></TouchableOpacity>
+
+          {/* <Button style={styles.submitButton} title="Submit" onPress={submit} /> */}
         </TouchableOpacity>
 
 
        
-        <ImageUploader />
 
         <Text style={styles.dummy}>Dummy text until I invstigate ScrollView more thoroughly</Text>
       </ScrollView>
@@ -151,10 +155,21 @@ const styles = StyleSheet.create({
   labelText: {
     marginBottom: 50
   },
+  uploaderText: {
+    marginTop: 100
+  },
   dummy: {
     marginTop: 100,
     marginBottom: 200
+  },
+  submitButton: {
+    marginTop: 100,
+    textAlign: 'center',
+    fontSize:30,
+    color: '#092455'
+
   }
+
 });
 
 export default connect(null, { postProjects })(NewProjectScreen);

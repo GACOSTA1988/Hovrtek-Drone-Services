@@ -13,6 +13,7 @@ import { getProjects, deleteProject } from "../../actions/index";
 import _ from "lodash";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
 
 class ProjectListScreen extends Component {
   componentDidMount() {
@@ -36,10 +37,19 @@ class ProjectListScreen extends Component {
               renderItem={({ item }) => {
                 return (
                   <View>
-
-                    <Text> {item.location} </Text>
-                    <Text> {item.date} </Text>
-                    <Text> {item.recording} </Text>
+                    <TouchableHighlight
+                      onPress={() =>
+                        this.props.navigation.navigate("ProjectDetailsScreen", {
+                          ...item
+                        })
+                      }
+                    >
+                      <View>
+                        <Text> {item.location} </Text>
+                        <Text> {item.date} </Text>
+                        <Text> {item.recording} </Text>
+                      </View>
+                    </TouchableHighlight>
                     <View>
                       <TouchableHighlight
                         onPress={() =>
@@ -56,17 +66,18 @@ class ProjectListScreen extends Component {
                         onPress={() => this.props.deleteProject(item.key)}
                       >
                         <View>
+                          <AntDesign name="delete" size={32} color='blue' />
                           <Ionicons name="ios-pizza" size={32} color="red" />
                         </View>
                       </TouchableHighlight>
                     </View>
-
                   </View>
                 );
               }}
             />
           </TouchableOpacity>
         </View>
+     
       </View>
     );
   }
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   testText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 17
   }
 });

@@ -48,8 +48,6 @@ export default class ImageUploader extends React.Component {
     uploadImage = async (uri, imageName) => {
         const response = await fetch(uri);
         const blob = await response.blob();
-        console.log("---------------------", blob)
-
         var ref = firebase.storage().ref().child("images/" + imageName);
         return ref.put(blob);
     }

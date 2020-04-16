@@ -17,18 +17,18 @@ function PilotSignInScreen( {navigation} ) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // supposed to be async
   const signIn = (e) => {
     e.preventDefault();
     try {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(user => { console.warn(user) });
-      signInPilot();
     } catch (error) {
-      console.log(error.toString(error));
+      alert(error.toString(error));
       navigation.pop();
     }
+    signInPilot();
   }
 
   return (

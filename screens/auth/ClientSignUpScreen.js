@@ -23,7 +23,6 @@ function ClientSignUpScreen() {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(user => { console.warn(user) });
       signInClient();
     } catch (error) {
       console.log(error.toString(error));

@@ -11,7 +11,6 @@ export default class FirebaseImagePicker extends React.Component {
         return (
             <View >
                 <Button title="Firebase Picker" onPress={this.pushIt} />
-
             </View>
         );
     }
@@ -33,12 +32,12 @@ pushIt = async () => {
  
     if (!result.cancelled) {
         this.uploadImage(result.uri, "test-image")
-            // .then(() => {
-            //     Alert.alert("Success");
-            // })
-            // .catch((error) => {
-            //     Alert.alert(error);
-            // });
+            .then(() => {
+                Alert.alert("Success");
+            })
+            .catch((error) => {
+                Alert.alert(error);
+            });
     }
 }
 

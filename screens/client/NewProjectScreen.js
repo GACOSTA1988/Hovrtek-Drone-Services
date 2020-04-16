@@ -15,10 +15,10 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import * as firebase from "firebase";
-import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
-import FirebaseImagePicker from '../../components/client/FirebaseImagePicker'
+
+
+
+import ImageUploader from '../../components/client/ImageUploader'
 
 function NewProjectScreen(props, { postProjects }) {
 
@@ -108,8 +108,8 @@ function NewProjectScreen(props, { postProjects }) {
         </TouchableOpacity>
 
 
-        {/* <ImagePicker /> */}
-        <FirebaseImagePicker />
+       
+        <ImageUploader />
 
         <Text style={styles.dummy}>Dummy text until I invstigate ScrollView more thoroughly</Text>
       </ScrollView>

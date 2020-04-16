@@ -11,15 +11,20 @@ import {
   ScrollView
 } from "react-native";
 import { postProjects } from "../../actions/index";
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel
+} from "react-native-simple-radio-button";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
+
 import { useNavigation } from '@react-navigation/native';
 
 
 
 import ImageUploader from '../../components/client/ImageUploader'
-
+import * as firebase from "firebase";
 function NewProjectScreen(props, { postProjects }) {
 
   const navigation = useNavigation();
@@ -27,6 +32,7 @@ function NewProjectScreen(props, { postProjects }) {
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [recording, setRecording] = useState('');
+
   const [light, setLight] = useState(1);
 
   function handleLocationChange(text) {
@@ -42,21 +48,25 @@ function NewProjectScreen(props, { postProjects }) {
   }
 
   function handleLightChange(text) {
-    (value) => { setLight({ value: value }) }
+    value => {
+      setLight({ value: value });
+    };
   }
 
-  const submit = (e) => {
+  const submit = e => {
     e.preventDefault();
     console.log("New Project Props", props);
     props.postProjects(location, date, recording, light);
-    navigation.navigate("ProjectListScreen")
-  }
 
-   
+    navigation.navigate("ProjectListScreen");
+    setDate(""), setLight(""), setLocation(""), setRecording("");
+  };
+
 
   // RADIO BUTTON STUFF
 
   let radio_props = [
+
     { label: 'Yes', value: 0 },
     { label: 'No', value: 1 }
   ];
@@ -122,6 +132,7 @@ function NewProjectScreen(props, { postProjects }) {
 }
 
 
+
 const styles = StyleSheet.create({
   newProjectListWrapper: {
     alignItems: "center"
@@ -135,7 +146,7 @@ const styles = StyleSheet.create({
   newProjectText: {
     fontSize: 30,
     color: "darkblue",
-    marginBottom: 20,
+    marginBottom: 20
   },
   newProjectListTextWrapper: {
     marginBottom: 20
@@ -144,6 +155,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     height: 30,
+
     marginBottom: 50
   },
   imageButton: {
@@ -167,6 +179,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize:30,
     color: '#092455'
+
 
   }
 

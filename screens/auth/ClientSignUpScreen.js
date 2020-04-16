@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -11,7 +11,7 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 
 function ClientSignUpScreen() {
-  const { signInClient } = React.useContext(AuthContext);
+  const { signInClient } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,12 +38,14 @@ function ClientSignUpScreen() {
           placeholder="email"
           value={email}
           onChangeText={setEmail}
+          style={styles.input}
         />
         <TextInput
           placeholder="password"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
+          style={styles.input}
         />
         <Button title="Sign up" onPress={signUp} />
       </TouchableOpacity>
@@ -53,7 +55,9 @@ function ClientSignUpScreen() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flex: .5
   },
   text: {
     fontSize: 30,
@@ -61,6 +65,13 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     marginBottom: 20
+  },
+  input: {
+    height: 40,
+    borderColor: "grey",
+    borderWidth: 1,
+    margin: 10,
+    width: 200
   }
 });
 

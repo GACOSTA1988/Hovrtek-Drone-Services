@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -12,7 +12,7 @@ import * as firebase from "firebase";
 
 function PilotSignUpScreen() {
 
-  const { signInPilot } = React.useContext(AuthContext);
+  const { signInPilot } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -37,12 +37,14 @@ function PilotSignUpScreen() {
           placeholder="email"
           value={email}
           onChangeText={setEmail}
+          style={styles.input}
         />
         <TextInput
           placeholder="password"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
+          style={styles.input}
         />
         <Button title="Sign up" onPress={signUp} />
       </TouchableOpacity>
@@ -52,7 +54,9 @@ function PilotSignUpScreen() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flex: .5
   },
   text: {
     fontSize: 30,
@@ -60,6 +64,13 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     marginBottom: 20
+  },
+  input: {
+    height: 40,
+    borderColor: "grey",
+    borderWidth: 1,
+    margin: 10,
+    width: 200
   }
 });
 

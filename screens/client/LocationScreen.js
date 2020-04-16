@@ -1,16 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import ClientHeader from '../../components/client/ClientHeader'
 
-const LocationScreen
- = ({ navigation }) => {
-
-
+const LocationScreen = () => {
   return (
     <View style={styles.container}>
-
       <Text style={styles.locationText}>Location Screen</Text>
-
     </View>
   )
 };
@@ -28,8 +22,8 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   locationText: {
-      fontSize:20
+    fontSize:20
   }
 });
 
-export default LocationScreen
+export default LocationScreen;

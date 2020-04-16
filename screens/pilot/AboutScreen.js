@@ -1,8 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import PilotHeader from "../../components/pilot/PilotHeader";
 
-const AboutScreen = ({ navigation }) => {
+const AboutScreen = () => {
   return (
     <View style={styles.container}>
       <Text>About Screen</Text>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import JobListScreen from "../screens/pilot/JobListScreen.js";
 import MyJobsScreen from "../screens/pilot/MyJobsScreen.js";

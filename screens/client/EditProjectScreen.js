@@ -11,8 +11,6 @@ class EditProjectScreen extends Component {
     key: this.props.route.params.key
   };
 
-
-
   submit = () => {
     this.props.editProject(
       this.state.location,

@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import ProjectScreensStackNavigator from "./ProjectScreensStackNavigator";
 import NewProjectScreen from "../screens/client/NewProjectScreen.js";
 
 const HomeScreenTab = createMaterialTopTabNavigator();
 
-function ProjectsNewProjectTabNavigation({ navigation }) {
+function ProjectsNewProjectTabNavigation() {
   return (
     <HomeScreenTab.Navigator>
       <HomeScreenTab.Screen

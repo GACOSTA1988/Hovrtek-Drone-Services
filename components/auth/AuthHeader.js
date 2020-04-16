@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Header, Image } from 'react-native';
+import { View, StyleSheet, Header, Image } from 'react-native';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
 
 const AuthHeader = ({ navigation }) => {

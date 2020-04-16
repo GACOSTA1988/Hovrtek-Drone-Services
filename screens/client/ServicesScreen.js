@@ -1,16 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import ClientHeader from '../../components/client/ClientHeader'
 
-const ServicesScreen
- = ({ navigation }) => {
-
-
+const ServicesScreen = () => {
   return (
     <View style={styles.container}>
-
       <Text style={styles.servicesText}>Services Screen</Text>
-
     </View>
   )
 };
@@ -28,9 +23,8 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   servicesText: {
-      fontSize:20
+    fontSize:20
   }
 });
 
-export default ServicesScreen
-
+export default ServicesScreen;

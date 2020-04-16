@@ -12,9 +12,7 @@ import { connect } from "react-redux";
 import { getProjects, deleteProject } from "../../actions/index";
 import _ from "lodash";
 import { Ionicons } from "@expo/vector-icons";
-
 import { TouchableHighlight } from "react-native-gesture-handler";
-
 
 class ProjectListScreen extends Component {
   componentDidMount() {

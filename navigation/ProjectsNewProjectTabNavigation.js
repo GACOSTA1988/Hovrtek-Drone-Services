@@ -9,11 +9,11 @@ function ProjectsNewProjectTabNavigation() {
   return (
     <HomeScreenTab.Navigator>
       <HomeScreenTab.Screen
-        name="ProjectScreensStackNavigator"
+        name="Projects"
         component={ProjectScreensStackNavigator}
       />
       <HomeScreenTab.Screen
-        name="NewProjectScreen"
+        name="Create New Project"
         component={NewProjectScreen}
       />
     </HomeScreenTab.Navigator>

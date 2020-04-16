@@ -9,8 +9,8 @@ import ClientHeader from "./components/client/ClientHeader";
 import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
-import SignUpNavigation from './navigation/SignUpNavigation';
-import SignInNavigation from './navigation/SignInNavigation';
+import SignUpNavigation from "./navigation/SignUpNavigation";
+import SignInNavigation from "./navigation/SignInNavigation";
 // REDUX STUFF
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -51,12 +51,20 @@ export default () => {
           {userType ? (
             userType === "client" ? (
               <RootClientStack.Navigator>
+                {/* <StaturBar barStyle="light-content" backgroundColor="#6a51ae" /> */}
                 <RootClientStack.Screen
                   name="Client"
                   component={ClientHomeNavigation}
+                  headerMode="screen"
                   options={{
                     title: "Home",
-                    headerTitle: () => <ClientHeader />
+                    headerTitle: () => <ClientHeader />,
+                    headerStyle: {
+                      backgroundColor: "#092455"
+                      // headerBackTitleStyle: 20,
+                      // headerTitleContainerStyle: { marginVertical: 50 }
+                      // marginBottom: 50
+                    }
                   }}
                 />
               </RootClientStack.Navigator>

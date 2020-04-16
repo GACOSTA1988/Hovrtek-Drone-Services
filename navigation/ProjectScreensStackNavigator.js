@@ -8,7 +8,7 @@ const ProjectScreensStack = createStackNavigator();
 
 function ProjectScreensStackNavigator() {
   return (
-    <ProjectScreensStack.Navigator>
+    <ProjectScreensStack.Navigator headerMode="none">
       <ProjectScreensStack.Screen
         name="ProjectListScreen"
         component={ProjectListScreen}

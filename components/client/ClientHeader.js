@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Header, Image, ShadowPropTypesIOS, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, Header, Image, Platform, ShadowPropTypesIOS, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
-import {useNavigation, DrawerActions} from '@react-navigation/native';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 
 const ClientHeader = () => {
 
-const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <View style={styles.clientHeaderWrapper}>
@@ -16,7 +16,7 @@ const navigation = useNavigation();
       />
       <Ionicons style={styles.hamburger}
         onPress={() => {
-        navigation.dispatch(DrawerActions.toggleDrawer());
+          navigation.dispatch(DrawerActions.toggleDrawer());
         }}
         name="ios-menu"
         size={45}
@@ -28,29 +28,64 @@ const navigation = useNavigation();
 }
 
 const styles = StyleSheet.create({
+
   clientHeaderWrapper: {
-    marginTop: 18,
-    backgroundColor: '#092455',
-    width: 375,
-    height:50,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...Platform.select({
+      ios: {
+        marginTop: 18,
+        backgroundColor: '#092455',
+        width: 375,
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      android: {
+        backgroundColor: '#092455',
+        left: -16,
+        top: 5,
+        alignSelf: 'stretch',
+        width: width,
+        height: 67,
+      }
+    })
   },
+
   hovrtekLogo: {
-    width: 170,
-    height: 30,
-    position: 'absolute',
-    left: 0,
-    right: 10,
-    top: 7,
+    ...Platform.select({
+      ios: {
+        width: 170,
+        height: 30,
+        position: 'absolute',
+        left: 0,
+        right: 10,
+        top: 7,
+      },
+      android: {
+        width: 170,
+        height: 30,
+        position: 'absolute',
+        left: 10,
+        top: 20,
+      }
+    })
   },
 
   hamburger: {
-    alignSelf:'flex-end',
-    marginLeft: 300,
-    margin: 0
+    ...Platform.select({
+      ios: {
+        alignSelf: 'flex-end',
+        marginLeft: 300,
+        margin: 0
+      },
+      android: {
+        alignSelf: 'flex-end',
+        right: 10,
+        top: 10
+      }
+    })
   }
+
 });
 
 
@@ -76,9 +111,9 @@ const styles = StyleSheet.create({
 //   },
 //
 //   hamburger: {
-//     alignSelf:'flex-end',
-//     right: 10,
-//     top: 10
+// alignSelf:'flex-end',
+// right: 10,
+// top: 10
 //   }
 // });
 

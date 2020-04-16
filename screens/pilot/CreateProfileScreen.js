@@ -9,31 +9,14 @@ import {
 } from "react-native";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
-// import firebase from '../../firebase';
 
 // make sure to read in both props and postProfiles function
-function CreateProfileScreen(props, {postProfiles}) {
+function CreateProfileScreen(props, { postProfiles }) {
 
   const [name, setName] = useState('');
   const [overview, setOverview] = useState('');
   const [equipment, setEquipment] = useState('');
   const [availability, setAvailability] = useState('');
-
-  function handleNameChange(text) {
-    setName(text);
-  }
-
-  function handleOverviewChange(text) {
-    setOverview(text);
-  }
-
-  function handleEquipmentChange(text) {
-    setEquipment(text);
-  }
-
-  function handleAvailabilityChange(text) {
-    setAvailability(text);
-  }
 
   const submit = (e) => {
     e.preventDefault();
@@ -47,22 +30,22 @@ function CreateProfileScreen(props, {postProfiles}) {
         <Text style={styles.createProfileText}>Edit your profile</Text>
         <TextInput
           placeholder="name"
-          onChangeText={handleNameChange}
+          onChangeText={setName}
           value={name}
         />
         <TextInput
           placeholder="overview"
-          onChangeText={handleOverviewChange}
+          onChangeText={setOverview}
           value={overview}
         />
         <TextInput
           placeholder="equipment"
-          onChangeText={handleEquipmentChange}
+          onChangeText={setEquipment}
           value={equipment}
         />
         <TextInput
           placeholder="availability"
-          onChangeText={handleAvailabilityChange}
+          onChangeText={setAvailability}
           value={availability}
         />
         <Button title="Save Changes" onPress={submit} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -13,7 +13,7 @@ import * as firebase from "firebase";
 
 function PilotSignInScreen( {navigation} ) {
 
-  const { signInPilot } = React.useContext(AuthContext);
+  const { signInPilot } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

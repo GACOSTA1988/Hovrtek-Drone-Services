@@ -15,7 +15,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 
-
 class ProjectListScreen extends Component {
   componentDidMount() {
     this.props.getProjects();

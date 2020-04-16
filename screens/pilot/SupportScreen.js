@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import PilotHeader from "../../components/pilot/PilotHeader";
+import { View, Text, StyleSheet } from "react-native";
 
-const SupportScreen = ({ navigation }) => {
+const SupportScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Support Screen</Text>

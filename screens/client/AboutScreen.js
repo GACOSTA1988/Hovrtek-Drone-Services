@@ -1,15 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import ClientHeader from '../../components/client/ClientHeader'
 
-const AboutScreen = ({ navigation }) => {
-  
-
+const AboutScreen = () => {
   return (
     <View style={styles.container}>
-
       <Text>About Screen</Text>
-
     </View>
   )
 };
@@ -28,4 +24,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AboutScreen
+export default AboutScreen;

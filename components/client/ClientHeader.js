@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 10,
-    top: 7
+    top: 7,
+    marginLeft: 20
   },
 
   hamburger: {

@@ -12,8 +12,9 @@ import { connect } from "react-redux";
 import { getProjects, deleteProject } from "../../actions/index";
 import _ from "lodash";
 import { Ionicons } from "@expo/vector-icons";
-
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
+
 
 class ProjectListScreen extends Component {
   componentDidMount() {
@@ -66,6 +67,7 @@ class ProjectListScreen extends Component {
                         onPress={() => this.props.deleteProject(item.key)}
                       >
                         <View>
+                          <AntDesign name="delete" size={32} color='blue' />
                           <Ionicons name="ios-pizza" size={32} color="red" />
                         </View>
                       </TouchableHighlight>
@@ -76,6 +78,7 @@ class ProjectListScreen extends Component {
             />
           </TouchableOpacity>
         </View>
+     
       </View>
     );
   }

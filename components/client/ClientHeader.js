@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
 
 });
 
+const width = Dimensions.get('window').width;
 
 // Android-compatible styling - todo: conditional rendering
 
-// const width = Dimensions.get('window').width;
 //
 // const styles = StyleSheet.create({
 //   clientHeaderWrapper: {

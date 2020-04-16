@@ -27,6 +27,8 @@ const ClientHeader = () => {
   )
 }
 
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
 
   clientHeaderWrapper: {

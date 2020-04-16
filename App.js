@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,6 +11,7 @@ import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
 import SignUpNavigation from './navigation/SignUpNavigation';
 import SignInNavigation from './navigation/SignInNavigation';
+import * as firebase from 'firebase';
 // REDUX STUFF
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -28,7 +29,20 @@ export default () => {
   // REDUX STATE
   const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-  const [userType, setUserType] = React.useState(null);
+  // auth stuff - maybe should be elsewhere?
+  const auth = firebase.auth();
+
+  let [loggedIn, setLoggedIn] = useState(false);
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  })
+
+  const [userType, setUserType] = useState(null);
 
   const authContext = React.useMemo(() => {
     return {
@@ -48,7 +62,7 @@ export default () => {
     <Provider store={state}>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
-          {userType ? (
+          {loggedIn ? (
             userType === "client" ? (
               <RootClientStack.Navigator>
                 <RootClientStack.Screen

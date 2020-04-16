@@ -37,10 +37,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "#092455",
     width: 425,
-    height: 50,
+    height: 60,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    borderBottomWidth: 10,
+    borderBottomColor: "grey"
   },
   hovrtekLogo: {
     width: 170,

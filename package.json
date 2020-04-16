@@ -16,6 +16,7 @@
     "@react-navigation/stack": "^5.2.9",
     "expo": "~37.0.3",
     "expo-image-picker": "~8.1.0",
+    "expo-permissions": "~8.1.0",
     "firebase": "^7.14.0",
     "lodash": "^4.17.15",
     "react": "~16.9.0",

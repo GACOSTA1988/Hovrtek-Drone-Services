@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+//NEWPROJECTSCREEN
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -14,15 +15,14 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-// import * as ImagePicker from 'expo-image-picker';
 import * as firebase from "firebase";
 import * as Permissions from 'expo-permissions';
-import ImagePicker from '../../components/client/ImagePicker'
+import * as ImagePicker from 'expo-image-picker';
+import FirebaseImagePicker from '../../components/client/FirebaseImagePicker'
 
 function NewProjectScreen(props, { postProjects }) {
 
   const navigation = useNavigation();
-
 
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
@@ -52,32 +52,7 @@ function NewProjectScreen(props, { postProjects }) {
     navigation.navigate("ProjectListScreen")
   }
 
-
-
-
-  const onChooseImagePress = async () => {
-    // let result = await ImagePicker.launchCameraAsync();
-    let result = await ImagePicker.launchImageLibraryAsync();
-
-    if (!result.cancelled) {
-
-      uploadImage(result.uri, "test-image")
-        .then(() => {
-          Alert.alert("Success");
-        })
-        .catch((error) => {
-          Alert.alert(error);
-        });
-    }
-  }
-  const uploadImage = async (uri, imageName) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    var ref = firebase.storage().ref().child("images/" + imageName);
-    return ref.put(blob);
-  }
-
+   
 
   // RADIO BUTTON STUFF
 
@@ -91,54 +66,52 @@ function NewProjectScreen(props, { postProjects }) {
 
     <View style={styles.newProjectListWrapper}>
       <ScrollView>
-      <TouchableOpacity style={styles.newProjectListTextWrapper}>
-        <Text style={styles.newProjectText}>Create a New Project</Text>
-        <Text style={styles.labelText}>Where is the location you want your Drone Service?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Location"
-          onChangeText={handleLocationChange}
-          value={location}
-        />
+        <TouchableOpacity style={styles.newProjectListTextWrapper}>
+          <Text style={styles.newProjectText}>Create a New Project</Text>
+          <Text style={styles.labelText}>Where is the location you want your Drone Service?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Location"
+            onChangeText={handleLocationChange}
+            value={location}
+          />
 
-        <Text style={styles.labelText}>What is the date of your Drone shoot?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Date"
-          onChangeText={handleDateChange}
-          value={date}
-        />
-        <Text style={styles.labelText}>What will the Drone Service be recording?</Text>
-        <TextInput
-          multiline={true}
-          numberOfLines={4}
-          style={styles.input}
-          placeholder="What?"
-          onChangeText={handleRecordingChange}
-          value={recording}
-        />
+          <Text style={styles.labelText}>What is the date of your Drone shoot?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Date"
+            onChangeText={handleDateChange}
+            value={date}
+          />
+          <Text style={styles.labelText}>What will the Drone Service be recording?</Text>
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
+            style={styles.input}
+            placeholder="What?"
+            onChangeText={handleRecordingChange}
+            value={recording}
+          />
 
-        <Text style={styles.labelText} >Do you have any light specification?</Text>
-        <RadioForm
-          formHorizontal={true}
-          labelHorizontal={true}
-          buttonColor={'#092455'}
-          selectedButtonColor={'#092455'}
-          radio_props={radio_props}
-          initial={1}
-          onPress={handleLightChange}
-        />
+          <Text style={styles.labelText} >Do you have any light specification?</Text>
+          <RadioForm
+            formHorizontal={true}
+            labelHorizontal={true}
+            buttonColor={'#092455'}
+            selectedButtonColor={'#092455'}
+            radio_props={radio_props}
+            initial={1}
+            onPress={handleLightChange}
+          />
 
-        <Button title="Submit" onPress={submit} />
-      </TouchableOpacity>
-
-
-      <Text>Upload an Image</Text>
+          <Button title="Submit" onPress={submit} />
+        </TouchableOpacity>
 
 
-        <ImagePicker />
+        {/* <ImagePicker /> */}
+        <FirebaseImagePicker />
 
-      <Text style={styles.dummy}>Dummy text until I invstigate ScrollView more thoroughly</Text>
+        <Text style={styles.dummy}>Dummy text until I invstigate ScrollView more thoroughly</Text>
       </ScrollView>
     </View>
   );
@@ -171,8 +144,8 @@ const styles = StyleSheet.create({
   },
   imageButton: {
     height: 30,
-    width: 20, 
-    marginBottom: 1000, 
+    width: 20,
+    marginBottom: 1000,
     backgroundColor: 'red'
   },
   labelText: {
@@ -185,3 +158,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(null, { postProjects })(NewProjectScreen);
+
+

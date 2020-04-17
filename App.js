@@ -51,7 +51,6 @@ export default () => {
           {userType ? (
             userType === "client" ? (
               <RootClientStack.Navigator>
-                {/* <StaturBar barStyle="light-content" backgroundColor="#6a51ae" /> */}
                 <RootClientStack.Screen
                   name="Client"
                   component={ClientHomeNavigation}
@@ -94,6 +93,7 @@ export default () => {
               />
             </AuthStack.Navigator>
           )}
+          {/* <StaturBar barStyle="light-content" backgroundColor="#6a51ae" /> */}
           <Footer />
         </NavigationContainer>
       </AuthContext.Provider>

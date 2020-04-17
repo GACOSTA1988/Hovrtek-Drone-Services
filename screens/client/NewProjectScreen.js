@@ -19,19 +19,16 @@ import RadioForm, {
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-
-
-import ImageUploader from '../../components/client/ImageUploader'
+import ImageUploader from "../../components/client/ImageUploader";
 import * as firebase from "firebase";
 function NewProjectScreen(props, { postProjects }) {
-
   const navigation = useNavigation();
 
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
-  const [recording, setRecording] = useState('');
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [recording, setRecording] = useState("");
 
   const [light, setLight] = useState(1);
 
@@ -62,38 +59,39 @@ function NewProjectScreen(props, { postProjects }) {
     setDate(""), setLight(""), setLocation(""), setRecording("");
   };
 
-
   // RADIO BUTTON STUFF
 
   let radio_props = [
-
-    { label: 'Yes', value: 0 },
-    { label: 'No', value: 1 }
+    { label: "Yes", value: 0 },
+    { label: "No", value: 1 }
   ];
 
-
   return (
-
     <View style={styles.newProjectListWrapper}>
       <ScrollView>
         <TouchableOpacity style={styles.newProjectListTextWrapper}>
           <Text style={styles.newProjectText}>Create a New Project</Text>
-          <Text style={styles.labelText}>Where is the location you want your Drone Service?</Text>
+          <Text style={styles.labelText}>
+            Where is the location you want your Drone Service?
+          </Text>
           <TextInput
             style={styles.input}
             placeholder="Location"
             onChangeText={handleLocationChange}
             value={location}
           />
-
-          <Text style={styles.labelText}>What is the date of your Drone shoot?</Text>
+          <Text style={styles.labelText}>
+            What is the date of your Drone shoot?
+          </Text>
           <TextInput
             style={styles.input}
             placeholder="Date"
             onChangeText={handleDateChange}
             value={date}
           />
-          <Text style={styles.labelText}>What will the Drone Service be recording?</Text>
+          <Text style={styles.labelText}>
+            What will the Drone Service be recording?
+          </Text>
           <TextInput
             multiline={true}
             numberOfLines={4}
@@ -102,36 +100,30 @@ function NewProjectScreen(props, { postProjects }) {
             onChangeText={handleRecordingChange}
             value={recording}
           />
-
-          <Text style={styles.labelText} >Do you have any light specification?</Text>
+          <Text style={styles.labelText}>
+            Do you have any light specification?
+          </Text>
           <RadioForm
             formHorizontal={true}
             labelHorizontal={true}
-            buttonColor={'#092455'}
-            selectedButtonColor={'#092455'}
+            buttonColor={"#092455"}
+            selectedButtonColor={"#092455"}
             radio_props={radio_props}
             initial={1}
             onPress={handleLightChange}
-            />
+          />
+          {/* <Text style={styles.uploaderText}>Upload an Image Here!</Text>
+          <ImageUploader style={styles.uploaderObject} /> */}
 
-            <Text style={styles.uploaderText}>Upload an Image Here!</Text>
-          <ImageUploader style={styles.uploaderObject}/>
-
-          <TouchableOpacity onPress={submit}><Text style={styles.submitButton}>Submit Form</Text></TouchableOpacity>
-
+          <TouchableOpacity onPress={submit}>
+            <Text style={styles.submitButton}>Submit Form</Text>
+          </TouchableOpacity>
           {/* <Button style={styles.submitButton} title="Submit" onPress={submit} /> */}
         </TouchableOpacity>
-
-
-       
-
-        <Text style={styles.dummy}>Dummy text until I invstigate ScrollView more thoroughly</Text>
       </ScrollView>
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   newProjectListWrapper: {
@@ -146,7 +138,9 @@ const styles = StyleSheet.create({
   newProjectText: {
     fontSize: 30,
     color: "darkblue",
-    marginBottom: 20
+    marginBottom: 20,
+    textAlign: "center",
+    marginTop: 10
   },
   newProjectListTextWrapper: {
     marginBottom: 20
@@ -162,10 +156,11 @@ const styles = StyleSheet.create({
     height: 30,
     width: 20,
     marginBottom: 1000,
-    backgroundColor: 'red'
+    backgroundColor: "red"
   },
   labelText: {
-    marginBottom: 50
+    marginBottom: 50,
+    textAlign: "center"
   },
   uploaderText: {
     marginTop: 100
@@ -175,16 +170,11 @@ const styles = StyleSheet.create({
     marginBottom: 200
   },
   submitButton: {
-    marginTop: 100,
-    textAlign: 'center',
-    fontSize:30,
-    color: '#092455'
-
-
+    marginTop: 10,
+    textAlign: "center",
+    fontSize: 30,
+    color: "#092455"
   }
-
 });
 
 export default connect(null, { postProjects })(NewProjectScreen);
-
-

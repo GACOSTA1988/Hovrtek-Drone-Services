@@ -75,9 +75,16 @@ export default () => {
                 <RootClientStack.Screen
                   name="Client"
                   component={ClientHomeNavigation}
+                  headerMode="screen"
                   options={{
                     title: "Home",
-                    headerTitle: () => <ClientHeader />
+                    headerTitle: () => <ClientHeader />,
+                    headerStyle: {
+                      backgroundColor: "#092455"
+                      // headerBackTitleStyle: 20,
+                      // headerTitleContainerStyle: { marginVertical: 50 }
+                      // marginBottom: 50
+                    }
                   }}
                 />
               </RootClientStack.Navigator>
@@ -107,6 +114,7 @@ export default () => {
               />
             </AuthStack.Navigator>
           )}
+          {/* <StaturBar barStyle="light-content" backgroundColor="#6a51ae" /> */}
           <Footer />
         </NavigationContainer>
       </AuthContext.Provider>

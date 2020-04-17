@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Text, View, StyleSheet, Header, Image, Platform, ShadowPropTypesIOS, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,11 +11,9 @@ const ClientHeader = () => {
 
   return (
     <View style={styles.clientHeaderWrapper}>
-      <Image
-        source={hovrtekLogo}
-        style={styles.hovrtekLogo}
-      />
-      <Ionicons style={styles.hamburger}
+      <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+      <Ionicons
+        style={styles.hamburger}
         onPress={() => {
           navigation.dispatch(DrawerActions.toggleDrawer());
         }}
@@ -27,20 +26,26 @@ const ClientHeader = () => {
   );
 };
 
+
 const width = Dimensions.get('window').width;
+
 
 const styles = StyleSheet.create({
 
   clientHeaderWrapper: {
+
     ...Platform.select({
       ios: {
-        marginTop: 18,
-        backgroundColor: '#092455',
-        width: 375,
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+       marginTop: 18,
+    marginBottom: 20,
+    backgroundColor: "#092455",
+    width: 425,
+    height: 60,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomWidth: 10,
+    borderBottomColor: "grey"
       },
       android: {
         backgroundColor: '#092455',
@@ -62,6 +67,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 10,
         top: 7,
+        marginLeft: 20
       },
       android: {
         width: 170,
@@ -89,5 +95,6 @@ const styles = StyleSheet.create({
   }
 
 });
+
 
 export default ClientHeader;

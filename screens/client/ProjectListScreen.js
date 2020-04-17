@@ -6,12 +6,17 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  FlatList
+  FlatList,
+  ScrollView
 } from "react-native";
 import { connect } from "react-redux";
 import { getProjects, deleteProject } from "../../actions/index";
 import _ from "lodash";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  FontAwesome5,
+  MaterialCommunityIcons
+} from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -23,61 +28,95 @@ class ProjectListScreen extends Component {
   render() {
     return (
       <View style={styles.projectListWrapper}>
-        <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
-          <Text style={styles.clientText}>Current Projects</Text>
-        </TouchableOpacity>
+        <ScrollView>
+          <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
+            <Text style={styles.clientText}>Current Projects</Text>
+          </TouchableOpacity>
 
-        <View style={styles.projectCard}>
-          <TouchableOpacity>
-            <FlatList
-              style={{ width: "100%" }}
-              data={this.props.listOfProjects}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={item => item.key}
-              renderItem={({ item }) => {
-                return (
-                  <View>
-                    <TouchableHighlight
-                      onPress={() =>
-                        this.props.navigation.navigate("ProjectDetailsScreen", {
-                          ...item
-                        })
-                      }
+          <View style={styles.projectCard}>
+            <TouchableOpacity>
+              <FlatList
+                style={{ width: "100%" }}
+                data={this.props.listOfProjects}
+                // showsVerticalScrollIndicator={true}
+                keyExtractor={item => item.key}
+                renderItem={({ item }) => {
+                  return (
+                    <View
+                      style={{
+                        elevation: 8,
+                        borderRadius: 15,
+                        backgroundColor: "#092455",
+                        marginBottom: 15,
+                        padding: 20
+                      }}
                     >
-                      <View>
-                        <Text> {item.location} </Text>
-                        <Text> {item.date} </Text>
-                        <Text> {item.recording} </Text>
-                      </View>
-                    </TouchableHighlight>
-                    <View>
                       <TouchableHighlight
                         onPress={() =>
-                          this.props.navigation.navigate("EditProjectScreen", {
-                            ...item
-                          })
+                          this.props.navigation.navigate(
+                            "ProjectDetailsScreen",
+                            {
+                              ...item
+                            }
+                          )
                         }
                       >
                         <View>
-                          <Ionicons name="ios-pizza" size={32} color="green" />
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Location: {item.location}{" "}
+                          </Text>
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Date: {item.date}{" "}
+                          </Text>
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Recording: {item.recording}{" "}
+                          </Text>
                         </View>
                       </TouchableHighlight>
-                      <TouchableHighlight
-                        onPress={() => this.props.deleteProject(item.key)}
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "flex-end",
+                          marginTop: 25
+                        }}
                       >
-                        <View>
-                          <AntDesign name="delete" size={32} color='blue' />
-                          <Ionicons name="ios-pizza" size={32} color="red" />
-                        </View>
-                      </TouchableHighlight>
+                        <TouchableHighlight
+                          onPress={() =>
+                            this.props.navigation.navigate(
+                              "EditProjectScreen",
+                              {
+                                ...item
+                              }
+                            )
+                          }
+                        >
+                          <View style={{ marginRight: 15 }}>
+                            <FontAwesome5
+                              name="edit"
+                              size={32}
+                              color="#a9b8de"
+                            />
+                          </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                          onPress={() => this.props.deleteProject(item.key)}
+                        >
+                          <View>
+                            <MaterialCommunityIcons
+                              name="delete"
+                              size={32}
+                              color="#a9b8de"
+                            />
+                          </View>
+                        </TouchableHighlight>
+                      </View>
                     </View>
-                  </View>
-                );
-              }}
-            />
-          </TouchableOpacity>
-        </View>
-     
+                  );
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -85,24 +124,19 @@ class ProjectListScreen extends Component {
 
 const styles = StyleSheet.create({
   projectCard: {
-    backgroundColor: "darkgray",
-    width: 380,
-    borderWidth: 1,
-    padding: 6
+    width: 380
   },
   clientText: {
     fontSize: 30,
-    color: "darkblue"
+    color: "darkblue",
+    textAlign: "center"
   },
   ClientProjectListTextWrapper: {
     marginBottom: 20
   },
   projectListWrapper: {
-    alignItems: "center"
-  },
-  testText: {
-    fontWeight: "bold",
-    fontSize: 17
+    alignItems: "center",
+    marginTop: 10
   }
 });
 

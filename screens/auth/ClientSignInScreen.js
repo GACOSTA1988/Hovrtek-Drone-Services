@@ -17,17 +17,18 @@ function ClientSignInScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // supposed to be async?
   const signIn = (e) => {
     e.preventDefault();
     try {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(user => { console.log(user) });
       signInClient();
     } catch (error) {
       console.warn(error.toString(error));
     }
+
   }
 
   return (

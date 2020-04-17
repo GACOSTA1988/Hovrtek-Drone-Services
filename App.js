@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -9,8 +9,9 @@ import ClientHeader from "./components/client/ClientHeader";
 import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
-import SignUpNavigation from "./navigation/SignUpNavigation";
-import SignInNavigation from "./navigation/SignInNavigation";
+import SignUpNavigation from './navigation/SignUpNavigation';
+import SignInNavigation from './navigation/SignInNavigation';
+import * as firebase from 'firebase';
 // REDUX STUFF
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -28,7 +29,27 @@ export default () => {
   // REDUX STATE
   const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-  const [userType, setUserType] = React.useState(null);
+  // auth stuff - maybe should be elsewhere?
+  const auth = firebase.auth();
+
+  let [loggedIn, setLoggedIn] = useState(false);
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      setLoggedIn(true);
+      // let user = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: "somethingElse",
+        photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.almanac.com%2Fnews%2Fhome-health%2Fchickens%2Fraising-chickens-101-how-get-started&psig=AOvVaw16Hoi574wlL8Dy8TJnqJ6f&ust=1587245536477000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCND2wcW08OgCFQAAAAAdAAAAABAH"
+      });
+      console.log(user);
+    } else {
+      setLoggedIn(false);
+    }
+  })
+
+
+  const [userType, setUserType] = useState(null);
 
   const authContext = React.useMemo(() => {
     return {

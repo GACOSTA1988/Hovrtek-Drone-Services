@@ -48,16 +48,38 @@ export default class ImageUploader extends React.Component {
         });
       this.setState({ thumbnail: result.uri });
     }
-  };
 
-  uploadImage = async (uri, imageName) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
 
-    var ref = firebase
-      .storage()
-      .ref()
-      .child("images/" + imageName);
-    return ref.put(blob);
-  };
+    componentDidMount() {
+        this.getPermissionAsync();
+    }
+
+    getPermissionAsync = async () => {
+        // alert('fired getPermission')
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        await Permissions.askAsync(Permissions.CAMERA);
+    }
+
+    pushIt = async () => {
+        // let result = await ImagePicker.launchCameraAsync();
+        let result = await ImagePicker.launchImageLibraryAsync();
+
+        if (!result.cancelled) {
+            this.uploadImage(result.uri, "test-image")
+                .then(() => {
+                    Alert.alert("Successfully Uploaded to the Hovrtek Database!");
+                })
+                .catch((error) => {
+                    Alert.alert(error);
+                });
+            this.setState({ thumbnail: result.uri });
+        }
+    }
+
+    uploadImage = async (uri, imageName) => {
+        const response = await fetch(uri);
+        const blob = await response.blob();
+        var ref = firebase.storage().ref().child("images/" + imageName);
+        return ref.put(blob);
+    }
 }

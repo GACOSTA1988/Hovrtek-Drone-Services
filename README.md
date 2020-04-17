@@ -3,6 +3,10 @@
 ## Styling bugs
 
 * footer moves up and gets in the way when keyboard appears
-* icons in footer are squished
 * auth headers need to be sorted out
-* forms are ugly
+* drawer comes out from left
+
+## auth bugs
+
+* need loading screen after await in sign up
+* need error handling with wrong password/email

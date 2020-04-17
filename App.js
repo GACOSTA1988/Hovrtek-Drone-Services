@@ -37,12 +37,6 @@ export default () => {
   auth.onAuthStateChanged(user => {
     if (user) {
       setLoggedIn(true);
-      // let user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: "somethingElse",
-        photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.almanac.com%2Fnews%2Fhome-health%2Fchickens%2Fraising-chickens-101-how-get-started&psig=AOvVaw16Hoi574wlL8Dy8TJnqJ6f&ust=1587245536477000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCND2wcW08OgCFQAAAAAdAAAAABAH"
-      });
-      console.log(user);
     } else {
       setLoggedIn(false);
     }

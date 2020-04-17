@@ -11,22 +11,32 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 
 function PilotSignUpScreen() {
-
   const { signInPilot } = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
-  const signUp = (e) => {
+  async function signUp(e) {
     e.preventDefault();
     try {
-      firebase
+      await firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(user => { console.warn(user) });
+        .createUserWithEmailAndPassword(email, password).then((user) => {
+          console.log("initial user: ", user);
+        })
       signInPilot();
     } catch (error) {
-      console.warn(error.toString(error));
+      console.log(error.toString(error));
     }
+    let user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: name,
+      photoURL: 'P'
+    });
+    console.log("user just updated ", user);
+    console.log("user id: ", user.uid);
+    // todo/ jay already did? push location and uid to profile
   }
 
   return (
@@ -40,10 +50,16 @@ function PilotSignUpScreen() {
           style={styles.input}
         />
         <TextInput
+          placeholder="name"
+          value={name}
+          onChangeText={setName}
+          style={styles.input}
+        />
+        <TextInput
           placeholder="password"
-          secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
+          secureTextEntry={true}
           style={styles.input}
         />
         <Button title="Sign up" onPress={signUp} />

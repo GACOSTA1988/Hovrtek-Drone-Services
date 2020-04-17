@@ -15,14 +15,15 @@ function ClientSignUpScreen() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
-  const signUp = (e) => {
+  async function signUp(e) {
     e.preventDefault();
     try {
-      firebase
+      await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password).then((user) => {
-          console.log(user);
+          console.log("initial user: ", user);
         })
       signInClient();
     } catch (error) {
@@ -30,10 +31,12 @@ function ClientSignUpScreen() {
     }
     let user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: "somethingElse",
-      photoURL: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.almanac.com%2Fnews%2Fhome-health%2Fchickens%2Fraising-chickens-101-how-get-started&psig=AOvVaw16Hoi574wlL8Dy8TJnqJ6f&ust=1587245536477000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCND2wcW08OgCFQAAAAAdAAAAABAH"
+      displayName: name,
+      photoURL: 'C'
     });
     console.log("user just updated ", user);
+    console.log("user id: ", user.uid);
+    // todo/ jay already did? push location and uid to profile
   }
 
   return (
@@ -44,6 +47,12 @@ function ClientSignUpScreen() {
           placeholder="email"
           value={email}
           onChangeText={setEmail}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="name"
+          value={name}
+          onChangeText={setName}
           style={styles.input}
         />
         <TextInput

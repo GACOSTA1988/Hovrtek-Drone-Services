@@ -1,251 +1,116 @@
-//NEWPROJECTSCREEN
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Button,
-  Alert,
-  ScrollView
+  Button
 } from "react-native";
-import { postProjects } from "../../actions/index";
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import { AuthContext } from "../../context";
+import * as firebase from "firebase";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
-import { useNavigation } from '@react-navigation/native';
-// import * as ImagePicker from 'expo-image-picker';
-import * as firebase from "firebase";
-import * as Permissions from 'expo-permissions';
-import ImagePicker from '../../components/client/ImagePicker'
 
-function NewProjectScreen(props, { postProjects }) {
-
-  const navigation = useNavigation();
+function PilotSignUpScreen(props) {
 
 
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
-  const [recording, setRecording] = useState('');
-  const [light, setLight] = useState(1);
+  const { signInPilot } = useContext(AuthContext);
+  const [pilotName, setPilotName] = useState('');
+  const [pilotLocation, setPilotLocation] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  function handleLocationChange(text) {
-    setLocation(text);
+  function handlePilotName(text) {
+    setPilotName(text);
   }
 
-  function handleDateChange(text) {
-    setDate(text);
+  function handlePilotLocation(text) {
+    setPilotLocation(text);
   }
 
-  function handleRecordingChange(text) {
-    setRecording(text);
-  }
-
-  function handleLightChange(text) {
-    (value) => { setLight({ value: value }) }
-  }
-
-  const submit = (e) => {
+  async function signUp(e) {
     e.preventDefault();
-    console.log("New Project Props", props);
-    props.postProjects(location, date, recording, light);
-    navigation.navigate("ProjectListScreen")
-  }
-
-  componentDidMount() {
-    this.getPermissionAsync();
-  }
-
-
-  const onChooseImagePress = async () => {
-    // let result = await ImagePicker.launchCameraAsync();
-    let result = await ImagePicker.launchImageLibraryAsync();
-
-    if (!result.cancelled) {
-
-      uploadImage(result.uri, "test-image")
-        .then(() => {
-          Alert.alert("Success");
+    props.postProfiles(pilotLocation, email, null);
+    try {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password).then((user) => {
+          console.log("initial user: ", user);
         })
-        .catch((error) => {
-          Alert.alert(error);
-        });
+      signInPilot();
+    } catch (error) {
+      console.log(error.toString(error));
     }
+    let user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: pilotName,
+      photoURL: 'P'
+    });
+    console.log("user just updated ", user);
+    console.log("user id: ", user.uid);
+    // todo/ jay already did? push location and uid to profile
   }
-  const uploadImage = async (uri, imageName) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    var ref = firebase.storage().ref().child("images/" + imageName);
-    return ref.put(blob);
-  }
-
-
-  // RADIO BUTTON STUFF
-
-  let radio_props = [
-    { label: 'Yes', value: 0 },
-    { label: 'No', value: 1 }
-  ];
 
 
   return (
-
-    <View style={styles.newProjectListWrapper}>
-      <ScrollView>
-        <TouchableOpacity style={styles.newProjectListTextWrapper}>
-          <Text style={styles.newProjectText}>Create a New Project</Text>
-          <Text style={styles.labelText}>Where is the location you want your Drone Service?</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Location"
-            onChangeText={handleLocationChange}
-            value={location}
-          />
-
-          <Text style={styles.labelText}>What is the date of your Drone shoot?</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Date"
-            onChangeText={handleDateChange}
-            value={date}
-          />
-          <Text style={styles.labelText}>What will the Drone Service be recording?</Text>
-          <TextInput
-            multiline={true}
-            numberOfLines={4}
-            style={styles.input}
-            placeholder="What?"
-            onChangeText={handleRecordingChange}
-            value={recording}
-          />
-
-          <Text style={styles.labelText} >Do you have any light specification?</Text>
-          <RadioForm
-            formHorizontal={true}
-            labelHorizontal={true}
-            buttonColor={'#092455'}
-            selectedButtonColor={'#092455'}
-            radio_props={radio_props}
-            initial={1}
-            onPress={handleLightChange}
-          />
-
-          <Button title="Submit" onPress={submit} />
-        </TouchableOpacity>
+    <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.textWrapper}>
+        <Text style={styles.text}>Create your pilot account</Text>
+        <TextInput
+          placeholder="Name"
+          value={pilotName}
+          onChangeText={handlePilotName}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Location"
+          value={pilotLocation}
+          onChangeText={handlePilotLocation}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="email"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="password"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+          style={styles.input}
+        />
 
 
-        <Text>Upload an Image</Text>
-
-        <Button style={styles.imageButton} title='Choose Image' onPress={onChooseImagePress} />
-
-        <ImagePicker />
-
-        <Text style={styles.dummy}>Dummy text until I invstigate ScrollView more thoroughly</Text>
-      </ScrollView>
+        <Button title="Sign up" onPress={signUp} />
+      </TouchableOpacity>
     </View>
   );
 }
 
-
 const styles = StyleSheet.create({
-  newProjectListWrapper: {
-    alignItems: "center"
+  wrapper: {
+    marginTop: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: .5
   },
-  newProjectListForm: {
-    backgroundColor: "darkgray",
-    width: 380,
-    borderWidth: 1,
-    padding: 6
-  },
-  newProjectText: {
+  text: {
     fontSize: 30,
-    color: "darkblue",
-    marginBottom: 20,
+    color: "darkblue"
   },
-  newProjectListTextWrapper: {
+  textWrapper: {
     marginBottom: 20
   },
   input: {
+    height: 40,
+    borderColor: "grey",
     borderWidth: 1,
-    borderRadius: 3,
-    height: 30,
-    marginBottom: 50
-  },
-  imageButton: {
-    height: 30,
-    width: 20,
-    marginBottom: 1000,
-    backgroundColor: 'red'
-  },
-  labelText: {
-    marginBottom: 50
-  },
-  dummy: {
-    marginTop: 100,
-    marginBottom: 200
+    margin: 10,
+    width: 200
   }
 });
 
-export default connect(null, { postProjects })(NewProjectScreen);
-
-
-
-
-// IMAGE PICKER COMPONENNT
-
-
-import * as React from 'react';
-import { Button, Image, View } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
-
-export default class ImagePickerExample extends React.Component {
-  state = {
-    image: null,
-  };
-
-  render() {
-    let { image } = this.state;
-
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button title="Pick an image from camera roll" onPress={this._pickImage} />
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-      </View>
-    );
-  }
-
-  componentDidMount() {
-    this.getPermissionAsync();
-  }
-
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      }
-    }
-  };
-
-  _pickImage = async () => {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        this.setState({ image: result.uri });
-      }
-
-      console.log(result);
-    } catch (E) {
-      console.log(E);
-    }
-  };
-}
+export default connect(null, { postProfiles })(PilotSignUpScreen);

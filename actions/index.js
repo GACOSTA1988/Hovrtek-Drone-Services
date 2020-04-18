@@ -37,13 +37,12 @@ export function getProfiles() {
   };
 }
 
-export function postProfiles(name, overview, equipment, availability) {
-  console.log("index.js line 41. got to post profiles. this is overview: ", overview);
+export function postProfiles(pilotLocation, email, userID, drone) {
   return dispatch => {
     firebase
       .database()
       .ref("/profiles")
-      .push({ name, overview, equipment, availability });
+      .push({ pilotLocation, email, userID, drone});
   };
 }
 

@@ -9,16 +9,29 @@ import {
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
+import { postProfiles } from "../../actions/index";
+import { connect } from "react-redux";
 
-function PilotSignUpScreen() {
+function PilotSignUpScreen(props) {
+
+
   const { signInPilot } = useContext(AuthContext);
-
+  const [pilotName, setPilotName] = useState('');
+  const [pilotLocation, setPilotLocation] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+
+  function handlePilotName(text) {
+    setPilotName(text);
+  }
+
+  function handlePilotLocation(text) {
+    setPilotLocation(text);
+  }
 
   async function signUp(e) {
     e.preventDefault();
+   
     try {
       await firebase
         .auth()
@@ -31,12 +44,14 @@ function PilotSignUpScreen() {
     }
     let user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: name,
+      displayName: pilotName,
       photoURL: 'P'
     });
+    let userID = user.uid
+    console.log("let userID = user.ID", userID)
     console.log("user just updated ", user);
     console.log("user id: ", user.uid);
-    // todo/ jay already did? push location and uid to profile
+    props.postProfiles(pilotLocation, email, userID, null);
   }
 
   return (
@@ -44,24 +59,32 @@ function PilotSignUpScreen() {
       <TouchableOpacity style={styles.textWrapper}>
         <Text style={styles.text}>Create your pilot account</Text>
         <TextInput
+          placeholder="Name"
+          value={pilotName}
+          onChangeText={handlePilotName}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Location"
+          value={pilotLocation}
+          onChangeText={handlePilotLocation}
+          style={styles.input}
+        />
+        <TextInput
           placeholder="email"
           value={email}
           onChangeText={setEmail}
           style={styles.input}
         />
         <TextInput
-          placeholder="name"
-          value={name}
-          onChangeText={setName}
-          style={styles.input}
-        />
-        <TextInput
           placeholder="password"
+          secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
-          secureTextEntry={true}
           style={styles.input}
         />
+
+
         <Button title="Sign up" onPress={signUp} />
       </TouchableOpacity>
     </View>
@@ -70,6 +93,7 @@ function PilotSignUpScreen() {
 
 const styles = StyleSheet.create({
   wrapper: {
+    marginTop: 50,
     alignItems: "center",
     justifyContent: "center",
     flex: .5
@@ -90,4 +114,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PilotSignUpScreen;
+export default connect(null, { postProfiles })(PilotSignUpScreen);

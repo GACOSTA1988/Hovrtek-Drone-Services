@@ -11,24 +11,24 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 
 
-function PilotSignInScreen( {navigation} ) {
+function ClientSignInScreen( {navigation} ) {
 
-  const { signInPilot } = useContext(AuthContext);
+  const { signInClient } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // supposed to be async
+  // supposed to be async?
   const signIn = (e) => {
     e.preventDefault();
     try {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
+      signInClient();
     } catch (error) {
-      alert(error.toString(error));
-      navigation.pop();
+      console.warn(error.toString(error));
     }
-    signInPilot();
+
   }
 
   return (
@@ -49,6 +49,9 @@ function PilotSignInScreen( {navigation} ) {
           style={styles.input}
         />
         <Button title="Sign in" onPress={signIn} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.push('SignUp')} >
+      <Text>Or Create an Account</Text>
       </TouchableOpacity>
     </View>
   );
@@ -76,4 +79,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PilotSignInScreen;
+export default ClientSignInScreen;

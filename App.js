@@ -10,7 +10,7 @@ import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
 import SignUpNavigation from './navigation/SignUpNavigation';
-import SignInNavigation from './navigation/SignInNavigation';
+import SignInScreen from './screens/auth/SignInScreen';
 import * as firebase from 'firebase';
 // REDUX STUFF
 import { Provider } from "react-redux";
@@ -33,28 +33,35 @@ export default () => {
   const auth = firebase.auth();
 
   let [loggedIn, setLoggedIn] = useState(false);
+  let [userType, setUserType] = useState(null);
+
+  console.log("this is the current user: ", auth.currentUser);
 
   auth.onAuthStateChanged(user => {
     if (user) {
       setLoggedIn(true);
+      setUserType(user.photoURL);
+      console.log(user.photoURL);
     } else {
       setLoggedIn(false);
+      setUserType(null);
     }
+    console.log("user type: ", userType);
   })
 
 
-  const [userType, setUserType] = useState(null);
+  const [userTypeOld, setUserTypeOld] = useState(null);
 
   const authContext = React.useMemo(() => {
     return {
       signInPilot: () => {
-        setUserType("pilot");
+        setUserTypeOld("pilot");
       },
       signInClient: () => {
-        setUserType("client");
+        setUserTypeOld("client");
       },
       signOut: () => {
-        setUserType(null);
+        setUserTypeOld(null);
       }
     };
   }, []);
@@ -63,8 +70,8 @@ export default () => {
     <Provider store={state}>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
-          {userType ? (
-            userType === "client" ? (
+          {loggedIn ? (
+            userType === "C" ? (
               <RootClientStack.Navigator>
                 <RootClientStack.Screen
                   name="Client"
@@ -82,7 +89,7 @@ export default () => {
                   }}
                 />
               </RootClientStack.Navigator>
-            ) : (
+            ) : userType === "P" (
               <RootPilotStack.Navigator>
                 <RootPilotStack.Screen
                   name="Pilot"
@@ -98,7 +105,7 @@ export default () => {
             <AuthStack.Navigator>
               <AuthStack.Screen
                 name="SignIn"
-                component={SignInNavigation}
+                component={SignInScreen}
                 options={{ title: "Sign In" }}
               />
               <AuthStack.Screen

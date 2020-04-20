@@ -31,14 +31,12 @@ function PilotSignUpScreen(props) {
 
   async function signUp(e) {
     e.preventDefault();
-   
     try {
       await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password).then((user) => {
           console.log("initial user: ", user);
         })
-      signInPilot();
     } catch (error) {
       console.log(error.toString(error));
     }
@@ -50,7 +48,7 @@ function PilotSignUpScreen(props) {
     let userID = user.uid
     console.log("let userID = user.ID", userID)
     console.log("user just updated ", user);
-    console.log("user id: ", user.uid);
+    console.log("photoURL: ", user.photoURL);
     props.postProfiles(pilotLocation, email, userID, null);
   }
 

@@ -25,7 +25,6 @@ function ClientSignUpScreen() {
         .createUserWithEmailAndPassword(email, password).then((user) => {
           console.log("initial user: ", user);
         })
-      signInClient();
     } catch (error) {
       console.log(error.toString(error));
     }
@@ -36,6 +35,7 @@ function ClientSignUpScreen() {
     });
     console.log("user just updated ", user);
     console.log("user id: ", user.uid);
+    console.log("photoURL: ", user.photoURL);
     // todo/ jay already did? push location and uid to profile
   }
 

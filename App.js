@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { Button, Image, StyleSheet, Text, View } from "react-native";
+import React, { useState, useContext, useMemo } from "react";
+import { Button, Image, StyleSheet, Text, View, Screen } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "./context";
@@ -11,6 +11,7 @@ import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
 import SignUpNavigation from './navigation/SignUpNavigation';
 import SignInScreen from './screens/auth/SignInScreen';
+import LoadingScreen from './screens/LoadingScreen';
 import * as firebase from 'firebase';
 // REDUX STUFF
 import { Provider } from "react-redux";
@@ -35,33 +36,24 @@ export default () => {
   let [loggedIn, setLoggedIn] = useState(false);
   let [userType, setUserType] = useState(null);
 
-  console.log("this is the current user: ", auth.currentUser);
-
   auth.onAuthStateChanged(user => {
     if (user) {
       setLoggedIn(true);
       setUserType(user.photoURL);
-      console.log(user.photoURL);
+      console.log("this is the user ", user, "this is the user email", user.email, "And this is the user photoURL", user.photoURL);
     } else {
       setLoggedIn(false);
       setUserType(null);
     }
-    console.log("user type: ", userType);
   })
 
-
-  const [userTypeOld, setUserTypeOld] = useState(null);
-
-  const authContext = React.useMemo(() => {
+  const authContext = useMemo(() => {
     return {
-      signInPilot: () => {
-        setUserTypeOld("pilot");
-      },
-      signInClient: () => {
-        setUserTypeOld("client");
-      },
-      signOut: () => {
-        setUserTypeOld(null);
+      updateUser: () => {
+        const user = firebase.auth().currentUser;
+        console.log("And here in update user, this is the user again: ", user, "this is the user email", user.email, "And, again, this is the user photoURL", user.photoURL);
+        setLoggedIn(true);
+        setUserType(user.photoURL);
       }
     };
   }, []);
@@ -71,7 +63,7 @@ export default () => {
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           {loggedIn ? (
-            userType === "C" ? (
+            (userType === "C") ? (
               <RootClientStack.Navigator>
                 <RootClientStack.Screen
                   name="Client"
@@ -89,7 +81,7 @@ export default () => {
                   }}
                 />
               </RootClientStack.Navigator>
-            ) : userType === "P" (
+            ) : (userType === "P") ? (
               <RootPilotStack.Navigator>
                 <RootPilotStack.Screen
                   name="Pilot"
@@ -100,6 +92,23 @@ export default () => {
                   }}
                 />
               </RootPilotStack.Navigator>
+            ) : (
+              <AuthStack.Navigator>
+                <AuthStack.Screen
+                  name="SignIn"
+                  component={SignInScreen}
+                  options={{ title: "Sign In" }}
+                />
+                <AuthStack.Screen
+                  name="SignUp"
+                  component={SignUpNavigation}
+                  options={{ title: "Sign Up" }}
+                />
+                <AuthStack.Screen
+                  name="Loading"
+                  component={LoadingScreen}
+                />
+              </AuthStack.Navigator>
             )
           ) : (
             <AuthStack.Navigator>
@@ -112,6 +121,10 @@ export default () => {
                 name="SignUp"
                 component={SignUpNavigation}
                 options={{ title: "Sign Up" }}
+              />
+              <AuthStack.Screen
+                name="Loading"
+                component={LoadingScreen}
               />
             </AuthStack.Navigator>
           )}

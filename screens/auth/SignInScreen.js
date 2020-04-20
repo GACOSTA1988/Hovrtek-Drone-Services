@@ -24,7 +24,6 @@ function ClientSignInScreen( {navigation} ) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-      signInClient();
     } catch (error) {
       console.warn(error.toString(error));
     }
@@ -52,6 +51,9 @@ function ClientSignInScreen( {navigation} ) {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.push('SignUp')} >
       <Text>Or Create an Account</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => firebase.auth().signOut()} >
+      <Text>Sign out user</Text>
       </TouchableOpacity>
     </View>
   );

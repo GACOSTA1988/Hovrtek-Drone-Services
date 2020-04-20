@@ -9,9 +9,9 @@ import ClientHeader from "./components/client/ClientHeader";
 import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
-import SignUpNavigation from './navigation/SignUpNavigation';
-import SignInNavigation from './navigation/SignInNavigation';
-import * as firebase from 'firebase';
+import SignUpNavigation from "./navigation/SignUpNavigation";
+import SignInNavigation from "./navigation/SignInNavigation";
+import * as firebase from "firebase";
 // REDUX STUFF
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -34,14 +34,13 @@ export default () => {
 
   let [loggedIn, setLoggedIn] = useState(false);
 
-  auth.onAuthStateChanged(user => {
+  auth.onAuthStateChanged((user) => {
     if (user) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
-  })
-
+  });
 
   const [userType, setUserType] = useState(null);
 
@@ -55,7 +54,7 @@ export default () => {
       },
       signOut: () => {
         setUserType(null);
-      }
+      },
     };
   }, []);
 
@@ -74,11 +73,8 @@ export default () => {
                     title: "Home",
                     headerTitle: () => <ClientHeader />,
                     headerStyle: {
-                      backgroundColor: "#092455"
-                      // headerBackTitleStyle: 20,
-                      // headerTitleContainerStyle: { marginVertical: 50 }
-                      // marginBottom: 50
-                    }
+                      backgroundColor: "#092455",
+                    },
                   }}
                 />
               </RootClientStack.Navigator>
@@ -89,7 +85,10 @@ export default () => {
                   component={PilotHomeNavigation}
                   options={{
                     title: "Home",
-                    headerTitle: () => <PilotHeader />
+                    headerTitle: () => <PilotHeader />,
+                    headerStyle: {
+                      backgroundColor: "#092455",
+                    },
                   }}
                 />
               </RootPilotStack.Navigator>
@@ -99,20 +98,37 @@ export default () => {
               <AuthStack.Screen
                 name="SignIn"
                 component={SignInNavigation}
-                options={{ title: "Sign In" }}
+                options={{
+                  title: "",
+                  headerStyle: {
+                    backgroundColor: "#092455",
+                    borderBottomWidth: 10,
+                    borderBottomColor: "grey",
+                    height: 110,
+                  },
+                }}
               />
               <AuthStack.Screen
                 name="SignUp"
                 component={SignUpNavigation}
-                options={{ title: "Sign Up" }}
+                options={{
+                  title: "",
+                  headerStyle: {
+                    backgroundColor: "#092455",
+                    borderBottomWidth: 10,
+                    borderBottomColor: "grey",
+                    height: 110,
+                  },
+                }}
               />
             </AuthStack.Navigator>
           )}
-          {/* <StaturBar barStyle="light-content" backgroundColor="#6a51ae" /> */}
+
           <Footer />
         </NavigationContainer>
       </AuthContext.Provider>
     </Provider>
+    // <StaturBar barStyle="light-content" backgroundColor="#6a51ae" />
   );
 };
 
@@ -121,8 +137,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
 
 // Header Logo

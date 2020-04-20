@@ -1,15 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "../context";
-import WhichSignInScreen from '../screens/auth/WhichSignInScreen';
-import PilotSignInScreen from '../screens/auth/PilotSignInScreen';
-import ClientSignInScreen from '../screens/auth/ClientSignInScreen';
+import WhichSignInScreen from "../screens/auth/WhichSignInScreen";
+import PilotSignInScreen from "../screens/auth/PilotSignInScreen";
+import ClientSignInScreen from "../screens/auth/ClientSignInScreen";
 
 const SignInStack = createStackNavigator();
 
 const SignInNavigation = () => {
   return (
-    <SignInStack.Navigator>
+    <SignInStack.Navigator headerMode="none">
       <SignInStack.Screen
         name="WhichSignInScreen"
         component={WhichSignInScreen}
@@ -21,7 +21,7 @@ const SignInNavigation = () => {
         headerMode="none"
       />
       <SignInStack.Screen
-        name='ClientSignInScreen'
+        name="ClientSignInScreen"
         component={ClientSignInScreen}
         headerMode="none"
       />

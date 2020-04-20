@@ -8,8 +8,8 @@ const HomeScreenTab = createMaterialTopTabNavigator();
 function JobListMyJobsTabNavigation({ navigation }) {
   return (
     <HomeScreenTab.Navigator>
-      <HomeScreenTab.Screen name="JobListScreen" component={JobListScreen} />
-      <HomeScreenTab.Screen name="MyJobsScreen" component={MyJobsScreen} />
+      <HomeScreenTab.Screen name="Available Jobs" component={JobListScreen} />
+      <HomeScreenTab.Screen name="My Jobs" component={MyJobsScreen} />
     </HomeScreenTab.Navigator>
   );
 }

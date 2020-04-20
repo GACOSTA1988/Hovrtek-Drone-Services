@@ -1,28 +1,50 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 import { AuthContext } from "../../context";
 
-function WhichSignInScreen( {navigation} ) {
+import HomeImage from "../../components/auth/HomeImage";
+
+function WhichSignInScreen({ navigation }) {
   const { signInPilot } = React.useContext(AuthContext);
   const { signInClient } = React.useContext(AuthContext);
 
   return (
-    <View style={styles.whichSignInBody}>
-      <TouchableOpacity style={styles.button} onPress={() => {navigation.push('PilotSignInScreen')}} >
-      <Text>Sign in as a pilot</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => {navigation.push('ClientSignInScreen')}} >
-      <Text>Sign in as a client</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.push('SignUp')} >
-      <Text>Create Account</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonShortcut} onPress={() => signInPilot()} >
-      <Text>Pilot Shortcut</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonShortcut} onPress={() => signInClient()} >
-      <Text>Client Shortcut</Text>
-      </TouchableOpacity>
+    <View>
+      <HomeImage />
+      <View style={styles.whichSignInBody}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.push("PilotSignInScreen");
+          }}
+        >
+          <Text style={styles.buttonText}>Pilot sign in</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.push("ClientSignInScreen");
+          }}
+        >
+          <Text style={styles.buttonText}>Client sign in</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.push("SignUp")}
+        >
+          <Text style={styles.buttonText}>Create Account</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={() => signInPilot()}>
+          <Text style={styles.buttonText}>Pilot Shortcut</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={() => signInClient()}>
+          <Text style={styles.buttonText}>Client Shortcut</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -31,22 +53,29 @@ const styles = StyleSheet.create({
   whichSignInBody: {
     alignItems: "center",
     justifyContent: "center",
-    flex: .5
+    flex: 0.5,
+    marginTop: 350,
+    position: "absolute",
+    flexDirection: "row",
+    marginLeft: "2%",
+
+    // justifyContent: "flex-end",
   },
   button: {
-    marginTop: 20,
+    marginTop: 30,
     padding: 10,
-    width: "90%",
+    width: 80,
     alignItems: "center",
-    backgroundColor: "lightblue"
+    backgroundColor: "white",
   },
   buttonShortcut: {
     marginTop: 20,
     padding: 10,
-    width: "90%",
+    width: 100,
     alignItems: "center",
-    backgroundColor: "lightgreen"
-  }
+    backgroundColor: "lightgreen",
+  },
+  buttonText: { textAlign: "center" },
 });
 
 export default WhichSignInScreen;

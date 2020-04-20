@@ -18,6 +18,7 @@ function ClientSignInScreen( {navigation} ) {
   // supposed to be async?
   const signIn = (e) => {
     e.preventDefault();
+    navigation.push("Loading");
     try {
       firebase
         .auth()
@@ -47,11 +48,14 @@ function ClientSignInScreen( {navigation} ) {
         />
         <Button title="Sign in" onPress={signIn} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.push('SignUp')} >
-      <Text>Or Create an Account</Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.push('SignUp')} >
+        <Text>Or Create an Account</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => firebase.auth().signOut()} >
-      <Text>Sign out user</Text>
+      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@email.com", "password")} >
+        <Text>Client shortcut (imaclient@email.com)</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@email.com", "password")} >
+        <Text>Pilot shortcut (imapilot@email.com)</Text>
       </TouchableOpacity>
     </View>
   );
@@ -76,6 +80,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: 10,
     width: 200
+  },
+  button: {
+    marginTop: 20,
+    padding: 10,
+    width: "90%",
+    alignItems: "center",
+    backgroundColor: "lightblue"
   }
 });
 

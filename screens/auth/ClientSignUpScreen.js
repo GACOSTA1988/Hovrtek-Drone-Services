@@ -11,7 +11,6 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 
 function ClientSignUpScreen() {
-  const { signInClient } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

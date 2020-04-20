@@ -7,13 +7,11 @@ import {
   TextInput,
   Button
 } from "react-native";
-import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 
 
 function ClientSignInScreen( {navigation} ) {
 
-  const { signInClient } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

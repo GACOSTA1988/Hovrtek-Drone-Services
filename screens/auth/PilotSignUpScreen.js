@@ -36,10 +36,6 @@ function PilotSignUpScreen(props) {
       photoURL: 'P'
     });
     await firebase.auth().currentUser.reload().then(updateUser());
-    let userID = user.uid
-    // console.log("let userID = user.ID", userID)
-    // console.log("user just updated ", user);
-    // console.log("photoURL: ", user.photoURL);
     props.postProfiles(pilotLocation, email, userID, null);
   }
 

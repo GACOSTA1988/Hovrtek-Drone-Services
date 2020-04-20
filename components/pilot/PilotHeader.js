@@ -1,8 +1,13 @@
 import React from "react";
 import {
-
-  Text, View, StyleSheet, Header, Image, ShadowPropTypesIOS, Platform, Dimensions
-
+  Text,
+  View,
+  StyleSheet,
+  Header,
+  Image,
+  ShadowPropTypesIOS,
+  Platform,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../../assets/hovrtek_logo.png";
@@ -30,29 +35,31 @@ const PilotHeader = () => {
   );
 };
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 const styles = StyleSheet.create({
-
   pilotHeaderWrapper: {
     ...Platform.select({
       ios: {
         marginTop: 18,
+        marginBottom: 20,
         backgroundColor: "#092455",
-        width: 375,
-        height: 50,
+        width: 425,
+        height: 60,
         flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        borderBottomWidth: 10,
+        borderBottomColor: "grey",
       },
       android: {
-        backgroundColor: '#092455',
+        backgroundColor: "#092455",
         left: -16,
         top: 5,
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
         width: width,
         height: 67,
-      }
-    })
+      },
+    }),
   },
 
   hovrtekLogo: {
@@ -63,16 +70,17 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 0,
         right: 10,
-        top: 7
+        top: 7,
+        marginLeft: 20,
       },
       android: {
         width: 170,
         height: 30,
-        position: 'absolute',
+        position: "absolute",
         left: 10,
         top: 20,
-      }
-    })
+      },
+    }),
   },
 
   hamburger: {
@@ -80,16 +88,15 @@ const styles = StyleSheet.create({
       ios: {
         alignSelf: "flex-end",
         marginLeft: 300,
-        margin: 0
+        margin: 0,
       },
       android: {
-        alignSelf: 'flex-end',
+        alignSelf: "flex-end",
         right: 10,
-        top: 10
-      }
-    })
-  }
-
+        top: 10,
+      },
+    }),
+  },
 });
 
 export default PilotHeader;

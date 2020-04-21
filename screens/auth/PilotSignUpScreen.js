@@ -18,7 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 function PilotSignUpScreen(props) {
 
   const navigation = useNavigation();
-  const { signInPilot } = useContext(AuthContext);
+  const { updateUser } = useContext(AuthContext);
   const [pilotFirstName, setPilotFirstName] = useState('');
   const [pilotLastName, setPilotLastName] = useState('');
   const [pilotLocation, setPilotLocation] = useState('');
@@ -28,21 +28,6 @@ function PilotSignUpScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handlePilotFirstName(text) {
-    setPilotFirstName(text);
-  }
-
-  function handlePilotLastName(text) {
-    setPilotLastName(text);
-  }
-
-  function handlePilotLocation(text) {
-    setPilotLocation(text);
-  }
-
-  function handleDroneType(text) {
-    setDroneType(text);
-  }
 
   async function signUp(e) {
     e.preventDefault();
@@ -72,25 +57,25 @@ function PilotSignUpScreen(props) {
           <TextInput
             placeholder="First Name"
             value={pilotFirstName}
-            onChangeText={handlePilotFirstName}
+            onChangeText={setPilotFirstName}
             style={styles.input}
           />
           <TextInput
             placeholder="Last Name"
             value={pilotLastName}
-            onChangeText={handlePilotLastName}
+            onChangeText={setPilotLastName}
             style={styles.input}
           />
           <TextInput
             placeholder="Location"
             value={pilotLocation}
-            onChangeText={handlePilotLocation}
+            onChangeText={setPilotLocation}
             style={styles.input}
           />
           <TextInput
             placeholder="Drone Type"
             value={droneType}
-            onChangeText={handleDroneType}
+            onChangeText={setDroneType}
             style={styles.input}
           />
 

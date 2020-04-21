@@ -37,12 +37,12 @@ export function getProfiles() {
   };
 }
 
-export function postProfiles(pilotLocation, email, userID, drone) {
+export function postProfiles(pilotFirstName, pilotLastName, pilotLocation, droneType, airMap, fourHundred, userID) {
   return dispatch => {
     firebase
       .database()
       .ref("/profiles")
-      .push({ pilotLocation, email, userID, drone});
+      .push({ pilotFirstName, pilotLastName, pilotLocation, droneType, airMap, fourHundred, userID });
   };
 }
 

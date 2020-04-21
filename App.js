@@ -192,7 +192,20 @@ export default () => {
                   },
                 })}
               />
-              <AuthStack.Screen name="Loading" component={LoadingScreen} />
+              <AuthStack.Screen
+                name="Loading"
+                component={LoadingScreen}
+                options={({ navigation }) => ({
+                  title: "",
+
+                  headerStyle: {
+                    backgroundColor: "#092455",
+                    borderBottomWidth: 10,
+                    borderBottomColor: "grey",
+                    height: 110,
+                  },
+                })}
+              />
             </AuthStack.Navigator>
           )}
           {/* <StaturBar barStyle="light-content" backgroundColor="#6a51ae" /> */}

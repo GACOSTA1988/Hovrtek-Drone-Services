@@ -8,12 +8,10 @@ import CreateProfileScreen from '../screens/pilot/CreateProfileScreen';
 import PilotProfileScreen from '../screens/pilot/PilotProfileScreen';
 import ProfileListScreen from '../screens/pilot/ProfileListScreen';
 import SignOutScreen from '../screens/auth/SignOutScreen';
-import { AuthContext } from "../context";
 
 const PilotDrawer = createDrawerNavigator();
 
 const PilotHomeNavigation = () => {
-  const { signOut } = React.useContext(AuthContext);
   return (
     <PilotDrawer.Navigator>
       <PilotDrawer.Screen

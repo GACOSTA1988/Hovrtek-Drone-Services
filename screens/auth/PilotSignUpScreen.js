@@ -14,43 +14,29 @@ import { connect } from "react-redux";
 
 function PilotSignUpScreen(props) {
 
-
-  const { signInPilot } = useContext(AuthContext);
+  const { updateUser } = useContext(AuthContext);
   const [pilotName, setPilotName] = useState('');
   const [pilotLocation, setPilotLocation] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handlePilotName(text) {
-    setPilotName(text);
-  }
-
-  function handlePilotLocation(text) {
-    setPilotLocation(text);
-  }
-
   async function signUp(e) {
     e.preventDefault();
-   
+    props.navigation.push("Loading");
     try {
       await firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password).then((user) => {
-          console.log("initial user: ", user);
-        })
-      signInPilot();
+        .createUserWithEmailAndPassword(email, password);
     } catch (error) {
       console.log(error.toString(error));
     }
     let user = firebase.auth().currentUser;
-    user.updateProfile({
+    await user.updateProfile({
       displayName: pilotName,
       photoURL: 'P'
     });
-    let userID = user.uid
-    console.log("let userID = user.ID", userID)
-    console.log("user just updated ", user);
-    console.log("user id: ", user.uid);
+    await user.reload().then(updateUser());
+    const userID = user.uid;
     props.postProfiles(pilotLocation, email, userID, null);
   }
 
@@ -61,13 +47,13 @@ function PilotSignUpScreen(props) {
         <TextInput
           placeholder="Name"
           value={pilotName}
-          onChangeText={handlePilotName}
+          onChangeText={setPilotName}
           style={styles.input}
         />
         <TextInput
           placeholder="Location"
           value={pilotLocation}
-          onChangeText={handlePilotLocation}
+          onChangeText={setPilotLocation}
           style={styles.input}
         />
         <TextInput
@@ -83,7 +69,6 @@ function PilotSignUpScreen(props) {
           onChangeText={setPassword}
           style={styles.input}
         />
-
 
         <Button title="Sign up" onPress={signUp} />
       </TouchableOpacity>

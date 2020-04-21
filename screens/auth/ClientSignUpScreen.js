@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Button
+  Button,
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
@@ -13,27 +13,24 @@ import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 
 function ClientSignUpScreen(props) {
-
   const { updateUser } = useContext(AuthContext);
-  const [clientName, setClientName] = useState('');
-  const [clientLocation, setClientLocation] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [clientName, setClientName] = useState("");
+  const [clientLocation, setClientLocation] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   async function signUp(e) {
     e.preventDefault();
     props.navigation.push("Loading");
     try {
-      await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (error) {
       console.log(error.toString(error));
     }
     let user = firebase.auth().currentUser;
     await user.updateProfile({
       displayName: clientName,
-      photoURL: 'C'
+      photoURL: "C",
     });
     await user.reload().then(updateUser());
     const userID = user.uid;
@@ -42,35 +39,39 @@ function ClientSignUpScreen(props) {
 
   return (
     <View style={styles.wrapper}>
+      <Text style={styles.text}>Create your client account</Text>
       <TouchableOpacity style={styles.textWrapper}>
-        <Text style={styles.text}>Create your client account</Text>
         <TextInput
-          placeholder="Name"
+          placeholder=" Name"
+          placeholderTextColor="grey"
           value={clientName}
           onChangeText={setClientName}
           style={styles.input}
         />
         <TextInput
-          placeholder="Location"
+          placeholder=" Location"
+          placeholderTextColor="grey"
           value={clientLocation}
           onChangeText={setClientLocation}
           style={styles.input}
         />
         <TextInput
-          placeholder="email"
+          placeholder=" Email"
+          placeholderTextColor="grey"
           value={email}
           onChangeText={setEmail}
           style={styles.input}
         />
         <TextInput
-          placeholder="password"
+          placeholder=" Password"
+          placeholderTextColor="grey"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
           style={styles.input}
         />
 
-        <Button title="Sign up" onPress={signUp} />
+        <Button title="Sign up" onPress={signUp} style={{ fontWeight: 900 }} />
       </TouchableOpacity>
     </View>
   );
@@ -78,25 +79,39 @@ function ClientSignUpScreen(props) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: 50,
     alignItems: "center",
-    justifyContent: "center",
-    flex: .5
+    // justifyContent: "center",
+    // flex: .
+    backgroundColor: "lightgray",
+    height: "100%",
   },
   text: {
+    marginTop: "25%",
+    marginBottom: "10%",
     fontSize: 30,
-    color: "darkblue"
+    color: "darkblue",
+    fontWeight: "600",
   },
+  inputText: { textAlign: "center", color: "white", fontSize: 15 },
+
   textWrapper: {
-    marginBottom: 20
+    elevation: 8,
+    borderRadius: 15,
+    backgroundColor: "#092455",
+    marginBottom: 15,
+    padding: 80,
   },
   input: {
     height: 40,
     borderColor: "grey",
-    borderWidth: 1,
+    borderWidth: 2,
     margin: 10,
-    width: 200
-  }
+    width: 200,
+    alignItems: "center",
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+  },
 });
 
 export default connect(null, { postProfiles })(ClientSignUpScreen);

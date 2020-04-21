@@ -9,10 +9,16 @@ import ClientHeader from "./components/client/ClientHeader";
 import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
 import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
-import SignUpNavigation from './navigation/SignUpNavigation';
-import SignInScreen from './screens/auth/SignInScreen';
-import LoadingScreen from './screens/LoadingScreen';
-import * as firebase from 'firebase';
+import SignUpNavigation from "./navigation/SignUpNavigation";
+import SignInScreen from "./screens/auth/SignInScreen";
+import LoadingScreen from "./screens/LoadingScreen";
+import * as firebase from "firebase";
+import {
+  Ionicons,
+  Entypo,
+  FontAwesome5,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 // REDUX STUFF
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -36,25 +42,39 @@ export default () => {
   let [loggedIn, setLoggedIn] = useState(false);
   let [userType, setUserType] = useState(null);
 
-  auth.onAuthStateChanged(user => {
+  auth.onAuthStateChanged((user) => {
     if (user) {
       setLoggedIn(true);
       setUserType(user.photoURL);
-      console.log("this is the user ", user, "this is the user email", user.email, "And this is the user photoURL", user.photoURL);
+      console.log(
+        "this is the user ",
+        user,
+        "this is the user email",
+        user.email,
+        "And this is the user photoURL",
+        user.photoURL
+      );
     } else {
       setLoggedIn(false);
       setUserType(null);
     }
-  })
+  });
 
   const authContext = useMemo(() => {
     return {
       updateUser: () => {
         const user = firebase.auth().currentUser;
-        console.log("And here in update user, this is the user again: ", user, "this is the user email", user.email, "And, again, this is the user photoURL", user.photoURL);
+        console.log(
+          "And here in update user, this is the user again: ",
+          user,
+          "this is the user email",
+          user.email,
+          "And, again, this is the user photoURL",
+          user.photoURL
+        );
         setLoggedIn(true);
         setUserType(user.photoURL);
-      }
+      },
     };
   }, []);
 
@@ -63,7 +83,7 @@ export default () => {
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           {loggedIn ? (
-            (userType === "C") ? (
+            userType === "C" ? (
               <RootClientStack.Navigator>
                 <RootClientStack.Screen
                   name="Client"
@@ -73,15 +93,12 @@ export default () => {
                     title: "Home",
                     headerTitle: () => <ClientHeader />,
                     headerStyle: {
-                      backgroundColor: "#092455"
-                      // headerBackTitleStyle: 20,
-                      // headerTitleContainerStyle: { marginVertical: 50 }
-                      // marginBottom: 50
-                    }
+                      backgroundColor: "#092455",
+                    },
                   }}
                 />
               </RootClientStack.Navigator>
-            ) : (userType === "P") ? (
+            ) : userType === "P" ? (
               <RootPilotStack.Navigator>
                 <RootPilotStack.Screen
                   name="Pilot"
@@ -102,25 +119,28 @@ export default () => {
                   component={SignInScreen}
                   options={{
                     title: "",
+
                     headerStyle: {
                       backgroundColor: "#092455",
                       borderBottomWidth: 10,
                       borderBottomColor: "grey",
                       height: 110,
-                    }
+                    },
                   }}
                 />
                 <AuthStack.Screen
                   name="SignUp"
                   component={SignUpNavigation}
-                  options={{ title: "",
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    borderBottomWidth: 10,
-                    borderBottomColor: "grey",
-                    height: 110,
-                  }
-                }}
+                  options={{
+                    title: "",
+
+                    headerStyle: {
+                      backgroundColor: "#092455",
+                      borderBottomWidth: 10,
+                      borderBottomColor: "grey",
+                      height: 110,
+                    },
+                  }}
                 />
                 <AuthStack.Screen
                   name="Loading"
@@ -132,7 +152,7 @@ export default () => {
                       borderBottomWidth: 10,
                       borderBottomColor: "grey",
                       height: 110,
-                    }
+                    },
                   }}
                 />
               </AuthStack.Navigator>
@@ -142,16 +162,49 @@ export default () => {
               <AuthStack.Screen
                 name="SignIn"
                 component={SignInScreen}
-                options={{ title: "Sign In" }}
+                options={{
+                  title: "",
+                  headerStyle: {
+                    backgroundColor: "#092455",
+                    borderBottomWidth: 10,
+                    borderBottomColor: "grey",
+                    height: 110,
+                  },
+                }}
               />
               <AuthStack.Screen
                 name="SignUp"
                 component={SignUpNavigation}
-                options={{ title: "Sign Up" }}
+                options={({ navigation }) => ({
+                  title: "",
+                  headerLeft: () => (
+                    <Button
+                      onPress={() => navigation.goBack()}
+                      title="Back"
+                      color="#fff"
+                    />
+                  ),
+                  headerStyle: {
+                    backgroundColor: "#092455",
+                    borderBottomWidth: 10,
+                    borderBottomColor: "grey",
+                    height: 110,
+                  },
+                })}
               />
               <AuthStack.Screen
                 name="Loading"
                 component={LoadingScreen}
+                options={({ navigation }) => ({
+                  title: "",
+
+                  headerStyle: {
+                    backgroundColor: "#092455",
+                    borderBottomWidth: 10,
+                    borderBottomColor: "grey",
+                    height: 110,
+                  },
+                })}
               />
             </AuthStack.Navigator>
           )}
@@ -168,8 +221,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
 
 // Header Logo

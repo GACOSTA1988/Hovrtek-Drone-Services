@@ -33,7 +33,7 @@ function SignInScreen( {navigation} ) {
     <View>
       <HomeImage />
       <View style={styles.SignInBody}>
-        <TouchableOpacity style={styles.textWrapper}>
+        <TouchableOpacity>
           <Text style={styles.text}>Sign In</Text>
           <TextInput
             placeholder="email"
@@ -50,14 +50,14 @@ function SignInScreen( {navigation} ) {
           />
           <Button title="Sign in" onPress={signIn} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.push('SignUp')} >
-          <Text style={styles.buttonText}>Or Create an Account</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@email.com", "password")} >
-          <Text style={styles.buttonText}>Client shortcut (imaclient@email.com)</Text>
+          <Text style={styles.buttonText}>Client shortcut</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@email.com", "password")} >
-          <Text style={styles.buttonText}>Pilot shortcut (imapilot@email.com)</Text>
+          <Text style={styles.buttonText}>Pilot shortcut</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.push('SignUp')} >
+          <Text style={styles.buttonText}>Or Create an Account</Text>
         </TouchableOpacity>
       </View>
     </View>

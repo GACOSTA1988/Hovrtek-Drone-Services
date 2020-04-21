@@ -12,14 +12,14 @@ const Footer = () => {
           color="white"
           style={{ marginRight: 10 }}
         ></Icon>
-        <Text>**</Text>
+        <Text style={styles.space}>***</Text>
         <Icon
           name="instagram"
           size={30}
           color="white"
           style={styles.icon}
         ></Icon>
-        <Text>**</Text>
+        <Text style={styles.space}>***</Text>
         <Icon name="linkedin" size={35} color="white"></Icon>
       </Text>
     </View>
@@ -44,6 +44,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     margin: 60
+  },
+  space: {
+    color: "#092455"
   }
 });
 

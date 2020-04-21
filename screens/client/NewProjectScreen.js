@@ -8,13 +8,13 @@ import {
   TextInput,
   Button,
   Alert,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { postProjects } from "../../actions/index";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
-  RadioButtonLabel
+  RadioButtonLabel,
 } from "react-native-simple-radio-button";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
@@ -45,12 +45,12 @@ function NewProjectScreen(props, { postProjects }) {
   }
 
   function handleLightChange(text) {
-    value => {
+    (value) => {
       setLight({ value: value });
     };
   }
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
     console.log("New Project Props", props);
     props.postProjects(location, date, recording, light);
@@ -63,7 +63,7 @@ function NewProjectScreen(props, { postProjects }) {
 
   let radio_props = [
     { label: "Yes", value: 0 },
-    { label: "No", value: 1 }
+    { label: "No", value: 1 },
   ];
 
   return (
@@ -127,54 +127,54 @@ function NewProjectScreen(props, { postProjects }) {
 
 const styles = StyleSheet.create({
   newProjectListWrapper: {
-    alignItems: "center"
+    alignItems: "center",
   },
   newProjectListForm: {
     backgroundColor: "darkgray",
     width: 380,
     borderWidth: 1,
-    padding: 6
+    padding: 6,
   },
   newProjectText: {
     fontSize: 30,
     color: "darkblue",
     marginBottom: 20,
     textAlign: "center",
-    marginTop: 10
+    marginTop: 10,
   },
   newProjectListTextWrapper: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   input: {
     borderWidth: 1,
     borderRadius: 3,
     height: 30,
 
-    marginBottom: 50
+    marginBottom: 50,
   },
   imageButton: {
     height: 30,
     width: 20,
     marginBottom: 1000,
-    backgroundColor: "red"
+    backgroundColor: "red",
   },
   labelText: {
     marginBottom: 50,
-    textAlign: "center"
+    textAlign: "center",
   },
   uploaderText: {
-    marginTop: 100
+    marginTop: 100,
   },
   dummy: {
     marginTop: 100,
-    marginBottom: 200
+    marginBottom: 200,
   },
   submitButton: {
     marginTop: 10,
     textAlign: "center",
     fontSize: 30,
-    color: "#092455"
-  }
+    color: "#092455",
+  },
 });
 
 export default connect(null, { postProjects })(NewProjectScreen);

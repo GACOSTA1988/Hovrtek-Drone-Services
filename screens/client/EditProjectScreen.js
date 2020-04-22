@@ -1,76 +1,61 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { editProject } from "../../actions/index";
 import { connect } from "react-redux";
 
-class EditProjectScreen extends Component {
-  state = {
-    location: this.props.route.params.location,
-    date: this.props.route.params.date,
-    recording: this.props.route.params.recording,
-    key: this.props.route.params.key
-  };
+function EditProjectScreen(props, { editProject }) {
+  const projectDetails = props.route.params;
+  const navigation = useNavigation();
 
-  submit = () => {
-    this.props.editProject(
-      this.state.location,
-      this.state.date,
-      this.state.recording,
-      this.state.key
-    );
+  const [location, setLocation] = useState(projectDetails.location);
+  const [date, setDate] = useState(projectDetails.date);
+  const [recording, setRecording] = useState(projectDetails.recording);
 
-    this.setState({
-      location: "",
-      date: "",
-      recording: "",
-      key: ""
-    });
-
-    this.props.navigation.navigate("ProjectListScreen");
-  };
-
-  render() {
-    console.log("00000000000000000", this.props.route.params.location);
-    return (
-      <View style={styles.container}>
-        <Text>Post</Text>
-        <TextInput
-          style={{
-            marginTop: 20,
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1
-          }}
-          placeholder="location"
-          onChangeText={location => this.setState({ location })}
-          value={this.state.location}
-        />
-        <TextInput
-          style={{
-            marginTop: 20,
-            height: 90,
-            borderColor: "gray",
-            borderWidth: 1
-          }}
-          placeholder="date"
-          onChangeText={date => this.setState({ date })}
-          value={this.state.date}
-        />
-        <TextInput
-          style={{
-            marginTop: 20,
-            height: 90,
-            borderColor: "gray",
-            borderWidth: 1
-          }}
-          placeholder="recording"
-          onChangeText={recording => this.setState({ recording })}
-          value={this.state.recording}
-        />
-        <Button title="Submit" onPress={this.submit} />
-      </View>
-    );
+  const submit = (e) => {
+    props.editProject(location, date, recording, projectDetails.key);
+    navigation.navigate("ProjectListScreen");
   }
+
+  return (
+    <View style={styles.container}>
+      <Text>Post</Text>
+      <TextInput
+        style={{
+          marginTop: 20,
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 1
+        }}
+        placeholder="location"
+        onChangeText={setLocation}
+        value={location}
+      />
+      <TextInput
+        style={{
+          marginTop: 20,
+          height: 90,
+          borderColor: "gray",
+          borderWidth: 1
+        }}
+        placeholder="date"
+        onChangeText={setDate}
+        value={date}
+      />
+      <TextInput
+        style={{
+          marginTop: 20,
+          height: 90,
+          borderColor: "gray",
+          borderWidth: 1
+        }}
+        placeholder="recording"
+        onChangeText={setRecording}
+        value={recording}
+      />
+      <Button title="Submit" onPress={submit} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

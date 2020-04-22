@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { connect } from "react-redux";
 
-function ProjectDetailsScreen(props) {
-  const projectDetails = props.route.params;
-
-  return (
+function JobDetailsScreen(props) {
+  const jobDetails = props.route.params;
+  return(
     <View style={styles.container}>
       <Text style={styles.ProjectText}>Project Details</Text>
       <Text style={styles.DetailsText}>
-        Project location: {projectDetails.location}
+        Project location: {jobDetails.location}
       </Text>
-      <Text style={styles.DetailsText}>Project Date: {projectDetails.date}</Text>
+      <Text style={styles.DetailsText}>Project Date: {jobDetails.date}</Text>
       <Text style={styles.DetailsText}>
-        Project Recording: {projectDetails.recording}
+        Project Recording: {jobDetails.recording}
       </Text>
     </View>
   );
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProjectDetailsScreen;
+export default JobDetailsScreen;

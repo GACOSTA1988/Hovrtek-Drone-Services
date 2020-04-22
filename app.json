@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test-auth",
-    "slug": "test-auth",
+    "name": "hovrtek",
+    "slug": "hovrtek",
     "sdkVersion":"36.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",

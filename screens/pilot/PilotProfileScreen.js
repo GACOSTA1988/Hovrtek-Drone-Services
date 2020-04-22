@@ -1,48 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, Text, StyleSheet, Button, ScrollView, TextInput } from "react-native";
-import { AuthContext } from "../../context";
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProfiles, postProfiles  } from "../../actions/index";
+import { getProfiles } from "../../actions/index";
 import * as firebase from 'firebase';
 import _ from "lodash";
 
-
-
 function PilotProfileScreen(props, { getProfiles }) {
 
- 
-  const { signOut } = React.useContext(AuthContext);
   const navigation = useNavigation();
   const [drone, setDrone] = useState('');
 
   useEffect(() => {
-    props.getProfiles()
-
+    props.getProfiles();
   }, []);
-
-
-
-
-  console.log()
-console.log("PILOT PROFILE PROPS", props)
-  console.log("LIST OF PROFILES", props.listOfProfiles)
-
-
-  function handleDroneChange(text) {
-    setDrone(text);
-  }
 
   const editProfile= e => {
     e.preventDefault();
-    // console.log("New Project Props", props);
-  
-
     navigation.navigate("ProfileListScreen");
     setDrone("");
   };
-
 
   return (
     <View style={styles.container}>
@@ -55,21 +33,19 @@ console.log("PILOT PROFILE PROPS", props)
         <Text style={styles.h1}>Location dynamically rendered here from login</Text>
         <Text style={styles.h1}>Please Upload a picture</Text>
         <ProfileImageUploader />
-        
+
         <Text style={styles.h1}>What Type of Drone do you have? </Text>
         <TextInput
           multiline={true}
           numberOfLines={4}
           style={styles.input}
           placeholder="Drone"
-          onChangeText={handleDroneChange}
+          onChangeText={setDrone}
           value={drone}
         />
 
 
         <TouchableOpacity onPress={editProfile}><Text style={styles.submitButton}>Edit Profile</Text></TouchableOpacity>
-
-        <Button title="Sign Out" onPress={() => signOut()} />
 
         <Text style={styles.dummyText}>Dummy text until I investigate ScrollView more thoroughly</Text>
       </ScrollView>
@@ -115,6 +91,7 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
+  console.log("this is state", state);
   const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
     return {
       ...val,
@@ -129,4 +106,3 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { getProfiles })(
   PilotProfileScreen
 );
-

@@ -26,7 +26,7 @@ class ProjectListScreen extends Component {
   }
 
   render() {
-console.log("GET PROJECTS", this.props.getProjects)
+    console.log("GET PROJECTS", this.props.getProjects)
     console.log("THIS PROPS", this.props)
     console.log("PROJECT LIST", this.props.listOfProjects)
 
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
+  console.log("this is state in projectlistscreen", state);
   const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
     return {
       ...val,

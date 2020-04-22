@@ -24,34 +24,18 @@ import * as firebase from "firebase";
 
 function NewProjectScreen(props, { postProjects }) {
   const navigation = useNavigation();
-
+  let clientID = null;
+  if (firebase.auth().currentUser) {
+    clientID = firebase.auth().currentUser.uid;
+  }
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [recording, setRecording] = useState("");
   const [light, setLight] = useState(1);
 
-  // function handleLocationChange(text) {
-  //   setLocation(text);
-  // }
-  //
-  // function handleDateChange(text) {
-  //   setDate(text);
-  // }
-  //
-  // function handleRecordingChange(text) {
-  //   setRecording(text);
-  // }
-  //
-  // function handleLightChange(text) {
-  //   (value) => {
-  //     setLight({ value: value });
-  //   };
-  // }
-
   const submit = (e) => {
     e.preventDefault();
-    const available = true;
-    props.postProjects(location, date, recording, light, available);
+    props.postProjects(clientID, location, date, recording, light, null);
     navigation.navigate("ProjectListScreen");
     setDate(""), setLight(""), setLocation(""), setRecording("");
   };

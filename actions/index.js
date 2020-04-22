@@ -14,12 +14,12 @@ export function getProjects() {
   };
 }
 
-export function postProjects(location, date, recording, light, available) {
+export function postProjects(clientID, location, date, recording, light, pilotID) {
   return dispatch => {
     firebase
       .database()
       .ref("/projects")
-      .push({ location, date, recording, light, available });
+      .push({ clientID, location, date, recording, light, pilotID });
   };
 }
 
@@ -65,12 +65,12 @@ export function editProject(location, date, recording, key) {
   };
 }
 
-export function acceptJob(available, key) {
+export function acceptJob(pilotID, key) {
   return dispatch => {
     firebase
       .database()
       .ref(`/projects`)
       .child(key)
-      .update({ available });
+      .update({ pilotID });
   };
 }

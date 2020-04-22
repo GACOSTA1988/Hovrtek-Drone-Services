@@ -14,7 +14,7 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
     useEffect(() => {
         getPermissionAsync()
     }, []);
-   
+
 
     async function getPermissionAsync() {
         await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -28,7 +28,6 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
         if (!result.cancelled) {
             uploadImage(result.uri, "test-image")
                 .then(() => {
-    
                     Alert.alert("Successfully Uploaded to the Hovrtek Database!");
                 })
                 .catch((error) => {
@@ -42,10 +41,6 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
         console.log('URI', uri)
         console.log('IMAGENAME', imageName)
 
-
-
-
-
         const response = await fetch(uri);
         const blob = await response.blob();
         console.log("---------------------", blob)
@@ -53,6 +48,7 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
         var uploadTask = await firebase.storage()
         .ref()
         .child("images/" + imageName);
+
         console.log("UPLOAD TASK", uploadTask)
         uploadTask.snapshot
         console.log("UPLOAD TASK SNAPSHOT ", uploadTask.snapshot)
@@ -68,9 +64,6 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
 
 
 
-
-
-  
     return (
         <View >
             <Button title="Upload Image" onPress={pushIt} />
@@ -82,4 +75,4 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
 
 
 
-export default LicenseUploader
+export default LicenseUploader;

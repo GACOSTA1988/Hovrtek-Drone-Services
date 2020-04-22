@@ -14,6 +14,9 @@ import * as firebase from "firebase";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
+import LicenseUploader from "../../components/auth/LicenseUploader";
+
+
 
 function PilotSignUpScreen(props) {
 
@@ -99,6 +102,9 @@ function PilotSignUpScreen(props) {
             <Picker.Item label="Yes" value="yes" />
           </Picker>
 
+          <Text style={styles.imageUploaderText}>Please upload your FAA license</Text>
+          <LicenseUploader/>
+     
 
 
           <TextInput
@@ -171,6 +177,9 @@ const styles = StyleSheet.create({
   },
   questionText: {
     marginTop: 50
+  },
+  imageUploaderText:{
+    marginTop: 250
   }
 });
 

@@ -1,116 +1,174 @@
-import React, { useState, useContext } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Button
-} from "react-native";
-import { AuthContext } from "../../context";
-import * as firebase from "firebase";
-import { postProfiles } from "../../actions/index";
-import { connect } from "react-redux";
-
-function PilotSignUpScreen(props) {
+import * as React from 'react'; 
+import { Button, Image, View, Alert } from 'react-native'; 
+import * as ImagePicker from 'expo-image-picker'; 
+import * as Permissions from 'expo-permissions'; 
+import * as firebase from 'firebase';
 
 
-  const { signInPilot } = useContext(AuthContext);
-  const [pilotName, setPilotName] = useState('');
-  const [pilotLocation, setPilotLocation] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default class LicenserUploader extends React.Component {
+  state = { thumbnail: null, };
 
-  function handlePilotName(text) {
-    setPilotName(text);
-  }
+  render() 
+  { let { thumbnail } = this.state; return (<View > <Button title="Upload Image" onPress={this.pushIt} /> 
+  
+  
+  {thumbnail && <Image source={{ uri: thumbnail }} style={{ width: 200, height: 200 }} />} 
+  
+  </View>); }
 
-  function handlePilotLocation(text) {
-    setPilotLocation(text);
-  }
-
-  async function signUp(e) {
-    e.preventDefault();
-    props.postProfiles(pilotLocation, email, null);
-    try {
-      await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password).then((user) => {
-          console.log("initial user: ", user);
-        })
-      signInPilot();
-    } catch (error) {
-      console.log(error.toString(error));
+  componentDidMount() 
+  { this.getPermissionAsync(); }
+  getPermissionAsync = async () => { // alert('fired getPermission') await Permissions.askAsync(Permissions.CAMERA_ROLL); await Permissions.askAsync(Permissions.CAMERA); }
+    pushIt = async () => { // let result = await ImagePicker.launchCameraAsync(); let result = await ImagePicker.launchImageLibraryAsync();
+      if (!result.cancelled) { this.uploadImage(result.uri, "test-image").then(() => { Alert.alert("Successfully Uploaded to the Hovrtek Database!"); }).catch((error) => { Alert.alert(error); }); this.setState({ thumbnail: result.uri }); }
     }
-    let user = firebase.auth().currentUser;
-    user.updateProfile({
-      displayName: pilotName,
-      photoURL: 'P'
-    });
-    console.log("user just updated ", user);
-    console.log("user id: ", user.uid);
-    // todo/ jay already did? push location and uid to profile
+    uploadImage = async (uri, imageName) => {
+      const response = await fetch(uri); const blob = await response.blob(); console.log("---------------------", blob)
+      var ref = firebase.storage().ref().child("images/" + imageName); return ref.put(blob);
+    }
   }
 
+
+
+  ++++++++++++++++++++++++++++++++++++++++++++++
+
+  // PilotProfileScreen FUNCTIONAL COMPONENT
+
+
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity, View, Text, StyleSheet, Button, ScrollView, TextInput, FlatList } from "react-native";
+import { AuthContext } from "../../context";
+import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
+import { connect } from "react-redux";
+import { useNavigation } from '@react-navigation/native';
+import { getProfiles, postProfiles } from "../../actions/index";
+import * as firebase from 'firebase';
+import _ from "lodash";
+
+const PilotProfileScreen = (props, { postProfiles, getProfiles }) => {
+
+  useEffect(() => {
+    props.getProfiles()
+  }, []);
+
+
+  // GRAB CURRENT USER PROPS BY MATCHING UID FROM FIREBASE WITH UID FROM USER OBJECT
+
+  let user = firebase.auth().currentUser;
+  console.log("USER", user)
+  let userID = user.uid
+  console.log("USERID", userID)
+  console.log("LIST OF PROFILES", props.listOfProfiles)
+  let currentUserProps = props.listOfProfiles.find(x => x.userID == userID)
+  console.log('CURRENT USER PROPS', currentUserProps)
+
+  // async function getLocation() {
+  //   await let currentUserProps = props.listOfProfiles.find(x => x.userID == userID)
+  //   return currentUserProps
+  // }
+
+  // STATE
+  const { signOut } = React.useContext(AuthContext);
+  const navigation = useNavigation();
+  const [drone, setDrone] = useState('');
+  const [pilotLocation, setPilotLocation] = useState(null);
+
+  // HANDLE INPUT TEXT
+  function handleDroneChange(text) {
+    setDrone(text);
+  }
+
+  // SUBMITTING NEW PROFILE DATA
+  const submit = e => {
+    e.preventDefault();
+    props.postProfiles(null, null, null, drone);
+    navigation.navigate("ProfileListScreen");
+    setDrone("");
+  };
 
   return (
-    <View style={styles.wrapper}>
-      <TouchableOpacity style={styles.textWrapper}>
-        <Text style={styles.text}>Create your pilot account</Text>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <Text style={styles.welcomeText}>Welcome to your Profile Page</Text>
+        <Text style={styles.h2}>Please complete your profile to recieve job postings</Text>
+
+
+
+        {currentUserProps ? (<Text>{currentUserProps.pilotLocation}</Text>) : <Text>Location:</Text>}
+
+        <Text style={styles.h1}>Please Upload a picture</Text>
+        <ProfileImageUploader />
+
+        <Text style={styles.h1}>What Type of Drone do you have? </Text>
         <TextInput
-          placeholder="Name"
-          value={pilotName}
-          onChangeText={handlePilotName}
+          multiline={true}
+          numberOfLines={4}
           style={styles.input}
-        />
-        <TextInput
-          placeholder="Location"
-          value={pilotLocation}
-          onChangeText={handlePilotLocation}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="email"
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
-          style={styles.input}
+          placeholder="Drone"
+          onChangeText={handleDroneChange}
+          value={drone}
         />
 
 
-        <Button title="Sign up" onPress={signUp} />
-      </TouchableOpacity>
+        <TouchableOpacity onPress={submit}><Text style={styles.submitButton}>Submit Form</Text></TouchableOpacity>
+
+        <Button title="Sign Out" onPress={() => signOut()} />
+
+        <Text style={styles.dummyText}>Dummy text until I investigate ScrollView more thoroughly</Text>
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  wrapper: {
-    marginTop: 50,
+  container: {
+    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    flex: .5
+    marginTop: 25
   },
-  text: {
-    fontSize: 30,
-    color: "darkblue"
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 10,
+    borderRadius: 5
   },
-  textWrapper: {
-    marginBottom: 20
+  welcomeText: {
+    fontSize: 25
+  },
+  h1: {
+    fontSize: 15,
+    marginBottom: 20,
+    marginTop: 50
+  },
+  h2: {
+    fontSize: 15,
+    marginBottom: 20,
+    marginTop: 5
   },
   input: {
-    height: 40,
-    borderColor: "grey",
     borderWidth: 1,
-    margin: 10,
-    width: 200
+    borderRadius: 3,
+    height: 30,
+    marginBottom: 80
+  },
+  dummyText: {
+    marginTop: 300
   }
 });
 
-export default connect(null, { postProfiles })(PilotSignUpScreen);
+
+
+
+function mapStateToProps(state) {
+  const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  return {
+    listOfProfiles
+  };
+}
+
+export default connect(mapStateToProps, { getProfiles, postProfiles })(PilotProfileScreen);

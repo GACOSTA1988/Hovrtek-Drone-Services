@@ -26,6 +26,10 @@ class ProjectListScreen extends Component {
   }
 
   render() {
+console.log("GET PROJECTS", this.props.getProjects)
+    console.log("THIS PROPS", this.props)
+    console.log("PROJECT LIST", this.props.listOfProjects)
+
     return (
       <View style={styles.projectListWrapper}>
         <ScrollView>

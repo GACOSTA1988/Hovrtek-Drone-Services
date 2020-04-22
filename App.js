@@ -5,10 +5,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
-import ClientHeader from "./components/client/ClientHeader";
-import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
-import PilotHeader from "./components/pilot/PilotHeader";
-import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
+import ClientNavigation from "./navigation/ClientNavigation";
+import MainHeader from "./components/MainHeader";
+import PilotNavigation from "./navigation/PilotNavigation";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
 import LoadingScreen from "./screens/LoadingScreen";
@@ -87,11 +86,11 @@ export default () => {
               <RootClientStack.Navigator>
                 <RootClientStack.Screen
                   name="Client"
-                  component={ClientHomeNavigation}
+                  component={ClientNavigation}
                   headerMode="screen"
                   options={{
                     title: "Home",
-                    headerTitle: () => <ClientHeader />,
+                    headerTitle: () => <MainHeader />,
                     headerStyle: {
                       backgroundColor: "#092455",
                     },
@@ -102,10 +101,10 @@ export default () => {
               <RootPilotStack.Navigator>
                 <RootPilotStack.Screen
                   name="Pilot"
-                  component={PilotHomeNavigation}
+                  component={PilotNavigation}
                   options={{
                     title: "Home",
-                    headerTitle: () => <PilotHeader />,
+                    headerTitle: () => <MainHeader />,
                     headerStyle: {
                       backgroundColor: "#092455",
                     },
@@ -225,7 +224,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// Header Logo
+// MainHeader Logo
 const LogoTitle = () => {
   return (
     <Image

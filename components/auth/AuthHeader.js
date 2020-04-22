@@ -5,14 +5,14 @@ import hovrtekLogo from '../../assets/hovrtek_logo.png';
 const AuthHeader = ({ navigation }) => {
 
   return (
-    <View style={styles.clientHeaderWrapper}>
+    <View style={styles.HeaderWrapper}>
       <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  clientHeaderWrapper: {
+  HeaderWrapper: {
   position: 'absolute',
   left: 0,
   right: 0,

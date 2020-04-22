@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import ClientHeader from '../../components/client/ClientHeader'
 
 const ServicesScreen = () => {
   return (

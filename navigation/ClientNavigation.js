@@ -1,10 +1,7 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import AboutScreen from "../screens/client/AboutScreen";
+import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/client/SupportScreen";
-import ClientHeader from "../components/client/ClientHeader";
 import ProjectsNewProjectTabNavigation from "./ProjectsNewProjectTabNavigation";
 import AccountScreen from '../screens/client/AccountScreen';
 import LocationScreen from '../screens/client/LocationScreen';

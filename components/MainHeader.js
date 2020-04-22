@@ -7,19 +7,17 @@ import {
   Image,
   ShadowPropTypesIOS,
   Platform,
-  Dimensions,
+  Dimensions
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import hovrtekLogo from "../../assets/hovrtek_logo.png";
-
+import hovrtekLogo from "../assets/hovrtek_logo.png";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 
-const PilotHeader = () => {
+const MainHeader = () => {
   const navigation = useNavigation();
-  console.log(navigation);
 
   return (
-    <View style={styles.pilotHeaderWrapper}>
+    <View style={styles.MainHeaderWrapper}>
       <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
       <Ionicons
         style={styles.hamburger}
@@ -35,9 +33,10 @@ const PilotHeader = () => {
   );
 };
 
-const width = Dimensions.get("window").width;
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
-  pilotHeaderWrapper: {
+  MainHeaderWrapper: {
     ...Platform.select({
       ios: {
         marginTop: 18,
@@ -99,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PilotHeader;
+export default MainHeader;

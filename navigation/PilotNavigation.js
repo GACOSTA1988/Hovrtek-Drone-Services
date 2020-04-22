@@ -1,8 +1,7 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import AboutScreen from "../screens/pilot/AboutScreen";
+import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
-import PilotHeader from "../components/pilot/PilotHeader";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
 import CreateProfileScreen from '../screens/pilot/CreateProfileScreen';
 import PilotProfileScreen from '../screens/pilot/PilotProfileScreen';

@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
-import ClientHeader from '../../components/client/ClientHeader';
-import sunsetDrone from '../../assets/sunsetDrone.png';
+import { View, Text, StyleSheet, Image } from "react-native";
+import sunsetDrone from '../assets/sunsetDrone.png';
 
 const AboutScreen = () => {
   return (
@@ -12,8 +11,6 @@ const AboutScreen = () => {
     </View>
   )
 };
-
-const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {

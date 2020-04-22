@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
-  console.log("this is state", state);
   const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
     return {
       ...val,

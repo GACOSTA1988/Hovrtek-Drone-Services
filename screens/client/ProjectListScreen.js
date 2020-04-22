@@ -73,13 +73,13 @@ function ProjectListScreen(props, { getProjects }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        { item.available ? (
+                        { item.pilotID ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                          Available
+                          No Longer Available
                           </Text>
                         ) : (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                          No Longer Available
+                          Available
                           </Text>
                         )}
                       </View>
@@ -147,7 +147,8 @@ const styles = StyleSheet.create({
   },
   projectListWrapper: {
     alignItems: "center",
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 90
   }
 });
 

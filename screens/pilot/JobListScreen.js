@@ -69,25 +69,25 @@ function JobListScreen(props, { getProjects }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        { item.available ? (
-                          <TouchableHighlight
-                            onPress={() =>
-                              props.navigation.navigate(
-                                "AcceptJobScreen",
-                                {
-                                  ...item
-                                }
-                              )
-                            }
-                          >
-                            <Text style={{ color: "white", fontWeight: "800" }}>
-                              Accept Job
-                            </Text>
-                          </TouchableHighlight>
-                        ) : (
+                        { item.pilotID ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
                           No Longer Available
                           </Text>
+                        ) : (
+                          <TouchableHighlight
+                          onPress={() =>
+                            props.navigation.navigate(
+                              "AcceptJobScreen",
+                              {
+                                ...item
+                              }
+                            )
+                          }
+                          >
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          Accept Job
+                          </Text>
+                          </TouchableHighlight>
                         )}
                       </View>
                     </TouchableHighlight>

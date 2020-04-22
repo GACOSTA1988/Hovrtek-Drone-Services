@@ -2,13 +2,22 @@ import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { acceptJob } from "../../actions/index";
 import { connect } from "react-redux";
+import { useNavigation } from '@react-navigation/native';
+import * as firebase from 'firebase';
 
 function AcceptJobScreen(props, { acceptJob }) {
+  const navigation = useNavigation();
   const jobDetails = props.route.params;
+  let pilotID = null;
+  if (firebase.auth().currentUser) {
+    pilotID = firebase.auth().currentUser.uid;
+  }
+  console.log("pilotID in acceptJob", pilotID);
 
   const accept = (e) => {
     e.preventDefault();
-    props.acceptJob(false, jobDetails.key);
+    props.acceptJob(pilotID, jobDetails.key);
+    navigation.navigate("JobListScreen");
   }
 
   return (

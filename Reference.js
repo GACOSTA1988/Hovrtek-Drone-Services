@@ -1,22 +1,22 @@
-import * as React from 'react'; 
-import { Button, Image, View, Alert } from 'react-native'; 
-import * as ImagePicker from 'expo-image-picker'; 
-import * as Permissions from 'expo-permissions'; 
+import * as React from 'react';
+import { Button, Image, View, Alert } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 import * as firebase from 'firebase';
 
 
 export default class LicenserUploader extends React.Component {
   state = { thumbnail: null, };
 
-  render() 
-  { let { thumbnail } = this.state; return (<View > <Button title="Upload Image" onPress={this.pushIt} /> 
-  
-  
-  {thumbnail && <Image source={{ uri: thumbnail }} style={{ width: 200, height: 200 }} />} 
-  
+  render()
+  { let { thumbnail } = this.state; return (<View > <Button title="Upload Image" onPress={this.pushIt} />
+
+
+  {thumbnail && <Image source={{ uri: thumbnail }} style={{ width: 200, height: 200 }} />}
+
   </View>); }
 
-  componentDidMount() 
+  componentDidMount()
   { this.getPermissionAsync(); }
   getPermissionAsync = async () => { // alert('fired getPermission') await Permissions.askAsync(Permissions.CAMERA_ROLL); await Permissions.askAsync(Permissions.CAMERA); }
     pushIt = async () => { // let result = await ImagePicker.launchCameraAsync(); let result = await ImagePicker.launchImageLibraryAsync();

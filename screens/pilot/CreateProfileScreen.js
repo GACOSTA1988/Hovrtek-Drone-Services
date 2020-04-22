@@ -20,7 +20,6 @@ function CreateProfileScreen(props, { postProfiles }) {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log("createprofilescreen line 38. this is props: ", props);
     props.postProfiles(name, overview, equipment, availability);
   }
 

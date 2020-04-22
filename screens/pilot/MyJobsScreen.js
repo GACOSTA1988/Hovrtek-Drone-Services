@@ -1,44 +1,139 @@
-import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ScrollView,
+  TextInput,
+  FlatList,
+  TouchableHighlight
+  } from "react-native";
+import {
+  Ionicons,
+  FontAwesome5,
+  MaterialCommunityIcons
+} from "@expo/vector-icons";
+import { connect } from "react-redux";
+import { useNavigation } from '@react-navigation/native';
+import { getProjects } from "../../actions/index";
+// import * as firebase from 'firebase';
+import _ from "lodash";
 
-const MyJobsScreen = () => {
+function MyJobsScreen(props, { getProjects }) {
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    props.getProjects();
+  }, []);
+
+  const listOfMyProjects = props.listOfProjects;
+
   return (
-    <View style={styles.myJobsListWrapper}>
-      <TouchableOpacity style={styles.myJobsListTextWrapper}>
-        <Text style={styles.myJobsText}>Your open jobs!</Text>
-      </TouchableOpacity>
-
-      <View style={styles.myJobsListForm}>
-        <TouchableOpacity>
-          <Text> These are my jobs </Text>
-          <Text> These are my jobs </Text>
-          <Text> These are my jobs </Text>
-          <Text> These are my jobs </Text>
-          <Text> These are my jobs </Text>
-          <Text> These are my jobs </Text>
-        </TouchableOpacity>
-      </View>
+    <View style={styles.projectListWrapper}>
+      <ScrollView>
+        <View style={styles.projectCard}>
+          <TouchableOpacity>
+            <FlatList
+              style={{ width: "100%" }}
+              data={listOfMyProjects}
+              // showsVerticalScrollIndicator={true}
+              keyExtractor={item => item.key}
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={{
+                      elevation: 8,
+                      borderRadius: 15,
+                      backgroundColor: "#092455",
+                      marginBottom: 15,
+                      padding: 20
+                    }}
+                  >
+                    <TouchableHighlight
+                      onPress={() =>
+                        props.navigation.navigate(
+                          "JobDetailsScreen",
+                          {
+                            ...item
+                          }
+                        )
+                      }
+                    >
+                      <View>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Location: {item.location}{" "}
+                        </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Date: {item.date}{" "}
+                        </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Recording: {item.recording}{" "}
+                        </Text>
+                        { item.pilotID ? (
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          No Longer Available
+                          </Text>
+                        ) : (
+                          <TouchableHighlight
+                          onPress={() =>
+                            props.navigation.navigate(
+                              "AcceptJobScreen",
+                              {
+                                ...item
+                              }
+                            )
+                          }
+                          >
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          Accept Job
+                          </Text>
+                          </TouchableHighlight>
+                        )}
+                      </View>
+                    </TouchableHighlight>
+                  </View>
+                );
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  myJobsListWrapper: {
-    alignItems: "center"
+  projectCard: {
+    width: 380
   },
-  myJobsListForm: {
-    backgroundColor: "darkgray",
-    width: 380,
-    borderWidth: 1,
-    padding: 6
-  },
-  myJobsText: {
+  clientText: {
     fontSize: 30,
-    color: "darkblue"
+    color: "darkblue",
+    textAlign: "center"
   },
-  myJobsListTextWrapper: {
+  ClientProjectListTextWrapper: {
     marginBottom: 20
+  },
+  projectListWrapper: {
+    alignItems: "center",
+    marginTop: 10
   }
 });
 
-export default MyJobsScreen;
+function mapStateToProps(state) {
+  const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  return {
+    listOfProjects
+  };
+}
+
+export default connect(mapStateToProps, { getProjects })(
+  MyJobsScreen
+);

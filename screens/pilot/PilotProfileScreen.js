@@ -22,11 +22,17 @@ function PilotProfileScreen(props, { getProfiles }) {
 
   }, []);
 
+  let user = firebase.auth().currentUser;
+  console.log("USER", user)
+  let userID = user.uid
+  console.log("USERID", userID)
+  console.log("LIST OF PROFILES", props.listOfProfiles)
+  const list = props.listOfProfiles
+  // list.forEach(e=> console.log(e))
+    let currentUserProps = list.find(x => x.userID === userID)
 
-
-
-  console.log()
-console.log("PILOT PROFILE PROPS", props)
+  console.log('CURRENT USER PROPS', currentUserProps)
+  console.log("PILOT PROFILE PROPS", props)
   console.log("LIST OF PROFILES", props.listOfProfiles)
 
 
@@ -47,24 +53,17 @@ console.log("PILOT PROFILE PROPS", props)
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={styles.welcomeText}>Welcome to your Profile Page</Text>
+        <Text style={styles.welcomeText}>Welcome to your Profile Page, {currentUserProps ? (<Text>{currentUserProps.pilotFirstName} {currentUserProps.pilotLastName}</Text>) : <Text>Name:</Text>}</Text>
 
+        {currentUserProps ? (<Text style={styles.h2}>Location: {currentUserProps.pilotLocation}</Text>) : <Text style={styles.h2}>Location:</Text>}
 
-        <Text style={styles.h2}>Please complete your profile to recieve job postings</Text>
-        <Text style={styles.h1}>Name dynamically rendered here from login</Text>
-        <Text style={styles.h1}>Location dynamically rendered here from login</Text>
-        <Text style={styles.h1}>Please Upload a picture</Text>
-        <ProfileImageUploader />
+        {currentUserProps ? (<Text style={styles.h2}>What type of drone do you fly? {currentUserProps.droneType}</Text>) : <Text style={styles.h2}>Location:</Text>}
+
+        {currentUserProps ? (<Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk?</Text>}
+
+        {currentUserProps ? (<Text style={styles.h2}>Do you have experience flying over 400 feet? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience flying over 400 feet?</Text>}
         
-        <Text style={styles.h1}>What Type of Drone do you have? </Text>
-        <TextInput
-          multiline={true}
-          numberOfLines={4}
-          style={styles.input}
-          placeholder="Drone"
-          onChangeText={handleDroneChange}
-          value={drone}
-        />
+
 
 
         <TouchableOpacity onPress={editProfile}><Text style={styles.submitButton}>Edit Profile</Text></TouchableOpacity>

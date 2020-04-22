@@ -54,7 +54,7 @@ function SignInScreen({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@email.com", "password")} >
           <Text style={styles.buttonText}>Client shortcut</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@email.com", "password")} >
+        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("captain@person.com", "password")} >
           <Text style={styles.buttonText}>Pilot shortcut</Text>
         </TouchableOpacity>
       </View>
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 300,
     position: "absolute",
     marginLeft: "22%",
+    marginTop: 100
   },
   text: {
     textAlign: "center",

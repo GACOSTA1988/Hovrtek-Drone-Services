@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import {
   Text,
   View,
@@ -19,118 +19,119 @@ import {
 } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
 
-class ProjectListScreen extends Component {
-  componentDidMount() {
-    this.props.getProjects();
-  }
+function ProjectListScreen(props, { getProjects }) {
+  const navigation = useNavigation();
 
-  render() {
+  useEffect(() => {
+    props.getProjects();
+  }, []);
 
-    return (
-      <View style={styles.projectListWrapper}>
-        <ScrollView>
-          <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
-            <Text style={styles.clientText}>Current Projects</Text>
-          </TouchableOpacity>
+  return (
+    <View style={styles.projectListWrapper}>
+      <ScrollView>
+        <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
+          <Text style={styles.clientText}>Current Projects</Text>
+        </TouchableOpacity>
 
-          <View style={styles.projectCard}>
-            <TouchableOpacity>
-              <FlatList
-                style={{ width: "100%" }}
-                data={this.props.listOfProjects}
-                // showsVerticalScrollIndicator={true}
-                keyExtractor={item => item.key}
-                renderItem={({ item }) => {
-                  return (
+        <View style={styles.projectCard}>
+          <TouchableOpacity>
+            <FlatList
+              style={{ width: "100%" }}
+              data={props.listOfProjects}
+              // showsVerticalScrollIndicator={true}
+              keyExtractor={item => item.key}
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={{
+                      elevation: 8,
+                      borderRadius: 15,
+                      backgroundColor: "#092455",
+                      marginBottom: 15,
+                      padding: 20
+                    }}
+                  >
+                    <TouchableHighlight
+                      onPress={() =>
+                        props.navigation.navigate(
+                          "ProjectDetailsScreen",
+                          {
+                            ...item
+                          }
+                        )
+                      }
+                    >
+                      <View>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Location: {item.location}{" "}
+                        </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Date: {item.date}{" "}
+                        </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Recording: {item.recording}{" "}
+                        </Text>
+                        { item.available ? (
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          Available
+                          </Text>
+                        ) : (
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          No Longer Available
+                          </Text>
+                        )}
+                      </View>
+                    </TouchableHighlight>
                     <View
                       style={{
-                        elevation: 8,
-                        borderRadius: 15,
-                        backgroundColor: "#092455",
-                        marginBottom: 15,
-                        padding: 20
+                        flexDirection: "row",
+                        justifyContent: "flex-end",
+                        marginTop: 25
                       }}
                     >
                       <TouchableHighlight
                         onPress={() =>
-                          this.props.navigation.navigate(
-                            "ProjectDetailsScreen",
+                          props.navigation.navigate(
+                            "EditProjectScreen",
                             {
                               ...item
                             }
                           )
                         }
                       >
-                        <View>
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                            Location: {item.location}{" "}
-                          </Text>
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                            Date: {item.date}{" "}
-                          </Text>
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                            Recording: {item.recording}{" "}
-                          </Text>
-                          { item.available ? (
-                            <Text style={{ color: "white", fontWeight: "800" }}>
-                            Available
-                            </Text>
-                          ) : (
-                            <Text style={{ color: "white", fontWeight: "800" }}>
-                            No Longer Available
-                            </Text>
-                          )}
+                        <View style={{ marginRight: 15 }}>
+                          <FontAwesome5
+                            name="edit"
+                            size={32}
+                            color="#a9b8de"
+                          />
                         </View>
                       </TouchableHighlight>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "flex-end",
-                          marginTop: 25
-                        }}
+                      <TouchableHighlight
+                        onPress={() => props.deleteProject(item.key)}
                       >
-                        <TouchableHighlight
-                          onPress={() =>
-                            this.props.navigation.navigate(
-                              "EditProjectScreen",
-                              {
-                                ...item
-                              }
-                            )
-                          }
-                        >
-                          <View style={{ marginRight: 15 }}>
-                            <FontAwesome5
-                              name="edit"
-                              size={32}
-                              color="#a9b8de"
-                            />
-                          </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                          onPress={() => this.props.deleteProject(item.key)}
-                        >
-                          <View>
-                            <MaterialCommunityIcons
-                              name="delete"
-                              size={32}
-                              color="#a9b8de"
-                            />
-                          </View>
-                        </TouchableHighlight>
-                      </View>
+                        <View>
+                          <MaterialCommunityIcons
+                            name="delete"
+                            size={32}
+                            color="#a9b8de"
+                          />
+                        </View>
+                      </TouchableHighlight>
                     </View>
-                  );
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
+                  </View>
+                );
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
+
 
 const styles = StyleSheet.create({
   projectCard: {

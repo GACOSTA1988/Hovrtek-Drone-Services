@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { editProject } from "../../actions/index";
 import { connect } from "react-redux";
 
+
 class EditProjectScreen extends Component {
   state = {
     location: this.props.route.params.location,

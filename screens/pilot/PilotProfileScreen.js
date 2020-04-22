@@ -1,30 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, Text, StyleSheet, Button, ScrollView, TextInput } from "react-native";
 import { AuthContext } from "../../context";
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
-import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProfiles  } from "../../actions/index";
+import { getProfiles, postProfiles  } from "../../actions/index";
+import * as firebase from 'firebase';
+import _ from "lodash";
 
 
-const PilotProfileScreen = (props, { postProfiles }) => {
+
+function PilotProfileScreen(props, { getProfiles }) {
+
+ 
   const { signOut } = React.useContext(AuthContext);
   const navigation = useNavigation();
   const [drone, setDrone] = useState('');
 
-console.log("pilotProfileProps", props)
-  console.log("pilotProfileProps", props.postProfiles)
+  useEffect(() => {
+    props.getProfiles()
+
+  }, []);
+
+
+
+
+  console.log()
+console.log("PILOT PROFILE PROPS", props)
+  console.log("LIST OF PROFILES", props.listOfProfiles)
 
 
   function handleDroneChange(text) {
     setDrone(text);
   }
 
-  const submit = e => {
+  const editProfile= e => {
     e.preventDefault();
     // console.log("New Project Props", props);
-    props.postProfiles(null, null, null, drone);
+  
 
     navigation.navigate("ProfileListScreen");
     setDrone("");
@@ -54,7 +67,7 @@ console.log("pilotProfileProps", props)
         />
 
 
-        <TouchableOpacity onPress={submit}><Text style={styles.submitButton}>Submit Form</Text></TouchableOpacity>
+        <TouchableOpacity onPress={editProfile}><Text style={styles.submitButton}>Edit Profile</Text></TouchableOpacity>
 
         <Button title="Sign Out" onPress={() => signOut()} />
 
@@ -100,4 +113,20 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, { postProfiles })(PilotProfileScreen);
+
+function mapStateToProps(state) {
+  const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  return {
+    listOfProfiles
+  };
+}
+
+export default connect(mapStateToProps, { getProfiles })(
+  PilotProfileScreen
+);
+

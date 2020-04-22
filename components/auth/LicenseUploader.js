@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 
 function LicenseUploader(props) {
 
+const [licenseThumbnail, setlicenseThumbnail] = useState(null)
 
     useEffect(() => {
         getPermissionAsync()
@@ -27,6 +28,7 @@ function LicenseUploader(props) {
         if (!result.cancelled) {
             uploadImage(result.uri, "test-image")
                 .then(() => {
+    
                     Alert.alert("Successfully Uploaded to the Hovrtek Database!");
                 })
                 .catch((error) => {
@@ -35,19 +37,38 @@ function LicenseUploader(props) {
             setlicenseThumbnail(result.uri);
         }
     }
+
     async function uploadImage(uri, imageName) {
         console.log('URI', uri)
         console.log('IMAGENAME', imageName)
+
+
+
+
 
         const response = await fetch(uri);
         const blob = await response.blob();
         console.log("---------------------", blob)
 
-        var ref = firebase.storage().ref().child("images/" + imageName);
-        return ref.put(blob);
+        var uploadTask = await firebase.storage()
+        .ref()
+        .child("images/" + imageName);
+        console.log("UPLOAD TASK", uploadTask)
+        uploadTask.snapshot
+        console.log("UPLOAD TASK SNAPSHOT ", uploadTask.snapshot)
+        // uploadTask.on('state_changed', function () {
+        //     uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        //         console.log('File available at', downloadURL);
+        //     });
+        // });
+
+        return uploadTask.put(blob)
     }
 
-    const [licenseThumbnail, setlicenseThumbnail] = useState(null);
+
+
+
+
 
   
     return (

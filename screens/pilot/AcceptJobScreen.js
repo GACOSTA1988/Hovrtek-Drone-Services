@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { acceptJob } from "../../actions/index";
 import { connect } from "react-redux";
 
-function ServicesScreen(props, { acceptJob }) {
+function AcceptJobScreen(props, { acceptJob }) {
   const jobDetails = props.route.params;
 
   const accept = (e) => {
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, { acceptJob })(ServicesScreen);
+export default connect(null, { acceptJob })(AcceptJobScreen);

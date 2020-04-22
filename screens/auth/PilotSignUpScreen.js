@@ -13,8 +13,15 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+
+
 import AirDrop from "../../components/pilot/AirMapDropDown";
+
+import { useNavigation } from '@react-navigation/native';
+import LicenseUploader from "../../components/auth/LicenseUploader";
+
+
+
 
 function PilotSignUpScreen(props) {
   const navigation = useNavigation();
@@ -127,6 +134,13 @@ function PilotSignUpScreen(props) {
             <Picker.Item label="No" value="no" />
             <Picker.Item label="Yes" value="yes" />
           </Picker>
+
+
+          <Text style={styles.imageUploaderText}>Please upload your FAA license</Text>
+          <LicenseUploader/>
+     
+
+
           <Button title="Sign up" onPress={signUp} />
         </TouchableOpacity>
       </ScrollView>
@@ -195,10 +209,11 @@ const styles = StyleSheet.create({
   airMapQuestionText: {
     // marginTop: 100,
   },
-  // fourHundredQuestionText: {},
-  // questionText: {
-  //   marginTop: 50,
-  // },
+
+  imageUploaderText:{
+    marginTop: 250
+  }
+
 });
 
 export default connect(null, { postProfiles })(PilotSignUpScreen);

@@ -1,10 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
+import { acceptJob } from "../../actions/index";
+import { connect } from "react-redux";
 
-const ServicesScreen = () => {
+function ServicesScreen(props, { acceptJob }) {
+  const jobDetails = props.route.params;
+
+  const accept = (e) => {
+    e.preventDefault();
+    props.acceptJob(false, jobDetails.key);
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.servicesText}>Accept Job Screen</Text>
+      <Text style={styles.servicesText}>Are you sure?</Text>
+      <Button title="Yes" onPress={accept} />
     </View>
   )
 };
@@ -26,4 +36,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ServicesScreen;
+export default connect(null, { acceptJob })(ServicesScreen);

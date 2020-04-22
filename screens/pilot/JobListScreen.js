@@ -23,17 +23,10 @@ import _ from "lodash";
 function JobListScreen(props, { getProjects }) {
 
   const navigation = useNavigation();
-  const [drone, setDrone] = useState('');
 
   useEffect(() => {
     props.getProjects();
   }, []);
-
-  const editProject = (e) => {
-    e.preventDefault();
-    navigation.navigate("JobListScreen");
-    setDrone("");
-  };
 
   return (
     <View style={styles.projectListWrapper}>
@@ -76,45 +69,28 @@ function JobListScreen(props, { getProjects }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
+                        { item.available ? (
+                          <TouchableHighlight
+                            onPress={() =>
+                              props.navigation.navigate(
+                                "AcceptJobScreen",
+                                {
+                                  ...item
+                                }
+                              )
+                            }
+                          >
+                            <Text style={{ color: "white", fontWeight: "800" }}>
+                              Accept Job
+                            </Text>
+                          </TouchableHighlight>
+                        ) : (
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          No Longer Available
+                          </Text>
+                        )}
                       </View>
                     </TouchableHighlight>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "flex-end",
-                        marginTop: 25
-                      }}
-                    >
-                      <TouchableHighlight
-                        onPress={() =>
-                          props.navigation.navigate(
-                            "EditProjectScreen",
-                            {
-                              ...item
-                            }
-                          )
-                        }
-                      >
-                        <View style={{ marginRight: 15 }}>
-                          <FontAwesome5
-                            name="edit"
-                            size={32}
-                            color="#a9b8de"
-                          />
-                        </View>
-                      </TouchableHighlight>
-                      <TouchableHighlight
-                        onPress={() => props.deleteProject(item.key)}
-                      >
-                        <View>
-                          <MaterialCommunityIcons
-                            name="delete"
-                            size={32}
-                            color="#a9b8de"
-                          />
-                        </View>
-                      </TouchableHighlight>
-                    </View>
                   </View>
                 );
               }}
@@ -145,7 +121,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log("this is state", state);
   const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
     return {
       ...val,

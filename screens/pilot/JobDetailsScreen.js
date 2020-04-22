@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 function JobDetailsScreen(props) {
   const jobDetails = props.route.params;
+  console.log(jobDetails);
   return(
     <View style={styles.container}>
       <Text style={styles.ProjectText}>Project Details</Text>

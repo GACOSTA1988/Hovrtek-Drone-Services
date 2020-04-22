@@ -26,9 +26,6 @@ class ProjectListScreen extends Component {
   }
 
   render() {
-    console.log("GET PROJECTS", this.props.getProjects)
-    console.log("THIS PROPS", this.props)
-    console.log("PROJECT LIST", this.props.listOfProjects)
 
     return (
       <View style={styles.projectListWrapper}>
@@ -75,6 +72,15 @@ class ProjectListScreen extends Component {
                           <Text style={{ color: "white", fontWeight: "800" }}>
                             Recording: {item.recording}{" "}
                           </Text>
+                          { item.available ? (
+                            <Text style={{ color: "white", fontWeight: "800" }}>
+                            Available
+                            </Text>
+                          ) : (
+                            <Text style={{ color: "white", fontWeight: "800" }}>
+                            No Longer Available
+                            </Text>
+                          )}
                         </View>
                       </TouchableHighlight>
                       <View
@@ -145,7 +151,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log("this is state in projectlistscreen", state);
   const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
     return {
       ...val,

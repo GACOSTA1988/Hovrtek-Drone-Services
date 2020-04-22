@@ -6,9 +6,9 @@ import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
 import ClientHeader from "./components/client/ClientHeader";
-import ClientHomeNavigation from "./navigation/ClientHomeNavigation";
+import ClientNavigation from "./navigation/ClientNavigation";
 import PilotHeader from "./components/pilot/PilotHeader";
-import PilotHomeNavigation from "./navigation/PilotHomeNavigation";
+import PilotNavigation from "./navigation/PilotNavigation";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
 import LoadingScreen from "./screens/LoadingScreen";
@@ -87,7 +87,7 @@ export default () => {
               <RootClientStack.Navigator>
                 <RootClientStack.Screen
                   name="Client"
-                  component={ClientHomeNavigation}
+                  component={ClientNavigation}
                   headerMode="screen"
                   options={{
                     title: "Home",
@@ -102,7 +102,7 @@ export default () => {
               <RootPilotStack.Navigator>
                 <RootPilotStack.Screen
                   name="Pilot"
-                  component={PilotHomeNavigation}
+                  component={PilotNavigation}
                   options={{
                     title: "Home",
                     headerTitle: () => <PilotHeader />,

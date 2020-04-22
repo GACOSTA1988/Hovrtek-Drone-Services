@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, Text, StyleSheet, Button, ScrollView, TextInput } from "react-native";
-import { AuthContext } from "../../context";
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProfiles, postProfiles  } from "../../actions/index";
+import { getProfiles } from "../../actions/index";
 import * as firebase from 'firebase';
 import _ from "lodash";
 
-
-
 function PilotProfileScreen(props, { getProfiles }) {
 
- 
-  const { signOut } = React.useContext(AuthContext);
   const navigation = useNavigation();
   const [drone, setDrone] = useState('');
 
   useEffect(() => {
-    props.getProfiles()
-
+    props.getProfiles();
   }, []);
+
 
   let user = firebase.auth().currentUser;
   console.log("USER", user)
@@ -40,15 +35,12 @@ function PilotProfileScreen(props, { getProfiles }) {
     setDrone(text);
   }
 
+
   const editProfile= e => {
     e.preventDefault();
-    // console.log("New Project Props", props);
-  
-
     navigation.navigate("ProfileListScreen");
     setDrone("");
   };
-
 
   return (
     <View style={styles.container}>
@@ -56,6 +48,7 @@ function PilotProfileScreen(props, { getProfiles }) {
         <Text style={styles.welcomeText}>Welcome to your Profile Page, {currentUserProps ? (<Text>{currentUserProps.pilotFirstName} {currentUserProps.pilotLastName}</Text>) : <Text>Name:</Text>}</Text>
 
         {currentUserProps ? (<Text style={styles.h2}>Location: {currentUserProps.pilotLocation}</Text>) : <Text style={styles.h2}>Location:</Text>}
+
 
         {currentUserProps ? (<Text style={styles.h2}>What type of drone do you fly? {currentUserProps.droneType}</Text>) : <Text style={styles.h2}>Location:</Text>}
 
@@ -67,8 +60,6 @@ function PilotProfileScreen(props, { getProfiles }) {
 
 
         <TouchableOpacity onPress={editProfile}><Text style={styles.submitButton}>Edit Profile</Text></TouchableOpacity>
-
-        <Button title="Sign Out" onPress={() => signOut()} />
 
         <Text style={styles.dummyText}>Dummy text until I investigate ScrollView more thoroughly</Text>
       </ScrollView>
@@ -114,6 +105,7 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
+  console.log("this is state", state);
   const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
     return {
       ...val,
@@ -128,4 +120,3 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { getProfiles })(
   PilotProfileScreen
 );
-

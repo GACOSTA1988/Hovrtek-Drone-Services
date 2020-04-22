@@ -18,43 +18,40 @@ import RadioForm, {
 } from "react-native-simple-radio-button";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
-
 import { useNavigation } from "@react-navigation/native";
-
 import ImageUploader from "../../components/client/ImageUploader";
 import * as firebase from "firebase";
+
 function NewProjectScreen(props, { postProjects }) {
   const navigation = useNavigation();
 
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [recording, setRecording] = useState("");
-
   const [light, setLight] = useState(1);
 
-  function handleLocationChange(text) {
-    setLocation(text);
-  }
-
-  function handleDateChange(text) {
-    setDate(text);
-  }
-
-  function handleRecordingChange(text) {
-    setRecording(text);
-  }
-
-  function handleLightChange(text) {
-    (value) => {
-      setLight({ value: value });
-    };
-  }
+  // function handleLocationChange(text) {
+  //   setLocation(text);
+  // }
+  //
+  // function handleDateChange(text) {
+  //   setDate(text);
+  // }
+  //
+  // function handleRecordingChange(text) {
+  //   setRecording(text);
+  // }
+  //
+  // function handleLightChange(text) {
+  //   (value) => {
+  //     setLight({ value: value });
+  //   };
+  // }
 
   const submit = (e) => {
     e.preventDefault();
-    console.log("New Project Props", props);
-    props.postProjects(location, date, recording, light);
-
+    const available = true;
+    props.postProjects(location, date, recording, light, available);
     navigation.navigate("ProjectListScreen");
     setDate(""), setLight(""), setLocation(""), setRecording("");
   };
@@ -77,7 +74,7 @@ function NewProjectScreen(props, { postProjects }) {
           <TextInput
             style={styles.input}
             placeholder="Location"
-            onChangeText={handleLocationChange}
+            onChangeText={setLocation}
             value={location}
           />
           <Text style={styles.labelText}>
@@ -86,7 +83,7 @@ function NewProjectScreen(props, { postProjects }) {
           <TextInput
             style={styles.input}
             placeholder="Date"
-            onChangeText={handleDateChange}
+            onChangeText={setDate}
             value={date}
           />
           <Text style={styles.labelText}>
@@ -97,7 +94,7 @@ function NewProjectScreen(props, { postProjects }) {
             numberOfLines={4}
             style={styles.input}
             placeholder="What?"
-            onChangeText={handleRecordingChange}
+            onChangeText={setRecording}
             value={recording}
           />
           <Text style={styles.labelText}>
@@ -110,7 +107,7 @@ function NewProjectScreen(props, { postProjects }) {
             selectedButtonColor={"#092455"}
             radio_props={radio_props}
             initial={1}
-            onPress={handleLightChange}
+            onPress={setLight}
           />
           {/* <Text style={styles.uploaderText}>Upload an Image Here!</Text>
           <ImageUploader style={styles.uploaderObject} /> */}
@@ -143,7 +140,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   newProjectListTextWrapper: {
-    marginBottom: 20,
+    marginBottom: 100,
   },
   input: {
     borderWidth: 1,

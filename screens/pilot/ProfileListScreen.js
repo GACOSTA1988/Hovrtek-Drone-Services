@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -9,43 +9,45 @@ import {
   FlatList
 } from "react-native";
 import { connect } from "react-redux";
+import { useNavigation } from '@react-navigation/native';
 import { getProfiles } from "../../actions/index";
 import _ from "lodash";
 
-class ProfileListScreen extends Component {
-  componentDidMount() {
-    this.props.getProfiles();
-  }
-  render() {
-    return (
-      <View style={styles.profileListWrapper}>
-        <TouchableOpacity style={styles.PilotProfileListTextWrapper}>
-          <Text style={styles.pilotText}>Current Profiles</Text>
-        </TouchableOpacity>
+function ProfileListScreen(props, { getProfiles }) {
+  const navigation = useNavigation();
 
-        <View style={styles.profileCard}>
-          <TouchableOpacity>
-            <Text> ALL PROFILES </Text>
-            <FlatList
-              style={{ width: "100%" }}
-              data={this.props.listOfProfiles}
-              keyExtractor={item => item.key}
-              renderItem={({ item }) => {
-                return (
-                  <View>
-                    <Text style={styles.name}> {item.name} </Text>
-                    <Text>Overview: {item.overview}</Text>
-                    <Text>Equipment: {item.equipment}</Text>
-                    <Text>Availability: {item.availability}</Text>
-                  </View>
-                );
-              }}
-            />
-          </TouchableOpacity>
-        </View>
+  useEffect(() => {
+    props.getProfiles();
+  }, []);
+
+  return (
+    <View style={styles.profileListWrapper}>
+      <TouchableOpacity style={styles.PilotProfileListTextWrapper}>
+        <Text style={styles.pilotText}>Current Profiles</Text>
+      </TouchableOpacity>
+
+      <View style={styles.profileCard}>
+        <TouchableOpacity>
+          <Text> ALL PROFILES </Text>
+          <FlatList
+            style={{ width: "100%" }}
+            data={props.listOfProfiles}
+            keyExtractor={item => item.key}
+            renderItem={({ item }) => {
+              return (
+                <View>
+                  <Text style={styles.name}> {item.name} </Text>
+                  <Text>Overview: {item.overview}</Text>
+                  <Text>Equipment: {item.equipment}</Text>
+                  <Text>Availability: {item.availability}</Text>
+                </View>
+              );
+            }}
+          />
+        </TouchableOpacity>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

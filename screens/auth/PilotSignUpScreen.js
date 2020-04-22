@@ -142,6 +142,8 @@ function PilotSignUpScreen(props) {
 
 
           <Button title="Sign up" onPress={signUp} />
+
+          <Text style={styles.dummyText}>dummy text</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -191,13 +193,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
   },
-  // emailInput: {
-  //   height: 40,
-  //   borderColor: "grey",
-  //   borderWidth: 1,
-  //   marginTop: 200,
-  //   width: 200,
-  // },
+  dummyText: {
+    marginTop: 200
+  },
 
   airMapPicker: {
     height: 100,

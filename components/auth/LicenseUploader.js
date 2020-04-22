@@ -28,7 +28,6 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
         if (!result.cancelled) {
             uploadImage(result.uri, "test-image")
                 .then(() => {
-
                     Alert.alert("Successfully Uploaded to the Hovrtek Database!");
                 })
                 .catch((error) => {
@@ -49,15 +48,21 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
         var uploadTask = await firebase.storage()
         .ref()
         .child("images/" + imageName);
-        console.log("UPLOAD TASK SNAPSHOT", uploadTask.snapshot.ref);
 
-        // uploadTask.getDownloadURL().then((downloadURL) = () => {
-        //   console.log('File available at', downloadURL);
+        console.log("UPLOAD TASK", uploadTask)
+        uploadTask.snapshot
+        console.log("UPLOAD TASK SNAPSHOT ", uploadTask.snapshot)
+        // uploadTask.on('state_changed', function () {
+        //     uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        //         console.log('File available at', downloadURL);
+        //     });
         // });
-
 
         return uploadTask.put(blob)
     }
+
+
+
 
     return (
         <View >

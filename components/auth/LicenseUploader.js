@@ -38,31 +38,18 @@ const [licenseThumbnail, setlicenseThumbnail] = useState(null)
     }
 
     async function uploadImage(uri, imageName) {
-        console.log('URI', uri)
-        console.log('IMAGENAME', imageName)
+      const response = await fetch(uri);
+      const blob = await response.blob();
 
-        const response = await fetch(uri);
-        const blob = await response.blob();
-        console.log("---------------------", blob)
+      var uploadTask = await firebase.storage()
+      .ref()
+      .child("images/" + imageName);
 
-        var uploadTask = await firebase.storage()
-        .ref()
-        .child("images/" + imageName);
-
-        console.log("UPLOAD TASK", uploadTask)
-        uploadTask.snapshot
-        console.log("UPLOAD TASK SNAPSHOT ", uploadTask.snapshot)
-        // uploadTask.on('state_changed', function () {
-        //     uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        //         console.log('File available at', downloadURL);
-        //     });
-        // });
-
-        return uploadTask.put(blob)
+      uploadTask.put(blob).then((snapshot) => {snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        console.log("File available at", downloadURL);
+      });
+    })
     }
-
-
-
 
     return (
         <View >

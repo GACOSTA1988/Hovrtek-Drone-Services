@@ -8,6 +8,7 @@ import {
   Button,
   Picker,
   ScrollView,
+  Alert
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
@@ -29,14 +30,30 @@ function PilotSignUpScreen(props) {
   const [fourHundred, setFourHundred] = useState("No");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
 
   async function signUp(e) {
     e.preventDefault();
     props.navigation.push("Loading");
+
+    if (pilotFirstName.trim() === '') {
+      Alert.alert("Please fill in your first name");
+      navigation.navigate("PilotSignUpScreen");
+    } else if (pilotLastName.trim() === '') {
+      Alert.alert("Please fill in your first name");
+      navigation.navigate("PilotSignUpScreen");
+    } else if (pilotLocation.trim() == '') {
+      Alert.alert("Please fill in your loaction");
+      navigation.navigate("PilotSignUpScreen");
+    } else {
+      Alert.alert("Welcome to Hovrtek!")
+    }
+
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (error) {
-      console.log(error.toString(error));
+      Alert.alert(error.message);
+      navigation.navigate("PilotSignUpScreen");
     }
     let user = firebase.auth().currentUser;
     await user.updateProfile({
@@ -55,6 +72,7 @@ function PilotSignUpScreen(props) {
       userID
     );
   }
+
 
   return (
     <View style={styles.wrapper}>
@@ -76,6 +94,7 @@ function PilotSignUpScreen(props) {
             placeholderTextColor="grey"
           />
           <TextInput
+            keyboardType={"email-address"}
             placeholder="email"
             value={email}
             onChangeText={setEmail}
@@ -132,7 +151,9 @@ function PilotSignUpScreen(props) {
 
 
           <Text style={styles.imageUploaderText}>Please upload your FAA license</Text>
-          <LicenseUploader/>
+
+          <LicenseUploader />
+
 
 
 
@@ -203,10 +224,12 @@ const styles = StyleSheet.create({
     // marginTop: 100,
   },
 
-  imageUploaderText:{
+  imageUploaderText: {
     marginTop: 250
   }
 
 });
 
+
 export default connect(null, { postPilotProfiles })(PilotSignUpScreen);
+

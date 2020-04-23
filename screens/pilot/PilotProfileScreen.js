@@ -3,17 +3,17 @@ import { TouchableOpacity, View, Text, StyleSheet, Button, ScrollView, TextInput
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProfiles } from "../../actions/index";
+import { getPilotProfiles } from "../../actions/index";
 import * as firebase from 'firebase';
 import _ from "lodash";
 
-function PilotProfileScreen(props, { getProfiles }) {
+function PilotProfileScreen(props, { getPilotProfiles }) {
 
   const navigation = useNavigation();
   const [drone, setDrone] = useState('');
 
   useEffect(() => {
-    props.getProfiles();
+    props.getPilotProfiles();
   }, []);
 
 
@@ -24,17 +24,15 @@ function PilotProfileScreen(props, { getProfiles }) {
   console.log("LIST OF PROFILES", props.listOfProfiles)
   const list = props.listOfProfiles
   // list.forEach(e=> console.log(e))
-    let currentUserProps = list.find(x => x.userID === userID)
+  let currentUserProps = list.find(x => x.userID === userID)
 
   console.log('CURRENT USER PROPS', currentUserProps)
   console.log("PILOT PROFILE PROPS", props)
   console.log("LIST OF PROFILES", props.listOfProfiles)
 
-
   function handleDroneChange(text) {
     setDrone(text);
   }
-
 
   const editProfile= e => {
     e.preventDefault();
@@ -55,7 +53,7 @@ function PilotProfileScreen(props, { getProfiles }) {
         {currentUserProps ? (<Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk?</Text>}
 
         {currentUserProps ? (<Text style={styles.h2}>Do you have experience flying over 400 feet? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience flying over 400 feet?</Text>}
-        
+
 
 
 
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
-  const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
+  const listOfProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
     return {
       ...val,
       key: key
@@ -116,6 +114,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getProfiles })(
+export default connect(mapStateToProps, { getPilotProfiles })(
   PilotProfileScreen
 );

@@ -17,7 +17,7 @@ import {
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import { getProjects } from "../../actions/index";
-// import * as firebase from 'firebase';
+import * as firebase from 'firebase';
 import _ from "lodash";
 
 function MyJobsScreen(props, { getProjects }) {
@@ -28,7 +28,16 @@ function MyJobsScreen(props, { getProjects }) {
     props.getProjects();
   }, []);
 
-  const listOfMyProjects = props.listOfProjects;
+  if (firebase.auth().currentUser) {
+    const userID = firebase.auth().currentUser.uid;
+  }
+  const listOfMyProjects = [];
+  props.listOfProjects.forEach((project) => {
+    if (project.pilotID === userID) {
+      listOfMyProjects.push(project);
+    }
+  });
+  console.log("this is the list of user's projects", listOfMyProjects);
 
   return (
     <View style={styles.projectListWrapper}>
@@ -71,26 +80,6 @@ function MyJobsScreen(props, { getProjects }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        { item.pilotID ? (
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                          No Longer Available
-                          </Text>
-                        ) : (
-                          <TouchableHighlight
-                          onPress={() =>
-                            props.navigation.navigate(
-                              "AcceptJobScreen",
-                              {
-                                ...item
-                              }
-                            )
-                          }
-                          >
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                          Accept Job
-                          </Text>
-                          </TouchableHighlight>
-                        )}
                       </View>
                     </TouchableHighlight>
                   </View>

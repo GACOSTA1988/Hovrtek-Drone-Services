@@ -41,14 +41,14 @@ import { AuthContext } from "../../context";
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProfiles, postProfiles } from "../../actions/index";
+import { getClientProfiles, postClientProfiles } from "../../actions/index";
 import * as firebase from 'firebase';
 import _ from "lodash";
 
-const PilotProfileScreen = (props, { postProfiles, getProfiles }) => {
+const PilotProfileScreen = (props, { postClientProfiles, getClientProfiles }) => {
 
   useEffect(() => {
-    props.getProfiles()
+    props.getClientProfiles()
   }, []);
 
 
@@ -81,7 +81,7 @@ const PilotProfileScreen = (props, { postProfiles, getProfiles }) => {
   // SUBMITTING NEW PROFILE DATA
   const submit = e => {
     e.preventDefault();
-    props.postProfiles(null, null, null, drone);
+    props.postClientProfiles(null, null, null, drone);
     navigation.navigate("ProfileListScreen");
     setDrone("");
   };
@@ -170,6 +170,7 @@ function mapStateToProps(state) {
     listOfProfiles
   };
 }
+
 
 export default connect(mapStateToProps, { getProfiles, postProfiles })(PilotProfileScreen);
 
@@ -397,3 +398,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(null, { postProfiles })(PilotSignUpScreen);
+
+export default connect(mapStateToProps, { getClientProfiles, postClientProfiles })(PilotProfileScreen);
+

@@ -10,14 +10,14 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProfiles } from "../../actions/index";
+import { getPilotProfiles } from "../../actions/index";
 import _ from "lodash";
 
-function ProfileListScreen(props, { getProfiles }) {
+function ProfileListScreen(props, { getPilotProfiles }) {
   const navigation = useNavigation();
 
   useEffect(() => {
-    props.getProfiles();
+    props.getPilotProfiles();
   }, []);
 
   return (
@@ -31,7 +31,7 @@ function ProfileListScreen(props, { getProfiles }) {
           <Text> ALL PROFILES </Text>
           <FlatList
             style={{ width: "100%" }}
-            data={props.listOfProfiles}
+            data={props.listOfPilotProfiles}
             keyExtractor={item => item.key}
             renderItem={({ item }) => {
               return (
@@ -74,15 +74,15 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
+  const listOfPilotProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
     return {
       ...val,
       key: key
     };
   });
   return {
-    listOfProfiles
+    listOfPilotProfiles
   };
 }
 
-export default connect(mapStateToProps, { getProfiles })(ProfileListScreen);
+export default connect(mapStateToProps, { getPilotProfiles })(ProfileListScreen);

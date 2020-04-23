@@ -7,11 +7,11 @@ import {
   TextInput,
   Button
 } from "react-native";
-import { postProfiles } from "../../actions/index";
+import { postPilotProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 
-// make sure to read in both props and postProfiles function
-function CreateProfileScreen(props, { postProfiles }) {
+// make sure to read in both props and postPilotProfiles function
+function CreateProfileScreen(props, { postPilotProfiles }) {
 
   const [name, setName] = useState('');
   const [overview, setOverview] = useState('');
@@ -20,7 +20,7 @@ function CreateProfileScreen(props, { postProfiles }) {
 
   const submit = (e) => {
     e.preventDefault();
-    props.postProfiles(name, overview, equipment, availability);
+    props.postPilotProfiles(name, overview, equipment, availability);
   }
 
   return (
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, { postProfiles })(CreateProfileScreen);
+export default connect(null, { postPilotProfiles })(CreateProfileScreen);

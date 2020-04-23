@@ -12,18 +12,16 @@ import {
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
-import { postProfiles } from "../../actions/index";
+import { postPilotProfiles } from "../../actions/index";
 import { connect } from "react-redux";
-
-
 import AirDrop from "../../components/pilot/AirMapDropDown";
-
 import { useNavigation } from '@react-navigation/native';
 import LicenseUploader from "../../components/auth/LicenseUploader";
 
 function PilotSignUpScreen(props) {
   const navigation = useNavigation();
   const { updateUser } = useContext(AuthContext);
+
   const [pilotFirstName, setPilotFirstName] = useState("");
   const [pilotLastName, setPilotLastName] = useState("");
   const [pilotLocation, setPilotLocation] = useState("");
@@ -64,7 +62,7 @@ function PilotSignUpScreen(props) {
     });
     await user.reload().then(updateUser());
     const userID = user.uid;
-    props.postProfiles(
+    props.postPilotProfiles(
       pilotFirstName,
       pilotLastName,
       pilotLocation,
@@ -153,7 +151,9 @@ function PilotSignUpScreen(props) {
 
 
           <Text style={styles.imageUploaderText}>Please upload your FAA license</Text>
+
           <LicenseUploader />
+
 
 
 
@@ -230,4 +230,6 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(null, { postProfiles })(PilotSignUpScreen);
+
+export default connect(null, { postPilotProfiles })(PilotSignUpScreen);
+

@@ -1,9 +1,9 @@
 export default function (state = {}, action) {
   switch (action.type) {
-    case "PROFILES_FETCH":
+    case "CLIENT_PROFILES_FETCH":
       return {
         ...state,
-        profilesList: action.payload,
+        clientProfilesList: action.payload,
       };
     default:
       return state;

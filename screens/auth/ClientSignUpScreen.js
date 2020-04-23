@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
-import { postProfiles } from "../../actions/index";
+import { postClientProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 
@@ -64,7 +64,7 @@ function ClientSignUpScreen (props) {
     });
     await user.reload().then(updateUser());
     const userID = user.uid;
-    props.postProfiles(clientLocation, email, userID, null);
+    props.postClientProfiles(clientName, clientLocation, email, userID);
   }
 
 
@@ -151,4 +151,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { postProfiles })(ClientSignUpScreen);
+export default connect(null, { postClientProfiles })(ClientSignUpScreen);

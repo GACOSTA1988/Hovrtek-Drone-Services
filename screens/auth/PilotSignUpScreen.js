@@ -8,6 +8,7 @@ import {
   Button,
   Picker,
   ScrollView,
+  Alert
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
@@ -20,9 +21,6 @@ import AirDrop from "../../components/pilot/AirMapDropDown";
 import { useNavigation } from '@react-navigation/native';
 import LicenseUploader from "../../components/auth/LicenseUploader";
 
-
-
-
 function PilotSignUpScreen(props) {
   const navigation = useNavigation();
   const { updateUser } = useContext(AuthContext);
@@ -34,14 +32,30 @@ function PilotSignUpScreen(props) {
   const [fourHundred, setFourHundred] = useState("No");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
 
   async function signUp(e) {
     e.preventDefault();
     props.navigation.push("Loading");
+
+    if (pilotFirstName.trim() === '') {
+      Alert.alert("Please fill in your first name");
+      navigation.navigate("PilotSignUpScreen");
+    } else if (pilotLastName.trim() === '') {
+      Alert.alert("Please fill in your first name");
+      navigation.navigate("PilotSignUpScreen");
+    } else if (pilotLocation.trim() == '') {
+      Alert.alert("Please fill in your loaction");
+      navigation.navigate("PilotSignUpScreen");
+    } else {
+      Alert.alert("Welcome to Hovrtek!")
+    }
+
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (error) {
-      console.log(error.toString(error));
+      Alert.alert(error.message);
+      navigation.navigate("PilotSignUpScreen");
     }
     let user = firebase.auth().currentUser;
     await user.updateProfile({
@@ -60,6 +74,7 @@ function PilotSignUpScreen(props) {
       userID
     );
   }
+
 
   return (
     <View style={styles.wrapper}>
@@ -81,6 +96,7 @@ function PilotSignUpScreen(props) {
             placeholderTextColor="grey"
           />
           <TextInput
+            keyboardType={"email-address"}
             placeholder="email"
             value={email}
             onChangeText={setEmail}
@@ -137,8 +153,8 @@ function PilotSignUpScreen(props) {
 
 
           <Text style={styles.imageUploaderText}>Please upload your FAA license</Text>
-          <LicenseUploader/>
-     
+          <LicenseUploader />
+
 
 
           <Button title="Sign up" onPress={signUp} />
@@ -208,7 +224,7 @@ const styles = StyleSheet.create({
     // marginTop: 100,
   },
 
-  imageUploaderText:{
+  imageUploaderText: {
     marginTop: 250
   }
 

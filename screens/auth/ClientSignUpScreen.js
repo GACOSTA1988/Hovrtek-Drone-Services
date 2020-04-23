@@ -6,13 +6,18 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  Alert
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
+import { useNavigation } from '@react-navigation/native';
 
-function ClientSignUpScreen(props) {
+
+
+function ClientSignUpScreen (props) {
+  const navigation = useNavigation();
   const { updateUser } = useContext(AuthContext);
   const [clientName, setClientName] = useState("");
   const [clientLocation, setClientLocation] = useState("");
@@ -20,12 +25,37 @@ function ClientSignUpScreen(props) {
   const [password, setPassword] = useState("");
 
   async function signUp(e) {
+
     e.preventDefault();
     props.navigation.push("Loading");
+
+    if (clientName.trim() === '') {
+      Alert.alert("Please fill in your name.");
+      navigation.navigate("ClientSignUpScreen");
+    } else if (clientLocation.trim() == '') {
+      Alert.alert("Please fill in your loaction.");
+      navigation.navigate("ClientSignUpScreen");
+    } else {
+      alert("Great, thank you!")
+    }
+
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (error) {
-      console.log(error.toString(error));
+      Alert.alert(error.message);
+      navigation.navigate("ClientSignUpScreen");
+      if (clientName.trim() === '') {
+        Alert.alert("Please fill in your name.");
+        navigation.navigate("ClientSignUpScreen");
+      } else if (clientLocation.trim() == '') {
+        Alert.alert("Please fill in your loaction.");
+        navigation.navigate("ClientSignUpScreen");
+      } else {
+        alert("Great, thank you!")
+      }
+
+
+
     }
     let user = firebase.auth().currentUser;
     await user.updateProfile({
@@ -37,17 +67,23 @@ function ClientSignUpScreen(props) {
     props.postProfiles(clientLocation, email, userID, null);
   }
 
+
+
   return (
     <View style={styles.wrapper}>
       <Text style={styles.text}>Create your client account</Text>
       <TouchableOpacity style={styles.textWrapper}>
+
         <TextInput
+          maxLength={30}
+          autoCapitalize='words'
           placeholder=" Name"
           placeholderTextColor="grey"
           value={clientName}
           onChangeText={setClientName}
           style={styles.input}
         />
+
         <TextInput
           placeholder=" Location"
           placeholderTextColor="grey"
@@ -57,6 +93,7 @@ function ClientSignUpScreen(props) {
         />
         <TextInput
           placeholder=" Email"
+          keyboardType={"email-address"}
           placeholderTextColor="grey"
           value={email}
           onChangeText={setEmail}
@@ -71,7 +108,7 @@ function ClientSignUpScreen(props) {
           style={styles.input}
         />
 
-        <Button title="Sign up" onPress={signUp} style={{ fontWeight: 900 }} />
+        <Button title="Sign up" onPress={signUp} style={{ fontWeight: 900}} />
       </TouchableOpacity>
     </View>
   );
@@ -86,7 +123,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   text: {
-    marginTop: "25%",
+    marginTop: "5%",
     marginBottom: "10%",
     fontSize: 30,
     color: "darkblue",

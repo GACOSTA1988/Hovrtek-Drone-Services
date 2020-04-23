@@ -6,15 +6,17 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  Alert
 } from "react-native";
 import * as firebase from "firebase";
 import HomeImage from "../../components/auth/HomeImage";
+
 
 function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // supposed to be async?
+
   const signIn = (e) => {
     e.preventDefault();
     navigation.push("Loading");
@@ -24,6 +26,14 @@ function SignInScreen({ navigation }) {
       console.warn(error.toString(error));
     }
   };
+
+
+  
+
+
+
+
+
 
   return (
     <View>

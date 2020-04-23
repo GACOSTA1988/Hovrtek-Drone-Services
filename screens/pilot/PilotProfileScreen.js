@@ -24,17 +24,15 @@ function PilotProfileScreen(props, { getProfiles }) {
   console.log("LIST OF PROFILES", props.listOfProfiles)
   const list = props.listOfProfiles
   // list.forEach(e=> console.log(e))
-    let currentUserProps = list.find(x => x.userID === userID)
+  let currentUserProps = list.find(x => x.userID === userID)
 
   console.log('CURRENT USER PROPS', currentUserProps)
   console.log("PILOT PROFILE PROPS", props)
   console.log("LIST OF PROFILES", props.listOfProfiles)
 
-
   function handleDroneChange(text) {
     setDrone(text);
   }
-
 
   const editProfile= e => {
     e.preventDefault();
@@ -55,7 +53,7 @@ function PilotProfileScreen(props, { getProfiles }) {
         {currentUserProps ? (<Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk?</Text>}
 
         {currentUserProps ? (<Text style={styles.h2}>Do you have experience flying over 400 feet? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience flying over 400 feet?</Text>}
-        
+
 
 
 

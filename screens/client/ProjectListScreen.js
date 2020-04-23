@@ -10,7 +10,7 @@ import {
   ScrollView
 } from "react-native";
 import { connect } from "react-redux";
-import { getProjects, deleteProject } from "../../actions/index";
+import { getProjects, deleteProject, getClientProfiles } from "../../actions/index";
 import _ from "lodash";
 import {
   Ionicons,
@@ -20,12 +20,14 @@ import {
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
+import * as firebase from 'firebase';
 
-function ProjectListScreen(props, { getProjects }) {
+function ProjectListScreen(props, { getProjects, getClientProfiles }) {
   const navigation = useNavigation();
 
   useEffect(() => {
     props.getProjects();
+    props.getClientProfiles();
   }, []);
 
   return (
@@ -72,6 +74,9 @@ function ProjectListScreen(props, { getProjects }) {
                         </Text>
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
+                        </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Posted by: {  }{" "}
                         </Text>
                         { item.pilotID ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
@@ -159,11 +164,20 @@ function mapStateToProps(state) {
       key: key
     };
   });
+  console.log("this is state: ", state);
+  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  console.log("client profiles: ", listOfClientProfiles);
   return {
-    listOfProjects
+    listOfProjects,
+    listOfClientProfiles
   };
 }
 
-export default connect(mapStateToProps, { getProjects, deleteProject })(
+export default connect(mapStateToProps, { getProjects, deleteProject, getClientProfiles })(
   ProjectListScreen
 );

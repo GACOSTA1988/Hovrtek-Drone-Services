@@ -51,10 +51,10 @@ function SignInScreen({ navigation }) {
         <TouchableOpacity onPress={() => navigation.push("SignUp")}>
           <Text style={styles.buttonText}>Create an Account</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@email.com", "password")} >
+        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@mail.com", "password")} >
           <Text style={styles.buttonText}>Client shortcut</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("captain@person.com", "password")} >
+        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@mail.com", "password")} >
           <Text style={styles.buttonText}>Pilot shortcut</Text>
         </TouchableOpacity>
       </View>

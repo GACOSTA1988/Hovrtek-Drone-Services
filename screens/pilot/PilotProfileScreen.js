@@ -3,17 +3,17 @@ import { TouchableOpacity, View, Text, StyleSheet, Button, ScrollView, TextInput
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProfiles } from "../../actions/index";
+import { getPilotProfiles } from "../../actions/index";
 import * as firebase from 'firebase';
 import _ from "lodash";
 
-function PilotProfileScreen(props, { getProfiles }) {
+function PilotProfileScreen(props, { getPilotProfiles }) {
 
   const navigation = useNavigation();
   const [drone, setDrone] = useState('');
 
   useEffect(() => {
-    props.getProfiles();
+    props.getPilotProfiles();
   }, []);
 
 
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
-  const listOfProfiles = _.map(state.profilesList.profilesList, (val, key) => {
+  const listOfProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
     return {
       ...val,
       key: key
@@ -114,6 +114,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getProfiles })(
+export default connect(mapStateToProps, { getPilotProfiles })(
   PilotProfileScreen
 );

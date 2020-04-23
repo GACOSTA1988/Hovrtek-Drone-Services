@@ -16,7 +16,7 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from "react-native-simple-radio-button";
-import { postProfiles } from "../../actions/index";
+import { postClientProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import ImageUploader from "../../components/client/ImageUploader";

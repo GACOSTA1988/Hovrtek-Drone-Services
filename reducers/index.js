@@ -1,10 +1,13 @@
 import { combineReducers } from "redux";
 
 import ProjectReducer from "./ProjectReducer";
-import ProfileReducer from './ProfileReducer';
+import PilotProfileReducer from './PilotProfileReducer';
+import ClientProfileReducer from './ClientProfileReducer';
 
 const rootReducer = combineReducers({
   projectsList: ProjectReducer,
-  profilesList: ProfileReducer
+  pilotProfilesList: PilotProfileReducer,
+  clientProfilesList: ClientProfileReducer
 });
+
 export default rootReducer;

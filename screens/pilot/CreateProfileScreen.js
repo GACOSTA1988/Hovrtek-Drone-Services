@@ -31,7 +31,7 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
 
   if (currentUserProps) {
   }
-
+  let pilotLocationPlaceHolder = "";
   let personalBioPlaceHolder = "";
   let yearsOfExperiencePlaceHolder = "";
   let faaLicenseExpPlaceHolder = "";
@@ -42,6 +42,7 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
   let fourHundredPlaceHolder = "";
 
   if (currentUserProps) {
+    pilotLocationPlaceHolder = currentUserProps.pilotLocation;
     personalBioPlaceHolder = currentUserProps.personalBio;
     yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
     faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
@@ -64,10 +65,20 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
   const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
 
   const submit = (e) => {
-    console.log(e);
-    console.log(editPilotProfile);
-    console.log(personalBio);
-    props.editPilotProfile();
+    console.log(currentUserProps);
+
+    props.editPilotProfile(
+      currentUserProps.pilotLocation,
+      personalBio,
+      yearsOfExperience,
+      faaLicenseExp,
+      insuredStatus,
+      travelStatus,
+      droneType,
+      airMap,
+      fourHundred,
+      currentUserProps.key
+    );
   };
 
   return (

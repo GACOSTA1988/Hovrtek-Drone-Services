@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity,
+import {
+  TouchableOpacity,
   View,
   Text,
   StyleSheet,
@@ -7,29 +8,29 @@ import { TouchableOpacity,
   ScrollView,
   TextInput,
   FlatList,
-  TouchableHighlight
-  } from "react-native";
+  TouchableHighlight,
+} from "react-native";
 import {
   Ionicons,
   FontAwesome5,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { getProjects } from "../../actions/index";
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 import _ from "lodash";
 
 function MyJobsScreen(props, { getProjects }) {
-
   const navigation = useNavigation();
 
   useEffect(() => {
     props.getProjects();
   }, []);
 
+  let userID = null;
   if (firebase.auth().currentUser) {
-    const userID = firebase.auth().currentUser.uid;
+    userID = firebase.auth().currentUser.uid;
   }
   const listOfMyProjects = [];
   props.listOfProjects.forEach((project) => {
@@ -48,7 +49,7 @@ function MyJobsScreen(props, { getProjects }) {
               style={{ width: "100%" }}
               data={listOfMyProjects}
               // showsVerticalScrollIndicator={true}
-              keyExtractor={item => item.key}
+              keyExtractor={(item) => item.key}
               renderItem={({ item }) => {
                 return (
                   <View
@@ -57,17 +58,14 @@ function MyJobsScreen(props, { getProjects }) {
                       borderRadius: 15,
                       backgroundColor: "#092455",
                       marginBottom: 15,
-                      padding: 20
+                      padding: 20,
                     }}
                   >
                     <TouchableHighlight
                       onPress={() =>
-                        props.navigation.navigate(
-                          "JobDetailsScreen",
-                          {
-                            ...item
-                          }
-                        )
+                        props.navigation.navigate("JobDetailsScreen", {
+                          ...item,
+                        })
                       }
                     >
                       <View>
@@ -91,38 +89,36 @@ function MyJobsScreen(props, { getProjects }) {
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   projectCard: {
-    width: 380
+    width: 380,
   },
   clientText: {
     fontSize: 30,
     color: "darkblue",
-    textAlign: "center"
+    textAlign: "center",
   },
   ClientProjectListTextWrapper: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   projectListWrapper: {
     alignItems: "center",
-    marginTop: 10
-  }
+    marginTop: 10,
+  },
 });
 
 function mapStateToProps(state) {
   const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
     return {
       ...val,
-      key: key
+      key: key,
     };
   });
   return {
-    listOfProjects
+    listOfProjects,
   };
 }
 
-export default connect(mapStateToProps, { getProjects })(
-  MyJobsScreen
-);
+export default connect(mapStateToProps, { getProjects })(MyJobsScreen);

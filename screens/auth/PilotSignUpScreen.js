@@ -34,8 +34,9 @@ function PilotSignUpScreen(props) {
   const [insuredStatus, setInsuredStatus] = useState("");
   const [travelStatus, setTravelStatus] = useState("");
   const [droneType, setDroneType] = useState("");
-  const [airMap, setAirMap] = useState("No");
-  const [fourHundred, setFourHundred] = useState("No");
+  const [airMap, setAirMap] = useState("");
+  const [fourHundred, setFourHundred] = useState("");
+  const [profileComplete, setProfileComplete] = useState("No");
 
   async function signUp(e) {
     e.preventDefault();
@@ -64,7 +65,8 @@ function PilotSignUpScreen(props) {
       droneType,
       airMap,
       fourHundred,
-      userID
+      userID,
+      profileComplete
     );
   }
 
@@ -110,41 +112,7 @@ function PilotSignUpScreen(props) {
             placeholderTextColor="grey"
           />
 
-          {/* <TextInput
-            placeholder="Drone Type"
-            value={droneType}
-            onChangeText={setDroneType}
-            style={styles.input}
-            placeholderTextColor="grey"
-          />
-          <Text style={styles.textSub}>
-            Have you ever used{"\n"}AirMap or Kitty Hawk?
-          </Text>
-          <AirDrop />
-          <Picker
-            style={styles.airMapPicker}
-            selectedValue={airMap}
-            onValueChange={(itemValue, itemIndex) => setAirMap(itemValue)}
-          >
-            <Picker.Item label="No" value="no" />
-            <Picker.Item label="Yes" value="yes" />
-          </Picker>
-          <Text style={styles.textSub}>
-            Do you have experience flying over 400 feet?
-          </Text>
-          <Picker
-            style={styles.fourHundredPicker}
-            selectedValue={fourHundred}
-            style={{ height: 50, width: 100 }}
-            onValueChange={(itemValue, itemIndex) => setFourHundred(itemValue)}
-          >
-            <Picker.Item label="No" value="no" />
-            <Picker.Item label="Yes" value="yes" />
-          </Picker>
-          <Text style={styles.imageUploaderText}>
-            Please upload your FAA license
-          </Text>
-          <LicenseUploader /> */}
+          <LicenseUploader />
           <Button title="Sign up" onPress={signUp} />
         </TouchableOpacity>
       </ScrollView>

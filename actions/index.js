@@ -82,7 +82,8 @@ export function postPilotProfiles(
   droneType,
   airMap,
   fourHundred,
-  userID
+  userID,
+  profileComplete
 ) {
   return (dispatch) => {
     firebase.database().ref("/pilotProfiles").push({
@@ -98,6 +99,7 @@ export function postPilotProfiles(
       airMap,
       fourHundred,
       userID,
+      profileComplete,
     });
   };
 }
@@ -112,6 +114,7 @@ export function editPilotProfile(
   droneType = "",
   airMap = "",
   fourHundred = "",
+  profileComplete = "",
   key = ""
 ) {
   return (dispatch) => {
@@ -125,6 +128,7 @@ export function editPilotProfile(
       droneType,
       airMap,
       fourHundred,
+      profileComplete,
     });
   };
 }

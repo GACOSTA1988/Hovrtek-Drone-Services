@@ -15,20 +15,21 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+import LicenseUploader from "../../components/auth/LicenseUploader";
 
-function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
+function PilotProfileImageUploadScreen(
+  props,
+  { getPilotProfiles, editPilotProfile }
+) {
   const navigation = useNavigation();
-  console.log("nooooooooo", editPilotProfile);
-  console.log("yoooooooo", getPilotProfiles);
+
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
-
   let user = firebase.auth().currentUser;
   let userID = user.uid;
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
-
   if (currentUserProps) {
   }
   let pilotLocationPlaceHolder = "";
@@ -40,7 +41,7 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
   let droneTypePlaceHolder = "";
   let airMapPlaceHolder = "";
   let fourHundredPlaceHolder = "";
-
+  let profileCompletePlaceHolder = "";
   if (currentUserProps) {
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
     personalBioPlaceHolder = currentUserProps.personalBio;
@@ -51,6 +52,7 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
     droneTypePlaceHolder = currentUserProps.droneType;
     airMapPlaceHolder = currentUserProps.airMapPlace;
     fourHundredPlaceHolder = currentUserProps.fourHundred;
+    profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
   }
 
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
@@ -63,10 +65,9 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
   const [droneType, setDroneType] = useState(droneTypePlaceHolder);
   const [airMap, setAirMap] = useState(airMapPlaceHolder);
   const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
-
+  const [profileComplete, setProfileComplete] = useState("Yes");
   const submit = (e) => {
     console.log(currentUserProps);
-
     props.editPilotProfile(
       currentUserProps.pilotLocation,
       personalBio,
@@ -77,68 +78,43 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
       droneType,
       airMap,
       fourHundred,
+      profileComplete,
       currentUserProps.key
     );
+    navigation.popToTop();
   };
-
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={styles.welcomeText}>
-          Welcome to your Profile Page{"\n"}
+          Hi!
           {currentUserProps ? (
-            <Text>
+            <Text style={styles.subText}>
               {"\n"}
-              {currentUserProps.pilotFirstName} {currentUserProps.pilotLastName}
+              {currentUserProps.pilotFirstName}
+              {"\n"}
+              {currentUserProps.pilotLastName}
             </Text>
           ) : (
             <Text>Name:</Text>
           )}
         </Text>
-        {currentUserProps ? (
-          <Text style={styles.h2}>
-            {"\n"}
-            Location: {currentUserProps.pilotLocation || "ssss"}
-          </Text>
-        ) : (
-          <Text style={styles.h2}>Location:</Text>
-        )}
-
-        {currentUserProps ? (
-          <Text style={styles.h2}>
-            {"\n"}
-            Bio: {currentUserProps.airMap}
-          </Text>
-        ) : (
-          <Text style={styles.h2}>Location:</Text>
-        )}
-
-        {currentUserProps ? (
-          <TextInput
-            style={{
-              marginTop: 20,
-              height: 90,
-              borderColor: "gray",
-              borderWidth: 1,
-            }}
-            onChangeText={setPersonalBio}
-            value={personalBio}
-          />
-        ) : (
-          <Text style={styles.h2}>Please:</Text>
-        )}
-
-        <Button title="Submit" onPress={submit} />
+        <Text>Please Upload FAA License Image</Text>
+        <LicenseUploader />
+        <Text>Please Upload Profile Picture</Text>
+        <LicenseUploader />
+        <Button title="Complete Profile" onPress={submit} />
+        <Button title="Back" onPress={() => props.navigation.goBack()} />
       </ScrollView>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 25,
+    backgroundColor: "lightgray",
+    height: "100%",
   },
   button: {
     paddingHorizontal: 20,
@@ -147,17 +123,25 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   welcomeText: {
-    fontSize: 25,
+    marginTop: "15%",
+    marginBottom: "10%",
+    fontSize: 30,
+    color: "darkblue",
+    fontWeight: "600",
+    textAlign: "center",
   },
-  h1: {
-    fontSize: 15,
-    marginBottom: 20,
-    marginTop: 50,
+  subText: {
+    marginTop: "25%",
+    marginBottom: "10%",
+    fontSize: 30,
+    color: "black",
+    fontWeight: "600",
+    textAlign: "center",
   },
-  h2: {
+  bodyText: {
     fontSize: 15,
-    marginBottom: 20,
-    marginTop: 5,
+    color: "black",
+    textAlign: "center",
   },
   input: {
     borderWidth: 1,
@@ -165,11 +149,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 80,
   },
-  dummyText: {
-    marginTop: 300,
-  },
 });
-
 function mapStateToProps(state) {
   const listOfProfiles = _.map(
     state.pilotProfilesList.pilotProfilesList,
@@ -186,5 +166,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
-  CreateProfileScreen
+  PilotProfileImageUploadScreen
 );

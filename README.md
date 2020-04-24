@@ -12,3 +12,6 @@
 
 * need loading screen after await in sign up
 * need error handling with wrong password/email
+
+
+Update Profile breaking upon change

@@ -35,11 +35,22 @@ function NewProjectScreen(props, { postProjects }) {
 
   const submit = (e) => {
     e.preventDefault();
+
+    if (location.trim() === '') {
+      Alert.alert("Please fill in the location of your Drone Service");
+      return
+    } else if (date.trim() === '') {
+      Alert.alert("Please enter the date of your drone service");
+      return
+    } else if (recording.trim() === '') {
+      Alert.alert("Please enter what you will be recording with the drone");
+    } else {
+
     props.postProjects(clientID, location, date, recording, light, null);
     navigation.navigate("ProjectListScreen");
     setDate(""), setLight(""), setLocation(""), setRecording("");
   };
-
+  }
   // RADIO BUTTON STUFF
 
   let radio_props = [

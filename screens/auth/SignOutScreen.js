@@ -2,6 +2,9 @@ import React from "react";
 import * as firebase from "firebase";
 
 const SignOutScreen = () => {
+
+ 
+
   try {
     firebase.auth().signOut();
   } catch (e) {

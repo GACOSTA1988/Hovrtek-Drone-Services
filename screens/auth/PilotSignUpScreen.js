@@ -31,7 +31,7 @@ function PilotSignUpScreen(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-
+  // Alert.alert("Welcome to Hovrtek!")
   async function signUp(e) {
     e.preventDefault();
     props.navigation.push("Loading");
@@ -46,31 +46,31 @@ function PilotSignUpScreen(props) {
       Alert.alert("Please fill in your loaction");
       navigation.navigate("PilotSignUpScreen");
     } else {
-      Alert.alert("Welcome to Hovrtek!")
+      
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+      } catch (error) {
+        Alert.alert(error.message);
+        navigation.navigate("PilotSignUpScreen");
+      }
+      let user = firebase.auth().currentUser;
+      await user.updateProfile({
+        displayName: pilotFirstName,
+        photoURL: "P",
+      });
+      await user.reload().then(updateUser());
+      const userID = user.uid;
+      props.postPilotProfiles(
+        pilotFirstName,
+        pilotLastName,
+        pilotLocation,
+        droneType,
+        airMap,
+        fourHundred,
+        userID
+      );
     }
-
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-    } catch (error) {
-      Alert.alert(error.message);
-      navigation.navigate("PilotSignUpScreen");
-    }
-    let user = firebase.auth().currentUser;
-    await user.updateProfile({
-      displayName: pilotFirstName,
-      photoURL: "P",
-    });
-    await user.reload().then(updateUser());
-    const userID = user.uid;
-    props.postPilotProfiles(
-      pilotFirstName,
-      pilotLastName,
-      pilotLocation,
-      droneType,
-      airMap,
-      fourHundred,
-      userID
-    );
+    
   }
 
 

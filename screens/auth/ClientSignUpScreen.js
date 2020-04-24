@@ -29,21 +29,6 @@ function ClientSignUpScreen (props) {
     e.preventDefault();
     props.navigation.push("Loading");
 
-    if (clientName.trim() === '') {
-      Alert.alert("Please fill in your name.");
-      navigation.navigate("ClientSignUpScreen");
-    } else if (clientLocation.trim() == '') {
-      Alert.alert("Please fill in your loaction.");
-      navigation.navigate("ClientSignUpScreen");
-    } else {
-      alert("Great, thank you!")
-    }
-
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-    } catch (error) {
-      Alert.alert(error.message);
-      navigation.navigate("ClientSignUpScreen");
       if (clientName.trim() === '') {
         Alert.alert("Please fill in your name.");
         navigation.navigate("ClientSignUpScreen");
@@ -51,22 +36,24 @@ function ClientSignUpScreen (props) {
         Alert.alert("Please fill in your loaction.");
         navigation.navigate("ClientSignUpScreen");
       } else {
-        alert("Great, thank you!")
+
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+      } catch (error) {
+        Alert.alert(error.message);
+        navigation.navigate("ClientSignUpScreen");
       }
-
-
-
+      let user = firebase.auth().currentUser;
+      await user.updateProfile({
+        displayName: clientName,
+        photoURL: "C",
+      });
+      await user.reload().then(updateUser());
+      const userID = user.uid;
+      props.postClientProfiles(clientName, clientLocation, email, userID);
+        navigation.navigate("ProjectListScreen");
     }
-    let user = firebase.auth().currentUser;
-    await user.updateProfile({
-      displayName: clientName,
-      photoURL: "C",
-    });
-    await user.reload().then(updateUser());
-    const userID = user.uid;
-    props.postClientProfiles(clientName, clientLocation, email, userID);
   }
-
 
 
   return (

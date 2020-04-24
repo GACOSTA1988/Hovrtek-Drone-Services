@@ -28,8 +28,9 @@ function MyJobsScreen(props, { getProjects }) {
     props.getProjects();
   }, []);
 
+  let userID = null;
   if (firebase.auth().currentUser) {
-    const userID = firebase.auth().currentUser.uid;
+    userID = firebase.auth().currentUser.uid;
   }
   const listOfMyProjects = [];
   props.listOfProjects.forEach((project) => {

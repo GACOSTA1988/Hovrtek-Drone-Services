@@ -14,7 +14,7 @@ const PilotNavigation = () => {
   return (
     <PilotDrawer.Navigator>
       <PilotDrawer.Screen
-        name="ProjectsNewProjectTabNavigation"
+        name="Home"
         component={JobListMyJobsTabNavigation}
       />
       <PilotDrawer.Screen

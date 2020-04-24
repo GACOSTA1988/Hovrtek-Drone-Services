@@ -3,7 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
-import CreateProfileScreen from "../screens/pilot/CreateProfileScreen";
+import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 
 import SignOutScreen from "../screens/auth/SignOutScreen";
 
@@ -26,10 +26,10 @@ const PilotNavigation = () => {
         options={{ title: "Support" }}
       />
       <PilotDrawer.Screen
-        name="CreateProfileScreen"
-        component={CreateProfileScreen}
+        name="Profile"
+        component={PilotCreateProfileNavigation}
         headerMode="none"
-        options={{ title: "Create/Edit Profile" }}
+        options={{ title: "Profile" }}
       />
 
       <PilotDrawer.Screen

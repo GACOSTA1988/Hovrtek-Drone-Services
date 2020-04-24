@@ -103,16 +103,16 @@ export function postPilotProfiles(
 }
 
 export function editPilotProfile(
-  pilotLocation = "New",
-  personalBio = "New",
-  yearsOfExperience = "New",
-  faaLicenseExp = "New",
-  insuredStatus = "New",
-  travelStatus = "New",
-  droneType = "New",
-  airMap = "New",
-  fourHundred = "New",
-  key = "New"
+  pilotLocation = "",
+  personalBio = "",
+  yearsOfExperience = "",
+  faaLicenseExp = "",
+  insuredStatus = "",
+  travelStatus = "",
+  droneType = "",
+  airMap = "",
+  fourHundred = "",
+  key = ""
 ) {
   return (dispatch) => {
     firebase.database().ref(`/pilotProfiles`).child(key).update({

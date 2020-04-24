@@ -5,6 +5,7 @@ const SupportScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Support Screen</Text>
+      
     </View>
   );
 };

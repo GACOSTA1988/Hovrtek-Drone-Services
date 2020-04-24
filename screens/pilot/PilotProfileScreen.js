@@ -16,24 +16,17 @@ function PilotProfileScreen(props, { getPilotProfiles }) {
     props.getPilotProfiles();
   }, []);
 
+  let userID = null;
+  if (firebase.auth().currentUser) {
+    userID = firebase.auth().currentUser.uid;
+  }
 
-  let user = firebase.auth().currentUser;
-  console.log("USER", user)
-  let userID = user.uid
-  console.log("USERID", userID)
-  console.log("LIST OF PROFILES", props.listOfProfiles)
   const list = props.listOfProfiles
-  // list.forEach(e=> console.log(e))
   let currentUserProps = list.find(x => x.userID === userID)
-
-  console.log('CURRENT USER PROPS', currentUserProps)
-  console.log("PILOT PROFILE PROPS", props)
-  console.log("LIST OF PROFILES", props.listOfProfiles)
 
   const editProfile= e => {
     e.preventDefault();
-    navigation.navigate("ProfileListScreen");
-    setDrone("");
+    alert('make this')
   };
 
   return (

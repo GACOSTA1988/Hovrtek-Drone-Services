@@ -30,10 +30,6 @@ function PilotProfileScreen(props, { getPilotProfiles }) {
   console.log("PILOT PROFILE PROPS", props)
   console.log("LIST OF PROFILES", props.listOfProfiles)
 
-  function handleDroneChange(text) {
-    setDrone(text);
-  }
-
   const editProfile= e => {
     e.preventDefault();
     navigation.navigate("ProfileListScreen");
@@ -42,25 +38,26 @@ function PilotProfileScreen(props, { getPilotProfiles }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    
+        <View style={styles.welcomeWrapper}>
         <Text style={styles.welcomeText}>Welcome to your Profile Page, {currentUserProps ? (<Text>{currentUserProps.pilotFirstName} {currentUserProps.pilotLastName}</Text>) : <Text>Name:</Text>}</Text>
-
+      </View>
+        <View style={styles.profileDetails}>
         {currentUserProps ? (<Text style={styles.h2}>Location: {currentUserProps.pilotLocation}</Text>) : <Text style={styles.h2}>Location:</Text>}
-
 
         {currentUserProps ? (<Text style={styles.h2}>What type of drone do you fly? {currentUserProps.droneType}</Text>) : <Text style={styles.h2}>Location:</Text>}
 
         {currentUserProps ? (<Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience with AirMap or Kitty Hawk?</Text>}
 
         {currentUserProps ? (<Text style={styles.h2}>Do you have experience flying over 400 feet? {currentUserProps.airMap}</Text>) : <Text style={styles.h2}>Do you have experience flying over 400 feet?</Text>}
-
+        </View>
 
 
 
         <TouchableOpacity onPress={editProfile}><Text style={styles.submitButton}>Edit Profile</Text></TouchableOpacity>
 
         <Text style={styles.dummyText}>Dummy text until I investigate ScrollView more thoroughly</Text>
-      </ScrollView>
+  
     </View>
   );
 };
@@ -69,7 +66,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 25
+    justifyContent: 'center',
+    marginTop: 80
   },
   button: {
     paddingHorizontal: 20,
@@ -88,7 +86,8 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 15,
     marginBottom: 20,
-    marginTop: 5
+    marginTop: 5,
+    color: 'white'
   },
   input: {
     borderWidth: 1,
@@ -98,7 +97,15 @@ const styles = StyleSheet.create({
   },
   dummyText: {
     marginTop: 300
+  },
+  profileDetails: {
+    backgroundColor: '#092455',
+    width: "80%"
+  },
+  welcomeWrapper:{
+    marginBottom: 50
   }
+
 });
 
 

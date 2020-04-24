@@ -19,21 +19,29 @@ function SignInScreen({ navigation }) {
 
   const signIn = (e) => {
     e.preventDefault();
+    if (email.length < 4) {
+      Alert.alert('Please enter an email address.');
+      return;
+    }
+    if (!password.length) {
+      Alert.alert('Please enter a password.');
+      return;
+    }
     navigation.push("Loading");
     try {
-      firebase.auth().signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.warn(error.toString(error));
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+          Alert.alert('Incorrect username or password');
+        } else {
+          console.log(error.code);
+          Alert.alert(error.toString(error));
+        }
+        navigation.pop();
+      });
+    } catch {
+      Alert.alert(error.toString(error));
     }
   };
-
-
-  
-
-
-
-
-
 
   return (
     <View>

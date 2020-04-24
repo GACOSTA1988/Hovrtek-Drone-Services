@@ -19,11 +19,11 @@ import {
 } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import * as firebase from 'firebase';
 
 function ProjectListScreen(props, { getProjects, getClientProfiles }) {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   useEffect(() => {
     props.getProjects();
@@ -164,7 +164,7 @@ function mapStateToProps(state) {
       key: key
     };
   });
-  console.log("this is state: ", state);
+  console.log("this is list of projects: ", listOfProjects);
   const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
     return {
       ...val,

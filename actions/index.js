@@ -102,7 +102,7 @@ export function postPilotProfiles(
   };
 }
 
-export function editPilotProfile({
+export function editPilotProfile(
   pilotLocation = "New",
   personalBio = "New",
   yearsOfExperience = "New",
@@ -112,8 +112,8 @@ export function editPilotProfile({
   droneType = "New",
   airMap = "New",
   fourHundred = "New",
-  key = "New",
-}) {
+  key = "New"
+) {
   return (dispatch) => {
     firebase.database().ref(`/pilotProfiles`).child(key).update({
       pilotLocation,

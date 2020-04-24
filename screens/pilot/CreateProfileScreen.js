@@ -87,7 +87,7 @@ function CreateProfileScreen(props, { getPilotProfiles, editPilotProfile }) {
         {currentUserProps ? (
           <Text style={styles.h2}>
             {"\n"}
-            Location: {currentUserProps.pilotLocation}
+            Location: {currentUserProps.pilotLocation || "ssss"}
           </Text>
         ) : (
           <Text style={styles.h2}>Location:</Text>

@@ -8,14 +8,13 @@ import {
   Button,
   Picker,
   ScrollView,
-  Alert
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postPilotProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import LicenseUploader from "../../components/auth/LicenseUploader";
 
 function PilotSignUpScreen(props) {
@@ -25,54 +24,51 @@ function PilotSignUpScreen(props) {
   const [pilotFirstName, setPilotFirstName] = useState("");
   const [pilotLastName, setPilotLastName] = useState("");
   const [pilotLocation, setPilotLocation] = useState("");
-  const [droneType, setDroneType] = useState("");
-  const [airMap, setAirMap] = useState("No");
-  const [fourHundred, setFourHundred] = useState("No");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  // Alert.alert("Welcome to Hovrtek!")
+
+  // BLANK PLACE HOLDERS TO BE UPDATED ON PROFILE CREATION
+  const [personalBio, setPersonalBio] = useState("");
+  const [yearsOfExperience, setYearsOfExperience] = useState("");
+  const [faaLicenseExp, setFaaLicenseExp] = useState("");
+  const [insuredStatus, setInsuredStatus] = useState("");
+  const [travelStatus, setTravelStatus] = useState("");
+  const [droneType, setDroneType] = useState("");
+  const [airMap, setAirMap] = useState("");
+  const [fourHundred, setFourHundred] = useState("");
+  const [profileComplete, setProfileComplete] = useState("No");
+
   async function signUp(e) {
     e.preventDefault();
     props.navigation.push("Loading");
-
-    if (pilotFirstName.trim() === '') {
-      Alert.alert("Please fill in your first name");
-      navigation.navigate("PilotSignUpScreen");
-    } else if (pilotLastName.trim() === '') {
-      Alert.alert("Please fill in your first name");
-      navigation.navigate("PilotSignUpScreen");
-    } else if (pilotLocation.trim() == '') {
-      Alert.alert("Please fill in your loaction");
-      navigation.navigate("PilotSignUpScreen");
-    } else {
-      
-      try {
-        await firebase.auth().createUserWithEmailAndPassword(email, password);
-      } catch (error) {
-        Alert.alert(error.message);
-        navigation.navigate("PilotSignUpScreen");
-      }
-      let user = firebase.auth().currentUser;
-      await user.updateProfile({
-        displayName: pilotFirstName,
-        photoURL: "P",
-      });
-      await user.reload().then(updateUser());
-      const userID = user.uid;
-      props.postPilotProfiles(
-        pilotFirstName,
-        pilotLastName,
-        pilotLocation,
-        droneType,
-        airMap,
-        fourHundred,
-        userID
-      );
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error.toString(error));
     }
-    
+    let user = firebase.auth().currentUser;
+    await user.updateProfile({
+      displayName: pilotFirstName,
+      photoURL: "P",
+    });
+    await user.reload().then(updateUser());
+    const userID = user.uid;
+    props.postPilotProfiles(
+      pilotFirstName,
+      pilotLastName,
+      pilotLocation,
+      personalBio,
+      yearsOfExperience,
+      faaLicenseExp,
+      insuredStatus,
+      travelStatus,
+      droneType,
+      airMap,
+      fourHundred,
+      userID,
+      profileComplete
+    );
   }
-
 
   return (
     <View style={styles.wrapper}>
@@ -94,7 +90,13 @@ function PilotSignUpScreen(props) {
             placeholderTextColor="grey"
           />
           <TextInput
-            keyboardType={"email-address"}
+            placeholder="State"
+            value={pilotLocation}
+            onChangeText={setPilotLocation}
+            style={styles.input}
+            placeholderTextColor="grey"
+          />
+          <TextInput
             placeholder="email"
             value={email}
             onChangeText={setEmail}
@@ -109,57 +111,8 @@ function PilotSignUpScreen(props) {
             style={styles.input}
             placeholderTextColor="grey"
           />
-          <TextInput
-            placeholder="Location"
-            value={pilotLocation}
-            onChangeText={setPilotLocation}
-            style={styles.input}
-            placeholderTextColor="grey"
-          />
-          <TextInput
-            placeholder="Drone Type"
-            value={droneType}
-            onChangeText={setDroneType}
-            style={styles.input}
-            placeholderTextColor="grey"
-          />
-          <Text style={styles.textSub}>
-            Have you ever used{"\n"}AirMap or Kitty Hawk?
-          </Text>
-          {/* <AirDrop /> */}
-          <Picker
-            style={styles.airMapPicker}
-            selectedValue={airMap}
-            onValueChange={(itemValue, itemIndex) => setAirMap(itemValue)}
-          >
-            <Picker.Item label="No" value="no" />
-            <Picker.Item label="Yes" value="yes" />
-          </Picker>
-
-          <Text style={styles.textSub}>
-            Do you have experience flying over 400 feet?
-          </Text>
-          <Picker
-            style={styles.fourHundredPicker}
-            selectedValue={fourHundred}
-            style={{ height: 50, width: 100 }}
-            onValueChange={(itemValue, itemIndex) => setFourHundred(itemValue)}
-          >
-            <Picker.Item label="No" value="no" />
-            <Picker.Item label="Yes" value="yes" />
-          </Picker>
-
-
-          <Text style={styles.imageUploaderText}>Please upload your FAA license</Text>
-
-          <LicenseUploader />
-
-
-
 
           <Button title="Sign up" onPress={signUp} />
-
-          <Text style={styles.dummyText}>dummy text</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -210,7 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   dummyText: {
-    marginTop: 200
+    marginTop: 200,
   },
 
   airMapPicker: {
@@ -225,11 +178,8 @@ const styles = StyleSheet.create({
   },
 
   imageUploaderText: {
-    marginTop: 250
-  }
-
+    marginTop: 250,
+  },
 });
 
-
 export default connect(null, { postPilotProfiles })(PilotSignUpScreen);
-

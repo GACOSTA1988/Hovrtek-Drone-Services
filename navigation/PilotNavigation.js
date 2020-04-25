@@ -3,19 +3,15 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
-import CreateProfileScreen from '../screens/pilot/CreateProfileScreen';
-import PilotProfileScreen from '../screens/pilot/PilotProfileScreen';
-import SignOutScreen from '../screens/auth/SignOutScreen';
+import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
+import SignOutScreen from "../screens/auth/SignOutScreen";
 
 const PilotDrawer = createDrawerNavigator();
 
 const PilotNavigation = () => {
   return (
     <PilotDrawer.Navigator>
-      <PilotDrawer.Screen
-        name="Home"
-        component={JobListMyJobsTabNavigation}
-      />
+      <PilotDrawer.Screen name="Home" component={JobListMyJobsTabNavigation} />
       <PilotDrawer.Screen
         name="AboutScreen"
         component={AboutScreen}
@@ -29,17 +25,12 @@ const PilotNavigation = () => {
         options={{ title: "Support" }}
       />
       <PilotDrawer.Screen
-        name="CreateProfileScreen"
-        component={CreateProfileScreen}
+        name="Profile"
+        component={PilotCreateProfileNavigation}
         headerMode="none"
-        options={{ title: "Create/Edit Profile" }}
+        options={{ title: "Profile" }}
       />
-      <PilotDrawer.Screen
-        name="PilotProfileScreen"
-        component={PilotProfileScreen}
-        headerMode="none"
-        options={{ title: "Your Profile" }}
-      />
+
       <PilotDrawer.Screen
         name="SignOutScreen"
         component={SignOutScreen}

@@ -1,27 +1,49 @@
 import React from "react";
-import { Text, View, StyleSheet, Header, Image } from "react-native";
+import { Text, View, StyleSheet, Header, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Linking } from 'expo';
 
 const Footer = () => {
+
+  function goToLinkedin() {
+    Linking.openURL('https://www.linkedin.com/company/hovrtek/');
+  }
+
+  function goToFacebook() {
+    Linking.openURL('https://www.facebook.com/Hovrtek/');
+  }
+
+  function goToInstagram() {
+    Linking.openURL('https://www.instagram.com/hovrtek/');
+  }
+
   return (
     <View style={styles.footerWrapper}>
-      <Text style={styles.mediaButton}>
-        <Icon
-          name="facebook"
-          size={30}
-          color="white"
-          style={{ marginRight: 10 }}
-        ></Icon>
-        <Text style={styles.space}>***</Text>
-        <Icon
-          name="instagram"
-          size={30}
-          color="white"
-          style={styles.icon}
-        ></Icon>
-        <Text style={styles.space}>***</Text>
-        <Icon name="linkedin" size={35} color="white"></Icon>
-      </Text>
+      <View style={styles.mediaButton}>
+        <TouchableOpacity onPress={goToLinkedin}>
+          <Icon
+            name="facebook"
+            size={30}
+            style={styles.icon}
+            color="white">
+          </Icon>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={goToInstagram}>
+          <Icon
+            name="instagram"
+            size={30}
+            color="white"
+            style={styles.icon}>
+          </Icon>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={goToFacebook}>
+          <Icon name="linkedin"
+            size={35}
+            style={styles.icon}
+            color="white">
+          </Icon>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -39,11 +61,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 10
   },
   mediaButton: {
-    textAlign: "center",
-    paddingTop: 20
+    alignItems: "center",
+    paddingLeft: '25%',
+    flexDirection: 'row'
   },
   icon: {
-    margin: 60
+    margin: 20
   },
   space: {
     color: "#092455"

@@ -5,7 +5,6 @@ import SupportScreen from "../screens/pilot/SupportScreen";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
 import CreateProfileScreen from '../screens/pilot/CreateProfileScreen';
 import PilotProfileScreen from '../screens/pilot/PilotProfileScreen';
-import ProfileListScreen from '../screens/pilot/ProfileListScreen';
 import SignOutScreen from '../screens/auth/SignOutScreen';
 
 const PilotDrawer = createDrawerNavigator();
@@ -40,12 +39,6 @@ const PilotNavigation = () => {
         component={PilotProfileScreen}
         headerMode="none"
         options={{ title: "Your Profile" }}
-      />
-      <PilotDrawer.Screen
-        name="ProfileListScreen"
-        component={ProfileListScreen}
-        headerMode="none"
-        options={{ title: "All Profiles" }}
       />
       <PilotDrawer.Screen
         name="SignOutScreen"

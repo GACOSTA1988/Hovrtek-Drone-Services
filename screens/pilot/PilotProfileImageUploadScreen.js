@@ -46,11 +46,11 @@ function PilotProfileImageUploadScreen(
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
     personalBioPlaceHolder = currentUserProps.personalBio;
     yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
-    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
+    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExp;
     insuredStatusPlaceHolder = currentUserProps.insuredStatus;
     travelStatusPlaceHolder = currentUserProps.travelStatus;
     droneTypePlaceHolder = currentUserProps.droneType;
-    airMapPlaceHolder = currentUserProps.airMapPlace;
+    airMapPlaceHolder = currentUserProps.airMap;
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
   }
@@ -105,7 +105,6 @@ function PilotProfileImageUploadScreen(
         <LicenseUploader />
         <Button title="Complete Profile" onPress={submit} />
         <Button title="Back" onPress={() => props.navigation.goBack()} />
-        <Text style={styles.dummyText}>Dummy Text</Text>
       </ScrollView>
     </View>
   );
@@ -150,10 +149,6 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 80,
   },
-  dummyText: {
-    marginTop: 200,
-    color: 'white'
-  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

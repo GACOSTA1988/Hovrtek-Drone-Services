@@ -85,35 +85,53 @@ function PilotProfileWelcomeScreen(
     <View style={styles.container}>
       {currentUserProps && isComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Text style={styles.welcomeText}>
-            Welcome to your Profile Page{"\n"}
-          </Text>
+          <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (
-            <Text style={styles.subText}>
-              COMPLETE!!
-              {"\n"}
-              {currentUserProps.pilotFirstName}
-              {"\n"}
-              {currentUserProps.pilotLastName}
-            </Text>
+            <View>
+              <Text style={styles.subText}>
+                {currentUserProps.pilotFirstName}
+                {"\n"}
+                {currentUserProps.pilotLastName}
+                {"\n"}
+                From {currentUserProps.pilotLocation}
+              </Text>
+              <Text style={styles.bodyText}>Welcome To Your Profile</Text>
+              <Text style={styles.bodyText}>
+                Personal Bio: {currentUserProps.personalBio}
+                {"\n"}
+                Drone Type: {currentUserProps.droneType}
+                {"\n"}
+                Years of Experience: {currentUserProps.yearsOfExperience}
+                {"\n"}
+                FAA License Expiration: {currentUserProps.faaLicenseExp}
+                {"\n"}
+                Travel for work? {currentUserProps.travelStatus}
+                {"\n"}
+                Insured: {currentUserProps.insuredStatus}
+                {"\n"}
+                Have you used AirMap: {currentUserProps.airMap}
+                {"\n"}
+                Have you flown over 400FT? {currentUserProps.fourHundred}
+              </Text>
+            </View>
           ) : (
             <Text></Text>
           )}
         </ScrollView>
       ) : (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Text style={styles.welcomeText}>
-            Welcome to your Profile Page{"\n"}
-          </Text>
+          <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (
-            <Text style={styles.subText}>
-              {"\n"}
-              {currentUserProps.pilotFirstName}
-              {"\n"}
-              {currentUserProps.pilotLastName}
-              {"\n"}
-              From: {currentUserProps.pilotLocation}
-            </Text>
+            <View>
+              <Text style={styles.subText}>
+                {currentUserProps.pilotFirstName}
+                {"\n"}
+                {currentUserProps.pilotLastName}
+                {"\n"}
+                From {currentUserProps.pilotLocation}
+              </Text>
+              <Text style={styles.bodyText}>Welcome To Your Profile</Text>
+            </View>
           ) : (
             <Text style={styles.h2}>Location:</Text>
           )}
@@ -146,15 +164,15 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     marginTop: "25%",
-    marginBottom: "10%",
+
     fontSize: 30,
     color: "darkblue",
     fontWeight: "600",
     textAlign: "center",
   },
   subText: {
-    marginTop: "25%",
     marginBottom: "10%",
+    marginTop: "5%",
     fontSize: 30,
     color: "black",
     fontWeight: "600",

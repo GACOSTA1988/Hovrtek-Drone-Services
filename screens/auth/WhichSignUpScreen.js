@@ -1,11 +1,14 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import hovrtekLogo from "../../assets/hovrtek_logo.png";
+
 
 function WhichSignUpScreen({ navigation }) {
   return (
     <View style={styles.whichSignUpBody}>
       <Text style={styles.welcomeText}>Welcome {"\n"}To</Text>
-      <Text style={styles.hovrtekText}>Hovrtek</Text>
+      <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
@@ -41,6 +44,7 @@ const styles = StyleSheet.create({
     width: "90%",
     alignItems: "center",
     backgroundColor: "#092455",
+    borderRadius: 4
   },
   buttonText: {
     color: "white",
@@ -51,14 +55,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 25,
     fontWeight: "400",
-    marginTop: "30%",
+    marginTop: "25%",
   },
-  hovrtekText: {
-    textAlign: "center",
-    fontSize: 40,
-    fontWeight: "600",
-    marginBottom: 50,
-  },
+  // hovrtekText: {
+  //   textAlign: "center",
+  //   fontSize: 40,
+  //   fontWeight: "600",
+  //   marginBottom: 50,
+  // },
+  hovrtekLogo: {
+    height: 50,
+    width: 280,
+    marginBottom: 30
+  }
 });
 
 export default WhichSignUpScreen;

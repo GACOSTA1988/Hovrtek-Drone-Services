@@ -8,7 +8,7 @@ const SupportScreen = () => {
       <Image source={sunsetDrone} style={styles.backgroundImage}></Image>
       <View style={styles.textWrapper}>
         <Text style={styles.h1}>SUPPORT</Text>
-        <Text style={styles.h2}>If you have any questions or concerns regarding Hovrtek, Please call Prince between the hours of 2am and 4am. TRhank you.</Text>
+        <Text style={styles.h2}>If you have any questions or concerns regarding Hovrtek, Please call Prince between the hours of 2am and 4am. Thank you.</Text>
 
         <Text style={styles.h3}>
           HOVRTEK HEADQUARTERS</Text>

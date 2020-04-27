@@ -7,6 +7,8 @@ import {
   Button,
   ScrollView,
   TextInput,
+  Alert,
+  Modal
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -25,8 +27,15 @@ function PilotProfileSetupPageOneScreen(
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
-  let user = firebase.auth().currentUser;
-  let userID = user.uid;
+
+  let userID = null;
+  if (firebase.auth().currentUser) {
+    userID = firebase.auth().currentUser.uid;
+  }
+
+
+  // let user = firebase.auth().currentUser;
+  // let userID = user.uid;
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
   if (currentUserProps) {
@@ -70,6 +79,21 @@ function PilotProfileSetupPageOneScreen(
   );
 
   const submit = (e) => {
+    e.preventDefault();
+    if (personalBio.trim() === '') {
+      Alert.alert("Please fill in your personal bio");
+      navigation.navigate("PilotProfileSetupPageOneScreen");
+    } else if (yearsOfExperience.trim() === '') {
+      Alert.alert("Please fill in years of experience");
+      navigation.navigate("PilotProfileSetupPageOneScreen");
+    } else if (droneType.trim() == '') {
+      Alert.alert("Please fill in your Drone type");
+      navigation.navigate("PilotProfileSetupPageOneScreen");
+    } else if (insuredStatus.trim() === '') {
+      Alert.alert("Please fill in your insurance status");
+      navigation.navigate("PilotProfileSetupPageOneScreen");
+    } else {
+
     console.log(currentUserProps);
     props.editPilotProfile(
       currentUserProps.pilotLocation,
@@ -86,6 +110,8 @@ function PilotProfileSetupPageOneScreen(
     );
     navigation.navigate("PilotProfileSetupPageTwoScreen");
   };
+}
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -181,8 +207,10 @@ function PilotProfileSetupPageOneScreen(
         ) : (
           <Text style={styles.bodyText}>Do You Have Valid Insurace?</Text>
         )}
+
         <Button title="Save and Continue" onPress={submit} />
         <Button title="Back" onPress={() => props.navigation.goBack()} />
+        <Text style={styles.dummyText}>Dummy Text</Text>
       </ScrollView>
     </View>
   );
@@ -227,6 +255,10 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 80,
   },
+  dummyText: {
+    marginTop: 200,
+    color: 'white'
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

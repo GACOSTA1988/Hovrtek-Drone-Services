@@ -190,6 +190,7 @@ function PilotProfileSetupPageTwoScreen(
 
         <Button title="Save and Continue" onPress={submit} />
         <Button title="Back" onPress={() => props.navigation.goBack()} />
+        <Text style={styles.dummyText}>Dummy Text</Text>
       </ScrollView>
     </View>
   );
@@ -234,6 +235,10 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 80,
   },
+  dummyText: {
+    marginTop:200,
+    color: 'white'
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

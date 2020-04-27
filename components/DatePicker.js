@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,  useContext } from 'react';
 import { View, Button, Platform, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
-import moment from 'moment'
+import moment from 'moment';
+import { DateTestContext} from '../screens/pilot/PilotProfileSetupPageTwoScreen'
 
 const DatePicker = () => {
+
+    const dateTest =  useContext(DateTestContext)
+
     const [date, setDate] = useState(new Date());
     const [chosenDate, setChosenDate] = useState('');
     const [isVisible, setIsVisible] = useState(false);
@@ -27,6 +31,7 @@ const DatePicker = () => {
 
     return (
         <View style={styles.pickerWrapper}>
+            <Text>{dateTest}</Text> 
             { chosenDate ?
                 <View>
                     <Text>   You have picked:</Text> 

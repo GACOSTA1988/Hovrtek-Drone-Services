@@ -19,3 +19,5 @@ Embedded image is SLOW to load on Client Support Screen / Client About Page
 * Dropdown clean up on PilotProfileSignupForms
 
 * Deep look at condictional rendering between ios / android
+
+rendering questions twice on pilot sign up

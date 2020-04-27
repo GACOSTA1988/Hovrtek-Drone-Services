@@ -14,7 +14,7 @@ const DatePicker = () => {
 
     const handlePicker = (datetime) => {
         setIsVisible(false)
-        setChosenDate(moment(datetime).format('MMMM, do YYYY HH:mm'))
+        setChosenDate(moment(datetime).format('MMMM, do YYYY'))
     }
 
     const hidePicker = () => {
@@ -25,15 +25,23 @@ const DatePicker = () => {
         setIsVisible(true)
     }
 
-
-console.log('date', date)
-    
-
     return (
         <View style={styles.pickerWrapper}>
-            <Text>You have picked: {chosenDate} </Text>
+            { chosenDate ?
+                <View>
+                    <Text>   You have picked:</Text> 
+                    <Text style={styles.datePicked}>{chosenDate}</Text>
+                </View>
+                : 
+                <Text></Text>}
+            
+            {/* <Text style={styles.datePicked}>{chosenDate} </Text> */}
             <TouchableOpacity style={styles.button} onPress={showPicker}>
+                { chosenDate ? 
+                <Text style={styles.buttonText}>Pick a Different Date</Text> :
                 <Text style={styles.buttonText}>Pick Date</Text>
+            }
+
                 <DateTimePicker
                 isVisible={isVisible}
                 onConfirm={handlePicker}
@@ -42,9 +50,6 @@ console.log('date', date)
                 value={date}
                 />
             </TouchableOpacity>
-       
-       
-
         </View>
     );
 };
@@ -59,6 +64,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 10,
+        marginBottom: 30
     },
     buttonText: {
         color: 'white',
@@ -66,6 +72,9 @@ const styles = StyleSheet.create({
     },
     pickerWrapper: {
         alignItems: 'center'
+    },
+    datePicked: {
+        fontSize: 20
     }
 
 });

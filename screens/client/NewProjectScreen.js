@@ -135,14 +135,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   newProjectListTextWrapper: {
-    marginBottom: 100,
+    // marginBottom: 100
   },
   input: {
     borderWidth: 1,
     borderRadius: 3,
     height: 30,
-
-    marginBottom: 50,
+    marginBottom: 50
   },
   imageButton: {
     height: 30,
@@ -163,6 +162,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     marginTop: 10,
+    marginBottom: 10,
     textAlign: "center",
     fontSize: 30,
     color: "#092455",

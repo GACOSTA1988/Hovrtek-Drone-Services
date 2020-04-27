@@ -8,3 +8,6 @@
 * scrollview needs bottom margin w/ keyboard
 * on android, the back button is a blank white square
 
+## Other bugs
+
+* on Lee's phone, toggling between tabs sometimes doesn't work

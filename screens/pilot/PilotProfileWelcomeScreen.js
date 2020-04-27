@@ -26,8 +26,12 @@ function PilotProfileWelcomeScreen(
     props.getPilotProfiles();
   }, []);
 
-  let user = firebase.auth().currentUser;
-  let userID = user.uid;
+
+  let userID = null;
+  if (firebase.auth().currentUser) {
+    userID = firebase.auth().currentUser.uid
+  }
+
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
 

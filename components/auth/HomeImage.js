@@ -16,7 +16,10 @@ function HomeImage({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { height: "100%", width: "110%" },
+  container: { 
+    height: "100%", 
+    width: "110%",
+  },
   backgroundImage: {
     // marginTop:
     flex: 1,
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     textAlign: "left",
-    marginTop: "40%",
+    marginTop: "27%",
     marginLeft: 10,
   },
   imageTextTwo: {

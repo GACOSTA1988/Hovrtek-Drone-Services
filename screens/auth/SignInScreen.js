@@ -85,15 +85,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    marginTop: 300,
+    marginTop: 200,
     position: "absolute",
     marginLeft: "22%",
-    marginTop: 100
+
   },
   text: {
     textAlign: "center",
     color: "white",
     fontSize: 15,
+    marginTop: 30
   },
   // button: {
   //   marginTop: 30,
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "grey",
     borderWidth: 1,
-    margin: 10,
+    marginTop: 8,
     width: 200,
     color: "white",
   },

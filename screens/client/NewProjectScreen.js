@@ -21,7 +21,7 @@ import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import ImageUploader from "../../components/client/ImageUploader";
 import * as firebase from "firebase";
-import DatePicker from '../../components/client/DatePicker'
+import DatePicker from '../../components/DatePicker'
 
 
 
@@ -68,8 +68,6 @@ function NewProjectScreen(props, { postProjects }) {
 
           <Text style={styles.newProjectText}>Create a New Project</Text>
 
-
-      
           <Text style={styles.labelText}>
             Where is the location you want your Drone Service?
           </Text>

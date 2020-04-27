@@ -15,6 +15,14 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+import DatePicker from '../../components/DatePicker'
+
+
+
+// context hook stuff
+export const PassSetFaaLicenseContext = React.createContext()
+export const PassFaaLicenseState = React.createContext()
+
 
 function PilotProfileSetupPageTwoScreen(
   props,
@@ -54,6 +62,8 @@ function PilotProfileSetupPageTwoScreen(
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
   }
+// Context Hook thing
+  const [fakeDate, setFakeDate] = useState(null)
 
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
   const [yearsOfExperience, setYearsOfExperience] = useState(
@@ -106,7 +116,13 @@ function PilotProfileSetupPageTwoScreen(
           Please Provide FAA License Expiration Date
         </Text>
         {currentUserProps ? (
-          <TextInput
+          <View>
+            <PassSetFaaLicenseContext.Provider value={setFaaLicenseExp}>
+              <PassFaaLicenseState.Provider value={faaLicenseExp}>
+               <DatePicker/>
+              </PassFaaLicenseState.Provider>
+            </PassSetFaaLicenseContext.Provider>
+          {/* <TextInput
             placeholder=" 10/10/2020"
             style={{
               marginTop: 20,
@@ -118,7 +134,8 @@ function PilotProfileSetupPageTwoScreen(
             }}
             onChangeText={setFaaLicenseExp}
             value={faaLicenseExp}
-          />
+          /> */}
+          </View>
         ) : (
           <Text style={styles.bodyText}>
             Please Provide FAA License Expiration Date

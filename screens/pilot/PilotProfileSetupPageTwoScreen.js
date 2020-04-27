@@ -20,7 +20,8 @@ import DatePicker from '../../components/DatePicker'
 
 
 // context hook stuff
-export const DateTestContext = React.createContext()
+export const PassSetFaaLicenseContext = React.createContext()
+export const PassFaaLicenseState = React.createContext()
 
 
 function PilotProfileSetupPageTwoScreen(
@@ -116,10 +117,12 @@ function PilotProfileSetupPageTwoScreen(
         </Text>
         {currentUserProps ? (
           <View>
-            <DateTestContext.Provider value={'fartland'}>
-              <DatePicker/>
-            </DateTestContext.Provider>
-          <TextInput
+            <PassSetFaaLicenseContext.Provider value={setFaaLicenseExp}>
+              <PassFaaLicenseState.Provider value={faaLicenseExp}>
+               <DatePicker/>
+              </PassFaaLicenseState.Provider>
+            </PassSetFaaLicenseContext.Provider>
+          {/* <TextInput
             placeholder=" 10/10/2020"
             style={{
               marginTop: 20,
@@ -131,7 +134,7 @@ function PilotProfileSetupPageTwoScreen(
             }}
             onChangeText={setFaaLicenseExp}
             value={faaLicenseExp}
-          />
+          /> */}
           </View>
         ) : (
           <Text style={styles.bodyText}>

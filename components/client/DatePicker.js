@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { View, Button, Platform, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
-
+import moment from 'moment'
 
 const DatePicker = () => {
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
+    const [date, setDate] = useState(new Date());
+    const [chosenDate, setChosenDate] = useState('');
     const [isVisible, setIsVisible] = useState(false);
 
-    const handlePicker = () => {
+    console.log('CHOSEN DATE', chosenDate)
+    console.log('DATE', date)
+    console.log(isVisible)
+
+    const handlePicker = (datetime) => {
         setIsVisible(false)
+        setChosenDate(moment(datetime).format('MMMM, do YYYY HH:mm'))
     }
 
     const hidePicker = () => {
@@ -22,17 +26,20 @@ const DatePicker = () => {
     }
 
 
-
+console.log('date', date)
     
 
     return (
         <View style={styles.pickerWrapper}>
+            <Text>You have picked: {chosenDate} </Text>
             <TouchableOpacity style={styles.button} onPress={showPicker}>
                 <Text style={styles.buttonText}>Pick Date</Text>
                 <DateTimePicker
                 isVisible={isVisible}
                 onConfirm={handlePicker}
                 onCancel={hidePicker}
+                mode={'date'}
+                value={date}
                 />
             </TouchableOpacity>
        

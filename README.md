@@ -17,3 +17,5 @@ Embedded image is SLOW to load on Client Support Screen / Client About Page
 "possilbe unhandled promise rejection id:0" on PilotProfileSetUpPageOneScreen
 
 * Dropdown clean up on PilotProfileSignupForms
+
+* Deep look at condictional rendering between ios / android

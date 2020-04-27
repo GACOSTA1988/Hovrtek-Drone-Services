@@ -26,10 +26,9 @@ function PilotProfileWelcomeScreen(
     props.getPilotProfiles();
   }, []);
 
-
   let userID = null;
   if (firebase.auth().currentUser) {
-    userID = firebase.auth().currentUser.uid
+    userID = firebase.auth().currentUser.uid;
   }
 
   const list = props.listOfProfiles;
@@ -47,6 +46,7 @@ function PilotProfileWelcomeScreen(
   let airMapPlaceHolder = "";
   let fourHundredPlaceHolder = "";
   let profileCompletePlaceHolder = "";
+  let isComplete = "";
 
   if (currentUserProps) {
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
@@ -59,6 +59,7 @@ function PilotProfileWelcomeScreen(
     airMapPlaceHolder = currentUserProps.airMapPlace;
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
+    isComplete = currentUserProps.profileComplete;
   }
 
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
@@ -78,39 +79,53 @@ function PilotProfileWelcomeScreen(
   const submit = (e) => {
     navigation.navigate("PilotProfileSetupPageOneScreen");
   };
+  // console.log(currentUserProps.profileComplete);
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={styles.welcomeText}>
-          Welcome to your Profile Page{"\n"}
+      {currentUserProps && isComplete === "Yes" ? (
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <Text style={styles.welcomeText}>
+            Welcome to your Profile Page{"\n"}
+          </Text>
           {currentUserProps ? (
             <Text style={styles.subText}>
+              COMPLETE!!
               {"\n"}
               {currentUserProps.pilotFirstName}
               {"\n"}
               {currentUserProps.pilotLastName}
             </Text>
           ) : (
-            <Text>Name:</Text>
+            <Text></Text>
           )}
-        </Text>
-        {currentUserProps ? (
-          <Text style={styles.bodyText}>
-            {"\n"}
-            From: {currentUserProps.pilotLocation}
+        </ScrollView>
+      ) : (
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <Text style={styles.welcomeText}>
+            Welcome to your Profile Page{"\n"}
           </Text>
-        ) : (
-          <Text style={styles.h2}>Location:</Text>
-        )}
+          {currentUserProps ? (
+            <Text style={styles.subText}>
+              {"\n"}
+              {currentUserProps.pilotFirstName}
+              {"\n"}
+              {currentUserProps.pilotLastName}
+              {"\n"}
+              From: {currentUserProps.pilotLocation}
+            </Text>
+          ) : (
+            <Text style={styles.h2}>Location:</Text>
+          )}
 
-        <Button
-          title="Start Pilot Profile"
-          onPress={() =>
-            props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
-          }
-        />
-      </ScrollView>
+          <Button
+            title="Start Pilot Profile"
+            onPress={() =>
+              props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
+            }
+          />
+        </ScrollView>
+      )}
     </View>
   );
 }

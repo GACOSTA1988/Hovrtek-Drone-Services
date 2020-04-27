@@ -6,11 +6,13 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  Alert
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+  ImageBackground
 } from "react-native";
 import * as firebase from "firebase";
-import HomeImage from "../../components/auth/HomeImage";
-
+import landingPageImage from "../../assets/landingPageImage.png";
 
 function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -44,76 +46,58 @@ function SignInScreen({ navigation }) {
   };
 
   return (
-    <View>
-      <HomeImage />
-      <View style={styles.SignInBody}>
-        <TouchableOpacity>
-          <Text style={styles.text}>Welcome Back</Text>
-          <TextInput
-            placeholder=" Email"
-            placeholderTextColor="grey"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder=" Password"
-            placeholderTextColor="grey"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-          />
-          <Button title="Sign in" onPress={signIn} style={styles.text} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.push("SignUp")}>
-          <Text style={styles.buttonText}>Create an Account</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@mail.com", "password")} >
-          <Text style={styles.buttonText}>Client shortcut</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@mail.com", "password")} >
-          <Text style={styles.buttonText}>Pilot shortcut</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <ImageBackground source={landingPageImage} style={styles.MainContainer}>
+      <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
+
+      <Text style={styles.imageTextTwo}>
+        THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
+      </Text>
+      <TouchableOpacity>
+        <Text style={styles.text}>Welcome Back</Text>
+        <TextInput
+          placeholder=" Email"
+          placeholderTextColor="grey"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder=" Password"
+          placeholderTextColor="grey"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+          style={styles.input}
+        />
+        <Button title="Sign in" onPress={signIn} style={styles.text} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.push("SignUp")}>
+        <Text style={styles.buttonText}>Create an Account</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@mail.com", "password")} >
+        <Text style={styles.buttonText}>Client shortcut</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@mail.com", "password")} >
+        <Text style={styles.buttonText}>Pilot shortcut</Text>
+      </TouchableOpacity>
+    </ImageBackground>
   );
 }
 
-const styles = StyleSheet.create({
-  SignInBody: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-    marginTop: 200,
-    position: "absolute",
-    marginLeft: "22%",
 
+const styles = StyleSheet.create({
+
+  MainContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
   },
-  text: {
-    textAlign: "center",
-    color: "white",
-    fontSize: 15,
-    marginTop: 30
-  },
-  // button: {
-  //   marginTop: 30,
-  //   padding: 10,
-  //   width: 80,
-  //   alignItems: "center",
-  //   backgroundColor: "white",
-  // },
-  // buttonShortcut: {
-  //   marginTop: 20,
-  //   padding: 10,
-  //   width: 100,
-  //   alignItems: "center",
-  //   backgroundColor: "lightgreen",
-  // },
+
   buttonText: {
     textAlign: "center",
     color: "grey",
   },
+
   input: {
     height: 40,
     borderColor: "grey",
@@ -122,6 +106,28 @@ const styles = StyleSheet.create({
     width: 200,
     color: "white",
   },
+
+  text: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+  },
+
+  imageText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "left",
+    marginLeft: 10,
+  },
+  imageTextTwo: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#3E90D0",
+    textAlign: "left",
+    margin: 10
+  },
+
 });
 
 export default SignInScreen;

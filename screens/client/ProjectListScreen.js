@@ -153,7 +153,6 @@ const styles = StyleSheet.create({
   projectListWrapper: {
     alignItems: "center",
     marginTop: 10,
-    marginBottom: 90
   }
 });
 

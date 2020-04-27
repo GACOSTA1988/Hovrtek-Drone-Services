@@ -400,4 +400,3 @@ const styles = StyleSheet.create({
 export default connect(null, { postProfiles })(PilotSignUpScreen);
 
 export default connect(mapStateToProps, { getClientProfiles, postClientProfiles })(PilotProfileScreen);
-

@@ -16,13 +16,15 @@ import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
 import DatePicker from '../../components/DatePicker'
+import TravelStatusPicker from '../../components/TravelStatusPicker'
 
 
 
 // context hook stuff
 export const PassSetFaaLicenseContext = React.createContext()
 export const PassFaaLicenseState = React.createContext()
-
+export const PassSetTravelStatus = React.createContext()
+export const PassTravelStatusState = React.createContext()
 
 function PilotProfileSetupPageTwoScreen(
   props,
@@ -120,19 +122,7 @@ function PilotProfileSetupPageTwoScreen(
                <DatePicker/>
               </PassFaaLicenseState.Provider>
             </PassSetFaaLicenseContext.Provider>
-          {/* <TextInput
-            placeholder=" 10/10/2020"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setFaaLicenseExp}
-            value={faaLicenseExp}
-          /> */}
+
           </View>
         ) : (
           <Text style={styles.bodyText}>
@@ -143,19 +133,14 @@ function PilotProfileSetupPageTwoScreen(
           Are You Willing To Travel Out Of State For A Drone Job?
         </Text>
         {currentUserProps ? (
-          <TextInput
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              marginBottom: 20,
-              textAlign: "center",
-            }}
-            placeholder="Yes or No"
-            onChangeText={setTravelStatus}
-            value={travelStatus}
-          />
+          <View style={styles.pickerButtonWrapper}>
+            <PassSetTravelStatus.Provider value={setTravelStatus}>
+              <PassTravelStatusState.Provider value={travelStatus}>
+                <TravelStatusPicker />
+              </PassTravelStatusState.Provider>
+            </PassSetTravelStatus.Provider>
+          </View>
+
         ) : (
           <Text style={styles.bodyText}>
             Are You Willing To Tarvel Out Of State For A Drone Job?
@@ -249,6 +234,9 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 80,
   },
+  pickerButtonWrapper: {
+    alignItems: 'center'
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

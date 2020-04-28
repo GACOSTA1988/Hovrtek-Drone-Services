@@ -1,6 +1,6 @@
 import React, { Component, useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Dimensions, Picker, TouchableOpacity } from 'react-native';
-import { PassSetYearsOfExperience, PassYearsOfExperienceState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
+import { PassSetDroneType, PassDroneTypeState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
 
 const DroneTypePicker = () => {
 
@@ -10,10 +10,10 @@ const DroneTypePicker = () => {
 
 
 
-    const setYearsOfExperience = useContext(PassSetYearsOfExperience)
-    const yearsOfExperience = useContext(PassYearsOfExperienceState)
+    const setDroneType = useContext(PassSetDroneType)
+    const droneType = useContext(PassDroneTypeState)
 
-    console.log("PICKER VALUE", yearsOfExperience)
+    console.log("DRONE TYPE", droneType)
 
     const openModal = () => {
         setIsModalVisible(true);
@@ -34,26 +34,23 @@ const DroneTypePicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>How many years of drone experience do you have?</Text>
+                        <Text style={styles.modalText}>What Type of drone do you have?</Text>
                     </View>
                     <View>
                         <Picker
-                            selectedValue={yearsOfExperience}
-                            onValueChange={(yearsOfExperience, itemIndex) => setYearsOfExperience(yearsOfExperience)}
+                            selectedValue={droneType}
+                            onValueChange={(droneType, itemIndex) => setDroneType(droneType)}
                         >
-                            <Picker.Item label="Less than 1" value="Less than 1" />
-                            <Picker.Item label="1" value="1" />
-                            <Picker.Item label="2" value="2" />
-                            <Picker.Item label="3" value="3" />
-                            <Picker.Item label="4" value="4" />
-                            <Picker.Item label="5" value="5" />
-                            <Picker.Item label="6" value="6" />
-                            <Picker.Item label="7" value="7" />
-                            <Picker.Item label="8" value="8" />
-                            <Picker.Item label="9" value="9" />
-                            <Picker.Item label="10" value="10" />
-                            <Picker.Item label="More than 10" value="More than 10" />
-
+                            <Picker.Item label="None" value="None" />
+                            <Picker.Item label="Power Lord 3000" value="Power Lord 3000" />
+                            <Picker.Item label="Power Lord 30001" value="Power Lord 30001" />
+                            <Picker.Item label="The Drone Zone" value="The Drone Zone" />
+                            <Picker.Item label="MegaDrone 12" value="MegaDrone 12" />
+                            <Picker.Item label="Sky Master 50" value="Sky Master 50" />
+                            <Picker.Item label="Lord of the Sky 21" value="Lord of the Sky 21" />
+                            <Picker.Item label="Flown Drone" value="Flown Drone" />
+                            <Picker.Item label="Drone Clone" value="Drone Clone" />
+                            <Picker.Item label="The Drone Zone Advanced" value="The Drone Zone Advanced" />
                         </Picker>
 
                     </View>
@@ -76,7 +73,7 @@ const DroneTypePicker = () => {
                 onPress={() => openModal()}
                 title={"Open modal"}
             >
-                <Text style={styles.buttonText}>{yearsOfExperience}</Text>
+                <Text style={styles.buttonText}>{droneType}</Text>
             </TouchableOpacity>
 
 

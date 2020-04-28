@@ -17,12 +17,15 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
-import DroneExperiencePicker from '../../components/DroneExperiencePicker'
+import DroneExperiencePicker from '../../components/DroneExperiencePicker';
+import DroneTypePicker from '../../components/DroneTypePicker';
 
 
-// Context Hook Stuff - passing Years of Experience props to DroneExperiencePicker.js
+// Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetYearsOfExperience = React.createContext()
 export const PassYearsOfExperienceState = React.createContext()
+export const PassSetDroneType = React.createContext()
+export const PassDroneTypeState = React.createContext()
 
 function PilotProfileSetupPageOneScreen(
   props,
@@ -185,19 +188,26 @@ function PilotProfileSetupPageOneScreen(
         )}
         <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
         {currentUserProps ? (
-          <TextInput
-            placeholder=" DJI Mavic 2 Pro"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setDroneType}
-            value={droneType}
-          />
+          <View style={styles.droneExpWrapper}>
+          <PassSetDroneType.Provider value={setDroneType}>
+            <PassDroneTypeState.Provider value={droneType}>
+              <DroneTypePicker />
+            </PassDroneTypeState.Provider>
+          </PassSetDroneType.Provider>
+          </View>
+          // <TextInput
+          //   placeholder=" DJI Mavic 2 Pro"
+          //   style={{
+          //     marginTop: 20,
+          //     height: 20,
+          //     borderColor: "gray",
+          //     borderWidth: 1,
+          //     textAlign: "center",
+          //     marginBottom: 20,
+          //   }}
+          //   onChangeText={setDroneType}
+          //   value={droneType}
+          // />
         ) : (
           <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
         )}

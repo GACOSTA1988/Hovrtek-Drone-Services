@@ -17,6 +17,12 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+import DroneExperiencePicker from '../../components/DroneExperiencePicker'
+
+
+// Context Hook Stuff - passing Years of Experience props to DroneExperiencePicker.js
+export const PassSetYearsOfExperience = React.createContext()
+export const PassYearsOfExperienceState = React.createContext()
 
 function PilotProfileSetupPageOneScreen(
   props,
@@ -33,9 +39,6 @@ function PilotProfileSetupPageOneScreen(
     userID = firebase.auth().currentUser.uid;
   }
 
-
-  // let user = firebase.auth().currentUser;
-  // let userID = user.uid;
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
   if (currentUserProps) {
@@ -153,7 +156,15 @@ function PilotProfileSetupPageOneScreen(
           How Many Years Of Drone Experience Do You Have?
         </Text>
         {currentUserProps ? (
-          <TextInput
+          <View style={styles.droneExpWrapper}>
+
+            <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
+              <PassYearsOfExperienceState.Provider value={yearsOfExperience}>
+                <DroneExperiencePicker/>
+              </PassYearsOfExperienceState.Provider>
+            </PassSetYearsOfExperience.Provider>
+
+          {/* <TextInput
             placeholder=" 4"
             style={{
               marginTop: 20,
@@ -165,7 +176,8 @@ function PilotProfileSetupPageOneScreen(
             }}
             onChangeText={setYearsOfExperience}
             value={yearsOfExperience}
-          />
+          /> */}
+          </View>
         ) : (
           <Text style={styles.bodyText}>
             How Many Years Of Drone Experience Do You Have?
@@ -258,6 +270,9 @@ const styles = StyleSheet.create({
   dummyText: {
     marginTop: 200,
     color: 'white'
+  },
+  droneExpWrapper: {
+    alignItems: 'center'
   }
 });
 function mapStateToProps(state) {

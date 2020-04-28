@@ -62,8 +62,6 @@ function PilotProfileSetupPageTwoScreen(
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
   }
-// Context Hook thing
-  const [fakeDate, setFakeDate] = useState(null)
 
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
   const [yearsOfExperience, setYearsOfExperience] = useState(
@@ -142,7 +140,7 @@ function PilotProfileSetupPageTwoScreen(
           </Text>
         )}
         <Text style={styles.bodyText}>
-          Are You Willing To Trvel Out Of State For A Drone Job?
+          Are You Willing To Travel Out Of State For A Drone Job?
         </Text>
         {currentUserProps ? (
           <TextInput

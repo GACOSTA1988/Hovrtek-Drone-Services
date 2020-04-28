@@ -17,6 +17,22 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+import DroneExperiencePicker from '../../components/DroneExperiencePicker';
+import DroneTypePicker from '../../components/DroneTypePicker';
+import ValidInsurancePicker from "../../components/ValidInsurancePicker";
+import BioPicker from "../../components/BioPicker";
+
+
+// Context Hook Stuff - passing props to Modals / Pickers
+export const PassSetYearsOfExperience = React.createContext()
+export const PassYearsOfExperienceState = React.createContext()
+
+export const PassSetDroneType = React.createContext()
+export const PassDroneTypeState = React.createContext()
+export const PassSetInsuredStatus = React.createContext()
+export const PassInsuredStatusState = React.createContext()
+export const PassSetPersonalBio = React.createContext()
+export const PassPersonalBioState = React.createContext()
 
 function PilotProfileSetupPageOneScreen(
   props,
@@ -33,9 +49,6 @@ function PilotProfileSetupPageOneScreen(
     userID = firebase.auth().currentUser.uid;
   }
 
-
-  // let user = firebase.auth().currentUser;
-  // let userID = user.uid;
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
   if (currentUserProps) {
@@ -132,17 +145,15 @@ function PilotProfileSetupPageOneScreen(
           Please Give Us Brief Summary of Your Work Experience
         </Text>
         {currentUserProps ? (
-          <TextInput
-            style={{
-              marginTop: 20,
-              height: 90,
-              borderColor: "gray",
-              borderWidth: 1,
-              marginBottom: 20,
-            }}
-            onChangeText={setPersonalBio}
-            value={personalBio}
-          />
+          <View style={styles.droneExpWrapper}>
+          
+            <PassSetPersonalBio.Provider value={setPersonalBio}>
+              <PassPersonalBioState.Provider value={personalBio}>
+                <BioPicker />
+              </PassPersonalBioState.Provider>
+            </PassSetPersonalBio.Provider>
+
+          </View>
         ) : (
           <Text style={styles.bodyText}>
             Please Give Us Brief Summary of Your Work Experience
@@ -153,19 +164,15 @@ function PilotProfileSetupPageOneScreen(
           How Many Years Of Drone Experience Do You Have?
         </Text>
         {currentUserProps ? (
-          <TextInput
-            placeholder=" 4"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setYearsOfExperience}
-            value={yearsOfExperience}
-          />
+          <View style={styles.droneExpWrapper}>
+
+            <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
+              <PassYearsOfExperienceState.Provider value={yearsOfExperience}>
+                <DroneExperiencePicker/>
+              </PassYearsOfExperienceState.Provider>
+            </PassSetYearsOfExperience.Provider>
+
+          </View>
         ) : (
           <Text style={styles.bodyText}>
             How Many Years Of Drone Experience Do You Have?
@@ -173,39 +180,30 @@ function PilotProfileSetupPageOneScreen(
         )}
         <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
         {currentUserProps ? (
-          <TextInput
-            placeholder=" DJI Mavic 2 Pro"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setDroneType}
-            value={droneType}
-          />
+          <View style={styles.droneExpWrapper}>
+          <PassSetDroneType.Provider value={setDroneType}>
+            <PassDroneTypeState.Provider value={droneType}>
+              <DroneTypePicker />
+            </PassDroneTypeState.Provider>
+          </PassSetDroneType.Provider>
+          </View>
+
         ) : (
           <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
         )}
-        <Text style={styles.bodyText}>Do You Have Valid Insurace?</Text>
+        <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
         {currentUserProps ? (
-          <TextInput
-            placeholder=" Yes or No"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setInsuredStatus}
-            value={insuredStatus}
-          />
+
+          <View style={styles.droneExpWrapper}>
+            <PassSetInsuredStatus.Provider value={setInsuredStatus}>
+              <PassInsuredStatusState.Provider value={insuredStatus}>
+                <ValidInsurancePicker />
+              </PassInsuredStatusState.Provider>
+            </PassSetInsuredStatus.Provider>
+          </View>
+
         ) : (
-          <Text style={styles.bodyText}>Do You Have Valid Insurace?</Text>
+          <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
         )}
 
         <Button title="Save and Continue" onPress={submit} />
@@ -257,7 +255,10 @@ const styles = StyleSheet.create({
   },
   dummyText: {
     marginTop: 200,
-    color: 'white'
+    color: 'lightgray'
+  },
+  droneExpWrapper: {
+    alignItems: 'center'
   }
 });
 function mapStateToProps(state) {

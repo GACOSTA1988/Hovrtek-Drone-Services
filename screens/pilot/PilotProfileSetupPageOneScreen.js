@@ -19,6 +19,7 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import DroneExperiencePicker from '../../components/DroneExperiencePicker';
 import DroneTypePicker from '../../components/DroneTypePicker';
+import ValidInsurancePicker from "../../components/ValidInsurancePicker";
 
 
 // Context Hook Stuff - passing props to Modals / Pickers
@@ -26,6 +27,8 @@ export const PassSetYearsOfExperience = React.createContext()
 export const PassYearsOfExperienceState = React.createContext()
 export const PassSetDroneType = React.createContext()
 export const PassDroneTypeState = React.createContext()
+export const PassSetInsuredStatus = React.createContext()
+export const PassInsuredStatusState = React.createContext()
 
 function PilotProfileSetupPageOneScreen(
   props,
@@ -167,19 +170,6 @@ function PilotProfileSetupPageOneScreen(
               </PassYearsOfExperienceState.Provider>
             </PassSetYearsOfExperience.Provider>
 
-          {/* <TextInput
-            placeholder=" 4"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setYearsOfExperience}
-            value={yearsOfExperience}
-          /> */}
           </View>
         ) : (
           <Text style={styles.bodyText}>
@@ -195,8 +185,24 @@ function PilotProfileSetupPageOneScreen(
             </PassDroneTypeState.Provider>
           </PassSetDroneType.Provider>
           </View>
+
+        ) : (
+          <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
+        )}
+        <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
+        {currentUserProps ? (
+
+          <View style={styles.droneExpWrapper}>
+            <PassSetInsuredStatus.Provider value={setInsuredStatus}>
+              <PassInsuredStatusState.Provider value={insuredStatus}>
+                <ValidInsurancePicker />
+              </PassInsuredStatusState.Provider>
+            </PassSetInsuredStatus.Provider>
+          </View>
+
+
           // <TextInput
-          //   placeholder=" DJI Mavic 2 Pro"
+          //   placeholder=" Yes or No"
           //   style={{
           //     marginTop: 20,
           //     height: 20,
@@ -205,29 +211,11 @@ function PilotProfileSetupPageOneScreen(
           //     textAlign: "center",
           //     marginBottom: 20,
           //   }}
-          //   onChangeText={setDroneType}
-          //   value={droneType}
+          //   onChangeText={setInsuredStatus}
+          //   value={insuredStatus}
           // />
         ) : (
-          <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
-        )}
-        <Text style={styles.bodyText}>Do You Have Valid Insurace?</Text>
-        {currentUserProps ? (
-          <TextInput
-            placeholder=" Yes or No"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setInsuredStatus}
-            value={insuredStatus}
-          />
-        ) : (
-          <Text style={styles.bodyText}>Do You Have Valid Insurace?</Text>
+          <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
         )}
 
         <Button title="Save and Continue" onPress={submit} />

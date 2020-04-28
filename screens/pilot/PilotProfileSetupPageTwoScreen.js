@@ -15,14 +15,20 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
-import DatePicker from '../../components/DatePicker'
-
-
+import DatePicker from '../../components/DatePicker';
+import TravelStatusPicker from '../../components/TravelStatusPicker';
+import FourHundredPicker from "../../components/FourHundredPicker";
+import AirMapPicker from "../../components/AirMapPicker";
 
 // context hook stuff
 export const PassSetFaaLicenseContext = React.createContext()
 export const PassFaaLicenseState = React.createContext()
-
+export const PassSetTravelStatus = React.createContext()
+export const PassTravelStatusState = React.createContext()
+export const PassSetFourHundred = React.createContext()
+export const PassFourHundredState = React.createContext()
+export const PassSetAirMap = React.createContext()
+export const PassAirMapState = React.createContext()
 
 function PilotProfileSetupPageTwoScreen(
   props,
@@ -120,19 +126,6 @@ function PilotProfileSetupPageTwoScreen(
                <DatePicker/>
               </PassFaaLicenseState.Provider>
             </PassSetFaaLicenseContext.Provider>
-          {/* <TextInput
-            placeholder=" 10/10/2020"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setFaaLicenseExp}
-            value={faaLicenseExp}
-          /> */}
           </View>
         ) : (
           <Text style={styles.bodyText}>
@@ -143,19 +136,14 @@ function PilotProfileSetupPageTwoScreen(
           Are You Willing To Travel Out Of State For A Drone Job?
         </Text>
         {currentUserProps ? (
-          <TextInput
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              marginBottom: 20,
-              textAlign: "center",
-            }}
-            placeholder="Yes or No"
-            onChangeText={setTravelStatus}
-            value={travelStatus}
-          />
+          <View style={styles.pickerButtonWrapper}>
+            <PassSetTravelStatus.Provider value={setTravelStatus}>
+              <PassTravelStatusState.Provider value={travelStatus}>
+                <TravelStatusPicker />
+              </PassTravelStatusState.Provider>
+            </PassSetTravelStatus.Provider>
+          </View>
+
         ) : (
           <Text style={styles.bodyText}>
             Are You Willing To Tarvel Out Of State For A Drone Job?
@@ -166,19 +154,16 @@ function PilotProfileSetupPageTwoScreen(
           Have You Had Experience Flying Over 400FT?
         </Text>
         {currentUserProps ? (
-          <TextInput
-            placeholder=" Yes or No"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setFourHundred}
-            value={fourHundred}
-          />
+
+
+          <View style={styles.pickerButtonWrapper}>
+            <PassSetFourHundred.Provider value={setFourHundred}>
+              <PassFourHundredState.Provider value={fourHundred}>
+                <FourHundredPicker />
+              </PassFourHundredState.Provider>
+            </PassSetFourHundred.Provider>
+          </View>
+
         ) : (
           <Text style={styles.bodyText}>
             Have You Had Experience Flying Over 400FT?
@@ -186,19 +171,15 @@ function PilotProfileSetupPageTwoScreen(
         )}
         <Text style={styles.bodyText}>Have You Used AirMap?</Text>
         {currentUserProps ? (
-          <TextInput
-            placeholder=" Yes or No"
-            style={{
-              marginTop: 20,
-              height: 20,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-            onChangeText={setAirMap}
-            value={airMap}
-          />
+
+          <View style={styles.pickerButtonWrapper}>
+            <PassSetAirMap.Provider value={setAirMap}>
+              <PassAirMapState.Provider value={airMap}>
+                <AirMapPicker />
+              </PassAirMapState.Provider>
+            </PassSetAirMap.Provider>
+          </View>
+
         ) : (
           <Text style={styles.bodyText}>Have You Used AirMap?</Text>
         )}
@@ -249,6 +230,9 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 80,
   },
+  pickerButtonWrapper: {
+    alignItems: 'center'
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

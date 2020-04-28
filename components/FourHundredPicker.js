@@ -1,18 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { PassSetPersonalBio, PassPersonalBioState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
-import { useNavigation } from "@react-navigation/native";
+import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity } from 'react-native';
+import { PassSetFourHundred, PassFourHundredState } from '../screens/pilot/PilotProfileSetupPageTwoScreen';
 
-const BioPicker = () => {
+const FourHundredPicker = () => {
 
-    const navigation = useNavigation();
     const [isModalVisible, setIsModalVisible] = useState(false)
 
-    const setPersonalBio = useContext(PassSetPersonalBio)
-    const personalBio = useContext(PassPersonalBioState)
 
-    console.log("PERSONAL BIO", personalBio)
-    console.log("SET PERSONAL BIO", setPersonalBio)
+    const setFourHundred = useContext(PassSetFourHundred)
+    const fourHundred = useContext(PassFourHundredState)
+
+    console.log("FOUR HUNDRED", fourHundred)
 
     const openModal = () => {
         setIsModalVisible(true);
@@ -20,8 +18,8 @@ const BioPicker = () => {
 
     const closeModal = () => {
         setIsModalVisible(false);
+    }
 
-}
 
     return (
         <View style={styles.container}>
@@ -33,20 +31,17 @@ const BioPicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>Please Give Us a Brief Summary of Your Work Experience</Text>
+                        <Text style={styles.modalText}>Have you had experience flying over 400 Feet?</Text>
                     </View>
                     <View>
-                        <TextInput
-                            style={{
-                                marginTop: 20,
-                                height: 90,
-                                borderColor: "gray",
-                                borderWidth: 1,
-                                marginBottom: 20,
-                            }}
-                            onChangeText={setPersonalBio}
-                            value={personalBio}
-                        />
+                        <Picker
+                            selectedValue={fourHundred}
+                            onValueChange={(fourHundred, itemIndex) => setFourHundred(fourHundred)}
+                        >
+                            <Picker.Item label="No" value="No" />
+                            <Picker.Item label="Yes" value="Yes" />
+
+                        </Picker>
 
                     </View>
                     <View styles={styles.cancelWrapper}>
@@ -60,16 +55,17 @@ const BioPicker = () => {
             </Modal>
 
 
-            {
 
-                (personalBio)
+
+            {
+                (fourHundred)
                     ?
                     (<TouchableOpacity
                         style={styles.button}
                         onPress={() => openModal()}
                         title={"Open modal"}
                     >
-                        <Text style={styles.buttonText}>Work Experience Set</Text>
+                        <Text style={styles.buttonText}>{fourHundred}</Text>
                     </TouchableOpacity>)
                     :
                     (<TouchableOpacity
@@ -77,7 +73,7 @@ const BioPicker = () => {
                         onPress={() => openModal()}
                         title={"Open modal"}
                     >
-                        <Text style={styles.buttonText}>Please Set Work Experience 
+                        <Text style={styles.buttonText}>Not Willing to Travel{setFourHundred("No")}
                         </Text>
                     </TouchableOpacity>)
             }
@@ -130,8 +126,10 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     buttonText: {
-        color: "white"
+        color: "white",
+        fontSize: 20
     }
+
 });
 
-export default BioPicker
+export default FourHundredPicker

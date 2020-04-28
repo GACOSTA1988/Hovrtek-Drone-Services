@@ -95,7 +95,7 @@ function PilotProfileSetupPageOneScreen(
     e.preventDefault();
     if (personalBio.trim() === '') {
       Alert.alert("Please fill in your personal bio");
-      navigation.navigate("PilotProfileSetupPageOneScreen");
+      return
     } else if (yearsOfExperience.trim() === '') {
       Alert.alert("Please fill in years of experience");
       navigation.navigate("PilotProfileSetupPageOneScreen");

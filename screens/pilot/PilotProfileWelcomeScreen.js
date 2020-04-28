@@ -7,6 +7,7 @@ import {
   Button,
   ScrollView,
   TextInput,
+  Image,
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -15,6 +16,7 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+import pic from "../../assets/landingPageImage.png";
 
 function PilotProfileWelcomeScreen(
   props,
@@ -48,8 +50,10 @@ function PilotProfileWelcomeScreen(
   let profileCompletePlaceHolder = "";
   let profileImageUrlPlaceHolder = "";
   let isComplete = "";
+  let url = "";
 
   if (currentUserProps) {
+    url = currentUserProps.profileImageUrl;
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
     personalBioPlaceHolder = currentUserProps.personalBio;
     yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
@@ -84,21 +88,29 @@ function PilotProfileWelcomeScreen(
   const submit = (e) => {
     navigation.navigate("PilotProfileSetupPageOneScreen");
   };
-  // console.log(currentUserProps.profileComplete);
+  console.log(url);
 
   return (
     <View style={styles.container}>
-      {currentUserProps && isComplete === "No" ? (
+      {currentUserProps && isComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (
             <View>
+              <Image
+                style={{ height: 500, width: 500 }}
+                source={{
+                  uri: url,
+                }}
+              />
               <Text style={styles.subText}>
                 {currentUserProps.pilotFirstName}
                 {"\n"}
                 {currentUserProps.pilotLastName}
                 {"\n"}
                 From {currentUserProps.pilotLocation}
+                {"\n"}
+                {/* source {currentUserProps.profileImageUrl} */}
               </Text>
               <Text style={styles.bodyText}>Welcome To Your Profile</Text>
               <Text style={styles.bodyText}>

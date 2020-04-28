@@ -8,8 +8,8 @@ import {
   Button,
   Picker,
   ScrollView,
-  Alert, 
-  Image
+  Alert,
+  Image,
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
@@ -18,7 +18,6 @@ import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
 import { useNavigation } from "@react-navigation/native";
 import LicenseUploader from "../../components/auth/LicenseUploader";
-
 
 function PilotSignUpScreen(props) {
   const navigation = useNavigation();
@@ -39,51 +38,52 @@ function PilotSignUpScreen(props) {
   const [droneType, setDroneType] = useState("");
   const [airMap, setAirMap] = useState("");
   const [fourHundred, setFourHundred] = useState("");
+  const [profileImageUrl, setProfileImageUrl] = useState("");
   const [profileComplete, setProfileComplete] = useState("No");
 
   async function signUp(e) {
     e.preventDefault();
     props.navigation.push("Loading");
 
-    if (pilotFirstName.trim() === '') {
+    if (pilotFirstName.trim() === "") {
       Alert.alert("Please fill in your first name");
       navigation.navigate("PilotSignUpScreen");
-    } else if (pilotLastName.trim() === '') {
+    } else if (pilotLastName.trim() === "") {
       Alert.alert("Please fill in your last name");
       navigation.navigate("PilotSignUpScreen");
-    } else if (pilotLocation.trim() == '') {
+    } else if (pilotLocation.trim() == "") {
       Alert.alert("Please fill in your loaction");
       navigation.navigate("PilotSignUpScreen");
     } else {
-
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.log(error.toString(error));
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+      } catch (error) {
+        console.log(error.toString(error));
+      }
+      let user = firebase.auth().currentUser;
+      await user.updateProfile({
+        displayName: pilotFirstName,
+        photoURL: "P",
+      });
+      await user.reload().then(updateUser());
+      const userID = user.uid;
+      props.postPilotProfiles(
+        pilotFirstName,
+        pilotLastName,
+        pilotLocation,
+        personalBio,
+        yearsOfExperience,
+        faaLicenseExp,
+        insuredStatus,
+        travelStatus,
+        droneType,
+        airMap,
+        fourHundred,
+        userID,
+        profileImageUrl,
+        profileComplete
+      );
     }
-    let user = firebase.auth().currentUser;
-    await user.updateProfile({
-      displayName: pilotFirstName,
-      photoURL: "P",
-    });
-    await user.reload().then(updateUser());
-    const userID = user.uid;
-    props.postPilotProfiles(
-      pilotFirstName,
-      pilotLastName,
-      pilotLocation,
-      personalBio,
-      yearsOfExperience,
-      faaLicenseExp,
-      insuredStatus,
-      travelStatus,
-      droneType,
-      airMap,
-      fourHundred,
-      userID,
-      profileComplete
-    );
-  }
   }
   return (
     <View style={styles.wrapper}>

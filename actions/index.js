@@ -83,6 +83,7 @@ export function postPilotProfiles(
   airMap,
   fourHundred,
   userID,
+  profileImageUrl,
   profileComplete
 ) {
   return (dispatch) => {
@@ -99,6 +100,7 @@ export function postPilotProfiles(
       airMap,
       fourHundred,
       userID,
+      profileImageUrl,
       profileComplete,
     });
   };
@@ -115,6 +117,7 @@ export function editPilotProfile(
   airMap = "",
   fourHundred = "",
   profileComplete = "",
+  profileImageUrl = "",
   key = ""
 ) {
   return (dispatch) => {
@@ -129,6 +132,7 @@ export function editPilotProfile(
       airMap,
       fourHundred,
       profileComplete,
+      profileImageUrl,
     });
   };
 }

@@ -46,6 +46,7 @@ function PilotProfileWelcomeScreen(
   let airMapPlaceHolder = "";
   let fourHundredPlaceHolder = "";
   let profileCompletePlaceHolder = "";
+  let profileImageUrlPlaceHolder = "";
   let isComplete = "";
 
   if (currentUserProps) {
@@ -60,8 +61,12 @@ function PilotProfileWelcomeScreen(
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
     isComplete = currentUserProps.profileComplete;
+    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    profileImageUrlPlaceHolder
+  );
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
   const [yearsOfExperience, setYearsOfExperience] = useState(
     yearsOfExperiencePlaceHolder
@@ -83,7 +88,7 @@ function PilotProfileWelcomeScreen(
 
   return (
     <View style={styles.container}>
-      {currentUserProps && isComplete === "Yes" ? (
+      {currentUserProps && isComplete === "No" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (

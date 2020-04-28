@@ -38,8 +38,8 @@ const ValidInsurancePicker = () => {
                             selectedValue={insuredStatus}
                             onValueChange={(insuredStatus, itemIndex) => setInsuredStatus(insuredStatus)}
                         >
-                            <Picker.Item label="Yes" value="Yes" />
                             <Picker.Item label="No" value="No" />
+                            <Picker.Item label="Yes" value="Yes" />
 
                         </Picker>
 
@@ -53,14 +53,32 @@ const ValidInsurancePicker = () => {
                     </View>
                 </View>
             </Modal>
+
+
+
+
+            {
+                (insuredStatus)
+                    ?
+                    (<TouchableOpacity
+                        style={styles.button}
+                        onPress={() => openModal()}
+                        title={"Open modal"}
+                    >
+                        <Text style={styles.buttonText}>{insuredStatus}</Text>
+                    </TouchableOpacity>)
+                    :
+                    (<TouchableOpacity
+                        style={styles.button}
+                        onPress={() => openModal()}
+                        title={"Open modal"}
+                    >
+                        <Text style={styles.buttonText}>No Insurance{setInsuredStatus("No")}
+                        </Text>
+                    </TouchableOpacity>)
+            }
  
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => openModal()}
-                title={"Open modal"}
-            >
-                <Text style={styles.buttonText}>{insuredStatus}</Text>
-            </TouchableOpacity>
+
 
 
 

@@ -41,7 +41,7 @@ const [isModalVisible, setIsModalVisible] = useState(false)
                                 selectedValue={yearsOfExperience}
                                 onValueChange={(yearsOfExperience, itemIndex) => setYearsOfExperience(yearsOfExperience)}
                             >
-                                <Picker.Item label="No Experience" value="No Experience" />
+                                <Picker.Item label="No Years of Experience" value="No Years of Experience" />
                                 <Picker.Item label="Less than 1" value="Less than 1" />
                                 <Picker.Item label="1" value="1" />
                                 <Picker.Item label="2" value="2" />
@@ -70,8 +70,7 @@ const [isModalVisible, setIsModalVisible] = useState(false)
 
       
                   
-                   { 
-                   
+                   {  
                    (yearsOfExperience) 
                    ? 
                        ( <TouchableOpacity
@@ -87,17 +86,10 @@ const [isModalVisible, setIsModalVisible] = useState(false)
                             onPress={() => openModal()}
                             title={"Open modal"}
                         >
-                   <Text style={styles.buttonText}>No Experience {setYearsOfExperience("No Experience")}
+                   <Text style={styles.buttonText}>Please Set Years of Experience{setYearsOfExperience("No Years of Experience")}
                    </Text> 
                         </TouchableOpacity>)
                    }
-
-
-
-                    {/* <Text style={styles.buttonText}>{yearsOfExperience}</Text> */}
-             
-
-
 
             </View>
         );

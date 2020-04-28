@@ -62,13 +62,32 @@ const BioPicker = () => {
                 </View>
             </Modal>
 
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => openModal()}
-                title={"Open modal"}
-            >
-                <Text style={styles.buttonText}>Work Experience</Text>
-            </TouchableOpacity>
+
+            {
+
+                (personalBio)
+                    ?
+                    (<TouchableOpacity
+                        style={styles.button}
+                        onPress={() => openModal()}
+                        title={"Open modal"}
+                    >
+                        <Text style={styles.buttonText}>Work Experience Set</Text>
+                    </TouchableOpacity>)
+                    :
+                    (<TouchableOpacity
+                        style={styles.button}
+                        onPress={() => openModal()}
+                        title={"Open modal"}
+                    >
+                        <Text style={styles.buttonText}>Please Set Work Experience 
+                        </Text>
+                    </TouchableOpacity>)
+            }
+
+
+
+
 
         </View>
     );

@@ -63,20 +63,27 @@ const DroneTypePicker = () => {
                     </View>
                 </View>
             </Modal>
-            {/* <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => openModal()}
-                    title="Open modal"
-                /> */}
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => openModal()}
-                title={"Open modal"}
-            >
-                <Text style={styles.buttonText}>{droneType}</Text>
-            </TouchableOpacity>
 
-
+            {
+                (droneType)
+                    ?
+                    (<TouchableOpacity
+                        style={styles.button}
+                        onPress={() => openModal()}
+                        title={"Open modal"}
+                    >
+                        <Text style={styles.buttonText}>{droneType}</Text>
+                    </TouchableOpacity>)
+                    :
+                    (<TouchableOpacity
+                        style={styles.button}
+                        onPress={() => openModal()}
+                        title={"Open modal"}
+                    >
+                        <Text style={styles.buttonText}>No Experience {setDroneType("None")}
+                        </Text>
+                    </TouchableOpacity>)
+            }
 
         </View>
     );

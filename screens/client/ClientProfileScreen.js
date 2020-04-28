@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Button, Alert, Image } from "react-native";
 import personIcon from '../../assets/personIcon.png';
+import princePic01 from '../../assets/princePic01.jpg';
 import * as firebase from 'firebase';
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -38,9 +39,15 @@ function ClientProfileScreen(props, { getClientProfiles }) {
     <View style={styles.container}>
       { profileDetails ? (
         <View>
-          <Image source={personIcon} />
+          <Image source={princePic01} style={styles.backgroundImage}/>
+          <Image source={personIcon} style={styles.profileImage}/>
           <Text style={styles.name}>{profileDetails.clientName}</Text>
-          <Text>This client is in {profileDetails.clientLocation}</Text>
+          <View style={styles.info}>
+            <Text style={{fontSize: 20}}>Location: This client is in {profileDetails.clientLocation}</Text>
+            <Text style={{fontSize: 20, marginTop: 10}}>Bio: </Text>
+            <Text style={{fontSize: 15}}>Amelia Mary Earhart (/ˈɛərhɑːrt/, born July 24, 1897; disappeared July 2, 1937) was an American aviation pioneer and author.[1][Note 1] Earhart was the first female aviator to fly solo across the Atlantic Ocean.[3][Note 2] She set many other records,[2] wrote best-selling books about her flying experiences, and was instrumental in the formation of The Ninety-Nines, an organization for female pilots.[5] </Text>
+            <Text style={{fontSize: 20, marginTop: 10}}>Client links:</Text>
+          </View>
         </View>
       ) : (
         <Text>User unavailable</Text>
@@ -64,11 +71,27 @@ function mapStateToProps(state) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    // justifyContent: "center",
+    // alignItems: "center"
   },
   name: {
-    fontSize: 20
+    fontSize: 30,
+    marginLeft: 20
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    marginTop: 60,
+    marginLeft: 20
+  },
+  info: {
+    margin: 20,
+  },
+  backgroundImage: {
+    width: '100%',
+    height: 130,
+    position: 'absolute'
+
   }
 });
 

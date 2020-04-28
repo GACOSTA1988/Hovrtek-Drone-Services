@@ -19,6 +19,7 @@
 ## Warnings on app
 * "Virtualized lists should never be nested inside plain scrollviews with the same orientation" error on PilotProfileSetupPageOneScreen
 * "possilbe unhandled promise rejection id:0" on PilotProfileSetUpPageOneScreen
+* "Require cycle: components/DatePicker.js -> screens/pilot/PilotProfileSetupPageTwoScreen.js -> components/DatePicker.js /n Require cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle." on pilot home page
 
 
 ## Possible bugs?

@@ -163,6 +163,7 @@ export default () => {
                   headerLeft: () => (
                     <Button
                       onPress={() => navigation.goBack()}
+                      style={styles.backButton}
                       title="Back"
                       color="#fff"
                     />
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
+  }
 });
 
 // MainHeader Logo

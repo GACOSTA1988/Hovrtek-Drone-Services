@@ -12,12 +12,9 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postClientProfiles } from "../../actions/index";
 import { connect } from "react-redux";
-import { useNavigation } from '@react-navigation/native';
-
-
 
 function ClientSignUpScreen (props) {
-  const navigation = useNavigation();
+  const navigation = props.navigation;
   const { updateUser } = useContext(AuthContext);
   const [clientName, setClientName] = useState("");
   const [clientLocation, setClientLocation] = useState("");
@@ -27,7 +24,7 @@ function ClientSignUpScreen (props) {
   async function signUp(e) {
 
     e.preventDefault();
-    props.navigation.push("Loading");
+    navigation.push("Loading");
 
       if (clientName.trim() === '') {
         Alert.alert("Please fill in your name.");

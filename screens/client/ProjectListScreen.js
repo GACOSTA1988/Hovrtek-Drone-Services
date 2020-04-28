@@ -19,16 +19,22 @@ import {
 } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
-// import { useNavigation } from '@react-navigation/native';
 import * as firebase from 'firebase';
 
 function ProjectListScreen(props, { getProjects, getClientProfiles }) {
-  // const navigation = useNavigation();
 
   useEffect(() => {
     props.getProjects();
     props.getClientProfiles();
   }, []);
+
+  let user = '';
+  if (firebase.auth().currentUser) {
+    user = firebase.auth().currentUser;
+    if (props.listOfClientProfiles.find((x) => x.userID === user.uid)) {
+      console.log("this should bring up current user: ", props.listOfClientProfiles.find((x) => x.userID === user.uid).clientName);
+    }
+  }
 
   return (
     <View style={styles.projectListWrapper}>
@@ -76,7 +82,7 @@ function ProjectListScreen(props, { getProjects, getClientProfiles }) {
                           Recording: {item.recording}{" "}
                         </Text>
                         <Text style={{ color: "white", fontWeight: "800" }}>
-                          Posted by: {  }{" "}
+                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).clientName }{" "}
                         </Text>
                         { item.pilotID ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
@@ -163,14 +169,12 @@ function mapStateToProps(state) {
       key: key
     };
   });
-  console.log("this is list of projects: ", listOfProjects);
   const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
     return {
       ...val,
       key: key
     };
   });
-  console.log("client profiles: ", listOfClientProfiles);
   return {
     listOfProjects,
     listOfClientProfiles

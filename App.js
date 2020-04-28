@@ -45,14 +45,6 @@ export default () => {
     if (user) {
       setLoggedIn(true);
       setUserType(user.photoURL);
-      // console.log(
-      //   "this is the user ",
-      //   user,
-      //   "this is the user email",
-      //   user.email,
-      //   "And this is the user photoURL",
-      //   user.photoURL
-      // );
     } else {
       setLoggedIn(false);
       setUserType(null);
@@ -63,14 +55,6 @@ export default () => {
     return {
       updateUser: () => {
         const user = firebase.auth().currentUser;
-        // console.log(
-        //   "And here in update user, this is the user again: ",
-        //   user,
-        //   "this is the user email",
-        //   user.email,
-        //   "And, again, this is the user photoURL",
-        //   user.photoURL
-        // );
         setLoggedIn(true);
         setUserType(user.photoURL);
       },

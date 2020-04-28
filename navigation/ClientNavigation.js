@@ -13,7 +13,7 @@ const ClientDrawer = createDrawerNavigator();
 
 const ClientNavigation = () => {
   return (
-    <ClientDrawer.Navigator>
+    <ClientDrawer.Navigator drawerPosition='right'>
       <ClientDrawer.Screen
         name="Home"
         component={ProjectsNewProjectTabNavigation}

@@ -47,39 +47,41 @@ function SignInScreen({ navigation }) {
 
   return (
     <ImageBackground source={landingPageImage} style={styles.MainContainer}>
-      <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
+      <KeyboardAvoidingView>
+        <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
 
-      <Text style={styles.imageTextTwo}>
-        THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
-      </Text>
-      <TouchableOpacity>
-        <Text style={styles.text}>Welcome Back</Text>
-        <TextInput
-          placeholder=" Email"
-          placeholderTextColor="grey"
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder=" Password"
-          placeholderTextColor="grey"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
-          style={styles.input}
-        />
-        <Button title="Sign in" onPress={signIn} style={styles.text} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.push("SignUp")}>
-        <Text style={styles.buttonText}>Create an Account</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@mail.com", "password")} >
-        <Text style={styles.buttonText}>Client shortcut</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@mail.com", "password")} >
-        <Text style={styles.buttonText}>Pilot shortcut</Text>
-      </TouchableOpacity>
+        <Text style={styles.imageTextTwo}>
+          THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
+        </Text>
+        <TouchableOpacity>
+          <Text style={styles.text}>Welcome Back</Text>
+          <TextInput
+            placeholder=" Email"
+            placeholderTextColor="grey"
+            value={email}
+            onChangeText={setEmail}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder=" Password"
+            placeholderTextColor="grey"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={setPassword}
+            style={styles.input}
+          />
+          <Button title="Sign in" onPress={signIn} style={styles.text} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.push("SignUp")}>
+          <Text style={styles.buttonText}>Create an Account</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@mail.com", "password")} >
+          <Text style={styles.buttonText}>Client shortcut</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@mail.com", "password")} >
+          <Text style={styles.buttonText}>Pilot shortcut</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 }

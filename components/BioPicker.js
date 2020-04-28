@@ -1,16 +1,18 @@
-import React, {  useState, useContext } from 'react';
-import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity } from 'react-native';
-import { PassSetInsuredStatus, PassInsuredStatusState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
+import React, { useState, useContext } from 'react';
+import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { PassSetPersonalBio, PassPersonalBioState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
+import { useNavigation } from "@react-navigation/native";
 
-const ValidInsurancePicker = () => {
+const BioPicker = () => {
 
+    const navigation = useNavigation();
     const [isModalVisible, setIsModalVisible] = useState(false)
 
+    const setPersonalBio = useContext(PassSetPersonalBio)
+    const personalBio = useContext(PassPersonalBioState)
 
-    const setInsuredStatus = useContext(PassSetInsuredStatus)
-    const insuredStatus = useContext(PassInsuredStatusState)
-
-    console.log("DRONE TYPE", insuredStatus)
+    console.log("PERSONAL BIO", personalBio)
+    console.log("SET PERSONAL BIO", setPersonalBio)
 
     const openModal = () => {
         setIsModalVisible(true);
@@ -18,8 +20,11 @@ const ValidInsurancePicker = () => {
 
     const closeModal = () => {
         setIsModalVisible(false);
+        if (personalBio.trim() === '') {
+            navigation.navigate("PilotProfileSetupPageOneScreen");
+            Alert.alert("Please fill in your personal bio");
     }
-
+}
 
     return (
         <View style={styles.container}>
@@ -31,17 +36,20 @@ const ValidInsurancePicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>What Type of drone do you have?</Text>
+                        <Text style={styles.modalText}>Please Give Us a Brief Summary of Your Work Experience</Text>
                     </View>
                     <View>
-                        <Picker
-                            selectedValue={insuredStatus}
-                            onValueChange={(insuredStatus, itemIndex) => setInsuredStatus(insuredStatus)}
-                        >
-                            <Picker.Item label="Yes" value="Yes" />
-                            <Picker.Item label="No" value="No" />
-
-                        </Picker>
+                        <TextInput
+                            style={{
+                                marginTop: 20,
+                                height: 90,
+                                borderColor: "gray",
+                                borderWidth: 1,
+                                marginBottom: 20,
+                            }}
+                            onChangeText={setPersonalBio}
+                            value={personalBio}
+                        />
 
                     </View>
                     <View styles={styles.cancelWrapper}>
@@ -53,16 +61,14 @@ const ValidInsurancePicker = () => {
                     </View>
                 </View>
             </Modal>
- 
+
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => openModal()}
                 title={"Open modal"}
             >
-                <Text style={styles.buttonText}>{insuredStatus}</Text>
+                <Text style={styles.buttonText}>Work Experience</Text>
             </TouchableOpacity>
-
-
 
         </View>
     );
@@ -112,4 +118,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ValidInsurancePicker
+export default BioPicker

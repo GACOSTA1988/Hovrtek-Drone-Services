@@ -20,15 +20,19 @@ import _ from "lodash";
 import DroneExperiencePicker from '../../components/DroneExperiencePicker';
 import DroneTypePicker from '../../components/DroneTypePicker';
 import ValidInsurancePicker from "../../components/ValidInsurancePicker";
+import BioPicker from "../../components/BioPicker";
 
 
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetYearsOfExperience = React.createContext()
 export const PassYearsOfExperienceState = React.createContext()
+
 export const PassSetDroneType = React.createContext()
 export const PassDroneTypeState = React.createContext()
 export const PassSetInsuredStatus = React.createContext()
 export const PassInsuredStatusState = React.createContext()
+export const PassSetPersonalBio = React.createContext()
+export const PassPersonalBioState = React.createContext()
 
 function PilotProfileSetupPageOneScreen(
   props,
@@ -141,17 +145,15 @@ function PilotProfileSetupPageOneScreen(
           Please Give Us Brief Summary of Your Work Experience
         </Text>
         {currentUserProps ? (
-          <TextInput
-            style={{
-              marginTop: 20,
-              height: 90,
-              borderColor: "gray",
-              borderWidth: 1,
-              marginBottom: 20,
-            }}
-            onChangeText={setPersonalBio}
-            value={personalBio}
-          />
+          <View style={styles.droneExpWrapper}>
+          
+            <PassSetPersonalBio.Provider value={setPersonalBio}>
+              <PassPersonalBioState.Provider value={personalBio}>
+                <BioPicker />
+              </PassPersonalBioState.Provider>
+            </PassSetPersonalBio.Provider>
+
+          </View>
         ) : (
           <Text style={styles.bodyText}>
             Please Give Us Brief Summary of Your Work Experience
@@ -200,20 +202,6 @@ function PilotProfileSetupPageOneScreen(
             </PassSetInsuredStatus.Provider>
           </View>
 
-
-          // <TextInput
-          //   placeholder=" Yes or No"
-          //   style={{
-          //     marginTop: 20,
-          //     height: 20,
-          //     borderColor: "gray",
-          //     borderWidth: 1,
-          //     textAlign: "center",
-          //     marginBottom: 20,
-          //   }}
-          //   onChangeText={setInsuredStatus}
-          //   value={insuredStatus}
-          // />
         ) : (
           <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
         )}
@@ -267,7 +255,7 @@ const styles = StyleSheet.create({
   },
   dummyText: {
     marginTop: 200,
-    color: 'white'
+    color: 'lightgray'
   },
   droneExpWrapper: {
     alignItems: 'center'

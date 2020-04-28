@@ -1,11 +1,11 @@
-import React, { Component, useState, useContext } from 'react';
-import { Text, View, Button, Modal, StyleSheet, Dimensions, Picker, TouchableOpacity } from 'react-native';
+import React, {  useState, useContext } from 'react';
+import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity } from 'react-native';
 import { PassSetYearsOfExperience, PassYearsOfExperienceState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
 
 const DroneExperiencePicker = () => {
 
 const [isModalVisible, setIsModalVisible] = useState(false)
-const [pickerValue, setPickerValue] = useState("Less than 1");
+
 
 
 
@@ -13,7 +13,7 @@ const [pickerValue, setPickerValue] = useState("Less than 1");
     const setYearsOfExperience = useContext(PassSetYearsOfExperience)
     const yearsOfExperience = useContext(PassYearsOfExperienceState)
 
-    console.log("PICKER VALUE", yearsOfExperience)
+    console.log("YEARS OF EXPERIENCE", yearsOfExperience)
 
     const openModal = () => {
         setIsModalVisible(true);
@@ -41,6 +41,7 @@ const [pickerValue, setPickerValue] = useState("Less than 1");
                                 selectedValue={yearsOfExperience}
                                 onValueChange={(yearsOfExperience, itemIndex) => setYearsOfExperience(yearsOfExperience)}
                             >
+                                <Picker.Item label="No Experience" value="No Experience" />
                                 <Picker.Item label="Less than 1" value="Less than 1" />
                                 <Picker.Item label="1" value="1" />
                                 <Picker.Item label="2" value="2" />
@@ -66,18 +67,35 @@ const [pickerValue, setPickerValue] = useState("Less than 1");
                     </View>
                     </View>
                 </Modal>
-                {/* <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => openModal()}
-                    title="Open modal"
-                /> */}
-                <TouchableOpacity 
-                    style={styles.button}
-                    onPress={() => openModal()}
-                    title={"Open modal"}
-                >
-                    <Text style={styles.buttonText}>{yearsOfExperience}</Text>
-                    </TouchableOpacity>
+
+      
+                  
+                   { 
+                   
+                   (yearsOfExperience) 
+                   ? 
+                       ( <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => openModal()}
+                            title={"Open modal"}
+                        >
+                   <Text style={styles.buttonText}>{yearsOfExperience}</Text> 
+                        </TouchableOpacity>)
+                   :  
+                        (<TouchableOpacity
+                            style={styles.button}
+                            onPress={() => openModal()}
+                            title={"Open modal"}
+                        >
+                   <Text style={styles.buttonText}>No Experience {setYearsOfExperience("No Experience")}
+                   </Text> 
+                        </TouchableOpacity>)
+                   }
+
+
+
+                    {/* <Text style={styles.buttonText}>{yearsOfExperience}</Text> */}
+             
 
 
 

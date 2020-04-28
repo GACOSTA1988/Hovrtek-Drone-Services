@@ -16,16 +16,17 @@ import {
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProjects } from "../../actions/index";
+import { getProjects, getClientProfiles } from "../../actions/index";
 // import * as firebase from 'firebase';
 import _ from "lodash";
 
-function JobListScreen(props, { getProjects }) {
+function JobListScreen(props, { getProjects, getClientProfiles }) {
 
   const navigation = useNavigation();
 
   useEffect(() => {
     props.getProjects();
+    props.getClientProfiles();
   }, []);
 
   return (
@@ -69,6 +70,9 @@ function JobListScreen(props, { getProjects }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).clientName }{" "}
+                        </Text>
                         { item.pilotID ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
                           No Longer Available
@@ -84,9 +88,9 @@ function JobListScreen(props, { getProjects }) {
                             )
                           }
                           >
-                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            <Text style={{ color: "white", fontWeight: "800" }}>
                           Accept Job
-                          </Text>
+                            </Text>
                           </TouchableHighlight>
                         )}
                       </View>
@@ -127,11 +131,18 @@ function mapStateToProps(state) {
       key: key
     };
   });
+  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
   return {
-    listOfProjects
+    listOfProjects,
+    listOfClientProfiles
   };
 }
 
-export default connect(mapStateToProps, { getProjects })(
+export default connect(mapStateToProps, { getProjects, getClientProfiles })(
   JobListScreen
 );

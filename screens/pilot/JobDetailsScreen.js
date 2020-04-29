@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet} from "react-native";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from '@react-navigation/native';
 
 function JobDetailsScreen(props) {
-  const navigation = useNavigation();
 
   const jobDetails = props.route.params;
+  console.log(jobDetails);
   return(
     <View style={styles.container}>
       <Text style={styles.ProjectText}>Project Details</Text>
@@ -20,7 +19,27 @@ function JobDetailsScreen(props) {
       </Text>
 
       <View>
-        <TouchableOpacity 
+        {!jobDetails.pilotID ? (
+          <TouchableOpacity
+          style={styles.back}
+          onPress={() =>
+            props.navigation.navigate(
+              "AcceptJobScreen",
+              {
+                ...jobDetails
+              }
+            )
+          }
+
+          >
+          <Text style={styles.backText}>Accept Job</Text>
+
+          </TouchableOpacity>
+
+        ) : (
+          <Text>This job is no longer available</Text>
+        )}
+        <TouchableOpacity
         style={styles.back}
         onPress={()=> props.navigation.navigate('JobListScreen')}
         >
@@ -61,7 +80,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#092455',
-   
+    margin: 10
+
   },
   backText: {
     textAlign: 'center',

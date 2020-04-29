@@ -9,18 +9,18 @@ import {
   Picker,
   ScrollView,
   Alert,
-  Image,
+  Image
+
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postPilotProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
-import { useNavigation } from "@react-navigation/native";
 import LicenseUploader from "../../components/auth/LicenseUploader";
 
 function PilotSignUpScreen(props) {
-  const navigation = useNavigation();
+  const navigation = props.navigation;
   const { updateUser } = useContext(AuthContext);
 
   const [pilotFirstName, setPilotFirstName] = useState("");
@@ -43,7 +43,7 @@ function PilotSignUpScreen(props) {
 
   async function signUp(e) {
     e.preventDefault();
-    props.navigation.push("Loading");
+    navigation.push("Loading");
 
     if (pilotFirstName.trim() === "") {
       Alert.alert("Please fill in your first name");

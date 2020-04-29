@@ -53,10 +53,11 @@ const styles = StyleSheet.create({
       android: {
         backgroundColor: "#092455",
         left: -16,
-        top: 5,
+        // top: 5,
         alignSelf: "stretch",
         width: width,
-        height: 67,
+        height: 80,
+        justifyContent: "center"
       },
     }),
   },
@@ -73,11 +74,11 @@ const styles = StyleSheet.create({
         marginLeft: 20,
       },
       android: {
-        width: 170,
-        height: 30,
+        width: 210,
+        height: 40,
         position: "absolute",
         left: 10,
-        top: 20,
+        top: '35%',
       },
     }),
   },

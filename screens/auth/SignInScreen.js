@@ -18,7 +18,6 @@ function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   const signIn = (e) => {
     e.preventDefault();
     if (email.length < 4) {
@@ -47,45 +46,41 @@ function SignInScreen({ navigation }) {
 
   return (
     <ImageBackground source={landingPageImage} style={styles.MainContainer}>
-      <KeyboardAvoidingView>
-        <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
-
-        <Text style={styles.imageTextTwo}>
-          THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
-        </Text>
-        <TouchableOpacity>
-          <Text style={styles.text}>Welcome Back</Text>
-          <TextInput
-            placeholder=" Email"
-            placeholderTextColor="grey"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder=" Password"
-            placeholderTextColor="grey"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-          />
-          <Button title="Sign in" onPress={signIn} style={styles.text} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.push("SignUp")}>
-          <Text style={styles.buttonText}>Create an Account</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@mail.com", "password")} >
-          <Text style={styles.buttonText}>Client shortcut</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@mail.com", "password")} >
-          <Text style={styles.buttonText}>Pilot shortcut</Text>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
+      <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
+      <Text style={styles.imageTextTwo}>
+        THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
+      </Text>
+      <TouchableOpacity>
+        <Text style={styles.text}>Welcome Back</Text>
+        <TextInput
+          placeholder=" Email"
+          placeholderTextColor="grey"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder=" Password"
+          placeholderTextColor="grey"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+          style={styles.input}
+        />
+        <Button title="Sign in" onPress={signIn} style={styles.text} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.push("SignUp")}>
+        <Text style={styles.buttonText}>Create an Account</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imaclient@mail.com", "password")} >
+        <Text style={styles.buttonText}>Client shortcut</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => firebase.auth().signInWithEmailAndPassword("imapilot@mail.com", "password")} >
+        <Text style={styles.buttonText}>Pilot shortcut</Text>
+      </TouchableOpacity>
     </ImageBackground>
   );
 }
-
 
 const styles = StyleSheet.create({
 
@@ -97,7 +92,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     textAlign: "center",
-    color: "grey",
+    color: "grey"
   },
 
   input: {
@@ -106,13 +101,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 8,
     width: 200,
-    color: "white",
+    color: "white"
   },
 
   text: {
     textAlign: "center",
     color: "white",
-    fontSize: 15,
+    fontSize: 15
   },
 
   imageText: {
@@ -120,15 +115,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     textAlign: "left",
-    marginLeft: 10,
+    marginLeft: 10
   },
+
   imageTextTwo: {
     fontSize: 13,
     fontWeight: "bold",
     color: "#3E90D0",
     textAlign: "left",
     margin: 10
-  },
+  }
 
 });
 

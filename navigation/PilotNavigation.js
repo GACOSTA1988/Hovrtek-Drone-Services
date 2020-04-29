@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NotificationContext } from "../context";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
@@ -7,6 +8,17 @@ import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
 
 const PilotDrawer = createDrawerNavigator();
+
+// Trying to set up a notifications thing. Need to learn more about useContext
+// const [notifications, setNotifications] = useState(0);
+//
+// const notificationContext = useMemo(() => {
+//   return {
+//     notify: () => {
+//       setNotifications(notifications++);
+//     }
+//   }
+// }, []);
 
 const PilotNavigation = () => {
   return (

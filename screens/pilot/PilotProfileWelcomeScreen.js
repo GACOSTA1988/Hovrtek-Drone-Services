@@ -98,7 +98,13 @@ function PilotProfileWelcomeScreen(
           {currentUserProps ? (
             <View>
               <Image
-                style={{ height: 500, width: 500 }}
+                style={{
+                  height: 90,
+                  width: 90,
+                  borderRadius: 90,
+                  alignItems: "center",
+                  marginLeft: "35%",
+                }}
                 source={{
                   uri: url,
                 }}

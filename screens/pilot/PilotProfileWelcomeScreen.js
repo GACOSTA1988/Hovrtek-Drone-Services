@@ -19,99 +19,36 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import pic from "../../assets/landingPageImage.png";
 
-function PilotProfileWelcomeScreen(
-  props,
-  { getPilotProfiles, editPilotProfile }
-) {
-  const navigation = useNavigation();
-
-  getCurrentUserProps();
+function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
 
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
 
-  let userID = null;
+  const [profileDetails, setProfileDetails] = useState(null);
+
+  let user = null;
   if (firebase.auth().currentUser) {
-    userID = firebase.auth().currentUser.uid;
+    user = firebase.auth().currentUser;
   }
 
-//   const [currentUserProps, setCurrentUserProps] = useState(null);
-
-//   async function getCurrentUserProps() {
-//     const currentUserProfile = await props.listOfProfiles.find((x) => x.userID === userID);
-//     await setCurrentUserProps(currentUserProfile);
-//     console.log("these are currentUserProps: ", currentUserProps);
-//     return currentUserProps;
-//   }
-
-//   const submit = (e) => {
-//     navigation.navigate("PilotProfileSetupPageOneScreen");
-//   };
-
-  const list = props.listOfProfiles;
-  let currentUserProps = list.find((x) => x.userID === userID);
-
-  if (currentUserProps) {
+  try {
+    if (!profileDetails) {
+      setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
+      console.log("profile details: ", profileDetails);
+    }
+  } catch (error) {
+    console.log("ERROR: ", error.message);
+    Alert.alert("User page unavailable");
+    props.navigation.navigate("JobListScreen");
   }
-  let pilotLocationPlaceHolder = "";
-  let personalBioPlaceHolder = "";
-  let yearsOfExperiencePlaceHolder = "";
-  let faaLicenseExpPlaceHolder = "";
-  let insuredStatusPlaceHolder = "";
-  let travelStatusPlaceHolder = "";
-  let droneTypePlaceHolder = "";
-  let airMapPlaceHolder = "";
-  let fourHundredPlaceHolder = "";
-  let profileCompletePlaceHolder = "";
-  let profileImageUrlPlaceHolder = "";
-  let isComplete = "";
-  let url = "";
-
-  if (currentUserProps) {
-    url = currentUserProps.profileImageUrl;
-    pilotLocationPlaceHolder = currentUserProps.pilotLocation;
-    personalBioPlaceHolder = currentUserProps.personalBio;
-    yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
-    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
-    insuredStatusPlaceHolder = currentUserProps.insuredStatus;
-    travelStatusPlaceHolder = currentUserProps.travelStatus;
-    droneTypePlaceHolder = currentUserProps.droneType;
-    airMapPlaceHolder = currentUserProps.airMapPlace;
-    fourHundredPlaceHolder = currentUserProps.fourHundred;
-    profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
-    isComplete = currentUserProps.profileComplete;
-    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
-  }
-
-  const [profileImageUrl, setProfileImageUrl] = useState(
-    profileImageUrlPlaceHolder
-  );
-  const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
-  const [yearsOfExperience, setYearsOfExperience] = useState(
-    yearsOfExperiencePlaceHolder
-  );
-  const [faaLicenseExp, setFaaLicenseExp] = useState(faaLicenseExpPlaceHolder);
-  const [insuredStatus, setInsuredStatus] = useState(insuredStatusPlaceHolder);
-  const [travelStatus, setTravelStatus] = useState(travelStatusPlaceHolder);
-  const [droneType, setDroneType] = useState(droneTypePlaceHolder);
-  const [airMap, setAirMap] = useState(airMapPlaceHolder);
-  const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
-  const [profileComplete, setProfileComplete] = useState(
-    profileCompletePlaceHolder
-  );
-
-  const submit = (e) => {
-    navigation.navigate("PilotProfileSetupPageOneScreen");
-  };
-  console.log(url);
 
   return (
     <View style={styles.container}>
-      {currentUserProps && currentUserProps.profileComplete === "Yes" ? (
+      {profileDetails && profileDetails.profileComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
-          {currentUserProps ? (
+          {profileDetails ? (
             <View>
               <Image
                 style={{
@@ -126,31 +63,31 @@ function PilotProfileWelcomeScreen(
                 }}
               />
               <Text style={styles.subText}>
-                {currentUserProps.pilotFirstName}
+                {profileDetails.pilotFirstName}
                 {"\n"}
-                {currentUserProps.pilotLastName}
+                {profileDetails.pilotLastName}
                 {"\n"}
-                From {currentUserProps.pilotLocation}
+                From {profileDetails.pilotLocation}
                 {"\n"}
-                {/* source {currentUserProps.profileImageUrl} */}
+                {/* source {profileDetails.profileImageUrl} */}
               </Text>
               <Text style={styles.bodyText}>Welcome To Your Profile</Text>
               <Text style={styles.bodyText}>
-                Personal Bio: {currentUserProps.personalBio}
+                Personal Bio: {profileDetails.personalBio}
                 {"\n"}
-                Drone Type: {currentUserProps.droneType}
+                Drone Type: {profileDetails.droneType}
                 {"\n"}
-                Years of Experience: {currentUserProps.yearsOfExperience}
+                Years of Experience: {profileDetails.yearsOfExperience}
                 {"\n"}
-                FAA License Expiration: {currentUserProps.faaLicenseExp}
+                FAA License Expiration: {profileDetails.faaLicenseExp}
                 {"\n"}
-                Travel for work? {currentUserProps.travelStatus}
+                Travel for work? {profileDetails.travelStatus}
                 {"\n"}
-                Insured: {currentUserProps.insuredStatus}
+                Insured: {profileDetails.insuredStatus}
                 {"\n"}
-                Have you used AirMap: {currentUserProps.airMap}
+                Have you used AirMap: {profileDetails.airMap}
                 {"\n"}
-                Have you flown over 400FT? {currentUserProps.fourHundred}
+                Have you flown over 400FT? {profileDetails.fourHundred}
               </Text>
             </View>
           ) : (
@@ -160,14 +97,14 @@ function PilotProfileWelcomeScreen(
       ) : (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
-          {currentUserProps ? (
+          {profileDetails ? (
             <View>
               <Text style={styles.subText}>
-                {currentUserProps.pilotFirstName}
+                {profileDetails.pilotFirstName}
                 {"\n"}
-                {currentUserProps.pilotLastName}
+                {profileDetails.pilotLastName}
                 {"\n"}
-                From {currentUserProps.pilotLocation}
+                From {profileDetails.pilotLocation}
               </Text>
               <Text style={styles.bodyText}>Welcome To Your Profile</Text>
             </View>
@@ -235,7 +172,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const listOfProfiles = _.map(
+  const listOfPilotProfiles = _.map(
     state.pilotProfilesList.pilotProfilesList,
     (val, key) => {
       return {
@@ -245,7 +182,7 @@ function mapStateToProps(state) {
     }
   );
   return {
-    listOfProfiles,
+    listOfPilotProfiles,
   };
 }
 

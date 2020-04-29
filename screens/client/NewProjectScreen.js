@@ -1,4 +1,3 @@
-//NEWPROJECTSCREEN
 import React, { useState, useEffect } from "react";
 import {
   Text,
@@ -21,11 +20,14 @@ import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import ImageUploader from "../../components/client/ImageUploader";
 import * as firebase from "firebase";
-import ClientDatePicker from '../../components/ClientDatePicker'
+import ClientDatePicker from '../../components/ClientDatePicker';
+import ClientLocationPicker from '../../components/ClientLocationPicker';
 
 // CONTEXT HOOK
 export const PassSetDate = React.createContext();
 export const PassDateState = React.createContext();
+export const PassSetLocation= React.createContext();
+export const PassLocationState = React.createContext();
 
 
 function NewProjectScreen(props, { postProjects }) {
@@ -72,14 +74,17 @@ function NewProjectScreen(props, { postProjects }) {
           <Text style={styles.newProjectText}>Create a New Project</Text>
 
           <Text style={styles.labelText}>
-            Where is the location you want your Drone Service?
+            Where is the location of your drone service?
           </Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Location"
-            onChangeText={setLocation}
-            value={location}
-          />
+
+          <View style={styles.modalWrapper}>
+            <PassSetLocation.Provider value={setLocation}>
+              <PassLocationState.Provider value={location}>
+                <ClientLocationPicker />
+              </PassLocationState.Provider>
+            </PassSetLocation.Provider>
+          </View>
+
           <Text style={styles.labelText}>
             What is the date of your Drone shoot?
           </Text>
@@ -89,14 +94,7 @@ function NewProjectScreen(props, { postProjects }) {
               <ClientDatePicker />
             </PassDateState.Provider>
           </PassSetDate.Provider>
-      
 
-          <TextInput
-            style={styles.input}
-            placeholder="Date"
-            onChangeText={setDate}
-            value={date}
-          />
           <Text style={styles.labelText}>
             What will the Drone Service be recording?
           </Text>
@@ -120,14 +118,14 @@ function NewProjectScreen(props, { postProjects }) {
             initial={1}
             onPress={setLight}
           />
-          {/* <Text style={styles.uploaderText}>Upload an Image Here!</Text>
-          <ImageUploader style={styles.uploaderObject} /> */}
+
 
           <TouchableOpacity onPress={submit}>
             <Text style={styles.submitButton}>Submit Form</Text>
           </TouchableOpacity>
           {/* <Button style={styles.submitButton} title="Submit" onPress={submit} /> */}
         </TouchableOpacity>
+        <Text style={styles.dummyText}>Dummy Text</Text>
       </ScrollView>
     </View>
   );
@@ -166,15 +164,16 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
   labelText: {
-    marginBottom: 50,
+    marginBottom: 10,
     textAlign: "center",
   },
   uploaderText: {
     marginTop: 100,
   },
-  dummy: {
-    marginTop: 100,
-    marginBottom: 200,
+  dummyText: {
+    marginTop: 200,
+
+    color: 'lightgray'
   },
   submitButton: {
     marginTop: 10,
@@ -183,6 +182,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "#092455",
   },
+  modalWrapper: {
+    alignItems: 'center'
+  }
 });
 
 export default connect(null, { postProjects })(NewProjectScreen);

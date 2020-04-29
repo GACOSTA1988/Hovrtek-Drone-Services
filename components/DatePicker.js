@@ -38,29 +38,6 @@ const DatePicker = () => {
     return (
         <View style={styles.pickerWrapper}>
 
-            {/* {
-                (faaLicenseState)
-                    ?
-                    (<TouchableOpacity
-                        style={styles.button}
-                        onPress={() => showPicker()}
-                        title={"Open modal"}
-                    >
-                        <Text style={styles.buttonText}>{faaLicenseState}</Text>
-                    </TouchableOpacity>)
-                    :
-                    (<TouchableOpacity
-                        style={styles.button}
-                        onPress={() => openModal()}
-                        title={"Open modal"}
-                    >
-                        <Text style={styles.buttonText}>Not Willing to Travel{setFaaLicenseContext("Pick a Date")}
-                        </Text>
-                    </TouchableOpacity>)
-            } */}
-       
-  
-
             <TouchableOpacity style={styles.button} onPress={showPicker}>
                 {faaLicenseState ? 
                     <Text style={styles.buttonText}>{faaLicenseState}</Text> :

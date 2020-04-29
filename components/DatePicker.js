@@ -24,7 +24,7 @@ const DatePicker = () => {
 
     const handlePicker = (datetime) => {
         setIsVisible(false)
-        setFaaLicenseContext(moment(datetime).format('MMMM, DD, YYYY'))
+        setFaaLicenseContext(moment(datetime).format('MMMM, DD  YYYY'))
     }
 
     const hidePicker = () => {

@@ -25,7 +25,7 @@ function PilotProfileWelcomeScreen(
 ) {
   const navigation = useNavigation();
 
-  getCurrentUserProps();
+  // getCurrentUserProps();
 
   useEffect(() => {
     props.getPilotProfiles();

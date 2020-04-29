@@ -97,15 +97,15 @@ function PilotProfileImageUploadScreen(
   };
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+
         <Text style={styles.welcomeText}>
           Hi!
           {currentUserProps ? (
             <Text style={styles.subText}>
               {"\n"}
-              {currentUserProps.pilotFirstName}
-              {"\n"}
-              {currentUserProps.pilotLastName}
+            {currentUserProps.pilotFirstName + ' ' +currentUserProps.pilotLastName}
+          
+              {}
             </Text>
           ) : (
             <Text>Name:</Text>
@@ -118,9 +118,25 @@ function PilotProfileImageUploadScreen(
             <LicenseUploader />
           </PassProfileImageUrlState.Provider>
         </PassSetProfileImageUrlContext.Provider>
-        <Button title="Complete Profile" onPress={submit} />
-        <Button title="Back" onPress={() => props.navigation.goBack()} />
-      </ScrollView>
+
+        <TouchableOpacity
+          style={styles.completeButton}
+          onPress={submit}
+          title={"Complete Profile"}
+        >
+          <Text style={styles.completeButtonText}>Complete Profile</Text>
+        </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => props.navigation.goBack()}
+        title={"Back"}
+      >
+        <Text style={styles.backButtonText}>Back</Text>
+      </TouchableOpacity>
+
+        {/* <Button style={styles.backButton} title="Back" onPress={() => props.navigation.goBack()} /> */}
+
     </View>
   );
 }
@@ -137,10 +153,26 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5,
   },
+  completeButton: {
+    width: 250,
+    height: 50,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 390,
+    marginBottom: 10,
+    position: 'absolute'
+  },
+  completeButtonText: {
+    color: "white",
+    fontSize: 20,
+  },
   welcomeText: {
-    marginTop: "15%",
+  
+    marginTop: "5%",
     marginBottom: "10%",
-    fontSize: 30,
+    fontSize: 25,
     color: "darkblue",
     fontWeight: "600",
     textAlign: "center",
@@ -148,7 +180,7 @@ const styles = StyleSheet.create({
   subText: {
     marginTop: "25%",
     marginBottom: "10%",
-    fontSize: 30,
+    fontSize: 20,
     color: "black",
     fontWeight: "600",
     textAlign: "center",
@@ -164,6 +196,15 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 80,
   },
+  backButton: {
+    marginTop: 450,
+    marginBottom: 10,
+    position: 'absolute'
+  },
+  backButtonText: {
+    color: '#0000EE',
+    fontSize: 20
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(
@@ -183,3 +224,11 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
   PilotProfileImageUploadScreen
 );
+
+
+// marginTop: "5%",
+//   marginBottom: "10%",
+//     fontSize: 25,
+//       color: "darkblue",
+//         fontWeight: "600",
+//           textAlign: "center",

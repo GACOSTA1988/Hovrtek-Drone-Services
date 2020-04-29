@@ -15,7 +15,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
     props.getClientProfiles();
   }, []);
 
-  const [profileDetails, setProfileDetails] = useState('');
+  const [profileDetails, setProfileDetails] = useState(null);
 
   let user = null;
 
@@ -24,11 +24,14 @@ function ClientProfileScreen(props, { getClientProfiles }) {
     // if user is client, get client profile
     if (user.photoURL === "C") {
       try {
-        setProfileDetails(props.listOfClientProfiles.find((x) => x.userID === user.uid));
-        console.log("profile details: ", profileDetails);
-      } catch {
-        // code is hitting this catch block every single time. And it breaks without it. why????
-        // Alert.alert("User page unavailable 1");
+        if (!profileDetails) {
+          setProfileDetails(props.listOfClientProfiles.find((x) => x.userID === user.uid));
+          console.log("profile details: ", profileDetails);
+        }
+      } catch (error) {
+        console.log("ERROR: ", error.message);
+        Alert.alert("User page unavailable");
+        props.navigation.navigate("ProjectListScreen");
       }
     // if user is pilot sent from JobsList, get client associated with that job's profile
   } else if (props.route.params.clientID) {
@@ -98,7 +101,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 30,
-    marginLeft: 20
+    marginLeft: 20,
+    width: 300
   },
   profileImage: {
     width: 100,

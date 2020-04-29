@@ -8,7 +8,7 @@ import {
   ScrollView,
   TextInput,
   Alert,
-  Image
+  Image,
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -18,77 +18,294 @@ import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
 import pic from "../../assets/landingPageImage.png";
+import princePic01 from "../../assets/princePic01.jpg";
+
 
 function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
 
-  useEffect(() => {
+
+useEffect(() => {
     props.getPilotProfiles();
   }, []);
 
   const [profileDetails, setProfileDetails] = useState(null);
 
   let user = null;
+  let profile = null;
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
-  }
-
-  try {
-    if (!profileDetails) {
-      setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
-      console.log("profile details: ", profileDetails);
+    profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
+    try {
+      if (!profileDetails && profile) {
+        setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
+      }
+    } catch(error) {
+      console.log("ERROR: ", error.message);
+      Alert.alert("User page unavailable");
+      props.navigation.navigate("JobListScreen");
     }
-  } catch (error) {
-    console.log("ERROR: ", error.message);
-    Alert.alert("User page unavailable");
-    props.navigation.navigate("JobListScreen");
   }
 
   return (
     <View style={styles.container}>
       {profileDetails && profileDetails.profileComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Text style={styles.welcomeText}>Hi</Text>
-          {profileDetails ? (
+
+          <Image source={princePic01} style={styles.backgroundImage} />
+          <Image
+            style={{
+              height: 100,
+              width: 100,
+              borderRadius: 90,
+              alignItems: "center",
+              marginTop: "17%",
+              marginLeft: 20,
+              elevation: 8,
+              borderWidth: 4,
+              borderColor: "#092455",
+            }}
+            source={{
+              uri: url,
+            }}
+          />
+          {currentUserProps ? (
+
             <View>
-              <Image
+              <Text style={styles.nameText}>
+                {currentUserProps.pilotFirstName}{" "}
+                {currentUserProps.pilotLastName}
+              </Text>
+              <Text style={styles.locationText}>
+                Location: {currentUserProps.pilotLocation}
+              </Text>
+
+              <Text
                 style={{
-                  height: 90,
-                  width: 90,
-                  borderRadius: 90,
-                  alignItems: "center",
-                  marginLeft: "35%",
+                  fontSize: 20,
+                  color: "black",
+                  fontWeight: "450",
+                  marginLeft: "2%",
+                  marginTop: "4%",
                 }}
-                source={{
-                  uri: url,
+
+              >
+                Bio:
+              </Text>
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: "black",
+                  // fontWeight: "450",
+                  marginLeft: "2%",
+                  marginTop: "1%",
                 }}
-              />
-              <Text style={styles.subText}>
-                {profileDetails.pilotFirstName}
-                {"\n"}
-                {profileDetails.pilotLastName}
-                {"\n"}
-                From {profileDetails.pilotLocation}
-                {"\n"}
-                {/* source {profileDetails.profileImageUrl} */}
+              >
+                {currentUserProps.personalBio}
+
               </Text>
-              <Text style={styles.bodyText}>Welcome To Your Profile</Text>
-              <Text style={styles.bodyText}>
-                Personal Bio: {profileDetails.personalBio}
-                {"\n"}
-                Drone Type: {profileDetails.droneType}
-                {"\n"}
-                Years of Experience: {profileDetails.yearsOfExperience}
-                {"\n"}
-                FAA License Expiration: {profileDetails.faaLicenseExp}
-                {"\n"}
-                Travel for work? {profileDetails.travelStatus}
-                {"\n"}
-                Insured: {profileDetails.insuredStatus}
-                {"\n"}
-                Have you used AirMap: {profileDetails.airMap}
-                {"\n"}
-                Have you flown over 400FT? {profileDetails.fourHundred}
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "450",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  Drone Model:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "200",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  {currentUserProps.droneType}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "450",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  Year Of Experience:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "200",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  {currentUserProps.yearsOfExperience}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "450",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  License Expiration Date:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "200",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  {currentUserProps.faaLicenseExp}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "450",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  Willing To Travel:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "200",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  {currentUserProps.travelStatus}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "450",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  Insured:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "200",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  {currentUserProps.insuredStatus}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "450",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  Experience with Air Map:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "200",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  {currentUserProps.airMap}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "450",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  Able to Fly over 400 FT:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: "200",
+                    marginLeft: "2%",
+                    marginTop: 8,
+                  }}
+                >
+                  {currentUserProps.fourHundred}
+                </Text>
+              </View>
             </View>
           ) : (
             <Text></Text>
@@ -99,8 +316,10 @@ function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
           <Text style={styles.welcomeText}>Hi</Text>
           {profileDetails ? (
             <View>
-              <Text style={styles.subText}>
-                {profileDetails.pilotFirstName}
+
+              <Text style={styles.nameText}>
+                {currentUserProps.pilotFirstName}
+
                 {"\n"}
                 {profileDetails.pilotLastName}
                 {"\n"}
@@ -128,7 +347,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-
     backgroundColor: "lightgray",
     height: "100%",
   },
@@ -138,23 +356,24 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5,
   },
-  welcomeText: {
-    marginTop: "25%",
 
-    fontSize: 30,
-    color: "darkblue",
-    fontWeight: "600",
-    textAlign: "center",
-  },
-  subText: {
-    marginBottom: "10%",
+  nameText: {
     marginTop: "5%",
     fontSize: 30,
     color: "black",
     fontWeight: "600",
-    textAlign: "center",
+    textAlign: "left",
+    marginLeft: "2%",
   },
-  bodyText: {
+  locationText: {
+    fontSize: 20,
+    color: "black",
+    fontWeight: "300",
+    textAlign: "left",
+    marginLeft: "2%",
+  },
+
+  subHeaderText: {
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 20,
@@ -168,6 +387,11 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     height: 30,
     marginBottom: 80,
+  },
+  backgroundImage: {
+    width: "100%",
+    height: "20%",
+    position: "absolute",
   },
 });
 

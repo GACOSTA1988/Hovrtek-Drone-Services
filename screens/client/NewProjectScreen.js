@@ -21,8 +21,11 @@ import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import ImageUploader from "../../components/client/ImageUploader";
 import * as firebase from "firebase";
-import DatePicker from '../../components/DatePicker'
+import ClientDatePicker from '../../components/ClientDatePicker'
 
+// CONTEXT HOOK
+export const PassSetDate = React.createContext();
+export const PassDateState = React.createContext();
 
 
 function NewProjectScreen(props, { postProjects }) {
@@ -80,7 +83,13 @@ function NewProjectScreen(props, { postProjects }) {
           <Text style={styles.labelText}>
             What is the date of your Drone shoot?
           </Text>
-          <DatePicker />
+
+          <PassSetDate.Provider value={setDate}>
+            <PassDateState.Provider value={date}>
+              <ClientDatePicker />
+            </PassDateState.Provider>
+          </PassSetDate.Provider>
+      
 
           <TextInput
             style={styles.input}

@@ -20,6 +20,7 @@ import DatePicker from '../../components/DatePicker';
 import TravelStatusPicker from '../../components/TravelStatusPicker';
 import FourHundredPicker from "../../components/FourHundredPicker";
 import AirMapPicker from "../../components/AirMapPicker";
+import { AntDesign } from "@expo/vector-icons";
 
 // context hook stuff
 export const PassSetFaaLicenseContext = React.createContext()
@@ -118,9 +119,7 @@ function PilotProfileSetupPageTwoScreen(
           {currentUserProps ? (
             <Text style={styles.subText}>
               {"\n"}
-              {currentUserProps.pilotFirstName}
-              {"\n"}
-              {currentUserProps.pilotLastName}
+              {currentUserProps.pilotFirstName + ' ' + currentUserProps.pilotLastName}
             </Text>
           ) : (
             <Text>Name:</Text>
@@ -195,8 +194,30 @@ function PilotProfileSetupPageTwoScreen(
         ) : (
           <Text style={styles.bodyText}>Have You Used AirMap?</Text>
         )}
+        <View style={styles.centerButton}>
+          <View style={styles.saveAndContinueWrapper}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={submit}
+              title={"Save and Continue"}
+            >
+              {/* <AntDesign
+                name="arrowright"
+                size={20}
+              /> */}
+              <Text style={styles.saveAndContinueText}>Save and Continue</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-        <Button title="Save and Continue" onPress={submit} />
+{/* 
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => props.navigation.goBack()} 
+        >
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity> */}
+    
         <Button title="Back" onPress={() => props.navigation.goBack()} />
       </ScrollView>
     </View>
@@ -209,6 +230,24 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
     height: "100%",
   },
+  centerButton: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  saveAndContinueWrapper: {
+    width: 170,
+    height: 50,
+    borderWidth: 2,
+    borderColor: "#092455",
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 50
+  },
+  saveAndContinueText: {
+    fontSize: 15,
+    color: "#092455",
+  },
   button: {
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -216,18 +255,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   welcomeText: {
-    marginTop: "15%",
+    marginTop: "5%",
     marginBottom: "10%",
-    fontSize: 30,
-    color: "darkblue",
+    fontSize: 25,
+    color: '#4593e7',
     fontWeight: "600",
     textAlign: "center",
   },
   subText: {
     marginTop: "25%",
     marginBottom: "10%",
-    fontSize: 30,
-    color: "black",
+    fontSize: 25,
+    color: 'black',
     fontWeight: "600",
     textAlign: "center",
   },

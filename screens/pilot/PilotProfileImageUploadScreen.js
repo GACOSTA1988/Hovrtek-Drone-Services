@@ -99,7 +99,7 @@ function PilotProfileImageUploadScreen(
     <View style={styles.container}>
 
         <Text style={styles.welcomeText}>
-          Hi!
+          Hello!
           {currentUserProps ? (
             <Text style={styles.subText}>
               {"\n"}
@@ -169,19 +169,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   welcomeText: {
-  
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 25,
-    color: "darkblue",
+    color: '#4593e7',
     fontWeight: "600",
     textAlign: "center",
   },
   subText: {
     marginTop: "25%",
     marginBottom: "10%",
-    fontSize: 20,
-    color: "black",
+    fontSize: 25,
+    color: 'black',
     fontWeight: "600",
     textAlign: "center",
   },

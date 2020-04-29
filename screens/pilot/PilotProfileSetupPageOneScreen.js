@@ -141,9 +141,7 @@ function PilotProfileSetupPageOneScreen(
           {currentUserProps ? (
             <Text style={styles.subText}>
               {"\n"}
-              {currentUserProps.pilotFirstName}
-              {"\n"}
-              {currentUserProps.pilotLastName}
+              {currentUserProps.pilotFirstName + ' ' + currentUserProps.pilotLastName}
             </Text>
           ) : (
             <Text>Name:</Text>
@@ -214,7 +212,18 @@ function PilotProfileSetupPageOneScreen(
           <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
         )}
 
-        <Button title="Save and Continue" onPress={submit} />
+        <View style={styles.centerButton}>
+          <View style={styles.saveAndContinueWrapper}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={submit}
+              title={"Save and Continue"}
+            >
+              <Text style={styles.saveAndContinueText}>Save and Continue</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
         <Button title="Back" onPress={() => props.navigation.goBack()} />
         <Text style={styles.dummyText}>Dummy Text</Text>
       </ScrollView>
@@ -234,19 +243,37 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5,
   },
+  centerButton: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  saveAndContinueWrapper: {
+    width: 170,
+    height: 50,
+    borderWidth: 2,
+    borderColor: "#092455",
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 50
+  },
+  saveAndContinueText: {
+    fontSize: 15,
+    color: "#092455",
+  },
   welcomeText: {
-    marginTop: "15%",
+    marginTop: "5%",
     marginBottom: "10%",
-    fontSize: 30,
-    color: "darkblue",
+    fontSize: 25,
+    color: '#4593e7',
     fontWeight: "600",
     textAlign: "center",
   },
   subText: {
     marginTop: "25%",
     marginBottom: "10%",
-    fontSize: 30,
-    color: "black",
+    fontSize: 25,
+    color: 'black',
     fontWeight: "600",
     textAlign: "center",
   },

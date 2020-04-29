@@ -70,9 +70,13 @@ function JobListScreen(props, { getProjects, getClientProfiles }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        <Text style={{ color: "white", fontWeight: "800" }}>
+                        { props.listOfClientProfiles.find((x) => x.userID === item.clientID) ? (
+                          <Text style={{ color: "white", fontWeight: "800" }}>
                           Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).clientName }{" "}
-                        </Text>
+                          </Text>
+                        ) : (
+                          <Text>Posted by:</Text>
+                        )}
                         { item.pilotID ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
                           No Longer Available

@@ -7,7 +7,8 @@ import {
   Button,
   ScrollView,
   TextInput,
-  Image,
+  Alert,
+  Image
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -24,6 +25,8 @@ function PilotProfileWelcomeScreen(
 ) {
   const navigation = useNavigation();
 
+  getCurrentUserProps();
+
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
@@ -32,6 +35,19 @@ function PilotProfileWelcomeScreen(
   if (firebase.auth().currentUser) {
     userID = firebase.auth().currentUser.uid;
   }
+
+//   const [currentUserProps, setCurrentUserProps] = useState(null);
+
+//   async function getCurrentUserProps() {
+//     const currentUserProfile = await props.listOfProfiles.find((x) => x.userID === userID);
+//     await setCurrentUserProps(currentUserProfile);
+//     console.log("these are currentUserProps: ", currentUserProps);
+//     return currentUserProps;
+//   }
+
+//   const submit = (e) => {
+//     navigation.navigate("PilotProfileSetupPageOneScreen");
+//   };
 
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
@@ -92,7 +108,7 @@ function PilotProfileWelcomeScreen(
 
   return (
     <View style={styles.container}>
-      {currentUserProps && isComplete === "Yes" ? (
+      {currentUserProps && currentUserProps.profileComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (

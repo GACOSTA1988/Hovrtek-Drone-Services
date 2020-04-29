@@ -18,15 +18,15 @@ function ClientProfileScreen(props, { getClientProfiles }) {
   const [profileDetails, setProfileDetails] = useState(null);
 
   let user = null;
-
+  let profile = null;
   if (firebase.auth().currentUser) {
-    user = firebase.auth().currentUser
+    user = firebase.auth().currentUser;
+    profile = props.listOfClientProfiles.find((x) => x.userID === user.uid);
     // if user is client, get client profile
     if (user.photoURL === "C") {
       try {
         if (!profileDetails) {
-          setProfileDetails(props.listOfClientProfiles.find((x) => x.userID === user.uid));
-          console.log("profile details: ", profileDetails);
+          setProfileDetails(profile);
         }
       } catch (error) {
         console.log("ERROR: ", error.message);
@@ -40,15 +40,19 @@ function ClientProfileScreen(props, { getClientProfiles }) {
       Alert.alert("User page unavailable");
       props.navigation.goBack();
     }
+  } else {
+    if (profileDetails) {
+      setProfileDetails(null);
+    }
   }
 
   return (
     <View style={styles.container}>
-      { profileDetails ? (
+      { user && profileDetails ? (
         <View>
           <Image source={princePic01} style={styles.backgroundImage}/>
           <View style={styles.editIcon}>
-          { profileDetails.userID === firebase.auth().currentUser.uid ? (
+          { profileDetails.userID === user.uid ? (
             <TouchableOpacity
               onPress={() =>
                 props.navigation.navigate("ClientEditProfileScreen",

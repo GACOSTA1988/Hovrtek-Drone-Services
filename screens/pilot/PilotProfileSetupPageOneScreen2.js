@@ -49,9 +49,12 @@ function PilotProfileSetupPageOneScreen(
     userID = firebase.auth().currentUser.uid;
   }
 
+
+
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
-
+  if (currentUserProps) {
+  }
   let pilotLocationPlaceHolder = "";
   let personalBioPlaceHolder = "";
   let yearsOfExperiencePlaceHolder = "";
@@ -151,7 +154,7 @@ function PilotProfileSetupPageOneScreen(
         </Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
-
+          
             <PassSetPersonalBio.Provider value={setPersonalBio}>
               <PassPersonalBioState.Provider value={personalBio}>
                 <BioPicker />

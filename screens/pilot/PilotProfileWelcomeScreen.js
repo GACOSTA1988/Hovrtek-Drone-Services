@@ -48,7 +48,7 @@ useEffect(() => {
 
   return (
     <View style={styles.container}>
-      {profileDetails && profileDetails.profileComplete === "Yes" ? (
+      { profileDetails && profileDetails.profileComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
           <Image source={princePic01} style={styles.backgroundImage} />
@@ -406,7 +406,7 @@ function mapStateToProps(state) {
     }
   );
   return {
-    listOfPilotProfiles,
+    listOfPilotProfiles
   };
 }
 

@@ -8,7 +8,7 @@ import {
   ScrollView,
   TextInput,
   Alert,
-  Modal
+  Modal,
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -49,6 +49,8 @@ function PilotProfileSetupPageOneScreen(
     userID = firebase.auth().currentUser.uid;
   }
 
+
+
   const list = props.listOfProfiles;
   let currentUserProps = list.find((x) => x.userID === userID);
   if (currentUserProps) {
@@ -63,6 +65,7 @@ function PilotProfileSetupPageOneScreen(
   let airMapPlaceHolder = "";
   let fourHundredPlaceHolder = "";
   let profileCompletePlaceHolder = "";
+  let profileImageUrlPlaceHolder = "";
 
   if (currentUserProps) {
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
@@ -75,8 +78,12 @@ function PilotProfileSetupPageOneScreen(
     airMapPlaceHolder = currentUserProps.airMapPlace;
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
+    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    profileImageUrlPlaceHolder
+  );
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
   const [yearsOfExperience, setYearsOfExperience] = useState(
     yearsOfExperiencePlaceHolder
@@ -93,37 +100,38 @@ function PilotProfileSetupPageOneScreen(
 
   const submit = (e) => {
     e.preventDefault();
-    if (personalBio.trim() === '') {
+    if (personalBio.trim() === "") {
       Alert.alert("Please fill in your personal bio");
       return
     } else if (yearsOfExperience.trim() === '') {
+
       Alert.alert("Please fill in years of experience");
       navigation.navigate("PilotProfileSetupPageOneScreen");
-    } else if (droneType.trim() == '') {
+    } else if (droneType.trim() == "") {
       Alert.alert("Please fill in your Drone type");
       navigation.navigate("PilotProfileSetupPageOneScreen");
-    } else if (insuredStatus.trim() === '') {
+    } else if (insuredStatus.trim() === "") {
       Alert.alert("Please fill in your insurance status");
       navigation.navigate("PilotProfileSetupPageOneScreen");
     } else {
-
-    console.log(currentUserProps);
-    props.editPilotProfile(
-      currentUserProps.pilotLocation,
-      personalBio,
-      yearsOfExperience,
-      faaLicenseExp,
-      insuredStatus,
-      travelStatus,
-      droneType,
-      airMap,
-      fourHundred,
-      currentUserProps.profileComplete,
-      currentUserProps.key
-    );
-    navigation.navigate("PilotProfileSetupPageTwoScreen");
+      console.log(currentUserProps);
+      props.editPilotProfile(
+        currentUserProps.pilotLocation,
+        personalBio,
+        yearsOfExperience,
+        faaLicenseExp,
+        insuredStatus,
+        travelStatus,
+        droneType,
+        airMap,
+        fourHundred,
+        currentUserProps.profileComplete,
+        profileImageUrl,
+        currentUserProps.key
+      );
+      navigation.navigate("PilotProfileSetupPageTwoScreen");
+    }
   };
-}
 
   return (
     <View style={styles.container}>
@@ -255,11 +263,13 @@ const styles = StyleSheet.create({
   },
   dummyText: {
     marginTop: 200,
+
     color: 'lightgray'
   },
   droneExpWrapper: {
     alignItems: 'center'
   }
+
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

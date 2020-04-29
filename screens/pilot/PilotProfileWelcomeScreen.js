@@ -7,6 +7,7 @@ import {
   Button,
   ScrollView,
   TextInput,
+  Image,
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -15,6 +16,7 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+import pic from "../../assets/landingPageImage.png";
 
 function PilotProfileWelcomeScreen(
   props,
@@ -46,9 +48,12 @@ function PilotProfileWelcomeScreen(
   let airMapPlaceHolder = "";
   let fourHundredPlaceHolder = "";
   let profileCompletePlaceHolder = "";
+  let profileImageUrlPlaceHolder = "";
   let isComplete = "";
+  let url = "";
 
   if (currentUserProps) {
+    url = currentUserProps.profileImageUrl;
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
     personalBioPlaceHolder = currentUserProps.personalBio;
     yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
@@ -60,8 +65,12 @@ function PilotProfileWelcomeScreen(
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
     isComplete = currentUserProps.profileComplete;
+    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    profileImageUrlPlaceHolder
+  );
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
   const [yearsOfExperience, setYearsOfExperience] = useState(
     yearsOfExperiencePlaceHolder
@@ -79,7 +88,7 @@ function PilotProfileWelcomeScreen(
   const submit = (e) => {
     navigation.navigate("PilotProfileSetupPageOneScreen");
   };
-  // console.log(currentUserProps.profileComplete);
+  console.log(url);
 
   return (
     <View style={styles.container}>
@@ -88,12 +97,26 @@ function PilotProfileWelcomeScreen(
           <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (
             <View>
+              <Image
+                style={{
+                  height: 90,
+                  width: 90,
+                  borderRadius: 90,
+                  alignItems: "center",
+                  marginLeft: "35%",
+                }}
+                source={{
+                  uri: url,
+                }}
+              />
               <Text style={styles.subText}>
                 {currentUserProps.pilotFirstName}
                 {"\n"}
                 {currentUserProps.pilotLastName}
                 {"\n"}
                 From {currentUserProps.pilotLocation}
+                {"\n"}
+                {/* source {currentUserProps.profileImageUrl} */}
               </Text>
               <Text style={styles.bodyText}>Welcome To Your Profile</Text>
               <Text style={styles.bodyText}>

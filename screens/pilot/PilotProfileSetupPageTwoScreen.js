@@ -15,6 +15,7 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+
 import DatePicker from '../../components/DatePicker';
 import TravelStatusPicker from '../../components/TravelStatusPicker';
 import FourHundredPicker from "../../components/FourHundredPicker";
@@ -29,6 +30,7 @@ export const PassSetFourHundred = React.createContext()
 export const PassFourHundredState = React.createContext()
 export const PassSetAirMap = React.createContext()
 export const PassAirMapState = React.createContext()
+
 
 function PilotProfileSetupPageTwoScreen(
   props,
@@ -55,6 +57,7 @@ function PilotProfileSetupPageTwoScreen(
   let airMapPlaceHolder = "";
   let fourHundredPlaceHolder = "";
   let profileCompletePlaceHolder = "";
+  let profileImageUrlPlaceHolder = "";
 
   if (currentUserProps) {
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
@@ -67,8 +70,14 @@ function PilotProfileSetupPageTwoScreen(
     airMapPlaceHolder = currentUserProps.airMap;
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
+    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
+
+
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    profileImageUrlPlaceHolder
+  );
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
   const [yearsOfExperience, setYearsOfExperience] = useState(
     yearsOfExperiencePlaceHolder
@@ -96,6 +105,7 @@ function PilotProfileSetupPageTwoScreen(
       airMap,
       fourHundred,
       currentUserProps.profileComplete,
+      profileImageUrl,
       currentUserProps.key
     );
     navigation.navigate("PilotProfileImageUploadScreen");
@@ -123,9 +133,11 @@ function PilotProfileSetupPageTwoScreen(
           <View>
             <PassSetFaaLicenseContext.Provider value={setFaaLicenseExp}>
               <PassFaaLicenseState.Provider value={faaLicenseExp}>
-               <DatePicker/>
+                <DatePicker />
               </PassFaaLicenseState.Provider>
             </PassSetFaaLicenseContext.Provider>
+
+
           </View>
         ) : (
           <Text style={styles.bodyText}>

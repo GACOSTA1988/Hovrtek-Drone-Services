@@ -11,13 +11,6 @@ function LicenseUploader(props) {
   const [licenseThumbnail, setlicenseThumbnail] = useState(null);
 
   const SetProfileImageUrlContext = useContext(PassSetProfileImageUrlContext);
-  // console.log(
-  //   "contexttttt",
-  //   SetProfileImageUrlContext,
-  //   "stateeeeeeee",
-  //   profileImageUrlState
-  // );
-  // PassSetProfileImageUrlContext("helllooooooo");
 
   const profileImageUrlState = useContext(PassProfileImageUrlState);
 

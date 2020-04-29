@@ -17,6 +17,10 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import LicenseUploader from "../../components/auth/LicenseUploader";
 
+// CONTEXT HOOK
+export const PassSetProfileImageUrlContext = React.createContext();
+export const PassProfileImageUrlState = React.createContext();
+
 function PilotProfileImageUploadScreen(
   props,
   { getPilotProfiles, editPilotProfile }
@@ -42,6 +46,8 @@ function PilotProfileImageUploadScreen(
   let airMapPlaceHolder = "";
   let fourHundredPlaceHolder = "";
   let profileCompletePlaceHolder = "";
+  let profileImageUrlPlaceHolder = "";
+
   if (currentUserProps) {
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
     personalBioPlaceHolder = currentUserProps.personalBio;
@@ -53,7 +59,12 @@ function PilotProfileImageUploadScreen(
     airMapPlaceHolder = currentUserProps.airMap;
     fourHundredPlaceHolder = currentUserProps.fourHundred;
     profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
+    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
+
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    profileImageUrlPlaceHolder
+  );
 
   const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
   const [yearsOfExperience, setYearsOfExperience] = useState(
@@ -79,6 +90,7 @@ function PilotProfileImageUploadScreen(
       airMap,
       fourHundred,
       profileComplete,
+      profileImageUrl,
       currentUserProps.key
     );
     navigation.popToTop();
@@ -99,10 +111,13 @@ function PilotProfileImageUploadScreen(
             <Text>Name:</Text>
           )}
         </Text>
-        <Text>Please Upload FAA License Image</Text>
-        <LicenseUploader />
+
         <Text>Please Upload Profile Picture</Text>
-        <LicenseUploader />
+        <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
+          <PassProfileImageUrlState.Provider value={profileImageUrl}>
+            <LicenseUploader />
+          </PassProfileImageUrlState.Provider>
+        </PassSetProfileImageUrlContext.Provider>
         <Button title="Complete Profile" onPress={submit} />
         <Button title="Back" onPress={() => props.navigation.goBack()} />
       </ScrollView>

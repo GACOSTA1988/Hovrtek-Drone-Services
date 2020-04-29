@@ -7,7 +7,8 @@ import {
   Button,
   ScrollView,
   TextInput,
-  Alert
+  Alert,
+  Image
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -16,6 +17,7 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
+import pic from "../../assets/landingPageImage.png";
 
 function PilotProfileWelcomeScreen(
   props,
@@ -34,18 +36,75 @@ function PilotProfileWelcomeScreen(
     userID = firebase.auth().currentUser.uid;
   }
 
-  const [currentUserProps, setCurrentUserProps] = useState(null);
+//   const [currentUserProps, setCurrentUserProps] = useState(null);
 
-  async function getCurrentUserProps() {
-    const currentUserProfile = await props.listOfProfiles.find((x) => x.userID === userID);
-    await setCurrentUserProps(currentUserProfile);
-    console.log("these are currentUserProps: ", currentUserProps);
-    return currentUserProps;
+//   async function getCurrentUserProps() {
+//     const currentUserProfile = await props.listOfProfiles.find((x) => x.userID === userID);
+//     await setCurrentUserProps(currentUserProfile);
+//     console.log("these are currentUserProps: ", currentUserProps);
+//     return currentUserProps;
+//   }
+
+//   const submit = (e) => {
+//     navigation.navigate("PilotProfileSetupPageOneScreen");
+//   };
+
+  const list = props.listOfProfiles;
+  let currentUserProps = list.find((x) => x.userID === userID);
+
+  if (currentUserProps) {
   }
+  let pilotLocationPlaceHolder = "";
+  let personalBioPlaceHolder = "";
+  let yearsOfExperiencePlaceHolder = "";
+  let faaLicenseExpPlaceHolder = "";
+  let insuredStatusPlaceHolder = "";
+  let travelStatusPlaceHolder = "";
+  let droneTypePlaceHolder = "";
+  let airMapPlaceHolder = "";
+  let fourHundredPlaceHolder = "";
+  let profileCompletePlaceHolder = "";
+  let profileImageUrlPlaceHolder = "";
+  let isComplete = "";
+  let url = "";
+
+  if (currentUserProps) {
+    url = currentUserProps.profileImageUrl;
+    pilotLocationPlaceHolder = currentUserProps.pilotLocation;
+    personalBioPlaceHolder = currentUserProps.personalBio;
+    yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
+    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
+    insuredStatusPlaceHolder = currentUserProps.insuredStatus;
+    travelStatusPlaceHolder = currentUserProps.travelStatus;
+    droneTypePlaceHolder = currentUserProps.droneType;
+    airMapPlaceHolder = currentUserProps.airMapPlace;
+    fourHundredPlaceHolder = currentUserProps.fourHundred;
+    profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
+    isComplete = currentUserProps.profileComplete;
+    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
+  }
+
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    profileImageUrlPlaceHolder
+  );
+  const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
+  const [yearsOfExperience, setYearsOfExperience] = useState(
+    yearsOfExperiencePlaceHolder
+  );
+  const [faaLicenseExp, setFaaLicenseExp] = useState(faaLicenseExpPlaceHolder);
+  const [insuredStatus, setInsuredStatus] = useState(insuredStatusPlaceHolder);
+  const [travelStatus, setTravelStatus] = useState(travelStatusPlaceHolder);
+  const [droneType, setDroneType] = useState(droneTypePlaceHolder);
+  const [airMap, setAirMap] = useState(airMapPlaceHolder);
+  const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
+  const [profileComplete, setProfileComplete] = useState(
+    profileCompletePlaceHolder
+  );
 
   const submit = (e) => {
     navigation.navigate("PilotProfileSetupPageOneScreen");
   };
+  console.log(url);
 
   return (
     <View style={styles.container}>
@@ -54,12 +113,26 @@ function PilotProfileWelcomeScreen(
           <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (
             <View>
+              <Image
+                style={{
+                  height: 90,
+                  width: 90,
+                  borderRadius: 90,
+                  alignItems: "center",
+                  marginLeft: "35%",
+                }}
+                source={{
+                  uri: url,
+                }}
+              />
               <Text style={styles.subText}>
                 {currentUserProps.pilotFirstName}
                 {"\n"}
                 {currentUserProps.pilotLastName}
                 {"\n"}
                 From {currentUserProps.pilotLocation}
+                {"\n"}
+                {/* source {currentUserProps.profileImageUrl} */}
               </Text>
               <Text style={styles.bodyText}>Welcome To Your Profile</Text>
               <Text style={styles.bodyText}>

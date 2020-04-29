@@ -28,24 +28,24 @@ function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
   const [profileDetails, setProfileDetails] = useState(null);
 
   let user = null;
+  let profile = null;
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
-  }
-
-  try {
-    if (!profileDetails) {
-      setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
-      console.log("profile details: ", profileDetails);
+    profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
+    try {
+      if (!profileDetails && profile) {
+        setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
+      }
+    } catch(error) {
+      console.log("ERROR: ", error.message);
+      Alert.alert("User page unavailable");
+      props.navigation.navigate("JobListScreen");
     }
-  } catch (error) {
-    console.log("ERROR: ", error.message);
-    Alert.alert("User page unavailable");
-    props.navigation.navigate("JobListScreen");
   }
 
   return (
     <View style={styles.container}>
-      {profileDetails && profileDetails.profileComplete === "Yes" ? (
+      { profileDetails && profileDetails.profileComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
           {profileDetails ? (
@@ -182,7 +182,7 @@ function mapStateToProps(state) {
     }
   );
   return {
-    listOfPilotProfiles,
+    listOfPilotProfiles
   };
 }
 

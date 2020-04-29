@@ -54,11 +54,15 @@ function PilotSignUpScreen(props) {
     } else if (pilotLocation.trim() == "") {
       Alert.alert("Please fill in your loaction");
       navigation.navigate("PilotSignUpScreen");
+    } else if (password.length < 6) {
+      Alert.alert("Password must be longer than 6 characters");
+      navigation.navigate("PilotSignUpScreen");
     } else {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
       } catch (error) {
-        console.log(error.toString(error));
+        Alert.alert(error.message);
+        navigation.navigate("PilotSignUpScreen");
       }
       let user = firebase.auth().currentUser;
       await user.updateProfile({

@@ -18,18 +18,6 @@ function ClientEditProfileScreen(props, { getClientProfiles }) {
       { profileDetails ? (
         <View>
           <Image source={princePic01} style={styles.backgroundImage}/>
-          <View style={styles.editIcon}>
-          { (profileDetails.userID === firebase.auth().currentUser.uid) ? (
-            <TouchableOpacity>
-              <AntDesign
-                name="edit"
-                size={40}
-              />
-            </TouchableOpacity>
-            ) : (
-              <View><Text>aaa</Text></View>
-            )}
-            </View>
           <Image source={personIcon} style={styles.profileImage}/>
           <Text style={styles.name}>{profileDetails.clientName}</Text>
           <View style={styles.info}>

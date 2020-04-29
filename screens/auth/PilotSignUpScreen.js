@@ -51,14 +51,15 @@ function PilotSignUpScreen(props) {
       Alert.alert("Please fill in your last name");
       navigation.navigate("PilotSignUpScreen");
     } else if (pilotLocation.trim() == '') {
-      Alert.alert("Please fill in your loaction");
+      Alert.alert("Please fill in your location");
       navigation.navigate("PilotSignUpScreen");
     } else {
 
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (error) {
-      console.log(error.toString(error));
+      Alert.alert(error.message);
+      navigation.navigate("PilotSignUpScreen");
     }
     let user = firebase.auth().currentUser;
     await user.updateProfile({

@@ -8,6 +8,8 @@ import LocationScreen from '../screens/client/LocationScreen';
 import ServicesScreen from '../screens/client/ServicesScreen';
 import SignOutScreen from '../screens/auth/SignOutScreen';
 import ClientProfileScreen from '../screens/client/ClientProfileScreen';
+import ClientEditProfileScreen from '../screens/client/ClientEditProfileScreen';
+
 import { AuthContext } from "../context";
 
 const ClientDrawer = createDrawerNavigator();
@@ -48,6 +50,11 @@ const ClientNavigation = () => {
         name='ClientProfileScreen'
         component={ClientProfileScreen}
         options={{ title: 'Public Profile' }}
+      />
+      <ClientDrawer.Screen
+        name='ClientEditProfileScreen'
+        component={ClientEditProfileScreen}
+        options={{ title: 'Edit Profile' }}
       />
       <ClientDrawer.Screen
         name="SignOutScreen"

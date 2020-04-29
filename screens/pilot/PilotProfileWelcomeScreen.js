@@ -7,6 +7,7 @@ import {
   Button,
   ScrollView,
   TextInput,
+  Alert
 } from "react-native";
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
@@ -22,6 +23,8 @@ function PilotProfileWelcomeScreen(
 ) {
   const navigation = useNavigation();
 
+  getCurrentUserProps();
+
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
@@ -31,59 +34,22 @@ function PilotProfileWelcomeScreen(
     userID = firebase.auth().currentUser.uid;
   }
 
-  const list = props.listOfProfiles;
-  let currentUserProps = list.find((x) => x.userID === userID);
+  const [currentUserProps, setCurrentUserProps] = useState(null);
 
-  if (currentUserProps) {
+  async function getCurrentUserProps() {
+    const currentUserProfile = await props.listOfProfiles.find((x) => x.userID === userID);
+    await setCurrentUserProps(currentUserProfile);
+    console.log("these are currentUserProps: ", currentUserProps);
+    return currentUserProps;
   }
-  let pilotLocationPlaceHolder = "";
-  let personalBioPlaceHolder = "";
-  let yearsOfExperiencePlaceHolder = "";
-  let faaLicenseExpPlaceHolder = "";
-  let insuredStatusPlaceHolder = "";
-  let travelStatusPlaceHolder = "";
-  let droneTypePlaceHolder = "";
-  let airMapPlaceHolder = "";
-  let fourHundredPlaceHolder = "";
-  let profileCompletePlaceHolder = "";
-  let isComplete = "";
-
-  if (currentUserProps) {
-    pilotLocationPlaceHolder = currentUserProps.pilotLocation;
-    personalBioPlaceHolder = currentUserProps.personalBio;
-    yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
-    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
-    insuredStatusPlaceHolder = currentUserProps.insuredStatus;
-    travelStatusPlaceHolder = currentUserProps.travelStatus;
-    droneTypePlaceHolder = currentUserProps.droneType;
-    airMapPlaceHolder = currentUserProps.airMapPlace;
-    fourHundredPlaceHolder = currentUserProps.fourHundred;
-    profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
-    isComplete = currentUserProps.profileComplete;
-  }
-
-  const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
-  const [yearsOfExperience, setYearsOfExperience] = useState(
-    yearsOfExperiencePlaceHolder
-  );
-  const [faaLicenseExp, setFaaLicenseExp] = useState(faaLicenseExpPlaceHolder);
-  const [insuredStatus, setInsuredStatus] = useState(insuredStatusPlaceHolder);
-  const [travelStatus, setTravelStatus] = useState(travelStatusPlaceHolder);
-  const [droneType, setDroneType] = useState(droneTypePlaceHolder);
-  const [airMap, setAirMap] = useState(airMapPlaceHolder);
-  const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
-  const [profileComplete, setProfileComplete] = useState(
-    profileCompletePlaceHolder
-  );
 
   const submit = (e) => {
     navigation.navigate("PilotProfileSetupPageOneScreen");
   };
-  // console.log(currentUserProps.profileComplete);
 
   return (
     <View style={styles.container}>
-      {currentUserProps && isComplete === "Yes" ? (
+      {currentUserProps && currentUserProps.profileComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
           {currentUserProps ? (

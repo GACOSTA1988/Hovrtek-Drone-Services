@@ -34,7 +34,7 @@ setTimeout(SplashScreen.hide, 3500);
 export default () => {
   // REDUX STATE
   const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
+  console.disableYellowBox = true;
   // auth stuff - maybe should be elsewhere?
   const auth = firebase.auth();
 
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 });
 
 // MainHeader Logo

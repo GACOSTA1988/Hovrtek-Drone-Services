@@ -97,8 +97,7 @@ function PilotProfileWelcomeScreen(
   return (
     <View style={styles.container}>
       {currentUserProps && currentUserProps.profileComplete === "Yes" ? (
-
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView style={{ width: "100%" }}>
           <Image source={princePic01} style={styles.backgroundImage} />
           <Image
             style={{
@@ -113,19 +112,17 @@ function PilotProfileWelcomeScreen(
               borderColor: "#092455",
             }}
             source={{
-              uri: profileDetails.profileImageUrl,
+              uri: url,
             }}
           />
-
           {currentUserProps ? (
-
             <View>
               <Text style={styles.nameText}>
-                {profileDetails.pilotFirstName}{" "}
-                {profileDetails.pilotLastName}
+                {currentUserProps.pilotFirstName}{" "}
+                {currentUserProps.pilotLastName}
               </Text>
               <Text style={styles.locationText}>
-                Location: {profileDetails.pilotLocation}
+                Location: {currentUserProps.pilotLocation}
               </Text>
 
               <Text
@@ -148,9 +145,7 @@ function PilotProfileWelcomeScreen(
                   marginTop: "1%",
                 }}
               >
-
                 {currentUserProps.personalBio}
-
               </Text>
               <View
                 style={{
@@ -178,7 +173,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.droneType}
+                  {currentUserProps.droneType}
                 </Text>
               </View>
               <View
@@ -207,7 +202,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.yearsOfExperience}
+                  {currentUserProps.yearsOfExperience}
                 </Text>
               </View>
               <View
@@ -236,7 +231,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.faaLicenseExp}
+                  {currentUserProps.faaLicenseExp}
                 </Text>
               </View>
               <View
@@ -265,7 +260,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.travelStatus}
+                  {currentUserProps.travelStatus}
                 </Text>
               </View>
               <View
@@ -294,7 +289,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.insuredStatus}
+                  {currentUserProps.insuredStatus}
                 </Text>
               </View>
               <View
@@ -323,7 +318,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.airMap}
+                  {currentUserProps.airMap}
                 </Text>
               </View>
               <View
@@ -352,52 +347,51 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.fourHundred}
+                  {currentUserProps.fourHundred}
                 </Text>
               </View>
             </View>
           ) : (
-            <Text></Text>
-          )}
+              <Text></Text>
+            )}
         </ScrollView>
       ) : (
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Text style={styles.welcomeText}>Hi</Text>
-          {currentUserProps ? (
-            <View>
-              <Text style={styles.nameText}>
-
-                {currentUserProps.pilotFirstName}
-
-                {"\n"}
-                {currentUserProps.pilotLastName}
-                {"\n"}
+          <ScrollView style={{ width: "100%" }}>
+            <Text style={styles.welcomeText}>Hi</Text>
+            {currentUserProps ? (
+              <View>
+                <Text style={styles.nameText}>
+                  {currentUserProps.pilotFirstName}
+                  {"\n"}
+                  {currentUserProps.pilotLastName}
+                  {"\n"}
                 From {currentUserProps.pilotLocation}
-              </Text>
-              <Text style={styles.bodyText}>Welcome To Your Profile</Text>
-            </View>
-          ) : (
-            <Text style={styles.h2}>Location:</Text>
-          )}
+                </Text>
+                <Text style={styles.bodyText}>Welcome To Your Profile</Text>
+              </View>
+            ) : (
+                <Text style={styles.h2}>Location:</Text>
+              )}
 
-          <Button
-            title="Start Pilot Profile"
-            onPress={() =>
-              props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
-            }
-          />
-        </ScrollView>
-      )}
+            <Button
+              title="Start Pilot Profile"
+              onPress={() =>
+                props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
+              }
+            />
+          </ScrollView>
+        )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     backgroundColor: "lightgray",
     height: "100%",
+    width: "100%",
   },
   button: {
     paddingHorizontal: 20,

@@ -1,18 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { PassSetLocation, PassLocationState } from '../screens/client/NewProjectScreen';
-import { useNavigation } from "@react-navigation/native";
+import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity } from 'react-native';
+import { PassSetLight, PassLightState } from '../screens/client/NewProjectScreen';
 
-const ClientLocationPicker = () => {
+const ClientLightPicker = () => {
 
-    const navigation = useNavigation();
     const [isModalVisible, setIsModalVisible] = useState(false)
 
-    const setLocation = useContext(PassSetLocation)
-    const locationState = useContext(PassLocationState )
 
-    console.log("LOCATION", locationState)
+    const setLight = useContext(PassSetLight)
+    const light = useContext(PassLightState)
 
+    console.log("LIGHT", light)
 
     const openModal = () => {
         setIsModalVisible(true);
@@ -20,8 +18,8 @@ const ClientLocationPicker = () => {
 
     const closeModal = () => {
         setIsModalVisible(false);
-
     }
+
 
     return (
         <View style={styles.container}>
@@ -33,20 +31,17 @@ const ClientLocationPicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>Where is the location of your drone service?</Text>
+                        <Text style={styles.modalText}>So you have any light specifications?</Text>
                     </View>
                     <View>
-                        <TextInput
-                            style={{
-                             
-                                height: 30,
-                                borderColor: "gray",
-                                borderWidth: 1,
-             
-                            }}
-                            onChangeText={setLocation}
-                            value={locationState}
-                        />
+                        <Picker
+                            selectedValue={light}
+                            onValueChange={(light, itemIndex) => setLight(light)}
+                        >
+                            <Picker.Item label="No" value="No" />
+                            <Picker.Item label="Yes" value="Yes" />
+
+                        </Picker>
 
                     </View>
                     <View styles={styles.cancelWrapper}>
@@ -60,16 +55,17 @@ const ClientLocationPicker = () => {
             </Modal>
 
 
-            {
 
-                (locationState)
+
+            {
+                (light)
                     ?
                     (<TouchableOpacity
                         style={styles.button}
                         onPress={() => openModal()}
                         title={"Open modal"}
                     >
-                        <Text style={styles.buttonText}>{locationState}</Text>
+                        <Text style={styles.buttonText}>{light}</Text>
                     </TouchableOpacity>)
                     :
                     (<TouchableOpacity
@@ -77,7 +73,7 @@ const ClientLocationPicker = () => {
                         onPress={() => openModal()}
                         title={"Open modal"}
                     >
-                        <Text style={styles.buttonText}>Please Set Location
+                        <Text style={styles.buttonText}>No Insurance{setLight("No")}
                         </Text>
                     </TouchableOpacity>)
             }
@@ -130,9 +126,8 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     buttonText: {
-        color: "white",
-        fontSize: 20
+        color: "white"
     }
 });
 
-export default ClientLocationPicker
+export default ClientLightPicker

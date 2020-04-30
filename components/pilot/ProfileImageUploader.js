@@ -3,11 +3,15 @@ import { Button, Image, View, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as firebase from 'firebase';
+import UUIDGenerator from 'react-native-uuid-generator';
 
 export default class ProfileImageUploader extends React.Component {
     state = {
         thumbnail: null,
     };
+
+
+
 
     render() {
         let { thumbnail } = this.state;
@@ -18,6 +22,8 @@ export default class ProfileImageUploader extends React.Component {
             </View>
         );
     }
+
+
 
     componentDidMount() {
         this.getPermissionAsync();

@@ -10,11 +10,6 @@ import {
   ScrollView,
 } from "react-native";
 import { postProjects } from "../../actions/index";
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from "react-native-simple-radio-button";
 import { postClientProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -22,12 +17,18 @@ import ImageUploader from "../../components/client/ImageUploader";
 import * as firebase from "firebase";
 import ClientDatePicker from '../../components/ClientDatePicker';
 import ClientLocationPicker from '../../components/ClientLocationPicker';
+import ClientRecordingPicker from '../../components/ClientRecordingPicker';
+import ClientLightPicker from '../../components/ClientLightPicker';
 
-// CONTEXT HOOK
+// CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
 export const PassDateState = React.createContext();
 export const PassSetLocation= React.createContext();
 export const PassLocationState = React.createContext();
+export const PassSetRecording = React.createContext();
+export const PassRecordingState = React.createContext();
+export const PassSetLight = React.createContext();
+export const PassLightState = React.createContext();
 
 
 function NewProjectScreen(props, { postProjects }) {
@@ -39,7 +40,8 @@ function NewProjectScreen(props, { postProjects }) {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [recording, setRecording] = useState("");
-  const [light, setLight] = useState(1);
+  const [light, setLight] = useState("");
+
 
   const submit = (e) => {
     e.preventDefault();
@@ -59,12 +61,7 @@ function NewProjectScreen(props, { postProjects }) {
     setDate(""), setLight(""), setLocation(""), setRecording("");
   };
   }
-  // RADIO BUTTON STUFF
 
-  let radio_props = [
-    { label: "Yes", value: 0 },
-    { label: "No", value: 1 },
-  ];
 
   return (
     <View style={styles.newProjectListWrapper}>
@@ -76,7 +73,6 @@ function NewProjectScreen(props, { postProjects }) {
           <Text style={styles.labelText}>
             Where is the location of your drone service?
           </Text>
-
           <View style={styles.modalWrapper}>
             <PassSetLocation.Provider value={setLocation}>
               <PassLocationState.Provider value={location}>
@@ -88,37 +84,39 @@ function NewProjectScreen(props, { postProjects }) {
           <Text style={styles.labelText}>
             What is the date of your Drone shoot?
           </Text>
-
-          <PassSetDate.Provider value={setDate}>
-            <PassDateState.Provider value={date}>
-              <ClientDatePicker />
-            </PassDateState.Provider>
-          </PassSetDate.Provider>
+          <View style={styles.modalWrapper}>
+            <PassSetDate.Provider value={setDate}>
+              <PassDateState.Provider value={date}>
+                <ClientDatePicker />
+              </PassDateState.Provider>
+            </PassSetDate.Provider>
+          </View>
 
           <Text style={styles.labelText}>
             What will the Drone Service be recording?
           </Text>
-          <TextInput
-            multiline={true}
-            numberOfLines={4}
-            style={styles.input}
-            placeholder="What?"
-            onChangeText={setRecording}
-            value={recording}
-          />
+          <View style={styles.modalWrapper}>
+            <PassSetRecording.Provider value={setRecording}>
+              <PassRecordingState.Provider value={recording}>
+                <ClientRecordingPicker />
+              </PassRecordingState.Provider>
+            </PassSetRecording.Provider>
+          </View>
+
           <Text style={styles.labelText}>
             Do you have any light specification?
           </Text>
-          <RadioForm
-            formHorizontal={true}
-            labelHorizontal={true}
-            buttonColor={"#092455"}
-            selectedButtonColor={"#092455"}
-            radio_props={radio_props}
-            initial={1}
-            onPress={setLight}
-          />
+          <View style={styles.modalWrapper}>
+            <PassSetLight.Provider value={setLight}>
+              <PassLightState.Provider value={light}>
+                <ClientLightPicker />
+              </PassLightState.Provider>
+            </PassSetLight.Provider>
+          </View>
 
+          <TouchableOpacity onPress={submit}>
+            <Text style={styles.submitButton}>Continue with Form</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={submit}>
             <Text style={styles.submitButton}>Submit Form</Text>

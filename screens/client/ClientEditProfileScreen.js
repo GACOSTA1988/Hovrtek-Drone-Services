@@ -4,29 +4,34 @@ import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import personIcon from '../../assets/personIcon.png';
 import princePic01 from '../../assets/princePic01.jpg';
-import * as firebase from 'firebase';
 import { connect } from "react-redux";
-import _ from "lodash";
-import { getClientProfiles } from "../../actions/index";
+import { editClientProfile } from "../../actions/index";
 
-function ClientEditProfileScreen(props, { getClientProfiles }) {
+function ClientEditProfileScreen(props, { editClientProfile }) {
 
-  const profileDetails = props.route.params;
+  let profileDetails = props.route.params;
 
-  const [bio, setBio] = useState(profileDetails.bio)
   const [firstName, setFirstName] = useState(profileDetails.firstName);
   const [lastName, setLastName] = useState(profileDetails.lastName);
   const [location, setLocation] = useState(profileDetails.location);
+  const [bio, setBio] = useState(profileDetails.bio)
   const [industry, setIndustry] = useState(profileDetails.industry);
   const [paymentType, setPaymentType] = useState(profileDetails.paymentType);
 
-  function save() {
-    Alert.alert("todo: save changes to database");
-    props.navigation.navigate("ClientProfileScreen");
+  const save = () => {
+    profileDetails.firstName = firstName;
+    profileDetails.lastName = lastName;
+    profileDetails.location = location;
+    profileDetails.bio = bio;
+    profileDetails.industry = industry;
+    profileDetails.paymentType = paymentType;
+    props.editClientProfile(firstName, lastName, location, bio, industry, paymentType, profileDetails.key);
+    console.log("PROFILE DETAILS", profileDetails);
+    props.navigation.navigate("ClientProfileScreen", { ...profileDetails });
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       { profileDetails ? (
         <View>
           <Image source={princePic01} style={styles.backgroundImage}/>
@@ -103,13 +108,13 @@ function ClientEditProfileScreen(props, { getClientProfiles }) {
       ) : (
         <Text>Page unavailable</Text>
       )}
-    </View>
+    </KeyboardAvoidingView>
   )
 };
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     // justifyContent: "center",
     // alignItems: "center"
   },
@@ -157,4 +162,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ClientEditProfileScreen;
+export default connect(null, { editClientProfile })(ClientEditProfileScreen);

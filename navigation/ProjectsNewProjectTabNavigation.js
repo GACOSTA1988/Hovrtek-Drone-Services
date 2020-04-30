@@ -1,7 +1,7 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import ProjectScreensStackNavigator from "./ProjectScreensStackNavigator";
-import NewProjectScreen from "../screens/client/NewProjectScreen.js";
+import ClientCreateNewProjectNavigation from "./ClientCreateNewProjectNavigation";
 
 const HomeScreenTab = createMaterialTopTabNavigator();
 
@@ -14,7 +14,7 @@ function ProjectsNewProjectTabNavigation() {
       />
       <HomeScreenTab.Screen
         name="Create New Project"
-        component={NewProjectScreen}
+        component={ClientCreateNewProjectNavigation}
       />
     </HomeScreenTab.Navigator>
   );

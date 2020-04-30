@@ -17,7 +17,7 @@ import * as firebase from "firebase";
 import { postPilotProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
-import LicenseUploader from "../../components/auth/LicenseUploader";
+import PilotProfileUploader from "../../components/auth/PilotProfileUploader.js";
 
 function PilotSignUpScreen(props) {
   const navigation = props.navigation;

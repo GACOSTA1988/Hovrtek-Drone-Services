@@ -201,10 +201,6 @@ function PilotProfileSetupPageTwoScreen(
               onPress={submit}
               title={"Save and Continue"}
             >
-              {/* <AntDesign
-                name="arrowright"
-                size={20}
-              /> */}
               <Text style={styles.saveAndContinueText}>Save and Continue</Text>
             </TouchableOpacity>
           </View>

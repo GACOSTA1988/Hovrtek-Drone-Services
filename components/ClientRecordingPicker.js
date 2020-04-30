@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { PassSetLocation, PassLocationState } from '../screens/client/NewProjectScreen';
+import { PassSetRecording, PassRecordingState } from '../screens/client/NewProjectScreen';
 import { useNavigation } from "@react-navigation/native";
 
-const ClientLocationPicker = () => {
+const ClientRecordingPicker = () => {
 
     const navigation = useNavigation();
     const [isModalVisible, setIsModalVisible] = useState(false)
 
-    const setLocation = useContext(PassSetLocation)
-    const locationState = useContext(PassLocationState )
+    const setRecording = useContext(PassSetRecording)
+    const recordingState = useContext(PassRecordingState)
 
-    console.log("LOCATION", locationState)
+    console.log("LOCATION", recordingState)
 
 
     const openModal = () => {
@@ -33,19 +33,19 @@ const ClientLocationPicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>Where is the location of your drone service?</Text>
+                        <Text style={styles.modalText}>What will you be recording?</Text>
                     </View>
                     <View>
                         <TextInput
                             style={{
-                             
+
                                 height: 30,
                                 borderColor: "gray",
                                 borderWidth: 1,
-             
+
                             }}
-                            onChangeText={setLocation}
-                            value={locationState}
+                            onChangeText={setRecording}
+                            value={recordingState}
                         />
 
                     </View>
@@ -62,14 +62,14 @@ const ClientLocationPicker = () => {
 
             {
 
-                (locationState)
+                (recordingState)
                     ?
                     (<TouchableOpacity
                         style={styles.button}
                         onPress={() => openModal()}
                         title={"Open modal"}
                     >
-                        <Text style={styles.buttonText}>{locationState}</Text>
+                        <Text style={styles.buttonText}>{recordingState}</Text>
                     </TouchableOpacity>)
                     :
                     (<TouchableOpacity
@@ -135,4 +135,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ClientLocationPicker
+export default ClientRecordingPicker

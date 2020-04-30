@@ -9,10 +9,12 @@ import {
   Alert,
   KeyboardAvoidingView,
   ScrollView,
-  ImageBackground
+  ImageBackground,
+  Image,
 } from "react-native";
 import * as firebase from "firebase";
 import landingPageImage from "../../assets/landingPageImage.png";
+import hovrtekLogo from "../../assets/hovrtek_logo.png";
 
 function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -21,24 +23,30 @@ function SignInScreen({ navigation }) {
   const signIn = (e) => {
     e.preventDefault();
     if (email.length < 4) {
-      Alert.alert('Please enter an email address.');
+      Alert.alert("Please enter an email address.");
       return;
     }
     if (!password.length) {
-      Alert.alert('Please enter a password.');
+      Alert.alert("Please enter a password.");
       return;
     }
     navigation.push("Loading");
     try {
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
-          Alert.alert('Incorrect username or password');
-        } else {
-          console.log(error.code);
-          Alert.alert(error.toString(error));
-        }
-        navigation.pop();
-      });
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .catch(function (error) {
+          if (
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/user-not-found"
+          ) {
+            Alert.alert("Incorrect username or password");
+          } else {
+            console.log(error.code);
+            Alert.alert(error.toString(error));
+          }
+          navigation.pop();
+        });
     } catch {
       Alert.alert(error.toString(error));
     }
@@ -46,6 +54,7 @@ function SignInScreen({ navigation }) {
 
   return (
     <ImageBackground source={landingPageImage} style={styles.MainContainer}>
+      {/* <Image source={hovrtekLogo} style={styles.hovrtekLogo} /> */}
       <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
       <Text style={styles.imageTextTwo}>
         THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
@@ -77,16 +86,16 @@ function SignInScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-
   MainContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    width: "100%",
   },
 
   buttonText: {
     textAlign: "center",
-    color: "grey"
+    color: "grey",
   },
 
   input: {
@@ -95,13 +104,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 8,
     width: 200,
-    color: "white"
+    color: "white",
   },
 
   text: {
     textAlign: "center",
     color: "white",
-    fontSize: 15
+    fontSize: 15,
+  },
+  hovrtekLogo: {
+    height: 50,
+    width: 280,
+    justifyContent: "center",
+    // marginLeft: 0,
+    marginBottom: 50,
   },
 
   imageText: {
@@ -109,7 +125,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     textAlign: "left",
-    marginLeft: 10
+    marginLeft: 10,
   },
 
   imageTextTwo: {
@@ -117,9 +133,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#3E90D0",
     textAlign: "left",
-    margin: 10
-  }
-
+    margin: 10,
+  },
 });
 
 export default SignInScreen;

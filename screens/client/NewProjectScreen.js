@@ -20,7 +20,7 @@ import ClientLocationPicker from '../../components/ClientLocationPicker';
 import ClientRecordingPicker from '../../components/ClientRecordingPicker';
 import ClientLightPicker from '../../components/ClientLightPicker';
 
-// CONTEXT HOOK FOR MODAL FORMS
+// CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
 export const PassDateState = React.createContext();
 export const PassSetLocation= React.createContext();
@@ -113,6 +113,10 @@ function NewProjectScreen(props, { postProjects }) {
               </PassLightState.Provider>
             </PassSetLight.Provider>
           </View>
+
+          <TouchableOpacity onPress={submit}>
+            <Text style={styles.submitButton}>Continue with Form</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={submit}>
             <Text style={styles.submitButton}>Submit Form</Text>

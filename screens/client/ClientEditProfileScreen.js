@@ -28,7 +28,7 @@ function ClientEditProfileScreen(props, { getClientProfiles }) {
           </View>
         </View>
       ) : (
-        <Text>User unavailable</Text>
+        <Text>Page unavailable</Text>
       )}
     </View>
   )

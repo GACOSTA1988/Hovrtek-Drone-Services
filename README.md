@@ -32,3 +32,6 @@
 * Deep look at conditional rendering between ios / android
 * accessibility - our app is not accessible right now
 * need to handle exceptions related to users not existing on projects they already made, etc.
+
+
+* open keyboard automatically when inputting work experience on pilot sign up form

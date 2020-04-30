@@ -21,10 +21,13 @@ import pic from "../../assets/landingPageImage.png";
 import princePic01 from "../../assets/princePic01.jpg";
 
 
+
 function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
 
 
+
 useEffect(() => {
+
     props.getPilotProfiles();
   }, []);
 

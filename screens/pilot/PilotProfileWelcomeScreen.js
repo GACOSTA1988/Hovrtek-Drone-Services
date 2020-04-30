@@ -27,15 +27,20 @@ function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
   }, []);
 
   const [profileDetails, setProfileDetails] = useState(null);
+  const [profileComplete, setProfileComplete] = useState(true);
 
   let user = null;
   let profile = null;
+
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
     profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
     try {
-      if (!profileDetails && profile) {
-        setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
+      if (!profileDetails) {
+        console.log("profile details is null");
+        if (profile) {
+          setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
+        }
       }
     } catch(error) {
       console.log("ERROR: ", error.message);
@@ -46,9 +51,8 @@ function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
 
   return (
     <View style={styles.container}>
-      { profileDetails && (profileDetails.profileComplete != "Yes") ? (
+      { (profileDetails && profileComplete === true) ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
           <Image source={princePic01} style={styles.backgroundImage} />
           <Image
             style={{

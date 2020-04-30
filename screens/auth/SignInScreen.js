@@ -54,7 +54,7 @@ function SignInScreen({ navigation }) {
 
   return (
     <ImageBackground source={landingPageImage} style={styles.MainContainer}>
-      <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+      {/* <Image source={hovrtekLogo} style={styles.hovrtekLogo} /> */}
       <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
       <Text style={styles.imageTextTwo}>
         THE FASTEST WAY TO GET AERIAL IMAGES AND DATA

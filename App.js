@@ -51,6 +51,19 @@ export default () => {
     }
   });
 
+  function LogoTitle() {
+    return (
+      <Image
+        style={{
+          width: 290,
+          height: 55,
+          marginBottom: 10,
+          alignItems: "center",
+        }}
+        source={require("./assets/hovrtek_logo.png")}
+      />
+    );
+  }
   const authContext = useMemo(() => {
     return {
       updateUser: () => {
@@ -146,9 +159,10 @@ export default () => {
                 name="SignIn"
                 component={SignInScreen}
                 options={{
-                  title: "",
+                  headerTitle: (props) => <LogoTitle {...props} />,
                   headerStyle: {
                     backgroundColor: "#092455",
+                    width: "100%",
                     borderBottomWidth: 10,
                     borderBottomColor: "grey",
                     height: 110,

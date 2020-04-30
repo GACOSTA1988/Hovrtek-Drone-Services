@@ -113,7 +113,7 @@ function PilotProfileWelcomeScreen(
               borderColor: "#092455",
             }}
             source={{
-              uri: url,
+              uri: profileDetails.profileImageUrl,
             }}
           />
 
@@ -137,7 +137,7 @@ function PilotProfileWelcomeScreen(
           {currentUserProps ? (
             <View>
               <Text style={styles.locationText}>
-                Location: {currentUserProps.pilotLocation}
+                Location: {profileDetails.pilotLocation}
               </Text>
 
               <Text
@@ -188,7 +188,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.droneType}
+                  {profileDetails.droneType}
                 </Text>
               </View>
               <View
@@ -217,7 +217,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.yearsOfExperience}
+                  {profileDetails.yearsOfExperience}
                 </Text>
               </View>
               <View
@@ -246,7 +246,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.faaLicenseExp}
+                  {profileDetails.faaLicenseExp}
                 </Text>
               </View>
               <View
@@ -275,7 +275,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.travelStatus}
+                  {profileDetails.travelStatus}
                 </Text>
               </View>
               <View
@@ -304,7 +304,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.insuredStatus}
+                  {profileDetails.insuredStatus}
                 </Text>
               </View>
               <View
@@ -333,7 +333,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.airMap}
+                  {profileDetails.airMap}
                 </Text>
               </View>
               <View
@@ -362,7 +362,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.fourHundred}
+                  {profileDetails.fourHundred}
                 </Text>
               </View>
             </View>

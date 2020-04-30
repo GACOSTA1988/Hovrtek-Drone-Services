@@ -152,11 +152,17 @@ export function getClientProfiles() {
   };
 }
 
-export function postClientProfiles(clientName, clientLocation, email, userID) {
+export function postClientProfiles(firstName, lastName, location, email, bio, industry, paymentType, userID) {
   return (dispatch) => {
     firebase
       .database()
       .ref("/clientProfiles")
-      .push({ clientName, clientLocation, email, userID });
+      .push({ firstName, lastName, location, email, bio, industry, paymentType, userID });
+  };
+}
+
+export function editClientProfile(firstName, lastName, location, bio, industry, paymentType, key) {
+  return (dispatch) => {
+    firebase.database().ref(`/clientProfiles`).child(key).update({ firstName, lastName, location, bio, industry, paymentType });
   };
 }

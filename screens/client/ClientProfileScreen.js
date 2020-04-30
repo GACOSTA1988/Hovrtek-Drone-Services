@@ -27,6 +27,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
       try {
         if (!profileDetails) {
           setProfileDetails(profile);
+          console.log("PROFILE: ", profile);
         }
       } catch (error) {
         console.log("ERROR: ", error.message);
@@ -70,12 +71,13 @@ function ClientProfileScreen(props, { getClientProfiles }) {
             )}
             </View>
           <Image source={personIcon} style={styles.profileImage}/>
-          <Text style={styles.name}>{profileDetails.clientName}</Text>
+          <Text style={styles.name}>{profileDetails.firstName}{" "}{profileDetails.lastName}</Text>
           <View style={styles.info}>
-            <Text style={{fontSize: 20}}>Location: This client is in {profileDetails.clientLocation}</Text>
+            <Text style={{fontSize: 20}}>Location: This client is in {profileDetails.location}</Text>
             <Text style={{fontSize: 20, marginTop: 10}}>Bio: </Text>
             <Text style={{fontSize: 15}}>Amelia Mary Earhart (/ˈɛərhɑːrt/, born July 24, 1897; disappeared July 2, 1937) was an American aviation pioneer and author.[1][Note 1] Earhart was the first female aviator to fly solo across the Atlantic Ocean.[3][Note 2] She set many other records,[2] wrote best-selling books about her flying experiences, and was instrumental in the formation of The Ninety-Nines, an organization for female pilots.[5] </Text>
-            <Text style={{fontSize: 20, marginTop: 10}}>Client links:</Text>
+            <Text style={{fontSize: 20, marginTop: 10}}>Industry:</Text>
+            <Text style={{fontSize: 20, marginTop: 10}}>Payment type:</Text>
           </View>
         </View>
       ) : (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button, Alert, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Button, Alert, Image, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import personIcon from '../../assets/personIcon.png';
@@ -13,18 +13,91 @@ function ClientEditProfileScreen(props, { getClientProfiles }) {
 
   const profileDetails = props.route.params;
 
+  const [bio, setBio] = useState(profileDetails.bio)
+  const [firstName, setFirstName] = useState(profileDetails.firstName);
+  const [lastName, setLastName] = useState(profileDetails.lastName);
+  const [location, setLocation] = useState(profileDetails.location);
+  const [industry, setIndustry] = useState(profileDetails.industry);
+  const [paymentType, setPaymentType] = useState(profileDetails.paymentType);
+
+  function save() {
+    Alert.alert("todo: save changes to database");
+    props.navigation.navigate("ClientProfileScreen");
+  }
+
   return (
     <View style={styles.container}>
       { profileDetails ? (
         <View>
           <Image source={princePic01} style={styles.backgroundImage}/>
-          <Image source={personIcon} style={styles.profileImage}/>
-          <Text style={styles.name}>{profileDetails.clientName}</Text>
+          <View style={styles.saveButton}>
+          <TouchableOpacity
+            onPress={() => save()}>
+            <Text style={styles.saveText}>Save Changes</Text>
+          </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            onPress={() => Alert.alert("todo: choose image")}
+            style={styles.imagePress}
+          >
+            <Image
+              source={personIcon} style={styles.profileImage}
+              />
+          </TouchableOpacity>
+          <View style={styles.names}>
+            <TextInput
+              style={styles.name}
+              placeholder={firstName}
+              value={firstName}
+              onChangeText={setFirstName}
+              />
+            <TextInput
+              style={styles.name}
+              placeholder={lastName}
+              value={lastName}
+              onChangeText={setLastName}
+            />
+          </View>
           <View style={styles.info}>
-            <Text style={{fontSize: 20}}>Location: This client is in {profileDetails.clientLocation}</Text>
-            <Text style={{fontSize: 20, marginTop: 10}}>Bio: </Text>
-            <Text style={{fontSize: 15}}>Amelia Mary Earhart (/ˈɛərhɑːrt/, born July 24, 1897; disappeared July 2, 1937) was an American aviation pioneer and author.[1][Note 1] Earhart was the first female aviator to fly solo across the Atlantic Ocean.[3][Note 2] She set many other records,[2] wrote best-selling books about her flying experiences, and was instrumental in the formation of The Ninety-Nines, an organization for female pilots.[5] </Text>
-            <Text style={{fontSize: 20, marginTop: 10}}>Client links:</Text>
+            <View style={{flexDirection: "row"}}>
+              <Text style={{fontSize: 20}}>Client is located in </Text>
+              <TextInput
+              style={{fontSize: 20}}
+              placeholder={location}
+              value={location}
+              onChangeText={setLocation}
+            />
+            </View>
+            <View>
+              <Text style={{fontSize: 20, marginTop: 10}}>Bio: </Text>
+              <TextInput
+                style={styles.input}
+                placeholder={bio}
+                value={bio}
+                onChangeText={setBio}
+                multiline={true}
+              />
+            </View>
+            <View style={{flexDirection: "row", marginTop: 10}}>
+              <Text style={{fontSize: 20}}>
+                Industry:
+              </Text>
+              <TextInput
+                style={{fontSize: 20, marginLeft: 5}}
+                placeholder={industry}
+                value={industry}
+                onChangeText={setIndustry}
+              />
+            </View>
+            <View style={{flexDirection: "row", marginTop: 10}}>
+              <Text style={{fontSize: 20}}>Payment type:</Text>
+              <TextInput
+                style={{fontSize: 20, marginLeft: 5}}
+                placeholder={paymentType}
+                value={paymentType}
+                onChangeText={setPaymentType}
+              />
+            </View>
           </View>
         </View>
       ) : (
@@ -34,16 +107,19 @@ function ClientEditProfileScreen(props, { getClientProfiles }) {
   )
 };
 
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // justifyContent: "center",
     // alignItems: "center"
   },
   name: {
     fontSize: 30,
-    marginLeft: 20
+    marginLeft: 6
+  },
+  names: {
+    flexDirection: "row",
+    marginLeft: 16
   },
   profileImage: {
     width: 100,
@@ -59,10 +135,25 @@ const styles = StyleSheet.create({
     height: 130,
     position: 'absolute'
   },
-  editIcon: {
-    marginTop: 160,
+  saveButton: {
+    marginTop: 150,
     position: 'absolute',
     right: 20,
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5
+
+  },
+  input: {
+    fontSize: 15
+  },
+  imagePress: {
+    width: 100
+  },
+  saveText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white"
   }
 });
 

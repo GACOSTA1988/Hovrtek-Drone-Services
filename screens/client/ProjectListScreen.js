@@ -32,7 +32,7 @@ function ProjectListScreen(props, { getProjects, getClientProfiles }) {
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
     if (props.listOfClientProfiles.find((x) => x.userID === user.uid)) {
-      console.log("this should bring up current user: ", props.listOfClientProfiles.find((x) => x.userID === user.uid).clientName);
+      console.log("this should bring up current user: ", props.listOfClientProfiles.find((x) => x.userID === user.uid).firstName);
     }
   }
 
@@ -83,7 +83,7 @@ function ProjectListScreen(props, { getProjects, getClientProfiles }) {
                         </Text>
                         { props.listOfClientProfiles.find((x) => x.userID === item.clientID) ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).clientName }{" "}
+                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).firstName }{" "}{ props.listOfClientProfiles.find((x) => x.userID === item.clientID).lastName }
                           </Text>
                         ) : (
                           <Text>Posted by:</Text>

@@ -72,7 +72,7 @@ function JobListScreen(props, { getProjects, getClientProfiles }) {
                         </Text>
                         { props.listOfClientProfiles.find((x) => x.userID === item.clientID) ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).clientName }{" "}
+                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).firstName }{" "}{props.listOfClientProfiles.find((x) => x.userID === item.clientID).lastName}
                           </Text>
                         ) : (
                           <Text>Posted by:</Text>

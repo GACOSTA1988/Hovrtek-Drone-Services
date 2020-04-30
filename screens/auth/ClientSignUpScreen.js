@@ -16,8 +16,9 @@ import { connect } from "react-redux";
 function ClientSignUpScreen (props) {
   const navigation = props.navigation;
   const { updateUser } = useContext(AuthContext);
-  const [clientName, setClientName] = useState("");
-  const [clientLocation, setClientLocation] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,10 +27,10 @@ function ClientSignUpScreen (props) {
     e.preventDefault();
     navigation.push("Loading");
 
-      if (clientName.trim() === '') {
+      if (firstName.trim() === '' || lastName.trim() === '') {
         Alert.alert("Please fill in your name.");
         navigation.navigate("ClientSignUpScreen");
-      } else if (clientLocation.trim() == '') {
+      } else if (location.trim() == '') {
         Alert.alert("Please fill in your loaction.");
         navigation.navigate("ClientSignUpScreen");
       } else {
@@ -42,13 +43,13 @@ function ClientSignUpScreen (props) {
       }
       let user = firebase.auth().currentUser;
       await user.updateProfile({
-        displayName: clientName,
+        displayName: firstName,
         photoURL: "C",
       });
       await user.reload().then(updateUser());
       const userID = user.uid;
-      props.postClientProfiles(clientName, clientLocation, email, userID);
-        navigation.navigate("ProjectListScreen");
+      props.postClientProfiles(firstName, lastName, location, email, "Amelia Mary Earhart (/ˈɛərhɑːrt/, born July 24, 1897; disappeared July 2, 1937) was an American aviation pioneer and author. Earhart was the first female aviator to fly solo across the Atlantic Ocean. She set many other records, wrote best-selling books about her flying experiences, and was instrumental in the formation of The Ninety-Nines, an organization for female pilots.", "Set industry", "Set payment type", userID);
+      navigation.navigate("ProjectListScreen");
     }
   }
 
@@ -61,18 +62,28 @@ function ClientSignUpScreen (props) {
         <TextInput
           maxLength={30}
           autoCapitalize='words'
-          placeholder=" Name"
+          placeholder=" First Name"
           placeholderTextColor="grey"
-          value={clientName}
-          onChangeText={setClientName}
+          value={firstName}
+          onChangeText={setFirstName}
+          style={styles.input}
+        />
+
+        <TextInput
+          maxLength={30}
+          autoCapitalize='words'
+          placeholder=" Last Name"
+          placeholderTextColor="grey"
+          value={lastName}
+          onChangeText={setLastName}
           style={styles.input}
         />
 
         <TextInput
           placeholder=" Location"
           placeholderTextColor="grey"
-          value={clientLocation}
-          onChangeText={setClientLocation}
+          value={location}
+          onChangeText={setLocation}
           style={styles.input}
         />
         <TextInput

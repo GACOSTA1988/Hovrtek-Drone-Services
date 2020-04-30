@@ -20,40 +20,84 @@ import _ from "lodash";
 import pic from "../../assets/landingPageImage.png";
 import princePic01 from "../../assets/princePic01.jpg";
 
+function PilotProfileWelcomeScreen(
+  props,
+  { getPilotProfiles, editPilotProfile }
+) {
+  const navigation = useNavigation();
 
+  // getCurrentUserProps();
 
-function PilotProfileWelcomeScreen(props, { getPilotProfiles }) {
-
-
-
-useEffect(() => {
-
+  useEffect(() => {
     props.getPilotProfiles();
   }, []);
 
-  const [profileDetails, setProfileDetails] = useState(null);
-
-  let user = null;
-  let profile = null;
+  let userID = null;
   if (firebase.auth().currentUser) {
-    user = firebase.auth().currentUser;
-    profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
-    try {
-      if (!profileDetails && profile) {
-        setProfileDetails(props.listOfPilotProfiles.find((x) => x.userID === user.uid));
-      }
-    } catch(error) {
-      console.log("ERROR: ", error.message);
-      Alert.alert("User page unavailable");
-      props.navigation.navigate("JobListScreen");
-    }
+    userID = firebase.auth().currentUser.uid;
   }
+
+  const list = props.listOfProfiles;
+  let currentUserProps = list.find((x) => x.userID === userID);
+
+  if (currentUserProps) {
+  }
+  let pilotLocationPlaceHolder = "";
+  let personalBioPlaceHolder = "";
+  let yearsOfExperiencePlaceHolder = "";
+  let faaLicenseExpPlaceHolder = "";
+  let insuredStatusPlaceHolder = "";
+  let travelStatusPlaceHolder = "";
+  let droneTypePlaceHolder = "";
+  let airMapPlaceHolder = "";
+  let fourHundredPlaceHolder = "";
+  let profileCompletePlaceHolder = "";
+  let profileImageUrlPlaceHolder = "";
+  let isComplete = "";
+  let url = "";
+
+  if (currentUserProps) {
+    url = currentUserProps.profileImageUrl;
+    pilotLocationPlaceHolder = currentUserProps.pilotLocation;
+    personalBioPlaceHolder = currentUserProps.personalBio;
+    yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
+    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
+    insuredStatusPlaceHolder = currentUserProps.insuredStatus;
+    travelStatusPlaceHolder = currentUserProps.travelStatus;
+    droneTypePlaceHolder = currentUserProps.droneType;
+    airMapPlaceHolder = currentUserProps.airMapPlace;
+    fourHundredPlaceHolder = currentUserProps.fourHundred;
+    profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
+    isComplete = currentUserProps.profileComplete;
+    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
+  }
+
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    profileImageUrlPlaceHolder
+  );
+  const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
+  const [yearsOfExperience, setYearsOfExperience] = useState(
+    yearsOfExperiencePlaceHolder
+  );
+  const [faaLicenseExp, setFaaLicenseExp] = useState(faaLicenseExpPlaceHolder);
+  const [insuredStatus, setInsuredStatus] = useState(insuredStatusPlaceHolder);
+  const [travelStatus, setTravelStatus] = useState(travelStatusPlaceHolder);
+  const [droneType, setDroneType] = useState(droneTypePlaceHolder);
+  const [airMap, setAirMap] = useState(airMapPlaceHolder);
+  const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
+  const [profileComplete, setProfileComplete] = useState(
+    profileCompletePlaceHolder
+  );
+
+  const submit = (e) => {
+    navigation.navigate("PilotProfileSetupPageOneScreen");
+  };
+  console.log(url);
 
   return (
     <View style={styles.container}>
-      { profileDetails && profileDetails.profileComplete === "Yes" ? (
+      {currentUserProps && currentUserProps.profileComplete === "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
           <Image source={princePic01} style={styles.backgroundImage} />
           <Image
             style={{
@@ -72,7 +116,6 @@ useEffect(() => {
             }}
           />
           {currentUserProps ? (
-
             <View>
               <Text style={styles.nameText}>
                 {currentUserProps.pilotFirstName}{" "}
@@ -90,7 +133,6 @@ useEffect(() => {
                   marginLeft: "2%",
                   marginTop: "4%",
                 }}
-
               >
                 Bio:
               </Text>
@@ -104,7 +146,6 @@ useEffect(() => {
                 }}
               >
                 {currentUserProps.personalBio}
-
               </Text>
               <View
                 style={{
@@ -317,16 +358,14 @@ useEffect(() => {
       ) : (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Text style={styles.welcomeText}>Hi</Text>
-          {profileDetails ? (
+          {currentUserProps ? (
             <View>
-
               <Text style={styles.nameText}>
                 {currentUserProps.pilotFirstName}
-
                 {"\n"}
-                {profileDetails.pilotLastName}
+                {currentUserProps.pilotLastName}
                 {"\n"}
-                From {profileDetails.pilotLocation}
+                From {currentUserProps.pilotLocation}
               </Text>
               <Text style={styles.bodyText}>Welcome To Your Profile</Text>
             </View>
@@ -399,7 +438,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const listOfPilotProfiles = _.map(
+  const listOfProfiles = _.map(
     state.pilotProfilesList.pilotProfilesList,
     (val, key) => {
       return {
@@ -409,7 +448,7 @@ function mapStateToProps(state) {
     }
   );
   return {
-    listOfPilotProfiles
+    listOfProfiles,
   };
 }
 

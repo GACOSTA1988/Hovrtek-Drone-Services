@@ -35,6 +35,7 @@
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-tab-view": "^2.14.0",
     "react-native-uuid": "^1.4.9",
+    "react-native-uuid-generator": "^6.1.1",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",

@@ -7,6 +7,7 @@ import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
 
+
 const PilotDrawer = createDrawerNavigator();
 
 // Trying to set up a notifications thing. Need to learn more about useContext
@@ -19,6 +20,8 @@ const PilotDrawer = createDrawerNavigator();
 //     }
 //   }
 // }, []);
+
+
 
 const PilotNavigation = () => {
   return (

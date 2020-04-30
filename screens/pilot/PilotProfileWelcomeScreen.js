@@ -113,7 +113,7 @@ function PilotProfileWelcomeScreen(
               borderColor: "#092455",
             }}
             source={{
-              uri: profileDetails.profileImageUrl,
+              uri: currentUserProps.profileImageUrl,
             }}
           />
 
@@ -137,7 +137,7 @@ function PilotProfileWelcomeScreen(
           {currentUserProps ? (
             <View>
               <Text style={styles.locationText}>
-                Location: {profileDetails.pilotLocation}
+                Location: {currentUserProps.pilotLocation}
               </Text>
 
               <Text
@@ -188,7 +188,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.droneType}
+                  {currentUserProps.droneType}
                 </Text>
               </View>
               <View
@@ -217,7 +217,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.yearsOfExperience}
+                  {currentUserProps.yearsOfExperience}
                 </Text>
               </View>
               <View
@@ -246,7 +246,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.faaLicenseExp}
+                  {currentUserProps.faaLicenseExp}
                 </Text>
               </View>
               <View
@@ -275,7 +275,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.travelStatus}
+                  {currentUserProps.travelStatus}
                 </Text>
               </View>
               <View
@@ -304,7 +304,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.insuredStatus}
+                  {currentUserProps.insuredStatus}
                 </Text>
               </View>
               <View
@@ -333,7 +333,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.airMap}
+                  {currentUserProps.airMap}
                 </Text>
               </View>
               <View
@@ -362,7 +362,7 @@ function PilotProfileWelcomeScreen(
                     marginTop: 8,
                   }}
                 >
-                  {profileDetails.fourHundred}
+                  {currentUserProps.fourHundred}
                 </Text>
               </View>
             </View>
@@ -372,17 +372,27 @@ function PilotProfileWelcomeScreen(
         </ScrollView>
       ) : (
         <ScrollView style={{ width: "100%" }}>
-          <Text style={styles.welcomeText}>Hi</Text>
+          <Image
+            source={princePic01}
+            style={styles.backgroundImageStartingPage}
+          />
+
+          <Text style={{ marginTop: "40%", textAlign: "center", fontSize: 30 }}>
+            Welcome to Hovrtek
+          </Text>
           {currentUserProps ? (
-            <View>
+            <View
+              style={{
+                flexDirection: "row",
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: 40,
+              }}
+            >
               <Text style={styles.nameText}>
-                {currentUserProps.pilotFirstName}
-                {"\n"}
+                {currentUserProps.pilotFirstName}{" "}
                 {currentUserProps.pilotLastName}
-                {"\n"}
-                From {currentUserProps.pilotLocation}
               </Text>
-              <Text style={styles.bodyText}>Welcome To Your Profile</Text>
             </View>
           ) : (
             <Text style={styles.h2}>Location:</Text>
@@ -430,7 +440,12 @@ const styles = StyleSheet.create({
     textAlign: "left",
     marginLeft: "2%",
   },
-
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+  },
   subHeaderText: {
     marginTop: "5%",
     marginBottom: "10%",
@@ -449,6 +464,11 @@ const styles = StyleSheet.create({
   backgroundImage: {
     width: "100%",
     height: "20%",
+    position: "absolute",
+  },
+  backgroundImageStartingPage: {
+    width: "100%",
+    height: "40%",
     position: "absolute",
   },
 });

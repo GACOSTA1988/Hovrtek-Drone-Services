@@ -19,6 +19,7 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import pic from "../../assets/landingPageImage.png";
 import princePic01 from "../../assets/princePic01.jpg";
+import { AntDesign } from "@expo/vector-icons";
 
 function PilotProfileWelcomeScreen(
   props,
@@ -115,12 +116,26 @@ function PilotProfileWelcomeScreen(
               uri: url,
             }}
           />
+
+          <View style={{ flexDirection: "row", display: "flex" }}>
+            <Text style={styles.nameText}>
+              {currentUserProps.pilotFirstName} {currentUserProps.pilotLastName}
+            </Text>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.push("PilotProfilePageSetupPageOneScreen")
+              }
+            >
+              <AntDesign
+                name="edit"
+                size={30}
+                color="darkblue"
+                style={{ marginLeft: 40, marginTop: 25 }}
+              />
+            </TouchableOpacity>
+          </View>
           {currentUserProps ? (
             <View>
-              <Text style={styles.nameText}>
-                {currentUserProps.pilotFirstName}{" "}
-                {currentUserProps.pilotLastName}
-              </Text>
               <Text style={styles.locationText}>
                 Location: {currentUserProps.pilotLocation}
               </Text>
@@ -129,7 +144,7 @@ function PilotProfileWelcomeScreen(
                 style={{
                   fontSize: 20,
                   color: "black",
-                  fontWeight: "450",
+                  fontWeight: "500",
                   marginLeft: "2%",
                   marginTop: "4%",
                 }}
@@ -352,35 +367,35 @@ function PilotProfileWelcomeScreen(
               </View>
             </View>
           ) : (
-              <Text></Text>
-            )}
+            <Text></Text>
+          )}
         </ScrollView>
       ) : (
-          <ScrollView style={{ width: "100%" }}>
-            <Text style={styles.welcomeText}>Hi</Text>
-            {currentUserProps ? (
-              <View>
-                <Text style={styles.nameText}>
-                  {currentUserProps.pilotFirstName}
-                  {"\n"}
-                  {currentUserProps.pilotLastName}
-                  {"\n"}
+        <ScrollView style={{ width: "100%" }}>
+          <Text style={styles.welcomeText}>Hi</Text>
+          {currentUserProps ? (
+            <View>
+              <Text style={styles.nameText}>
+                {currentUserProps.pilotFirstName}
+                {"\n"}
+                {currentUserProps.pilotLastName}
+                {"\n"}
                 From {currentUserProps.pilotLocation}
-                </Text>
-                <Text style={styles.bodyText}>Welcome To Your Profile</Text>
-              </View>
-            ) : (
-                <Text style={styles.h2}>Location:</Text>
-              )}
+              </Text>
+              <Text style={styles.bodyText}>Welcome To Your Profile</Text>
+            </View>
+          ) : (
+            <Text style={styles.h2}>Location:</Text>
+          )}
 
-            <Button
-              title="Start Pilot Profile"
-              onPress={() =>
-                props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
-              }
-            />
-          </ScrollView>
-        )}
+          <Button
+            title="Start Pilot Profile"
+            onPress={() =>
+              props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
+            }
+          />
+        </ScrollView>
+      )}
     </View>
   );
 }

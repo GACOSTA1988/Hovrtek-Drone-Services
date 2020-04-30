@@ -15,6 +15,8 @@ function ClientProfileScreen(props, { getClientProfiles }) {
     props.getClientProfiles();
   }, []);
 
+  let passedProps = props.route.params;
+
   const [profileDetails, setProfileDetails] = useState(null);
 
   let user = null;
@@ -27,7 +29,9 @@ function ClientProfileScreen(props, { getClientProfiles }) {
       try {
         if (!profileDetails) {
           setProfileDetails(profile);
-          console.log("PROFILE: ", profile);
+          passedProps = profile;
+        } else if (passedProps && profileDetails != passedProps) {
+          setProfileDetails(passedProps);
         }
       } catch (error) {
         console.log("ERROR: ", error.message);
@@ -75,9 +79,17 @@ function ClientProfileScreen(props, { getClientProfiles }) {
           <View style={styles.info}>
             <Text style={{fontSize: 20}}>Location: This client is in {profileDetails.location}</Text>
             <Text style={{fontSize: 20, marginTop: 10}}>Bio: </Text>
-            <Text style={{fontSize: 15}}>Amelia Mary Earhart (/ˈɛərhɑːrt/, born July 24, 1897; disappeared July 2, 1937) was an American aviation pioneer and author.[1][Note 1] Earhart was the first female aviator to fly solo across the Atlantic Ocean.[3][Note 2] She set many other records,[2] wrote best-selling books about her flying experiences, and was instrumental in the formation of The Ninety-Nines, an organization for female pilots.[5] </Text>
-            <Text style={{fontSize: 20, marginTop: 10}}>Industry:</Text>
-            <Text style={{fontSize: 20, marginTop: 10}}>Payment type:</Text>
+            <Text style={{fontSize: 15}}>{profileDetails.bio}</Text>
+            { (profileDetails.industry != "Set industry") ? (
+              <Text style={{fontSize: 20, marginTop: 10}}>Industry: {profileDetails.industry}</Text>
+            ) : (
+              <Text style={{fontSize: 20, marginTop: 10}}>No industry details</Text>
+            )}
+            { (profileDetails.industry != "Set industry") ? (
+              <Text style={{fontSize: 20, marginTop: 10}}>Payment type: {profileDetails.paymentType}</Text>
+            ) : (
+              <Text style={{fontSize: 20, marginTop: 10}}>No payment type details</Text>
+            )}
           </View>
         </View>
       ) : (

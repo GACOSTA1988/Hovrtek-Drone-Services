@@ -6,24 +6,25 @@ import NewProjectScreenTwo from "../screens/client/NewProjectScreenTwo";
 import NewProjectScreenThree from "../screens/client/NewProjectScreenThree";
 
 
-const ClientCreateNewProjectNavigation = createStackNavigator();
+const CreateNewProjectStack = createStackNavigator();
 
 function ClientCreateNewProjectNavigation() {
     return (
-        <ClientCreateNewProjectNavigation.Navigator headerMode="none">
-            <ClientCreateNewProjectNavigation.Screen
+        <CreateNewProjectStack.Navigator headerMode="none">
+            <CreateNewProjectStack.Screen
                 name="NewProjectScreen"
                 component={NewProjectScreen}
             />
-            <ClientCreateNewProjectNavigation.Screen
+            <CreateNewProjectStack.Screen
                 name="NewProjectScreenTwo"
                 component={NewProjectScreenTwo}
             />
-            <ClientCreateNewProjectNavigation.Screen
+
+            <CreateNewProjectStack.Screen
                 name="NewProjectScreenThree"
                 component={NewProjectScreenThree}
             />
-        </ClientCreateNewProjectNavigation.Navigator>
+        </CreateNewProjectStack.Navigator>
     );
 }
 

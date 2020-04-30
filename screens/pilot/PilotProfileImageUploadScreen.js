@@ -15,7 +15,7 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
-import LicenseUploader from "../../components/auth/LicenseUploader";
+import PilotProfileUploader from "../../components/auth/PilotProfileUploader";
 
 // CONTEXT HOOK
 export const PassSetProfileImageUrlContext = React.createContext();
@@ -115,7 +115,7 @@ function PilotProfileImageUploadScreen(
         <Text>Please Upload Profile Picture</Text>
         <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
           <PassProfileImageUrlState.Provider value={profileImageUrl}>
-            <LicenseUploader />
+            <PilotProfileUploader />
           </PassProfileImageUrlState.Provider>
         </PassSetProfileImageUrlContext.Provider>
 

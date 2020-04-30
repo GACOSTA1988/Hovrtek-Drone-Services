@@ -8,7 +8,7 @@ import { PassSetProfileImageUrlContext } from "../../screens/pilot/PilotProfileI
 import { PassProfileImageUrlState } from "../../screens/pilot/PilotProfileImageUploadScreen";
 import UUIDGenerator from 'react-native-uuid-generator';
 
-function LicenseUploader(props) {
+function PilotProfileUploader(props) {
   const [licenseThumbnail, setlicenseThumbnail] = useState(null);
 
   const SetProfileImageUrlContext = useContext(PassSetProfileImageUrlContext);
@@ -78,4 +78,4 @@ function LicenseUploader(props) {
   );
 }
 
-export default LicenseUploader;
+export default PilotProfileUploader;

@@ -13,12 +13,12 @@ import { postProjects } from "../../actions/index";
 import { postClientProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import ImageUploader from "../../components/client/ImageUploader";
 import * as firebase from "firebase";
 import ClientDatePicker from '../../components/ClientDatePicker';
 import ClientLocationPicker from '../../components/ClientLocationPicker';
 import ClientRecordingPicker from '../../components/ClientRecordingPicker';
 import ClientLightPicker from '../../components/ClientLightPicker';
+import ClientCreateNewProjectNavigation from "../../navigation/ClientCreateNewProjectNavigation";
 
 // CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
@@ -60,6 +60,10 @@ function NewProjectScreen(props, { postProjects }) {
     navigation.navigate("ProjectListScreen");
     setDate(""), setLight(""), setLocation(""), setRecording("");
   };
+  }
+
+  const continueButton = () => {
+    navigation.navigate("NewProjectScreenTwo");
   }
 
 
@@ -114,8 +118,8 @@ function NewProjectScreen(props, { postProjects }) {
             </PassSetLight.Provider>
           </View>
 
-          <TouchableOpacity onPress={submit}>
-            <Text style={styles.submitButton}>Continue with Form</Text>
+          <TouchableOpacity onPress={continueButton}>
+            <Text style={styles.continueButton}>Continue with Form</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={submit}>
@@ -174,6 +178,13 @@ const styles = StyleSheet.create({
     color: 'lightgray'
   },
   submitButton: {
+    marginTop: 10,
+    marginBottom: 10,
+    textAlign: "center",
+    fontSize: 30,
+    color: "#092455",
+  },
+  continueButton: {
     marginTop: 10,
     marginBottom: 10,
     textAlign: "center",

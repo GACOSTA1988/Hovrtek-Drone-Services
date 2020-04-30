@@ -200,7 +200,7 @@ import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
 
 import { useNavigation } from '@react-navigation/native';
-import LicenseUploader from "../../components/auth/LicenseUploader";
+import PilotProfileUploader from "../../components/auth/PilotProfileUploader";
 
 
 
@@ -320,7 +320,7 @@ function PilotSignUpScreen(props) {
 
 
           <Text style={styles.imageUploaderText}>Please upload your FAA license</Text>
-          <LicenseUploader />
+          <PilotProfileUploader />
 
 
 

@@ -31,7 +31,7 @@ const ValidInsurancePicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>What Type of drone do you have?</Text>
+                        <Text style={styles.modalText}>Do you have valid insurance?</Text>
                     </View>
                     <View>
                         <Picker

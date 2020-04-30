@@ -35,6 +35,7 @@ useEffect(() => {
 
   let user = null;
   let profile = null;
+
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
     profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
@@ -51,7 +52,7 @@ useEffect(() => {
 
   return (
     <View style={styles.container}>
-      { profileDetails && profileDetails.profileComplete === "Yes" ? (
+      { profileDetails && profileDetails.profileComplete !== "Yes" ? (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
           <Image source={princePic01} style={styles.backgroundImage} />
@@ -71,15 +72,15 @@ useEffect(() => {
               uri: url,
             }}
           />
-          {currentUserProps ? (
+          {profileDetails ? (
 
             <View>
               <Text style={styles.nameText}>
-                {currentUserProps.pilotFirstName}{" "}
-                {currentUserProps.pilotLastName}
+                {profileDetails.pilotFirstName}{" "}
+                {profileDetails.pilotLastName}
               </Text>
               <Text style={styles.locationText}>
-                Location: {currentUserProps.pilotLocation}
+                Location: {profileDetails.pilotLocation}
               </Text>
 
               <Text
@@ -103,7 +104,7 @@ useEffect(() => {
                   marginTop: "1%",
                 }}
               >
-                {currentUserProps.personalBio}
+                {profileDetails.personalBio}
 
               </Text>
               <View
@@ -132,7 +133,7 @@ useEffect(() => {
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.droneType}
+                  {profileDetails.droneType}
                 </Text>
               </View>
               <View
@@ -161,7 +162,7 @@ useEffect(() => {
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.yearsOfExperience}
+                  {profileDetails.yearsOfExperience}
                 </Text>
               </View>
               <View
@@ -190,7 +191,7 @@ useEffect(() => {
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.faaLicenseExp}
+                  {profileDetails.faaLicenseExp}
                 </Text>
               </View>
               <View
@@ -219,7 +220,7 @@ useEffect(() => {
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.travelStatus}
+                  {profileDetails.travelStatus}
                 </Text>
               </View>
               <View
@@ -248,7 +249,7 @@ useEffect(() => {
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.insuredStatus}
+                  {profileDetails.insuredStatus}
                 </Text>
               </View>
               <View
@@ -277,7 +278,7 @@ useEffect(() => {
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.airMap}
+                  {profileDetails.airMap}
                 </Text>
               </View>
               <View
@@ -306,7 +307,7 @@ useEffect(() => {
                     marginTop: 8,
                   }}
                 >
-                  {currentUserProps.fourHundred}
+                  {profileDetails.fourHundred}
                 </Text>
               </View>
             </View>
@@ -321,7 +322,7 @@ useEffect(() => {
             <View>
 
               <Text style={styles.nameText}>
-                {currentUserProps.pilotFirstName}
+                {profileDetails.pilotFirstName}
 
                 {"\n"}
                 {profileDetails.pilotLastName}

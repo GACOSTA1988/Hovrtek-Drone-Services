@@ -79,9 +79,14 @@ function ClientProfileScreen(props, { getClientProfiles }) {
             ) : (
               <TouchableOpacity
                 style={styles.saveButton}
-                onPress={() => props.navigation.pop()}
+                onPress={() =>
+                  props.navigation.navigate("ChatScreen",
+                  {
+                    ...profileDetails
+                  }
+                )}
               >
-                <Text style={styles.saveText}>Back to job</Text>
+                <Text style={styles.saveText}>Chat</Text>
               </TouchableOpacity>
             )}
             </View>

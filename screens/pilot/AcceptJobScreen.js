@@ -12,12 +12,11 @@ function AcceptJobScreen(props, { acceptJob }) {
   if (firebase.auth().currentUser) {
     pilotID = firebase.auth().currentUser.uid;
   }
-  console.log("pilotID in acceptJob", pilotID);
 
   const accept = (e) => {
     e.preventDefault();
     props.acceptJob(pilotID, jobDetails.key);
-    navigation.navigate("JobListScreen");
+    navigation.navigate("MyJobsScreen");
   }
 
   return (

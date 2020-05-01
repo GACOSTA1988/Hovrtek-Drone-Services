@@ -166,3 +166,29 @@ export function editClientProfile(firstName, lastName, location, bio, industry, 
     firebase.database().ref(`/clientProfiles`).child(key).update({ firstName, lastName, location, bio, industry, paymentType });
   };
 }
+
+
+// Messages functions
+
+export function getMessages() {
+  return (dispatch) => {
+    firebase
+      .database()
+      .ref("/messages")
+      .on("value", (snapshot) => {
+        dispatch({
+          type: "MESSAGES_FETCH",
+          payload: snapshot.val(),
+        });
+      });
+  };
+}
+
+export function postMessages(userOneID, userTwoID, timestamp, body) {
+  return (dispatch) => {
+    firebase
+      .database()
+      .ref("/messages")
+      .push({ userOneID, userTwoID, timestamp, body });
+  };
+}

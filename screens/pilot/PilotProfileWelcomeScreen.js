@@ -155,7 +155,7 @@ function PilotProfileWelcomeScreen(
                 source={princePic01}
                 style={styles.backgroundImageStartingPage}
               />
-              {user && profileDetails && user.photoURL === "P" ? (
+              {user.photoURL === "P" ? (
                 <View>
                   <Text style={styles.welcomeText}>
                   Welcome to Hovrtek

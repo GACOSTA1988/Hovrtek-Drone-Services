@@ -38,7 +38,6 @@ function MyJobsScreen(props, { getProjects }) {
       listOfMyProjects.push(project);
     }
   });
-  console.log("this is the list of user's projects", listOfMyProjects);
 
   return (
     <View style={styles.projectListWrapper}>

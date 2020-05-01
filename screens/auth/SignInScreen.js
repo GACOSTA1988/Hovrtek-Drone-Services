@@ -62,24 +62,26 @@ function SignInScreen({ navigation }) {
       <TouchableOpacity>
         <Text style={styles.text}>Welcome Back</Text>
         <TextInput
-          placeholder=" Email"
+          placeholder="Email"
           placeholderTextColor="grey"
           value={email}
           onChangeText={setEmail}
           style={styles.input}
         />
         <TextInput
-          placeholder=" Password"
+          placeholder="Password"
           placeholderTextColor="grey"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
           style={styles.input}
         />
-        <Button title="Sign in" onPress={signIn} style={styles.text} />
       </TouchableOpacity>
+        <TouchableOpacity style={styles.signIn} onPress={signIn}>
+          <Text style={styles.text}>SIGN IN</Text>
+        </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.push("SignUp")}>
-        <Text style={styles.buttonText}>Create an Account</Text>
+        <Text style={styles.buttonText}>or Create an Account</Text>
       </TouchableOpacity>
     </ImageBackground>
   );
@@ -96,6 +98,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     color: "grey",
+    fontSize: 17
   },
 
   input: {
@@ -103,14 +106,15 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 1,
     marginTop: 8,
-    width: 200,
+    width: 250,
     color: "white",
+    padding: 10
   },
 
   text: {
     textAlign: "center",
     color: "white",
-    fontSize: 15,
+    fontSize: 17
   },
   hovrtekLogo: {
     height: 50,
@@ -135,6 +139,15 @@ const styles = StyleSheet.create({
     textAlign: "left",
     margin: 10,
   },
+
+  signIn: {
+    backgroundColor: "#3E90D0",
+    width: 250,
+    marginTop: 10,
+    marginBottom: 15,
+    padding: 5,
+    borderRadius: 3
+  }
 });
 
 export default SignInScreen;

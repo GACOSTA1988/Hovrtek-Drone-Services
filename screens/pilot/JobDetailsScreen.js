@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet} from "react-native";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { getClientProfiles } from "../../actions/index";
+import _ from "lodash";
 
-function JobDetailsScreen(props) {
+function JobDetailsScreen(props, { getClientProfiles }) {
 
   const jobDetails = props.route.params;
-  console.log(jobDetails);
+
+  useEffect(() => {
+    props.getClientProfiles();
+  }, []);
+
+  let client = null;
+
+  if (props.listOfClientProfiles.find((x) => x.userID === jobDetails.clientID)) {
+    client = props.listOfClientProfiles.find((x) => x.userID === jobDetails.clientID)
+  }
+
   return(
     <View style={styles.container}>
       <Text style={styles.ProjectText}>Project Details</Text>
@@ -17,23 +29,35 @@ function JobDetailsScreen(props) {
       <Text style={styles.DetailsText}>
         Project Recording: {jobDetails.recording}
       </Text>
+      <TouchableOpacity
+        onPress={() =>
+          props.navigation.navigate(
+            "ClientProfileScreen",
+            {
+              ...client
+            }
+          )
+        }
+      >
+        <Text style={styles.DetailsText}>
+          Client: {client.firstName}{" "}{client.lastName}
+        </Text>
+      </TouchableOpacity>
 
       <View>
         {!jobDetails.pilotID ? (
           <TouchableOpacity
-          style={styles.back}
-          onPress={() =>
-            props.navigation.navigate(
-              "AcceptJobScreen",
-              {
-                ...jobDetails
-              }
-            )
-          }
-
+            style={styles.back}
+            onPress={() =>
+              props.navigation.navigate(
+                "AcceptJobScreen",
+                {
+                  ...jobDetails
+                }
+              )
+            }
           >
-          <Text style={styles.backText}>Accept Job</Text>
-
+            <Text style={styles.backText}>Accept Job</Text>
           </TouchableOpacity>
 
         ) : (
@@ -47,7 +71,6 @@ function JobDetailsScreen(props) {
 
         </TouchableOpacity>
       </View>
-
     </View>
   );
 }
@@ -89,4 +112,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default JobDetailsScreen;
+function mapStateToProps(state) {
+  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  return {
+    listOfClientProfiles
+  };
+}
+
+export default connect(mapStateToProps, { getClientProfiles })(JobDetailsScreen);

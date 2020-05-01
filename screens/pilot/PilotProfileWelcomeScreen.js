@@ -29,71 +29,40 @@ function PilotProfileWelcomeScreen(
 
   // getCurrentUserProps();
 
+  let passedProps = props.route.params;
+
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
 
-  let userID = null;
+  let user = null;
   if (firebase.auth().currentUser) {
-    userID = firebase.auth().currentUser.uid;
+    user = firebase.auth().currentUser;
   }
 
-  const list = props.listOfProfiles;
-  let currentUserProps = list.find((x) => x.userID === userID);
+  const [currentUserProps, setCurrentUserProps] = useState(null);
 
-  if (currentUserProps) {
+  let profile = null;
+
+  if (user.photoURL === "P") {
+    profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
+    try {
+      if (!currentUserProps && profile) {
+        setCurrentUserProps(profile);
+        passedProps = profile;
+      }
+    } catch (error) {
+      console.log("ERROR: ", error.message);
+      Alert.alert("User page unavailable");
+      props.navigation.navigate("JobListScreen");
+    }
+  } else if (passedProps & currentUserProps != passedProps) {
+    setCurrentUserProps(passedProps);
   }
-  let pilotLocationPlaceHolder = "";
-  let personalBioPlaceHolder = "";
-  let yearsOfExperiencePlaceHolder = "";
-  let faaLicenseExpPlaceHolder = "";
-  let insuredStatusPlaceHolder = "";
-  let travelStatusPlaceHolder = "";
-  let droneTypePlaceHolder = "";
-  let airMapPlaceHolder = "";
-  let fourHundredPlaceHolder = "";
-  let profileCompletePlaceHolder = "";
-  let profileImageUrlPlaceHolder = "";
-  let isComplete = "";
-  let url = "";
-
-  if (currentUserProps) {
-    url = currentUserProps.profileImageUrl;
-    pilotLocationPlaceHolder = currentUserProps.pilotLocation;
-    personalBioPlaceHolder = currentUserProps.personalBio;
-    yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
-    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
-    insuredStatusPlaceHolder = currentUserProps.insuredStatus;
-    travelStatusPlaceHolder = currentUserProps.travelStatus;
-    droneTypePlaceHolder = currentUserProps.droneType;
-    airMapPlaceHolder = currentUserProps.airMapPlace;
-    fourHundredPlaceHolder = currentUserProps.fourHundred;
-    profileCompletePlaceHolder = currentUserProps.profileCompletePlaceHolder;
-    isComplete = currentUserProps.profileComplete;
-    profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
-  }
-
-  const [profileImageUrl, setProfileImageUrl] = useState(
-    profileImageUrlPlaceHolder
-  );
-  const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
-  const [yearsOfExperience, setYearsOfExperience] = useState(
-    yearsOfExperiencePlaceHolder
-  );
-  const [faaLicenseExp, setFaaLicenseExp] = useState(faaLicenseExpPlaceHolder);
-  const [insuredStatus, setInsuredStatus] = useState(insuredStatusPlaceHolder);
-  const [travelStatus, setTravelStatus] = useState(travelStatusPlaceHolder);
-  const [droneType, setDroneType] = useState(droneTypePlaceHolder);
-  const [airMap, setAirMap] = useState(airMapPlaceHolder);
-  const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
-  const [profileComplete, setProfileComplete] = useState(
-    profileCompletePlaceHolder
-  );
 
   const submit = (e) => {
     navigation.navigate("PilotProfileSetupPageOneScreen");
   };
-  console.log(url);
 
   return (
     <View style={styles.container}>
@@ -474,7 +443,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const listOfProfiles = _.map(
+  const listOfPilotProfiles = _.map(
     state.pilotProfilesList.pilotProfilesList,
     (val, key) => {
       return {
@@ -484,7 +453,7 @@ function mapStateToProps(state) {
     }
   );
   return {
-    listOfProfiles,
+    listOfPilotProfiles
   };
 }
 

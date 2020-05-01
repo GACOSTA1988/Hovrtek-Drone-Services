@@ -45,7 +45,7 @@ export default class ProfileImageUploader extends React.Component {
                     Alert.alert("Successfully Uploaded to the Hovrtek Database!");
                 })
                 .catch((error) => {
-                    Alert.alert(error);
+                    Alert.alert(error.message);
                 });
             this.setState({ thumbnail: result.uri });
         }

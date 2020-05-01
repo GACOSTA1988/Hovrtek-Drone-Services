@@ -29,6 +29,13 @@ function JobListScreen(props, { getProjects, getClientProfiles }) {
     props.getClientProfiles();
   }, []);
 
+  const availableProjects = [];
+  props.listOfProjects.forEach((project) => {
+    if (!project.pilotID) {
+      availableProjects.push(project);
+    }
+  })
+
   return (
     <View style={styles.projectListWrapper}>
       <ScrollView>
@@ -36,7 +43,7 @@ function JobListScreen(props, { getProjects, getClientProfiles }) {
           <TouchableOpacity>
             <FlatList
               style={{ width: "100%" }}
-              data={props.listOfProjects}
+              data={availableProjects}
               // showsVerticalScrollIndicator={true}
               keyExtractor={item => item.key}
               renderItem={({ item }) => {
@@ -76,26 +83,6 @@ function JobListScreen(props, { getProjects, getClientProfiles }) {
                           </Text>
                         ) : (
                           <Text>Posted by:</Text>
-                        )}
-                        { item.pilotID ? (
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                          No Longer Available
-                          </Text>
-                        ) : (
-                          <TouchableHighlight
-                          onPress={() =>
-                            props.navigation.navigate(
-                              "AcceptJobScreen",
-                              {
-                                ...item
-                              }
-                            )
-                          }
-                          >
-                            <Text style={{ color: "white", fontWeight: "800" }}>
-                          Accept Job
-                            </Text>
-                          </TouchableHighlight>
                         )}
                       </View>
                     </TouchableHighlight>

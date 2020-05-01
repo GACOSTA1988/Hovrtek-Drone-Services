@@ -10,7 +10,7 @@ import {
   ScrollView
 } from "react-native";
 import { connect } from "react-redux";
-import { getProjects, deleteProject, getClientProfiles } from "../../actions/index";
+import { getProjects, deleteProject, getPilotProfiles } from "../../actions/index";
 import _ from "lodash";
 import {
   Ionicons,
@@ -21,20 +21,24 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import * as firebase from 'firebase';
 
-function ProjectListScreen(props, { getProjects, getClientProfiles }) {
+function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
   useEffect(() => {
     props.getProjects();
-    props.getClientProfiles();
+    props.getPilotProfiles();
   }, []);
 
   let user = '';
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
-    if (props.listOfClientProfiles.find((x) => x.userID === user.uid)) {
-      console.log("this should bring up current user: ", props.listOfClientProfiles.find((x) => x.userID === user.uid).firstName);
-    }
   }
+
+  const listOfMyProjects = [];
+  props.listOfProjects.forEach((project) => {
+    if (project.clientID === user.uid) {
+      listOfMyProjects.push(project);
+    }
+  });
 
   return (
     <View style={styles.projectListWrapper}>
@@ -47,7 +51,7 @@ function ProjectListScreen(props, { getProjects, getClientProfiles }) {
           <TouchableOpacity>
             <FlatList
               style={{ width: "100%" }}
-              data={props.listOfProjects}
+              data={listOfMyProjects}
               // showsVerticalScrollIndicator={true}
               keyExtractor={item => item.key}
               renderItem={({ item }) => {
@@ -81,21 +85,12 @@ function ProjectListScreen(props, { getProjects, getClientProfiles }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        { props.listOfClientProfiles.find((x) => x.userID === item.clientID) ? (
+                        { (item.pilotID && props.listOfPilotProfiles.find((x) => x.userID === item.pilotID)) ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).firstName }{" "}{ props.listOfClientProfiles.find((x) => x.userID === item.clientID).lastName }
+                          Your pilot: { props.listOfPilotProfiles.find((x) => x.userID === item.pilotID).pilotFirstName }{" "}{ props.listOfPilotProfiles.find((x) => x.userID === item.pilotID).pilotLastName }
                           </Text>
                         ) : (
-                          <Text>Posted by:</Text>
-                        )}
-                        { item.pilotID ? (
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                          No Longer Available
-                          </Text>
-                        ) : (
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                          Available
-                          </Text>
+                          <Text style={{ color: "white", fontWeight: "800" }}>Pending pilot</Text>
                         )}
                       </View>
                     </TouchableHighlight>
@@ -173,7 +168,7 @@ function mapStateToProps(state) {
       key: key
     };
   });
-  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
+  const listOfPilotProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
     return {
       ...val,
       key: key
@@ -181,10 +176,10 @@ function mapStateToProps(state) {
   });
   return {
     listOfProjects,
-    listOfClientProfiles
+    listOfPilotProfiles
   };
 }
 
-export default connect(mapStateToProps, { getProjects, deleteProject, getClientProfiles })(
+export default connect(mapStateToProps, { getProjects, deleteProject, getPilotProfiles })(
   ProjectListScreen
 );

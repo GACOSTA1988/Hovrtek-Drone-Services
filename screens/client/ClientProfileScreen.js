@@ -27,7 +27,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
     // if user is client, get client profile
     if (user.photoURL === "C") {
       try {
-        if (!profileDetails) {
+        if (!profileDetails && profile) {
           setProfileDetails(profile);
           passedProps = profile;
         } else if (passedProps && profileDetails != passedProps) {
@@ -77,7 +77,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
           <Image source={personIcon} style={styles.profileImage}/>
           <Text style={styles.name}>{profileDetails.firstName}{" "}{profileDetails.lastName}</Text>
           <View style={styles.info}>
-            <Text style={{fontSize: 20}}>Location: This client is in {profileDetails.location}</Text>
+            <Text style={{fontSize: 20}}>Location:  {profileDetails.location}</Text>
             <Text style={{fontSize: 20, marginTop: 10}}>Bio: </Text>
             <Text style={{fontSize: 15}}>{profileDetails.bio}</Text>
             { (profileDetails.industry != "Set industry") ? (

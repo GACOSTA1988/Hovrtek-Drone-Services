@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native";
 
 function ProjectDetailsScreen(props) {
   const projectDetails = props.route.params;
@@ -14,6 +14,10 @@ function ProjectDetailsScreen(props) {
       <Text style={styles.DetailsText}>
         Project Recording: {projectDetails.recording}
       </Text>
+      <TouchableOpacity
+        onPress={() => props.navigation.pop()}>
+        <Text>Back to projects</Text>
+      </TouchableOpacity>
     </View>
   );
 }

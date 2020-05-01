@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { PassSetLocation, PassLocationState } from '../screens/client/NewProjectScreen';
+import { PassSetLocation, PassLocationState } from '../screens/client/NewProjectScreenOne';
 import { useNavigation } from "@react-navigation/native";
 
 const ClientLocationPicker = () => {

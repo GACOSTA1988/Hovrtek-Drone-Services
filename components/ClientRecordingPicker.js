@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { PassSetRecording, PassRecordingState } from '../screens/client/NewProjectScreen';
+import { PassSetRecording, PassRecordingState } from '../screens/client/NewProjectScreenOne';
 import { useNavigation } from "@react-navigation/native";
 
 const ClientRecordingPicker = () => {
@@ -77,7 +77,7 @@ const ClientRecordingPicker = () => {
                         onPress={() => openModal()}
                         title={"Open modal"}
                     >
-                        <Text style={styles.buttonText}>Please Set Location
+                        <Text style={styles.buttonText}>Please Set Recording
                         </Text>
                     </TouchableOpacity>)
             }

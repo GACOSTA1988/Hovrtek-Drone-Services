@@ -35,3 +35,7 @@
 
 
 * open keyboard automatically when inputting work experience on pilot sign up form
+
+* Change Landing page on Client side to be CREATE NEW PROJECT instead of Projects. 
+* Make new Landing page for New Projects saying something like "WELCOME, MAKE A PROJECT"
+* Remove Account, Services and Location from CLIENT SIDE NAV STACK

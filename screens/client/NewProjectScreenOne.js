@@ -31,7 +31,7 @@ export const PassSetLight = React.createContext();
 export const PassLightState = React.createContext();
 
 
-function NewProjectScreen(props, { postProjects }) {
+function NewProjectScreenOne(props, { postProjects }) {
   const navigation = useNavigation();
   let clientID = null;
   if (firebase.auth().currentUser) {
@@ -125,6 +125,7 @@ function NewProjectScreen(props, { postProjects }) {
           <TouchableOpacity onPress={submit}>
             <Text style={styles.submitButton}>Submit Form</Text>
           </TouchableOpacity>
+          <Button title="Back" onPress={() => props.navigation.goBack()} />
           {/* <Button style={styles.submitButton} title="Submit" onPress={submit} /> */}
         </TouchableOpacity>
         <Text style={styles.dummyText}>Dummy Text</Text>
@@ -196,4 +197,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, { postProjects })(NewProjectScreen);
+export default connect(null, { postProjects })(NewProjectScreenOne);

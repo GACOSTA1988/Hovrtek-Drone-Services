@@ -16,7 +16,7 @@ const NewProjectScreenThree = (props) => {
             <View style={styles.saveAndContinueWrapper}>
                 <TouchableOpacity
                     style={styles.backButton}
-                    onPress={() => props.navigation.navigate("NewProjectScreen")}
+                    onPress={() => props.navigation.navigate("NewProjectScreenOne")}
                     title={"Save and Continue"}
                 >
                     <Text style={styles.saveAndContinueText}>Pretend to Complete Project, but will just take you back to New Project Form</Text>

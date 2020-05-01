@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20
   },
-
   ProjectText: {
     fontSize: 30,
     color: "darkblue",
@@ -88,7 +87,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10
   },
-
   DetailsText: {
     marginBottom: 50,
     textAlign: "center",

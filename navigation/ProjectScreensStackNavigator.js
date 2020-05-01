@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ProjectListScreen from "../screens/client/ProjectListScreen";
 import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import EditProjectScreen from "../screens/client/EditProjectScreen";
+import PilotProfileWelcomeScreen from '../screens/pilot/PilotProfileWelcomeScreen';
 
 const ProjectScreensStack = createStackNavigator();
 
@@ -20,6 +21,10 @@ function ProjectScreensStackNavigator() {
       <ProjectScreensStack.Screen
         name="EditProjectScreen"
         component={EditProjectScreen}
+      />
+      <ProjectScreensStack.Screen
+        name="PilotProfileWelcomeScreen"
+        component={PilotProfileWelcomeScreen}
       />
     </ProjectScreensStack.Navigator>
   );

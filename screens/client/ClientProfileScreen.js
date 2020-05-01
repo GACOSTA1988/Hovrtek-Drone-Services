@@ -78,7 +78,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
             </TouchableOpacity>
             ) : (
               <TouchableOpacity
-                style={styles.saveButton}
+                style={styles.chatButton}
                 onPress={() =>
                   props.navigation.navigate("ChatScreen",
                   {
@@ -86,7 +86,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
                   }
                 )}
               >
-                <Text style={styles.saveText}>Chat</Text>
+                <Text style={styles.chatText}>Chat</Text>
               </TouchableOpacity>
             )}
             </View>
@@ -157,12 +157,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
   },
-  saveText: {
+  chatText: {
     fontWeight: "bold",
     fontSize: 15,
     color: "white"
   },
-  saveButton: {
+  chatButton: {
     position: 'absolute',
     right: 0,
     backgroundColor: "#092455",

@@ -35,29 +35,29 @@ function PilotProfileWelcomeScreen(
     props.getPilotProfiles();
   }, []);
 
+
+  const [profileDetails, setCurrentUserProps] = useState(null);
+
   let user = null;
+  let profile = null;
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
-  }
-
-  const [currentUserProps, setCurrentUserProps] = useState(null);
-
-  let profile = null;
-
-  if (user.photoURL === "P") {
-    profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
-    try {
-      if (!currentUserProps && profile) {
-        setCurrentUserProps(profile);
-        passedProps = profile;
+    if (user.photoURL === "P") {
+      profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
+      try {
+        if ((!profileDetails && profile) || (profileDetails && profileDetails != profile)) {
+          setCurrentUserProps(profile);
+          console.log("profileDetails", profileDetails);
+          passedProps = profile;
+        }
+      } catch (error) {
+        console.log("ERROR: ", error.message);
+        Alert.alert("User page unavailable");
+        props.navigation.navigate("JobListScreen");
       }
-    } catch (error) {
-      console.log("ERROR: ", error.message);
-      Alert.alert("User page unavailable");
-      props.navigation.navigate("JobListScreen");
+    } else if (passedProps && profileDetails != passedProps) {
+      setCurrentUserProps(passedProps);
     }
-  } else if (passedProps & currentUserProps != passedProps) {
-    setCurrentUserProps(passedProps);
   }
 
   const submit = (e) => {
@@ -66,62 +66,51 @@ function PilotProfileWelcomeScreen(
 
   return (
     <View style={styles.container}>
-      {currentUserProps && currentUserProps.profileComplete === "Yes" ? (
-        <ScrollView style={{ width: "100%" }}>
-          <Image source={princePic01} style={styles.backgroundImage} />
-          <Image
-            style={{
-              height: 100,
-              width: 100,
-              borderRadius: 90,
-              alignItems: "center",
-              marginTop: "17%",
-              marginLeft: 20,
-              elevation: 8,
-              borderWidth: 4,
-              borderColor: "#092455",
-            }}
-            source={{
-              uri: currentUserProps.profileImageUrl,
-            }}
-          />
-
-          <View style={{ flexDirection: "row", display: "flex" }}>
-            <Text style={styles.nameText}>
-              {currentUserProps.pilotFirstName} {currentUserProps.pilotLastName}
-            </Text>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.push("PilotProfilePageSetupPageOneScreen")
-              }
-            >
-              <AntDesign
-                name="edit"
-                size={30}
-                color="darkblue"
-                style={{ marginLeft: 40, marginTop: 25 }}
-              />
-            </TouchableOpacity>
-          </View>
-          {currentUserProps ? (
-            <View>
-              <Text style={styles.locationText}>
-                Location: {currentUserProps.pilotLocation}
-              </Text>
-
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: "black",
-                  fontWeight: "500",
-                  marginLeft: "2%",
-                  marginTop: "4%",
+      {user && profileDetails ? (
+        <View>
+          {profileDetails.profileComplete === "Yes" ? (
+            <ScrollView style={{ width: "100%" }}>
+              <Image source={princePic01} style={styles.backgroundImage} />
+              <Image
+                style={styles.profilePic}
+                source={{
+                  uri: profileDetails.profileImageUrl,
                 }}
-              >
-                Bio:
-              </Text>
-              <Text
-                style={{
+              />
+              <View style={{ flexDirection: "row", display: "flex" }}>
+                <Text style={styles.nameText}>
+                  {profileDetails.pilotFirstName} {profileDetails.pilotLastName}
+                </Text>
+                {user.photoURL === "P" ? (
+                  <TouchableOpacity
+                  onPress={() =>
+                    navigation.push("PilotProfilePageSetupPageOneScreen")
+                  }
+                  >
+                  <AntDesign
+                    name="edit"
+                    size={30}
+                    color="darkblue"
+                    style={{ marginLeft: 40, marginTop: 25 }}
+                  />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.chatButton}
+                    onPress={() =>
+                      props.navigation.navigate("ChatScreen",
+                      {
+                        ...profileDetails
+                      }
+                    )}
+                  >
+                    <Text style={styles.chatText}>Chat</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+              <Text style={styles.locationText}>Location: {profileDetails.pilotLocation}</Text>
+              <Text style={styles.specTitle}>Bio:</Text>
+              <Text style={{
                   fontSize: 15,
                   color: "black",
                   // fontWeight: "450",
@@ -129,251 +118,89 @@ function PilotProfileWelcomeScreen(
                   marginTop: "1%",
                 }}
               >
-                {currentUserProps.personalBio}
+                {profileDetails.personalBio}
               </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "450",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  Drone Model:
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "200",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  {currentUserProps.droneType}
-                </Text>
+              <View style={styles.specView}>
+                <Text style={styles.specTitle}>Drone Model:</Text>
+                <Text style={styles.specs}>{profileDetails.droneType}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "450",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  Year Of Experience:
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "200",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  {currentUserProps.yearsOfExperience}
-                </Text>
+              <View style={styles.specView}>
+                <Text style={styles.specTitle}>Years Of Experience:</Text>
+                <Text style={styles.specs}>{profileDetails.yearsOfExperience}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "450",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  License Expiration Date:
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "200",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  {currentUserProps.faaLicenseExp}
-                </Text>
+              <View style={styles.specView}>
+                <Text style={styles.specTitle}>License Expiration Date:</Text>
+                <Text style={styles.specs}>{profileDetails.faaLicenseExp}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "450",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  Willing To Travel:
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "200",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  {currentUserProps.travelStatus}
-                </Text>
+              <View style={styles.specView}>
+                <Text style={styles.specTitle}>Willing To Travel:</Text>
+                <Text style={styles.specs}>{profileDetails.travelStatus}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "450",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  Insured:
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "200",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  {currentUserProps.insuredStatus}
-                </Text>
+              <View style={styles.specView}>
+                <Text style={styles.specTitle}>Insured:</Text>
+                <Text style={styles.specs}>{profileDetails.insuredStatus}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "450",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  Experience with Air Map:
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "200",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  {currentUserProps.airMap}
-                </Text>
+              <View style={styles.specView}>
+                <Text style={styles.specTitle}>Experience with Air Map:</Text>
+                <Text style={styles.specs}>{profileDetails.airMap}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "450",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  Able to Fly over 400 FT:
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "black",
-                    fontWeight: "200",
-                    marginLeft: "2%",
-                    marginTop: 8,
-                  }}
-                >
-                  {currentUserProps.fourHundred}
-                </Text>
+              <View style={styles.specView}>
+                <Text style={styles.specTitle}>Able to Fly over 400 FT:</Text>
+                <Text style={styles.specs}>{profileDetails.fourHundred}</Text>
               </View>
-            </View>
+            </ScrollView>
           ) : (
-            <Text></Text>
+            <ScrollView style={{ width: "100%" }}>
+              <Image
+                source={princePic01}
+                style={styles.backgroundImageStartingPage}
+              />
+              {user && profileDetails && user.photoURL === "P" ? (
+                <View>
+                  <Text style={styles.welcomeText}>
+                  Welcome to Hovrtek
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      display: "flex",
+                      justifyContent: "center",
+                      marginBottom: 40
+                    }}
+                    >
+                    <Text style={styles.nameText}>
+                    {profileDetails.pilotFirstName}{" "}{profileDetails.pilotLastName}
+                    </Text>
+                  </View>
+                  <Button
+                    title="Start Pilot Profile"
+                    onPress={() =>
+                      props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
+                    }
+                  />
+                </View>
+              ) : (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginBottom: 40,
+                  }}
+                  >
+                  <Text style={styles.nameText}>
+                  {profileDetails.pilotFirstName}{" "}{profileDetails.pilotLastName}
+                  </Text>
+                  <Text style={styles.welcomeText}>
+                  This pilot has not created their profile yet
+                  </Text>
+                </View>
+              )}
+            </ScrollView>
           )}
-        </ScrollView>
+        </View>
       ) : (
-        <ScrollView style={{ width: "100%" }}>
-          <Image
-            source={princePic01}
-            style={styles.backgroundImageStartingPage}
-          />
-
-          <Text style={{ marginTop: "40%", textAlign: "center", fontSize: 30 }}>
-            Welcome to Hovrtek
-          </Text>
-          {currentUserProps ? (
-            <View
-              style={{
-                flexDirection: "row",
-                display: "flex",
-                justifyContent: "center",
-                marginBottom: 40,
-              }}
-            >
-              <Text style={styles.nameText}>
-                {currentUserProps.pilotFirstName}{" "}
-                {currentUserProps.pilotLastName}
-              </Text>
-            </View>
-          ) : (
-            <Text style={styles.h2}>Location:</Text>
-          )}
-
-          <Button
-            title="Start Pilot Profile"
-            onPress={() =>
-              props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
-            }
-          />
-        </ScrollView>
+        <View></View>
       )}
     </View>
   );
@@ -393,7 +220,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5,
   },
-
+  welcomeText: {
+    marginTop: "40%",
+    textAlign: "center",
+    fontSize: 30
+  },
   nameText: {
     marginTop: "5%",
     fontSize: 30,
@@ -440,6 +271,48 @@ const styles = StyleSheet.create({
     height: "40%",
     position: "absolute",
   },
+  profilePic: {
+    height: 100,
+    width: 100,
+    borderRadius: 90,
+    alignItems: "center",
+    marginTop: "17%",
+    marginLeft: 20,
+    elevation: 8,
+    borderWidth: 4,
+    borderColor: "#092455",
+  },
+  specs: {
+    fontSize: 20,
+    color: "black",
+    fontWeight: "200",
+    marginLeft: "2%",
+    marginTop: 8
+  },
+  specTitle: {
+    fontSize: 20,
+    color: "black",
+    fontWeight: "400",
+    marginLeft: "2%",
+    marginTop: 8
+  },
+  specView: {
+    flexDirection: "row",
+    display: "flex"
+  },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white"
+  },
+  chatButton: {
+    position: 'absolute',
+    right: 0,
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5
+  }
+
 });
 
 function mapStateToProps(state) {

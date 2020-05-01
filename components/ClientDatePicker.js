@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import { View, Button, Platform, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from 'moment';
-import { PassSetDate } from '../screens/client/NewProjectScreen'
-import { PassDateState } from '../screens/client/NewProjectScreen'
+import { PassSetDate } from '../screens/client/NewProjectScreenOne'
+import { PassDateState } from '../screens/client/NewProjectScreenOne'
 const ClientDatePicker = () => {
 
 

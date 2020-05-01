@@ -12,6 +12,7 @@ import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postClientProfiles } from "../../actions/index";
 import { connect } from "react-redux";
+import { ScrollView } from "react-native-gesture-handler";
 
 function ClientSignUpScreen (props) {
   const navigation = props.navigation;
@@ -56,6 +57,7 @@ function ClientSignUpScreen (props) {
 
   return (
     <View style={styles.wrapper}>
+      <ScrollView>
       <Text style={styles.text}>Create your client account</Text>
       <TouchableOpacity style={styles.textWrapper}>
 
@@ -102,9 +104,9 @@ function ClientSignUpScreen (props) {
           onChangeText={setPassword}
           style={styles.input}
         />
-
         <Button title="Sign up" onPress={signUp} style={{ fontWeight: 900}} />
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }

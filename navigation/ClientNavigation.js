@@ -21,7 +21,7 @@ const ClientNavigation = () => {
         name="Home"
         component={ProjectsNewProjectTabNavigation}
       />
-      <ClientDrawer.Screen
+      {/* <ClientDrawer.Screen
         name='AccountScreen'
         component={AccountScreen}
         options={{ title: 'Account' }}
@@ -30,12 +30,12 @@ const ClientNavigation = () => {
         name='ServicesScreen'
         component={ServicesScreen}
         options={{ title: 'Services' }}
-      />
-      <ClientDrawer.Screen
+      /> */}
+      {/* <ClientDrawer.Screen
         name='LocationScreen'
         component={LocationScreen}
         options={{ title: 'Location' }}
-      />
+      /> */}
       <ClientDrawer.Screen
         name='AboutScreen'
         component={AboutScreen}

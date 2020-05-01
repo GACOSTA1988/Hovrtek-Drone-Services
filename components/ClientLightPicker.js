@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity } from 'react-native';
-import { PassSetLight, PassLightState } from '../screens/client/NewProjectScreen';
+import { PassSetLight, PassLightState } from '../screens/client/NewProjectScreenOne';
 
 const ClientLightPicker = () => {
 

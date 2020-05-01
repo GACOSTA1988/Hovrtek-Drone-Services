@@ -34,7 +34,7 @@
 * need to handle exceptions related to users not existing on projects they already made, etc.
 
 
-* open keyboard automatically when inputting work experience on pilot sign up form
+* Open keyboard automatically when inputting work experience on pilot sign up form
 
 * Change Landing page on Client side to be CREATE NEW PROJECT instead of Projects. 
 * Make new Landing page for New Projects saying something like "WELCOME, MAKE A PROJECT"

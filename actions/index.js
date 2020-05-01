@@ -152,18 +152,56 @@ export function getClientProfiles() {
   };
 }
 
-export function postClientProfiles(firstName, lastName, location, email, bio, industry, paymentType, userID) {
+export function postClientProfiles(
+  firstName,
+  lastName,
+  location,
+  email,
+  bio,
+  industry,
+  paymentType,
+  profileImageUrl,
+  userID
+) {
   return (dispatch) => {
-    firebase
-      .database()
-      .ref("/clientProfiles")
-      .push({ firstName, lastName, location, email, bio, industry, paymentType, userID });
+    firebase.database().ref("/clientProfiles").push({
+      firstName,
+      lastName,
+      location,
+      email,
+      bio,
+      industry,
+      paymentType,
+      userID,
+      profileImageUrl,
+    });
   };
 }
 
-export function editClientProfile(firstName, lastName, location, bio, industry, paymentType, key) {
+export function editClientProfile(
+  firstName,
+  lastName,
+  location,
+  bio,
+  industry,
+  paymentType,
+  profileImageUrl,
+  key
+) {
   return (dispatch) => {
-    firebase.database().ref(`/clientProfiles`).child(key).update({ firstName, lastName, location, bio, industry, paymentType });
+    firebase
+      .database()
+      .ref(`/clientProfiles`)
+      .child(key)
+      .update({
+        firstName,
+        lastName,
+        location,
+        bio,
+        industry,
+        paymentType,
+        profileImageUrl,
+      });
   };
 }
 

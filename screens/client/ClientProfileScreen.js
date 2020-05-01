@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button, Alert, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Alert,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import personIcon from '../../assets/personIcon.png';
-import princePic01 from '../../assets/princePic01.jpg';
-import * as firebase from 'firebase';
+import personIcon from "../../assets/personIcon.png";
+import princePic01 from "../../assets/princePic01.jpg";
+import * as firebase from "firebase";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { getClientProfiles } from "../../actions/index";
 
 function ClientProfileScreen(props, { getClientProfiles }) {
-
   useEffect(() => {
     props.getClientProfiles();
   }, []);
@@ -38,7 +45,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
         Alert.alert("User page unavailable");
         props.navigation.navigate("ProjectListScreen");
       }
-    // if user is pilot sent from JobsList, get client associated with that job's profile
+      // if user is pilot sent from JobsList, get client associated with that job's profile
     } else if (props.route.params && !profileDetails) {
       try {
         setProfileDetails(props.route.params);
@@ -59,23 +66,20 @@ function ClientProfileScreen(props, { getClientProfiles }) {
 
   return (
     <View style={styles.container}>
-      { user && profileDetails ? (
+      {user && profileDetails ? (
         <View>
-          <Image source={princePic01} style={styles.backgroundImage}/>
+          <Image source={princePic01} style={styles.backgroundImage} />
           <View style={styles.editIcon}>
-          { profileDetails.userID === user.uid ? (
-            <TouchableOpacity
-              onPress={() =>
-                props.navigation.navigate("ClientEditProfileScreen",
-                {
-                  ...profileDetails
+            {profileDetails.userID === user.uid ? (
+              <TouchableOpacity
+                onPress={() =>
+                  props.navigation.navigate("ClientEditProfileScreen", {
+                    ...profileDetails,
+                  })
                 }
-              )}>
-              <AntDesign
-                name="edit"
-                size={40}
-              />
-            </TouchableOpacity>
+              >
+                <AntDesign name="edit" size={40} />
+              </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 style={styles.chatButton}
@@ -89,22 +93,49 @@ function ClientProfileScreen(props, { getClientProfiles }) {
                 <Text style={styles.chatText}>Chat</Text>
               </TouchableOpacity>
             )}
-            </View>
-          <Image source={personIcon} style={styles.profileImage}/>
-          <Text style={styles.name}>{profileDetails.firstName}{" "}{profileDetails.lastName}</Text>
+          </View>
+          <Image
+            source={{
+              uri: profileDetails.profileImageUrl,
+            }}
+            style={{
+              height: 100,
+              width: 100,
+              borderRadius: 90,
+              alignItems: "center",
+              marginTop: "17%",
+              marginLeft: 20,
+              elevation: 8,
+              borderWidth: 4,
+              borderColor: "#092455",
+            }}
+          />
+          <Text style={styles.name}>
+            {profileDetails.firstName} {profileDetails.lastName}
+          </Text>
           <View style={styles.info}>
-            <Text style={{fontSize: 20}}>Location:  {profileDetails.location}</Text>
-            <Text style={{fontSize: 20, marginTop: 10}}>Bio: </Text>
-            <Text style={{fontSize: 15}}>{profileDetails.bio}</Text>
-            { (profileDetails.industry != "Set industry") ? (
-              <Text style={{fontSize: 20, marginTop: 10}}>Industry: {profileDetails.industry}</Text>
+            <Text style={{ fontSize: 20 }}>
+              Location: {profileDetails.location}
+            </Text>
+            <Text style={{ fontSize: 20, marginTop: 10 }}>Bio: </Text>
+            <Text style={{ fontSize: 15 }}>{profileDetails.bio}</Text>
+            {profileDetails.industry != "Set industry" ? (
+              <Text style={{ fontSize: 20, marginTop: 10 }}>
+                Industry: {profileDetails.industry}
+              </Text>
             ) : (
-              <Text style={{fontSize: 20, marginTop: 10}}>No industry details</Text>
+              <Text style={{ fontSize: 20, marginTop: 10 }}>
+                No industry details
+              </Text>
             )}
-            { (profileDetails.industry != "Set industry") ? (
-              <Text style={{fontSize: 20, marginTop: 10}}>Payment type: {profileDetails.paymentType}</Text>
+            {profileDetails.industry != "Set industry" ? (
+              <Text style={{ fontSize: 20, marginTop: 10 }}>
+                Payment type: {profileDetails.paymentType}
+              </Text>
             ) : (
-              <Text style={{fontSize: 20, marginTop: 10}}>No payment type details</Text>
+              <Text style={{ fontSize: 20, marginTop: 10 }}>
+                No payment type details
+              </Text>
             )}
           </View>
         </View>
@@ -112,18 +143,21 @@ function ClientProfileScreen(props, { getClientProfiles }) {
         <Text>User unavailable</Text>
       )}
     </View>
-  )
-};
+  );
+}
 
 function mapStateToProps(state) {
-  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
-    return {
-      ...val,
-      key: key
-    };
-  });
+  const listOfClientProfiles = _.map(
+    state.clientProfilesList.clientProfilesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    }
+  );
   return {
-    listOfClientProfiles
+    listOfClientProfiles,
   };
 }
 
@@ -136,40 +170,41 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 30,
     marginLeft: 20,
-    width: 300
+    width: 300,
   },
   profileImage: {
     width: 100,
     height: 100,
     marginTop: 60,
-    marginLeft: 20
+    marginLeft: 20,
   },
   info: {
     margin: 20,
   },
   backgroundImage: {
-    width: '100%',
+    width: "100%",
     height: 130,
-    position: 'absolute'
+    position: "absolute",
   },
   editIcon: {
     marginTop: 160,
-    position: 'absolute',
+    position: "absolute",
     right: 20,
   },
   chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white"
+    color: "white",
   },
   chatButton: {
     position: 'absolute',
     right: 0,
     backgroundColor: "#092455",
     padding: 7,
-    borderRadius: 5
-  }
-
+    borderRadius: 5,
+  },
 });
 
-export default connect(mapStateToProps, {getClientProfiles })(ClientProfileScreen);
+export default connect(mapStateToProps, { getClientProfiles })(
+  ClientProfileScreen
+);

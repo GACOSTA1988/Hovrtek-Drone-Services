@@ -1,8 +1,22 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
+import { getPilotProfiles } from "../../actions/index";
+import _ from "lodash";
 
-function ProjectDetailsScreen(props) {
+function ProjectDetailsScreen(props, { getPilotProfiles }) {
+
   const projectDetails = props.route.params;
+
+  useEffect(() => {
+    props.getPilotProfiles();
+  }, []);
+
+  let pilot = null;
+
+  if (props.listOfPilotProfiles.find((x) => x.userID === projectDetails.pilotID)) {
+    pilot = props.listOfPilotProfiles.find((x) => x.userID === projectDetails.pilotID)
+  }
 
   return (
     <View style={styles.container}>
@@ -14,6 +28,20 @@ function ProjectDetailsScreen(props) {
       <Text style={styles.DetailsText}>
         Project Recording: {projectDetails.recording}
       </Text>
+      <TouchableOpacity
+        onPress={() =>
+          props.navigation.navigate(
+            "PilotProfileWelcomeScreen",
+            {
+              ...pilot
+            }
+          )
+        }
+      >
+        <Text style={styles.DetailsText}>
+          Pilot: {pilot.pilotFirstName}{" "}{pilot.pilotLastName}
+        </Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => props.navigation.pop()}>
         <Text>Back to projects</Text>
@@ -27,7 +55,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20
   },
-
   ProjectText: {
     fontSize: 30,
     color: "darkblue",
@@ -35,7 +62,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10
   },
-
   DetailsText: {
     marginBottom: 50,
     textAlign: "center",
@@ -44,4 +70,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProjectDetailsScreen;
+function mapStateToProps(state) {
+  const listOfPilotProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  return {
+    listOfPilotProfiles
+  };
+}
+
+export default connect(mapStateToProps, { getPilotProfiles })(ProjectDetailsScreen);

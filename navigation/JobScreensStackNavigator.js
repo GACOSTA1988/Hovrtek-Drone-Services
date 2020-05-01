@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import JobListScreen from "../screens/pilot/JobListScreen";
 import JobDetailsScreen from "../screens/pilot/JobDetailsScreen";
 import AcceptJobScreen from "../screens/pilot/AcceptJobScreen";
+import ClientProfileScreen from '../screens/client/ClientProfileScreen';
 
 const JobScreensStack = createStackNavigator();
 
@@ -20,6 +21,10 @@ function JobScreensStackNavigator() {
       <JobScreensStack.Screen
         name="AcceptJobScreen"
         component={AcceptJobScreen}
+      />
+      <JobScreensStack.Screen
+        name="ClientProfileScreen"
+        component={ClientProfileScreen}
       />
     </JobScreensStack.Navigator>
   );

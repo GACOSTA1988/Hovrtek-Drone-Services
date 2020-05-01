@@ -39,13 +39,19 @@ function ClientProfileScreen(props, { getClientProfiles }) {
         props.navigation.navigate("ProjectListScreen");
       }
     // if user is pilot sent from JobsList, get client associated with that job's profile
-  } else if (props.route.params.clientID) {
-      setProfileDetails(props.listOfClientProfiles.find((x) => x.userID === props.route.params.clientID));
-    } else {
-      Alert.alert("User page unavailable");
-      props.navigation.goBack();
+    } else if (props.route.params && !profileDetails) {
+      try {
+        setProfileDetails(props.route.params);
+      } catch (error) {
+        console.log("ERROR: ", error.message);
+        Alert.alert("User page unavailable");
+        props.navigation.navigate("JobListScreen");
+      }
     }
   } else {
+    console.log("ERROR: ", error.message);
+    Alert.alert("User page unavailable");
+    props.navigation.goBack();
     if (profileDetails) {
       setProfileDetails(null);
     }
@@ -71,7 +77,12 @@ function ClientProfileScreen(props, { getClientProfiles }) {
               />
             </TouchableOpacity>
             ) : (
-              <View><Text>aaa</Text></View>
+              <TouchableOpacity
+                style={styles.saveButton}
+                onPress={() => props.navigation.pop()}
+              >
+                <Text style={styles.saveText}>Back to job</Text>
+              </TouchableOpacity>
             )}
             </View>
           <Image source={personIcon} style={styles.profileImage}/>
@@ -140,7 +151,20 @@ const styles = StyleSheet.create({
     marginTop: 160,
     position: 'absolute',
     right: 20,
+  },
+  saveText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white"
+  },
+  saveButton: {
+    position: 'absolute',
+    right: 0,
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5
   }
+
 });
 
 export default connect(mapStateToProps, {getClientProfiles })(ClientProfileScreen);

@@ -6,29 +6,29 @@ import PilotProfileSetupPageOneScreen from "../screens/pilot/PilotProfileSetupPa
 import PilotProfileSetupPageTwoScreen from "../screens/pilot/PilotProfileSetupPageTwoScreen";
 import PilotProfileImageUploadScreen from "../screens/pilot/PilotProfileImageUploadScreen";
 
-const PilotCreateProfileNavigation = createStackNavigator();
+const PilotCreateProfileNavigationStack = createStackNavigator();
 
-function PilotCreateProfileNavigator() {
+function PilotCreateProfileNavigation() {
   return (
-    <PilotCreateProfileNavigation.Navigator headerMode="none">
-      <PilotCreateProfileNavigation.Screen
+    <PilotCreateProfileNavigationStack.Navigator headerMode="none">
+      <PilotCreateProfileNavigationStack.Screen
         name="Profile"
         component={PilotProfileWelcomeScreen}
       />
-      <PilotCreateProfileNavigation.Screen
+      <PilotCreateProfileNavigationStack.Screen
         name="PilotProfilePageSetupPageOneScreen"
         component={PilotProfileSetupPageOneScreen}
       />
-      <PilotCreateProfileNavigation.Screen
+      <PilotCreateProfileNavigationStack.Screen
         name="PilotProfileSetupPageTwoScreen"
         component={PilotProfileSetupPageTwoScreen}
       />
-      <PilotCreateProfileNavigation.Screen
+      <PilotCreateProfileNavigationStack.Screen
         name="PilotProfileImageUploadScreen"
         component={PilotProfileImageUploadScreen}
       />
-    </PilotCreateProfileNavigation.Navigator>
+    </PilotCreateProfileNavigationStack.Navigator>
   );
 }
 
-export default PilotCreateProfileNavigator;
+export default PilotCreateProfileNavigation;

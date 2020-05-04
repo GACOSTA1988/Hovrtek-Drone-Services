@@ -26,7 +26,10 @@ const PilotDrawer = createDrawerNavigator();
 const PilotNavigation = () => {
   return (
     <PilotDrawer.Navigator drawerPosition='right'>
-      <PilotDrawer.Screen name="Home" component={JobListMyJobsTabNavigation} />
+      <PilotDrawer.Screen 
+      name="Home" 
+      component={JobListMyJobsTabNavigation} 
+      />
       <PilotDrawer.Screen
         name="AboutScreen"
         component={AboutScreen}

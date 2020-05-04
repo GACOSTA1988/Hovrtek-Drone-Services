@@ -32,10 +32,6 @@ function JobScreensStackNavigator() {
         name="ChatScreen"
         component={ChatScreen}
       />
-      <JobScreensStack.Screen
-        name="JumpToHamburger"
-        component={PilotCreateProfileNavigation}
-      />
     </JobScreensStack.Navigator>
   );
 }

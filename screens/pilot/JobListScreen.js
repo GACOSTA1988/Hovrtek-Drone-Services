@@ -42,14 +42,8 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
     }
   })
 
-  // GETTING USER profileComplete STATE
-  // const showCompleteProfileNotice = () => {
-  //   if (currentUserProps.profileComplete == "No") {
-  //     console.log("FINISH YOUR PROFILE!!")
-  //   }
-  // }
+  // GETTING USER profileComplete STATE without breaking upon receiving undefined User and DB props
 
-  
   console.log("CURRENT USER", firebase.auth().currentUser)
 
   let currentUser = firebase.auth().currentUser
@@ -57,7 +51,6 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
     currentUser = firebase.auth().currentUser
     console.log(" FIRE BASE AUTH CURRENT USER", currentUser)
   }
-
 
   let userID = null;
   if (currentUser !== null) {
@@ -96,7 +89,7 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
         <View style={styles.profileCompleteNoticeWrapper}>
           <TouchableOpacity 
           style={styles.profileCompleteNotice}
-            onPress={navigation.navigate('PilotCreateProfileNavigator', { screen: 'PilotProfileWelcomeScreen' })}
+            // onPress={navigation.navigate('PilotCreateProfileNavigator', { screen: 'PilotProfileWelcomeScreen' })}
           >
             <Text style={styles.profileCompleteNoticeText}>Click here to complete your profile to be eligable for jobs!</Text>
           </TouchableOpacity>

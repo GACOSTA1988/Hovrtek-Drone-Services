@@ -4,7 +4,7 @@ import ProjectListScreen from "../screens/client/ProjectListScreen";
 import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import EditProjectScreen from "../screens/client/EditProjectScreen";
 import PilotProfileWelcomeScreen from '../screens/pilot/PilotProfileWelcomeScreen';
-import ChatScreen from '../screens/ChatScreen';
+import ChatScreen from '../screens/messaging/ChatScreen';
 
 const ProjectScreensStack = createStackNavigator();
 

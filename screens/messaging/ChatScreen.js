@@ -12,11 +12,12 @@ import { TouchableOpacity,
 import {
   Ionicons,
   FontAwesome5,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
+  Alert
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getMessages, postMessages } from "../actions/index";
+import { getMessages, postMessages } from "../../actions/index";
 import * as firebase from 'firebase';
 import _ from "lodash";
 

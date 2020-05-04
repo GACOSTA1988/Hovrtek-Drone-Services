@@ -16,22 +16,21 @@ import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
 
-import DatePicker from '../../components/DatePicker';
-import TravelStatusPicker from '../../components/TravelStatusPicker';
+import DatePicker from "../../components/DatePicker";
+import TravelStatusPicker from "../../components/TravelStatusPicker";
 import FourHundredPicker from "../../components/FourHundredPicker";
 import AirMapPicker from "../../components/AirMapPicker";
 import { AntDesign } from "@expo/vector-icons";
 
 // context hook stuff
-export const PassSetFaaLicenseContext = React.createContext()
-export const PassFaaLicenseState = React.createContext()
-export const PassSetTravelStatus = React.createContext()
-export const PassTravelStatusState = React.createContext()
-export const PassSetFourHundred = React.createContext()
-export const PassFourHundredState = React.createContext()
-export const PassSetAirMap = React.createContext()
-export const PassAirMapState = React.createContext()
-
+export const PassSetFaaLicenseContext = React.createContext();
+export const PassFaaLicenseState = React.createContext();
+export const PassSetTravelStatus = React.createContext();
+export const PassTravelStatusState = React.createContext();
+export const PassSetFourHundred = React.createContext();
+export const PassFourHundredState = React.createContext();
+export const PassSetAirMap = React.createContext();
+export const PassAirMapState = React.createContext();
 
 function PilotProfileSetupPageTwoScreen(
   props,
@@ -74,8 +73,6 @@ function PilotProfileSetupPageTwoScreen(
     profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
-
-
   const [profileImageUrl, setProfileImageUrl] = useState(
     profileImageUrlPlaceHolder
   );
@@ -115,11 +112,13 @@ function PilotProfileSetupPageTwoScreen(
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={styles.welcomeText}>
-          Hi!
+          Hello!
           {currentUserProps ? (
             <Text style={styles.subText}>
               {"\n"}
-              {currentUserProps.pilotFirstName + ' ' + currentUserProps.pilotLastName}
+              {currentUserProps.pilotFirstName +
+                " " +
+                currentUserProps.pilotLastName}
             </Text>
           ) : (
             <Text>Name:</Text>
@@ -135,8 +134,6 @@ function PilotProfileSetupPageTwoScreen(
                 <DatePicker />
               </PassFaaLicenseState.Provider>
             </PassSetFaaLicenseContext.Provider>
-
-
           </View>
         ) : (
           <Text style={styles.bodyText}>
@@ -154,7 +151,6 @@ function PilotProfileSetupPageTwoScreen(
               </PassTravelStatusState.Provider>
             </PassSetTravelStatus.Provider>
           </View>
-
         ) : (
           <Text style={styles.bodyText}>
             Are You Willing To Tarvel Out Of State For A Drone Job?
@@ -165,8 +161,6 @@ function PilotProfileSetupPageTwoScreen(
           Have You Had Experience Flying Over 400FT?
         </Text>
         {currentUserProps ? (
-
-
           <View style={styles.pickerButtonWrapper}>
             <PassSetFourHundred.Provider value={setFourHundred}>
               <PassFourHundredState.Provider value={fourHundred}>
@@ -174,7 +168,6 @@ function PilotProfileSetupPageTwoScreen(
               </PassFourHundredState.Provider>
             </PassSetFourHundred.Provider>
           </View>
-
         ) : (
           <Text style={styles.bodyText}>
             Have You Had Experience Flying Over 400FT?
@@ -182,7 +175,6 @@ function PilotProfileSetupPageTwoScreen(
         )}
         <Text style={styles.bodyText}>Have You Used AirMap?</Text>
         {currentUserProps ? (
-
           <View style={styles.pickerButtonWrapper}>
             <PassSetAirMap.Provider value={setAirMap}>
               <PassAirMapState.Provider value={airMap}>
@@ -190,7 +182,6 @@ function PilotProfileSetupPageTwoScreen(
               </PassAirMapState.Provider>
             </PassSetAirMap.Provider>
           </View>
-
         ) : (
           <Text style={styles.bodyText}>Have You Used AirMap?</Text>
         )}
@@ -206,14 +197,14 @@ function PilotProfileSetupPageTwoScreen(
           </View>
         </View>
 
-{/* 
+        {/* 
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => props.navigation.goBack()} 
         >
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity> */}
-    
+
         <Button title="Back" onPress={() => props.navigation.goBack()} />
       </ScrollView>
     </View>
@@ -227,8 +218,8 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   centerButton: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   saveAndContinueWrapper: {
     width: 170,
@@ -236,9 +227,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#092455",
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
   },
   saveAndContinueText: {
     fontSize: 15,
@@ -254,7 +245,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 25,
-    color: '#4593e7',
+    color: "#4593e7",
     fontWeight: "600",
     textAlign: "center",
   },
@@ -262,7 +253,7 @@ const styles = StyleSheet.create({
     marginTop: "25%",
     marginBottom: "10%",
     fontSize: 25,
-    color: 'black',
+    color: "black",
     fontWeight: "600",
     textAlign: "center",
   },
@@ -278,8 +269,8 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   pickerButtonWrapper: {
-    alignItems: 'center'
-  }
+    alignItems: "center",
+  },
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

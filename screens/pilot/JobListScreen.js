@@ -42,7 +42,7 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
     }
   })
 
-  // GETTING USER profileComplete STATE WITHOUT BREAKING UPON RECEIVING UNDEFINED USER AND DB PROPS 
+  // GETTING USER profileComplete STATE WITHOUT BREAKING UPON RECEIVING UNDEFINED USER AND DB PROPS
 
   let currentUser = firebase.auth().currentUser
   if (currentUser) {
@@ -70,19 +70,18 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
     console.log("PROFILE COMPLETE STATE", profileCompleteState)
   }
 
-
   return (
     <View style={styles.projectListWrapper}>
 
       {(profileCompleteState === "No") ?
         <View style={styles.profileCompleteNoticeWrapper}>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
           style={styles.profileCompleteNotice}
             onPress={() => navigation.navigate('Profile')}
           >
             <View style={styles.textRow}>
-            <Text style={styles.profileCompleteNoticeText}>Click here to complete your profile to be eligable for jobs!</Text>
+            <Text style={styles.profileCompleteNoticeText}>Click here to complete your profile in order to be eligible for jobs!</Text>
             </View>
             <View>
             <FontAwesome5 name="check-circle" size={30} />
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: "absolute",
     backgroundColor: 'white',
-    zIndex: 1
+    zIndex: 0
   },
   textRow:{
     marginRight: 10

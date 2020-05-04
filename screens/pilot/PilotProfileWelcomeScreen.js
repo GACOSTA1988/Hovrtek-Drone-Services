@@ -44,6 +44,7 @@ function PilotProfileWelcomeScreen(
     user = firebase.auth().currentUser;
     if (user.photoURL === "P") {
       profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
+      console.log(props.listOfPilotProfiles);
       try {
         if ((!profileDetails && profile) || (profileDetails && profileDetails != profile)) {
           setCurrentUserProps(profile);
@@ -182,14 +183,18 @@ function PilotProfileWelcomeScreen(
 
                 </View>
               ) : (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginBottom: 40,
-                  }}
+                <View>
+                  <TouchableOpacity
+                    style={styles.chatButton}
+                    onPress={() =>
+                      props.navigation.navigate("ChatScreen",
+                      {
+                        ...profileDetails
+                      }
+                    )}
                   >
+                    <Text style={styles.chatText}>Chat</Text>
+                  </TouchableOpacity>
                   <Text style={styles.nameText}>
                   {profileDetails.pilotFirstName}{" "}{profileDetails.pilotLastName}
                   </Text>

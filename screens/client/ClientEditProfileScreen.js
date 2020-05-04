@@ -17,7 +17,7 @@ import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
 import { editClientProfile } from "../../actions/index";
-import PilotProfileUploader from "../../components/client/PilotProfileUploader";
+import ClientProfileUploader from "../../components/client/ClientProfileUploader";
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
@@ -128,7 +128,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           <View style={{ alignItems: "center", marginBottom: 50 }}>
             <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
               <PassProfileImageUrlState.Provider value={profileImageUrl}>
-                <PilotProfileUploader />
+                <ClientProfileUploader />
               </PassProfileImageUrlState.Provider>
             </PassSetProfileImageUrlContext.Provider>
           </View>

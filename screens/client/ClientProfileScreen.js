@@ -56,9 +56,6 @@ function ClientProfileScreen(props, { getClientProfiles }) {
       }
     }
   } else {
-    console.log("ERROR: ", error.message);
-    Alert.alert("User page unavailable");
-    props.navigation.goBack();
     if (profileDetails) {
       setProfileDetails(null);
     }

@@ -29,6 +29,7 @@ function JobDetailsScreen(props, { getClientProfiles }) {
       <Text style={styles.DetailsText}>
         Project Recording: {jobDetails.recording}
       </Text>
+      {client ? (
       <TouchableOpacity
         onPress={() =>
           props.navigation.navigate(
@@ -39,10 +40,16 @@ function JobDetailsScreen(props, { getClientProfiles }) {
           )
         }
       >
+
         <Text style={styles.DetailsText}>
           Client: {client.firstName}{" "}{client.lastName}
         </Text>
       </TouchableOpacity>
+    ) : (
+      <Text style={styles.DetailsText}>
+        Client:
+      </Text>
+    )}
 
       <View>
         {!jobDetails.pilotID ? (

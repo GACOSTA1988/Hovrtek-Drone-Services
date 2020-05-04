@@ -17,22 +17,21 @@ import { getPilotProfiles } from "../../actions/index";
 import { editPilotProfile } from "../../actions/index";
 import * as firebase from "firebase";
 import _ from "lodash";
-import DroneExperiencePicker from '../../components/DroneExperiencePicker';
-import DroneTypePicker from '../../components/DroneTypePicker';
+import DroneExperiencePicker from "../../components/DroneExperiencePicker";
+import DroneTypePicker from "../../components/DroneTypePicker";
 import ValidInsurancePicker from "../../components/ValidInsurancePicker";
 import BioPicker from "../../components/BioPicker";
 
-
 // Context Hook Stuff - passing props to Modals / Pickers
-export const PassSetYearsOfExperience = React.createContext()
-export const PassYearsOfExperienceState = React.createContext()
+export const PassSetYearsOfExperience = React.createContext();
+export const PassYearsOfExperienceState = React.createContext();
 
-export const PassSetDroneType = React.createContext()
-export const PassDroneTypeState = React.createContext()
-export const PassSetInsuredStatus = React.createContext()
-export const PassInsuredStatusState = React.createContext()
-export const PassSetPersonalBio = React.createContext()
-export const PassPersonalBioState = React.createContext()
+export const PassSetDroneType = React.createContext();
+export const PassDroneTypeState = React.createContext();
+export const PassSetInsuredStatus = React.createContext();
+export const PassInsuredStatusState = React.createContext();
+export const PassSetPersonalBio = React.createContext();
+export const PassPersonalBioState = React.createContext();
 
 function PilotProfileSetupPageOneScreen(
   props,
@@ -99,9 +98,8 @@ function PilotProfileSetupPageOneScreen(
     e.preventDefault();
     if (personalBio.trim() === "") {
       Alert.alert("Please fill in your personal bio");
-      return
-    } else if (yearsOfExperience.trim() === '') {
-
+      return;
+    } else if (yearsOfExperience.trim() === "") {
       Alert.alert("Please fill in years of experience");
       navigation.navigate("PilotProfileSetupPageOneScreen");
     } else if (droneType.trim() == "") {
@@ -134,11 +132,13 @@ function PilotProfileSetupPageOneScreen(
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={styles.welcomeText}>
-          Hi!
+          Hello!
           {currentUserProps ? (
             <Text style={styles.subText}>
               {"\n"}
-              {currentUserProps.pilotFirstName + ' ' + currentUserProps.pilotLastName}
+              {currentUserProps.pilotFirstName +
+                " " +
+                currentUserProps.pilotLastName}
             </Text>
           ) : (
             <Text>Name:</Text>
@@ -149,13 +149,11 @@ function PilotProfileSetupPageOneScreen(
         </Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
-
             <PassSetPersonalBio.Provider value={setPersonalBio}>
               <PassPersonalBioState.Provider value={personalBio}>
                 <BioPicker />
               </PassPersonalBioState.Provider>
             </PassSetPersonalBio.Provider>
-
           </View>
         ) : (
           <Text style={styles.bodyText}>
@@ -168,13 +166,11 @@ function PilotProfileSetupPageOneScreen(
         </Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
-
             <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
               <PassYearsOfExperienceState.Provider value={yearsOfExperience}>
-                <DroneExperiencePicker/>
+                <DroneExperiencePicker />
               </PassYearsOfExperienceState.Provider>
             </PassSetYearsOfExperience.Provider>
-
           </View>
         ) : (
           <Text style={styles.bodyText}>
@@ -184,19 +180,17 @@ function PilotProfileSetupPageOneScreen(
         <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
-          <PassSetDroneType.Provider value={setDroneType}>
-            <PassDroneTypeState.Provider value={droneType}>
-              <DroneTypePicker />
-            </PassDroneTypeState.Provider>
-          </PassSetDroneType.Provider>
+            <PassSetDroneType.Provider value={setDroneType}>
+              <PassDroneTypeState.Provider value={droneType}>
+                <DroneTypePicker />
+              </PassDroneTypeState.Provider>
+            </PassSetDroneType.Provider>
           </View>
-
         ) : (
           <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
         )}
         <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
         {currentUserProps ? (
-
           <View style={styles.droneExpWrapper}>
             <PassSetInsuredStatus.Provider value={setInsuredStatus}>
               <PassInsuredStatusState.Provider value={insuredStatus}>
@@ -204,7 +198,6 @@ function PilotProfileSetupPageOneScreen(
               </PassInsuredStatusState.Provider>
             </PassSetInsuredStatus.Provider>
           </View>
-
         ) : (
           <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
         )}
@@ -241,8 +234,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   centerButton: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   saveAndContinueWrapper: {
     width: 170,
@@ -250,9 +243,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#092455",
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
   },
   saveAndContinueText: {
     fontSize: 15,
@@ -262,7 +255,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 25,
-    color: '#4593e7',
+    color: "#4593e7",
     fontWeight: "600",
     textAlign: "center",
   },
@@ -270,7 +263,7 @@ const styles = StyleSheet.create({
     marginTop: "25%",
     marginBottom: "10%",
     fontSize: 25,
-    color: 'black',
+    color: "black",
     fontWeight: "600",
     textAlign: "center",
   },
@@ -288,12 +281,11 @@ const styles = StyleSheet.create({
   dummyText: {
     marginTop: 200,
 
-    color: 'lightgray'
+    color: "lightgray",
   },
   droneExpWrapper: {
-    alignItems: 'center'
-  }
-
+    alignItems: "center",
+  },
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

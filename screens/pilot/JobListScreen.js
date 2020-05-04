@@ -9,24 +9,28 @@ import {
   TextInput,
   FlatList,
   TouchableHighlight,
-  Alert
+  Alert,
 } from "react-native";
 import {
   Ionicons,
   FontAwesome5,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
-import { useNavigation } from '@react-navigation/native';
-import { getProjects, getClientProfiles, getPilotProfiles } from "../../actions/index";
-import * as firebase from 'firebase';
+import { useNavigation } from "@react-navigation/native";
+import {
+  getProjects,
+  getClientProfiles,
+  getPilotProfiles,
+} from "../../actions/index";
+import * as firebase from "firebase";
 import _ from "lodash";
 import { render } from "react-dom";
 
-
-
-function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles }) {
-
+function JobListScreen(
+  props,
+  { getProjects, getClientProfiles, getPilotProfiles }
+) {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -40,57 +44,57 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
     if (!project.pilotID) {
       availableProjects.push(project);
     }
-  })
+  });
 
-  // GETTING USER profileComplete STATE WITHOUT BREAKING UPON RECEIVING UNDEFINED USER AND DB PROPS 
+  // GETTING USER profileComplete STATE WITHOUT BREAKING UPON RECEIVING UNDEFINED USER AND DB PROPS
 
-  let currentUser = firebase.auth().currentUser
+  let currentUser = firebase.auth().currentUser;
   if (currentUser) {
-    currentUser = firebase.auth().currentUser
-    console.log(" FIRE BASE AUTH CURRENT USER", currentUser)
+    currentUser = firebase.auth().currentUser;
+    console.log(" FIRE BASE AUTH CURRENT USER", currentUser);
   }
   let userID = null;
   if (currentUser !== null) {
     userID = firebase.auth().currentUser.uid;
-    console.log("USER ID", userID)
+    console.log("USER ID", userID);
   }
-  let list = null
+  let list = null;
   if (props.listOfPilotProfiles) {
     list = props.listOfPilotProfiles;
-    console.log("LIST", list)
-    }
-  let currentUserProps = null
-    if (list !== null){
-      currentUserProps = list.find((x) => x.userID === userID);
-      console.log("CURRENET USER PROPS", currentUserProps)
-    }
-  let profileCompleteState = null
-  if (currentUserProps){
-    profileCompleteState = currentUserProps.profileComplete
-    console.log("PROFILE COMPLETE STATE", profileCompleteState)
+    console.log("LIST", list);
   }
-
+  let currentUserProps = null;
+  if (list !== null) {
+    currentUserProps = list.find((x) => x.userID === userID);
+    console.log("CURRENET USER PROPS", currentUserProps);
+  }
+  let profileCompleteState = null;
+  if (currentUserProps) {
+    profileCompleteState = currentUserProps.profileComplete;
+    console.log("PROFILE COMPLETE STATE", profileCompleteState);
+  }
 
   return (
     <View style={styles.projectListWrapper}>
-
-      {(profileCompleteState === "No") ?
+      {profileCompleteState === "No" ? (
         <View style={styles.profileCompleteNoticeWrapper}>
-          
-          <TouchableOpacity 
-          style={styles.profileCompleteNotice}
-            onPress={() => navigation.navigate('Profile')}
+          <TouchableOpacity
+            style={styles.profileCompleteNotice}
+            onPress={() => navigation.navigate("Profile")}
           >
             <View style={styles.textRow}>
-            <Text style={styles.profileCompleteNoticeText}>Click here to complete your profile to be eligable for jobs!</Text>
+              <Text style={styles.profileCompleteNoticeText}>
+                Click here to complete your profile to be eligable for jobs!
+              </Text>
             </View>
             <View>
-            <FontAwesome5 name="check-circle" size={30} />
+              <FontAwesome5 name="check-circle" size={30} color="red" />
             </View>
           </TouchableOpacity>
         </View>
-        : <Text></Text>
-      }
+      ) : (
+        <Text></Text>
+      )}
       <ScrollView>
         <View style={styles.projectCard}>
           <TouchableOpacity>
@@ -98,7 +102,7 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
               style={{ width: "100%" }}
               data={availableProjects}
               // showsVerticalScrollIndicator={true}
-              keyExtractor={item => item.key}
+              keyExtractor={(item) => item.key}
               renderItem={({ item }) => {
                 return (
                   <View
@@ -107,17 +111,14 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
                       borderRadius: 15,
                       backgroundColor: "#092455",
                       marginBottom: 15,
-                      padding: 20
+                      padding: 20,
                     }}
                   >
                     <TouchableHighlight
                       onPress={() =>
-                        props.navigation.navigate(
-                          "JobDetailsScreen",
-                          {
-                            ...item
-                          }
-                        )
+                        props.navigation.navigate("JobDetailsScreen", {
+                          ...item,
+                        })
                       }
                     >
                       <View>
@@ -130,13 +131,25 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        {props.listOfClientProfiles.find((x) => x.userID === item.clientID) ? (
+                        {props.listOfClientProfiles.find(
+                          (x) => x.userID === item.clientID
+                        ) ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                            Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).firstName}{" "}{props.listOfClientProfiles.find((x) => x.userID === item.clientID).lastName}
+                            Posted by:{" "}
+                            {
+                              props.listOfClientProfiles.find(
+                                (x) => x.userID === item.clientID
+                              ).firstName
+                            }{" "}
+                            {
+                              props.listOfClientProfiles.find(
+                                (x) => x.userID === item.clientID
+                              ).lastName
+                            }
                           </Text>
                         ) : (
-                            <Text>Posted by:</Text>
-                          )}
+                          <Text>Posted by:</Text>
+                        )}
                       </View>
                     </TouchableHighlight>
                   </View>
@@ -148,79 +161,91 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   projectCard: {
-    width: 380
+    width: 380,
   },
   clientText: {
     fontSize: 30,
     color: "darkblue",
-    textAlign: "center"
+    textAlign: "center",
   },
   ClientProjectListTextWrapper: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   projectListWrapper: {
     alignItems: "center",
-    marginTop: 10
+    marginTop: 10,
   },
   profileCompleteNotice: {
-    flexDirection: 'row',
+    flexDirection: "row",
     top: 0,
     bottom: 0,
-    borderWidth: 2,
-    width: 270,
+    borderWidth: 3,
+    borderColor: "red",
+    width: 280,
     height: 120,
     borderRadius: 8,
     padding: 20,
-    alignItems: 'center',
+    alignItems: "center",
     position: "absolute",
-    backgroundColor: 'white',
-    zIndex: 1
+    backgroundColor: "white",
+    zIndex: 1,
   },
-  textRow:{
-    marginRight: 10
+  textRow: {
+    marginRight: 10,
   },
   profileCompleteNoticeWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1,
+    // backgroundColor: "blue",
+    marginTop: "45%",
+    height: "100%",
   },
   profileCompleteNoticeText: {
-    fontSize: 15
-  }
+    fontSize: 15,
+    fontWeight: "600",
+  },
 });
 
 function mapStateToProps(state) {
   const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
     return {
       ...val,
-      key: key
+      key: key,
     };
   });
   console.log("These are projects: ", listOfProjects);
-  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
-    return {
-      ...val,
-      key: key
-    };
-  });
-  const listOfPilotProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
-    return {
-      ...val,
-      key: key
-    };
-  });
+  const listOfClientProfiles = _.map(
+    state.clientProfilesList.clientProfilesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    }
+  );
+  const listOfPilotProfiles = _.map(
+    state.pilotProfilesList.pilotProfilesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    }
+  );
   return {
     listOfProjects,
     listOfClientProfiles,
-    listOfPilotProfiles
-
+    listOfPilotProfiles,
   };
 }
 
-export default connect(mapStateToProps, { getProjects, getClientProfiles, getPilotProfiles })(
-  JobListScreen
-);
+export default connect(mapStateToProps, {
+  getProjects,
+  getClientProfiles,
+  getPilotProfiles,
+})(JobListScreen);

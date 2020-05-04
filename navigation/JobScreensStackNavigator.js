@@ -4,7 +4,7 @@ import JobListScreen from "../screens/pilot/JobListScreen";
 import JobDetailsScreen from "../screens/pilot/JobDetailsScreen";
 import AcceptJobScreen from "../screens/pilot/AcceptJobScreen";
 import ClientProfileScreen from '../screens/client/ClientProfileScreen';
-import ChatScreen from '../screens/ChatScreen';
+import ChatScreen from '../screens/messaging/ChatScreen';
 import PilotCreateProfileNavigation from './PilotCreateProfileNavigation'
 
 const JobScreensStack = createStackNavigator();

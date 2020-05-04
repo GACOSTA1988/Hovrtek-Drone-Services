@@ -49,31 +49,27 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
     currentUser = firebase.auth().currentUser
     console.log(" FIRE BASE AUTH CURRENT USER", currentUser)
   }
-
   let userID = null;
   if (currentUser !== null) {
     userID = firebase.auth().currentUser.uid;
     console.log("USER ID", userID)
   }
-
   let list = null
   if (props.listOfPilotProfiles) {
     list = props.listOfPilotProfiles;
     console.log("LIST", list)
     }
-
   let currentUserProps = null
     if (list !== null){
       currentUserProps = list.find((x) => x.userID === userID);
       console.log("CURRENET USER PROPS", currentUserProps)
     }
-    let profileCompleteState = null
-    if (currentUserProps){
-      profileCompleteState = currentUserProps.profileComplete
-      console.log("PROFILE COMPLETE STATE", profileCompleteState)
-    }
-  
-           // onPress={() => navigation.navigate('JumpToHamburger')}
+  let profileCompleteState = null
+  if (currentUserProps){
+    profileCompleteState = currentUserProps.profileComplete
+    console.log("PROFILE COMPLETE STATE", profileCompleteState)
+  }
+
 
   return (
     <View style={styles.projectListWrapper}>
@@ -89,18 +85,13 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
             <Text style={styles.profileCompleteNoticeText}>Click here to complete your profile to be eligable for jobs!</Text>
             </View>
             <View>
-            <FontAwesome5 name="arrow-circle-right" size={30} />
+            <FontAwesome5 name="check-circle" size={30} />
             </View>
           </TouchableOpacity>
         </View>
         : <Text></Text>
       }
-   
-
       <ScrollView>
-
-
-
         <View style={styles.projectCard}>
           <TouchableOpacity>
             <FlatList
@@ -177,7 +168,7 @@ const styles = StyleSheet.create({
   },
   profileCompleteNotice: {
     flexDirection: 'row',
-    top: 1,
+    top: 0,
     bottom: 0,
     borderWidth: 2,
     width: 270,
@@ -187,7 +178,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: "absolute",
     backgroundColor: 'white',
-
+    zIndex: 1
   },
   textRow:{
     marginRight: 10

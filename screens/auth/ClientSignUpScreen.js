@@ -47,17 +47,23 @@ function ClientSignUpScreen(props) {
       });
       await user.reload().then(updateUser());
       const userID = user.uid;
-      props.postClientProfiles(
-        firstName,
-        lastName,
-        location,
-        email,
-        "Amelia Mary Earhart (/ˈɛərhɑːrt/, born July 24, 1897; disappeared July 2, 1937) was an American aviation pioneer and author. Earhart was the first female aviator to fly solo across the Atlantic Ocean. She set many other records, wrote best-selling books about her flying experiences, and was instrumental in the formation of The Ninety-Nines, an organization for female pilots.",
-        "Set industry",
-        "Set payment type",
-        userID,
-        profileImageUrl
-      );
+      try {
+        props.postClientProfiles(
+          firstName,
+          lastName,
+          location,
+          email,
+          "Amelia Mary Earhart (/ˈɛərhɑːrt/, born July 24, 1897; disappeared July 2, 1937) was an American aviation pioneer and author. Earhart was the first female aviator to fly solo across the Atlantic Ocean. She set many other records, wrote best-selling books about her flying experiences, and was instrumental in the formation of The Ninety-Nines, an organization for female pilots.",
+          "Set industry",
+          "Set payment type",
+          "",
+          userID
+        );
+      } catch (error) {
+        Alert.alert("Error: ", error.message);
+        console.log("ERROR: ", error.message);
+        // if client profile can't be created, delete user and redirect to signup
+      }
       navigation.navigate("NewProjectScreenWelcome");
     }
   }

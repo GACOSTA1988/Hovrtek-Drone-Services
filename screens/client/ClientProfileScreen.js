@@ -31,6 +31,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
     profile = props.listOfClientProfiles.find((x) => x.userID === user.uid);
+    console.log("HERE ARE ALL THE CLIENTS", props.listOfClientProfiles);
     // if user is client, get client profile
     if (user.photoURL === "C") {
       try {

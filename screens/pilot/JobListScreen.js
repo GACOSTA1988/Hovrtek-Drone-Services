@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { TouchableOpacity,
+import React, { useState, useEffect, useContext } from "react";
+import {
+  TouchableOpacity,
   View,
   Text,
   StyleSheet,
@@ -7,8 +8,9 @@ import { TouchableOpacity,
   ScrollView,
   TextInput,
   FlatList,
-  TouchableHighlight
-  } from "react-native";
+  TouchableHighlight,
+  Alert
+} from "react-native";
 import {
   Ionicons,
   FontAwesome5,
@@ -16,17 +18,21 @@ import {
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProjects, getClientProfiles } from "../../actions/index";
-// import * as firebase from 'firebase';
+import { getProjects, getClientProfiles, getPilotProfiles } from "../../actions/index";
+import * as firebase from 'firebase';
 import _ from "lodash";
+import { render } from "react-dom";
+import PilotCreateProfileNavigation from '../../navigation/PilotCreateProfileNavigation'
 
-function JobListScreen(props, { getProjects, getClientProfiles }) {
+
+function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles }) {
 
   const navigation = useNavigation();
 
   useEffect(() => {
     props.getProjects();
     props.getClientProfiles();
+    props.getPilotProfiles();
   }, []);
 
   const availableProjects = [];
@@ -36,9 +42,73 @@ function JobListScreen(props, { getProjects, getClientProfiles }) {
     }
   })
 
+  // GETTING USER profileComplete STATE
+  // const showCompleteProfileNotice = () => {
+  //   if (currentUserProps.profileComplete == "No") {
+  //     console.log("FINISH YOUR PROFILE!!")
+  //   }
+  // }
+
+  
+  console.log("CURRENT USER", firebase.auth().currentUser)
+
+  let currentUser = firebase.auth().currentUser
+  if (currentUser) {
+    currentUser = firebase.auth().currentUser
+    console.log(" FIRE BASE AUTH CURRENT USER", currentUser)
+  }
+
+
+  let userID = null;
+  if (currentUser !== null) {
+    userID = firebase.auth().currentUser.uid;
+    console.log("USER ID", userID)
+  }
+
+  let list = null
+  if (props.listOfPilotProfiles) {
+    list = props.listOfPilotProfiles;
+    console.log("LIST", list)
+    }
+
+  let currentUserProps = null
+    if (list !== null){
+      currentUserProps = list.find((x) => x.userID === userID);
+      console.log("CURRENET USER PROPS", currentUserProps)
+    }
+    let profileCompleteState = null
+    if (currentUserProps){
+      profileCompleteState = currentUserProps.profileComplete
+      console.log("PROFILE COMPLETE STATE", profileCompleteState)
+    }
+  
+
+  // if (currentUserProps) {
+  //   console.log("Profile COMplete", currentUserProps.profileComplete)
+  //   showCompleteProfileNotice()
+  // }
+  // onPress = { navigation.navigate('PilotCreateProfileNavigator', { screen: 'PilotProfileWelcomeScreen' }) }
+
   return (
     <View style={styles.projectListWrapper}>
+
+      {(profileCompleteState === "No") ?
+        <View style={styles.profileCompleteNoticeWrapper}>
+          <TouchableOpacity 
+          style={styles.profileCompleteNotice}
+            onPress={navigation.navigate('PilotCreateProfileNavigator', { screen: 'PilotProfileWelcomeScreen' })}
+          >
+            <Text style={styles.profileCompleteNoticeText}>Click here to complete your profile to be eligable for jobs!</Text>
+          </TouchableOpacity>
+        </View>
+        : <Text></Text>
+      }
+   
+
       <ScrollView>
+
+
+
         <View style={styles.projectCard}>
           <TouchableOpacity>
             <FlatList
@@ -77,13 +147,13 @@ function JobListScreen(props, { getProjects, getClientProfiles }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        { props.listOfClientProfiles.find((x) => x.userID === item.clientID) ? (
+                        {props.listOfClientProfiles.find((x) => x.userID === item.clientID) ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                          Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).firstName }{" "}{props.listOfClientProfiles.find((x) => x.userID === item.clientID).lastName}
+                            Posted by: { props.listOfClientProfiles.find((x) => x.userID === item.clientID).firstName}{" "}{props.listOfClientProfiles.find((x) => x.userID === item.clientID).lastName}
                           </Text>
                         ) : (
-                          <Text>Posted by:</Text>
-                        )}
+                            <Text>Posted by:</Text>
+                          )}
                       </View>
                     </TouchableHighlight>
                   </View>
@@ -112,6 +182,28 @@ const styles = StyleSheet.create({
   projectListWrapper: {
     alignItems: "center",
     marginTop: 10
+  },
+  profileCompleteNotice: {
+    top: 200,
+
+    bottom: 0,
+    borderWidth: 2,
+    width: 270,
+    height: 120,
+    borderRadius: 8,
+    padding: 20,
+    alignItems: 'center',
+    position: "absolute",
+    backgroundColor: 'white',
+
+  },
+  profileCompleteNoticeWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1
+  },
+  profileCompleteNoticeText: {
+    fontSize: 20
   }
 });
 
@@ -128,12 +220,20 @@ function mapStateToProps(state) {
       key: key
     };
   });
+  const listOfPilotProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
   return {
     listOfProjects,
-    listOfClientProfiles
+    listOfClientProfiles,
+    listOfPilotProfiles
+
   };
 }
 
-export default connect(mapStateToProps, { getProjects, getClientProfiles })(
+export default connect(mapStateToProps, { getProjects, getClientProfiles, getPilotProfiles })(
   JobListScreen
 );

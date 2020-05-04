@@ -172,12 +172,14 @@ function PilotProfileWelcomeScreen(
                     {profileDetails.pilotFirstName}{" "}{profileDetails.pilotLastName}
                     </Text>
                   </View>
-                  <Button
-                    title="Start Pilot Profile"
-                    onPress={() =>
-                      props.navigation.navigate("PilotProfilePageSetupPageOneScreen")
-                    }
-                  />
+
+                  <TouchableOpacity
+                    style={styles.startButton}
+                      onPress={() =>
+                        props.navigation.navigate("PilotProfilePageSetupPageOneScreen")}>
+                    <Text style={styles.startButtonText}>Start Pilot Profile</Text>
+                  </TouchableOpacity>
+
                 </View>
               ) : (
                 <View
@@ -311,6 +313,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5
+  },
+  startButton: {
+    width: 250,
+    height: 50,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 30,
+    color: 'white'
+  },
+  startButtonText: {
+    color: "white",
+    fontSize: 20
   }
 
 });

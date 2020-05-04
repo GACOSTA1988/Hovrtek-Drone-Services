@@ -28,6 +28,8 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
       <Text style={styles.DetailsText}>
         Project Recording: {projectDetails.recording}
       </Text>
+      {pilot ? (
+
       <TouchableOpacity
         onPress={() =>
           props.navigation.navigate(
@@ -42,6 +44,11 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
           Pilot: {pilot.pilotFirstName}{" "}{pilot.pilotLastName}
         </Text>
       </TouchableOpacity>
+    ) : (
+      <Text style={styles.DetailsText}>
+        Pending Pilot
+      </Text>
+    )}
       <TouchableOpacity
         onPress={() => props.navigation.pop()}>
         <Text>Back to projects</Text>

@@ -200,6 +200,7 @@ function mapStateToProps(state) {
       key: key
     };
   });
+  console.log("These are projects: ", listOfProjects);
   const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
     return {
       ...val,

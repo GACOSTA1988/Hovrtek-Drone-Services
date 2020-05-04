@@ -342,6 +342,7 @@ function mapStateToProps(state) {
       };
     }
   );
+  console.log("THESE ARE PILOT PROFILES", listOfPilotProfiles);
   return {
     listOfPilotProfiles
   };

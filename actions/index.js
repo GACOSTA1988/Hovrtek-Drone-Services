@@ -172,8 +172,8 @@ export function postClientProfiles(
       bio,
       industry,
       paymentType,
-      userID,
       profileImageUrl,
+      userID
     });
   };
 }

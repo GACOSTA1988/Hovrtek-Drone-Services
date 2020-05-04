@@ -5,6 +5,7 @@ import JobDetailsScreen from "../screens/pilot/JobDetailsScreen";
 import AcceptJobScreen from "../screens/pilot/AcceptJobScreen";
 import ClientProfileScreen from '../screens/client/ClientProfileScreen';
 import ChatScreen from '../screens/ChatScreen';
+import PilotCreateProfileNavigation from './PilotCreateProfileNavigation'
 
 const JobScreensStack = createStackNavigator();
 
@@ -30,6 +31,10 @@ function JobScreensStackNavigator() {
       <JobScreensStack.Screen
         name="ChatScreen"
         component={ChatScreen}
+      />
+      <JobScreensStack.Screen
+        name="JumpToHamburger"
+        component={PilotCreateProfileNavigation}
       />
     </JobScreensStack.Navigator>
   );

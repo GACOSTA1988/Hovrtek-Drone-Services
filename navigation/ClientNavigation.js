@@ -21,21 +21,6 @@ const ClientNavigation = () => {
         name="Home"
         component={ProjectsNewProjectTabNavigation}
       />
-      {/* <ClientDrawer.Screen
-        name='AccountScreen'
-        component={AccountScreen}
-        options={{ title: 'Account' }}
-      />
-      <ClientDrawer.Screen
-        name='ServicesScreen'
-        component={ServicesScreen}
-        options={{ title: 'Services' }}
-      /> */}
-      {/* <ClientDrawer.Screen
-        name='LocationScreen'
-        component={LocationScreen}
-        options={{ title: 'Location' }}
-      /> */}
       <ClientDrawer.Screen
         name='AboutScreen'
         component={AboutScreen}
@@ -61,13 +46,6 @@ const ClientNavigation = () => {
   );
 };
 
-const LogoTitle = () => {
-  return (
-    <Image
-      style={{ width: 130, height: 22, marginTop: 0 }}
-      source={require("../assets/hovrtek_logo.png")}
-    />
-  );
-};
+
 
 export default ClientNavigation;

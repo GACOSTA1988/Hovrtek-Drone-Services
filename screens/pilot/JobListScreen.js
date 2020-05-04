@@ -22,7 +22,7 @@ import { getProjects, getClientProfiles, getPilotProfiles } from "../../actions/
 import * as firebase from 'firebase';
 import _ from "lodash";
 import { render } from "react-dom";
-import PilotCreateProfileNavigation from '../../navigation/PilotCreateProfileNavigation'
+
 
 
 function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles }) {
@@ -42,9 +42,7 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
     }
   })
 
-  // GETTING USER profileComplete STATE without breaking upon receiving undefined User and DB props
-
-  console.log("CURRENT USER", firebase.auth().currentUser)
+  // GETTING USER profileComplete STATE WITHOUT BREAKING UPON RECEIVING UNDEFINED USER AND DB PROPS 
 
   let currentUser = firebase.auth().currentUser
   if (currentUser) {
@@ -75,23 +73,24 @@ function JobListScreen(props, { getProjects, getClientProfiles, getPilotProfiles
       console.log("PROFILE COMPLETE STATE", profileCompleteState)
     }
   
-
-  // if (currentUserProps) {
-  //   console.log("Profile COMplete", currentUserProps.profileComplete)
-  //   showCompleteProfileNotice()
-  // }
-  // onPress = { navigation.navigate('PilotCreateProfileNavigator', { screen: 'PilotProfileWelcomeScreen' }) }
+           // onPress={() => navigation.navigate('JumpToHamburger')}
 
   return (
     <View style={styles.projectListWrapper}>
 
       {(profileCompleteState === "No") ?
         <View style={styles.profileCompleteNoticeWrapper}>
+          
           <TouchableOpacity 
           style={styles.profileCompleteNotice}
-            // onPress={navigation.navigate('PilotCreateProfileNavigator', { screen: 'PilotProfileWelcomeScreen' })}
+            onPress={() => navigation.navigate('Profile')}
           >
+            <View style={styles.textRow}>
             <Text style={styles.profileCompleteNoticeText}>Click here to complete your profile to be eligable for jobs!</Text>
+            </View>
+            <View>
+            <FontAwesome5 name="arrow-circle-right" size={30} />
+            </View>
           </TouchableOpacity>
         </View>
         : <Text></Text>
@@ -177,8 +176,8 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   profileCompleteNotice: {
-    top: 200,
-
+    flexDirection: 'row',
+    top: 1,
     bottom: 0,
     borderWidth: 2,
     width: 270,
@@ -190,13 +189,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
 
   },
+  textRow:{
+    marginRight: 10
+  },
   profileCompleteNoticeWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 1
   },
   profileCompleteNoticeText: {
-    fontSize: 20
+    fontSize: 15
   }
 });
 

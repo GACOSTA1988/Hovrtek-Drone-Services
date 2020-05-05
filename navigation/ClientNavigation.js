@@ -9,6 +9,8 @@ import ServicesScreen from '../screens/client/ServicesScreen';
 import SignOutScreen from '../screens/auth/SignOutScreen';
 import ClientProfileNavigation from './ClientProfileNavigation';
 import MessagingNavigation from './MessagingNavigation';
+import ChatScreen from '../screens/messaging/ChatScreen';
+
 
 
 import { AuthContext } from "../context";
@@ -38,10 +40,15 @@ const ClientNavigation = () => {
         options={{ title: 'Public Profile' }}
       />
       <ClientDrawer.Screen
-        name='MessagingNavigation'
+        name='MessagingScreen'
         component={MessagingNavigation}
         options={{ title: 'Messages' }}
       />
+      {/* <ClientDrawer.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={{ title: 'Messages' }}
+      /> */}
       <ClientDrawer.Screen
         name="SignOutScreen"
         component={SignOutScreen}

@@ -71,6 +71,7 @@ function ChatScreen(props, { getMessages, postMessages }) {
       <View style={styles.inputBackButtoncontainer}>
         <View style={styles.inputWrapper}>
           <TextInput
+          multiline={true}
             autoCorrect={true}
             placeholder="Send message..."
             placeholderTextColor="grey"
@@ -135,6 +136,10 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   input: {
+    justifyContent: 'center',
+    paddingRight: 40,
+    paddingLeft: 5,
+    paddingTop: 10,
     marginTop: 30,
     width: "80%", 
     height:45,
@@ -147,7 +152,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
     marginBottom: 30

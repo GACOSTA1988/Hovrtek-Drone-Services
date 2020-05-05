@@ -3,10 +3,13 @@ import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from "rea
 import { connect } from "react-redux";
 import { getPilotProfiles } from "../../actions/index";
 import _ from "lodash";
+import { useNavigation } from "@react-navigation/native";
+
 
 function ProjectDetailsScreen(props, { getPilotProfiles }) {
 
   const projectDetails = props.route.params;
+  const navigation = useNavigation();
 
   useEffect(() => {
     props.getPilotProfiles();
@@ -32,7 +35,7 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
 
       <TouchableOpacity
         onPress={() =>
-          props.navigation.navigate(
+          navigation.navigate(
             "PilotProfileWelcomeScreen",
             {
               ...pilot

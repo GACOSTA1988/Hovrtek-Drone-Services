@@ -35,7 +35,6 @@ function PilotProfileWelcomeScreen(
     props.getPilotProfiles();
   }, []);
 
-
   const [profileDetails, setCurrentUserProps] = useState(null);
 
   let user = null;
@@ -46,7 +45,10 @@ function PilotProfileWelcomeScreen(
       profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
       console.log(props.listOfPilotProfiles);
       try {
-        if ((!profileDetails && profile) || (profileDetails && profileDetails != profile)) {
+        if (
+          (!profileDetails && profile) ||
+          (profileDetails && profileDetails != profile)
+        ) {
           setCurrentUserProps(profile);
           console.log("profileDetails", profileDetails);
           passedProps = profile;
@@ -84,34 +86,36 @@ function PilotProfileWelcomeScreen(
                 </Text>
                 {user.photoURL === "P" ? (
                   <TouchableOpacity
-                  onPress={() =>
-                    navigation.push("PilotProfilePageSetupPageOneScreen")
-                  }
+                    onPress={() =>
+                      navigation.push("PilotProfilePageSetupPageOneScreen")
+                    }
                   >
-                  <AntDesign
-                    name="edit"
-                    size={30}
-                    color="darkblue"
-                    style={{ marginLeft: 40, marginTop: 25 }}
-                  />
+                    <AntDesign
+                      name="edit"
+                      size={30}
+                      color="darkblue"
+                      style={{ marginLeft: 40, marginTop: 25 }}
+                    />
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
                     style={styles.chatButton}
                     onPress={() =>
-                      props.navigation.navigate("ChatScreen",
-                      {
-                        ...profileDetails
-                      }
-                    )}
+                      props.navigation.navigate("ChatScreen", {
+                        ...profileDetails,
+                      })
+                    }
                   >
                     <Text style={styles.chatText}>Chat</Text>
                   </TouchableOpacity>
                 )}
               </View>
-              <Text style={styles.locationText}>Location: {profileDetails.pilotLocation}</Text>
+              <Text style={styles.locationText}>
+                Location: {profileDetails.pilotLocation}
+              </Text>
               <Text style={styles.specTitle}>Bio:</Text>
-              <Text style={{
+              <Text
+                style={{
                   fontSize: 15,
                   color: "black",
                   // fontWeight: "450",
@@ -127,7 +131,9 @@ function PilotProfileWelcomeScreen(
               </View>
               <View style={styles.specView}>
                 <Text style={styles.specTitle}>Years Of Experience:</Text>
-                <Text style={styles.specs}>{profileDetails.yearsOfExperience}</Text>
+                <Text style={styles.specs}>
+                  {profileDetails.yearsOfExperience}
+                </Text>
               </View>
               <View style={styles.specView}>
                 <Text style={styles.specTitle}>License Expiration Date:</Text>
@@ -158,29 +164,34 @@ function PilotProfileWelcomeScreen(
               />
               {user.photoURL === "P" ? (
                 <View>
-                  <Text style={styles.welcomeText}>
-                  Welcome to Hovrtek
-                  </Text>
+                  <Text style={styles.welcomeText}>Welcome to Hovrtek</Text>
                   <View
                     style={{
                       flexDirection: "row",
                       display: "flex",
                       justifyContent: "center",
-                      marginBottom: 40
+                      marginBottom: 40,
                     }}
-                    >
+                  >
                     <Text style={styles.nameText}>
-                    {profileDetails.pilotFirstName}{" "}{profileDetails.pilotLastName}
+                      {profileDetails.pilotFirstName}{" "}
+                      {profileDetails.pilotLastName}
                     </Text>
                   </View>
-
-                  <TouchableOpacity
-                    style={styles.startButton}
+                  <View style={{ alignItems: "center" }}>
+                    <TouchableOpacity
+                      style={styles.startButton}
                       onPress={() =>
-                        props.navigation.navigate("PilotProfilePageSetupPageOneScreen")}>
-                    <Text style={styles.startButtonText}>Start Pilot Profile</Text>
-                  </TouchableOpacity>
-
+                        props.navigation.navigate(
+                          "PilotProfilePageSetupPageOneScreen"
+                        )
+                      }
+                    >
+                      <Text style={styles.startButtonText}>
+                        Start Pilot Profile
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               ) : (
                 <View>
@@ -196,10 +207,11 @@ function PilotProfileWelcomeScreen(
                     <Text style={styles.chatText}>Chat</Text>
                   </TouchableOpacity>
                   <Text style={styles.nameText}>
-                  {profileDetails.pilotFirstName}{" "}{profileDetails.pilotLastName}
+                    {profileDetails.pilotFirstName}{" "}
+                    {profileDetails.pilotLastName}
                   </Text>
                   <Text style={styles.welcomeText}>
-                  This pilot has not created their profile yet
+                    This pilot has not created their profile yet
                   </Text>
                 </View>
               )}
@@ -216,7 +228,7 @@ function PilotProfileWelcomeScreen(
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
     backgroundColor: "lightgray",
     height: "100%",
     width: "100%",
@@ -230,7 +242,7 @@ const styles = StyleSheet.create({
   welcomeText: {
     marginTop: "40%",
     textAlign: "center",
-    fontSize: 30
+    fontSize: 30,
   },
   nameText: {
     marginTop: "5%",
@@ -294,47 +306,46 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "200",
     marginLeft: "2%",
-    marginTop: 8
+    marginTop: 8,
   },
   specTitle: {
     fontSize: 20,
     color: "black",
     fontWeight: "400",
     marginLeft: "2%",
-    marginTop: 8
+    marginTop: 8,
   },
   specView: {
     flexDirection: "row",
-    display: "flex"
+    display: "flex",
   },
   chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white"
+    color: "white",
   },
   chatButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     backgroundColor: "#092455",
     padding: 7,
-    borderRadius: 5
+    borderRadius: 5,
   },
   startButton: {
     width: 250,
     height: 50,
     backgroundColor: "#092455",
     borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 10,
     marginBottom: 30,
-    color: 'white'
+    color: "white",
   },
   startButtonText: {
     color: "white",
-    fontSize: 20
-  }
-
+    fontSize: 20,
+  },
 });
 
 function mapStateToProps(state) {
@@ -349,7 +360,7 @@ function mapStateToProps(state) {
   );
   console.log("THESE ARE PILOT PROFILES", listOfPilotProfiles);
   return {
-    listOfPilotProfiles
+    listOfPilotProfiles,
   };
 }
 

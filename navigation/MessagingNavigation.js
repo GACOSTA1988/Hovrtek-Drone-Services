@@ -3,20 +3,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MessagingScreen from "../screens/messaging/MessagingScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
 
-const MessagingNavigator = createStackNavigator();
+const MessagingStack = createStackNavigator();
 
 function MessagingNavigation() {
   return (
-    <MessagingNavigation.Navigator headerMode="none">
-      <MessagingNavigation.Screen
+    <MessagingStack.Navigator headerMode="none">
+      <MessagingStack.Screen
         name="MessagingScreen"
         component={MessagingScreen}
       />
-      <MessagingNavigation.Screen
+      <MessagingStack.Screen
         name="ChatScreen"
         component={ChatScreen}
       />
-    </MessagingNavigation.Navigator>
+    </MessagingStack.Navigator>
   );
 }
 

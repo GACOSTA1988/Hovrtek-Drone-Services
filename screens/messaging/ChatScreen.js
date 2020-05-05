@@ -7,13 +7,13 @@ import { TouchableOpacity,
   ScrollView,
   TextInput,
   FlatList,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
   } from "react-native";
 import {
   Ionicons,
   FontAwesome5,
   MaterialCommunityIcons,
-  Alert
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
@@ -48,6 +48,7 @@ function ChatScreen(props, { getMessages, postMessages }) {
         conversation.push(message);
       }
     });
+    // change message to read
   }
 
   const send = (e) => {

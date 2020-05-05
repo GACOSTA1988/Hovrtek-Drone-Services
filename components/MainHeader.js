@@ -12,6 +12,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../assets/hovrtek_logo.png";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
+import Notification from './Notification';
 
 const MainHeader = () => {
   const navigation = useNavigation();
@@ -29,6 +30,7 @@ const MainHeader = () => {
         color="white"
         resizeMode="contain"
       />
+      <Notification/>
     </View>
   );
 };

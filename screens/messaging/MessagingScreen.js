@@ -24,7 +24,6 @@ function MessagingScreen(props, { getMessages, getPilotProfiles }) {
     props.listOfMessages.forEach((message) => {
       if (message.userOneID === user.uid) {
         contact = props.listOfPilotProfiles.find((x) => x.userID === message.userTwoID);
-        console.log("message", message);
         if (contact && !contacts.includes(contact)) {
           contacts.push(contact);
         }

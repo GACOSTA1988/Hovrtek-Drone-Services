@@ -30,14 +30,14 @@ const MainHeader = (props, { getMessages }) => {
 
   let userID = null;
   let unreadMessages = [];
-  if (firebase.auth().currentUser && props.listOfMessages) {
-    userID = firebase.auth().currentUser.uid;
-    props.listOfMessages.forEach((message) => {
-      if ((message.userTwoID === userID) && !message.read) {
-        unreadMessages.push(message);
-      }
-    })
-  }
+  // if (firebase.auth().currentUser && props.listOfMessages) {
+  //   userID = firebase.auth().currentUser.uid;
+  //   props.listOfMessages.forEach((message) => {
+  //     if ((message.userTwoID === userID) && !message.read) {
+  //       unreadMessages.push(message);
+  //     }
+  //   })
+  // }
 
   return (
     <View style={styles.MainHeaderWrapper}>

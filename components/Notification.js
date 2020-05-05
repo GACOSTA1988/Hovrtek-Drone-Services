@@ -6,7 +6,7 @@ const Notification = () => {
 
   const messages = useContext(NotificationContext);
 
-  if (messages) {
+  if (messages.length > 0) {
     return (
       <View style={styles.note}>
         {messages.length > 1 ? (

@@ -13,8 +13,7 @@ import { TouchableOpacity,
 import {
   Ionicons,
   FontAwesome5,
-  MaterialCommunityIcons,
-
+  MaterialCommunityIcons
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
@@ -50,6 +49,7 @@ function ChatScreen(props, { getMessages, postMessages }) {
         conversation.push(message);
       }
     });
+    // change message to read
   }
 
   const send = (e) => {

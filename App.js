@@ -64,6 +64,7 @@ export default () => {
       />
     );
   }
+  
   const authContext = useMemo(() => {
     return {
       updateUser: () => {

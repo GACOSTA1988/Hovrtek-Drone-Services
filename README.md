@@ -5,6 +5,7 @@
 ### Android
 * ~~footer moves up and gets in the way when keyboard appears~~ footer now disappears but is there for a split second - better but still not satisfactory
 *  the back button is a blank white square
+* clicking on some things just doesn't work - notifications particularly
 
 ### iOS
 * keyboard needs to push forms up
@@ -36,6 +37,6 @@
 
 * Open keyboard automatically when inputting work experience on pilot sign up form
 
-* Change Landing page on Client side to be CREATE NEW PROJECT instead of Projects. 
+* Change Landing page on Client side to be CREATE NEW PROJECT instead of Projects.
 * Make new Landing page for New Projects saying something like "WELCOME, MAKE A PROJECT"
 * Remove Account, Services and Location from CLIENT SIDE NAV STACK

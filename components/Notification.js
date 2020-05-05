@@ -1,19 +1,27 @@
-import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { NotificationContext } from "../context";
 
-const Notification = (props) => {
+const Notification = () => {
 
-  let message = "This is a notification!!!!!";
-  if (props.route) {
-    message = props.route.params.body;
-  }
+  const messages = useContext(NotificationContext);
 
-  if (message) {
+  if (messages) {
     return (
       <View style={styles.note}>
-        <TouchableOpacity>
-          <Text style={styles.messageText}>{message}</Text>
-        </TouchableOpacity>
+        {messages.length > 1 ? (
+          <TouchableOpacity
+            onPress={() => Alert.alert("pressed")}
+          >
+            <Text style={styles.messageText}>You have {messages.length} new messages</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => Alert.alert("pressed")}
+          >
+            <Text style={styles.messageText}>{messages}</Text>
+          </TouchableOpacity>
+        )}
       </View>
     )
   } else {
@@ -28,9 +36,9 @@ const styles = StyleSheet.create({
     right: 10,
     backgroundColor: "white",
     borderRadius: 15,
-    padding: 20,
-    // borderWidth: 1,
-    // borderColor: "#092455",
+    paddingLeft: 20,
+    paddingRight: 15,
+    paddingBottom: 20,
     shadowColor: "#000",
     shadowOffset: {
     	width: 0,
@@ -38,13 +46,18 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-
     elevation: 4,
-
+    flexDirection: "row"
   },
   messageText: {
+    paddingTop: 20
     // left: 10,
     // color: "white"
+  },
+  ex: {
+    paddingLeft: 10,
+    paddingBottom: 20,
+    paddingTop: 10
   }
 })
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Text,
   View,
@@ -7,30 +7,54 @@ import {
   Image,
   ShadowPropTypesIOS,
   Platform,
-  Dimensions
+  Dimensions,
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../assets/hovrtek_logo.png";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import Notification from './Notification';
+import { getMessages } from '../actions/index';
+import { connect } from "react-redux";
+import _ from "lodash";
+import * as firebase from 'firebase';
+import { NotificationContext } from "../context";
 
-const MainHeader = () => {
+const MainHeader = (props, { getMessages }) => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    props.getMessages();
+  }, []);
+
+  let userID = null;
+  let unreadMessages = [];
+  if (firebase.auth().currentUser && props.listOfMessages) {
+    userID = firebase.auth().currentUser.uid;
+    props.listOfMessages.forEach((message) => {
+      if ((message.userTwoID === userID) && !message.read) {
+        unreadMessages.push(message);
+      }
+    })
+  }
 
   return (
     <View style={styles.MainHeaderWrapper}>
-      <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
-      <Ionicons
-        style={styles.hamburger}
-        onPress={() => {
-          navigation.dispatch(DrawerActions.toggleDrawer());
-        }}
-        name="ios-menu"
-        size={45}
-        color="white"
-        resizeMode="contain"
-      />
-      <Notification/>
+      <NotificationContext.Provider value={unreadMessages}>
+        <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+        <Ionicons
+          style={styles.hamburger}
+          onPress={() => {
+            navigation.dispatch(DrawerActions.toggleDrawer());
+          }}
+          name="ios-menu"
+          size={45}
+          color="white"
+          resizeMode="contain"
+        />
+        <Notification />
+      </NotificationContext.Provider>
     </View>
   );
 };
@@ -98,7 +122,22 @@ const styles = StyleSheet.create({
         top: 10,
       },
     }),
-  },
+  }
 });
 
-export default MainHeader;
+function mapStateToProps(state) {
+  const listOfMessages = _.map(
+    state.messagesList.messagesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    }
+  );
+  return {
+    listOfMessages
+  };
+}
+
+export default connect(mapStateToProps, { getMessages })(MainHeader);

@@ -18,6 +18,7 @@ import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
 import { editClientProfile } from "../../actions/index";
 import ClientProfileUploader from "../../components/client/ClientProfileUploader";
+
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();

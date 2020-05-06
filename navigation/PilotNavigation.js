@@ -6,29 +6,17 @@ import SupportScreen from "../screens/pilot/SupportScreen";
 import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
+import MessagingNavigation from './MessagingNavigation';
 
 
 const PilotDrawer = createDrawerNavigator();
 
-// Trying to set up a notifications thing. Need to learn more about useContext
-// const [notifications, setNotifications] = useState(0);
-//
-// const notificationContext = useMemo(() => {
-//   return {
-//     notify: () => {
-//       setNotifications(notifications++);
-//     }
-//   }
-// }, []);
-
-
-
 const PilotNavigation = () => {
   return (
     <PilotDrawer.Navigator drawerPosition='right'>
-      <PilotDrawer.Screen 
-      name="Home" 
-      component={JobListMyJobsTabNavigation} 
+      <PilotDrawer.Screen
+      name="Home"
+      component={JobListMyJobsTabNavigation}
       />
       <PilotDrawer.Screen
         name="AboutScreen"
@@ -48,7 +36,11 @@ const PilotNavigation = () => {
         headerMode="none"
         options={{ title: "Profile" }}
       />
-
+      <PilotDrawer.Screen
+        name='MessagingScreen'
+        component={MessagingNavigation}
+        options={{ title: 'Messages' }}
+      />
       <PilotDrawer.Screen
         name="SignOutScreen"
         component={SignOutScreen}

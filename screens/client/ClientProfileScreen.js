@@ -15,7 +15,7 @@ import princePic01 from "../../assets/princePic01.jpg";
 import * as firebase from "firebase";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { getClientProfiles } from "../../actions/index";
+import { getClientProfiles } from "../../actions/clientProfiles";
 
 function ClientProfileScreen(props, { getClientProfiles }) {
   useEffect(() => {
@@ -79,6 +79,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
                 <AntDesign name="edit" size={40} />
               </TouchableOpacity>
             ) : (
+              <View>
               <TouchableOpacity
                 style={styles.chatButton}
                 onPress={() =>
@@ -90,6 +91,13 @@ function ClientProfileScreen(props, { getClientProfiles }) {
               >
                 <Text style={styles.chatText}>Chat</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => props.navigation.pop()}
+              >
+                <Text style={styles.chatText}>Back</Text>
+              </TouchableOpacity>
+              </View>
             )}
           </View>
           <Image
@@ -201,6 +209,14 @@ const styles = StyleSheet.create({
     padding: 7,
     borderRadius: 5,
   },
+  backButton: {
+    position: 'absolute',
+    right: 0,
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    top: 60
+  }
 });
 
 export default connect(mapStateToProps, { getClientProfiles })(

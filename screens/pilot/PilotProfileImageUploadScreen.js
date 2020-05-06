@@ -11,8 +11,7 @@ import {
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getPilotProfiles } from "../../actions/index";
-import { editPilotProfile } from "../../actions/index";
+import { getPilotProfiles, editPilotProfile } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import PilotProfileUploader from "../../components/auth/PilotProfileUploader";
@@ -104,7 +103,7 @@ function PilotProfileImageUploadScreen(
             <Text style={styles.subText}>
               {"\n"}
             {currentUserProps.pilotFirstName + ' ' +currentUserProps.pilotLastName}
-          
+
               {}
             </Text>
           ) : (

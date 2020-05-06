@@ -16,7 +16,7 @@ import { AntDesign } from "@expo/vector-icons";
 import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
-import { editClientProfile } from "../../actions/index";
+import { editClientProfile } from "../../actions/clientProfiles";
 import ClientProfileUploader from "../../components/client/ClientProfileUploader";
 
 // CONTEXT HOOKS PROFILE IMAGE URL

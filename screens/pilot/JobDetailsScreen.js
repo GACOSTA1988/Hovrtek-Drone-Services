@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet} from "react-native";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { getClientProfiles } from "../../actions/index";
+import { getClientProfiles } from "../../actions/clientProfiles";
 import _ from "lodash";
 
 function JobDetailsScreen(props, { getClientProfiles }) {

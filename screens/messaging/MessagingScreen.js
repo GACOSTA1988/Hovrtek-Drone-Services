@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList } from "react-native";
 import { connect } from "react-redux";
-import { getMessages, getPilotProfiles } from "../../actions/index";
+import { getMessages } from "../../actions/messages";
+import { getPilotProfiles } from "../../actions/pilotProfiles";
+import { getClientProfiles } from "../../actions/clientProfiles";
 import * as firebase from 'firebase';
 import _ from "lodash";
 
-function MessagingScreen(props, { getMessages, getPilotProfiles }) {
+function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfiles }) {
 
   useEffect(() => {
     props.getMessages();
     props.getPilotProfiles();
+    props.getClientProfiles();
   }, []);
 
   let user = null;
@@ -19,16 +22,22 @@ function MessagingScreen(props, { getMessages, getPilotProfiles }) {
 
   let contacts = [];
   let contact = null;
+  let listOfProfiles = null;
 
-  if (props.listOfMessages && (props.listOfPilotProfiles.length)) {
+  if (props.listOfPilotProfiles && props.listOfClientProfiles) {
+    listOfProfiles = props.listOfPilotProfiles.concat(props.listOfClientProfiles);
+    // console.log("LIST OF PROFILES", listOfProfiles);
+  }
+
+  if (props.listOfMessages && listOfProfiles) {
     props.listOfMessages.forEach((message) => {
       if (message.userOneID === user.uid) {
-        contact = props.listOfPilotProfiles.find((x) => x.userID === message.userTwoID);
+        contact = listOfProfiles.find((x) => x.userID === message.userTwoID);
         if (contact && !contacts.includes(contact)) {
           contacts.push(contact);
         }
       } else if (message.userTwoID === user.uid) {
-        contact = props.listOfPilotProfiles.find((x) => x.userID === message.userTwoID);
+        contact = listOfProfiles.find((x) => x.userID === message.userOneID);
         if (contact && !contacts.includes(contact)) {
           contacts.push(contact);
         }
@@ -45,12 +54,23 @@ function MessagingScreen(props, { getMessages, getPilotProfiles }) {
         keyExtractor={item => item.key}
         renderItem={({item}) => {
           return (
-            <TouchableOpacity
-              style={styles.contact}
-              onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
-            >
-              <Text>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
-            </TouchableOpacity>
+            <View>
+            {item.pilotFirstName ? (
+              <TouchableOpacity
+                style={styles.contact}
+                onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+              >
+                <Text>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.contact}
+                onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+              >
+                <Text>{item.firstName}{" "}{item.lastName}</Text>
+              </TouchableOpacity>
+            )}
+            </View>
           )
         }}
         />
@@ -74,9 +94,17 @@ function mapStateToProps(state) {
       key: key
     };
   });
+  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
+    return {
+      ...val,
+      key: key
+    };
+  });
+  // console.log("LIST OF CLIENT PROFILES", listOfClientProfiles, "LIST OF PILOT PROFILES", listOfPilotProfiles);
   return {
     listOfMessages,
-    listOfPilotProfiles
+    listOfPilotProfiles,
+    listOfClientProfiles
   };
 }
 
@@ -96,4 +124,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(mapStateToProps, { getMessages, getPilotProfiles })(MessagingScreen);
+export default connect(mapStateToProps, { getMessages, getPilotProfiles, getClientProfiles })(MessagingScreen);

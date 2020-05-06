@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { acceptJob } from "../../actions/index";
+import { acceptJob } from "../../actions/projects";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import * as firebase from 'firebase';

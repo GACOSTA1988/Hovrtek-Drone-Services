@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { editProject } from "../../actions/index";
+import { editProject } from "../../actions/projects";
 import { connect } from "react-redux";
 
 function EditProjectScreen(props, { editProject }) {

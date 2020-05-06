@@ -16,7 +16,7 @@ import {
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getProjects } from "../../actions/index";
+import { getProjects } from "../../actions/projects";
 import * as firebase from 'firebase';
 import _ from "lodash";
 

@@ -10,7 +10,8 @@ import {
   ScrollView
 } from "react-native";
 import { connect } from "react-redux";
-import { getProjects, deleteProject, getPilotProfiles } from "../../actions/index";
+import { getProjects, deleteProject } from "../../actions/projects";
+import { getPilotProfiles } from "../../actions/pilotProfiles";
 import _ from "lodash";
 import {
   Ionicons,

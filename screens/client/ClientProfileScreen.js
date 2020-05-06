@@ -15,7 +15,7 @@ import princePic01 from "../../assets/princePic01.jpg";
 import * as firebase from "firebase";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { getClientProfiles } from "../../actions/index";
+import { getClientProfiles } from "../../actions/clientProfiles";
 
 function ClientProfileScreen(props, { getClientProfiles }) {
   useEffect(() => {

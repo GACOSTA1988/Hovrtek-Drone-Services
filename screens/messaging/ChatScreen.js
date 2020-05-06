@@ -17,7 +17,7 @@ import {
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getMessages, postMessages } from "../../actions/index";
+import { getMessages, postMessages } from "../../actions/messages";
 import * as firebase from 'firebase';
 import _ from "lodash";
 import { AntDesign } from "@expo/vector-icons";
@@ -65,7 +65,6 @@ function ChatScreen(props, { getMessages, postMessages }) {
     setBody("");
   }
 
-
   return (
     <View>
       <View style={styles.inputBackButtoncontainer}>
@@ -79,11 +78,11 @@ function ChatScreen(props, { getMessages, postMessages }) {
             onChangeText={setBody}
             style={styles.input}
           />
-          <AntDesign 
-            style={styles.plusIcon} 
-            name="plus" 
+          <AntDesign
+            style={styles.plusIcon}
+            name="plus"
             size={25}
-            onPress={send} 
+            onPress={send}
           />
         </View>
 
@@ -124,7 +123,7 @@ function ChatScreen(props, { getMessages, postMessages }) {
         />
         <View>
         </View>
-  
+
     <Text style={styles.dummy}>dummy</Text>
     </ScrollView>
     </View>
@@ -141,8 +140,8 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingTop: 10,
     marginTop: 30,
-    width: "80%", 
-    height:45,
+    width: "80%",
+    height: 45,
     borderRadius: 20,
     backgroundColor: 'white',
     borderWidth: 3,
@@ -162,7 +161,7 @@ const styles = StyleSheet.create({
     top: -27,
     right: 14,
     color: 'gray'
-   
+
   },
   backButton: {
     marginTop: 20,

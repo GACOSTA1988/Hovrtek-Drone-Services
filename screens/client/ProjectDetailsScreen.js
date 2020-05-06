@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { getPilotProfiles } from "../../actions/index";
+import { getPilotProfiles } from "../../actions/pilotProfiles";
 import _ from "lodash";
 import { useNavigation } from "@react-navigation/native";
 

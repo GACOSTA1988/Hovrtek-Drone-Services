@@ -18,11 +18,9 @@ import {
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import {
-  getProjects,
-  getClientProfiles,
-  getPilotProfiles,
-} from "../../actions/index";
+import { getProjects } from "../../actions/projects";
+import { getClientProfiles } from "../../actions/clientProfiles";
+import { getPilotProfiles } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import { render } from "react-dom";

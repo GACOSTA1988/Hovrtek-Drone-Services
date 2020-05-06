@@ -9,8 +9,8 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import { postProjects } from "../../actions/index";
-import { postClientProfiles } from "../../actions/index";
+import { postProjects } from "../../actions/projects";
+import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";

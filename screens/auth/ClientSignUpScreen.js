@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
-import { postClientProfiles } from "../../actions/index";
+import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 

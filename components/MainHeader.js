@@ -15,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../assets/hovrtek_logo.png";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import Notification from './Notification';
-import { getMessages } from '../actions/index';
+import { getMessages } from '../actions/messages.js';
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as firebase from 'firebase';
@@ -30,14 +30,14 @@ const MainHeader = (props, { getMessages }) => {
 
   let userID = null;
   let unreadMessages = [];
-  // if (firebase.auth().currentUser && props.listOfMessages) {
-  //   userID = firebase.auth().currentUser.uid;
-  //   props.listOfMessages.forEach((message) => {
-  //     if ((message.userTwoID === userID) && !message.read) {
-  //       unreadMessages.push(message);
-  //     }
-  //   })
-  // }
+  if (firebase.auth().currentUser && props.listOfMessages) {
+    userID = firebase.auth().currentUser.uid;
+    props.listOfMessages.forEach((message) => {
+      if ((message.userTwoID === userID) && !message.read) {
+        unreadMessages.push(message);
+      }
+    })
+  }
 
   return (
     <View style={styles.MainHeaderWrapper}>

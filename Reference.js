@@ -41,7 +41,7 @@ import { AuthContext } from "../../context";
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getClientProfiles, postClientProfiles } from "../../actions/index";
+import { getClientProfiles, postClientProfiles } from "../../clientProfiles/index";
 import * as firebase from 'firebase';
 import _ from "lodash";
 
@@ -193,7 +193,6 @@ import {
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
-import { postProfiles } from "../../actions/index";
 import { connect } from "react-redux";
 
 

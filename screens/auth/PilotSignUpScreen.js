@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
-import { postPilotProfiles } from "../../actions/index";
+import { postPilotProfiles } from "../../actions/pilotProfiles";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
 import PilotProfileUploader from "../../components/auth/PilotProfileUploader.js";

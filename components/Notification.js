@@ -9,19 +9,13 @@ const Notification = () => {
   if (messages.length > 0) {
     return (
       <View style={styles.note}>
-        {messages.length > 0 ? (
-          <TouchableOpacity
-            onPress={() => Alert.alert("pressed")}
-          >
-            <Text style={styles.messageText}>You have {messages.length} new messages</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            onPress={() => Alert.alert("pressed")}
-          >
-            <Text style={styles.messageText}>{messages}</Text>
-          </TouchableOpacity>
-        )}
+
+        <TouchableOpacity
+          onPress={() => Alert.alert("pressed")}
+        >
+          <Text style={styles.messageText}>You have {messages.length} new messages</Text>
+        </TouchableOpacity>
+
       </View>
     )
   } else {

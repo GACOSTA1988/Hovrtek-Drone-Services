@@ -18,6 +18,7 @@ import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
 import { editClientProfile } from "../../actions/clientProfiles";
 import ClientProfileUploader from "../../components/client/ClientProfileUploader";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
@@ -58,7 +59,12 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <KeyboardAwareScrollView
+      style={{
+        flex: 1,
+        height: "100%",
+      }}
+    >
       {profileDetails ? (
         <View>
           <Image source={princePic01} style={styles.backgroundImage} />
@@ -137,7 +143,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
       ) : (
         <Text>Page unavailable</Text>
       )}
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 }
 

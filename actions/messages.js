@@ -14,12 +14,12 @@ export function getMessages() {
   };
 }
 
-export function postMessages(userOneID, userTwoID, timestamp, body, read) {
+export function postMessages(userOneID, userTwoID, body, read, timestamp) {
   return (dispatch) => {
     firebase
       .database()
       .ref("/messages")
-      .push({ userOneID, userTwoID, timestamp, body, read });
+      .push({ userOneID, userTwoID, body, read, timestamp });
   };
 }
 

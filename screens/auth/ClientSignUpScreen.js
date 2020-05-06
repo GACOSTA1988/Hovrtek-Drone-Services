@@ -13,6 +13,7 @@ import * as firebase from "firebase";
 import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function ClientSignUpScreen(props) {
   const navigation = props.navigation;
@@ -69,8 +70,13 @@ function ClientSignUpScreen(props) {
   }
 
   return (
-    <View style={styles.wrapper}>
-      <ScrollView>
+    <KeyboardAwareScrollView
+      style={{
+        flex: 1,
+        height: "100%",
+      }}
+    >
+      <View style={styles.wrapper}>
         <Text style={styles.text}>Create your client account</Text>
         <TouchableOpacity style={styles.textWrapper}>
           <TextInput
@@ -122,8 +128,8 @@ function ClientSignUpScreen(props) {
             style={{ fontWeight: 900 }}
           />
         </TouchableOpacity>
-      </ScrollView>
-    </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -133,7 +139,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // flex: .
     backgroundColor: "lightgray",
-    height: "100%",
+    height: "120%",
   },
   text: {
     marginTop: "5%",

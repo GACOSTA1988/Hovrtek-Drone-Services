@@ -14,12 +14,12 @@ import {
   Keyboard,
   Platform,
   Container,
+  Alert
 } from "react-native";
 import {
   Ionicons,
   FontAwesome5,
   MaterialCommunityIcons,
-  Alert,
   AntDesign,
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
@@ -28,6 +28,7 @@ import { getMessages, postMessages, readMessage } from "../../actions/messages";
 import * as firebase from "firebase";
 import _ from "lodash";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import moment from 'moment';
 
 function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   const navigation = useNavigation();
@@ -56,20 +57,19 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
         message.userTwoID === recipient.userID
       ) {
         conversation.push(message);
-      } else if (
-        message.userOneID === recipient.userID &&
-        message.userTwoID === sender.uid
-      ) {
-        try {
-          props.readMessage(true, message.key);
-          console.log("A MESSAGE WAS READ AND IT WAS THIS ONE", message);
-          conversation.push(message);
-        } catch (error) {
-          Alert.alert(error);
-          navigation.pop();
-        }
+      } else if (message.userOneID === recipient.userID && message.userTwoID === sender.uid) {
+        conversation.push(message);
       }
     });
+  }
+
+  function readMessages() {
+    conversation.forEach((message) => {
+      if (message.userTwoID === sender.uid && message.userOneID === recipient.userID) {
+        props.readMessage(true, message.key);
+        console.log("A MESSAGE WAS READ AND IT WAS THIS ONE", message);
+      }
+    })
   }
 
   const send = (e) => {
@@ -80,8 +80,11 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       return;
     }
 
-    let timestamp = "two o'clock";
-    props.postMessages(sender.uid, recipient.userID, timestamp, body, false);
+    let read = false;
+    let userOneID = sender.uid;
+    let userTwoID = recipient.userID;
+    let timestamp = moment(new Date()).format('MMMM, DD  YYYY')
+    props.postMessages(userOneID, userTwoID, body, read, timestamp);
     setBody("");
   };
 
@@ -111,6 +114,16 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
               <View>
                 <Text>Message sent at: {item.timestamp}</Text>
                 <Text>Message body: {item.body} </Text>
+                {item.read ? (
+                  <FontAwesome5
+                    name="check-circle"
+                    size={15}
+                    style={{textAlign: "right"}}
+                  />
+                ) : (
+                  // todo: filled in check circle when read, outline when not
+                  <Text></Text>
+                )}
               </View>
             </View>
           );
@@ -130,6 +143,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           placeholderTextColor="grey"
           value={body}
           onChangeText={setBody}
+          onFocus={() => readMessages()}
           style={{
             width: "80%",
             borderWidth: 4,
@@ -144,7 +158,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           style={{
             position: "absolute",
             top: "18%",
-            right: "15%",
+            right: "5%",
             color: "#092455",
           }}
           name="plus"

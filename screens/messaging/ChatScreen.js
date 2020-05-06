@@ -28,6 +28,7 @@ import { getMessages, postMessages, readMessage } from "../../actions/messages";
 import * as firebase from 'firebase';
 import _ from "lodash";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import moment from 'moment';
 
 function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   const navigation = useNavigation();
@@ -47,6 +48,31 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   if (props.route.params) {
     recipient = props.route.params;
   }
+
+
+// ERASE THIS IF YOU WANT
+  // var oldMessage = new Date()
+  // console.log("OLD ", oldMessage)
+  // var newMessage = oldMessage.getTime() -1;
+  // console.log("NEW", newMessage)
+  // date.setDate(nextDate);
+  // var newDate = date.toLocaleString();
+
+  // var currentDate = new Date();
+  // console.log("CURRENT DATE", currentDate)
+  // var date = currentDate.getDate();
+  // console.log("DATE", date)
+  // var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+  // console.log("MONTH", month)
+  // var year = currentDate.getFullYear();
+  // console.log("YEAR", year)
+  // var dateString = date + "-" + (month + 1) + "-" + year;
+  // console.log("dateString", dateString)
+  // let timestampNewConversations = moment(new Date()).format('LT')
+  // let timestampOldConversations = moment(new Date()).format('LLLL')
+  // console.log("NEW CONVERSATIONS", timestampNewConversations)
+  // console.log("OLD CONVERSATIONS", timestampOldConversations)
+
 
   let conversation = [];
   if (sender && recipient) {
@@ -74,7 +100,11 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       return;
     }
 
-    let timestamp = new Date();
+
+    // let timestampNewConversations = moment(new Date()).format('LT')
+    // let timestampOldConversations = moment(new Date()).format('LLLL')
+    let timestamp = moment(new Date()).format('LLLL')
+
     props.postMessages(sender.uid, recipient.userID, timestamp, body, false);
     setBody("");
   };
@@ -126,12 +156,14 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           onChangeText={setBody}
           style={{
             width: "80%",
-            borderWidth: 4,
+            borderWidth: 2,
             backgroundColor: "white",
             borderRadius: 20,
             height: 45,
             marginBottom: 10,
             marginTop: 20,
+            paddingRight: 40,
+            borderColor: "#092455"
           }}
         />
         <AntDesign

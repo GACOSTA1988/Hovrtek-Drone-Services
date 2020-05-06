@@ -47,7 +47,9 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Messaging Screen</Text>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title}>Messaging Screen</Text>
+      </View>
       {contacts ? (
         <FlatList
         data={contacts}
@@ -60,7 +62,7 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
                 style={styles.contact}
                 onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
               >
-                <Text>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
+                  <Text style={styles.contactText}>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
@@ -116,11 +118,29 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 40,
-    fontSize: 30
+    fontSize: 30,
+    backgroundColor: 'gray'
+  },
+  titleWrapper: {
+    width: "100%",
+    textAlign: 'center',
+
+
   },
   contact: {
-    paddingTop: 40
-  }
+    width: 250,
+    height: 50,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 30
+  },
+  contactText: {
+    color: 'white',
+    fontSize: 20
+  },
 
 });
 

@@ -9,7 +9,7 @@ const Notification = () => {
   if (messages.length > 0) {
     return (
       <View style={styles.note}>
-        {messages.length > 1 ? (
+        {messages.length > 0 ? (
           <TouchableOpacity
             onPress={() => Alert.alert("pressed")}
           >

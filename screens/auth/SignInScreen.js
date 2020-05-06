@@ -15,6 +15,7 @@ import {
 import * as firebase from "firebase";
 import landingPageImage from "../../assets/landingPageImage.png";
 import hovrtekLogo from "../../assets/hovrtek_logo.png";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -53,52 +54,60 @@ function SignInScreen({ navigation }) {
   };
 
   return (
-    <ImageBackground source={landingPageImage} style={styles.MainContainer}>
-      {/* <Image source={hovrtekLogo} style={styles.hovrtekLogo} /> */}
-      <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
-      <Text style={styles.imageTextTwo}>
-        THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
-      </Text>
-      <TouchableOpacity>
-        <Text style={styles.text}>Welcome Back</Text>
-        <TextInput
-          placeholder="Email"
-          placeholderTextColor="grey"
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor="grey"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
-          style={styles.input}
-        />
-      </TouchableOpacity>
+    <KeyboardAwareScrollView
+      style={{
+        flex: 1,
+        height: "100%",
+      }}
+    >
+      <ImageBackground source={landingPageImage} style={styles.MainContainer}>
+        <Text style={styles.imageText}>PROFESSIONAL DRONE SERVICES</Text>
+        <Text style={styles.imageTextTwo}>
+          THE FASTEST WAY TO GET AERIAL IMAGES AND DATA
+        </Text>
+        <TouchableOpacity>
+          <Text style={styles.text}>Welcome Back</Text>
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="grey"
+            value={email}
+            onChangeText={setEmail}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor="grey"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={setPassword}
+            style={styles.input}
+          />
+        </TouchableOpacity>
         <TouchableOpacity style={styles.signIn} onPress={signIn}>
           <Text style={styles.text}>SIGN IN</Text>
         </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.push("SignUp")}>
-        <Text style={styles.buttonText}>or Create an Account</Text>
-      </TouchableOpacity>
-    </ImageBackground>
+        <TouchableOpacity onPress={() => navigation.push("SignUp")}>
+          <Text style={styles.buttonText}>or Create an Account</Text>
+        </TouchableOpacity>
+      </ImageBackground>
+    </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   MainContainer: {
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
-    flex: 1,
-    width: "100%",
+    // position: "absolute",
+    // flex: 1,
+    // width: "100%",
+    height: 700,
   },
 
   buttonText: {
     textAlign: "center",
     color: "grey",
-    fontSize: 17
+    fontSize: 17,
   },
 
   input: {
@@ -108,21 +117,21 @@ const styles = StyleSheet.create({
     marginTop: 8,
     width: 250,
     color: "white",
-    padding: 10
+    padding: 10,
   },
 
   text: {
     textAlign: "center",
     color: "white",
-    fontSize: 17
+    fontSize: 17,
   },
-  hovrtekLogo: {
-    height: 50,
-    width: 280,
-    justifyContent: "center",
-    // marginLeft: 0,
-    marginBottom: 50,
-  },
+  // hovrtekLogo: {
+  //   height: 50,
+  //   width: 280,
+  //   justifyContent: "center",
+
+  //   marginBottom: 50,
+  // },
 
   imageText: {
     fontSize: 30,
@@ -130,6 +139,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "left",
     marginLeft: 10,
+    marginTop: 160,
   },
 
   imageTextTwo: {
@@ -146,8 +156,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 15,
     padding: 5,
-    borderRadius: 3
-  }
+    borderRadius: 3,
+  },
 });
 
 export default SignInScreen;

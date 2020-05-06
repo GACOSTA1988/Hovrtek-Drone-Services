@@ -23,9 +23,9 @@ import {
   AntDesign,
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { getMessages, postMessages, readMessage } from "../../actions/messages";
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 import _ from "lodash";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -51,9 +51,15 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   let conversation = [];
   if (sender && recipient) {
     props.listOfMessages.forEach((message) => {
-      if (message.userOneID === sender.uid && message.userTwoID === recipient.userID) {
+      if (
+        message.userOneID === sender.uid &&
+        message.userTwoID === recipient.userID
+      ) {
         conversation.push(message);
-      } else if (message.userOneID === recipient.userID && message.userTwoID === sender.uid) {
+      } else if (
+        message.userOneID === recipient.userID &&
+        message.userTwoID === sender.uid
+      ) {
         try {
           props.readMessage(true, message.key);
           console.log("A MESSAGE WAS READ AND IT WAS THIS ONE", message);
@@ -74,7 +80,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       return;
     }
 
-    let timestamp = new Date();
+    let timestamp = "two o'clock";
     props.postMessages(sender.uid, recipient.userID, timestamp, body, false);
     setBody("");
   };
@@ -195,6 +201,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getMessages, postMessages, readMessage })(
-  ChatScreen
-);
+export default connect(mapStateToProps, {
+  getMessages,
+  postMessages,
+  readMessage,
+})(ChatScreen);

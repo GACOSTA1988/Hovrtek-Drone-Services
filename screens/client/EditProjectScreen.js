@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { editProject } from "../../actions/projects";
 import { connect } from "react-redux";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function EditProjectScreen(props, { editProject }) {
   const projectDetails = props.route.params;
@@ -18,101 +19,110 @@ function EditProjectScreen(props, { editProject }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          elevation: 8,
-          borderRadius: 15,
-          backgroundColor: "#092455",
-          marginBottom: 15,
-          padding: 20,
-        }}
-      >
-        <Text
+    <KeyboardAwareScrollView
+      style={{
+        flex: 1,
+        height: "120%",
+        backgroundColor: "lightgray",
+      }}
+    >
+      <View style={styles.container}>
+        <View
           style={{
-            fontSize: 30,
-            color: "white",
-            fontWeight: "600",
-            textAlign: "center",
+            elevation: 8,
+            borderRadius: 15,
+            backgroundColor: "#092455",
+            marginBottom: 15,
+            padding: 20,
           }}
         >
-          Edit Project
-          {"\n"}
-        </Text>
-        <Text
-          style={{
-            fontSize: 20,
-            color: "gray",
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          Location
-        </Text>
-        <TextInput
-          style={{
-            marginTop: 10,
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 2,
-            color: "white",
-          }}
-          placeholderTextColor="grey"
-          placeholder="location"
-          onChangeText={setLocation}
-          value={location}
-        />
-        <Text
-          style={{
-            fontSize: 20,
-            color: "gray",
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          {"\n"}
-          Date
-        </Text>
-        <TextInput
-          style={{
-            marginTop: 10,
-            height: 90,
-            borderColor: "gray",
-            borderWidth: 2,
-            color: "white",
-          }}
-          placeholderTextColor="grey"
-          placeholder="date"
-          onChangeText={setDate}
-          value={date}
-        />
-        <Text
-          style={{
-            fontSize: 20,
-            color: "gray",
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          {"\n"}
-          Project Description
-        </Text>
-        <TextInput
-          style={{
-            marginTop: 10,
-            height: 90,
-            borderColor: "gray",
-            borderWidth: 2,
-            color: "white",
-          }}
-          placeholder="recording"
-          onChangeText={setRecording}
-          value={recording}
-        />
+          <Text
+            style={{
+              fontSize: 30,
+              color: "white",
+              fontWeight: "600",
+              textAlign: "center",
+            }}
+          >
+            Edit Project
+            {"\n"}
+          </Text>
+          <Text
+            style={{
+              fontSize: 20,
+              color: "gray",
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            Location
+          </Text>
+          <TextInput
+            style={{
+              marginTop: 10,
+              height: 40,
+              borderColor: "gray",
+              borderWidth: 2,
+              color: "white",
+            }}
+            placeholderTextColor="grey"
+            placeholder="location"
+            onChangeText={setLocation}
+            value={location}
+          />
+          <Text
+            style={{
+              fontSize: 20,
+              color: "gray",
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            {"\n"}
+            Date
+          </Text>
+          <TextInput
+            style={{
+              marginTop: 10,
+              height: 40,
+              borderColor: "gray",
+              borderWidth: 2,
+              color: "white",
+            }}
+            placeholderTextColor="grey"
+            placeholder="date"
+            onChangeText={setDate}
+            value={date}
+          />
+          <Text
+            style={{
+              fontSize: 20,
+              color: "gray",
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            {"\n"}
+            Project Description
+          </Text>
+          <TextInput
+            style={{
+              marginTop: 10,
+              height: 60,
+              borderColor: "gray",
+              borderWidth: 2,
+              color: "white",
+              // marginBottom: "10%",
+            }}
+            placeholder="recording"
+            onChangeText={setRecording}
+            value={recording}
+          />
+        </View>
+        <Button title="Save Changes" onPress={submit} />
+        <Button title="Back" onPress={() => props.navigation.goBack()} />
       </View>
-      <Button title="Save Changes" onPress={submit} />
-      <Button title="Back" onPress={() => props.navigation.goBack()} />
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -121,7 +131,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 30,
-    backgroundColor: "#fff",
+    backgroundColor: "lightgray",
+    height: "100%",
+    // marginTop: "10%",
   },
 });
 

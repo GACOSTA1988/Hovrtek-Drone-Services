@@ -9,8 +9,7 @@ import {
   Picker,
   ScrollView,
   Alert,
-  Image
-
+  Image,
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
@@ -18,6 +17,7 @@ import { postPilotProfiles } from "../../actions/pilotProfiles";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
 import PilotProfileUploader from "../../components/auth/PilotProfileUploader.js";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function PilotSignUpScreen(props) {
   const navigation = props.navigation;
@@ -90,8 +90,13 @@ function PilotSignUpScreen(props) {
     }
   }
   return (
-    <View style={styles.wrapper}>
-      <ScrollView style={styles.scrollView}>
+    <KeyboardAwareScrollView
+      style={{
+        flex: 1,
+        height: "100%",
+      }}
+    >
+      <View style={styles.wrapper}>
         <Text style={styles.textMain}>Create your pilot account</Text>
         <TouchableOpacity style={styles.textWrapper}>
           <TextInput
@@ -134,8 +139,8 @@ function PilotSignUpScreen(props) {
 
           <Button title="Sign up" onPress={signUp} />
         </TouchableOpacity>
-      </ScrollView>
-    </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: "center",
     backgroundColor: "lightgray",
-    height: "100%",
+    height: "120%",
     // justifyContent: 'center'
   },
   textMain: {

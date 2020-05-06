@@ -17,12 +17,12 @@ import {
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
-import { getMessages, postMessages } from "../../actions/messages";
+import { getMessages, postMessages, readMessage } from "../../actions/messages";
 import * as firebase from 'firebase';
 import _ from "lodash";
 import { AntDesign } from "@expo/vector-icons";
 
-function ChatScreen(props, { getMessages, postMessages }) {
+function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 
   const navigation = useNavigation();
 
@@ -45,11 +45,20 @@ function ChatScreen(props, { getMessages, postMessages }) {
   let conversation = [];
   if (sender && recipient) {
     props.listOfMessages.forEach((message) => {
-      if ((message.userOneID === sender.uid && message.userTwoID === recipient.userID) || (message.userOneID === recipient.userID && message.userTwoID === sender.uid)) {
+      if (message.userOneID === sender.uid && message.userTwoID === recipient.userID) {
         conversation.push(message);
+      } else if (message.userOneID === recipient.userID && message.userTwoID === sender.uid) {
+        try {
+          props.readMessage(true, message.key);
+          console.log("A MESSAGE WAS READ AND IT WAS THIS ONE", message);
+          conversation.push(message);
+        } catch (error) {
+          Alert.alert(error);
+          navigation.pop();
+        }
       }
     });
-    // change message to read
+
   }
 
   const send = (e) => {
@@ -61,7 +70,7 @@ function ChatScreen(props, { getMessages, postMessages }) {
     }
 
     let timestamp = new Date();
-    props.postMessages(sender.uid, recipient.userID, timestamp, body);
+    props.postMessages(sender.uid, recipient.userID, timestamp, body, false);
     setBody("");
   }
 
@@ -194,6 +203,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getMessages, postMessages })(
+export default connect(mapStateToProps, { getMessages, postMessages, readMessage })(
   ChatScreen
 );

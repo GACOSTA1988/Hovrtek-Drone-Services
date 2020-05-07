@@ -62,7 +62,9 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Messaging Screen</Text>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title}>Messaging Screen</Text>
+      </View>
       {contacts ? (
         <FlatList
         data={contacts}

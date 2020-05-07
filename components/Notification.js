@@ -11,11 +11,13 @@ const Notification = () => {
   if (visible) {
     return (
       <View style={styles.note}>
+
         <TouchableOpacity
           onPress={() => setVisible(false)}
         >
           <Text style={styles.messageText}>You have {messages.length} new messages</Text>
         </TouchableOpacity>
+
       </View>
     )
   } else {

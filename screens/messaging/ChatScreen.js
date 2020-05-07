@@ -49,6 +49,31 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
     recipient = props.route.params;
   }
 
+
+// ERASE THIS IF YOU WANT
+  // var oldMessage = new Date()
+  // console.log("OLD ", oldMessage)
+  // var newMessage = oldMessage.getTime() -1;
+  // console.log("NEW", newMessage)
+  // date.setDate(nextDate);
+  // var newDate = date.toLocaleString();
+
+  // var currentDate = new Date();
+  // console.log("CURRENT DATE", currentDate)
+  // var date = currentDate.getDate();
+  // console.log("DATE", date)
+  // var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+  // console.log("MONTH", month)
+  // var year = currentDate.getFullYear();
+  // console.log("YEAR", year)
+  // var dateString = date + "-" + (month + 1) + "-" + year;
+  // console.log("dateString", dateString)
+  // let timestampNewConversations = moment(new Date()).format('LT')
+  // let timestampOldConversations = moment(new Date()).format('LLLL')
+  // console.log("NEW CONVERSATIONS", timestampNewConversations)
+  // console.log("OLD CONVERSATIONS", timestampOldConversations)
+
+
   let conversation = [];
   if (sender && recipient) {
     props.listOfMessages.forEach((message) => {
@@ -80,11 +105,13 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       return;
     }
 
+
     let read = false;
     let userOneID = sender.uid;
     let userTwoID = recipient.userID;
     let timestamp = moment(new Date()).format('MMMM, DD  YYYY')
     props.postMessages(userOneID, userTwoID, body, read, timestamp);
+
     setBody("");
   };
 
@@ -146,12 +173,14 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           onFocus={() => readMessages()}
           style={{
             width: "80%",
-            borderWidth: 4,
+            borderWidth: 2,
             backgroundColor: "white",
             borderRadius: 20,
             height: 45,
             marginBottom: 10,
             marginTop: 20,
+            paddingRight: 40,
+            borderColor: "#092455"
           }}
         />
         <AntDesign

@@ -42,14 +42,12 @@ function PilotProfileWelcomeScreen(
     user = firebase.auth().currentUser;
     if (user.photoURL === "P") {
       profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
-      console.log(props.listOfPilotProfiles);
       try {
         if (
           (!profileDetails && profile) ||
           (profileDetails && profileDetails != profile)
         ) {
           setCurrentUserProps(profile);
-          console.log("profileDetails", profileDetails);
           passedProps = profile;
         }
       } catch (error) {
@@ -357,7 +355,6 @@ function mapStateToProps(state) {
       };
     }
   );
-  console.log("THESE ARE PILOT PROFILES", listOfPilotProfiles);
   return {
     listOfPilotProfiles,
   };

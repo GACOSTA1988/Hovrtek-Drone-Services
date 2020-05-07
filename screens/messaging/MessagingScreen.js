@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, Image } from "react-native";
 import { connect } from "react-redux";
 import { getMessages } from "../../actions/messages";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
@@ -54,22 +54,37 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
         keyExtractor={item => item.key}
         renderItem={({item}) => {
           return (
-            <View>
-            {item.pilotFirstName ? (
-              <TouchableOpacity
-                style={styles.contact}
-                onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
-              >
-                <Text>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                style={styles.contact}
-                onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
-              >
-                <Text>{item.firstName}{" "}{item.lastName}</Text>
-              </TouchableOpacity>
-            )}
+            <View style={{flexDirection: "row"}}>
+              {item.profileImageUrl ? (
+                <Image
+                source={{
+                  uri: item.profileImageUrl
+                }}
+                style={styles.profilePic}
+                />
+              ) : (
+                <Image
+                source={{
+                  uri: "https://thenypost.files.wordpress.com/2017/07/ameliaearhart.jpg?quality=90&strip=all&w=1200"
+                }}
+                style={styles.profilePic}
+                />
+              )}
+              {item.pilotFirstName ? (
+                <TouchableOpacity
+                  style={styles.contact}
+                  onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+                >
+                  <Text style={styles.names}>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.contact}
+                  onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+                >
+                  <Text style={styles.names}>{item.firstName}{" "}{item.lastName}</Text>
+                </TouchableOpacity>
+              )}
             </View>
           )
         }}
@@ -112,14 +127,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     marginTop: 40,
-    fontSize: 30
+    fontSize: 30,
+    textAlign: "center"
   },
   contact: {
-    paddingTop: 40
+    paddingTop: 30
+  },
+  names: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  profilePic: {
+    height: 70,
+    width: 70,
+    borderRadius: 90,
+    borderWidth: 4,
+    borderColor: "#092455",
+    margin: 15
   }
 
 });

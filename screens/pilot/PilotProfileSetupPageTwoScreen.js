@@ -90,7 +90,6 @@ function PilotProfileSetupPageTwoScreen(
   );
 
   const submit = (e) => {
-    console.log(currentUserProps);
     props.editPilotProfile(
       currentUserProps.pilotLocation,
       personalBio,

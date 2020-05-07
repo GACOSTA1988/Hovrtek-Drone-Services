@@ -43,7 +43,6 @@ function ClientProfileUploader(props) {
       setlicenseThumbnail(result.uri);
     }
   }
-  console.log("FARRRRRT");
   async function uploadImage(uri, uuid) {
     const response = await fetch(uri);
     const blob = await response.blob();

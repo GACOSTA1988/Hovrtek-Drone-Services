@@ -1,17 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
 import { NotificationContext } from "../context";
 
 const Notification = () => {
 
-  const messages = useContext(NotificationContext);
+  const noteContext = useContext(NotificationContext);
+  const messages = noteContext[0];
+  const [visible, setVisible] = useState(noteContext[1]);
 
-  if (messages.length > 0) {
+  if (visible) {
     return (
       <View style={styles.note}>
 
         <TouchableOpacity
-          onPress={() => Alert.alert("pressed")}
+          onPress={() => setVisible(false)}
         >
           <Text style={styles.messageText}>You have {messages.length} new messages</Text>
         </TouchableOpacity>
@@ -25,9 +27,17 @@ const Notification = () => {
 
 const styles = StyleSheet.create({
   note: {
+    ...Platform.select({
+      ios: {
+        top: 70,
+        right: 20
+      },
+      android: {
+        top: 20,
+        alignSelf: "center"
+      }
+    }),
     position: "absolute",
-    top: 70,
-    right: 10,
     backgroundColor: "white",
     borderRadius: 15,
     paddingLeft: 20,

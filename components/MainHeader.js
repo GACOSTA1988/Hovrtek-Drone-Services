@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -30,19 +30,39 @@ const MainHeader = (props, { getMessages }) => {
 
   let userID = null;
   let unreadMessages = [];
+  const [noteVisible, setNoteVisible] = useState(false);
   if (firebase.auth().currentUser && props.listOfMessages) {
     userID = firebase.auth().currentUser.uid;
     props.listOfMessages.forEach((message) => {
       if ((message.userTwoID === userID) && !message.read) {
-        unreadMessages.push(message);
+        if (!unreadMessages.includes(message)) {
+          unreadMessages.push(message);
+        }
       }
     })
+    console.log("UNREAD MESSAGES", unreadMessages);
   }
 
   return (
     <View style={styles.MainHeaderWrapper}>
-      <NotificationContext.Provider value={unreadMessages}>
+      <NotificationContext.Provider value={[unreadMessages, noteVisible]}>
         <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+        {unreadMessages.length > 0 ? (
+          <View style={styles.dot}><Text></Text></View>
+        ) : (
+          <View></View>
+        )}
+        {noteVisible ? (
+          <View style={styles.note}>
+            <TouchableOpacity
+              onPress={() => setNoteVisible(false)}
+            >
+              <Text style={styles.messageText}>You have {unreadMessages.length} new messages</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View></View>
+        )}
         <Ionicons
           style={styles.hamburger}
           onPress={() => {
@@ -53,7 +73,6 @@ const MainHeader = (props, { getMessages }) => {
           color="white"
           resizeMode="contain"
         />
-        <Notification />
       </NotificationContext.Provider>
     </View>
   );
@@ -63,37 +82,34 @@ const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   MainHeaderWrapper: {
+    backgroundColor: "#092455",
+    justifyContent: "center",
     ...Platform.select({
       ios: {
         marginTop: 18,
         marginBottom: 20,
-        backgroundColor: "#092455",
         width: 425,
         height: 60,
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
         borderBottomWidth: 10,
         borderBottomColor: "grey",
       },
       android: {
-        backgroundColor: "#092455",
         left: -16,
-        // top: 5,
         alignSelf: "stretch",
         width: width,
         height: 80,
-        justifyContent: "center"
       },
     }),
   },
 
   hovrtekLogo: {
+    position: "absolute",
     ...Platform.select({
       ios: {
         width: 170,
         height: 30,
-        position: "absolute",
         left: 0,
         right: 10,
         top: 7,
@@ -102,7 +118,6 @@ const styles = StyleSheet.create({
       android: {
         width: 210,
         height: 40,
-        position: "absolute",
         left: 10,
         top: '35%',
       },
@@ -110,19 +125,57 @@ const styles = StyleSheet.create({
   },
 
   hamburger: {
+    alignSelf: "flex-end",
     ...Platform.select({
       ios: {
-        alignSelf: "flex-end",
         marginLeft: 300,
         margin: 0,
       },
       android: {
-        alignSelf: "flex-end",
         right: 10,
         top: 10,
       },
     }),
-  }
+  },
+  dot: {
+    backgroundColor: "red",
+    margin: 5,
+    width: 10,
+    height: 10,
+    position: "absolute",
+    right: 35,
+    borderRadius: 90
+  },
+  note: {
+    ...Platform.select({
+      ios: {
+        top: 70,
+        right: 20
+      },
+      android: {
+        top: 20,
+        alignSelf: "center"
+      }
+    }),
+    position: "absolute",
+    backgroundColor: "white",
+    borderRadius: 15,
+    paddingLeft: 20,
+    paddingRight: 15,
+    paddingBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+    	height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+    flexDirection: "row"
+  },
+  messageText: {
+    paddingTop: 20
+  },
 });
 
 function mapStateToProps(state) {

@@ -8,7 +8,6 @@ import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
 import MessagingNavigation from './MessagingNavigation';
 
-
 const PilotDrawer = createDrawerNavigator();
 
 const PilotNavigation = () => {

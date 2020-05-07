@@ -109,7 +109,6 @@ function PilotProfileSetupPageOneScreen(
       Alert.alert("Please fill in your insurance status");
       navigation.navigate("PilotProfileSetupPageOneScreen");
     } else {
-      console.log(currentUserProps);
       props.editPilotProfile(
         currentUserProps.pilotLocation,
         personalBio,

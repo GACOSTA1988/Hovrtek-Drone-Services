@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity, Image } from "react-native";
 import { connect } from "react-redux";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
 import _ from "lodash";
@@ -23,16 +23,18 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.ProjectText}>Project Details</Text>
+      <Text style={styles.ProjectText}>Details:</Text>
+      <View style={styles.line} />
+      <Text style={styles.detailsHeader}>Where</Text>
       <Text style={styles.DetailsText}>
-        Project location: {projectDetails.location}
+        {projectDetails.location}
       </Text>
-      <Text style={styles.DetailsText}>Project Date: {projectDetails.date}</Text>
-      <Text style={styles.DetailsText}>
-        Project Recording: {projectDetails.recording}
-      </Text>
+      <Text style={styles.detailsHeader}>When</Text>
+      <Text style={styles.DetailsText}>{projectDetails.date}</Text>
+      <Text style={styles.detailsHeader}>What</Text>
+      <Text style={styles.DetailsText}>{projectDetails.recording}</Text>
+      <Text style={styles.detailsHeader}>Your pilot</Text>
       {pilot ? (
-
       <TouchableOpacity
         onPress={() =>
           navigation.navigate(
@@ -43,18 +45,39 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
           )
         }
       >
-        <Text style={styles.DetailsText}>
-          Pilot: {pilot.pilotFirstName}{" "}{pilot.pilotLastName}
-        </Text>
+        <View style={{flexDirection: "row"}}>
+        {pilot.profileImageUrl ? (
+          <Image
+          source={{
+            uri: pilot.profileImageUrl
+          }}
+          style={styles.profilePic}
+          />
+        ) : (
+          <Image
+          source={{
+            uri: "https://thenypost.files.wordpress.com/2017/07/ameliaearhart.jpg?quality=90&strip=all&w=1200"
+          }}
+          style={styles.profilePic}
+          />
+        )}
+          <Text style={styles.nameText}>{pilot.pilotFirstName}{" "}{pilot.pilotLastName}</Text>
+        </View>
       </TouchableOpacity>
     ) : (
-      <Text style={styles.DetailsText}>
-        Pending Pilot
-      </Text>
+      <View style={{flexDirection: "row"}}>
+        <Image
+        source={{
+          uri: "https://thenypost.files.wordpress.com/2017/07/ameliaearhart.jpg?quality=90&strip=all&w=1200"
+        }}
+        style={styles.profilePic}
+        />
+        <Text style={styles.unnamedText}>Pending Pilot</Text>
+      </View>
     )}
       <TouchableOpacity
         onPress={() => props.navigation.pop()}>
-        <Text>Back to projects</Text>
+        <Text style={styles.back}>Back to projects</Text>
       </TouchableOpacity>
     </View>
   );
@@ -62,21 +85,58 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     padding: 20
   },
   ProjectText: {
-    fontSize: 30,
-    color: "darkblue",
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#3E90D0",
     marginBottom: 20,
-    textAlign: "center",
     marginTop: 10
   },
   DetailsText: {
-    marginBottom: 50,
-    textAlign: "center",
-    fontSize: 15,
+    marginBottom: 20,
+    fontSize: 17,
+    color: "grey",
     fontWeight: "800"
+  },
+  nameText: {
+    marginBottom: 20,
+    fontSize: 17,
+    color: "grey",
+    marginTop: 20,
+    fontWeight: "bold",
+    color: "darkblue"
+  },
+  unnamedText: {
+    marginBottom: 20,
+    fontSize: 17,
+    color: "grey",
+    marginTop: 20
+  },
+  line: {
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
+    marginBottom: 20
+  },
+  detailsHeader: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  back: {
+    marginTop: 40,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "darkblue"
+  },
+  profilePic: {
+    height: 50,
+    width: 50,
+    borderRadius: 90,
+    marginTop: 5,
+    // borderWidth: 4,
+    // borderColor: "#092455",
+    marginRight: 10
   }
 });
 

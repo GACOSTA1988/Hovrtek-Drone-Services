@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, Image } from "react-native";
 import { connect } from "react-redux";
 import { getMessages } from "../../actions/messages";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
@@ -23,10 +23,15 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
   let contacts = [];
   let contact = null;
   let listOfProfiles = null;
+  let listOfMyMessages = [];
 
-  if (props.listOfPilotProfiles && props.listOfClientProfiles) {
+  if (props.listOfPilotProfiles && props.listOfClientProfiles && props.listOfMessages) {
     listOfProfiles = props.listOfPilotProfiles.concat(props.listOfClientProfiles);
-    // console.log("LIST OF PROFILES", listOfProfiles);
+    props.listOfMessages.forEach((message) => {
+      if ((message.userOneID === user.uid) || (message.userTwoID === user.uid)) {
+        listOfMyMessages.push(message);
+      }
+    })
   }
 
   if (props.listOfMessages && listOfProfiles) {
@@ -45,6 +50,16 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
     });
   }
 
+  // if (listOfMyMessages && listOfProfiles) {
+  //   listOfProfiles.forEach((profile) => {
+  //     listOfMessages.forEach((message) => {
+  //       if ((message.userOneID === profile.userID) || (message.userTwoID === profile.userID)) {
+  //
+  //       }
+  //     })
+  //   })
+  // }
+
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
@@ -56,22 +71,37 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
         keyExtractor={item => item.key}
         renderItem={({item}) => {
           return (
-            <View>
-            {item.pilotFirstName ? (
-              <TouchableOpacity
-                style={styles.contact}
-                onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
-              >
-                  <Text style={styles.contactText}>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                style={styles.contact}
-                onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
-              >
-                <Text>{item.firstName}{" "}{item.lastName}</Text>
-              </TouchableOpacity>
-            )}
+            <View style={{flexDirection: "row"}}>
+              {item.profileImageUrl ? (
+                <Image
+                  source={{
+                    uri: item.profileImageUrl
+                  }}
+                  style={styles.profilePic}
+                />
+              ) : (
+                <Image
+                source={{
+                  uri: "https://thenypost.files.wordpress.com/2017/07/ameliaearhart.jpg?quality=90&strip=all&w=1200"
+                }}
+                style={styles.profilePic}
+                />
+              )}
+              {item.pilotFirstName ? (
+                <TouchableOpacity
+                  style={styles.contact}
+                  onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+                >
+                  <Text style={styles.names}>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.contact}
+                  onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+                >
+                  <Text style={styles.names}>{item.firstName}{" "}{item.lastName}</Text>
+                </TouchableOpacity>
+              )}
             </View>
           )
         }}
@@ -114,33 +144,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     marginTop: 40,
     fontSize: 30,
-    backgroundColor: 'gray'
-  },
-  titleWrapper: {
-    width: "100%",
-    textAlign: 'center',
-
-
+    textAlign: "center"
   },
   contact: {
-    width: 250,
-    height: 50,
-    backgroundColor: "#092455",
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 30
+    paddingTop: 30
   },
-  contactText: {
-    color: 'white',
-    fontSize: 20
+  names: {
+    fontSize: 20,
+    fontWeight: "bold"
   },
+  profilePic: {
+    height: 70,
+    width: 70,
+    borderRadius: 90,
+    borderWidth: 4,
+    borderColor: "#092455",
+    margin: 15
+  }
 
 });
 

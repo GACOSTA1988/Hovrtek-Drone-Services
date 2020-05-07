@@ -30,19 +30,28 @@ const MainHeader = (props, { getMessages }) => {
 
   let userID = null;
   let unreadMessages = [];
+  let noteVisible = false;
   if (firebase.auth().currentUser && props.listOfMessages) {
     userID = firebase.auth().currentUser.uid;
     props.listOfMessages.forEach((message) => {
       if ((message.userTwoID === userID) && !message.read) {
         unreadMessages.push(message);
+        noteVisible = true;
+        console.log("there is an unread message and noteVisible is true!");
       }
     })
+    console.log("UNREAD MESSAGES", unreadMessages);
   }
 
   return (
     <View style={styles.MainHeaderWrapper}>
-      <NotificationContext.Provider value={unreadMessages}>
+      <NotificationContext.Provider value={[unreadMessages, noteVisible]}>
         <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+        {noteVisible ? (
+          <View style={styles.dot}><Text></Text></View>
+        ) : (
+          <View></View>
+        )}
         <Ionicons
           style={styles.hamburger}
           onPress={() => {
@@ -63,37 +72,34 @@ const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   MainHeaderWrapper: {
+    backgroundColor: "#092455",
+    justifyContent: "center",
     ...Platform.select({
       ios: {
         marginTop: 18,
         marginBottom: 20,
-        backgroundColor: "#092455",
         width: 425,
         height: 60,
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
         borderBottomWidth: 10,
         borderBottomColor: "grey",
       },
       android: {
-        backgroundColor: "#092455",
         left: -16,
-        // top: 5,
         alignSelf: "stretch",
         width: width,
         height: 80,
-        justifyContent: "center"
       },
     }),
   },
 
   hovrtekLogo: {
+    position: "absolute",
     ...Platform.select({
       ios: {
         width: 170,
         height: 30,
-        position: "absolute",
         left: 0,
         right: 10,
         top: 7,
@@ -102,7 +108,6 @@ const styles = StyleSheet.create({
       android: {
         width: 210,
         height: 40,
-        position: "absolute",
         left: 10,
         top: '35%',
       },
@@ -110,18 +115,26 @@ const styles = StyleSheet.create({
   },
 
   hamburger: {
+    alignSelf: "flex-end",
     ...Platform.select({
       ios: {
-        alignSelf: "flex-end",
         marginLeft: 300,
         margin: 0,
       },
       android: {
-        alignSelf: "flex-end",
         right: 10,
         top: 10,
       },
     }),
+  },
+  dot: {
+    backgroundColor: "red",
+    margin: 5,
+    width: 10,
+    height: 10,
+    position: "absolute",
+    right: 35,
+    borderRadius: 90
   }
 });
 

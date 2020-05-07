@@ -23,10 +23,15 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
   let contacts = [];
   let contact = null;
   let listOfProfiles = null;
+  let listOfMyMessages = [];
 
-  if (props.listOfPilotProfiles && props.listOfClientProfiles) {
+  if (props.listOfPilotProfiles && props.listOfClientProfiles && props.listOfMessages) {
     listOfProfiles = props.listOfPilotProfiles.concat(props.listOfClientProfiles);
-    // console.log("LIST OF PROFILES", listOfProfiles);
+    props.listOfMessages.forEach((message) => {
+      if ((message.userOneID === user.uid) || (message.userTwoID === user.uid)) {
+        listOfMyMessages.push(message);
+      }
+    })
   }
 
   if (props.listOfMessages && listOfProfiles) {
@@ -45,6 +50,16 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
     });
   }
 
+  // if (listOfMyMessages && listOfProfiles) {
+  //   listOfProfiles.forEach((profile) => {
+  //     listOfMessages.forEach((message) => {
+  //       if ((message.userOneID === profile.userID) || (message.userTwoID === profile.userID)) {
+  //
+  //       }
+  //     })
+  //   })
+  // }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Messaging Screen</Text>
@@ -57,10 +72,10 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
             <View style={{flexDirection: "row"}}>
               {item.profileImageUrl ? (
                 <Image
-                source={{
-                  uri: item.profileImageUrl
-                }}
-                style={styles.profilePic}
+                  source={{
+                    uri: item.profileImageUrl
+                  }}
+                  style={styles.profilePic}
                 />
               ) : (
                 <Image

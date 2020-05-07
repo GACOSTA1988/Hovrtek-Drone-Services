@@ -6,13 +6,13 @@ const Notification = () => {
 
   const noteContext = useContext(NotificationContext);
   const messages = noteContext[0];
-  const visible = noteContext[1];
+  const [visible, setVisible] = useState(noteContext[1]);
 
   if (visible) {
     return (
       <View style={styles.note}>
         <TouchableOpacity
-          onPress={() => Alert.alert("pressed")}
+          onPress={() => setVisible(false)}
         >
           <Text style={styles.messageText}>You have {messages.length} new messages</Text>
         </TouchableOpacity>

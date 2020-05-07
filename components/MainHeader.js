@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -30,14 +30,14 @@ const MainHeader = (props, { getMessages }) => {
 
   let userID = null;
   let unreadMessages = [];
-  let noteVisible = false;
+  const [noteVisible, setNoteVisible] = useState(false);
   if (firebase.auth().currentUser && props.listOfMessages) {
     userID = firebase.auth().currentUser.uid;
     props.listOfMessages.forEach((message) => {
       if ((message.userTwoID === userID) && !message.read) {
-        unreadMessages.push(message);
-        noteVisible = true;
-        console.log("there is an unread message and noteVisible is true!");
+        if (!unreadMessages.includes(message)) {
+          unreadMessages.push(message);
+        }
       }
     })
     console.log("UNREAD MESSAGES", unreadMessages);
@@ -47,8 +47,19 @@ const MainHeader = (props, { getMessages }) => {
     <View style={styles.MainHeaderWrapper}>
       <NotificationContext.Provider value={[unreadMessages, noteVisible]}>
         <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
-        {noteVisible ? (
+        {unreadMessages.length > 0 ? (
           <View style={styles.dot}><Text></Text></View>
+        ) : (
+          <View></View>
+        )}
+        {noteVisible ? (
+          <View style={styles.note}>
+            <TouchableOpacity
+              onPress={() => setNoteVisible(false)}
+            >
+              <Text style={styles.messageText}>You have {unreadMessages.length} new messages</Text>
+            </TouchableOpacity>
+          </View>
         ) : (
           <View></View>
         )}
@@ -62,7 +73,6 @@ const MainHeader = (props, { getMessages }) => {
           color="white"
           resizeMode="contain"
         />
-        <Notification />
       </NotificationContext.Provider>
     </View>
   );
@@ -135,7 +145,37 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 35,
     borderRadius: 90
-  }
+  },
+  note: {
+    ...Platform.select({
+      ios: {
+        top: 70,
+        right: 20
+      },
+      android: {
+        top: 20,
+        alignSelf: "center"
+      }
+    }),
+    position: "absolute",
+    backgroundColor: "white",
+    borderRadius: 15,
+    paddingLeft: 20,
+    paddingRight: 15,
+    paddingBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+    	height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+    flexDirection: "row"
+  },
+  messageText: {
+    paddingTop: 20
+  },
 });
 
 function mapStateToProps(state) {

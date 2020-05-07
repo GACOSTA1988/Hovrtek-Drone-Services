@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet} from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { getClientProfiles } from "../../actions/clientProfiles";
@@ -21,30 +21,47 @@ function JobDetailsScreen(props, { getClientProfiles }) {
 
   return(
     <View style={styles.container}>
-      <Text style={styles.ProjectText}>Project Details</Text>
+      <Text style={styles.ProjectText}>Details:</Text>
+      <View style={styles.line} />
+      <Text style={styles.detailsHeader}>Where</Text>
       <Text style={styles.DetailsText}>
-        Project location: {jobDetails.location}
+        {jobDetails.location}
       </Text>
-      <Text style={styles.DetailsText}>Project Date: {jobDetails.date}</Text>
-      <Text style={styles.DetailsText}>
-        Project Recording: {jobDetails.recording}
-      </Text>
+      <Text style={styles.detailsHeader}>When</Text>
+      <Text style={styles.DetailsText}>{jobDetails.date}</Text>
+      <Text style={styles.detailsHeader}>What</Text>
+      <Text style={styles.DetailsText}>{jobDetails.recording}</Text>
+      <Text style={styles.detailsHeader}>Client</Text>
       {client ? (
-      <TouchableOpacity
-        onPress={() =>
-          props.navigation.navigate(
-            "ClientProfileScreen",
-            {
-              ...client
-            }
-          )
-        }
-      >
-
-        <Text style={styles.DetailsText}>
-          Client: {client.firstName}{" "}{client.lastName}
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(
+              "PilotProfileWelcomeScreen",
+              {
+                ...client
+              }
+            )
+          }
+        >
+          <View style={{flexDirection: "row"}}>
+          {client.profileImageUrl ? (
+            <Image
+            source={{
+              uri: client.profileImageUrl
+            }}
+            style={styles.profilePic}
+            />
+          ) : (
+            <Image
+            source={{
+              uri: "https://thenypost.files.wordpress.com/2017/07/ameliaearhart.jpg?quality=90&strip=all&w=1200"
+            }}
+            style={styles.profilePic}
+            />
+          )}
+            <Text style={styles.nameText}>{client.firstName}{" "}{client.lastName}</Text>
+          </View>
+        </TouchableOpacity>
     ) : (
       <Text style={styles.DetailsText}>
         Client:
@@ -84,36 +101,58 @@ function JobDetailsScreen(props, { getClientProfiles }) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     padding: 20
   },
   ProjectText: {
-    fontSize: 30,
-    color: "darkblue",
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#3E90D0",
     marginBottom: 20,
-    textAlign: "center",
     marginTop: 10
   },
   DetailsText: {
-    marginBottom: 50,
-    textAlign: "center",
-    fontSize: 15,
+    marginBottom: 20,
+    fontSize: 17,
+    color: "grey",
     fontWeight: "800"
   },
-  back: {
-    borderRadius: 5,
-    backgroundColor: 'red',
-    width: 120,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#092455',
-    margin: 10
-
+  line: {
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
+    marginBottom: 20
   },
-  backText: {
-    textAlign: 'center',
-    color: 'white'
+  detailsHeader: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  back: {
+    marginTop: 40,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "darkblue"
+  },
+  nameText: {
+    marginBottom: 20,
+    fontSize: 17,
+    color: "grey",
+    marginTop: 20,
+    fontWeight: "bold",
+    color: "darkblue"
+  },
+  unnamedText: {
+    marginBottom: 20,
+    fontSize: 17,
+    color: "grey",
+    marginTop: 20
+  },
+  profilePic: {
+    height: 50,
+    width: 50,
+    borderRadius: 90,
+    marginTop: 5,
+    // borderWidth: 4,
+    // borderColor: "#092455",
+    marginRight: 10
   }
 });
 

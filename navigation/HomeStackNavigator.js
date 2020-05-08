@@ -17,7 +17,7 @@ const HomeStack = createStackNavigator();
 
 const HomeStackNavigator = () => {
     return (
-        <HomeStack.Navigator headerMode="none">
+        <HomeStack.Navigator headerMode="none" initialRouteName="NewProjectScreenWelcome" >
             <HomeStack.Screen
                 name="NewProjectScreenWelcome"
                 component={NewProjectScreenWelcome}

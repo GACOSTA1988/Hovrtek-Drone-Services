@@ -8,7 +8,7 @@
 * clicking on some things just doesn't work - notifications particularly
 
 ### iOS
-* keyboard needs to push forms up
+* ~~keyboard needs to push forms up~~
 
 ### Both
 * auth headers need to be sorted out
@@ -16,6 +16,7 @@
 
 ## Other Bugs
 * Embedded image is SLOW to load on Client Support Screen / Client About Page
+* image just sometimes doesn't upload. Doesn't throw an error either
 
 ## Warnings on app
 * "Virtualized lists should never be nested inside plain scrollviews with the same orientation" error on PilotProfileSetupPageOneScreen

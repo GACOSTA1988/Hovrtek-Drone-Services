@@ -64,7 +64,7 @@ export default () => {
       />
     );
   }
-  
+
   const authContext = useMemo(() => {
     return {
       updateUser: () => {
@@ -90,23 +90,16 @@ export default () => {
                     title: "Home",
                     headerTitle: () => <MainHeader />,
                     headerStyle: {
-                      backgroundColor: "#092455",
-                    },
+                      backgroundColor: "#092455"
+                    }
                   }}
                 />
               </RootClientStack.Navigator>
             ) : userType === "P" ? (
-              <RootPilotStack.Navigator>
+              <RootPilotStack.Navigator headerMode={"none"}>
                 <RootPilotStack.Screen
                   name="Pilot"
                   component={PilotNavigation}
-                  options={{
-                    title: "Home",
-                    headerTitle: () => <MainHeader />,
-                    headerStyle: {
-                      backgroundColor: "#092455",
-                    },
-                  }}
                 />
               </RootPilotStack.Navigator>
             ) : (

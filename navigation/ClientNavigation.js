@@ -42,7 +42,14 @@ const ClientNavigation = () => {
       <ClientDrawer.Screen
         name='MessagingScreen'
         component={MessagingNavigation}
-        options={{ title: 'Messages' }}
+        headerMode="screen"
+        options={{
+          title: "Messages",
+          headerTitle: () => <MessagingHeader />,
+          headerStyle: {
+            backgroundColor: "#092455"
+          }
+        }}
       />
       {/* <ClientDrawer.Screen
         name="ChatScreen"

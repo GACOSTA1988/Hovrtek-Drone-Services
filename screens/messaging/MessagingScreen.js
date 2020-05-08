@@ -60,6 +60,10 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
   //   })
   // }
 
+  function goToChat(item) {
+    props.navigation.navigate("ChatScreen", { ...item });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
@@ -90,14 +94,14 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
               {item.pilotFirstName ? (
                 <TouchableOpacity
                   style={styles.contact}
-                  onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+                  onPress={() => {goToChat(item)}}
                 >
                   <Text style={styles.names}>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
                   style={styles.contact}
-                  onPress={() => props.navigation.navigate("ChatScreen", { ...item })}
+                  onPress={() => goToChat(item)}
                 >
                   <Text style={styles.names}>{item.firstName}{" "}{item.lastName}</Text>
                 </TouchableOpacity>

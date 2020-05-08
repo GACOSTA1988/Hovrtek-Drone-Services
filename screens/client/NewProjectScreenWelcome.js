@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
+import ClientSubheader from '../../components/client/ClientSubheader'
 
 function NewProjectScreenWelcome(props) {
     const navigation = useNavigation();
@@ -19,9 +20,6 @@ function NewProjectScreenWelcome(props) {
         clientID = firebase.auth().currentUser.uid;
     }
 
-
-
-
     const continueButton = () => {
         navigation.navigate("NewProjectScreenOne");
     }
@@ -29,6 +27,7 @@ function NewProjectScreenWelcome(props) {
 
     return (
         <View style={styles.newProjectListWrapper}>
+            <ClientSubheader/>
             <Text style={styles.welcomeText}>Welcome to</Text>
             <View style={styles.HeaderWrapper}>
                 <Image source={hovrtekLogo} style={styles.hovrtekLogo} />

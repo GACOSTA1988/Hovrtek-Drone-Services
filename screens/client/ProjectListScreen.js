@@ -44,7 +44,7 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
   return (
     <View style={styles.projectListWrapper}>
-  
+      <ClientSubheader/>
       <ScrollView>
         <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
           <Text style={styles.clientText}>My Projects</Text>

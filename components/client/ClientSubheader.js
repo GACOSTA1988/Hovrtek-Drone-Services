@@ -29,7 +29,7 @@ function ClientSubheader(props) {
 
             <View>
                 <TouchableOpacity style={styles.topButtonWrapperLeft}
-                    onPress={() => navigation.navigate('Create New Project')}
+                    onPress={() => navigation.navigate('NewProjectScreenWelcome')}
                 >
                     <Text style={styles.topButtonText}>Create New Project</Text>
                 </TouchableOpacity>
@@ -37,7 +37,7 @@ function ClientSubheader(props) {
 
             <View>
                 <TouchableOpacity style={styles.topButtonWrapperRight}
-                    onPress={() => navigation.navigate('Projects')}
+                    onPress={() => navigation.navigate('ProjectListScreen')}
                 >
                     <Text style={styles.topButtonText}>Projects</Text>
                 </TouchableOpacity>

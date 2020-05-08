@@ -7,6 +7,9 @@ import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
 import MessagingNavigation from './MessagingNavigation';
+import MainHeader from '../components/MainHeader';
+import NestedHeader from '../components/NestedHeader';
+import { Ionicons } from "@expo/vector-icons";
 
 const PilotDrawer = createDrawerNavigator();
 
@@ -20,19 +23,30 @@ const PilotNavigation = () => {
       <PilotDrawer.Screen
         name="AboutScreen"
         component={AboutScreen}
-        headerMode="none"
-        options={{ title: "About" }}
+        options={{
+          title: "About",
+          headerTitle: () => <MainHeader />,
+          headerStyle: {
+            backgroundColor: "#092455",
+            height: 100
+          },
+        }}
       />
       <PilotDrawer.Screen
         name="SupportScreen"
         component={SupportScreen}
-        headerMode="none"
-        options={{ title: "Support" }}
+        options={{
+          title: "Support",
+          headerTitle: () => <MainHeader />,
+          headerStyle: {
+            backgroundColor: "#092455",
+            height: 100
+          },
+        }}
       />
       <PilotDrawer.Screen
         name="Profile"
         component={PilotCreateProfileNavigation}
-        headerMode="none"
         options={{ title: "Profile" }}
       />
       <PilotDrawer.Screen

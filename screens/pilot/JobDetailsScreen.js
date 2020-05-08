@@ -35,8 +35,8 @@ function JobDetailsScreen(props, { getClientProfiles }) {
       {client ? (
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate(
-              "PilotProfileWelcomeScreen",
+            props.navigation.navigate(
+              "ClientProfileScreen",
               {
                 ...client
               }

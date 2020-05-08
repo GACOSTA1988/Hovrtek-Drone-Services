@@ -14,6 +14,7 @@ import ChatScreen from '../screens/messaging/ChatScreen';
 
 
 import { AuthContext } from "../context";
+import HomeStackNavigator from "./HomeStackNavigator";
 
 const ClientDrawer = createDrawerNavigator();
 
@@ -22,7 +23,7 @@ const ClientNavigation = () => {
     <ClientDrawer.Navigator drawerPosition='right'>
       <ClientDrawer.Screen
         name="Home"
-        component={ProjectsNewProjectTabNavigation}
+        component={HomeStackNavigator}
       />
       <ClientDrawer.Screen
         name='AboutScreen'

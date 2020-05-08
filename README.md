@@ -41,3 +41,6 @@
 * Change Landing page on Client side to be CREATE NEW PROJECT instead of Projects.
 * Make new Landing page for New Projects saying something like "WELCOME, MAKE A PROJECT"
 * Remove Account, Services and Location from CLIENT SIDE NAV STACK
+
+* Touchable opacity on ProjectList all "Glow" upon touch, only selected should do so.
+* Upon scrolling on ProjectList all projects "Glow". 

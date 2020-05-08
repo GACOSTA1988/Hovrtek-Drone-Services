@@ -10,19 +10,21 @@ import SignOutScreen from '../screens/auth/SignOutScreen';
 import ClientProfileNavigation from './ClientProfileNavigation';
 import MessagingNavigation from './MessagingNavigation';
 import ChatScreen from '../screens/messaging/ChatScreen';
+import GoHomeButton from '../screens/client/GoHomeButton';
 
 
-
-import { AuthContext } from "../context";
+import HomeStackNavigator from "./HomeStackNavigator";
 
 const ClientDrawer = createDrawerNavigator();
 
+
 const ClientNavigation = () => {
+
   return (
-    <ClientDrawer.Navigator drawerPosition='right'>
+    <ClientDrawer.Navigator initialRouteName="HomeStackNavigator" >
       <ClientDrawer.Screen
         name="Home"
-        component={ProjectsNewProjectTabNavigation}
+        component={HomeStackNavigator}
       />
       <ClientDrawer.Screen
         name='AboutScreen'

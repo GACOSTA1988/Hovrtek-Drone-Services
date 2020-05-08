@@ -49,29 +49,44 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
     recipient = props.route.params;
   }
 
+  console.log("SENDER", sender.userID)
+  console.log("LIST OF MESSAGES", props.listOfMessages)
+  let hour = 3.6e+6
+  let oneDay = 86400000
+  // let yesterday = date - 1000 * 60 * 60 * 24 * 1;
+  let currentTimestamp = new Date();
+  let databaseTimestamp = null
+  props.listOfMessages.forEach((message) => {
+    if (
+      message.userOneID === sender.uid &&
+      message.userTwoID === recipient.userID
+    ) {
+      databaseTimestamp = message.timestamp
+      console.log("MESSAGE TIMESTAMP", message.timestamp)
+      console.log("DATABASE TIMESTAMP INSIDE LOOP", databaseTimestamp)
+      console.log("CURRENT TIMESTAMP", currentTimestamp)
+      console.log("CALCULATION", databaseTimestamp - currentTimestamp)
+    }
+  })
+  console.log("DATABASE TIMESTAMP", databaseTimestamp)
 
-// ERASE THIS IF YOU WANT
-  // var oldMessage = new Date()
-  // console.log("OLD ", oldMessage)
-  // var newMessage = oldMessage.getTime() -1;
-  // console.log("NEW", newMessage)
-  // date.setDate(nextDate);
-  // var newDate = date.toLocaleString();
 
-  // var currentDate = new Date();
-  // console.log("CURRENT DATE", currentDate)
-  // var date = currentDate.getDate();
+  // let date = new Date();
   // console.log("DATE", date)
-  // var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-  // console.log("MONTH", month)
-  // var year = currentDate.getFullYear();
-  // console.log("YEAR", year)
-  // var dateString = date + "-" + (month + 1) + "-" + year;
-  // console.log("dateString", dateString)
-  // let timestampNewConversations = moment(new Date()).format('LT')
-  // let timestampOldConversations = moment(new Date()).format('LLLL')
-  // console.log("NEW CONVERSATIONS", timestampNewConversations)
-  // console.log("OLD CONVERSATIONS", timestampOldConversations)
+  // let yesterday = date - 1000 * 60 * 60 * 24 * 1;
+  // yesterday = new Date(yesterday);
+  // console.log("YESTERDAY", yesterday)
+  // let oneDay = 86400000
+  // console.log(date - yesterday >= oneDay)
+  // console.log(date - yesterday < oneDay)
+  // console.log("ONEDAY", oneDay)
+  // if (date - yesterday > oneDay){
+  //   timestamp = moment(new Date()).format('LL')
+  //   console.log("TIMESTAMP IF OLD", timestamp)
+  // } 
+  // if (date - yesterday <= oneDay){
+  //   timestamp = moment(new Date()).format('LLLL')
+  //   console.log("TIMESTAMP IF NEW", timestamp)
 
 
   let conversation = [];
@@ -87,6 +102,8 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       }
     });
   }
+
+  console.log("SENDER UID", sender.uid)
 
   function readMessages() {
     conversation.forEach((message) => {
@@ -105,12 +122,23 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       return;
     }
 
-
+    let isNewTimestamp = false;
     let read = false;
     let userOneID = sender.uid;
     let userTwoID = recipient.userID;
-    let timestamp = moment(new Date()).format('MMMM, DD  YYYY')
-    props.postMessages(userOneID, userTwoID, body, read, timestamp);
+
+    // console.log("FIRST MESSAGE TIMESTAMP", firstMessage)
+    // if (firstMessage && firstMessage ) {
+    //   alert("hhhhhh")
+    // }
+
+    let timestamp = moment(new Date()).format('LLLL')
+
+    // TIMESTAMP WITHOUT MOMENT FORMATTING
+    // let timestamp = new Date() 
+
+    // console.log("TIMESTAMP", timestamp)
+    props.postMessages(userOneID, userTwoID, body, read, timestamp, isNewTimestamp);
 
     setBody("");
   };
@@ -139,18 +167,31 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
               }}
             >
               <View>
-                <Text>Message sent at: {item.timestamp}</Text>
+
+                {console.log("ITEM . TIMESTAMP", item.isNewTimestamp)}
+                {(item.isNewTimestamp) ?
+                  <View>
+                    <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
+                    <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
+                  </View>
+                  :
+                  <Text>OLD Message sent at: {item.timestamp}</Text>
+
+                }
+
+
+
                 <Text>Message body: {item.body} </Text>
                 {item.read ? (
                   <FontAwesome5
                     name="check-circle"
                     size={15}
-                    style={{textAlign: "right"}}
+                    style={{ textAlign: "right" }}
                   />
                 ) : (
-                  // todo: filled in check circle when read, outline when not
-                  <Text></Text>
-                )}
+                    // todo: filled in check circle when read, outline when not
+                    <Text></Text>
+                  )}
               </View>
             </View>
           );
@@ -166,6 +207,8 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
         }}
       >
         <TextInput
+          multiline
+          numberOfLines={4}
           placeholder=" Send message..."
           placeholderTextColor="grey"
           value={body}
@@ -180,14 +223,15 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
             marginBottom: 10,
             marginTop: 20,
             paddingRight: 40,
-            borderColor: "#092455"
+            borderColor: "#092455",
+            paddingTop: 11
           }}
         />
         <AntDesign
           style={{
             position: "absolute",
             top: "18%",
-            right: "5%",
+            right: "13%",
             color: "#092455",
           }}
           name="plus"

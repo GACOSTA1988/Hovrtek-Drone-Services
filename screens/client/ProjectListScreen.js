@@ -21,6 +21,7 @@ import {
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import * as firebase from 'firebase';
+import ClientSubheader from "../../components/client/ClientSubheader";
 
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
@@ -43,6 +44,7 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
   return (
     <View style={styles.projectListWrapper}>
+      <ClientSubheader/>
       <ScrollView>
         <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
           <Text style={styles.clientText}>My Projects</Text>

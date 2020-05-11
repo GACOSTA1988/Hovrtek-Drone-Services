@@ -29,16 +29,11 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import moment from 'moment';
-import { AuthContext } from "../../context";
 
 function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   const navigation = useNavigation();
 
   const [body, setBody] = useState("");
-
-  // setting header to back type
-  const { setBackHeader } = useContext(AuthContext);
-  setBackHeader();
 
   useEffect(() => {
     props.getMessages();

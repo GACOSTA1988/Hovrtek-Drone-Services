@@ -74,14 +74,6 @@ export default () => {
         setLoggedIn(true);
         setUserType(user.photoURL);
       },
-      setBackHeader: () => {
-        setHeaderType('back');
-        console.log("set header back");
-      },
-      setMainHeader: () => {
-        setHeaderType('main');
-        console.log("set header main");
-      }
     };
   }, []);
 
@@ -106,37 +98,13 @@ export default () => {
                 />
               </RootClientStack.Navigator>
             ) : userType === "P" ? (
-              headerType === 'main' ? (
-              <RootPilotStack.Navigator>
+              <RootPilotStack.Navigator headerMode={"none"}>
                 <RootPilotStack.Screen
                   name="Pilot"
                   component={PilotNavigation}
                   headerMode="screen"
-                  options={{
-                    title: "Home",
-                    headerTitle: () => <MainHeader />,
-                    headerStyle: {
-                      backgroundColor: "#092455"
-                    }
-                  }}
                 />
               </RootPilotStack.Navigator>
-            ) : (
-              <RootPilotStack.Navigator>
-                <RootPilotStack.Screen
-                  name="Pilot"
-                  component={PilotNavigation}
-                  headerMode="screen"
-                  options={{
-                    title: "Home",
-                    headerTitle: () => <NestedHeader />,
-                    headerStyle: {
-                      backgroundColor: "#092455"
-                    }
-                  }}
-                />
-              </RootPilotStack.Navigator>
-            )
             ) : (
               <AuthStack.Navigator>
                 <AuthStack.Screen

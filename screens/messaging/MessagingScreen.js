@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, Image } from "react-native";
 import { connect } from "react-redux";
 import { getMessages } from "../../actions/messages";

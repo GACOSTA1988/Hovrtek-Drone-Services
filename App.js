@@ -7,6 +7,7 @@ import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
 import ClientNavigation from "./navigation/ClientNavigation";
 import MainHeader from "./components/MainHeader";
+import NestedHeader from "./components/NestedHeader";
 import PilotNavigation from "./navigation/PilotNavigation";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
@@ -40,6 +41,7 @@ export default () => {
 
   let [loggedIn, setLoggedIn] = useState(false);
   let [userType, setUserType] = useState(null);
+  let [headerType, setHeaderType] = useState('main');
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -100,6 +102,7 @@ export default () => {
                 <RootPilotStack.Screen
                   name="Pilot"
                   component={PilotNavigation}
+                  headerMode="screen"
                 />
               </RootPilotStack.Navigator>
             ) : (
@@ -123,6 +126,14 @@ export default () => {
                   component={SignUpNavigation}
                   options={{
                     title: "",
+                    headerLeft: () => (
+                      <Button
+                        onPress={() => navigation.goBack()}
+                        style={styles.backButton}
+                        title="Back"
+                        color="#fff"
+                      />
+                    ),
 
                     headerStyle: {
                       backgroundColor: "#092455",

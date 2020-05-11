@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 import { NotificationContext } from "../context";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
@@ -12,6 +13,46 @@ import NestedHeader from '../components/NestedHeader';
 import { Ionicons } from "@expo/vector-icons";
 
 const PilotDrawer = createDrawerNavigator();
+const AboutStack = createStackNavigator();
+const SupportStack = createStackNavigator();
+
+const AboutNavigation = () => {
+  return (
+    <AboutStack.Navigator>
+    <AboutStack.Screen
+    name='About'
+    component={AboutScreen}
+    options={{
+      title: "About",
+      headerTitle: () => <MainHeader />,
+      headerStyle: {
+        backgroundColor: "#092455",
+        height: 100
+      },
+    }}
+    />
+    </AboutStack.Navigator>
+  )
+}
+
+const SupportNavigation = () => {
+  return (
+    <SupportStack.Navigator>
+    <SupportStack.Screen
+    name='Support'
+    component={SupportScreen}
+    options={{
+      title: "Support",
+      headerTitle: () => <MainHeader />,
+      headerStyle: {
+        backgroundColor: "#092455",
+        height: 100
+      },
+    }}
+    />
+    </SupportStack.Navigator>
+  )
+}
 
 const PilotNavigation = () => {
   return (
@@ -22,27 +63,13 @@ const PilotNavigation = () => {
       />
       <PilotDrawer.Screen
         name="AboutScreen"
-        component={AboutScreen}
-        options={{
-          title: "About",
-          headerTitle: () => <MainHeader />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          },
-        }}
+        component={AboutNavigation}
+        options={{ title: "About" }}
       />
       <PilotDrawer.Screen
         name="SupportScreen"
-        component={SupportScreen}
-        options={{
-          title: "Support",
-          headerTitle: () => <MainHeader />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          },
-        }}
+        component={SupportNavigation}
+        options={{ title: "Support" }}
       />
       <PilotDrawer.Screen
         name="Profile"

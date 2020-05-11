@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, Image } from "react-native";
+import { AuthContext } from "../../context";
 import { connect } from "react-redux";
 import { getMessages } from "../../actions/messages";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
@@ -8,6 +9,10 @@ import * as firebase from 'firebase';
 import _ from "lodash";
 
 function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfiles }) {
+
+  // setting header to main type
+  const { setMainHeader } = useContext(AuthContext);
+  setMainHeader();
 
   useEffect(() => {
     props.getMessages();

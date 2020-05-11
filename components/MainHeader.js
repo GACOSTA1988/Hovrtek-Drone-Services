@@ -20,6 +20,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as firebase from 'firebase';
 import { NotificationContext } from "../context";
+import { HeaderContext } from '../context';
 
 const MainHeader = (props, { getMessages }) => {
   const navigation = useNavigation();

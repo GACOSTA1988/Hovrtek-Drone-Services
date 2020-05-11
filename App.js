@@ -7,6 +7,7 @@ import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
 import ClientNavigation from "./navigation/ClientNavigation";
 import MainHeader from "./components/MainHeader";
+import NestedHeader from "./components/NestedHeader";
 import PilotNavigation from "./navigation/PilotNavigation";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
@@ -40,6 +41,7 @@ export default () => {
 
   let [loggedIn, setLoggedIn] = useState(false);
   let [userType, setUserType] = useState(null);
+  let [headerType, setHeaderType] = useState('main');
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -72,6 +74,14 @@ export default () => {
         setLoggedIn(true);
         setUserType(user.photoURL);
       },
+      setBackHeader: () => {
+        setHeaderType('back');
+        console.log("set header back");
+      },
+      setMainHeader: () => {
+        setHeaderType('main');
+        console.log("set header main");
+      }
     };
   }, []);
 
@@ -96,12 +106,37 @@ export default () => {
                 />
               </RootClientStack.Navigator>
             ) : userType === "P" ? (
-              <RootPilotStack.Navigator headerMode={"none"}>
+              headerType === 'main' ? (
+              <RootPilotStack.Navigator>
                 <RootPilotStack.Screen
                   name="Pilot"
                   component={PilotNavigation}
+                  headerMode="screen"
+                  options={{
+                    title: "Home",
+                    headerTitle: () => <MainHeader />,
+                    headerStyle: {
+                      backgroundColor: "#092455"
+                    }
+                  }}
                 />
               </RootPilotStack.Navigator>
+            ) : (
+              <RootPilotStack.Navigator>
+                <RootPilotStack.Screen
+                  name="Pilot"
+                  component={PilotNavigation}
+                  headerMode="screen"
+                  options={{
+                    title: "Home",
+                    headerTitle: () => <NestedHeader />,
+                    headerStyle: {
+                      backgroundColor: "#092455"
+                    }
+                  }}
+                />
+              </RootPilotStack.Navigator>
+            )
             ) : (
               <AuthStack.Navigator>
                 <AuthStack.Screen
@@ -123,6 +158,14 @@ export default () => {
                   component={SignUpNavigation}
                   options={{
                     title: "",
+                    headerLeft: () => (
+                      <Button
+                        onPress={() => navigation.goBack()}
+                        style={styles.backButton}
+                        title="Back"
+                        color="#fff"
+                      />
+                    ),
 
                     headerStyle: {
                       backgroundColor: "#092455",

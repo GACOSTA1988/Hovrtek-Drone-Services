@@ -4,12 +4,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NotificationContext } from "../context";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
-import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
+import PilotHomeStackNavigator from "./PilotHomeStackNavigator";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
-import MessagingNavigation from './MessagingNavigation';
-import MainHeader from '../components/MainHeader';
-import NestedHeader from '../components/NestedHeader';
+import MessagingNavigation from "./MessagingNavigation";
+import MainHeader from "../components/MainHeader";
+import NestedHeader from "../components/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const PilotDrawer = createDrawerNavigator();
@@ -19,48 +19,45 @@ const SupportStack = createStackNavigator();
 const AboutNavigation = () => {
   return (
     <AboutStack.Navigator>
-    <AboutStack.Screen
-    name='About'
-    component={AboutScreen}
-    options={{
-      title: "About",
-      headerTitle: () => <MainHeader />,
-      headerStyle: {
-        backgroundColor: "#092455",
-        height: 100
-      },
-    }}
-    />
+      <AboutStack.Screen
+        name="About"
+        component={AboutScreen}
+        options={{
+          title: "About",
+          headerTitle: () => <MainHeader />,
+          headerStyle: {
+            backgroundColor: "#092455",
+            height: 100,
+          },
+        }}
+      />
     </AboutStack.Navigator>
-  )
-}
+  );
+};
 
 const SupportNavigation = () => {
   return (
     <SupportStack.Navigator>
-    <SupportStack.Screen
-    name='Support'
-    component={SupportScreen}
-    options={{
-      title: "Support",
-      headerTitle: () => <MainHeader />,
-      headerStyle: {
-        backgroundColor: "#092455",
-        height: 100
-      },
-    }}
-    />
+      <SupportStack.Screen
+        name="Support"
+        component={SupportScreen}
+        options={{
+          title: "Support",
+          headerTitle: () => <MainHeader />,
+          headerStyle: {
+            backgroundColor: "#092455",
+            height: 100,
+          },
+        }}
+      />
     </SupportStack.Navigator>
-  )
-}
+  );
+};
 
 const PilotNavigation = () => {
   return (
-    <PilotDrawer.Navigator drawerPosition='right'>
-      <PilotDrawer.Screen
-      name="Home"
-      component={JobListMyJobsTabNavigation}
-      />
+    <PilotDrawer.Navigator drawerPosition="right">
+      <PilotDrawer.Screen name="Home" component={PilotHomeStackNavigator} />
       <PilotDrawer.Screen
         name="AboutScreen"
         component={AboutNavigation}
@@ -77,9 +74,9 @@ const PilotNavigation = () => {
         options={{ title: "Profile" }}
       />
       <PilotDrawer.Screen
-        name='MessagingScreen'
+        name="MessagingScreen"
         component={MessagingNavigation}
-        options={{ title: 'Messages' }}
+        options={{ title: "Messages" }}
       />
       <PilotDrawer.Screen
         name="SignOutScreen"

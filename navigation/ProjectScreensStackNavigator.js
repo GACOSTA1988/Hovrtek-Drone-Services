@@ -23,7 +23,7 @@ function ProjectScreensStackNavigator() {
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
-          },
+          }
         }}
       />
       <ProjectScreensStack.Screen
@@ -35,7 +35,7 @@ function ProjectScreensStackNavigator() {
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
-          },
+          }
         }}
       />
       <ProjectScreensStack.Screen
@@ -47,7 +47,7 @@ function ProjectScreensStackNavigator() {
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
-          },
+          }
         }}
       />
       <ProjectScreensStack.Screen
@@ -59,7 +59,7 @@ function ProjectScreensStackNavigator() {
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
-          },
+          }
         }}
       />
       <ProjectScreensStack.Screen
@@ -71,7 +71,7 @@ function ProjectScreensStackNavigator() {
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
-          },
+          }
         }}
       />
     </ProjectScreensStack.Navigator>

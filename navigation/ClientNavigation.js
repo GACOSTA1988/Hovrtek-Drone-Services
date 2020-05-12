@@ -3,7 +3,6 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/client/SupportScreen";
-import ProjectsNewProjectTabNavigation from "./ProjectsNewProjectTabNavigation";
 import AccountScreen from '../screens/client/AccountScreen';
 import LocationScreen from '../screens/client/LocationScreen';
 import ServicesScreen from '../screens/client/ServicesScreen';
@@ -12,7 +11,10 @@ import ClientProfileNavigation from './ClientProfileNavigation';
 import MessagingNavigation from './MessagingNavigation';
 import ChatScreen from '../screens/messaging/ChatScreen';
 import GoHomeButton from '../screens/client/GoHomeButton';
-import HomeStackNavigator from "./HomeStackNavigator";
+import ClientHomeStackNavigator from "./ClientHomeStackNavigator";
+import MainHeader from '../components/MainHeader';
+import NestedHeader from '../components/NestedHeader';
+import { Ionicons } from "@expo/vector-icons";
 
 const ClientDrawer = createDrawerNavigator();
 const AboutStack = createStackNavigator();
@@ -59,10 +61,10 @@ const SupportNavigation = () => {
 const ClientNavigation = () => {
 
   return (
-    <ClientDrawer.Navigator initialRouteName="HomeStackNavigator" drawerPosition='right' >
+    <ClientDrawer.Navigator initialRouteName="ClientHomeStackNavigator" drawerPosition='right' >
       <ClientDrawer.Screen
         name="Home"
-        component={HomeStackNavigator}
+        component={ClientHomeStackNavigator}
       />
       <ClientDrawer.Screen
         name='AboutScreen'

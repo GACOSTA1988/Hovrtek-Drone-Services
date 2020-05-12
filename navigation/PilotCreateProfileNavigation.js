@@ -17,7 +17,7 @@ function PilotCreateProfileNavigation() {
         name="Profile"
         component={PilotProfileWelcomeScreen}
         options={{
-          title: "About",
+          title: "Profile",
           headerTitle: () => <MainHeader />,
           headerStyle: {
             backgroundColor: "#092455",

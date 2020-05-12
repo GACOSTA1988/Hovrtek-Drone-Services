@@ -16,11 +16,13 @@ function ClientProfileNavigator() {
         name="ClientProfileScreen"
         component={ClientProfileScreen}
         options={{
+          animationEnabled: false,
           title: "Profile",
           headerTitle: () => <MainHeader />,
           headerStyle: {
             backgroundColor: "#092455",
-            height: 100
+            height: 100,
+            
           },
         }}
       />
@@ -28,6 +30,7 @@ function ClientProfileNavigator() {
         name="ClientEditProfileScreen"
         component={ClientEditProfileScreen}
         options={{
+          animationEnabled: false,
           title: "Edit Profile",
           headerTitle: () => <NestedHeader />,
           headerStyle: {

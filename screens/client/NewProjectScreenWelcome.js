@@ -44,6 +44,7 @@ function NewProjectScreenWelcome(props) {
 const styles = StyleSheet.create({
     newProjectListWrapper: {
         alignItems: "center",
+        marginTop: 15
     },
     hovrtekLogo: {
         width: 320,

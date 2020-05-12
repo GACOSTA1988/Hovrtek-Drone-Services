@@ -44,11 +44,13 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
   return (
     <View style={styles.projectListWrapper}>
-      <ClientSubheader/>
-      <ScrollView>
+      <View style={styles.subheaderWrapper}>
+       <ClientSubheader/>
+      </View>
         <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
           <Text style={styles.clientText}>My Projects</Text>
         </TouchableOpacity>
+      <ScrollView>
 
         <View style={styles.projectCard}>
           <TouchableOpacity>
@@ -148,7 +150,8 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
 const styles = StyleSheet.create({
   projectCard: {
-    width: 380
+    width: 380,
+    marginBottom: 140
   },
   clientText: {
     fontSize: 30,
@@ -160,7 +163,10 @@ const styles = StyleSheet.create({
   },
   projectListWrapper: {
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 15,
+  },
+  subheaderWrapper: {
+    marginBottom: 10
   }
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NotificationContext } from "../context";
@@ -7,28 +7,28 @@ import SupportScreen from "../screens/pilot/SupportScreen";
 import PilotHomeStackNavigator from "./PilotHomeStackNavigator";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
-import MessagingNavigation from "./MessagingNavigation";
-import MainHeader from "../components/MainHeader";
-import NestedHeader from "../components/NestedHeader";
-import { Ionicons } from "@expo/vector-icons";
+import MessagingNavigation from './MessagingNavigation';
+import MainHeader from '../components/MainHeader';
+import NestedHeader from '../components/NestedHeader';
 
 const PilotDrawer = createDrawerNavigator();
 const AboutStack = createStackNavigator();
 const SupportStack = createStackNavigator();
 
+const mainHeaderStyle = {
+  backgroundColor: "#092455",
+  height: 100
+}
+
 const AboutNavigation = () => {
   return (
     <AboutStack.Navigator>
       <AboutStack.Screen
-        name="About"
+        name='About'
         component={AboutScreen}
         options={{
-          title: "About",
           headerTitle: () => <MainHeader />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100,
-          },
+          headerStyle: mainHeaderStyle
         }}
       />
     </AboutStack.Navigator>
@@ -39,15 +39,11 @@ const SupportNavigation = () => {
   return (
     <SupportStack.Navigator>
       <SupportStack.Screen
-        name="Support"
+        name='Support'
         component={SupportScreen}
         options={{
-          title: "Support",
           headerTitle: () => <MainHeader />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100,
-          },
+          headerStyle: mainHeaderStyle
         }}
       />
     </SupportStack.Navigator>
@@ -85,15 +81,6 @@ const PilotNavigation = () => {
         options={{ title: "Sign Out" }}
       />
     </PilotDrawer.Navigator>
-  );
-};
-
-const LogoTitle = () => {
-  return (
-    <Image
-      style={{ width: 130, height: 22, marginTop: 0 }}
-      source={require("../assets/hovrtek_logo.png")}
-    />
   );
 };
 

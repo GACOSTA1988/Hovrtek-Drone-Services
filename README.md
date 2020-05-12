@@ -26,7 +26,7 @@
 
 ## Possible bugs?
 
-* on Lee's phone, toggling between tabs sometimes doesn't work
+* back button in sign up stack skips back to sign in page no matter how far in the stack you are (?)
 
 ## Things to keep in mind
 
@@ -43,6 +43,7 @@
 * Remove Account, Services and Location from CLIENT SIDE NAV STACK
 
 * Touchable opacity on ProjectList all "Glow" upon touch, only selected should do so.
+
 * Upon scrolling on ProjectList all projects "Glow". 
 
 make time / phone stuff white

@@ -44,3 +44,5 @@
 
 * Touchable opacity on ProjectList all "Glow" upon touch, only selected should do so.
 * Upon scrolling on ProjectList all projects "Glow". 
+
+make time / phone stuff white

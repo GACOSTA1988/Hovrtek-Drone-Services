@@ -15,6 +15,7 @@ function MessagingNavigation() {
         name="MessagingScreen"
         component={MessagingScreen}
         options={{
+          headerBackTitle: " ",
           title: "Messaging",
           headerTitle: () => <MainHeader />,
           headerStyle: {
@@ -27,13 +28,14 @@ function MessagingNavigation() {
         name="ChatScreen"
         component={ChatScreen}
         options={{
+          headerBackTitle: " ",
           title: "Chat",
           headerTitle: () => <NestedHeader />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
           },
-          headerBackImage: () => <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />,
+          // headerBackImage: () => <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />,
         }}
       />
     </MessagingNavigatorStack.Navigator>

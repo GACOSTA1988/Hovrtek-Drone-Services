@@ -87,11 +87,6 @@ const ClientNavigation = () => {
         headerMode="screen"
         options={{ title: "Messages" }}
       />
-      {/* <ClientDrawer.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{ title: 'Messages' }}
-      /> */}
       <ClientDrawer.Screen
         name="SignOutScreen"
         component={SignOutScreen}

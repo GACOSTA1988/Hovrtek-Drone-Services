@@ -27,6 +27,7 @@ const ClientHomeStackNavigator = () => {
                 name="NewProjectScreenWelcome"
                 component={NewProjectScreenWelcome}
                 options={{
+                  headerBackTitle: " ",
                   title: "Welcome",
                   headerTitle: () => <MainHeader />,
                   headerStyle: mainHeaderStyle
@@ -36,6 +37,8 @@ const ClientHomeStackNavigator = () => {
                 name="NewProjectScreenOne"
                 component={NewProjectScreenOne}
                 options={{
+                  headerBackTitle: " ",
+                  title: "New Project",
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
                 }}
@@ -44,6 +47,8 @@ const ClientHomeStackNavigator = () => {
                 name="NewProjectScreenTwo"
                 component={NewProjectScreenTwo}
                 options={{
+                  headerBackTitle: " ",
+                  title: "New Project",
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
                 }}
@@ -52,6 +57,8 @@ const ClientHomeStackNavigator = () => {
                 name="NewProjectScreenThree"
                 component={NewProjectScreenThree}
                 options={{
+                  headerBackTitle: ' ',               
+                  title: "New Project",
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
                 }}
@@ -62,12 +69,16 @@ const ClientHomeStackNavigator = () => {
                 options={{
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
+                  headerBackTitle: " ",
+                  title: "",
                 }}
             />
             <HomeStack.Screen
                 name="ProjectDetailsScreen"
                 component={ProjectDetailsScreen}
                 options={{
+                  headerBackTitle: " ",
+                  title: "",
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
                 }}
@@ -76,6 +87,8 @@ const ClientHomeStackNavigator = () => {
                 name="EditProjectScreen"
                 component={EditProjectScreen}
                 options={{
+                  headerBackTitle: " ",
+                  title: "Edit",
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
                 }}
@@ -84,6 +97,8 @@ const ClientHomeStackNavigator = () => {
                 name="PilotProfileWelcomeScreen"
                 component={PilotProfileWelcomeScreen}
                 options={{
+                  headerBackTitle: " ",
+                  title: "Pilot Profile",
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
                 }}
@@ -94,6 +109,8 @@ const ClientHomeStackNavigator = () => {
                 options={{
                   headerTitle: () => <NestedHeader />,
                   headerStyle: mainHeaderStyle
+                  headerBackTitle: " ",
+                  title: "Pilot Profile",
                 }}
             />
         </HomeStack.Navigator>

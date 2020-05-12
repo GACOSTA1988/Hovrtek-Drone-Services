@@ -14,26 +14,26 @@ import GoHomeButton from '../screens/client/GoHomeButton';
 import ClientHomeStackNavigator from "./ClientHomeStackNavigator";
 import MainHeader from '../components/MainHeader';
 import NestedHeader from '../components/NestedHeader';
-import { Ionicons } from "@expo/vector-icons";
 
 const ClientDrawer = createDrawerNavigator();
 const AboutStack = createStackNavigator();
 const SupportStack = createStackNavigator();
 
+const mainHeaderStyle = {
+  backgroundColor: "#092455",
+  height: 100
+}
+
 const AboutNavigation = () => {
   return (
     <AboutStack.Navigator>
       <AboutStack.Screen
-      name='AboutScreen'
-      component={AboutScreen}
-      options={{
-        title: "About",
-        headerTitle: () => <MainHeader />,
-        headerStyle: {
-          backgroundColor: "#092455",
-          height: 100
-        },
-      }}
+        name='About'
+        component={AboutScreen}
+        options={{
+          headerTitle: () => <MainHeader />,
+          headerStyle: mainHeaderStyle
+        }}
       />
     </AboutStack.Navigator>
   )
@@ -42,18 +42,14 @@ const AboutNavigation = () => {
 const SupportNavigation = () => {
   return (
     <SupportStack.Navigator>
-    <SupportStack.Screen
-    name='Support'
-    component={SupportScreen}
-    options={{
-      title: "Support",
-      headerTitle: () => <MainHeader />,
-      headerStyle: {
-        backgroundColor: "#092455",
-        height: 100
-      },
-    }}
-    />
+      <SupportStack.Screen
+        name='Support'
+        component={SupportScreen}
+        options={{
+          headerTitle: () => <MainHeader />,
+          headerStyle: mainHeaderStyle
+        }}
+      />
     </SupportStack.Navigator>
   )
 }
@@ -63,18 +59,17 @@ const ClientNavigation = () => {
   return (
     <ClientDrawer.Navigator initialRouteName="ClientHomeStackNavigator" drawerPosition='right' >
       <ClientDrawer.Screen
-        name="Home"
+        name="ClientHomeStackNavigator"
         component={ClientHomeStackNavigator}
+        options={{ title: 'Home' }}
       />
       <ClientDrawer.Screen
-        name='AboutScreen'
+        name='About'
         component={AboutNavigation}
-        options={{ title: 'About' }}
       />
       <ClientDrawer.Screen
-        name='SupportScreen'
+        name='Support'
         component={SupportNavigation}
-        options={{ title: 'Support' }}
       />
       <ClientDrawer.Screen
         name='ClientProfileNavigation'
@@ -82,21 +77,12 @@ const ClientNavigation = () => {
         options={{ title: 'Public Profile' }}
       />
       <ClientDrawer.Screen
-        name='MessagingScreen'
+        name='Messages'
         component={MessagingNavigation}
-        headerMode="screen"
-        options={{ title: "Messages" }}
       />
-      {/* <ClientDrawer.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{ title: 'Messages' }}
-      /> */}
       <ClientDrawer.Screen
-        name="SignOutScreen"
+        name="Sign Out"
         component={SignOutScreen}
-        headerMode="none"
-        options={{ title: "Sign Out" }}
       />
     </ClientDrawer.Navigator>
   );

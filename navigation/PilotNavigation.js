@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NotificationContext } from "../context";
@@ -10,11 +10,15 @@ import SignOutScreen from "../screens/auth/SignOutScreen";
 import MessagingNavigation from './MessagingNavigation';
 import MainHeader from '../components/MainHeader';
 import NestedHeader from '../components/NestedHeader';
-import { Ionicons } from "@expo/vector-icons";
 
 const PilotDrawer = createDrawerNavigator();
 const AboutStack = createStackNavigator();
 const SupportStack = createStackNavigator();
+
+const mainHeaderStyle = {
+  backgroundColor: "#092455",
+  height: 100
+}
 
 const AboutNavigation = () => {
   return (
@@ -23,12 +27,8 @@ const AboutNavigation = () => {
     name='About'
     component={AboutScreen}
     options={{
-      title: "About",
       headerTitle: () => <MainHeader />,
-      headerStyle: {
-        backgroundColor: "#092455",
-        height: 100
-      },
+      headerStyle: mainHeaderStyle
     }}
     />
     </AboutStack.Navigator>
@@ -42,12 +42,8 @@ const SupportNavigation = () => {
     name='Support'
     component={SupportScreen}
     options={{
-      title: "Support",
       headerTitle: () => <MainHeader />,
-      headerStyle: {
-        backgroundColor: "#092455",
-        height: 100
-      },
+      headerStyle: mainHeaderStyle
     }}
     />
     </SupportStack.Navigator>
@@ -88,15 +84,6 @@ const PilotNavigation = () => {
         options={{ title: "Sign Out" }}
       />
     </PilotDrawer.Navigator>
-  );
-};
-
-const LogoTitle = () => {
-  return (
-    <Image
-      style={{ width: 130, height: 22, marginTop: 0 }}
-      source={require("../assets/hovrtek_logo.png")}
-    />
   );
 };
 

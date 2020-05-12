@@ -23,19 +23,21 @@ const LogoTitle = () => {
 };
 
 const renderLogin = () => {
+  const signHeaderStyle = {
+    backgroundColor: "#092455",
+    width: "100%",
+    borderBottomWidth: 10,
+    borderBottomColor: "grey",
+    height: 110
+  };
+
   const signInScreen = (
     <RootStack.Screen
       name="SignIn"
       component={SignInScreen}
       options={{
         headerTitle: props => <LogoTitle {...props} />,
-        headerStyle: {
-          backgroundColor: "#092455",
-          width: "100%",
-          borderBottomWidth: 10,
-          borderBottomColor: "grey",
-          height: 110,
-        },
+        headerStyle: signHeaderStyle
       }}
     />
   );
@@ -49,17 +51,11 @@ const renderLogin = () => {
         headerLeft: () => (
           <Button
             onPress={() => navigation.goBack()}
-            style={styles.backButton}
             title="Back"
             color="#fff"
           />
         ),
-        headerStyle: {
-          backgroundColor: "#092455",
-          borderBottomWidth: 10,
-          borderBottomColor: "grey",
-          height: 110,
-        },
+        headerStyle: signHeaderStyle
       })}
     />
   );
@@ -70,12 +66,7 @@ const renderLogin = () => {
       component={LoadingScreen}
       options={() => ({
         title: "",
-        headerStyle: {
-          backgroundColor: "#092455",
-          borderBottomWidth: 10,
-          borderBottomColor: "grey",
-          height: 110,
-        },
+        headerStyle: signHeaderStyle
       })}
     />
   );

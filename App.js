@@ -1,38 +1,19 @@
-import React, { useState, useContext, useMemo } from "react";
-import { Button, Image, StyleSheet, Text, View, Screen } from "react-native";
+import React, { useState, useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
-import ClientNavigation from "./navigation/ClientNavigation";
-import MainHeader from "./components/MainHeader";
-import NestedHeader from "./components/NestedHeader";
-import PilotNavigation from "./navigation/PilotNavigation";
-import SignUpNavigation from "./navigation/SignUpNavigation";
-import SignInScreen from "./screens/auth/SignInScreen";
-import LoadingScreen from "./screens/LoadingScreen";
 import * as firebase from "firebase";
-import {
-  Ionicons,
-  Entypo,
-  FontAwesome5,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-// REDUX STUFF
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import ReduxThunk from "redux-thunk";
-import reducers from "./reducers/index";
 import {
   clientNavigation,
   pilotNavigation,
   renderLogin,
 } from "./appNavigationUtils";
-
-const AuthStack = createStackNavigator();
-const RootClientStack = createStackNavigator();
-const RootPilotStack = createStackNavigator();
+// REDUX STUFF
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
+import reducers from "./reducers/index";
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);

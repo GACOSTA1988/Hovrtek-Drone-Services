@@ -15,6 +15,11 @@ import { Ionicons } from "@expo/vector-icons";
 
 const HomeStack = createStackNavigator();
 
+const mainHeaderStyle = {
+  backgroundColor: "#092455",
+  height: 100
+}
+
 const ClientHomeStackNavigator = () => {
     return (
         <HomeStack.Navigator initialRouteName="NewProjectScreenWelcome" >
@@ -24,99 +29,72 @@ const ClientHomeStackNavigator = () => {
                 options={{
                   title: "Welcome",
                   headerTitle: () => <MainHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="NewProjectScreenOne"
                 component={NewProjectScreenOne}
                 options={{
-                  title: "New Project",
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="NewProjectScreenTwo"
                 component={NewProjectScreenTwo}
                 options={{
-                  title: "New Project",
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="NewProjectScreenThree"
                 component={NewProjectScreenThree}
                 options={{
-                  title: "New Project",
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="ProjectListScreen"
                 component={ProjectListScreen}
                 options={{
-                  title: "Projects",
-                  headerTitle: () => <MainHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerTitle: () => <NestedHeader />,
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="ProjectDetailsScreen"
                 component={ProjectDetailsScreen}
                 options={{
-                  title: "Details",
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="EditProjectScreen"
                 component={EditProjectScreen}
                 options={{
-                  title: "Edit",
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="PilotProfileWelcomeScreen"
                 component={PilotProfileWelcomeScreen}
                 options={{
-                  title: "Pilot Profile",
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    height: 100
-                  }
+                  headerStyle: mainHeaderStyle
                 }}
             />
             <HomeStack.Screen
                 name="ChatScreen"
                 component={ChatScreen}
+                options={{
+                  headerTitle: () => <NestedHeader />,
+                  headerStyle: mainHeaderStyle
+                }}
             />
         </HomeStack.Navigator>
     );

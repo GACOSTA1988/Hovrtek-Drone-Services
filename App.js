@@ -83,18 +83,10 @@ export default () => {
         <NavigationContainer>
           {loggedIn ? (
             userType === "C" ? (
-              <RootClientStack.Navigator>
+              <RootClientStack.Navigator headerMode={"none"}>
                 <RootClientStack.Screen
                   name="Client"
                   component={ClientNavigation}
-                  headerMode="screen"
-                  options={{
-                    title: "Home",
-                    headerTitle: () => <MainHeader />,
-                    headerStyle: {
-                      backgroundColor: "#092455"
-                    }
-                  }}
                 />
               </RootClientStack.Navigator>
             ) : userType === "P" ? (
@@ -102,7 +94,6 @@ export default () => {
                 <RootPilotStack.Screen
                   name="Pilot"
                   component={PilotNavigation}
-                  headerMode="screen"
                 />
               </RootPilotStack.Navigator>
             ) : (

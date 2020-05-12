@@ -4,14 +4,10 @@ import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { getClientProfiles } from "../../actions/clientProfiles";
 import _ from "lodash";
-import { AuthContext } from "../../context";
 
 function JobDetailsScreen(props, { getClientProfiles }) {
 
   const jobDetails = props.route.params;
-
-  const { setMainHeader } = useContext(AuthContext);
-  setMainHeader();
 
   useEffect(() => {
     props.getClientProfiles();

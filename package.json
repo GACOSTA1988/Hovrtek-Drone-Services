@@ -35,7 +35,6 @@
     "react-native-screens": "~2.2.0",
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-size-matters": "^0.3.0",
-    "react-native-svg": "11.0.1",
     "react-native-tab-view": "^2.14.0",
     "react-native-uuid": "^1.4.9",
     "react-native-uuid-generator": "^6.1.1",

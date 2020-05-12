@@ -24,6 +24,11 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
+import {
+  clientNavigation,
+  pilotNavigation,
+  renderLogin,
+} from "./appNavigationUtils";
 
 const AuthStack = createStackNavigator();
 const RootClientStack = createStackNavigator();
@@ -41,7 +46,6 @@ export default () => {
 
   let [loggedIn, setLoggedIn] = useState(false);
   let [userType, setUserType] = useState(null);
-  let [headerType, setHeaderType] = useState('main');
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -53,20 +57,6 @@ export default () => {
     }
   });
 
-  function LogoTitle() {
-    return (
-      <Image
-        style={{
-          width: 290,
-          height: 55,
-          marginBottom: 10,
-          alignItems: "center",
-        }}
-        source={require("./assets/hovrtek_logo.png")}
-      />
-    );
-  }
-
   const authContext = useMemo(() => {
     return {
       updateUser: () => {
@@ -77,154 +67,19 @@ export default () => {
     };
   }, []);
 
+  const isClientLoggedIn = loggedIn && userType === 'C';
+  const isPilotLoggedIn = loggedIn && userType === 'P';
+
   return (
     <Provider store={state}>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
-          {loggedIn ? (
-            userType === "C" ? (
-              <RootClientStack.Navigator headerMode={"none"}>
-                <RootClientStack.Screen
-                  name="Client"
-                  component={ClientNavigation}
-                />
-              </RootClientStack.Navigator>
-            ) : userType === "P" ? (
-              <RootPilotStack.Navigator headerMode={"none"}>
-                <RootPilotStack.Screen
-                  name="Pilot"
-                  component={PilotNavigation}
-                />
-              </RootPilotStack.Navigator>
-            ) : (
-              <AuthStack.Navigator>
-                <AuthStack.Screen
-                  name="SignIn"
-                  component={SignInScreen}
-                  options={{
-                    title: "",
-
-                    headerStyle: {
-                      backgroundColor: "#092455",
-                      borderBottomWidth: 10,
-                      borderBottomColor: "grey",
-                      height: 110,
-                    },
-                  }}
-                />
-                <AuthStack.Screen
-                  name="SignUp"
-                  component={SignUpNavigation}
-                  options={{
-                    title: "",
-                    headerLeft: () => (
-                      <Button
-                        onPress={() => navigation.goBack()}
-                        style={styles.backButton}
-                        title="Back"
-                        color="#fff"
-                      />
-                    ),
-
-                    headerStyle: {
-                      backgroundColor: "#092455",
-                      borderBottomWidth: 10,
-                      borderBottomColor: "grey",
-                      height: 110,
-                    },
-                  }}
-                />
-                <AuthStack.Screen
-                  name="Loading"
-                  component={LoadingScreen}
-                  options={{
-                    title: "",
-                    headerStyle: {
-                      backgroundColor: "#092455",
-                      borderBottomWidth: 10,
-                      borderBottomColor: "grey",
-                      height: 110,
-                    },
-                  }}
-                />
-              </AuthStack.Navigator>
-            )
-          ) : (
-            <AuthStack.Navigator>
-              <AuthStack.Screen
-                name="SignIn"
-                component={SignInScreen}
-                options={{
-                  headerTitle: (props) => <LogoTitle {...props} />,
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    width: "100%",
-                    borderBottomWidth: 10,
-                    borderBottomColor: "grey",
-                    height: 110,
-                  },
-                }}
-              />
-              <AuthStack.Screen
-                name="SignUp"
-                component={SignUpNavigation}
-                options={({ navigation }) => ({
-                  title: "",
-                  headerLeft: () => (
-                    <Button
-                      onPress={() => navigation.goBack()}
-                      style={styles.backButton}
-                      title="Back"
-                      color="#fff"
-                    />
-                  ),
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    borderBottomWidth: 10,
-                    borderBottomColor: "grey",
-                    height: 110,
-                  },
-                })}
-              />
-              <AuthStack.Screen
-                name="Loading"
-                component={LoadingScreen}
-                options={({ navigation }) => ({
-                  title: "",
-
-                  headerStyle: {
-                    backgroundColor: "#092455",
-                    borderBottomWidth: 10,
-                    borderBottomColor: "grey",
-                    height: 110,
-                  },
-                })}
-              />
-            </AuthStack.Navigator>
-          )}
-          {/* <StaturBar barStyle="light-content" backgroundColor="#6a51ae" /> */}
+          {isClientLoggedIn && clientNavigation}
+          {isPilotLoggedIn && pilotNavigation}
+          {!loggedIn && renderLogin()}
           <Footer />
         </NavigationContainer>
       </AuthContext.Provider>
     </Provider>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-// MainHeader Logo
-const LogoTitle = () => {
-  return (
-    <Image
-      style={{ width: 130, height: 22, marginTop: 0 }}
-      source={require("./assets/hovrtek_logo.png")}
-    />
   );
 };

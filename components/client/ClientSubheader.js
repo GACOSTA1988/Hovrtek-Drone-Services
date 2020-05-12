@@ -27,7 +27,7 @@ function ClientSubheader(props) {
     return (
         <View style={styles.wrapper}>
 
-            <View>
+            <View style={styles.buttonWrapper}>
                 <TouchableOpacity style={styles.topButtonWrapperLeft}
                     onPress={() => navigation.navigate('NewProjectScreenWelcome')}
                 >
@@ -35,7 +35,7 @@ function ClientSubheader(props) {
                 </TouchableOpacity>
             </View>
 
-            <View>
+            <View style={styles.buttonWrapper}>
                 <TouchableOpacity style={styles.topButtonWrapperRight}
                     onPress={() => navigation.navigate('ProjectListScreen')}
                 >
@@ -49,24 +49,37 @@ function ClientSubheader(props) {
 
 const styles = StyleSheet.create({
     wrapper:{
-        flexDirection: 'row'
+        flexDirection: 'row', 
+    },
+    buttonWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     topButtonWrapperLeft: {
         backgroundColor: "#092455",
         height: 40,
-        width: 180,
-        alignSelf: 'flex-start'
+        width: 160,
+        alignSelf: 'flex-start',
+        borderRadius: 5,
+        marginRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+        
     }, 
     topButtonWrapperRight: {
         backgroundColor: "#092455",
         height: 40,
-        width: 180,
-        alignSelf: 'flex-start'
+        width: 160,
+        alignSelf: 'flex-start',
+        borderRadius: 5,
+        marginLeft: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
     }, 
     topButtonText: {
         color: 'white',
-        paddingTop: 10
+
     }
 });
 

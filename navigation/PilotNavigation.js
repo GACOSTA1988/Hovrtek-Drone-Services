@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NotificationContext } from "../context";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/pilot/SupportScreen";
-import JobListMyJobsTabNavigation from "./JobListMyJobsTabNavigation";
+import PilotHomeStackNavigator from "./PilotHomeStackNavigator";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
 import MessagingNavigation from './MessagingNavigation';
@@ -23,40 +23,37 @@ const mainHeaderStyle = {
 const AboutNavigation = () => {
   return (
     <AboutStack.Navigator>
-    <AboutStack.Screen
-    name='About'
-    component={AboutScreen}
-    options={{
-      headerTitle: () => <MainHeader />,
-      headerStyle: mainHeaderStyle
-    }}
-    />
+      <AboutStack.Screen
+        name='About'
+        component={AboutScreen}
+        options={{
+          headerTitle: () => <MainHeader />,
+          headerStyle: mainHeaderStyle
+        }}
+      />
     </AboutStack.Navigator>
-  )
-}
+  );
+};
 
 const SupportNavigation = () => {
   return (
     <SupportStack.Navigator>
-    <SupportStack.Screen
-    name='Support'
-    component={SupportScreen}
-    options={{
-      headerTitle: () => <MainHeader />,
-      headerStyle: mainHeaderStyle
-    }}
-    />
+      <SupportStack.Screen
+        name='Support'
+        component={SupportScreen}
+        options={{
+          headerTitle: () => <MainHeader />,
+          headerStyle: mainHeaderStyle
+        }}
+      />
     </SupportStack.Navigator>
-  )
-}
+  );
+};
 
 const PilotNavigation = () => {
   return (
-    <PilotDrawer.Navigator drawerPosition='right'>
-      <PilotDrawer.Screen
-      name="Home"
-      component={JobListMyJobsTabNavigation}
-      />
+    <PilotDrawer.Navigator drawerPosition="right">
+      <PilotDrawer.Screen name="Home" component={PilotHomeStackNavigator} />
       <PilotDrawer.Screen
         name="AboutScreen"
         component={AboutNavigation}
@@ -73,9 +70,9 @@ const PilotNavigation = () => {
         options={{ title: "Profile" }}
       />
       <PilotDrawer.Screen
-        name='MessagingScreen'
+        name="MessagingScreen"
         component={MessagingNavigation}
-        options={{ title: 'Messages' }}
+        options={{ title: "Messages" }}
       />
       <PilotDrawer.Screen
         name="SignOutScreen"

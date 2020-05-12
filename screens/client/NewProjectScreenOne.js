@@ -128,7 +128,7 @@ function NewProjectScreenOne(props, { postProjects }) {
           <Button title="Back" onPress={() => props.navigation.goBack()} />
           {/* <Button style={styles.submitButton} title="Submit" onPress={submit} /> */}
         </TouchableOpacity>
-        <Text style={styles.dummyText}>Dummy Text</Text>
+  
       </ScrollView>
     </View>
   );
@@ -137,6 +137,7 @@ function NewProjectScreenOne(props, { postProjects }) {
 const styles = StyleSheet.create({
   newProjectListWrapper: {
     alignItems: "center",
+  
   },
   newProjectListForm: {
     backgroundColor: "darkgray",
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   newProjectListTextWrapper: {
-    // marginBottom: 100
+    marginBottom: 200
   },
   input: {
     borderWidth: 1,
@@ -172,11 +173,6 @@ const styles = StyleSheet.create({
   },
   uploaderText: {
     marginTop: 100,
-  },
-  dummyText: {
-    marginTop: 200,
-
-    color: 'lightgray'
   },
   submitButton: {
     marginTop: 10,

@@ -68,7 +68,7 @@ const ClientHomeStackNavigator = () => {
                 component={ProjectListScreen}
                 options={{
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: mainHeaderStyle
+                  headerStyle: mainHeaderStyle,
                   headerBackTitle: " ",
                   title: "",
                 }}
@@ -108,7 +108,7 @@ const ClientHomeStackNavigator = () => {
                 component={ChatScreen}
                 options={{
                   headerTitle: () => <NestedHeader />,
-                  headerStyle: mainHeaderStyle
+                  headerStyle: mainHeaderStyle,
                   headerBackTitle: " ",
                   title: "Pilot Profile",
                 }}

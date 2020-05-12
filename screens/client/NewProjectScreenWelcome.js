@@ -6,6 +6,7 @@ import {
     Image, 
     TouchableOpacity
 } from "react-native";
+import { StatusBar } from 'react-native'
 
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -27,6 +28,7 @@ function NewProjectScreenWelcome(props) {
 
     return (
         <View style={styles.newProjectListWrapper}>
+
             <ClientSubheader/>
             <Text style={styles.welcomeText}>Welcome to</Text>
             <View style={styles.HeaderWrapper}>

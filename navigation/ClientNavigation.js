@@ -57,7 +57,17 @@ const SupportNavigation = () => {
 const ClientNavigation = () => {
 
   return (
-    <ClientDrawer.Navigator initialRouteName="ClientHomeStackNavigator" drawerPosition='right' >
+    <ClientDrawer.Navigator initialRouteName="ClientHomeStackNavigator" drawerPosition='right'
+    drawerStyle={{
+      backgroundColor: '#F4EDEA',
+      width: 200,
+      marginTop: 100,
+    }}
+    drawerContentOptions={{
+      activeTintColor: '#120309',
+      // activeBackgroundColor: '#120309'
+    }}
+    >
       <ClientDrawer.Screen
         name="ClientHomeStackNavigator"
         component={ClientHomeStackNavigator}

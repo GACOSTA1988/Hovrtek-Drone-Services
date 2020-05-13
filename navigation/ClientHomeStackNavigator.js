@@ -21,6 +21,7 @@ const mainHeaderStyle = {
 };
 
 const ClientHomeStackNavigator = () => {
+
   return (
     <HomeStack.Navigator initialRouteName="NewProjectScreenWelcome">
       <HomeStack.Screen
@@ -115,6 +116,7 @@ const ClientHomeStackNavigator = () => {
       />
     </HomeStack.Navigator>
   );
+
 };
 
 export default ClientHomeStackNavigator;

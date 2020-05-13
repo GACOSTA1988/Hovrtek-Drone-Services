@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer} from "@react-navigation/native";
 import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
+import { StatusBar } from 'react-native'
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
@@ -53,8 +54,13 @@ export default () => {
 
   return (
     <Provider store={state}>
+      <StatusBar
+        backgroundColor="white"
+        barStyle="light-content"
+      />
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
+          
           {isClientLoggedIn && clientNavigation}
           {isPilotLoggedIn && pilotNavigation}
           {!loggedIn && renderLogin()}

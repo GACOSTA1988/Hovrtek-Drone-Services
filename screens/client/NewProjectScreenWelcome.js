@@ -6,6 +6,7 @@ import {
     Image, 
     TouchableOpacity
 } from "react-native";
+import { StatusBar } from 'react-native'
 
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -13,7 +14,10 @@ import * as firebase from "firebase";
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
 import ClientSubheader from '../../components/client/ClientSubheader'
 
+
 function NewProjectScreenWelcome(props) {
+
+
     const navigation = useNavigation();
     let clientID = null;
     if (firebase.auth().currentUser) {
@@ -24,10 +28,12 @@ function NewProjectScreenWelcome(props) {
         navigation.navigate("NewProjectScreenOne");
     }
 
-
     return (
         <View style={styles.newProjectListWrapper}>
-            <ClientSubheader/>
+
+                    <ClientSubheader />
+
+
             <Text style={styles.welcomeText}>Welcome to</Text>
             <View style={styles.HeaderWrapper}>
                 <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
@@ -44,6 +50,7 @@ function NewProjectScreenWelcome(props) {
 const styles = StyleSheet.create({
     newProjectListWrapper: {
         alignItems: "center",
+        marginTop: 15
     },
     hovrtekLogo: {
         width: 320,

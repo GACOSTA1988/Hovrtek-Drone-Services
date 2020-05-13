@@ -4,16 +4,17 @@ import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
 import * as firebase from "firebase";
-// REDUX STUFF
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import ReduxThunk from "redux-thunk";
-import reducers from "./reducers/index";
 import {
   clientNavigation,
   pilotNavigation,
   renderLogin,
 } from "./appNavigationUtils";
+// REDUX STUFF
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
+import reducers from "./reducers/index";
+import { StatusBar } from 'react-native'
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
@@ -29,7 +30,10 @@ export default () => {
   // auth stuff - maybe should be elsewhere?
   const auth = firebase.auth();
 
-  auth.onAuthStateChanged(user => {
+  let [loggedIn, setLoggedIn] = useState(false);
+  let [userType, setUserType] = useState(null);
+
+  auth.onAuthStateChanged((user) => {
     if (user) {
       setLoggedIn(true);
       setUserType(user.photoURL);
@@ -49,11 +53,15 @@ export default () => {
     };
   }, []);
 
-  const isClientLoggedIn = loggedIn && userType === "C";
-  const isPilotLoggedIn = loggedIn && userType === "P";
+  const isClientLoggedIn = loggedIn && userType === 'C';
+  const isPilotLoggedIn = loggedIn && userType === 'P';
 
   return (
     <Provider store={state}>
+      <StatusBar
+        backgroundColor="white"
+        barStyle="light-content"
+      />
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           {isClientLoggedIn && clientNavigation}
@@ -65,22 +73,3 @@ export default () => {
     </Provider>
   );
 };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
-
-// // MainHeader Logo
-// const LogoTitle = () => {
-//   return (
-//     <Image
-//       style={{ width: 130, height: 22, marginTop: 0 }}
-//       source={require("./assets/hovrtek_logo.png")}
-//     />
-//   );
-// };

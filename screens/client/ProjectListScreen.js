@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -23,7 +23,10 @@ import { AntDesign } from "@expo/vector-icons";
 import * as firebase from 'firebase';
 import ClientSubheader from "../../components/client/ClientSubheader";
 
+
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
+
+ 
 
   useEffect(() => {
     props.getProjects();
@@ -44,11 +47,13 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
   return (
     <View style={styles.projectListWrapper}>
-      <ClientSubheader/>
-      <ScrollView>
+      <View style={styles.subheaderWrapper}>
+            <ClientSubheader />
+      </View>
         <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
           <Text style={styles.clientText}>My Projects</Text>
         </TouchableOpacity>
+      <ScrollView>
 
         <View style={styles.projectCard}>
           <TouchableOpacity>
@@ -148,7 +153,8 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
 const styles = StyleSheet.create({
   projectCard: {
-    width: 380
+    width: 380,
+    marginBottom: 140
   },
   clientText: {
     fontSize: 30,
@@ -160,7 +166,10 @@ const styles = StyleSheet.create({
   },
   projectListWrapper: {
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 15,
+  },
+  subheaderWrapper: {
+    marginBottom: 10
   }
 });
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 import AboutScreen from "../screens/AboutScreen";
 import SupportScreen from "../screens/client/SupportScreen";
-import ProjectsNewProjectTabNavigation from "./ProjectsNewProjectTabNavigation";
 import AccountScreen from '../screens/client/AccountScreen';
 import LocationScreen from '../screens/client/LocationScreen';
 import ServicesScreen from '../screens/client/ServicesScreen';
@@ -11,30 +11,75 @@ import ClientProfileNavigation from './ClientProfileNavigation';
 import MessagingNavigation from './MessagingNavigation';
 import ChatScreen from '../screens/messaging/ChatScreen';
 import GoHomeButton from '../screens/client/GoHomeButton';
-
-
-import HomeStackNavigator from "./HomeStackNavigator";
+import ClientHomeStackNavigator from "./ClientHomeStackNavigator";
+import MainHeader from '../components/MainHeader';
+import NestedHeader from '../components/NestedHeader';
 
 const ClientDrawer = createDrawerNavigator();
+const AboutStack = createStackNavigator();
+const SupportStack = createStackNavigator();
 
+const mainHeaderStyle = {
+  backgroundColor: "#092455",
+  height: 100
+}
+
+const AboutNavigation = () => {
+  return (
+    <AboutStack.Navigator>
+      <AboutStack.Screen
+        name='About'
+        component={AboutScreen}
+        options={{
+          headerTitle: () => <MainHeader />,
+          headerStyle: mainHeaderStyle
+        }}
+      />
+    </AboutStack.Navigator>
+  )
+}
+
+const SupportNavigation = () => {
+  return (
+    <SupportStack.Navigator>
+      <SupportStack.Screen
+        name='Support'
+        component={SupportScreen}
+        options={{
+          headerTitle: () => <MainHeader />,
+          headerStyle: mainHeaderStyle
+        }}
+      />
+    </SupportStack.Navigator>
+  )
+}
 
 const ClientNavigation = () => {
 
   return (
-    <ClientDrawer.Navigator initialRouteName="HomeStackNavigator" >
+    <ClientDrawer.Navigator initialRouteName="ClientHomeStackNavigator" drawerPosition='right'
+    drawerStyle={{
+      backgroundColor: '#F4EDEA',
+      width: 200,
+      marginTop: 100,
+    }}
+    drawerContentOptions={{
+      activeTintColor: '#120309',
+      // activeBackgroundColor: '#120309'
+    }}
+    >
       <ClientDrawer.Screen
-        name="Home"
-        component={HomeStackNavigator}
+        name="ClientHomeStackNavigator"
+        component={ClientHomeStackNavigator}
+        options={{ title: 'Home' }}
       />
       <ClientDrawer.Screen
-        name='AboutScreen'
-        component={AboutScreen}
-        options={{ title: 'About' }}
+        name='About'
+        component={AboutNavigation}
       />
       <ClientDrawer.Screen
-        name='SupportScreen'
-        component={SupportScreen}
-        options={{ title: 'Support' }}
+        name='Support'
+        component={SupportNavigation}
       />
       <ClientDrawer.Screen
         name='ClientProfileNavigation'
@@ -42,27 +87,12 @@ const ClientNavigation = () => {
         options={{ title: 'Public Profile' }}
       />
       <ClientDrawer.Screen
-        name='MessagingScreen'
+        name='Messages'
         component={MessagingNavigation}
-        headerMode="screen"
-        options={{
-          title: "Messages",
-          headerTitle: () => <MessagingHeader />,
-          headerStyle: {
-            backgroundColor: "#092455"
-          }
-        }}
       />
-      {/* <ClientDrawer.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{ title: 'Messages' }}
-      /> */}
       <ClientDrawer.Screen
-        name="SignOutScreen"
+        name="Sign Out"
         component={SignOutScreen}
-        headerMode="none"
-        options={{ title: "Sign Out" }}
       />
     </ClientDrawer.Navigator>
   );

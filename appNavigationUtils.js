@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Image } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ClientNavigation from "./navigation/ClientNavigation";
-import MainHeader from "./components/MainHeader";
 import PilotNavigation from "./navigation/PilotNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
 import SignUpNavigation from "./navigation/SignUpNavigation";
@@ -24,19 +23,21 @@ const LogoTitle = () => {
 };
 
 const renderLogin = () => {
+  const signHeaderStyle = {
+    backgroundColor: "#092455",
+    width: "100%",
+    borderBottomWidth: 10,
+    borderBottomColor: "grey",
+    height: 110
+  };
+
   const signInScreen = (
     <RootStack.Screen
       name="SignIn"
       component={SignInScreen}
       options={{
         headerTitle: props => <LogoTitle {...props} />,
-        headerStyle: {
-          backgroundColor: "#092455",
-          width: "100%",
-          borderBottomWidth: 10,
-          borderBottomColor: "grey",
-          height: 110,
-        },
+        headerStyle: signHeaderStyle
       }}
     />
   );
@@ -50,17 +51,11 @@ const renderLogin = () => {
         headerLeft: () => (
           <Button
             onPress={() => navigation.goBack()}
-            style={styles.backButton}
             title="Back"
             color="#fff"
           />
         ),
-        headerStyle: {
-          backgroundColor: "#092455",
-          borderBottomWidth: 10,
-          borderBottomColor: "grey",
-          height: 110,
-        },
+        headerStyle: signHeaderStyle
       })}
     />
   );
@@ -71,12 +66,7 @@ const renderLogin = () => {
       component={LoadingScreen}
       options={() => ({
         title: "",
-        headerStyle: {
-          backgroundColor: "#092455",
-          borderBottomWidth: 10,
-          borderBottomColor: "grey",
-          height: 110,
-        },
+        headerStyle: signHeaderStyle
       })}
     />
   );
@@ -91,18 +81,10 @@ const renderLogin = () => {
 };
 
 const clientNavigation = (
-  <RootStack.Navigator>
+  <RootStack.Navigator headerMode="none">
     <RootStack.Screen
       name="Client"
       component={ClientNavigation}
-      headerMode="screen"
-      options={{
-        title: "Home",
-        headerTitle: () => <MainHeader />,
-        headerStyle: {
-          backgroundColor: "#092455",
-        },
-      }}
     />
   </RootStack.Navigator>
 );
@@ -112,7 +94,6 @@ const pilotNavigation = (
     <RootStack.Screen
       name="Pilot"
       component={PilotNavigation}
-      headerMode="screen"
     />
   </RootStack.Navigator>
 );

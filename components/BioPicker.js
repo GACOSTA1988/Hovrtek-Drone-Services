@@ -53,6 +53,24 @@ const BioPicker = () => {
       : renderPersonalBioButton(APP_STRINGS.setWorkExperience);
   };
 
+  renderTextInput = (bio, setBio) => {
+    return (
+      <View>
+        <TextInput
+          style={{
+            marginTop: 20,
+            height: 90,
+            borderColor: "gray",
+            borderWidth: 1,
+            marginBottom: 20,
+          }}
+          onChangeText={setBio}
+          value={bio}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Modal
@@ -63,23 +81,11 @@ const BioPicker = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              {APP_STRINGS.briefSummary}
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.briefSummary}</Text>
           </View>
-          <View>
-            <TextInput
-              style={{
-                marginTop: 20,
-                height: 90,
-                borderColor: "gray",
-                borderWidth: 1,
-                marginBottom: 20,
-              }}
-              onChangeText={setPersonalBio}
-              value={personalBio}
-            />
-          </View>
+
+          {renderTextInput(personalBio, setPersonalBio)}
+
           <View styles={styles.cancelWrapper}>
             <Button onPress={closeModal} title={APP_STRINGS.choose} />
           </View>

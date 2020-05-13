@@ -12,16 +12,15 @@ import {
   PassSetPersonalBio,
   PassPersonalBioState,
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
+import { APP_STRINGS } from "../constants";
 
-// TODO move this into a centralized file so that other constants
-// can be added and then exported to other files as well
-const APP_STRINGS = {
-  openModal: "Open modal",
-  workExperienceSet: "Work Experience Set",
-  setWorkExperience: "Please Set Work Experience",
-  choose: "Choose",
-  briefSummary: "Please Give Us a Brief Summary of Your Work Experience",
-};
+const {
+  openModal,
+  workExperienceSet,
+  setWorkExperience,
+  choose,
+  briefSummary,
+} = APP_STRINGS;
 
 const BioPicker = () => {
   const [ isModalVisible, setIsModalVisible ] = useState(false);
@@ -54,6 +53,7 @@ const BioPicker = () => {
   };
 
   const renderTextInput = (bio, setBio) => {
+    // TODO move this into the styled div below
     const style = {
       marginTop: 20,
       height: 90,

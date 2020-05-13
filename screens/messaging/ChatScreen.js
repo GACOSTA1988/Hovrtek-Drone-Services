@@ -148,7 +148,8 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       style={{
         flex: 1,
         height: "100%",
-        backgroundColor: "lightgray",
+        backgroundColor: "white",
+        padding: 10
       }}
     >
       <FlatList
@@ -200,7 +201,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 
       <View
         style={{
-          backgroundColor: "lightgray",
+          backgroundColor: "white",
           marginTop: 10,
           marginBottom: 40,
           alignItems: "center",

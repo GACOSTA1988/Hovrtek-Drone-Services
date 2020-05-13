@@ -194,8 +194,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   submitWrapper: {
-    width: 230,
-    height: 80,
+    width: 200,
+    height: 60,
     borderWidth: 2,
     borderColor: "#092455",
     borderRadius: 5,

@@ -24,6 +24,7 @@ import { getPilotProfiles } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import { render } from "react-dom";
+import PilotSubheader from "../../components/pilot/PilotSubheader";
 
 function JobListScreen(
   props,
@@ -94,6 +95,9 @@ function JobListScreen(
         <Text></Text>
       )}
       <ScrollView>
+        <View style={styles.subheaderWrapper}>
+          <PilotSubheader />
+        </View>
         <View style={styles.projectCard}>
           <TouchableOpacity>
             <FlatList
@@ -206,6 +210,10 @@ const styles = StyleSheet.create({
   profileCompleteNoticeText: {
     fontSize: 15,
     fontWeight: "600",
+  },
+  subheaderWrapper: {
+    marginBottom: 10,
+    marginLeft: "5%",
   },
 });
 

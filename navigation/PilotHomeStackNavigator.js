@@ -97,7 +97,7 @@ const PilotHomeStackNavigator = () => {
         }}
       />
       <HomeStack.Screen
-        name="My Jobs"
+        name="MyJobsScreen"
         component={MyJobsScreen}
         options={{
           title: "My Jobs",

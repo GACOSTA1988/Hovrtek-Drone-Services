@@ -4,21 +4,23 @@ import WhichSignUpScreen from "../screens/auth/WhichSignUpScreen";
 import PilotSignUpScreen from "../screens/auth/PilotSignUpScreen";
 import ClientSignUpScreen from "../screens/auth/ClientSignUpScreen";
 
+const baseObject = { headerMode: "none" };
+
 const signUpScreensMetadata = [
   {
+    ...baseObject,
     name: "WhichSignUpScreen",
     component: WhichSignUpScreen,
-    headerMode: "none",
   },
   {
+    ...baseObject,
     name: "PilotSignUpScreen",
     component: PilotSignUpScreen,
-    headerMode: "none",
   },
   {
+    ...baseObject,
     name: "ClientSignUpScreen",
     component: ClientSignUpScreen,
-    headerMode: "none",
   },
 ];
 

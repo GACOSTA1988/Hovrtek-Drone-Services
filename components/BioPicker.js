@@ -54,19 +54,17 @@ const BioPicker = () => {
   };
 
   const renderTextInput = (bio, setBio) => {
+    const style = {
+      marginTop: 20,
+      height: 90,
+      borderColor: "gray",
+      borderWidth: 1,
+      marginBottom: 20,
+    };
+
     return (
       <View>
-        <TextInput
-          style={{
-            marginTop: 20,
-            height: 90,
-            borderColor: "gray",
-            borderWidth: 1,
-            marginBottom: 20,
-          }}
-          onChangeText={setBio}
-          value={bio}
-        />
+        <TextInput style={style} onChangeText={setBio} value={bio} />
       </View>
     );
   };

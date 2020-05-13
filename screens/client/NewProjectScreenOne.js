@@ -143,12 +143,6 @@ const styles = StyleSheet.create({
   newProjectListWrapper: {
     alignItems: "center",
   },
-  newProjectListForm: {
-    backgroundColor: "darkgray",
-    width: 380,
-    borderWidth: 1,
-    padding: 6,
-  },
   newProjectText: {
     fontSize: 30,
     color: "darkblue",
@@ -157,26 +151,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   newProjectListTextWrapper: {
-    marginBottom: 200
+    marginBottom: 100
   },
-  input: {
-    borderWidth: 1,
-    borderRadius: 3,
-    height: 30,
-    marginBottom: 50
-  },
-  imageButton: {
-    height: 30,
-    width: 20,
-    marginBottom: 1000,
-    backgroundColor: "red",
-  },
+
   labelText: {
     marginBottom: 10,
     textAlign: "center",
-  },
-  uploaderText: {
-    marginTop: 100,
   },
   submitButton: {
     marginTop: 10,

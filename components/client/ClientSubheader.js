@@ -74,6 +74,16 @@ const styles = StyleSheet.create({
         marginRight: 10,
         justifyContent: 'center',
         alignItems: 'center',
+    }, 
+    topButtonWrapperLeftPressed: {
+        backgroundColor: "#092455",
+        height: 40,
+        width: 160,
+        alignSelf: 'flex-start',
+        borderRadius: 5,
+        marginRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -82,10 +92,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
         elevation: 10,
-    }, 
-    topButtonWrapperLeftPressed: {
-
-       
     }, 
     topButtonWrapperRight: {
         backgroundColor: "#092455",
@@ -96,11 +102,27 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        
+    }, 
+    topButtonWrapperRightPressed: {
+        backgroundColor: "#092455",
+        height: 40,
+        width: 160,
+        alignSelf: 'flex-start',
+        borderRadius: 5,
+        marginLeft: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 10,
     }, 
     topButtonText: {
         color: 'white',
-
     }
 });
 

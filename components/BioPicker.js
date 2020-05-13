@@ -13,6 +13,16 @@ import {
   PassPersonalBioState,
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
 
+// TODO move this into a centralized file so that other constants
+// can be added and then exported to other files as well
+const APP_STRINGS = {
+  openModal: "Open modal",
+  workExperienceSet: "Work Experience Set",
+  setWorkExperience: "Please Set Work Experience",
+  choose: "Choose",
+  briefSummary: "Please Give Us a Brief Summary of Your Work Experience",
+};
+
 const BioPicker = () => {
   const [ isModalVisible, setIsModalVisible ] = useState(false);
 
@@ -36,11 +46,11 @@ const BioPicker = () => {
   };
 
   const renderPersonalBio = (hasPersonalBio = false) => {
-    const title = "Open modal";
+    const title = APP_STRINGS.openModal;
 
     return hasPersonalBio
-      ? renderPersonalBioButton("Work Experience Set")
-      : renderPersonalBioButton("Please Set Work Experience");
+      ? renderPersonalBioButton(APP_STRINGS.workExperienceSet)
+      : renderPersonalBioButton(APP_STRINGS.setWorkExperience);
   };
 
   return (
@@ -54,7 +64,7 @@ const BioPicker = () => {
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              Please Give Us a Brief Summary of Your Work Experience
+              {APP_STRINGS.briefSummary}
             </Text>
           </View>
           <View>
@@ -71,7 +81,7 @@ const BioPicker = () => {
             />
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title="Choose" />
+            <Button onPress={closeModal} title={APP_STRINGS.choose} />
           </View>
         </View>
       </Modal>

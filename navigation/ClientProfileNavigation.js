@@ -2,40 +2,65 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ClientProfileScreen from "../screens/client/ClientProfileScreen";
 import ClientEditProfileScreen from "../screens/client/ClientEditProfileScreen";
-import MainHeader from '../components/MainHeader';
-import NestedHeader from '../components/NestedHeader';
+import MainHeader from "../components/MainHeader";
+import NestedHeader from "../components/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
 
+// TODO move to central app strings
+const APP_STRINGS = {
+  profile: "Profile",
+  editProfile: "Edit Profile",
+};
 
-const ClientProfileNavigation = createStackNavigator();
+// named by using the hex value in http://chir.ag/projects/name-that-color/#092455
+const APP_COLORS = {
+  downriver: "#092455",
+};
+
+const generateNavOptions = (title = "", headerTitleComponent = {}) => {
+  return {
+    title,
+    headerTitle: headerTitleComponent,
+    headerStyle: {
+      backgroundColor: APP_COLORS.downriver,
+      height: 100,
+    },
+  };
+};
+
+const clientNavProfileNavScreensMetadata = [
+  {
+    name: "ClientProfileScreen",
+    component: ClientProfileScreen,
+    options: generateNavOptions(APP_STRINGS.profile, MainHeader),
+  },
+  {
+    name: "ClientEditProfileScreen",
+    component: ClientEditProfileScreen,
+    options: generateNavOptions(APP_STRINGS.editProfile, NestedHeader),
+  },
+];
 
 function ClientProfileNavigator() {
+  const ClientProfileNavigation = createStackNavigator();
+
+  const clientProfileNavScreens = clientNavProfileNavScreensMetadata.map(
+    metadata => {
+      const { name, component, options } = metadata;
+
+      return (
+        <ClientProfileNavigation.Screen
+          name={metadata.name}
+          component={metadata.component}
+          options={metadata.options}
+        />
+      );
+    },
+  );
+
   return (
     <ClientProfileNavigation.Navigator>
-      <ClientProfileNavigation.Screen
-        name="ClientProfileScreen"
-        component={ClientProfileScreen}
-        options={{
-          title: "Profile",
-          headerTitle: () => <MainHeader />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          },
-        }}
-      />
-      <ClientProfileNavigation.Screen
-        name="ClientEditProfileScreen"
-        component={ClientEditProfileScreen}
-        options={{
-          title: "Edit Profile",
-          headerTitle: () => <NestedHeader />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          },
-        }}
-      />
+      {clientProfileNavScreens}
     </ClientProfileNavigation.Navigator>
   );
 }

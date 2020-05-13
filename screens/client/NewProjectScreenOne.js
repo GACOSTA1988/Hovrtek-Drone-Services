@@ -30,7 +30,6 @@ export const PassRecordingState = React.createContext();
 export const PassSetLight = React.createContext();
 export const PassLightState = React.createContext();
 
-
 function NewProjectScreenOne(props, { postProjects }) {
   const navigation = useNavigation();
   let clientID = null;
@@ -41,7 +40,6 @@ function NewProjectScreenOne(props, { postProjects }) {
   const [date, setDate] = useState("");
   const [recording, setRecording] = useState("");
   const [light, setLight] = useState("");
-
 
   const submit = (e) => {
     e.preventDefault();
@@ -65,7 +63,6 @@ function NewProjectScreenOne(props, { postProjects }) {
   const continueButton = () => {
     navigation.navigate("NewProjectScreenTwo");
   }
-
 
   return (
     <View style={styles.newProjectListWrapper}>
@@ -118,15 +115,23 @@ function NewProjectScreenOne(props, { postProjects }) {
             </PassSetLight.Provider>
           </View>
 
-          <TouchableOpacity onPress={continueButton}>
-            <Text style={styles.continueButton}>Continue with Form</Text>
-          </TouchableOpacity>
+          <View style={styles.backButtonWrapper}>
+            <TouchableOpacity style={styles.submitWrapper} onPress={submit}>
+              <Text style={styles.submitButton}>Submit Form</Text>
+            </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={submit}>
-            <Text style={styles.submitButton}>Submit Form</Text>
+          <TouchableOpacity onPress={continueButton}>
+            <Text style={styles.continueButton}>Fake Continue With Form Route Link</Text>
           </TouchableOpacity>
-          <Button title="Back" onPress={() => props.navigation.goBack()} />
-          {/* <Button style={styles.submitButton} title="Submit" onPress={submit} /> */}
+          <View style={styles.backButtonWrapper}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => props.navigation.goBack()}
+            >
+              <Text style={styles.backButtonText}>Back</Text>
+            </TouchableOpacity>
+          </View>
         </TouchableOpacity>
   
       </ScrollView>
@@ -137,7 +142,6 @@ function NewProjectScreenOne(props, { postProjects }) {
 const styles = StyleSheet.create({
   newProjectListWrapper: {
     alignItems: "center",
-  
   },
   newProjectListForm: {
     backgroundColor: "darkgray",
@@ -185,12 +189,40 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     textAlign: "center",
-    fontSize: 30,
+    fontSize: 9,
     color: "#092455",
   },
   modalWrapper: {
     alignItems: 'center'
-  }
+  },
+  backButton: {
+    marginTop: 20,
+    marginBottom: 40,
+    width: 60,
+    height: 30,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  backButtonText: {
+    color: "white",
+    textAlign: "center",
+    // marginBottom: 40,
+  },
+  backButtonWrapper:{
+    alignItems: 'center'
+  },
+  submitWrapper: {
+    width: 230,
+    height: 80,
+    borderWidth: 2,
+    borderColor: "#092455",
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20
+  },
 });
 
 export default connect(null, { postProjects })(NewProjectScreenOne);

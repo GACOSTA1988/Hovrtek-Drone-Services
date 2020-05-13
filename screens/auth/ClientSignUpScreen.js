@@ -65,7 +65,8 @@ function ClientSignUpScreen(props) {
         console.log("ERROR: ", error.message);
         // if client profile can't be created, delete user and redirect to signup
       }
-      // navigation.navigate("NewProjectScreenWelcome");
+
+
     }
   }
 

@@ -49,7 +49,7 @@ const BioPicker = () => {
         transparent={true}
         visible={isModalVisible}
         animationType="slide"
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
@@ -71,7 +71,7 @@ const BioPicker = () => {
             />
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"} />
+            <Button onPress={closeModal} title="Choose" />
           </View>
         </View>
       </Modal>

@@ -4,28 +4,40 @@ import WhichSignUpScreen from "../screens/auth/WhichSignUpScreen";
 import PilotSignUpScreen from "../screens/auth/PilotSignUpScreen";
 import ClientSignUpScreen from "../screens/auth/ClientSignUpScreen";
 
-const SignUpStack = createStackNavigator();
+const signUpScreensMetadata = [
+  {
+    name: "WhichSignUpScreen",
+    component: WhichSignUpScreen,
+    headerMode: "none",
+  },
+  {
+    name: "PilotSignUpScreen",
+    component: PilotSignUpScreen,
+    headerMode: "none",
+  },
+  {
+    name: "ClientSignUpScreen",
+    component: ClientSignUpScreen,
+    headerMode: "none",
+  },
+];
 
 const SignUpNavigation = () => {
-  return (
-    <SignUpStack.Navigator headerMode="none">
+  const SignUpStack = createStackNavigator();
+
+  const signUpStackScreens = signUpScreensMetadata.map(metadata => {
+    const { name, component, headerMode } = metadata;
+
+    return (
       <SignUpStack.Screen
-        name="WhichSignUpScreen"
-        component={WhichSignUpScreen}
-        headerMode="none"
+        name={name}
+        component={component}
+        headerMode={headerMode}
       />
-      <SignUpStack.Screen
-        name="PilotSignUpScreen"
-        component={PilotSignUpScreen}
-        headerMode="none"
-      />
-      <SignUpStack.Screen
-        name="ClientSignUpScreen"
-        component={ClientSignUpScreen}
-        headerMode="none"
-      />
-    </SignUpStack.Navigator>
-  );
+    );
+  });
+
+  return signUpStackScreens;
 };
 
 export default SignUpNavigation;

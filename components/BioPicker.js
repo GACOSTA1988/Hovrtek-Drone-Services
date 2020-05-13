@@ -36,7 +36,7 @@ const BioPicker = () => {
     return hasPersonalBio ? (
       <TouchableOpacity
         style={styles.button}
-        onPress={() => openModal()}
+        onPress={openModal}
         title={title}
       >
         <Text style={styles.buttonText}>Work Experience Set</Text>
@@ -44,7 +44,7 @@ const BioPicker = () => {
     ) : (
       <TouchableOpacity
         style={styles.button}
-        onPress={() => openModal()}
+        onPress={openModal}
         title={title}
       >
         <Text style={styles.buttonText}>Please Set Work Experience</Text>

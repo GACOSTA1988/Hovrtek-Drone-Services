@@ -30,26 +30,20 @@ const BioPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderPersonalBioButton = (buttonText = "") => {
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   const renderPersonalBio = (hasPersonalBio = false) => {
     const title = "Open modal";
 
-    return hasPersonalBio ? (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={openModal}
-        title={title}
-      >
-        <Text style={styles.buttonText}>Work Experience Set</Text>
-      </TouchableOpacity>
-    ) : (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={openModal}
-        title={title}
-      >
-        <Text style={styles.buttonText}>Please Set Work Experience</Text>
-      </TouchableOpacity>
-    );
+    return hasPersonalBio
+      ? renderPersonalBioButton("Work Experience Set")
+      : renderPersonalBioButton("Please Set Work Experience");
   };
 
   return (
@@ -84,24 +78,7 @@ const BioPicker = () => {
           </View>
         </View>
       </Modal>
-
       {renderPersonalBio(personalBio)}
-      {/* {personalBio ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>Work Experience Set</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>Please Set Work Experience</Text>
-        </TouchableOpacity> */}
       )}
     </View>
   );

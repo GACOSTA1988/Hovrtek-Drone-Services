@@ -38,6 +38,8 @@ const BioPicker = () => {
   };
 
   const renderPersonalBioButton = (buttonText = "") => {
+    const title = APP_STRINGS.openModal;
+
     return (
       <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
         <Text style={styles.buttonText}>{buttonText}</Text>
@@ -46,14 +48,12 @@ const BioPicker = () => {
   };
 
   const renderPersonalBio = (hasPersonalBio = false) => {
-    const title = APP_STRINGS.openModal;
-
     return hasPersonalBio
       ? renderPersonalBioButton(APP_STRINGS.workExperienceSet)
       : renderPersonalBioButton(APP_STRINGS.setWorkExperience);
   };
 
-  renderTextInput = (bio, setBio) => {
+  const renderTextInput = (bio, setBio) => {
     return (
       <View>
         <TextInput
@@ -91,6 +91,7 @@ const BioPicker = () => {
           </View>
         </View>
       </Modal>
+
       {renderPersonalBio(personalBio)}
     </View>
   );

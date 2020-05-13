@@ -30,12 +30,32 @@ const BioPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderPersonalBio = (hasPersonalBio = false) => {
+    return hasPersonalBio ? (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => openModal()}
+        title={"Open modal"}
+      >
+        <Text style={styles.buttonText}>Work Experience Set</Text>
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => openModal()}
+        title={"Open modal"}
+      >
+        <Text style={styles.buttonText}>Please Set Work Experience</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType="slide"
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
@@ -63,7 +83,8 @@ const BioPicker = () => {
         </View>
       </Modal>
 
-      {personalBio ? (
+      {renderPersonalBio(personalBio)}
+      {/* {personalBio ? (
         <TouchableOpacity
           style={styles.button}
           onPress={() => openModal()}
@@ -78,7 +99,7 @@ const BioPicker = () => {
           title={"Open modal"}
         >
           <Text style={styles.buttonText}>Please Set Work Experience</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       )}
     </View>
   );

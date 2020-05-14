@@ -23,6 +23,7 @@ import DroneExperiencePicker from "../../components/DroneExperiencePicker";
 import DroneTypePicker from "../../components/DroneTypePicker";
 import ValidInsurancePicker from "../../components/ValidInsurancePicker";
 import BioPicker from "../../components/BioPicker";
+import { APP_STRINGS } from '../../constants/index';
 
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetYearsOfExperience = React.createContext();
@@ -34,6 +35,7 @@ export const PassSetInsuredStatus = React.createContext();
 export const PassInsuredStatusState = React.createContext();
 export const PassSetPersonalBio = React.createContext();
 export const PassPersonalBioState = React.createContext();
+
 
 function PilotProfileSetupPageOneScreen(
   props,
@@ -146,7 +148,7 @@ function PilotProfileSetupPageOneScreen(
           )}
         </Text>
         <Text style={styles.bodyText}>
-          Please Give Us Brief Summary of Your Work Experience
+          {APP_STRINGS.briefSummary}
         </Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
@@ -158,12 +160,12 @@ function PilotProfileSetupPageOneScreen(
           </View>
         ) : (
           <Text style={styles.bodyText}>
-            Please Give Us Brief Summary of Your Work Experience
+              {APP_STRINGS.briefSummary}
           </Text>
         )}
 
         <Text style={styles.bodyText}>
-          How Many Years Of Drone Experience Do You Have?
+          {APP_STRINGS.yearsExperience}
         </Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
@@ -175,10 +177,10 @@ function PilotProfileSetupPageOneScreen(
           </View>
         ) : (
           <Text style={styles.bodyText}>
-            How Many Years Of Drone Experience Do You Have?
+              {APP_STRINGS.yearsExperience}
           </Text>
         )}
-        <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
+        <Text style={styles.bodyText}>{APP_STRINGS.modelDrone}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
             <PassSetDroneType.Provider value={setDroneType}>
@@ -188,9 +190,9 @@ function PilotProfileSetupPageOneScreen(
             </PassSetDroneType.Provider>
           </View>
         ) : (
-          <Text style={styles.bodyText}>What Drone Model Do You Have?</Text>
+            <Text style={styles.bodyText}>{APP_STRINGS.modelDrone}</Text>
         )}
-        <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
+        <Text style={styles.bodyText}>{APP_STRINGS.insurance}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
             <PassSetInsuredStatus.Provider value={setInsuredStatus}>
@@ -200,23 +202,29 @@ function PilotProfileSetupPageOneScreen(
             </PassSetInsuredStatus.Provider>
           </View>
         ) : (
-          <Text style={styles.bodyText}>Do You Have Valid Insurance?</Text>
+            <Text style={styles.bodyText}>{APP_STRINGS.insurance}</Text>
         )}
 
         <View style={styles.centerButton}>
           <View style={styles.saveAndContinueWrapper}>
             <TouchableOpacity
-              style={styles.backButton}
               onPress={submit}
-              title={"Save and Continue"}
+              title={APP_STRINGS.saveAndContinue}
             >
-              <Text style={styles.saveAndContinueText}>Save and Continue</Text>
+              <Text style={styles.saveAndContinueText}>{APP_STRINGS.saveAndContinue}</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        <Button title="Back" onPress={props.navigation.goBack} />
-        <Text style={styles.dummyText}>Dummy Text</Text>
+        <View style={styles.backButtonWrapper}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => props.navigation.goBack()}
+          >
+            <Text style={styles.backButtonText}>Back</Text>
+          </TouchableOpacity>
+        </View>
+
       </ScrollView>
     </View>
   );
@@ -246,7 +254,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 50,
+    marginTop: 20,
   },
   saveAndContinueText: {
     fontSize: 15,
@@ -286,6 +294,24 @@ const styles = StyleSheet.create({
   },
   droneExpWrapper: {
     alignItems: "center",
+  },
+  backButton: {
+    marginTop: 20,
+    marginBottom: 40,
+    width: 60,
+    height: 30,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  backButtonText: {
+    color: "white",
+    textAlign: "center",
+    // marginBottom: 40,
+  },
+  backButtonWrapper: {
+    alignItems: 'center'
   },
 });
 function mapStateToProps(state) {

@@ -13,6 +13,7 @@ import {
   PassSetDroneType,
   PassDroneTypeState,
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
+import { APP_STRINGS } from "../constants/index";
 
 const DroneTypePicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -29,6 +30,20 @@ const DroneTypePicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderDroneTypePickerButton = (buttonText = "") => {
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderDroneType = (hasDroneType = false) => {
+    return hasDroneType
+      ? renderDroneTypePickerButton(droneType)
+      : renderDroneTypePickerButton(setDroneType("None"));
+  };
+
   return (
     <View style={styles.container}>
       <Modal
@@ -39,9 +54,7 @@ const DroneTypePicker = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              What Type of drone do you have?
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.modelDrone}</Text>
           </View>
           <View>
             <Picker
@@ -72,25 +85,7 @@ const DroneTypePicker = () => {
         </View>
       </Modal>
 
-      {droneType ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{droneType}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>
-            No Experience {setDroneType("None")}
-          </Text>
-        </TouchableOpacity>
-      )}
+      {renderDroneType(droneType)}
     </View>
   );
 };

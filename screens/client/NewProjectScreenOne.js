@@ -124,6 +124,7 @@ function NewProjectScreenOne(props, { postProjects }) {
           <TouchableOpacity onPress={continueButton}>
             <Text style={styles.continueButton}>Fake Continue With Form Route Link</Text>
           </TouchableOpacity>
+
           <View style={styles.backButtonWrapper}>
             <TouchableOpacity
               style={styles.backButton}
@@ -132,6 +133,7 @@ function NewProjectScreenOne(props, { postProjects }) {
               <Text style={styles.backButtonText}>Back</Text>
             </TouchableOpacity>
           </View>
+          
         </TouchableOpacity>
   
       </ScrollView>

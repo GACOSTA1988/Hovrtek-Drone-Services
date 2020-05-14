@@ -15,7 +15,9 @@ import {
   PassPersonalBioState,
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
 import { useNavigation } from "@react-navigation/native";
-import { APP_STRINGS } from "../constants";
+import { APP_STRINGS } from "../constants/index";
+
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const {
   openModal,
@@ -32,6 +34,9 @@ const BioPicker = () => {
   const setPersonalBio = useContext(PassSetPersonalBio);
   const personalBio = useContext(PassPersonalBioState);
 
+  console.log("PERSONAL BIO", personalBio);
+  console.log("SET PERSONAL BIO", setPersonalBio);
+
   const openModal = () => {
     setIsModalVisible(true);
   };
@@ -42,7 +47,6 @@ const BioPicker = () => {
 
   const renderPersonalBioButton = (buttonText = "") => {
     const title = APP_STRINGS.openModal;
-
     return (
       <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
         <Text style={styles.buttonText}>{buttonText}</Text>
@@ -57,18 +61,9 @@ const BioPicker = () => {
   };
 
   const renderTextInput = (bio, setBio) => {
-    // TODO move this into the styled div below
-    const style = {
-      marginTop: 20,
-      height: 90,
-      borderColor: "gray",
-      borderWidth: 1,
-      marginBottom: 20,
-    };
-
     return (
       <View>
-        <TextInput style={style} onChangeText={setBio} value={bio} />
+        <TextInput style={styles.input} onChangeText={setBio} value={bio} />
       </View>
     );
   };
@@ -136,6 +131,13 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
+  },
+  input: {
+    marginTop: 20,
+    height: 90,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
   },
 });
 

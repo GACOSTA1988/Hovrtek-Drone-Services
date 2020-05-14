@@ -13,7 +13,10 @@ import {
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getPilotProfiles, editPilotProfile } from "../../actions/pilotProfiles";
+import {
+  getPilotProfiles,
+  editPilotProfile,
+} from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import DroneExperiencePicker from "../../components/DroneExperiencePicker";
@@ -110,7 +113,6 @@ function PilotProfileSetupPageOneScreen(
       Alert.alert("Please fill in your insurance status");
       navigation.navigate("PilotProfileSetupPageOneScreen");
     } else {
-      console.log(currentUserProps);
       props.editPilotProfile(
         currentUserProps.pilotLocation,
         personalBio,

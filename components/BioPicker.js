@@ -19,6 +19,14 @@ import { APP_STRINGS } from "../constants/index";
 
 //REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
+const {
+  openModal,
+  workExperienceSet,
+  setWorkExperience,
+  choose,
+  briefSummary,
+} = APP_STRINGS;
+
 const BioPicker = () => {
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -65,8 +73,8 @@ const BioPicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
-        onRequestClose={() => closeModal()}
+        animationType="slide"
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
@@ -76,36 +84,12 @@ const BioPicker = () => {
           {renderTextInput(personalBio, setPersonalBio)}
 
           <View styles={styles.cancelWrapper}>
-            <Button
-              onPress={() => closeModal()}
-              title={APP_STRINGS.choose}
-            ></Button>
+            <Button onPress={closeModal} title={APP_STRINGS.choose} />
           </View>
         </View>
       </Modal>
 
       {renderPersonalBio(personalBio)}
-      {/* {
-
-                (personalBio)
-                    ?
-                    (<TouchableOpacity
-                        style={styles.button}
-                        onPress={() => openModal()}
-                        title={APP_STRINGS.openModal}
-                    >
-                        <Text style={styles.buttonText}>{APP_STRINGS.workExperienceSet}</Text>
-                    </TouchableOpacity>)
-                    :
-                    (<TouchableOpacity
-                        style={styles.button}
-                        onPress={() => openModal()}
-                        title={APP_STRINGS.openModal}
-                    >
-                        <Text style={styles.buttonText}>{APP_STRINGS.setWorkExperience} 
-                        </Text>
-                    </TouchableOpacity>)
-            } */}
     </View>
   );
 };

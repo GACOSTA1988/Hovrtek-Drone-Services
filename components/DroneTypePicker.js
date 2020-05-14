@@ -22,8 +22,6 @@ const DroneTypePicker = () => {
   const setDroneType = useContext(PassSetDroneType);
   const droneType = useContext(PassDroneTypeState);
 
-  console.log("DRONE TYPE", droneType);
-
   const openModal = () => {
     setIsModalVisible(true);
   };

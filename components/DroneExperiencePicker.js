@@ -22,8 +22,6 @@ const DroneExperiencePicker = () => {
   const setYearsOfExperience = useContext(PassSetYearsOfExperience);
   const yearsOfExperience = useContext(PassYearsOfExperienceState);
 
-  console.log("YEARS OF EXPERIENCE", yearsOfExperience);
-
   const openModal = () => {
     setIsModalVisible(true);
   };
@@ -40,6 +38,7 @@ const DroneExperiencePicker = () => {
     );
   };
 
+  // TODO Add yearsOfExp as arguement to render years of exp... ALSO, APP_STRINGIFY "no years of exp"
   const renderYearsOfExperience = (hasYearsOfExperience = false) => {
     return hasYearsOfExperience
       ? renderYearsOfExperienceButton(yearsOfExperience)

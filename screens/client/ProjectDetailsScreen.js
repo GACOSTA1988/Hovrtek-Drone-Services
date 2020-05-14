@@ -75,10 +75,13 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
         <Text style={styles.unnamedText}>Pending Pilot</Text>
       </View>
     )}
-      <TouchableOpacity
-        onPress={() => props.navigation.pop()}>
-        <Text style={styles.back}>Back to projects</Text>
-      </TouchableOpacity>
+      <View style={styles.backButtonWrapper}>
+          <TouchableOpacity
+          style={styles.backButton}
+            onPress={() => props.navigation.pop()}>
+            <Text style={styles.backButtonText}>Back to projects</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 }
@@ -137,6 +140,25 @@ const styles = StyleSheet.create({
     // borderWidth: 4,
     // borderColor: "#092455",
     marginRight: 10
+  },
+  backButton: {
+    backgroundColor: "#092455",
+    height: 40,
+    width: 160,
+    alignSelf: 'flex-start',
+    borderRadius: 5,
+    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center'
+  },
+  backButtonText: {
+    color: 'white',
+  },
+  backButtonWrapper: {
+    marginTop: 20,
+    alignItems: 'center',
+    
   }
 });
 

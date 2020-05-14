@@ -13,7 +13,10 @@ import {
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getPilotProfiles, editPilotProfile } from "../../actions/pilotProfiles";
+import {
+  getPilotProfiles,
+  editPilotProfile,
+} from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import pic from "../../assets/landingPageImage.png";
@@ -51,7 +54,6 @@ function PilotProfileWelcomeScreen(
           passedProps = profile;
         }
       } catch (error) {
-        console.log("ERROR: ", error.message);
         Alert.alert("User page unavailable");
         props.navigation.navigate("JobListScreen");
       }
@@ -195,11 +197,10 @@ function PilotProfileWelcomeScreen(
                   <TouchableOpacity
                     style={styles.chatButton}
                     onPress={() =>
-                      props.navigation.navigate("ChatScreen",
-                      {
-                        ...profileDetails
-                      }
-                    )}
+                      props.navigation.navigate("ChatScreen", {
+                        ...profileDetails,
+                      })
+                    }
                   >
                     <Text style={styles.chatText}>Chat</Text>
                   </TouchableOpacity>
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     // alignItems: "center",
-    backgroundColor: "lightgray",
+    backgroundColor: "white",
     height: "100%",
     width: "100%",
   },

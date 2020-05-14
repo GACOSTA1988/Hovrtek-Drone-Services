@@ -4,23 +4,23 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
 
-function ClientSubheader(props) {
+function PilotSubheader(props) {
   const navigation = useNavigation();
-  let clientID = null;
+  let pilotID = null;
   if (firebase.auth().currentUser) {
-    clientID = firebase.auth().currentUser.uid;
+    pilotID = firebase.auth().currentUser.uid;
   }
 
   const [homeActive, setHomeActive] = useState(null);
 
   const pushHomeButton = () => {
     setHomeActive(true);
-    navigation.navigate("NewProjectScreenWelcome");
+    navigation.navigate("JobListScreen");
   };
 
-  const pushProjectsButton = () => {
+  const pushMyJobsButton = () => {
     setHomeActive(false);
-    navigation.navigate("ProjectListScreen");
+    navigation.navigate("MyJobsScreen");
   };
 
   return (
@@ -37,9 +37,9 @@ function ClientSubheader(props) {
       <View style={styles.buttonWrapper}>
         <TouchableOpacity
           style={styles.topButtonWrapperRight}
-          onPress={pushProjectsButton}
+          onPress={pushMyJobsButton}
         >
-          <Text style={styles.topButtonText}>Projects</Text>
+          <Text style={styles.topButtonText}>My Jobs</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ClientSubheader;
+export default PilotSubheader;

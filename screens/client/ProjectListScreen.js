@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -23,7 +23,10 @@ import { AntDesign } from "@expo/vector-icons";
 import * as firebase from 'firebase';
 import ClientSubheader from "../../components/client/ClientSubheader";
 
+
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
+
+ 
 
   useEffect(() => {
     props.getProjects();
@@ -45,7 +48,7 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
   return (
     <View style={styles.projectListWrapper}>
       <View style={styles.subheaderWrapper}>
-       <ClientSubheader/>
+            <ClientSubheader />
       </View>
         <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
           <Text style={styles.clientText}>My Projects</Text>

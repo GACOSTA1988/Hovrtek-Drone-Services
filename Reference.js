@@ -23,7 +23,7 @@ export default class LicenserUploader extends React.Component {
       if (!result.cancelled) { this.uploadImage(result.uri, "test-image").then(() => { Alert.alert("Successfully Uploaded to the Hovrtek Database!"); }).catch((error) => { Alert.alert(error); }); this.setState({ thumbnail: result.uri }); }
     }
     uploadImage = async (uri, imageName) => {
-      const response = await fetch(uri); const blob = await response.blob(); console.log("---------------------", blob)
+      const response = await fetch(uri); const blob = await response.blob(); blob)
       var ref = firebase.storage().ref().child("images/" + imageName); return ref.put(blob);
     }
   }
@@ -55,12 +55,11 @@ const PilotProfileScreen = (props, { postClientProfiles, getClientProfiles }) =>
   // GRAB CURRENT USER PROPS BY MATCHING UID FROM FIREBASE WITH UID FROM USER OBJECT
 
   let user = firebase.auth().currentUser;
-  console.log("USER", user)
+
   let userID = user.uid
-  console.log("USERID", userID)
-  console.log("LIST OF PROFILES", props.listOfProfiles)
+ 
   let currentUserProps = props.listOfProfiles.find(x => x.userID == userID)
-  console.log('CURRENT USER PROPS', currentUserProps)
+  
 
   // async function getLocation() {
   //   await let currentUserProps = props.listOfProfiles.find(x => x.userID == userID)
@@ -223,7 +222,7 @@ function PilotSignUpScreen(props) {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (error) {
-      console.log(error.toString(error));
+     
     }
     let user = firebase.auth().currentUser;
     await user.updateProfile({

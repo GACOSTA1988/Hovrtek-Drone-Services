@@ -23,8 +23,6 @@ const ClientLocationPicker = () => {
   const setLocation = useContext(PassSetLocation);
   const locationState = useContext(PassLocationState);
 
-  console.log("LOCATION", locationState);
-
   const openModal = () => {
     setIsModalVisible(true);
   };

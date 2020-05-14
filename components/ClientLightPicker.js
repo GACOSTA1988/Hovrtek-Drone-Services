@@ -19,8 +19,6 @@ const ClientLightPicker = () => {
   const setLight = useContext(PassSetLight);
   const light = useContext(PassLightState);
 
-  console.log("LIGHT", light);
-
   const openModal = () => {
     setIsModalVisible(true);
   };

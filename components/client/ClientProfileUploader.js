@@ -15,14 +15,12 @@ function ClientProfileUploader(props) {
 
   const profileImageUrlState = useContext(PassProfileImageUrlState);
 
-  // console.log("File available at", downloadURL);
   useEffect(() => {
     getPermissionAsync();
   }, []);
 
   const uuid = Math.random();
 
-  console.log("UUUIIIDDDD", uuid);
   async function getPermissionAsync() {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
     // await Permissions.askAsync(Permissions.CAMERA);
@@ -55,10 +53,8 @@ function ClientProfileUploader(props) {
     uploadTask.put(blob).then((snapshot) => {
       snapshot.ref.getDownloadURL().then(function (downloadURL) {
         SetProfileImageUrlContext(downloadURL);
-        // console.log("File available at", imageUrl);
-        let test = downloadURL;
 
-        console.log("File available at", test);
+        let test = downloadURL;
       });
     });
   }

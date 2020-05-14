@@ -1,14 +1,24 @@
 import React, { useEffect, useContext } from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  FlatList,
+  Image,
+} from "react-native";
 import { connect } from "react-redux";
 import { getMessages } from "../../actions/messages";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
 import { getClientProfiles } from "../../actions/clientProfiles";
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 import _ from "lodash";
 
-function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfiles }) {
-
+function MessagingScreen(
+  props,
+  { getMessages, getPilotProfiles, getClientProfiles }
+) {
   useEffect(() => {
     props.getMessages();
     props.getPilotProfiles();
@@ -25,13 +35,19 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
   let listOfProfiles = null;
   let listOfMyMessages = [];
 
-  if (props.listOfPilotProfiles && props.listOfClientProfiles && props.listOfMessages) {
-    listOfProfiles = props.listOfPilotProfiles.concat(props.listOfClientProfiles);
+  if (
+    props.listOfPilotProfiles &&
+    props.listOfClientProfiles &&
+    props.listOfMessages
+  ) {
+    listOfProfiles = props.listOfPilotProfiles.concat(
+      props.listOfClientProfiles
+    );
     props.listOfMessages.forEach((message) => {
-      if ((message.userOneID === user.uid) || (message.userTwoID === user.uid)) {
+      if (message.userOneID === user.uid || message.userTwoID === user.uid) {
         listOfMyMessages.push(message);
       }
-    })
+    });
   }
 
   if (props.listOfMessages && listOfProfiles) {
@@ -71,76 +87,89 @@ function MessagingScreen(props, { getMessages, getPilotProfiles, getClientProfil
       </View>
       {contacts ? (
         <FlatList
-        data={contacts}
-        keyExtractor={item => item.key}
-        renderItem={({item}) => {
-          return (
-            <View style={{flexDirection: "row"}}>
-              {item.profileImageUrl ? (
-                <Image
-                  source={{
-                    uri: item.profileImageUrl
-                  }}
-                  style={styles.profilePic}
-                />
-              ) : (
-                <Image
-                source={{
-                  uri: "https://thenypost.files.wordpress.com/2017/07/ameliaearhart.jpg?quality=90&strip=all&w=1200"
-                }}
-                style={styles.profilePic}
-                />
-              )}
-              {item.pilotFirstName ? (
-                <TouchableOpacity
-                  style={styles.contact}
-                  onPress={() => {goToChat(item)}}
-                >
-                  <Text style={styles.names}>{item.pilotFirstName}{" "}{item.pilotLastName}</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={styles.contact}
-                  onPress={() => goToChat(item)}
-                >
-                  <Text style={styles.names}>{item.firstName}{" "}{item.lastName}</Text>
-                </TouchableOpacity>
-              )}
-            </View>
-          )
-        }}
+          data={contacts}
+          keyExtractor={(item) => item.key}
+          renderItem={({ item }) => {
+            return (
+              <View style={{ flexDirection: "row" }}>
+                {item.profileImageUrl ? (
+                  <Image
+                    source={{
+                      uri: item.profileImageUrl,
+                    }}
+                    style={styles.profilePic}
+                  />
+                ) : (
+                  <Image
+                    source={{
+                      uri:
+                        "https://thenypost.files.wordpress.com/2017/07/ameliaearhart.jpg?quality=90&strip=all&w=1200",
+                    }}
+                    style={styles.profilePic}
+                  />
+                )}
+                {item.pilotFirstName ? (
+                  <TouchableOpacity
+                    style={styles.contact}
+                    onPress={() => {
+                      goToChat(item);
+                    }}
+                  >
+                    <Text style={styles.names}>
+                      {item.pilotFirstName} {item.pilotLastName}
+                    </Text>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.contact}
+                    onPress={() => goToChat(item)}
+                  >
+                    <Text style={styles.names}>
+                      {item.firstName} {item.lastName}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            );
+          }}
         />
       ) : (
         <Text>No contacts yet</Text>
       )}
     </View>
-  )
-};
+  );
+}
 
 function mapStateToProps(state) {
   const listOfMessages = _.map(state.messagesList.messagesList, (val, key) => {
     return {
       ...val,
-      key: key
+      key: key,
     };
   });
-  const listOfPilotProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
-    return {
-      ...val,
-      key: key
-    };
-  });
-  const listOfClientProfiles = _.map(state.clientProfilesList.clientProfilesList, (val, key) => {
-    return {
-      ...val,
-      key: key
-    };
-  });
-  // console.log("LIST OF CLIENT PROFILES", listOfClientProfiles, "LIST OF PILOT PROFILES", listOfPilotProfiles);
+  const listOfPilotProfiles = _.map(
+    state.pilotProfilesList.pilotProfilesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    }
+  );
+  const listOfClientProfiles = _.map(
+    state.clientProfilesList.clientProfilesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    }
+  );
+
   return {
     listOfMessages,
     listOfPilotProfiles,
-    listOfClientProfiles
+    listOfClientProfiles,
   };
 }
 
@@ -152,14 +181,14 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 40,
     fontSize: 30,
-    textAlign: "center"
+    textAlign: "center",
   },
   contact: {
-    paddingTop: 30
+    paddingTop: 30,
   },
   names: {
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   profilePic: {
     height: 70,
@@ -167,9 +196,12 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     borderWidth: 4,
     borderColor: "#092455",
-    margin: 15
-  }
-
+    margin: 15,
+  },
 });
 
-export default connect(mapStateToProps, { getMessages, getPilotProfiles, getClientProfiles })(MessagingScreen);
+export default connect(mapStateToProps, {
+  getMessages,
+  getPilotProfiles,
+  getClientProfiles,
+})(MessagingScreen);

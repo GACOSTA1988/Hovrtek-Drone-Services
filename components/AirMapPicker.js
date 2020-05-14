@@ -20,8 +20,6 @@ const AirMapPicker = () => {
   const setAirMap = useContext(PassSetAirMap);
   const airMap = useContext(PassAirMapState);
 
-  console.log("AIR MAP", airMap);
-
   const openModal = () => {
     setIsModalVisible(true);
   };

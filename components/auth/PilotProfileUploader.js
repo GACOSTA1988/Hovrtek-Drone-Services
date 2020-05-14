@@ -6,7 +6,7 @@ import * as Permissions from "expo-permissions";
 import * as firebase from "firebase";
 import { PassSetProfileImageUrlContext } from "../../screens/pilot/PilotProfileImageUploadScreen";
 import { PassProfileImageUrlState } from "../../screens/pilot/PilotProfileImageUploadScreen";
-import UUIDGenerator from 'react-native-uuid-generator';
+import UUIDGenerator from "react-native-uuid-generator";
 
 function PilotProfileUploader(props) {
   const [licenseThumbnail, setlicenseThumbnail] = useState(null);
@@ -15,22 +15,17 @@ function PilotProfileUploader(props) {
 
   const profileImageUrlState = useContext(PassProfileImageUrlState);
 
-  // console.log("File available at", downloadURL);
   useEffect(() => {
     getPermissionAsync();
   }, []);
 
+  const uuid = Math.random();
 
- const uuid = Math.random()
-
- console.log("UUUIIIDDDD", uuid)
   async function getPermissionAsync() {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // await Permissions.askAsync(Permissions.CAMERA);
   }
 
   async function pushIt() {
-    // let result = await ImagePicker.launchCameraAsync();
     let result = await ImagePicker.launchImageLibraryAsync();
 
     if (!result.cancelled) {
@@ -56,10 +51,8 @@ function PilotProfileUploader(props) {
     uploadTask.put(blob).then((snapshot) => {
       snapshot.ref.getDownloadURL().then(function (downloadURL) {
         SetProfileImageUrlContext(downloadURL);
-        // console.log("File available at", imageUrl);
-        let test = downloadURL;
 
-        console.log("File available at", test);
+        let test = downloadURL;
       });
     });
   }

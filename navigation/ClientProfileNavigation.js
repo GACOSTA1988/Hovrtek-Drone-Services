@@ -28,7 +28,7 @@ const generateNavOptions = (title = "", headerTitleComponent = {}) => {
   };
 };
 
-const clientNavProfileNavScreensMetadata = [
+const profileScreensMetadata = [
   {
     name: "ClientProfileScreen",
     component: ClientProfileScreen,
@@ -44,19 +44,17 @@ const clientNavProfileNavScreensMetadata = [
 function ClientProfileNavigator() {
   const ClientProfileNavigation = createStackNavigator();
 
-  const clientProfileNavScreens = clientNavProfileNavScreensMetadata.map(
-    metadata => {
-      const { name, component, options } = metadata;
+  const clientProfileNavScreens = profileScreensMetadata.map((metadata) => {
+    const { name, component, options } = metadata;
 
-      return (
-        <ClientProfileNavigation.Screen
-          name={metadata.name}
-          component={metadata.component}
-          options={metadata.options}
-        />
-      );
-    },
-  );
+    return (
+      <ClientProfileNavigation.Screen
+        name={name}
+        component={component}
+        options={options}
+      />
+    );
+  });
 
   return (
     <ClientProfileNavigation.Navigator>

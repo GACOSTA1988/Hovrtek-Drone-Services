@@ -18,10 +18,11 @@ const HomeStack = createStackNavigator();
 const mainHeaderStyle = {
   backgroundColor: "#092455",
   height: 100,
+  borderBottomColor: "grey",
+  borderBottomWidth: 10,
 };
 
 const ClientHomeStackNavigator = () => {
-
   return (
     <HomeStack.Navigator initialRouteName="NewProjectScreenWelcome">
       <HomeStack.Screen
@@ -116,7 +117,6 @@ const ClientHomeStackNavigator = () => {
       />
     </HomeStack.Navigator>
   );
-
 };
 
 export default ClientHomeStackNavigator;

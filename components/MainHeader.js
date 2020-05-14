@@ -9,18 +9,18 @@ import {
   Platform,
   Dimensions,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../assets/hovrtek_logo.png";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
-import Notification from './Notification';
-import { getMessages } from '../actions/messages.js';
+import Notification from "./Notification";
+import { getMessages } from "../actions/messages.js";
 import { connect } from "react-redux";
 import _ from "lodash";
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 import { NotificationContext } from "../context";
-import { HeaderContext } from '../context';
+import { HeaderContext } from "../context";
 
 const MainHeader = (props, { getMessages }) => {
   const navigation = useNavigation();
@@ -35,13 +35,12 @@ const MainHeader = (props, { getMessages }) => {
   if (firebase.auth().currentUser && props.listOfMessages) {
     userID = firebase.auth().currentUser.uid;
     props.listOfMessages.forEach((message) => {
-      if ((message.userTwoID === userID) && !message.read) {
+      if (message.userTwoID === userID && !message.read) {
         if (!unreadMessages.includes(message)) {
           unreadMessages.push(message);
         }
       }
-    })
-    console.log("UNREAD MESSAGES", unreadMessages);
+    });
   }
 
   return (
@@ -49,16 +48,18 @@ const MainHeader = (props, { getMessages }) => {
       <NotificationContext.Provider value={[unreadMessages, noteVisible]}>
         <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
         {unreadMessages.length > 0 ? (
-          <View style={styles.dot}><Text></Text></View>
+          <View style={styles.dot}>
+            <Text></Text>
+          </View>
         ) : (
           <View></View>
         )}
         {noteVisible ? (
           <View style={styles.note}>
-            <TouchableOpacity
-              onPress={() => setNoteVisible(false)}
-            >
-              <Text style={styles.messageText}>You have {unreadMessages.length} new messages</Text>
+            <TouchableOpacity onPress={() => setNoteVisible(false)}>
+              <Text style={styles.messageText}>
+                You have {unreadMessages.length} new messages
+              </Text>
             </TouchableOpacity>
           </View>
         ) : (
@@ -79,7 +80,7 @@ const MainHeader = (props, { getMessages }) => {
   );
 };
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   MainHeaderWrapper: {
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
         width: 210,
         height: 40,
         left: 10,
-        top: '35%',
+        top: "35%",
       },
     }),
   },
@@ -145,18 +146,18 @@ const styles = StyleSheet.create({
     height: 10,
     position: "absolute",
     right: 35,
-    borderRadius: 90
+    borderRadius: 90,
   },
   note: {
     ...Platform.select({
       ios: {
         top: 70,
-        right: 20
+        right: 20,
       },
       android: {
         top: 20,
-        alignSelf: "center"
-      }
+        alignSelf: "center",
+      },
     }),
     position: "absolute",
     backgroundColor: "white",
@@ -166,31 +167,28 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     shadowColor: "#000",
     shadowOffset: {
-    	width: 0,
-    	height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   messageText: {
-    paddingTop: 20
+    paddingTop: 20,
   },
 });
 
 function mapStateToProps(state) {
-  const listOfMessages = _.map(
-    state.messagesList.messagesList,
-    (val, key) => {
-      return {
-        ...val,
-        key: key,
-      };
-    }
-  );
+  const listOfMessages = _.map(state.messagesList.messagesList, (val, key) => {
+    return {
+      ...val,
+      key: key,
+    };
+  });
   return {
-    listOfMessages
+    listOfMessages,
   };
 }
 

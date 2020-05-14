@@ -43,7 +43,6 @@ function SignInScreen({ navigation }) {
           ) {
             Alert.alert("Incorrect username or password");
           } else {
-            console.log(error.code);
             Alert.alert(error.toString(error));
           }
           navigation.pop();

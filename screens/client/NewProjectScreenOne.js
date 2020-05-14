@@ -124,6 +124,7 @@ function NewProjectScreenOne(props, { postProjects }) {
           <TouchableOpacity onPress={continueButton}>
             <Text style={styles.continueButton}>Fake Continue With Form Route Link</Text>
           </TouchableOpacity>
+
           <View style={styles.backButtonWrapper}>
             <TouchableOpacity
               style={styles.backButton}
@@ -132,6 +133,7 @@ function NewProjectScreenOne(props, { postProjects }) {
               <Text style={styles.backButtonText}>Back</Text>
             </TouchableOpacity>
           </View>
+          
         </TouchableOpacity>
   
       </ScrollView>
@@ -194,8 +196,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   submitWrapper: {
-    width: 230,
-    height: 80,
+    width: 200,
+    height: 60,
     borderWidth: 2,
     borderColor: "#092455",
     borderRadius: 5,

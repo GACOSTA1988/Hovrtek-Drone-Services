@@ -28,7 +28,7 @@ const renderLogin = () => {
     width: "100%",
     borderBottomWidth: 10,
     borderBottomColor: "grey",
-    height: 110
+    height: 110,
   };
 
   const signInScreen = (
@@ -36,8 +36,8 @@ const renderLogin = () => {
       name="SignIn"
       component={SignInScreen}
       options={{
-        headerTitle: props => <LogoTitle {...props} />,
-        headerStyle: signHeaderStyle
+        headerTitle: (props) => <LogoTitle {...props} />,
+        headerStyle: signHeaderStyle,
       }}
     />
   );
@@ -49,13 +49,9 @@ const renderLogin = () => {
       options={({ navigation }) => ({
         title: "",
         headerLeft: () => (
-          <Button
-            onPress={() => navigation.goBack()}
-            title="Back"
-            color="#fff"
-          />
+          <Button onPress={navigation.goBack} title="Back" color="#fff" />
         ),
-        headerStyle: signHeaderStyle
+        headerStyle: signHeaderStyle,
       })}
     />
   );
@@ -66,7 +62,7 @@ const renderLogin = () => {
       component={LoadingScreen}
       options={() => ({
         title: "",
-        headerStyle: signHeaderStyle
+        headerStyle: signHeaderStyle,
       })}
     />
   );
@@ -82,19 +78,13 @@ const renderLogin = () => {
 
 const clientNavigation = (
   <RootStack.Navigator headerMode="none">
-    <RootStack.Screen
-      name="Client"
-      component={ClientNavigation}
-    />
+    <RootStack.Screen name="Client" component={ClientNavigation} />
   </RootStack.Navigator>
 );
 
 const pilotNavigation = (
   <RootStack.Navigator headerMode="none">
-    <RootStack.Screen
-      name="Pilot"
-      component={PilotNavigation}
-    />
+    <RootStack.Screen name="Pilot" component={PilotNavigation} />
   </RootStack.Navigator>
 );
 

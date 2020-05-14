@@ -11,7 +11,10 @@ import {
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getPilotProfiles, editPilotProfile } from "../../actions/pilotProfiles";
+import {
+  getPilotProfiles,
+  editPilotProfile,
+} from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 
@@ -203,7 +206,7 @@ function PilotProfileSetupPageTwoScreen(
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity> */}
 
-        <Button title="Back" onPress={() => props.navigation.goBack()} />
+        <Button title="Back" onPress={props.navigation.goBack} />
       </ScrollView>
     </View>
   );

@@ -11,7 +11,10 @@ import {
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getPilotProfiles, editPilotProfile } from "../../actions/pilotProfiles";
+import {
+  getPilotProfiles,
+  editPilotProfile,
+} from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import PilotProfileUploader from "../../components/auth/PilotProfileUploader";
@@ -77,7 +80,6 @@ function PilotProfileImageUploadScreen(
   const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
   const [profileComplete, setProfileComplete] = useState("Yes");
   const submit = (e) => {
-    console.log(currentUserProps);
     props.editPilotProfile(
       currentUserProps.pilotLocation,
       personalBio,
@@ -96,35 +98,36 @@ function PilotProfileImageUploadScreen(
   };
   return (
     <View style={styles.container}>
+      <Text style={styles.welcomeText}>
+        Hello!
+        {currentUserProps ? (
+          <Text style={styles.subText}>
+            {"\n"}
+            {currentUserProps.pilotFirstName +
+              " " +
+              currentUserProps.pilotLastName}
 
-        <Text style={styles.welcomeText}>
-          Hello!
-          {currentUserProps ? (
-            <Text style={styles.subText}>
-              {"\n"}
-            {currentUserProps.pilotFirstName + ' ' +currentUserProps.pilotLastName}
+            {}
+          </Text>
+        ) : (
+          <Text>Name:</Text>
+        )}
+      </Text>
 
-              {}
-            </Text>
-          ) : (
-            <Text>Name:</Text>
-          )}
-        </Text>
+      <Text>Please Upload Profile Picture</Text>
+      <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
+        <PassProfileImageUrlState.Provider value={profileImageUrl}>
+          <PilotProfileUploader />
+        </PassProfileImageUrlState.Provider>
+      </PassSetProfileImageUrlContext.Provider>
 
-        <Text>Please Upload Profile Picture</Text>
-        <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
-          <PassProfileImageUrlState.Provider value={profileImageUrl}>
-            <PilotProfileUploader />
-          </PassProfileImageUrlState.Provider>
-        </PassSetProfileImageUrlContext.Provider>
-
-        <TouchableOpacity
-          style={styles.completeButton}
-          onPress={submit}
-          title={"Complete Profile"}
-        >
-          <Text style={styles.completeButtonText}>Complete Profile</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.completeButton}
+        onPress={submit}
+        title={"Complete Profile"}
+      >
+        <Text style={styles.completeButtonText}>Complete Profile</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.backButton}
@@ -133,9 +136,6 @@ function PilotProfileImageUploadScreen(
       >
         <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
-
-        {/* <Button style={styles.backButton} title="Back" onPress={() => props.navigation.goBack()} /> */}
-
     </View>
   );
 }
@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#092455",
     borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 390,
     marginBottom: 10,
-    position: 'absolute'
+    position: "absolute",
   },
   completeButtonText: {
     color: "white",
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 25,
-    color: '#4593e7',
+    color: "#4593e7",
     fontWeight: "600",
     textAlign: "center",
   },
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     marginTop: "25%",
     marginBottom: "10%",
     fontSize: 25,
-    color: 'black',
+    color: "black",
     fontWeight: "600",
     textAlign: "center",
   },
@@ -197,12 +197,12 @@ const styles = StyleSheet.create({
   backButton: {
     marginTop: 450,
     marginBottom: 10,
-    position: 'absolute'
+    position: "absolute",
   },
   backButtonText: {
-    color: '#0000EE',
-    fontSize: 20
-  }
+    color: "#0000EE",
+    fontSize: 20,
+  },
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(
@@ -222,7 +222,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
   PilotProfileImageUploadScreen
 );
-
 
 // marginTop: "5%",
 //   marginBottom: "10%",

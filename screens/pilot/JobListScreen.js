@@ -50,27 +50,22 @@ function JobListScreen(
   let currentUser = firebase.auth().currentUser;
   if (currentUser) {
     currentUser = firebase.auth().currentUser;
-    console.log(" FIRE BASE AUTH CURRENT USER", currentUser);
   }
   let userID = null;
   if (currentUser !== null) {
     userID = firebase.auth().currentUser.uid;
-    console.log("USER ID", userID);
   }
   let list = null;
   if (props.listOfPilotProfiles) {
     list = props.listOfPilotProfiles;
-    console.log("LIST", list);
   }
   let currentUserProps = null;
   if (list !== null) {
     currentUserProps = list.find((x) => x.userID === userID);
-    console.log("CURRENET USER PROPS", currentUserProps);
   }
   let profileCompleteState = null;
   if (currentUserProps) {
     profileCompleteState = currentUserProps.profileComplete;
-    console.log("PROFILE COMPLETE STATE", profileCompleteState);
   }
 
   return (
@@ -224,7 +219,7 @@ function mapStateToProps(state) {
       key: key,
     };
   });
-  console.log("These are projects: ", listOfProjects);
+
   const listOfClientProfiles = _.map(
     state.clientProfilesList.clientProfilesList,
     (val, key) => {

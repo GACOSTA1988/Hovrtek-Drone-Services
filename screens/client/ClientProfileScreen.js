@@ -31,7 +31,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
     profile = props.listOfClientProfiles.find((x) => x.userID === user.uid);
-    console.log("HERE ARE ALL THE CLIENTS", props.listOfClientProfiles);
+
     // if user is client, get client profile
     if (user.photoURL === "C") {
       try {
@@ -42,7 +42,6 @@ function ClientProfileScreen(props, { getClientProfiles }) {
           setProfileDetails(passedProps);
         }
       } catch (error) {
-        console.log("ERROR: ", error.message);
         Alert.alert("User page unavailable");
         props.navigation.navigate("ProjectListScreen");
       }
@@ -51,7 +50,6 @@ function ClientProfileScreen(props, { getClientProfiles }) {
       try {
         setProfileDetails(props.route.params);
       } catch (error) {
-        console.log("ERROR: ", error.message);
         Alert.alert("User page unavailable");
         props.navigation.navigate("JobListScreen");
       }
@@ -80,23 +78,22 @@ function ClientProfileScreen(props, { getClientProfiles }) {
               </TouchableOpacity>
             ) : (
               <View>
-              <TouchableOpacity
-                style={styles.chatButton}
-                onPress={() =>
-                  props.navigation.navigate("ChatScreen",
-                  {
-                    ...profileDetails
+                <TouchableOpacity
+                  style={styles.chatButton}
+                  onPress={() =>
+                    props.navigation.navigate("ChatScreen", {
+                      ...profileDetails,
+                    })
                   }
-                )}
-              >
-                <Text style={styles.chatText}>Chat</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => props.navigation.pop()}
-              >
-                <Text style={styles.chatText}>Back</Text>
-              </TouchableOpacity>
+                >
+                  <Text style={styles.chatText}>Chat</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.backButton}
+                  onPress={() => props.navigation.pop()}
+                >
+                  <Text style={styles.chatText}>Back</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
@@ -203,20 +200,20 @@ const styles = StyleSheet.create({
     color: "white",
   },
   chatButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5,
   },
   backButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5,
-    top: 60
-  }
+    top: 60,
+  },
 });
 
 export default connect(mapStateToProps, { getClientProfiles })(

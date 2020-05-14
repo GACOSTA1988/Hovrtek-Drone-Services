@@ -13,7 +13,10 @@ import {
 import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getPilotProfiles, editPilotProfile } from "../../actions/pilotProfiles";
+import {
+  getPilotProfiles,
+  editPilotProfile,
+} from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import DroneExperiencePicker from "../../components/DroneExperiencePicker";
@@ -202,7 +205,7 @@ function PilotProfileSetupPageOneScreen(
         )}
 
         <Button title="Save and Continue" onPress={submit} />
-        <Button title="Back" onPress={() => props.navigation.goBack()} />
+        <Button title="Back" onPress={props.navigation.goBack} />
         <Text style={styles.dummyText}>Dummy Text</Text>
       </ScrollView>
     </View>

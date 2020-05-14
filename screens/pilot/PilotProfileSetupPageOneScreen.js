@@ -215,7 +215,7 @@ function PilotProfileSetupPageOneScreen(
           </View>
         </View>
 
-        <Button title="Back" onPress={() => props.navigation.goBack()} />
+        <Button title="Back" onPress={props.navigation.goBack} />
         <Text style={styles.dummyText}>Dummy Text</Text>
       </ScrollView>
     </View>

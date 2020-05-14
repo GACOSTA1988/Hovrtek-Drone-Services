@@ -136,8 +136,6 @@ function PilotProfileImageUploadScreen(
       >
         <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
-
-      {/* <Button style={styles.backButton} title="Back" onPress={() => props.navigation.goBack()} /> */}
     </View>
   );
 }

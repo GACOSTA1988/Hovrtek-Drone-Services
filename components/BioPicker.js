@@ -15,6 +15,15 @@ import {
   PassPersonalBioState,
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
 import { useNavigation } from "@react-navigation/native";
+import { APP_STRINGS } from "../constants";
+
+const {
+  openModal,
+  workExperienceSet,
+  setWorkExperience,
+  choose,
+  briefSummary,
+} = APP_STRINGS;
 
 const BioPicker = () => {
   const navigation = useNavigation();
@@ -31,56 +40,61 @@ const BioPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderPersonalBioButton = (buttonText = "") => {
+    const title = APP_STRINGS.openModal;
+
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderPersonalBio = (hasPersonalBio = false) => {
+    return hasPersonalBio
+      ? renderPersonalBioButton(APP_STRINGS.workExperienceSet)
+      : renderPersonalBioButton(APP_STRINGS.setWorkExperience);
+  };
+
+  const renderTextInput = (bio, setBio) => {
+    // TODO move this into the styled div below
+    const style = {
+      marginTop: 20,
+      height: 90,
+      borderColor: "gray",
+      borderWidth: 1,
+      marginBottom: 20,
+    };
+
+    return (
+      <View>
+        <TextInput style={style} onChangeText={setBio} value={bio} />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
-        onRequestClose={() => closeModal()}
+        animationType="slide"
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              Please Give Us a Brief Summary of Your Work Experience
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.briefSummary}</Text>
           </View>
-          <View>
-            <TextInput
-              style={{
-                marginTop: 20,
-                height: 90,
-                borderColor: "gray",
-                borderWidth: 1,
-                marginBottom: 20,
-              }}
-              onChangeText={setPersonalBio}
-              value={personalBio}
-            />
-          </View>
+
+          {renderTextInput(personalBio, setPersonalBio)}
+
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={APP_STRINGS.choose} />
           </View>
         </View>
       </Modal>
 
-      {personalBio ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>Work Experience Set</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>Please Set Work Experience</Text>
-        </TouchableOpacity>
-      )}
+      {renderPersonalBio(personalBio)}
     </View>
   );
 };

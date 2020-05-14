@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity } from 'react-native';
 import { PassSetAirMap, PassAirMapState } from '../screens/pilot/PilotProfileSetupPageTwoScreen';
 import * as firebase from "firebase";
-import { APP_STRINGS } from '../constants/index';
 
 const AirMapPicker = () => {
 
@@ -38,7 +37,7 @@ const AirMapPicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>{APP_STRINGS.experienceFlying}}</Text>
+                        <Text style={styles.modalText}>Have you had experience flying over 400 Feet?</Text>
                     </View>
                     <View>
                         <Picker

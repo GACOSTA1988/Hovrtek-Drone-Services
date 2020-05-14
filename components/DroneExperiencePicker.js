@@ -1,14 +1,15 @@
 import React, {  useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity } from 'react-native';
 import { PassSetYearsOfExperience, PassYearsOfExperienceState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
+import { APP_STRINGS } from '../constants/index';
+
+
+
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const DroneExperiencePicker = () => {
 
 const [isModalVisible, setIsModalVisible] = useState(false)
-
-
-
-
 
     const setYearsOfExperience = useContext(PassSetYearsOfExperience)
     const yearsOfExperience = useContext(PassYearsOfExperienceState)
@@ -23,6 +24,20 @@ const [isModalVisible, setIsModalVisible] = useState(false)
         setIsModalVisible(false);
     }
 
+    const renderYearsOfExperienceButton = (buttonText = '') => {
+        return (
+            <TouchableOpacity style={styles.button} onPress={openModal}>
+                <Text style={styles.buttonText}>{buttonText }</Text>
+            </TouchableOpacity>
+        )
+    }
+
+    const renderYearsOfExperience = (hasYearsOfExperience = false) => {
+        return hasYearsOfExperience
+            ? renderYearsOfExperienceButton(yearsOfExperience)
+            : renderYearsOfExperienceButton(setYearsOfExperience('No Years of Experience'));
+    };
+
 
         return (
             <View style={styles.container}>
@@ -34,7 +49,7 @@ const [isModalVisible, setIsModalVisible] = useState(false)
                 >
                     <View style={styles.modalContainer}>
                         <View style={styles.innerContainer}>
-                            <Text style={styles.modalText}>How many years of drone experience do you have?</Text>
+                            <Text style={styles.modalText}>{APP_STRINGS.yearsExperience}</Text>
                         </View>
                         <View>
                             <Picker
@@ -68,28 +83,9 @@ const [isModalVisible, setIsModalVisible] = useState(false)
                     </View>
                 </Modal>
 
-      
+                {renderYearsOfExperience(yearsOfExperience)}
                   
-                   {  
-                   (yearsOfExperience) 
-                   ? 
-                       ( <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => openModal()}
-                            title={"Open modal"}
-                        >
-                   <Text style={styles.buttonText}>{yearsOfExperience}</Text> 
-                        </TouchableOpacity>)
-                   :  
-                        (<TouchableOpacity
-                            style={styles.button}
-                            onPress={() => openModal()}
-                            title={"Open modal"}
-                        >
-                   <Text style={styles.buttonText}>Please Set Years of Experience{setYearsOfExperience("No Years of Experience")}
-                   </Text> 
-                        </TouchableOpacity>)
-                   }
+
 
             </View>
         );

@@ -4,13 +4,7 @@ import { PassSetPersonalBio, PassPersonalBioState } from '../screens/pilot/Pilot
 import { useNavigation } from "@react-navigation/native";
 import { APP_STRINGS } from '../constants/index';
 
-const {
-    openModal,
-    workExperienceSet,
-    setWorkExperience,
-    choose,
-    briefSummary,
-} = APP_STRINGS;
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const BioPicker = () => {
 

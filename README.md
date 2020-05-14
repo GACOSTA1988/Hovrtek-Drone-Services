@@ -46,4 +46,4 @@
 
 * Upon scrolling on ProjectList all projects "Glow". 
 
-make time / phone stuff white
+* Bring Keyboard up at same time as as modal, eliminating the step of pressing the input to bring the keyboard up

@@ -69,8 +69,8 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
         <View>
           <Image source={princePic01} style={styles.backgroundImage} />
           <View style={styles.saveButton}>
-            <TouchableOpacity onPress={() => save()}>
-              <Text style={styles.saveText}>Save Changes</Text>
+            <TouchableOpacity hitSlop={{ top: 30, left: 30, bottom: 30, right: 30 }} onPress={() => save()}>
+              <Text style={styles.saveText} >Save Changes</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     color: "white",
+    
   },
 });
 

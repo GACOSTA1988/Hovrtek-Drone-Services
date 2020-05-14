@@ -20,7 +20,7 @@ const PilotHomeStackNavigator = () => {
         name="JobListScreen"
         component={JobListScreen}
         options={{
-          title: "Available Jobs",
+          title: " ",
           headerTitle: () => <MainHeader />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -32,14 +32,16 @@ const PilotHomeStackNavigator = () => {
         name="JobDetailsScreen"
         component={JobDetailsScreen}
         options={{
-          title: "Job Details",
+          title: " ",
           headerTitle: () => <NestedHeader />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
+            borderBottomColor: "grey",
+            borderBottomWidth: 10,
           },
           headerBackImage: () => (
-            <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />
+            <Ionicons name="ios-arrow-round-back" size={50} color={"#092455"} />
           ),
         }}
       />
@@ -52,9 +54,11 @@ const PilotHomeStackNavigator = () => {
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
+            borderBottomColor: "grey",
+            borderBottomWidth: 10,
           },
           headerBackImage: () => (
-            <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />
+            <Ionicons name="ios-arrow-round-back" size={50} color={"#092455"} />
           ),
         }}
       />
@@ -62,14 +66,16 @@ const PilotHomeStackNavigator = () => {
         name="ClientProfileScreen"
         component={ClientProfileScreen}
         options={{
-          title: "Profile",
+          title: " ",
           headerTitle: () => <NestedHeader />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
+            borderBottomColor: "grey",
+            borderBottomWidth: 10,
           },
           headerBackImage: () => (
-            <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />
+            <Ionicons name="ios-arrow-round-back" size={50} color={"#092455"} />
           ),
         }}
       />
@@ -77,14 +83,16 @@ const PilotHomeStackNavigator = () => {
         name="ChatScreen"
         component={ChatScreen}
         options={{
-          title: "Chat",
+          title: " ",
           headerTitle: () => <NestedHeader />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
+            borderBottomColor: "grey",
+            borderBottomWidth: 10,
           },
           headerBackImage: () => (
-            <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />
+            <Ionicons name="ios-arrow-round-back" size={50} color={"#092455"} />
           ),
         }}
       />

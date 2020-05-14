@@ -62,7 +62,7 @@ const BioPicker = () => {
             />
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={"Choose"}></Button>
           </View>
         </View>
       </Modal>

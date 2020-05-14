@@ -112,7 +112,7 @@ const PilotProfileScreen = (props, { postClientProfiles, getClientProfiles }) =>
 
         <TouchableOpacity onPress={submit}><Text style={styles.submitButton}>Submit Form</Text></TouchableOpacity>
 
-        <Button title="Sign Out" onPress={() => signOut()} />
+        <Button title="Sign Out" onPress={signOut} />
 
         <Text style={styles.dummyText}>Dummy text until I investigate ScrollView more thoroughly</Text>
       </ScrollView>

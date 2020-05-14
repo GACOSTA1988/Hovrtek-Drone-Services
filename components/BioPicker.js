@@ -2,6 +2,15 @@ import React, { useState, useContext } from 'react';
 import { Text, View, Button, Modal, StyleSheet, Picker, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { PassSetPersonalBio, PassPersonalBioState } from '../screens/pilot/PilotProfileSetupPageOneScreen';
 import { useNavigation } from "@react-navigation/native";
+import { APP_STRINGS } from '../constants/index';
+
+const {
+    openModal,
+    workExperienceSet,
+    setWorkExperience,
+    choose,
+    briefSummary,
+} = APP_STRINGS;
 
 const BioPicker = () => {
 
@@ -20,11 +29,35 @@ const BioPicker = () => {
 
     const closeModal = () => {
         setIsModalVisible(false);
+    }
 
-}
+    const renderPersonalBioButton = (buttonText = '') => {
+        const title = APP_STRINGS.openModal;
+        return (
+            <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
+                <Text style={styles.buttonText}>{buttonText}</Text>
+            </TouchableOpacity>
+        )
+    }
+
+    const renderPersonalBio = (hasPersonalBio = false) => {
+        return hasPersonalBio
+            ? renderPersonalBioButton(APP_STRINGS.workExperienceSet)
+            : renderPersonalBioButton(APP_STRINGS.setWorkExperience);
+    };
+
+    const renderTextInput = (bio, setBio) => {
+
+        return (
+            <View>
+                <TextInput style={styles.input} onChangeText={setBio} value={bio} />
+            </View>
+        );
+    };
 
     return (
         <View style={styles.container}>
+            
             <Modal
                 transparent={true}
                 visible={isModalVisible}
@@ -33,58 +66,43 @@ const BioPicker = () => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.innerContainer}>
-                        <Text style={styles.modalText}>Please Give Us a Brief Summary of Your Work Experience</Text>
+                        <Text style={styles.modalText}>{APP_STRINGS.briefSummary}</Text>
                     </View>
-                    <View>
-                        <TextInput
-                            style={{
-                                marginTop: 20,
-                                height: 90,
-                                borderColor: "gray",
-                                borderWidth: 1,
-                                marginBottom: 20,
-                            }}
-                            onChangeText={setPersonalBio}
-                            value={personalBio}
-                        />
 
-                    </View>
+                    {renderTextInput(personalBio, setPersonalBio)}
+                    
                     <View styles={styles.cancelWrapper}>
                         <Button
                             onPress={() => closeModal()}
-                            title={"Choose"}
+                            title={APP_STRINGS.choose}
                         >
                         </Button>
                     </View>
                 </View>
             </Modal>
 
-
-            {
+            {renderPersonalBio(personalBio)}
+            {/* {
 
                 (personalBio)
                     ?
                     (<TouchableOpacity
                         style={styles.button}
                         onPress={() => openModal()}
-                        title={"Open modal"}
+                        title={APP_STRINGS.openModal}
                     >
-                        <Text style={styles.buttonText}>Work Experience Set</Text>
+                        <Text style={styles.buttonText}>{APP_STRINGS.workExperienceSet}</Text>
                     </TouchableOpacity>)
                     :
                     (<TouchableOpacity
                         style={styles.button}
                         onPress={() => openModal()}
-                        title={"Open modal"}
+                        title={APP_STRINGS.openModal}
                     >
-                        <Text style={styles.buttonText}>Please Set Work Experience 
+                        <Text style={styles.buttonText}>{APP_STRINGS.setWorkExperience} 
                         </Text>
                     </TouchableOpacity>)
-            }
-
-
-
-
+            } */}
 
         </View>
     );
@@ -131,6 +149,13 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "white"
+    },
+    input: {
+        marginTop: 20,
+        height: 90,
+        borderColor: "gray",
+        borderWidth: 1,
+        marginBottom: 20,
     }
 });
 

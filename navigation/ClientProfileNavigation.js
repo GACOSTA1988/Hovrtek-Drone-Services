@@ -4,26 +4,17 @@ import ClientProfileScreen from "../screens/client/ClientProfileScreen";
 import ClientEditProfileScreen from "../screens/client/ClientEditProfileScreen";
 import MainHeader from "../components/MainHeader";
 import NestedHeader from "../components/NestedHeader";
-import { Ionicons } from "@expo/vector-icons";
+import { APP_STRINGS, APP_COLORS } from "../constants";
 
-// TODO move to central app strings
-const APP_STRINGS = {
-  profile: "Profile",
-  editProfile: "Edit Profile",
-};
-
-// named by using the hex value in http://chir.ag/projects/name-that-color/#092455
-const APP_COLORS = {
-  downriver: "#092455",
-};
+const { profile, editProfile } = APP_STRINGS;
 
 const generateNavOptions = (title = "", headerTitleComponent = {}) => {
   return {
     title,
     headerTitle: headerTitleComponent,
     headerStyle: {
-      backgroundColor: APP_COLORS.downriver,
-      height: 100,
+      backgroundColor: APP_COLORS.clientNavHeaderBG,
+      height: 100, // TODO this should be somewhere else, with other styles
     },
   };
 };
@@ -32,12 +23,12 @@ const profileScreensMetadata = [
   {
     name: "ClientProfileScreen",
     component: ClientProfileScreen,
-    options: generateNavOptions(APP_STRINGS.profile, MainHeader),
+    options: generateNavOptions(profile, MainHeader),
   },
   {
     name: "ClientEditProfileScreen",
     component: ClientEditProfileScreen,
-    options: generateNavOptions(APP_STRINGS.editProfile, NestedHeader),
+    options: generateNavOptions(editProfile, NestedHeader),
   },
 ];
 

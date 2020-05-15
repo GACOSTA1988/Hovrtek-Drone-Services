@@ -27,7 +27,7 @@ const signUpScreensMetadata = [
 const SignUpNavigation = () => {
   const SignUpStack = createStackNavigator();
 
-  const signUpStackScreens = signUpScreensMetadata.map(metadata => {
+  const signUpStackScreens = signUpScreensMetadata.map((metadata) => {
     const { name, component, headerMode } = metadata;
 
     return (

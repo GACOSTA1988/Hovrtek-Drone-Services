@@ -41,15 +41,12 @@ const renderTravelButton = (buttonText = '') => {
   );
 }
 
-  // TODO Add validInsurance as arguement to render Valid Insurance
+// Added second argument to avoid direct state call in funciton as per functional Programming specs
 const renderTravel = (hasSetTravel = false, argTravelStatus) => {
   return hasSetTravel
   ? renderTravelButton(argTravelStatus)
   : renderTravelButton(setTravelStatus(APP_STRINGS.no))
 }
-
-// renderTravelButton(travelStatus)
-
 
 
   return (

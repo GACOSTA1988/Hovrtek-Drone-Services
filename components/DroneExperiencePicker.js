@@ -38,13 +38,12 @@ const DroneExperiencePicker = () => {
     );
   };
 
-// ADDED argToRenderYearsOfExperience as a second argument to make function self-contained-- As opposed to setting the 'yearsOfExperience' state in the 'renderYearsOfExperienceButton' directly.
-  const renderYearsOfExperience = (hasYearsOfExperience = false, argToRenderYearsOfExperience) => {
-    return hasYearsOfExperience
-      ? renderYearsOfExperienceButton(argToRenderYearsOfExperience)
-      : renderYearsOfExperienceButton(
-          setYearsOfExperience(APP_STRINGS.noYearsOfExperience),
-        );
+  // Added second argument to avoid direct state call in funciton as per functional Programming specs
+  const renderYearsOfExperience = (yearsOfExperienceString = "") => {
+    const parsedYears = parseInt(yearsOfExperienceString);
+    return parsedYears > 0
+      ? renderYearsOfExperienceButton(yearsOfExperience)
+      : renderYearsOfExperienceButton(APP_STRINGS.noYearsOfExperience);
   };
 
   return (
@@ -90,7 +89,7 @@ const DroneExperiencePicker = () => {
         </View>
       </Modal>
 
-      {renderYearsOfExperience(yearsOfExperience, yearsOfExperience)}
+      {renderYearsOfExperience(yearsOfExperience)}
     </View>
   );
 };

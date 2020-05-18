@@ -41,10 +41,10 @@ const ValidInsurancePicker = () => {
     )
 }
 
-  // TODO Add validInsurance as arguement to render Valid Insurance
-const renderValidInsurance = (hasValidInsurance = false) => {
+// Added second argument to avoid direct state call in funciton as per functional Programming specs
+const renderValidInsurance = (hasValidInsurance = false, validInsuranceArg) => {
   return hasValidInsurance
-    ? renderValidInsuranceButton(insuredStatus)
+    ? renderValidInsuranceButton(validInsuranceArg)
     : renderValidInsuranceButton(setInsuredStatus(APP_STRINGS.no));
 };
 
@@ -77,7 +77,7 @@ const renderValidInsurance = (hasValidInsurance = false) => {
         </View>
       </Modal>
 
-      {renderValidInsurance(insuredStatus)}
+      {renderValidInsurance(insuredStatus, insuredStatus)}
     </View>
   );
 };

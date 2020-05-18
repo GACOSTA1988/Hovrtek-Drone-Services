@@ -5,10 +5,8 @@ import {
   Button,
   Modal,
   StyleSheet,
-  Picker,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
 import {
   PassSetLocation,

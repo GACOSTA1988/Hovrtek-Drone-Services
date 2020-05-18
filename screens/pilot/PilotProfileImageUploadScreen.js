@@ -18,6 +18,8 @@ import {
 import * as firebase from "firebase";
 import _ from "lodash";
 import PilotProfileUploader from "../../components/auth/PilotProfileUploader";
+import { APP_STRINGS } from "../../constants/index";
+
 
 // CONTEXT HOOK
 export const PassSetProfileImageUrlContext = React.createContext();
@@ -99,7 +101,7 @@ function PilotProfileImageUploadScreen(
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>
-        Hello!
+        {APP_STRINGS.hello}
         {currentUserProps ? (
           <Text style={styles.subText}>
             {"\n"}

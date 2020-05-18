@@ -41,10 +41,10 @@ const renderTravelButton = (buttonText = '') => {
   );
 }
 
-// Added second argument to avoid direct state call in funciton as per functional Programming specs
-const renderTravel = (hasSetTravel = false, argTravelStatus) => {
+// Refactored
+const renderTravel = (hasSetTravel = false) => {
   return hasSetTravel
-  ? renderTravelButton(argTravelStatus)
+  ? renderTravelButton(travelStatus)
   : renderTravelButton(setTravelStatus(APP_STRINGS.no))
 }
 
@@ -54,13 +54,13 @@ const renderTravel = (hasSetTravel = false, argTravelStatus) => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              Are You Willing to Travel Out of State for a Drone Job?
+              {APP_STRINGS.areYouWilling}
             </Text>
           </View>
           <View>
@@ -80,7 +80,7 @@ const renderTravel = (hasSetTravel = false, argTravelStatus) => {
         </View>
       </Modal>
 
-      {renderTravel(travelStatus, travelStatus)}
+      {renderTravel(travelStatus)}
     </View>
   );
 };

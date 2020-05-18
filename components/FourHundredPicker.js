@@ -59,7 +59,7 @@ const FourHundredPicker = () => {
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              Have you had experience flying over 400 Feet?
+              {APP_STRINGS.haveYouHadExperienceFlying}
             </Text>
           </View>
           <View>

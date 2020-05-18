@@ -40,11 +40,10 @@ const DroneTypePicker = () => {
     );
   };
 
-// Added second argument to avoid direct state call in funciton as per functional Programming specs
-  const renderDroneType = (hasDroneType = false, droneTypeArg) => {
-    console.log("has drone type", hasDroneType)
+// Refactored
+  const renderDroneType = (hasDroneType = false) => {
     return hasDroneType
-      ? renderDroneTypePickerButton(droneTypeArg)
+      ? renderDroneTypePickerButton(droneType)
       : renderDroneTypePickerButton(setDroneType("None"));
   };
 
@@ -89,7 +88,7 @@ const DroneTypePicker = () => {
         </View>
       </Modal>
 
-      {renderDroneType(droneType, droneType)}
+      {renderDroneType(droneType)}
     </View>
   );
 };

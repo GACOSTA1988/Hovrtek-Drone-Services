@@ -38,12 +38,18 @@ const DroneExperiencePicker = () => {
     );
   };
 
-// Refactored 
-  const renderYearsOfExperience = (yearsOfExperienceString = "") => {
-    const parsedYears = parseInt(yearsOfExperienceString);
-    return parsedYears > 0
+// This refactor was breaking upon submition- need to investigate why...
+  // const renderYearsOfExperience = (yearsOfExperienceString = "") => {
+  //   const parsedYears = parseInt(yearsOfExperienceString);
+  //   return parsedYears > 0
+  //     ? renderYearsOfExperienceButton(yearsOfExperience)
+  //     : renderYearsOfExperienceButton(APP_STRINGS.noYearsOfExperience);
+  // };
+
+    const renderYearsOfExperience = (yearsOfExperienceString) => {
+    return yearsOfExperienceString
       ? renderYearsOfExperienceButton(yearsOfExperience)
-      : renderYearsOfExperienceButton(APP_STRINGS.noYearsOfExperience);
+      : renderYearsOfExperienceButton(setYearsOfExperience(APP_STRINGS.noYearsOfExperience));
   };
 
   return (

@@ -58,7 +58,7 @@ const renderValidInsurance = (hasValidInsurance = false) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Do you have valid insurance?</Text>
+            <Text style={styles.modalText}>{APP_STRINGS.doYouHaveValidInsurance}</Text>
           </View>
           <View>
             <Picker
@@ -72,7 +72,7 @@ const renderValidInsurance = (hasValidInsurance = false) => {
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={APP_STRINGS.choose}></Button>
           </View>
         </View>
       </Modal>

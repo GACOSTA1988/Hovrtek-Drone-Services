@@ -13,6 +13,7 @@ import {
   PassAirMapState,
 } from "../screens/pilot/PilotProfileSetupPageTwoScreen";
 import * as firebase from "firebase";
+import { APP_STRINGS } from "../constants/index";
 
 const AirMapPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

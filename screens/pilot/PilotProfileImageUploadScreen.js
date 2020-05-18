@@ -129,13 +129,16 @@ function PilotProfileImageUploadScreen(
         <Text style={styles.completeButtonText}>Complete Profile</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => props.navigation.goBack()}
-        title={"Back"}
-      >
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
+      <View style={styles.backButtonWrapper}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => props.navigation.goBack()}
+        >
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+      </View>
+
+    
     </View>
   );
 }
@@ -195,13 +198,23 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   backButton: {
-    marginTop: 450,
-    marginBottom: 10,
-    position: "absolute",
+    marginTop: 20,
+    marginBottom: 40,
+    width: 60,
+    height: 30,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   backButtonText: {
-    color: "#0000EE",
-    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+   
+  },
+  backButtonWrapper: {
+    marginTop: 253,
+    alignItems: "center",
   },
 });
 function mapStateToProps(state) {

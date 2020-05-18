@@ -38,7 +38,7 @@ const DroneExperiencePicker = () => {
     );
   };
 
-  // Added second argument to avoid direct state call in funciton as per functional Programming specs
+// Refactored 
   const renderYearsOfExperience = (yearsOfExperienceString = "") => {
     const parsedYears = parseInt(yearsOfExperienceString);
     return parsedYears > 0

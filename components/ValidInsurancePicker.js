@@ -41,10 +41,10 @@ const ValidInsurancePicker = () => {
     )
 }
 
-// Added second argument to avoid direct state call in funciton as per functional Programming specs
-const renderValidInsurance = (hasValidInsurance = false, validInsuranceArg) => {
+// Refactored 
+const renderValidInsurance = (hasValidInsurance = false) => {
   return hasValidInsurance
-    ? renderValidInsuranceButton(validInsuranceArg)
+    ? renderValidInsuranceButton(insuredStatus)
     : renderValidInsuranceButton(setInsuredStatus(APP_STRINGS.no));
 };
 
@@ -77,7 +77,7 @@ const renderValidInsurance = (hasValidInsurance = false, validInsuranceArg) => {
         </View>
       </Modal>
 
-      {renderValidInsurance(insuredStatus, insuredStatus)}
+      {renderValidInsurance(insuredStatus)}
     </View>
   );
 };

@@ -8,18 +8,18 @@ import { PassSetProfileImageUrlContext } from "../../screens/pilot/PilotProfileI
 import { PassProfileImageUrlState } from "../../screens/pilot/PilotProfileImageUploadScreen";
 import UUIDGenerator from "react-native-uuid-generator";
 
-function PilotProfileUploader(props) {
-  const [licenseThumbnail, setlicenseThumbnail] = useState(null);
+// todo move to app_strings
+const SUCCESS_UPLOAD = "Successfully Uploaded to the Hovrtek Database!";
+
+function PilotProfileUploader() {
+  const uuid = Math.random();
+  const [ licenseThumbnail, setlicenseThumbnail ] = useState(null);
 
   const SetProfileImageUrlContext = useContext(PassSetProfileImageUrlContext);
-
-  const profileImageUrlState = useContext(PassProfileImageUrlState);
 
   useEffect(() => {
     getPermissionAsync();
   }, []);
-
-  const uuid = Math.random();
 
   async function getPermissionAsync() {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -31,7 +31,7 @@ function PilotProfileUploader(props) {
     if (!result.cancelled) {
       uploadImage(result.uri, uuid)
         .then(() => {
-          Alert.alert("Successfully Uploaded to the Hovrtek Database!");
+          Alert.alert(SUCCESS_UPLOAD);
         })
         .catch((error) => {
           Alert.alert(error);
@@ -39,20 +39,16 @@ function PilotProfileUploader(props) {
       setlicenseThumbnail(result.uri);
     }
   }
+
   async function uploadImage(uri, uuid) {
     const response = await fetch(uri);
     const blob = await response.blob();
 
-    var uploadTask = await firebase
-      .storage()
-      .ref()
-      .child("images/" + uuid);
+    var uploadTask = await firebase.storage().ref().child("images/" + uuid);
 
     uploadTask.put(blob).then((snapshot) => {
-      snapshot.ref.getDownloadURL().then(function (downloadURL) {
+      snapshot.ref.getDownloadURL().then(function(downloadURL) {
         SetProfileImageUrlContext(downloadURL);
-
-        let test = downloadURL;
       });
     });
   }

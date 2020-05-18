@@ -16,7 +16,6 @@ import * as firebase from "firebase";
 import { postPilotProfiles } from "../../actions/pilotProfiles";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
-import PilotProfileUploader from "../../components/auth/PilotProfileUploader.js";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function PilotSignUpScreen(props) {

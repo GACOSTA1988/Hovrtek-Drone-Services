@@ -17,7 +17,7 @@ import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
 import { editClientProfile } from "../../actions/clientProfiles";
-import ClientProfileUploader from "../../components/client/ClientProfileUploader";
+import ProfileUploader from "components/shared/ProfileUploader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // CONTEXT HOOKS PROFILE IMAGE URL
@@ -138,7 +138,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           <View style={{ alignItems: "center", marginBottom: 50 }}>
             <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
               <PassProfileImageUrlState.Provider value={profileImageUrl}>
-                <ClientProfileUploader />
+                <ProfileUploader isPilot={false} />
               </PassProfileImageUrlState.Provider>
             </PassSetProfileImageUrlContext.Provider>
           </View>

@@ -10,7 +10,6 @@ import {
   Alert,
   Image,
 } from "react-native";
-import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import {

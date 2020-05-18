@@ -21,13 +21,13 @@ async function uploadImage(uri = "", uuid = "", func = {}) {
 // the promise here
 const promiseResolver = (promise) => {
   return promise
-    .then((data) => {
-      console.log("hell yeah!\n\n", data);
-      return { data, error: null };
-    })
     .catch((error) => {
       console.log("damnnnn\n\n", error);
       return { error, data: null };
+    })
+    .then((data) => {
+      console.log("hell yeah!\n\n", data);
+      return { data, error: null };
     });
 };
 

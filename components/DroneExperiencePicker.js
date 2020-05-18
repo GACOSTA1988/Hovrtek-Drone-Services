@@ -67,8 +67,8 @@ const DroneExperiencePicker = () => {
               }
             >
               <Picker.Item
-                label="No Years of Experience"
-                value="No Years of Experience"
+                label={APP_STRINGS.noYearsOfExperience}
+                value={APP_STRINGS.noYearsOfExperience}
               />
               <Picker.Item label="Less than 1" value="Less than 1" />
               <Picker.Item label="1" value="1" />

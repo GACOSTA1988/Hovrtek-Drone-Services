@@ -12,6 +12,9 @@ import {
   PassSetInsuredStatus,
   PassInsuredStatusState,
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
+import { APP_STRINGS } from "../constants";
+
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const ValidInsurancePicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -32,7 +35,6 @@ const ValidInsurancePicker = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={openModal}
-          title={"Open modal"}
         >
           <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
@@ -43,10 +45,8 @@ const ValidInsurancePicker = () => {
 const renderValidInsurance = (hasValidInsurance = false) => {
   return hasValidInsurance
     ? renderValidInsuranceButton(insuredStatus)
-    : renderValidInsuranceButton(setInsuredStatus("No"));
+    : renderValidInsuranceButton(setInsuredStatus(APP_STRINGS.no));
 };
-
-
 
   return (
     <View style={styles.container}>
@@ -54,7 +54,7 @@ const renderValidInsurance = (hasValidInsurance = false) => {
         transparent={true}
         visible={isModalVisible}
         animationType={"slide"}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
@@ -67,12 +67,12 @@ const renderValidInsurance = (hasValidInsurance = false) => {
                 setInsuredStatus(insuredStatus)
               }
             >
-              <Picker.Item label="No" value="No" />
-              <Picker.Item label="Yes" value="Yes" />
+              <Picker.Item label={APP_STRINGS.no} value={APP_STRINGS.no} />
+              <Picker.Item label={APP_STRINGS.yes} value={APP_STRINGS.yes} />
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={"Choose"}></Button>
           </View>
         </View>
       </Modal>

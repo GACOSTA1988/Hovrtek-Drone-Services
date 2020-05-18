@@ -5,20 +5,21 @@ async function uploadImage(uri = "", uuid = "", func = {}) {
   const blob = await response.blob();
   const uploadTask = await firebase.storage().ref().child(`images/${uuid}`);
 
-  const { data: snapshot, error = null } = uploadTask.put(blob);
+  const { data: snapshot, error } = promiseResolver(uploadTask.put(blob));
   if (error) {
-    Alert.alert("⚠️⚠️warning: uploadImage is very virus⚠️⚠️:0");
+    Alert.alert("⚠️⚠️warning: uploadImage is very virus⚠️⚠️:1");
   }
 
-  const { data, error = null } = promiseResolver(snapshot.ref.getDownloadURL());
+  const { data: url, error } = promiseResolver(snapshot.ref.getDownloadURL());
   if (error) {
-    Alert.alert("⚠️⚠️warning: uploadImage is very virus:1⚠️⚠️");
-  } else if (!!data) {
-    func(data);
+    Alert.alert("⚠️⚠️warning: uploadImage is very virus:2⚠️⚠️");
+  } else if (!!url) {
+    func(url);
   }
 }
 
-// the promise here
+// the promise here is created when you call a function with its params,
+// ex.
 const promiseResolver = (promise) => {
   return promise
     .catch((error) => {

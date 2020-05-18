@@ -19,7 +19,10 @@ async function uploadImage(uri = "", uuid = "", func = {}) {
 }
 
 // the promise here is created when you call a function with its params,
-// ex.
+// ex. snapshot.ref.getDownloadURL(), uploadTask.put(blob)
+// this function processes the promise and returns one of:
+// { error, data: null }; let's call it an error object, or
+// { data, error: null }; let's say a data object
 const promiseResolver = (promise) => {
   return promise
     .catch((error) => {

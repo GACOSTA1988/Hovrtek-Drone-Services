@@ -27,6 +27,27 @@ const ValidInsurancePicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderValidInsuranceButton = (buttonText = "") => {
+    return (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={openModal}
+          title={"Open modal"}
+        >
+          <Text style={styles.buttonText}>{buttonText}</Text>
+        </TouchableOpacity>
+    )
+}
+
+  // TODO Add validInsurance as arguement to render Valid Insurance
+const renderValidInsurance = (hasValidInsurance = false) => {
+  return hasValidInsurance
+    ? renderValidInsuranceButton(insuredStatus)
+    : renderValidInsuranceButton(setInsuredStatus("No"));
+};
+
+
+
   return (
     <View style={styles.container}>
       <Modal
@@ -56,25 +77,7 @@ const ValidInsurancePicker = () => {
         </View>
       </Modal>
 
-      {insuredStatus ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{insuredStatus}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>
-            No Insurance{setInsuredStatus("No")}
-          </Text>
-        </TouchableOpacity>
-      )}
+      {renderValidInsurance(insuredStatus)}
     </View>
   );
 };

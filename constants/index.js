@@ -14,6 +14,7 @@ const APP_STRINGS = {
   setWorkExperience: "Please Set Work Experience",
   workExperienceSet: "Work Experience Set",
   yearsExperience: "How Many Years Of Drone Experience Do You Have?",
+  noYearsOfExperience: "No Years of Experience",
 };
 
 export { APP_STRINGS };

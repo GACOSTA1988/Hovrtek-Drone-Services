@@ -15,6 +15,8 @@ import {
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
 import { APP_STRINGS } from "../constants/index";
 
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
+
 const DroneTypePicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [pickerValue, setPickerValue] = useState("Less than 1");
@@ -38,7 +40,9 @@ const DroneTypePicker = () => {
     );
   };
 
+    // TODO Add droneType as arguement to render Drone Type
   const renderDroneType = (hasDroneType = false) => {
+    console.log("has drone type", hasDroneType)
     return hasDroneType
       ? renderDroneTypePickerButton(droneType)
       : renderDroneTypePickerButton(setDroneType("None"));

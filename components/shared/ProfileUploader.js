@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Button, Image, View, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
-import { promiseResolver, uploadImage } from "ProfileUploaderUtils";
+import {
+  generateUploadedImageStyle,
+  promiseResolver,
+  uploadImage,
+} from "ProfileUploaderUtils";
+import { APP_STRINGS } from "../../constants";
 
-// todo move to app_strings
-const SUCCESS_UPLOAD = "Successfully Uploaded to the Hovrtek Database!";
-const UPLOAD_IMAGE = "Upload Image";
+const { successfullyUploaded, uploadImage: uploadImageStr } = APP_STRINGS;
 
 function ProfileUploader(hasSquareImage = false) {
   const uuid = Math.random();
@@ -25,12 +28,13 @@ function ProfileUploader(hasSquareImage = false) {
 
     if (!result.cancelled) {
       const { uri } = result;
-      const { error } = promiseResolver(uploadImage(uri, uuid));
+      const { error, data } = promiseResolver(uploadImage(uri, uuid));
 
       if (error) {
         Alert.alert(error);
       } else {
-        Alert.alert(SUCCESS_UPLOAD);
+        console.log("that good data\n\n", data)
+        Alert.alert(successfullyUploaded);
       }
 
       setlicenseThumbnail(uri);
@@ -38,15 +42,11 @@ function ProfileUploader(hasSquareImage = false) {
   }
 
   const source = { uri: licenseThumbnail };
-
-  // todo make into util fn
-  const style = hasSquareImage
-    ? { width: 200, height: 200 }
-    : { width: 150, height: 150, border: 5, borderColor: "blue" };
+  const style = generateUploadedImageStyle(hasSquareImage);
 
   return (
     <View>
-      <Button title={UPLOAD_IMAGE} onPress={setImage} />
+      <Button title={uploadImageStr} onPress={setImage} />
       {!!licenseThumbnail && <Image source={source} style={style} />}
     </View>
   );

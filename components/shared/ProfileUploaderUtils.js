@@ -1,5 +1,11 @@
 import { Alert } from "react-native";
 
+const generateUploadedImageStyle = (isSquare = false) => {
+  return isSquare
+    ? { width: 200, height: 200 }
+    : { width: 150, height: 150, border: 5, borderColor: "blue" };
+};
+
 async function uploadImage(uri = "", uuid = "", func = {}) {
   const response = await fetch(uri);
   const blob = await response.blob();
@@ -35,4 +41,4 @@ const promiseResolver = (promise) => {
     });
 };
 
-export { promiseResolver, uploadImage };
+export { generateUploadedImageStyle, promiseResolver, uploadImage };

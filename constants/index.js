@@ -12,6 +12,8 @@ const APP_STRINGS = {
   openModal: "Open modal",
   saveAndContinue: "Save and Continue",
   setWorkExperience: "Please Set Work Experience",
+  successfullyUploaded: "Successfully Uploaded to the Hovrtek Database!",
+  uploadImage: "Upload Image",
   workExperienceSet: "Work Experience Set",
   yearsExperience: "How Many Years Of Drone Experience Do You Have?",
 };

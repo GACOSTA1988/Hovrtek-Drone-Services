@@ -138,7 +138,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           <View style={{ alignItems: "center", marginBottom: 50 }}>
             <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
               <PassProfileImageUrlState.Provider value={profileImageUrl}>
-                <ProfileUploader isPilot={false} />
+                <ProfileUploader hasSquareImage={false} />
               </PassProfileImageUrlState.Provider>
             </PassSetProfileImageUrlContext.Provider>
           </View>

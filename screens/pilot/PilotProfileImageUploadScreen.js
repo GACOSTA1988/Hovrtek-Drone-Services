@@ -116,7 +116,7 @@ function PilotProfileImageUploadScreen(
       <Text>Please Upload Profile Picture</Text>
       <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
         <PassProfileImageUrlState.Provider value={profileImageUrl}>
-          <ProfileUploader isPilot={true} />
+          <ProfileUploader hasSquareImage={true} />
         </PassProfileImageUrlState.Provider>
       </PassSetProfileImageUrlContext.Provider>
 

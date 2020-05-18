@@ -8,7 +8,7 @@ import { promiseResolver, uploadImage } from "ProfileUploaderUtils";
 const SUCCESS_UPLOAD = "Successfully Uploaded to the Hovrtek Database!";
 const UPLOAD_IMAGE = "Upload Image";
 
-function ProfileUploader(isPilot = false) {
+function ProfileUploader(hasSquareImage = false) {
   const uuid = Math.random();
   const [ licenseThumbnail, setlicenseThumbnail ] = useState(null);
 
@@ -20,7 +20,7 @@ function ProfileUploader(isPilot = false) {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
   }
 
-  async function pushIt() {
+  async function setImage() {
     let result = await ImagePicker.launchImageLibraryAsync();
 
     if (!result.cancelled) {
@@ -40,13 +40,13 @@ function ProfileUploader(isPilot = false) {
   const source = { uri: licenseThumbnail };
 
   // todo make into util fn
-  const style = isPilot
+  const style = hasSquareImage
     ? { width: 200, height: 200 }
     : { width: 150, height: 150, border: 5, borderColor: "blue" };
 
   return (
     <View>
-      <Button title={UPLOAD_IMAGE} onPress={pushIt} />
+      <Button title={UPLOAD_IMAGE} onPress={setImage} />
       {!!licenseThumbnail && <Image source={source} style={style} />}
     </View>
   );

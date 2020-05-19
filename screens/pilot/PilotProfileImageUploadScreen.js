@@ -25,11 +25,14 @@ import { APP_STRINGS } from "../../constants/index";
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
 
+
+
 function PilotProfileImageUploadScreen(
   props,
   { getPilotProfiles, editPilotProfile }
 ) {
   const navigation = useNavigation();
+  const { goBack } = props.navigation;
 
   useEffect(() => {
     props.getPilotProfiles();
@@ -134,7 +137,7 @@ function PilotProfileImageUploadScreen(
       <View style={styles.backButtonWrapper}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => props.navigation.goBack()}
+          onPress={goBack}
         >
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>

@@ -42,10 +42,14 @@ const renderTravelButton = (buttonText = '') => {
 }
 
 // Refactored
-const renderTravel = (hasSetTravel = false) => {
-  return hasSetTravel
-  ? renderTravelButton(travelStatus)
-  : renderTravelButton(setTravelStatus(APP_STRINGS.no))
+const renderTravel = (travelString) => {
+          if (!travelString) {
+            setTravelStatus(APP_STRINGS.no);
+          }
+  return (
+    renderTravelButton(travelStatus)
+  )
+
 }
 
 

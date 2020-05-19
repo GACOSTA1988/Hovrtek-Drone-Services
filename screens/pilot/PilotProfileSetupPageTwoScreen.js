@@ -285,7 +285,6 @@ const styles = StyleSheet.create({
   backButtonText: {
     color: "white",
     textAlign: "center",
-    // marginBottom: 40,
   },
   backButtonWrapper: {
     alignItems: "center",

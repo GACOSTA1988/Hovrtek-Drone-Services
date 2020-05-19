@@ -42,10 +42,13 @@ const ValidInsurancePicker = () => {
 }
 
 // Refactored 
-const renderValidInsurance = (hasValidInsurance = false) => {
-  return hasValidInsurance
-    ? renderValidInsuranceButton(insuredStatus)
-    : renderValidInsuranceButton(setInsuredStatus(APP_STRINGS.no));
+const renderValidInsurance = (validInsuranceString) => {
+            if (!validInsuranceString) {
+              setInsuredStatus(APP_STRINGS.no);
+            }
+  return (
+    renderValidInsuranceButton(insuredStatus)
+  )
 };
 
   return (
@@ -53,7 +56,7 @@ const renderValidInsurance = (hasValidInsurance = false) => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>

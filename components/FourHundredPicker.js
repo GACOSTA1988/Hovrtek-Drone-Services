@@ -42,10 +42,13 @@ const FourHundredPicker = () => {
   }
 
   // Refactored 
-  const renderFourHundred = (fourHundredStateExist) => {
-    fourHundredStateExist
-      ? renderFourHundredButton(fourHundred)
-      : renderFourHundredButton(setFourHundred(APP_STRINGS.no));
+  const renderFourHundred = (fourHunderedFeetString) => {
+              if (!fourHunderedFeetString) {
+                setFourHundred(APP_STRINGS.no);
+              }
+    return (
+      renderFourHundredButton(fourHundred)
+    )
   }
 
   return (

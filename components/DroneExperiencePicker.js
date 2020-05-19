@@ -38,18 +38,13 @@ const DroneExperiencePicker = () => {
     );
   };
 
-// This refactor was breaking upon submition- need to investigate why...
-  // const renderYearsOfExperience = (yearsOfExperienceString = "") => {
-  //   const parsedYears = parseInt(yearsOfExperienceString);
-  //   return parsedYears > 0
-  //     ? renderYearsOfExperienceButton(yearsOfExperience)
-  //     : renderYearsOfExperienceButton(APP_STRINGS.noYearsOfExperience);
-  // };
-
     const renderYearsOfExperience = (yearsOfExperienceString) => {
-    return yearsOfExperienceString
-      ? renderYearsOfExperienceButton(yearsOfExperience)
-      : renderYearsOfExperienceButton(setYearsOfExperience(APP_STRINGS.noYearsOfExperience));
+      if(!yearsOfExperienceString){
+        setYearsOfExperience(APP_STRINGS.noYearsOfExperience);
+      }
+    return (
+      renderYearsOfExperienceButton(yearsOfExperience)
+    )
   };
 
   return (
@@ -57,7 +52,7 @@ const DroneExperiencePicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
@@ -90,7 +85,7 @@ const DroneExperiencePicker = () => {
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button onPress={() => closeModal()} title={APP_STRINGS.choose}></Button>
           </View>
         </View>
       </Modal>

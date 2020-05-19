@@ -41,10 +41,13 @@ const DroneTypePicker = () => {
   };
 
 // Refactored
-  const renderDroneType = (hasDroneType = false) => {
-    return hasDroneType
-      ? renderDroneTypePickerButton(droneType)
-      : renderDroneTypePickerButton(setDroneType("None"));
+  const renderDroneType = (droneTypeString) => {
+      if (!droneTypeString) {
+        setDroneType(APP_STRINGS.none);
+      }
+    return (
+      renderDroneTypePickerButton(droneType)
+    )
   };
 
   return (
@@ -52,7 +55,7 @@ const DroneTypePicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
@@ -64,7 +67,7 @@ const DroneTypePicker = () => {
               selectedValue={droneType}
               onValueChange={(droneType, itemIndex) => setDroneType(droneType)}
             >
-              <Picker.Item label="None" value="None" />
+              <Picker.Item label={APP_STRINGS.none} value={APP_STRINGS.none} />
               <Picker.Item label="Power Lord 3000" value="Power Lord 3000" />
               <Picker.Item label="Power Lord 30001" value="Power Lord 30001" />
               <Picker.Item label="The Drone Zone" value="The Drone Zone" />
@@ -83,7 +86,7 @@ const DroneTypePicker = () => {
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button onPress={() => closeModal()} title={APP_STRINGS.choose}></Button>
           </View>
         </View>
       </Modal>

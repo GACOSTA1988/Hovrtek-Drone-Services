@@ -13,6 +13,7 @@ import {
   PassLocationState,
 } from "../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
+import { APP_STRINGS } from "../constants/index";
 
 const ClientLocationPicker = () => {
   const navigation = useNavigation();
@@ -29,19 +30,32 @@ const ClientLocationPicker = () => {
     setIsModalVisible(false);
   };
 
+  // const renderLocationButton = (buttonText = "") => {
+  //   return (
+  //     <TouchableOpacity style={styles.button} onPress={openModal}>
+  //       <Text style={styles.buttonText}>{buttonText}</Text>
+  //     </TouchableOpacity>
+  //   );
+  // };
+
+  // const renderLocation = (hasLocationState) => {
+  //   setLocation(hasLocationState);
+  //   return hasLocationState
+  //     ? renderLocationButton(locationState)
+  //     : renderLocation(APP_STRINGS.pleaseSetLocation);
+  // };
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              Where is the location of your drone service?
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
           <View>
             <TextInput
@@ -55,7 +69,7 @@ const ClientLocationPicker = () => {
             />
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
+            <Button onPress={closeModal} title="choose"></Button>
           </View>
         </View>
       </Modal>
@@ -74,7 +88,7 @@ const ClientLocationPicker = () => {
           onPress={openModal}
           title={"Open modal"}
         >
-          <Text style={styles.buttonText}>Please Set Location</Text>
+          <Text style={styles.buttonText}>{APP_STRINGS.pleaseSetLocation}</Text>
         </TouchableOpacity>
       )}
     </View>

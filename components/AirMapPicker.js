@@ -13,7 +13,8 @@ import {
   PassAirMapState,
 } from "../screens/pilot/PilotProfileSetupPageTwoScreen";
 import * as firebase from "firebase";
-import { APP_STRINGS } from "../constants/index";
+import { APP_STRINGS } from "../constants";
+
 
 const AirMapPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -32,6 +33,25 @@ const AirMapPicker = () => {
   let userID = null;
   if (firebase.auth().currentUser) {
     userID = firebase.auth().currentUser.uid;
+  }
+
+  const renderAirMapButton = (buttonText = "") => {
+
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  const renderAirMap = (airMapString = false) => {
+    if (!airMapString){
+      setAirMap(APP_STRINGS.no)
+        }
+    return (
+      renderAirMapButton(airMap)
+    )
+
   }
 
   return (
@@ -63,11 +83,14 @@ const AirMapPicker = () => {
         </View>
       </Modal>
 
-      {airMap ? (
+      {renderAirMap(airMap)}
+
+  
+
+      {/* {airMap ? (
         <TouchableOpacity
           style={styles.button}
           onPress={openModal}
-          title={"Open modal"}
         >
           <Text style={styles.buttonText}>{airMap}</Text>
         </TouchableOpacity>
@@ -75,13 +98,12 @@ const AirMapPicker = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={openModal}
-          title={"Open modal"}
         >
           <Text style={styles.buttonText}>
             Not Willing to Travel{setAirMap("No")}
           </Text>
         </TouchableOpacity>
-      )}
+      )} */}
     </View>
   );
 };

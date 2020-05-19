@@ -15,7 +15,6 @@ import {
 import * as firebase from "firebase";
 import { APP_STRINGS } from "../constants";
 
-
 const AirMapPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -36,74 +35,48 @@ const AirMapPicker = () => {
   }
 
   const renderAirMapButton = (buttonText = "") => {
-
     return (
       <TouchableOpacity style={styles.button} onPress={openModal}>
         <Text style={styles.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
     );
-  }
+  };
 
   const renderAirMap = (airMapString = false) => {
-    if (!airMapString){
-      setAirMap(APP_STRINGS.no)
-        }
-    return (
-      renderAirMapButton(airMap)
-    )
-
-  }
+    if (!airMapString) {
+      setAirMap(APP_STRINGS.no);
+    }
+    return renderAirMapButton(airMap);
+  };
 
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              Have you had experience flying over 400 Feet?
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.experienceFlying}</Text>
           </View>
           <View>
             <Picker
               selectedValue={airMap}
               onValueChange={(airMap, itemIndex) => setAirMap(airMap)}
             >
-              <Picker.Item label="No" value="No" />
-              <Picker.Item label="Yes" value="Yes" />
+              <Picker.Item label={APP_STRINGS.no} value={APP_STRINGS.no} />
+              <Picker.Item label={APP_STRINGS.yes} value={APP_STRINGS.yes} />
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={APP_STRINGS.choose}></Button>
           </View>
         </View>
       </Modal>
 
       {renderAirMap(airMap)}
-
-  
-
-      {/* {airMap ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-        >
-          <Text style={styles.buttonText}>{airMap}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-        >
-          <Text style={styles.buttonText}>
-            Not Willing to Travel{setAirMap("No")}
-          </Text>
-        </TouchableOpacity>
-      )} */}
     </View>
   );
 };

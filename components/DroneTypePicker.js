@@ -40,14 +40,12 @@ const DroneTypePicker = () => {
     );
   };
 
-// Refactored
+  // Refactored
   const renderDroneType = (droneTypeString) => {
-      if (!droneTypeString) {
-        setDroneType(APP_STRINGS.none);
-      }
-    return (
-      renderDroneTypePickerButton(droneType)
-    )
+    if (!droneTypeString) {
+      setDroneType(APP_STRINGS.none);
+    }
+    return renderDroneTypePickerButton(droneType);
   };
 
   return (
@@ -86,7 +84,10 @@ const DroneTypePicker = () => {
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={APP_STRINGS.choose}></Button>
+            <Button
+              onPress={() => closeModal()}
+              title={APP_STRINGS.choose}
+            ></Button>
           </View>
         </View>
       </Modal>

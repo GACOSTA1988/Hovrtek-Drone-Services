@@ -30,28 +30,20 @@ const TravelStatusPicker = () => {
     setIsModalVisible(false);
   };
 
-const renderTravelButton = (buttonText = '') => {
-  return (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={openModal}
-    >
-      <Text style={styles.buttonText}>{buttonText}</Text>
-    </TouchableOpacity>
-  );
-}
+  const renderTravelButton = (buttonText = "") => {
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
 
-// Refactored
-const renderTravel = (travelString) => {
-          if (!travelString) {
-            setTravelStatus(APP_STRINGS.no);
-          }
-  return (
-    renderTravelButton(travelStatus)
-  )
-
-}
-
+  const renderTravel = (travelString) => {
+    if (!travelString) {
+      setTravelStatus(APP_STRINGS.no);
+    }
+    return renderTravelButton(travelStatus);
+  };
 
   return (
     <View style={styles.container}>
@@ -63,9 +55,7 @@ const renderTravel = (travelString) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              {APP_STRINGS.areYouWilling}
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.areYouWilling}</Text>
           </View>
           <View>
             <Picker

@@ -30,33 +30,27 @@ const FourHundredPicker = () => {
     setIsModalVisible(false);
   };
 
-  const renderFourHundredButton = (buttonText = '') => {
+  const renderFourHundredButton = (buttonText = "") => {
     return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={openModal}
-      >
+      <TouchableOpacity style={styles.button} onPress={openModal}>
         <Text style={styles.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
     );
-  }
+  };
 
-  // Refactored 
   const renderFourHundred = (fourHunderedFeetString) => {
-              if (!fourHunderedFeetString) {
-                setFourHundred(APP_STRINGS.no);
-              }
-    return (
-      renderFourHundredButton(fourHundred)
-    )
-  }
+    if (!fourHunderedFeetString) {
+      setFourHundred(APP_STRINGS.no);
+    }
+    return renderFourHundredButton(fourHundred);
+  };
 
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
@@ -72,18 +66,20 @@ const FourHundredPicker = () => {
                 setFourHundred(fourHundred)
               }
             >
-              <Picker.Item label="No" value="No" />
-              <Picker.Item label="Yes" value="Yes" />
+              <Picker.Item label={APP_STRINGS.no} value={APP_STRINGS.no} />
+              <Picker.Item label={APP_STRINGS.yes} value={APP_STRINGS.yes} />
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button
+              onPress={() => closeModal()}
+              title={APP_STRINGS.choose}
+            ></Button>
           </View>
         </View>
       </Modal>
 
       {renderFourHundred(fourHundred)}
-
     </View>
   );
 };

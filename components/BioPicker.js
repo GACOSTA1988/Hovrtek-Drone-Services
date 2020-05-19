@@ -70,7 +70,7 @@ const BioPicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType="slide"
+        animationType={APP_STRINGS.slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>

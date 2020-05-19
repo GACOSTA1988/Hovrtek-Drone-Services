@@ -32,24 +32,18 @@ const ValidInsurancePicker = () => {
 
   const renderValidInsuranceButton = (buttonText = "") => {
     return (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-        >
-          <Text style={styles.buttonText}>{buttonText}</Text>
-        </TouchableOpacity>
-    )
-}
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
 
-// Refactored 
-const renderValidInsurance = (validInsuranceString) => {
-            if (!validInsuranceString) {
-              setInsuredStatus(APP_STRINGS.no);
-            }
-  return (
-    renderValidInsuranceButton(insuredStatus)
-  )
-};
+  const renderValidInsurance = (validInsuranceString) => {
+    if (!validInsuranceString) {
+      setInsuredStatus(APP_STRINGS.no);
+    }
+    return renderValidInsuranceButton(insuredStatus);
+  };
 
   return (
     <View style={styles.container}>
@@ -61,7 +55,9 @@ const renderValidInsurance = (validInsuranceString) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>{APP_STRINGS.doYouHaveValidInsurance}</Text>
+            <Text style={styles.modalText}>
+              {APP_STRINGS.doYouHaveValidInsurance}
+            </Text>
           </View>
           <View>
             <Picker

@@ -31,6 +31,34 @@ const ClientLocationPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderClientLocationButton = (buttonText) => {
+    return (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={openModal}
+        title={"Open modal"}
+      >
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderClientLocation = (hasClientLocation) => {
+    return hasClientLocation
+      ? renderClientLocationButton(locationState)
+      : renderClientLocationButton("Please Set Location");
+  };
+
+  const renderTextInput = (location, setLocation) => {
+    return (
+      <View>
+        <TextInput
+          style={styles.input} onChangeText={setLocation} value={location}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Modal
@@ -45,40 +73,13 @@ const ClientLocationPicker = () => {
               Where is the location of your drone service?
             </Text>
           </View>
-          <View>
-            <TextInput
-              style={{
-                height: 30,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
-              onChangeText={setLocation}
-              value={locationState}
-            />
-          </View>
+          {renderTextInput(location, setLocation)}
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={"Choose"} />
           </View>
         </View>
       </Modal>
-
-      {locationState ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{locationState}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>Please Set Location</Text>
-        </TouchableOpacity>
-      )}
+      {renderClientLocation(locationState)}
     </View>
   );
 };

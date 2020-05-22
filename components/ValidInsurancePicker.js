@@ -12,6 +12,9 @@ import {
   PassSetInsuredStatus,
   PassInsuredStatusState,
 } from "../screens/pilot/PilotProfileSetupPageOneScreen";
+import { APP_STRINGS } from "../constants";
+
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const ValidInsurancePicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,17 +30,34 @@ const ValidInsurancePicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderValidInsuranceButton = (buttonText = "") => {
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderValidInsurance = (validInsuranceString) => {
+    if (!validInsuranceString) {
+      setInsuredStatus(APP_STRINGS.no);
+    }
+    return renderValidInsuranceButton(insuredStatus);
+  };
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
-        onRequestClose={() => closeModal()}
+        animationType={APP_STRINGS.slide}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Do you have valid insurance?</Text>
+            <Text style={styles.modalText}>
+              {APP_STRINGS.doYouHaveValidInsurance}
+            </Text>
           </View>
           <View>
             <Picker
@@ -46,35 +66,17 @@ const ValidInsurancePicker = () => {
                 setInsuredStatus(insuredStatus)
               }
             >
-              <Picker.Item label="No" value="No" />
-              <Picker.Item label="Yes" value="Yes" />
+              <Picker.Item label={APP_STRINGS.no} value={APP_STRINGS.no} />
+              <Picker.Item label={APP_STRINGS.yes} value={APP_STRINGS.yes} />
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={APP_STRINGS.choose}></Button>
           </View>
         </View>
       </Modal>
 
-      {insuredStatus ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{insuredStatus}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>
-            No Insurance{setInsuredStatus("No")}
-          </Text>
-        </TouchableOpacity>
-      )}
+      {renderValidInsurance(insuredStatus)}
     </View>
   );
 };

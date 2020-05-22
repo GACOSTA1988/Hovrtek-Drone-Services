@@ -6,7 +6,7 @@ import {
   generateUploadedImageStyle,
   promiseResolver,
   uploadImage,
-} from "ProfileUploaderUtils";
+} from "./ProfileUploaderUtils";
 import { APP_STRINGS } from "../../constants";
 
 const { successfullyUploaded, uploadImage: uploadImageStr } = APP_STRINGS;

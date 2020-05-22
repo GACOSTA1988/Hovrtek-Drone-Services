@@ -17,7 +17,7 @@ import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
 import { editClientProfile } from "../../actions/clientProfiles";
-import ProfileUploader from "components/shared/ProfileUploader";
+import ProfileUploader from "../../components/shared/ProfileUploader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // CONTEXT HOOKS PROFILE IMAGE URL
@@ -56,6 +56,28 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
     );
 
     props.navigation.navigate("ClientProfileScreen", { ...profileDetails });
+  };
+
+  const renderTextInputItem = (textInputItemMetadata = {}) => {
+    const {
+      text,
+      textStyle,
+      textInputStyle,
+      textInputValue,
+      onChangeText,
+    } = textInputItemMetadata;
+
+    return (
+      <React.Fragment>
+        <Text style={textStyle}>{text}</Text>
+        <TextInput
+          style={textInputStyle}
+          placeholder={textInputValue}
+          value={textInputValue}
+          onChangeText={onChangeText}
+        />
+      </React.Fragment>
+    );
   };
 
   return (
@@ -98,13 +120,22 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           </View>
           <View style={styles.info}>
             <View style={{ flexDirection: "row" }}>
-              <Text style={{ fontSize: 20 }}>Client is located in </Text>
+
+              {renderTextInputItem({
+                text: "Client is located in ",
+                textStyle: { fontSize: 20 },
+                textInputStyle: { fontSize: 20 },
+                textInputValue: location,
+                onChangeText: setLocation,
+              })}
+
+              {/* <Text style={{ fontSize: 20 }}>Client is located in </Text>
               <TextInput
                 style={{ fontSize: 20 }}
                 placeholder={location}
                 value={location}
                 onChangeText={setLocation}
-              />
+              /> */}
             </View>
             <View>
               <Text style={{ fontSize: 20, marginTop: 10 }}>Bio: </Text>

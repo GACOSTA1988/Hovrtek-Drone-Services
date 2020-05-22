@@ -11,13 +11,13 @@ async function uploadImage(uri = "", uuid = "", func = {}) {
   const blob = await response.blob();
   const uploadTask = await firebase.storage().ref().child(`images/${uuid}`);
 
-  const { data: snapshot, error } = promiseResolver(uploadTask.put(blob));
-  if (error) {
+  const { data: snapshot, error: snapshotError } = promiseResolver(uploadTask.put(blob));
+  if (snapshotError) {
     Alert.alert("⚠️⚠️warning: uploadImage is very virus⚠️⚠️:1");
   }
 
-  const { data: url, error } = promiseResolver(snapshot.ref.getDownloadURL());
-  if (error) {
+  const { data: url, error: urlError } = promiseResolver(snapshot.ref.getDownloadURL());
+  if (urlError) {
     Alert.alert("⚠️⚠️warning: uploadImage is very virus:2⚠️⚠️");
   } else if (!!url) {
     func(url);

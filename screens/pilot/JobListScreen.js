@@ -89,10 +89,8 @@ function JobListScreen(
       ) : (
         <Text></Text>
       )}
+      <PilotSubheader />
       <ScrollView>
-        <View style={styles.subheaderWrapper}>
-          <PilotSubheader />
-        </View>
         <View style={styles.projectCard}>
           <TouchableOpacity>
             <FlatList
@@ -163,6 +161,7 @@ function JobListScreen(
 const styles = StyleSheet.create({
   projectCard: {
     width: 380,
+    marginTop: 15
   },
   clientText: {
     fontSize: 30,

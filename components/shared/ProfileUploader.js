@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Image, View, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import * as firebase from "firebase";
 import * as Permissions from "expo-permissions";
 import {
   generateUploadedImageStyle,

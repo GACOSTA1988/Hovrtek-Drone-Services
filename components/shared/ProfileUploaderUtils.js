@@ -1,4 +1,5 @@
 import { Alert } from "react-native";
+import * as firebase from "firebase";
 
 const generateUploadedImageStyle = (isSquare = false) => {
   return isSquare
@@ -11,7 +12,7 @@ async function uploadImage(uri = "", uuid = "", func = {}) {
   const blob = await response.blob();
   const uploadTask = await firebase.storage().ref().child(`images/${uuid}`);
 
-  const { data: snapshot, error: snapshotError } = promiseResolver(uploadTask.put(blob));
+  const { data: snapshot, error: snapshotError } = await promiseResolver(uploadTask.put(blob));
   if (snapshotError) {
     Alert.alert("⚠️⚠️warning: uploadImage is very virus⚠️⚠️:1");
   }

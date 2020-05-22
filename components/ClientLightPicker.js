@@ -27,6 +27,24 @@ const ClientLightPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderClientLightButton = (buttonText) => {
+    return (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={openModal}
+        title={"Open modal"}
+      >
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const renderClientLight = (hasClientLight) => {
+    return hasClientLight
+      ? renderClientLightButton(light)
+      : renderClientLightButton("Set lighting")
+  }
+
   return (
     <View style={styles.container}>
       <Modal

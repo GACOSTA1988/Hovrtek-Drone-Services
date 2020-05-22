@@ -30,20 +30,33 @@ const ClientLocationPicker = () => {
     setIsModalVisible(false);
   };
 
-  // const renderLocationButton = (buttonText = "") => {
-  //   return (
-  //     <TouchableOpacity style={styles.button} onPress={openModal}>
-  //       <Text style={styles.buttonText}>{buttonText}</Text>
-  //     </TouchableOpacity>
-  //   );
-  // };
+  const renderClientLocationButton = (buttonText) => {
+    return (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={openModal}
+        title={"Open modal"}
+      >
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
 
-  // const renderLocation = (hasLocationState) => {
-  //   setLocation(hasLocationState);
-  //   return hasLocationState
-  //     ? renderLocationButton(locationState)
-  //     : renderLocation(APP_STRINGS.pleaseSetLocation);
-  // };
+  const renderClientLocation = (hasClientLocation) => {
+    return hasClientLocation
+      ? renderClientLocationButton(locationState)
+      : renderClientLocationButton("Please Set Location");
+  };
+
+  const renderTextInput = (location, setLocation) => {
+    return (
+      <View>
+        <TextInput
+          style={styles.input} onChangeText={setLocation} value={location}
+        />
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -57,40 +70,13 @@ const ClientLocationPicker = () => {
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
-          <View>
-            <TextInput
-              style={{
-                height: 30,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
-              onChangeText={setLocation}
-              value={locationState}
-            />
-          </View>
+          {renderTextInput(location, setLocation)}
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title="choose"></Button>
+            <Button onPress={closeModal} title={"Choose"} />
           </View>
         </View>
       </Modal>
-
-      {locationState ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{locationState}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{APP_STRINGS.pleaseSetLocation}</Text>
-        </TouchableOpacity>
-      )}
+      {renderClientLocation(locationState)}
     </View>
   );
 };

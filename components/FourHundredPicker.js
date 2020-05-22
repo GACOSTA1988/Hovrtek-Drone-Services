@@ -12,6 +12,9 @@ import {
   PassSetFourHundred,
   PassFourHundredState,
 } from "../screens/pilot/PilotProfileSetupPageTwoScreen";
+import { APP_STRINGS } from "../constants";
+
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const FourHundredPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,18 +30,33 @@ const FourHundredPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderFourHundredButton = (buttonText = "") => {
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderFourHundred = (fourHunderedFeetString) => {
+    if (!fourHunderedFeetString) {
+      setFourHundred(APP_STRINGS.no);
+    }
+    return renderFourHundredButton(fourHundred);
+  };
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              Have you had experience flying over 400 Feet?
+              {APP_STRINGS.haveYouHadExperienceFlying}
             </Text>
           </View>
           <View>
@@ -48,35 +66,20 @@ const FourHundredPicker = () => {
                 setFourHundred(fourHundred)
               }
             >
-              <Picker.Item label="No" value="No" />
-              <Picker.Item label="Yes" value="Yes" />
+              <Picker.Item label={APP_STRINGS.no} value={APP_STRINGS.no} />
+              <Picker.Item label={APP_STRINGS.yes} value={APP_STRINGS.yes} />
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button
+              onPress={() => closeModal()}
+              title={APP_STRINGS.choose}
+            ></Button>
           </View>
         </View>
       </Modal>
 
-      {fourHundred ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{fourHundred}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>
-            Not Willing to Travel{setFourHundred("No")}
-          </Text>
-        </TouchableOpacity>
-      )}
+      {renderFourHundred(fourHundred)}
     </View>
   );
 };

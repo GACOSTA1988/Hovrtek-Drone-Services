@@ -189,7 +189,7 @@ function PilotProfileSetupPageTwoScreen(
         <View style={styles.centerButton}>
           <View style={styles.saveAndContinueWrapper}>
             <TouchableOpacity
-              style={styles.backButton}
+              style={styles.submitButton}
               onPress={submit}
               title={"Save and Continue"}
             >
@@ -198,15 +198,15 @@ function PilotProfileSetupPageTwoScreen(
           </View>
         </View>
 
-        {/*
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => props.navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>Back</Text>
-        </TouchableOpacity> */}
-
-        <Button title="Back" onPress={props.navigation.goBack} />
+        <View style={styles.backButtonWrapper}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => props.navigation.goBack()}
+          >
+            <Text style={styles.backButtonText}>Back</Text>
+          </TouchableOpacity>
+        </View>
+        
       </ScrollView>
     </View>
   );
@@ -270,6 +270,23 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   pickerButtonWrapper: {
+    alignItems: "center",
+  },
+  backButton: {
+    marginTop: 20,
+    marginBottom: 40,
+    width: 60,
+    height: 30,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  backButtonText: {
+    color: "white",
+    textAlign: "center",
+  },
+  backButtonWrapper: {
     alignItems: "center",
   },
 });

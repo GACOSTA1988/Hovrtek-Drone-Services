@@ -18,16 +18,21 @@ import {
 import * as firebase from "firebase";
 import _ from "lodash";
 import PilotProfileUploader from "../../components/auth/PilotProfileUploader";
+import { APP_STRINGS } from "../../constants/index";
+
 
 // CONTEXT HOOK
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
+
+
 
 function PilotProfileImageUploadScreen(
   props,
   { getPilotProfiles, editPilotProfile }
 ) {
   const navigation = useNavigation();
+  const { goBack } = props.navigation;
 
   useEffect(() => {
     props.getPilotProfiles();
@@ -99,7 +104,7 @@ function PilotProfileImageUploadScreen(
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>
-        Hello!
+        {APP_STRINGS.hello}
         {currentUserProps ? (
           <Text style={styles.subText}>
             {"\n"}
@@ -129,13 +134,16 @@ function PilotProfileImageUploadScreen(
         <Text style={styles.completeButtonText}>Complete Profile</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => props.navigation.goBack()}
-        title={"Back"}
-      >
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
+      <View style={styles.backButtonWrapper}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={goBack}
+        >
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+      </View>
+
+    
     </View>
   );
 }
@@ -195,13 +203,23 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   backButton: {
-    marginTop: 450,
-    marginBottom: 10,
-    position: "absolute",
+    marginTop: 20,
+    marginBottom: 40,
+    width: 60,
+    height: 30,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   backButtonText: {
-    color: "#0000EE",
-    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+   
+  },
+  backButtonWrapper: {
+    marginTop: 253,
+    alignItems: "center",
   },
 });
 function mapStateToProps(state) {

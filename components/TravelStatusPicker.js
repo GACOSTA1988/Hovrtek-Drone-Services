@@ -12,6 +12,9 @@ import {
   PassSetTravelStatus,
   PassTravelStatusState,
 } from "../screens/pilot/PilotProfileSetupPageTwoScreen";
+import { APP_STRINGS } from "../constants";
+
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const TravelStatusPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,19 +30,32 @@ const TravelStatusPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderTravelButton = (buttonText = "") => {
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderTravel = (travelString) => {
+    if (!travelString) {
+      setTravelStatus(APP_STRINGS.no);
+    }
+    return renderTravelButton(travelStatus);
+  };
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
-        onRequestClose={() => closeModal()}
+        animationType={APP_STRINGS.slide}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              Are You Willing to Travel Out of State for a Drone Job?
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.areYouWilling}</Text>
           </View>
           <View>
             <Picker
@@ -48,35 +64,17 @@ const TravelStatusPicker = () => {
                 setTravelStatus(travelStatus)
               }
             >
-              <Picker.Item label="No" value="No" />
-              <Picker.Item label="Yes" value="Yes" />
+              <Picker.Item label={APP_STRINGS.no} value={APP_STRINGS.no} />
+              <Picker.Item label={APP_STRINGS.yes} value={APP_STRINGS.yes} />
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={APP_STRINGS.choose}></Button>
           </View>
         </View>
       </Modal>
 
-      {travelStatus ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{travelStatus}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => openModal()}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>
-            Not Willing to Travel{setTravelStatus("No")}
-          </Text>
-        </TouchableOpacity>
-      )}
+      {renderTravel(travelStatus)}
     </View>
   );
 };

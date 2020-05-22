@@ -5,16 +5,15 @@ import {
   Button,
   Modal,
   StyleSheet,
-  Picker,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
 import {
   PassSetLocation,
   PassLocationState,
 } from "../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
+import { APP_STRINGS } from "../constants/index";
 
 const ClientLocationPicker = () => {
   const navigation = useNavigation();
@@ -64,14 +63,12 @@ const ClientLocationPicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              Where is the location of your drone service?
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
           {renderTextInput(location, setLocation)}
           <View styles={styles.cancelWrapper}>

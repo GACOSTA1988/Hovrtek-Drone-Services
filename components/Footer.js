@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, Header, Image, TouchableOpacity, Keyboard, Alert } from "react-native";
+import { View, StyleSheet, Header, Image, TouchableOpacity, Keyboard, Alert } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Linking } from 'expo';
 

@@ -62,7 +62,6 @@ export default () => {
       }
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
-
           {isClientLoggedIn && clientNavigation}
           {isPilotLoggedIn && pilotNavigation}
           {!loggedIn && renderLogin()}

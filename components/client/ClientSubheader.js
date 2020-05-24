@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-    elevation: 10,
+    // elevation: 10,
   },
   topButtonWrapperRight: {
     backgroundColor: "#092455",
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-    elevation: 10,
+    // elevation: 10,
   },
   topButtonText: {
     color: "white",

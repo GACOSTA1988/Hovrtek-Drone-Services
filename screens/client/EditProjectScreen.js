@@ -20,7 +20,7 @@ function EditProjectScreen(props, { editProject }) {
 
   return (
     <KeyboardAwareScrollView style={styles.KeyboardAwareScrollView}>
-      
+
       <View style={styles.container}>
         <View style={styles.editProjectCard}>
           <Text style={styles.editProjectText}>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
   },
   editProjectCard: {
-    elevation: 8,
+    // elevation: 8,
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   backButtonWrapper: {
     alignItems: 'center'
   },
-  
+
 
 
 });

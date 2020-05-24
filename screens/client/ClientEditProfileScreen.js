@@ -26,15 +26,18 @@ export const PassProfileImageUrlState = React.createContext();
 function ClientEditProfileScreen(props, { editClientProfile }) {
   let profileDetails = props.route.params;
 
-  const [firstName, setFirstName] = useState(profileDetails.firstName);
-  const [lastName, setLastName] = useState(profileDetails.lastName);
-  const [location, setLocation] = useState(profileDetails.location);
-  const [bio, setBio] = useState(profileDetails.bio);
-  const [industry, setIndustry] = useState(profileDetails.industry);
-  const [paymentType, setPaymentType] = useState(profileDetails.paymentType);
-  const [profileImageUrl, setProfileImageUrl] = useState(
-    profileDetails.profileImageUrl
+  const [ firstName, setFirstName ] = useState(profileDetails.firstName);
+  const [ lastName, setLastName ] = useState(profileDetails.lastName);
+  const [ location, setLocation ] = useState(profileDetails.location);
+  const [ bio, setBio ] = useState(profileDetails.bio);
+  const [ industry, setIndustry ] = useState(profileDetails.industry);
+  const [ paymentType, setPaymentType ] = useState(profileDetails.paymentType);
+  const [ licenseThumbnail, setlicenseThumbnail ] = useState(null);
+
+  const [ profileImageUrl, setProfileImageUrl ] = useState(
+    profileDetails.profileImageUrl,
   );
+  console.log("SOMETHINGGGG 0");
 
   const save = () => {
     profileDetails.firstName = firstName;
@@ -52,9 +55,9 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
       industry,
       paymentType,
       profileImageUrl,
-      profileDetails.key
+      profileDetails.key,
     );
-
+    console.log(JSON.stringify(profileDetails));
     props.navigation.navigate("ClientProfileScreen", { ...profileDetails });
   };
 
@@ -80,6 +83,11 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
     );
   };
 
+  const pluckImage = (imgUrl = "") => {
+    setlicenseThumbnail(imgUrl);
+    Alert.alert(`plucked ${imgUrl}`);
+  };
+
   return (
     <KeyboardAwareScrollView
       style={{
@@ -95,7 +103,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
               hitSlop={{ top: 30, left: 30, bottom: 30, right: 30 }}
               onPress={() => save()}
             >
-              <Text style={styles.saveText}>Save Changes</Text>
+              <Text style={styles.saveText}>Save Changes!!!</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -120,7 +128,6 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           </View>
           <View style={styles.info}>
             <View style={{ flexDirection: "row" }}>
-
               {renderTextInputItem({
                 text: "Client is located in ",
                 textStyle: { fontSize: 20 },
@@ -168,8 +175,13 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           </View>
           <View style={{ alignItems: "center", marginBottom: 50 }}>
             <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
-              <PassProfileImageUrlState.Provider value={profileImageUrl}>
-                <ProfileUploader hasSquareImage={false} />
+              <PassProfileImageUrlState.Provider
+                value={profileImageUrl || licenseThumbnail}
+              >
+                <ProfileUploader
+                  hasSquareImage={false}
+                  pluckImage={(image) => pluckImage(image)}
+                />
               </PassProfileImageUrlState.Provider>
             </PassSetProfileImageUrlContext.Provider>
           </View>

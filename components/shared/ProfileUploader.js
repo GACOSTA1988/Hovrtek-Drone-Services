@@ -12,7 +12,10 @@ import { APP_STRINGS } from "../../constants";
 
 const { successfullyUploaded, uploadImage: uploadImageStr } = APP_STRINGS;
 
-function ProfileUploader(hasSquareImage = false) {
+function ProfileUploader(
+  hasSquareImage = false,
+  pluckImage = () => {},
+) {
   const uuid = Math.random();
   const [ licenseThumbnail, setlicenseThumbnail ] = useState(null);
 
@@ -34,17 +37,20 @@ function ProfileUploader(hasSquareImage = false) {
       if (error) {
         Alert.alert(error);
       } else {
-        console.log("that good data\n\n", data)
         Alert.alert(successfullyUploaded);
       }
 
       setlicenseThumbnail(uri);
+      pluckImage(uri)
     }
   }
+
+  console.log("licenseThumbnail", licenseThumbnail);
 
   const source = { uri: licenseThumbnail };
   const style = generateUploadedImageStyle(hasSquareImage);
 
+  console.log("source", JSON.stringify(source));
   return (
     <View>
       <Button title={uploadImageStr} onPress={setImage} />

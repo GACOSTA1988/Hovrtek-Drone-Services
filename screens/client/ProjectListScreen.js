@@ -26,7 +26,7 @@ import ClientSubheader from "../../components/client/ClientSubheader";
 
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
- 
+
 
   useEffect(() => {
     props.getProjects();
@@ -66,7 +66,7 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
                 return (
                   <View
                     style={{
-                      elevation: 8,
+                      // elevation: 8,
                       borderRadius: 15,
                       backgroundColor: "#092455",
                       marginBottom: 15,

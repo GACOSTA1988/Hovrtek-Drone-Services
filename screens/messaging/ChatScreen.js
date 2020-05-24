@@ -138,7 +138,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           return (
             <View
               style={{
-                elevation: 8,
+                // elevation: 8,
                 borderRadius: 15,
                 backgroundColor: "#3E90D0",
                 marginBottom: 15,

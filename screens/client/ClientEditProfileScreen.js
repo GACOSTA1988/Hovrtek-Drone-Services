@@ -33,6 +33,11 @@ function ClientEditProfileScreen(props) {
     profileDetails.profileImageUrl,
   );
 
+  const pluckImage = (imgUrl = "") => {
+    setProfileImageUrl(imgUrl);
+    console.log(profileImageUrl);
+  };
+
   const save = () => {
     profileDetails.firstName = firstName;
     profileDetails.lastName = lastName;
@@ -77,13 +82,6 @@ function ClientEditProfileScreen(props) {
       </React.Fragment>
     );
   };
-
-  const pluckImage = (imgUrl = "") => {
-    setProfileImageUrl(imgUrl);
-    console.log(profileImageUrl);
-  };
-
-  console.log("main body", profileImageUrl);
 
   return (
     <KeyboardAwareScrollView
@@ -133,42 +131,36 @@ function ClientEditProfileScreen(props) {
                 textInputValue: location,
                 onChangeText: setLocation,
               })}
+            </View>
 
-              {/* <Text style={{ fontSize: 20 }}>Client is located in </Text>
-              <TextInput
-                style={{ fontSize: 20 }}
-                placeholder={location}
-                value={location}
-                onChangeText={setLocation}
-              /> */}
-            </View>
             <View>
-              <Text style={{ fontSize: 20, marginTop: 10 }}>Bio: </Text>
-              <TextInput
-                style={styles.input}
-                placeholder={bio}
-                value={bio}
-                onChangeText={setBio}
-                multiline={true}
-              />
+              {renderTextInputItem({
+                text: "Bio: ",
+                textStyle: { fontSize: 20, marginTop: 10 },
+                textInputStyle: styles.input,
+                textInputValue: bio,
+                onChangeText: setBio,
+              })}
             </View>
+
             <View style={{ flexDirection: "row", marginTop: 10 }}>
-              <Text style={{ fontSize: 20 }}>Industry:</Text>
-              <TextInput
-                style={{ fontSize: 20, marginLeft: 5 }}
-                placeholder={industry}
-                value={industry}
-                onChangeText={setIndustry}
-              />
+              {renderTextInputItem({
+                text: "Industry: ",
+                textStyle: { fontSize: 20 },
+                textInputStyle: { fontSize: 20, marginLeft: 5 },
+                textInputValue: industry,
+                onChangeText: setIndustry,
+              })}
             </View>
+
             <View style={{ flexDirection: "row", marginTop: 10 }}>
-              <Text style={{ fontSize: 20 }}>Payment type:</Text>
-              <TextInput
-                style={{ fontSize: 20, marginLeft: 5 }}
-                placeholder={paymentType}
-                value={paymentType}
-                onChangeText={setPaymentType}
-              />
+              {renderTextInputItem({
+                text: "Payment type: ",
+                textStyle: { fontSize: 20 },
+                textInputStyle: { fontSize: 20, marginLeft: 5 },
+                textInputValue: paymentType,
+                onChangeText: setPaymentType,
+              })}
             </View>
           </View>
 
@@ -193,8 +185,6 @@ function ClientEditProfileScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center"
   },
   name: {
     fontSize: 30,

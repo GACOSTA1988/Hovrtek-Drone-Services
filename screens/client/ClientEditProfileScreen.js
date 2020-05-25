@@ -19,6 +19,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
 
+// todo
+const pageUnavailable = "Page unavailable";
+const saveChanges = "Save Changes";
+
 function ClientEditProfileScreen(props) {
   let profileDetails = props.route.params;
 
@@ -38,7 +42,7 @@ function ClientEditProfileScreen(props) {
     console.log(profileImageUrl);
   };
 
-  const save = () => {
+  const saveEdits = () => {
     profileDetails.firstName = firstName;
     profileDetails.lastName = lastName;
     profileDetails.location = location;
@@ -84,29 +88,25 @@ function ClientEditProfileScreen(props) {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={{
-        flex: 1,
-        height: "100%",
-      }}
-    >
-      {profileDetails ? (
+    <KeyboardAwareScrollView style={styles.keyboardView}>
+      {!profileDetails && <Text>{pageUnavailable}</Text>}
+
+      {profileDetails && (
         <View>
           <Image source={princePic01} style={styles.backgroundImage} />
           <View style={styles.saveButton}>
-            <TouchableOpacity
-              hitSlop={{ top: 30, left: 30, bottom: 30, right: 30 }}
-              onPress={() => save()}
-            >
-              <Text style={styles.saveText}>Save Changes</Text>
+            <TouchableOpacity hitSlop={styles.hitSlop} onPress={saveEdits}>
+              <Text style={styles.saveText}>{saveChanges}</Text>
             </TouchableOpacity>
           </View>
+
           <TouchableOpacity
             onPress={() => Alert.alert("todo: choose image")}
             style={styles.imagePress}
           >
             <Image source={personIcon} style={styles.profileImage} />
           </TouchableOpacity>
+
           <View style={styles.names}>
             <TextInput
               style={styles.name}
@@ -175,20 +175,28 @@ function ClientEditProfileScreen(props) {
             </PassSetProfileImageUrlContext.Provider>
           </View>
         </View>
-      ) : (
-        <Text>Page unavailable</Text>
       )}
     </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  keyboardView: {
+    flex: 1,
+    height: "100%",
+  },
   container: {
     flex: 1,
   },
   name: {
     fontSize: 30,
     marginLeft: 6,
+  },
+  hitSlop: {
+    top: 30,
+    left: 30,
+    bottom: 30,
+    right: 30,
   },
   names: {
     flexDirection: "row",

@@ -3,16 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   Alert,
   Image,
   TouchableOpacity,
   TextInput,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
@@ -23,7 +18,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
-function ClientEditProfileScreen(props, { editClientProfile }) {
+
+function ClientEditProfileScreen(props) {
   let profileDetails = props.route.params;
 
   const [ firstName, setFirstName ] = useState(profileDetails.firstName);
@@ -32,12 +28,10 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
   const [ bio, setBio ] = useState(profileDetails.bio);
   const [ industry, setIndustry ] = useState(profileDetails.industry);
   const [ paymentType, setPaymentType ] = useState(profileDetails.paymentType);
-  const [ licenseThumbnail, setlicenseThumbnail ] = useState(null);
 
   const [ profileImageUrl, setProfileImageUrl ] = useState(
     profileDetails.profileImageUrl,
   );
-  console.log("SOMETHINGGGG 0");
 
   const save = () => {
     profileDetails.firstName = firstName;
@@ -47,6 +41,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
     profileDetails.industry = industry;
     profileDetails.paymentType = paymentType;
     profileDetails.profileImageUrl = profileImageUrl;
+
     props.editClientProfile(
       firstName,
       lastName,
@@ -57,7 +52,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
       profileImageUrl,
       profileDetails.key,
     );
-    console.log(JSON.stringify(profileDetails));
+
     props.navigation.navigate("ClientProfileScreen", { ...profileDetails });
   };
 
@@ -84,9 +79,11 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
   };
 
   const pluckImage = (imgUrl = "") => {
-    setlicenseThumbnail(imgUrl);
-    Alert.alert(`plucked ${imgUrl}`);
+    setProfileImageUrl(imgUrl);
+    console.log(profileImageUrl);
   };
+
+  console.log("main body", profileImageUrl);
 
   return (
     <KeyboardAwareScrollView
@@ -103,7 +100,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
               hitSlop={{ top: 30, left: 30, bottom: 30, right: 30 }}
               onPress={() => save()}
             >
-              <Text style={styles.saveText}>Save Changes!!!</Text>
+              <Text style={styles.saveText}>Save Changes</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -126,6 +123,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
               onChangeText={setLastName}
             />
           </View>
+
           <View style={styles.info}>
             <View style={{ flexDirection: "row" }}>
               {renderTextInputItem({
@@ -173,11 +171,10 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
               />
             </View>
           </View>
+
           <View style={{ alignItems: "center", marginBottom: 50 }}>
             <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
-              <PassProfileImageUrlState.Provider
-                value={profileImageUrl || licenseThumbnail}
-              >
+              <PassProfileImageUrlState.Provider value={profileImageUrl}>
                 <ProfileUploader
                   hasSquareImage={false}
                   pluckImage={(image) => pluckImage(image)}

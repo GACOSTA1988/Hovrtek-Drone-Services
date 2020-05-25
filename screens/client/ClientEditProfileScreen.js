@@ -19,7 +19,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
 
-// todo
+// todo move to app strings
 const pageUnavailable = "Page unavailable";
 const saveChanges = "Save Changes";
 
@@ -87,6 +87,36 @@ function ClientEditProfileScreen(props) {
     );
   };
 
+  const renderFirstAndLastName = () => {
+    const names = [
+      {
+        name: firstName,
+        onChangeText: setFirstName,
+      },
+      {
+        name: lastName,
+        onChangeText: setLastName,
+      },
+    ];
+
+    return (
+      <View style={styles.names}>
+        {names.map((n) => {
+          const { name, onChangeText } = n;
+
+          return (
+            <TextInput
+              style={styles.name}
+              placeholder={name}
+              value={name}
+              onChangeText={onChangeText}
+            />
+          );
+        })}
+      </View>
+    );
+  };
+
   return (
     <KeyboardAwareScrollView style={styles.keyboardView}>
       {!profileDetails && <Text>{pageUnavailable}</Text>}
@@ -94,6 +124,7 @@ function ClientEditProfileScreen(props) {
       {profileDetails && (
         <View>
           <Image source={princePic01} style={styles.backgroundImage} />
+
           <View style={styles.saveButton}>
             <TouchableOpacity hitSlop={styles.hitSlop} onPress={saveEdits}>
               <Text style={styles.saveText}>{saveChanges}</Text>
@@ -107,20 +138,7 @@ function ClientEditProfileScreen(props) {
             <Image source={personIcon} style={styles.profileImage} />
           </TouchableOpacity>
 
-          <View style={styles.names}>
-            <TextInput
-              style={styles.name}
-              placeholder={firstName}
-              value={firstName}
-              onChangeText={setFirstName}
-            />
-            <TextInput
-              style={styles.name}
-              placeholder={lastName}
-              value={lastName}
-              onChangeText={setLastName}
-            />
-          </View>
+          {renderFirstAndLastName()}
 
           <View style={styles.info}>
             <View style={{ flexDirection: "row" }}>

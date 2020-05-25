@@ -106,6 +106,7 @@ function ClientEditProfileScreen(props) {
 
           return (
             <TextInput
+              key={`name-${name}`}
               style={styles.name}
               placeholder={name}
               value={name}

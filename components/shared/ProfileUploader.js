@@ -11,12 +11,12 @@ import {
 import { APP_STRINGS } from "../../constants";
 
 const { successfullyUploaded, uploadImage: uploadImageStr } = APP_STRINGS;
-
-function ProfileUploader(
-  hasSquareImage = false,
-  pluckImage = () => {},
-) {
+// hasSquareImage = false
+// , pluckImage = new Function
+function ProfileUploader(props) {
   const uuid = Math.random();
+  const { hasSquareImage, pluckImage } = props;
+
   const [ licenseThumbnail, setlicenseThumbnail ] = useState(null);
 
   useEffect(() => {
@@ -26,6 +26,11 @@ function ProfileUploader(
   async function getPermissionAsync() {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
   }
+
+  persistImage = (uri = "") => {
+    setlicenseThumbnail(uri);
+    pluckImage(uri);
+  };
 
   async function setImage() {
     let result = await ImagePicker.launchImageLibraryAsync();
@@ -40,17 +45,13 @@ function ProfileUploader(
         Alert.alert(successfullyUploaded);
       }
 
-      setlicenseThumbnail(uri);
-      pluckImage(uri)
+      persistImage(uri);
     }
   }
-
-  console.log("licenseThumbnail", licenseThumbnail);
 
   const source = { uri: licenseThumbnail };
   const style = generateUploadedImageStyle(hasSquareImage);
 
-  console.log("source", JSON.stringify(source));
   return (
     <View>
       <Button title={uploadImageStr} onPress={setImage} />

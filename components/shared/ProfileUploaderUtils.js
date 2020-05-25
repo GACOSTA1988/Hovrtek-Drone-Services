@@ -4,7 +4,7 @@ import * as firebase from "firebase";
 const generateUploadedImageStyle = (isSquare = false) => {
   return isSquare
     ? { width: 200, height: 200 }
-    : { width: 150, height: 150, border: 5, borderColor: "blue" };
+    : { width: 150, height: 150, borderWidth: 5, borderColor: "blue" };
 };
 
 async function uploadImage(uri = "", uuid = "", func = () => {}) {

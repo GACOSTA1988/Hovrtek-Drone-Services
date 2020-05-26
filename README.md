@@ -11,7 +11,7 @@
 * ~~keyboard needs to push forms up~~
 
 ### Both
-* auth headers need to be sorted out
+* auth headers need to be sorted out - Back button upon Sign up goes back to Landing page as oppsed to signin Screen. 
 
 
 ## Other Bugs
@@ -81,4 +81,10 @@ PilotProfileSetupPageOne forms
 
  * Top gray framing bar on Pilot side is off.
 
- * Back Button on Pilot Profile is Unclickable iPhone 7
+ * APP BREAKING ISSUE: Back Button on PilotProfile is Unclickable iPhone 7 
+
+ * Weird hiccup in Subheader CSS when navigating from ProjectsListScreen to MyJobsScreen - the subheader "clicks" down on animation...
+
+ * on JobDetailsScreen on Pilot Side, back button is pushed down so "Back" is unclickable if a job description details are too long. Wrap page in <ScrollView>????
+
+ * ChatScreen Input should be sticky / static and independant of the <ScrollView>

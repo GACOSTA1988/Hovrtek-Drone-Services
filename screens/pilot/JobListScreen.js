@@ -164,16 +164,12 @@ const styles = StyleSheet.create({
   projectCard: {
     width: 380,
   },
-  clientText: {
-    fontSize: 30,
-    color: "darkblue",
-    textAlign: "center",
-  },
   ClientProjectListTextWrapper: {
     marginBottom: 20,
   },
   projectListWrapper: {
     alignItems: "center",
+    
   },
   profileCompleteNotice: {
     flexDirection: "row",

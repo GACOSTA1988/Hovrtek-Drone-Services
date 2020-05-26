@@ -42,7 +42,9 @@ function MyJobsScreen(props, { getProjects }) {
 
   return (
     <View style={styles.projectListWrapper}>
-      <PilotSubheader />
+      <View style={styles.subheaderWrapper}>
+        <PilotSubheader />
+      </View>
       <View style={styles.scrollViewWrapper}>
         <ScrollView>
           <View style={styles.projectCard}>
@@ -97,15 +99,6 @@ function MyJobsScreen(props, { getProjects }) {
 const styles = StyleSheet.create({
   projectCard: {
     width: 380,
-    marginTop: 15,
-  },
-  clientText: {
-    fontSize: 30,
-    color: "darkblue",
-    textAlign: "center",
-  },
-  ClientProjectListTextWrapper: {
-    marginBottom: 20,
   },
   projectListWrapper: {
     alignItems: "center",
@@ -113,14 +106,10 @@ const styles = StyleSheet.create({
   },
   scrollViewWrapper: {
     alignItems: "center",
-
-
   },
   subheaderWrapper: {
-    marginBottom: 500,
-    marginLeft: "5%",
+    marginBottom: 14,
   },
-  jobWrapper: {},
 });
 
 function mapStateToProps(state) {

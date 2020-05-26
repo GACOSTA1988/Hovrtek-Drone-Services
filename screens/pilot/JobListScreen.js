@@ -89,10 +89,10 @@ function JobListScreen(
       ) : (
         <Text></Text>
       )}
-      <ScrollView>
         <View style={styles.subheaderWrapper}>
           <PilotSubheader />
         </View>
+      <ScrollView>
         <View style={styles.projectCard}>
           <TouchableOpacity>
             <FlatList
@@ -174,7 +174,6 @@ const styles = StyleSheet.create({
   },
   projectListWrapper: {
     alignItems: "center",
-    marginTop: 10,
   },
   profileCompleteNotice: {
     flexDirection: "row",
@@ -207,8 +206,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   subheaderWrapper: {
-    marginBottom: 10,
-    marginLeft: "5%",
+    marginBottom: 14,
+
   },
 });
 

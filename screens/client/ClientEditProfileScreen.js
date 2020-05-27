@@ -73,6 +73,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
       textInputStyle,
       textInputValue,
       onChangeText,
+      isMultiline = false,
     } = textInputItemMetadata;
 
     return (
@@ -83,6 +84,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           placeholder={textInputValue}
           value={textInputValue}
           onChangeText={onChangeText}
+          multiline={isMultiline}
         />
       </React.Fragment>
     );
@@ -160,7 +162,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
                 textInputStyle: styles.input,
                 textInputValue: bio,
                 onChangeText: setBio,
-                // multiline={true}
+                isMultiline: true,
               })}
             </View>
 

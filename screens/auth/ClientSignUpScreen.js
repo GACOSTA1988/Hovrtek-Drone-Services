@@ -18,11 +18,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 function ClientSignUpScreen(props) {
   const navigation = props.navigation;
   const { updateUser } = useContext(AuthContext);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [location, setLocation] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [ firstName, setFirstName ] = useState("");
+  const [ lastName, setLastName ] = useState("");
+  const [ location, setLocation ] = useState("");
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
 
   async function signUp(e) {
     e.preventDefault();
@@ -58,7 +58,7 @@ function ClientSignUpScreen(props) {
           "Set industry",
           "Set payment type",
           "",
-          userID
+          userID,
         );
       } catch (error) {
         Alert.alert("Error: ", error.message);
@@ -135,8 +135,6 @@ function ClientSignUpScreen(props) {
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: "center",
-    // justifyContent: "center",
-    // flex: .
     backgroundColor: "lightgray",
     height: "120%",
   },
@@ -150,7 +148,6 @@ const styles = StyleSheet.create({
   inputText: { textAlign: "center", color: "white", fontSize: 15 },
 
   textWrapper: {
-    // elevation: 8,
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,

@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { editProject } from "../../actions/projects";
 import { connect } from "react-redux";
@@ -9,9 +16,9 @@ function EditProjectScreen(props, { editProject }) {
   const projectDetails = props.route.params;
   const navigation = useNavigation();
 
-  const [location, setLocation] = useState(projectDetails.location);
-  const [date, setDate] = useState(projectDetails.date);
-  const [recording, setRecording] = useState(projectDetails.recording);
+  const [ location, setLocation ] = useState(projectDetails.location);
+  const [ date, setDate ] = useState(projectDetails.date);
+  const [ recording, setRecording ] = useState(projectDetails.recording);
 
   const submit = (e) => {
     props.editProject(location, date, recording, projectDetails.key);
@@ -20,17 +27,15 @@ function EditProjectScreen(props, { editProject }) {
 
   return (
     <KeyboardAwareScrollView style={styles.KeyboardAwareScrollView}>
-
       <View style={styles.container}>
         <View style={styles.editProjectCard}>
           <Text style={styles.editProjectText}>
             Edit Project
             {"\n"}
           </Text>
-          <Text style={styles.labelText}>
-            Location
-          </Text>
-          <TextInput style={styles.input}
+          <Text style={styles.labelText}>Location</Text>
+          <TextInput
+            style={styles.input}
             placeholderTextColor="white"
             placeholder="location"
             onChangeText={setLocation}
@@ -40,7 +45,8 @@ function EditProjectScreen(props, { editProject }) {
             {"\n"}
             Date
           </Text>
-          <TextInput style={styles.input}
+          <TextInput
+            style={styles.input}
             placeholderTextColor="white"
             placeholder="date"
             onChangeText={setDate}
@@ -50,7 +56,8 @@ function EditProjectScreen(props, { editProject }) {
             {"\n"}
             Project Description
           </Text>
-          <TextInput style={styles.input}
+          <TextInput
+            style={styles.input}
             placeholder="recording"
             onChangeText={setRecording}
             value={recording}
@@ -93,13 +100,12 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
   },
   editProjectCard: {
-    // elevation: 8,
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,
     padding: 20,
   },
-  editProjectText:{
+  editProjectText: {
     fontSize: 30,
     color: "white",
     fontWeight: "600",
@@ -125,12 +131,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#092455",
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
   },
   submitButtonWrapper: {
-    alignItems: 'center'
+    alignItems: "center",
   },
   submitButtonText: {
     marginTop: 10,
@@ -152,14 +158,10 @@ const styles = StyleSheet.create({
   backButtonText: {
     color: "white",
     textAlign: "center",
-    // marginBottom: 40,
   },
   backButtonWrapper: {
-    alignItems: 'center'
+    alignItems: "center",
   },
-
-
-
 });
 
 export default connect(null, { editProject })(EditProjectScreen);

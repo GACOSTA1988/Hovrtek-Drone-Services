@@ -22,23 +22,23 @@ function PilotSignUpScreen(props) {
   const navigation = props.navigation;
   const { updateUser } = useContext(AuthContext);
 
-  const [pilotFirstName, setPilotFirstName] = useState("");
-  const [pilotLastName, setPilotLastName] = useState("");
-  const [pilotLocation, setPilotLocation] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [ pilotFirstName, setPilotFirstName ] = useState("");
+  const [ pilotLastName, setPilotLastName ] = useState("");
+  const [ pilotLocation, setPilotLocation ] = useState("");
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
 
   // BLANK PLACE HOLDERS TO BE UPDATED ON PROFILE CREATION
-  const [personalBio, setPersonalBio] = useState("");
-  const [yearsOfExperience, setYearsOfExperience] = useState("");
-  const [faaLicenseExp, setFaaLicenseExp] = useState("");
-  const [insuredStatus, setInsuredStatus] = useState("");
-  const [travelStatus, setTravelStatus] = useState("");
-  const [droneType, setDroneType] = useState("");
-  const [airMap, setAirMap] = useState("");
-  const [fourHundred, setFourHundred] = useState("");
-  const [profileImageUrl, setProfileImageUrl] = useState("");
-  const [profileComplete, setProfileComplete] = useState("No");
+  const [ personalBio, setPersonalBio ] = useState("");
+  const [ yearsOfExperience, setYearsOfExperience ] = useState("");
+  const [ faaLicenseExp, setFaaLicenseExp ] = useState("");
+  const [ insuredStatus, setInsuredStatus ] = useState("");
+  const [ travelStatus, setTravelStatus ] = useState("");
+  const [ droneType, setDroneType ] = useState("");
+  const [ airMap, setAirMap ] = useState("");
+  const [ fourHundred, setFourHundred ] = useState("");
+  const [ profileImageUrl, setProfileImageUrl ] = useState("");
+  const [ profileComplete, setProfileComplete ] = useState("No");
 
   async function signUp(e) {
     e.preventDefault();
@@ -84,7 +84,7 @@ function PilotSignUpScreen(props) {
         fourHundred,
         userID,
         profileImageUrl,
-        profileComplete
+        profileComplete,
       );
     }
   }
@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "lightgray",
     height: "120%",
-    // justifyContent: 'center'
   },
   textMain: {
     marginTop: "25%",
@@ -160,7 +159,6 @@ const styles = StyleSheet.create({
   },
   textSub: {
     marginTop: "25%",
-    // marginBottom: "5%",
     fontSize: 20,
     color: "white",
     fontWeight: "400",
@@ -169,7 +167,6 @@ const styles = StyleSheet.create({
   textWrapper: {
     marginBottom: 20,
     alignItems: "center",
-    // elevation: 8,
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,
@@ -194,12 +191,8 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     color: "white",
-
-    // marginBottom: 100,
   },
-  airMapQuestionText: {
-    // marginTop: 100,
-  },
+  airMapQuestionText: {},
 
   imageUploaderText: {
     marginTop: 250,

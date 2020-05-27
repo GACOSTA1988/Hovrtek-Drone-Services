@@ -24,11 +24,9 @@ import { AntDesign } from "@expo/vector-icons";
 
 function PilotProfileWelcomeScreen(
   props,
-  { getPilotProfiles, editPilotProfile }
+  { getPilotProfiles, editPilotProfile },
 ) {
   const navigation = useNavigation();
-
-  // getCurrentUserProps();
 
   let passedProps = props.route.params;
 
@@ -36,7 +34,7 @@ function PilotProfileWelcomeScreen(
     props.getPilotProfiles();
   }, []);
 
-  const [profileDetails, setCurrentUserProps] = useState(null);
+  const [ profileDetails, setCurrentUserProps ] = useState(null);
 
   let user = null;
   let profile = null;
@@ -85,8 +83,7 @@ function PilotProfileWelcomeScreen(
                 {user.photoURL === "P" ? (
                   <TouchableOpacity
                     onPress={() =>
-                      navigation.push("PilotProfilePageSetupPageOneScreen")
-                    }
+                      navigation.push("PilotProfilePageSetupPageOneScreen")}
                   >
                     <AntDesign
                       name="edit"
@@ -101,8 +98,7 @@ function PilotProfileWelcomeScreen(
                     onPress={() =>
                       props.navigation.navigate("ChatScreen", {
                         ...profileDetails,
-                      })
-                    }
+                      })}
                   >
                     <Text style={styles.chatText}>Chat</Text>
                   </TouchableOpacity>
@@ -116,7 +112,6 @@ function PilotProfileWelcomeScreen(
                 style={{
                   fontSize: 15,
                   color: "black",
-                  // fontWeight: "450",
                   marginLeft: "2%",
                   marginTop: "1%",
                 }}
@@ -181,9 +176,8 @@ function PilotProfileWelcomeScreen(
                       style={styles.startButton}
                       onPress={() =>
                         props.navigation.navigate(
-                          "PilotProfilePageSetupPageOneScreen"
-                        )
-                      }
+                          "PilotProfilePageSetupPageOneScreen",
+                        )}
                     >
                       <Text style={styles.startButtonText}>
                         Start Pilot Profile
@@ -198,8 +192,7 @@ function PilotProfileWelcomeScreen(
                     onPress={() =>
                       props.navigation.navigate("ChatScreen", {
                         ...profileDetails,
-                      })
-                    }
+                      })}
                   >
                     <Text style={styles.chatText}>Chat</Text>
                   </TouchableOpacity>
@@ -216,7 +209,7 @@ function PilotProfileWelcomeScreen(
           )}
         </View>
       ) : (
-        <View></View>
+        <View />
       )}
     </View>
   );
@@ -224,8 +217,6 @@ function PilotProfileWelcomeScreen(
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // alignItems: "center",
     backgroundColor: "white",
     height: "100%",
     width: "100%",
@@ -294,7 +285,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "17%",
     marginLeft: 20,
-    // elevation: 8,
     borderWidth: 4,
     borderColor: "#092455",
   },
@@ -353,7 +343,7 @@ function mapStateToProps(state) {
         ...val,
         key: key,
       };
-    }
+    },
   );
   return {
     listOfPilotProfiles,
@@ -361,5 +351,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
-  PilotProfileWelcomeScreen
+  PilotProfileWelcomeScreen,
 );

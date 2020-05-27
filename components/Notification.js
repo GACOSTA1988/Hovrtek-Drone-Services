@@ -1,41 +1,45 @@
-import React, { useState, useContext } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
+import React, { useState, useContext } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Platform,
+} from "react-native";
 import { NotificationContext } from "../context";
 
 const Notification = () => {
-
   const noteContext = useContext(NotificationContext);
   const messages = noteContext[0];
-  const [visible, setVisible] = useState(noteContext[1]);
+  const [ visible, setVisible ] = useState(noteContext[1]);
 
   if (visible) {
     return (
       <View style={styles.note}>
-
-        <TouchableOpacity
-          onPress={() => setVisible(false)}
-        >
-          <Text style={styles.messageText}>You have {messages.length} new messages</Text>
+        <TouchableOpacity onPress={() => setVisible(false)}>
+          <Text style={styles.messageText}>
+            You have {messages.length} new messages
+          </Text>
         </TouchableOpacity>
-
       </View>
-    )
+    );
   } else {
     return null;
   }
-}
+};
 
 const styles = StyleSheet.create({
   note: {
     ...Platform.select({
       ios: {
         top: 70,
-        right: 20
+        right: 20,
       },
       android: {
         top: 20,
-        alignSelf: "center"
-      }
+        alignSelf: "center",
+      },
     }),
     position: "absolute",
     backgroundColor: "white",
@@ -45,24 +49,23 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     shadowColor: "#000",
     shadowOffset: {
-    	width: 0,
-    	height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    // elevation: 4,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   messageText: {
-    paddingTop: 20
+    paddingTop: 20,
     // left: 10,
     // color: "white"
   },
   ex: {
     paddingLeft: 10,
     paddingBottom: 20,
-    paddingTop: 10
-  }
-})
+    paddingTop: 10,
+  },
+});
 
 export default Notification;

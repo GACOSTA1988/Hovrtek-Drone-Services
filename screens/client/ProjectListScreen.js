@@ -7,7 +7,7 @@ import {
   TextInput,
   Button,
   FlatList,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { connect } from "react-redux";
 import { getProjects, deleteProject } from "../../actions/projects";
@@ -16,24 +16,20 @@ import _ from "lodash";
 import {
   Ionicons,
   FontAwesome5,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 import ClientSubheader from "../../components/client/ClientSubheader";
 
-
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
-
-
-
   useEffect(() => {
     props.getProjects();
     props.getPilotProfiles();
   }, []);
 
-  let user = '';
+  let user = "";
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
   }
@@ -48,40 +44,33 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
   return (
     <View style={styles.projectListWrapper}>
       <View style={styles.subheaderWrapper}>
-            <ClientSubheader />
+        <ClientSubheader />
       </View>
-        <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
-          <Text style={styles.clientText}>My Projects</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
+        <Text style={styles.clientText}>My Projects</Text>
+      </TouchableOpacity>
       <ScrollView>
-
         <View style={styles.projectCard}>
           <TouchableOpacity>
             <FlatList
               style={{ width: "100%" }}
               data={listOfMyProjects}
-              // showsVerticalScrollIndicator={true}
-              keyExtractor={item => item.key}
+              keyExtractor={(item) => item.key}
               renderItem={({ item }) => {
                 return (
                   <View
                     style={{
-                      // elevation: 8,
                       borderRadius: 15,
                       backgroundColor: "#092455",
                       marginBottom: 15,
-                      padding: 20
+                      padding: 20,
                     }}
                   >
                     <TouchableHighlight
                       onPress={() =>
-                        props.navigation.navigate(
-                          "ProjectDetailsScreen",
-                          {
-                            ...item
-                          }
-                        )
-                      }
+                        props.navigation.navigate("ProjectDetailsScreen", {
+                          ...item,
+                        })}
                     >
                       <View>
                         <Text style={{ color: "white", fontWeight: "800" }}>
@@ -93,12 +82,27 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
                         <Text style={{ color: "white", fontWeight: "800" }}>
                           Recording: {item.recording}{" "}
                         </Text>
-                        { (item.pilotID && props.listOfPilotProfiles.find((x) => x.userID === item.pilotID)) ? (
+                        {item.pilotID &&
+                        props.listOfPilotProfiles.find(
+                          (x) => x.userID === item.pilotID,
+                        ) ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
-                          Your pilot: { props.listOfPilotProfiles.find((x) => x.userID === item.pilotID).pilotFirstName }{" "}{ props.listOfPilotProfiles.find((x) => x.userID === item.pilotID).pilotLastName }
+                            Your pilot:{" "}
+                            {
+                              props.listOfPilotProfiles.find(
+                                (x) => x.userID === item.pilotID,
+                              ).pilotFirstName
+                            }{" "}
+                            {
+                              props.listOfPilotProfiles.find(
+                                (x) => x.userID === item.pilotID,
+                              ).pilotLastName
+                            }
                           </Text>
                         ) : (
-                          <Text style={{ color: "white", fontWeight: "800" }}>Pending pilot</Text>
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Pending pilot
+                          </Text>
                         )}
                       </View>
                     </TouchableHighlight>
@@ -106,25 +110,17 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
                       style={{
                         flexDirection: "row",
                         justifyContent: "flex-end",
-                        marginTop: 25
+                        marginTop: 25,
                       }}
                     >
                       <TouchableHighlight
                         onPress={() =>
-                          props.navigation.navigate(
-                            "EditProjectScreen",
-                            {
-                              ...item
-                            }
-                          )
-                        }
+                          props.navigation.navigate("EditProjectScreen", {
+                            ...item,
+                          })}
                       >
                         <View style={{ marginRight: 15 }}>
-                          <FontAwesome5
-                            name="edit"
-                            size={32}
-                            color="#a9b8de"
-                          />
+                          <FontAwesome5 name="edit" size={32} color="#a9b8de" />
                         </View>
                       </TouchableHighlight>
                       <TouchableHighlight
@@ -150,48 +146,52 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
   );
 }
 
-
 const styles = StyleSheet.create({
   projectCard: {
     width: 380,
-    marginBottom: 140
+    marginBottom: 140,
   },
   clientText: {
     fontSize: 30,
     color: "darkblue",
-    textAlign: "center"
+    textAlign: "center",
   },
   ClientProjectListTextWrapper: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   projectListWrapper: {
     alignItems: "center",
     marginTop: 15,
   },
   subheaderWrapper: {
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
 
 function mapStateToProps(state) {
   const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {
     return {
       ...val,
-      key: key
+      key: key,
     };
   });
-  const listOfPilotProfiles = _.map(state.pilotProfilesList.pilotProfilesList, (val, key) => {
-    return {
-      ...val,
-      key: key
-    };
-  });
+  const listOfPilotProfiles = _.map(
+    state.pilotProfilesList.pilotProfilesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    },
+  );
   return {
     listOfProjects,
-    listOfPilotProfiles
+    listOfPilotProfiles,
   };
 }
 
-export default connect(mapStateToProps, { getProjects, deleteProject, getPilotProfiles })(
-  ProjectListScreen
-);
+export default connect(mapStateToProps, {
+  getProjects,
+  deleteProject,
+  getPilotProfiles,
+})(ProjectListScreen);

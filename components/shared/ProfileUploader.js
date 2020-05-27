@@ -5,7 +5,6 @@ import * as firebase from "firebase";
 import * as Permissions from "expo-permissions";
 import {
   generateUploadedImageStyle,
-  promiseResolver,
   uploadImage,
 } from "./ProfileUploaderUtils";
 import { APP_STRINGS } from "../../constants";
@@ -33,20 +32,20 @@ function ProfileUploader(props) {
   };
 
   async function setImage() {
-    let result = await ImagePicker.launchImageLibraryAsync();
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync();
 
-    if (!result.cancelled) {
-      const { uri } = result;
-      // there is also a `data` key from the promiseResolver, but it is unused right now
-      const { error } = promiseResolver(uploadImage(uri, uuid));
+      if (!result.cancelled) {
+        const { uri } = result;
+        const response = await uploadImage(uri, uuid);
 
-      if (error) {
-        Alert.alert(error);
-      } else {
         Alert.alert(successfullyUploaded);
-      }
+        console.log("got success response ", response);
 
-      persistImage(uri);
+        persistImage(uri);
+      }
+    } catch (error) {
+      return Alert.alert(error);
     }
   }
 

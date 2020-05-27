@@ -61,11 +61,10 @@ const ClientNavigation = () => {
     drawerStyle={{
       backgroundColor: '#F4EDEA',
       width: 200,
-      marginTop: 100,
+      marginTop: 102,
     }}
     drawerContentOptions={{
-      activeTintColor: '#120309',
-      // activeBackgroundColor: '#120309'
+      activeTintColor: '#120309'
     }}
     >
       <ClientDrawer.Screen

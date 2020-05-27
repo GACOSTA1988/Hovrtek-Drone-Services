@@ -19,6 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getProjects } from "../../actions/projects";
 import * as firebase from 'firebase';
 import _ from "lodash";
+import PilotSubheader from "../../components/pilot/PilotSubheader";
 
 function MyJobsScreen(props, { getProjects }) {
 
@@ -41,11 +42,12 @@ function MyJobsScreen(props, { getProjects }) {
 
   return (
     <View style={styles.projectListWrapper}>
+    <PilotSubheader />
       <ScrollView>
         <View style={styles.projectCard}>
           <TouchableOpacity>
             <FlatList
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginTop: 15 }}
               data={listOfMyProjects}
               // showsVerticalScrollIndicator={true}
               keyExtractor={item => item.key}

@@ -64,7 +64,7 @@ const ClientLocationPicker = () => {
         transparent={true}
         visible={isModalVisible}
         animationType={APP_STRINGS.slide}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
@@ -119,6 +119,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontSize: 20,
+  },
+  input: {
+    marginTop: 20,
+    height: 90,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
   },
 });
 

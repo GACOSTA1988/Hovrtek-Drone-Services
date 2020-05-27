@@ -89,7 +89,11 @@ function JobListScreen(
       ) : (
         <Text></Text>
       )}
-      <PilotSubheader />
+
+        <View style={styles.subheaderWrapper}>
+          <PilotSubheader />
+        </View>
+
       <ScrollView>
         <View style={styles.projectCard}>
           <TouchableOpacity>
@@ -163,17 +167,12 @@ const styles = StyleSheet.create({
     width: 380,
     marginTop: 15
   },
-  clientText: {
-    fontSize: 30,
-    color: "darkblue",
-    textAlign: "center",
-  },
   ClientProjectListTextWrapper: {
     marginBottom: 20,
   },
   projectListWrapper: {
     alignItems: "center",
-    marginTop: 10,
+    
   },
   profileCompleteNotice: {
     flexDirection: "row",
@@ -206,8 +205,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   subheaderWrapper: {
-    marginBottom: 10,
-    marginLeft: "5%",
+    marginBottom: 14,
+
   },
 });
 

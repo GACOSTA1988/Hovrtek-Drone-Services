@@ -65,7 +65,7 @@ function ClientProfileUploader(props) {
       {licenseThumbnail && (
         <Image
           source={{ uri: licenseThumbnail }}
-          style={{ width: 150, height: 150, border: 5, borderColor: "blue" }}
+          style={{ width: 150, height: 150, borderWidth: 5, borderColor: "blue" }}
         />
       )}
     </View>

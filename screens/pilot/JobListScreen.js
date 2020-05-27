@@ -28,7 +28,7 @@ import PilotSubheader from "../../components/pilot/PilotSubheader";
 
 function JobListScreen(
   props,
-  { getProjects, getClientProfiles, getPilotProfiles }
+  { getProjects, getClientProfiles, getPilotProfiles },
 ) {
   const navigation = useNavigation();
 
@@ -87,7 +87,7 @@ function JobListScreen(
           </TouchableOpacity>
         </View>
       ) : (
-        <Text></Text>
+        <Text />
       )}
       <ScrollView>
         <View style={styles.subheaderWrapper}>
@@ -104,7 +104,6 @@ function JobListScreen(
                 return (
                   <View
                     style={{
-                      elevation: 8,
                       borderRadius: 15,
                       backgroundColor: "#092455",
                       marginBottom: 15,
@@ -115,8 +114,7 @@ function JobListScreen(
                       onPress={() =>
                         props.navigation.navigate("JobDetailsScreen", {
                           ...item,
-                        })
-                      }
+                        })}
                     >
                       <View>
                         <Text style={{ color: "white", fontWeight: "800" }}>
@@ -129,18 +127,18 @@ function JobListScreen(
                           Recording: {item.recording}{" "}
                         </Text>
                         {props.listOfClientProfiles.find(
-                          (x) => x.userID === item.clientID
+                          (x) => x.userID === item.clientID,
                         ) ? (
                           <Text style={{ color: "white", fontWeight: "800" }}>
                             Posted by:{" "}
                             {
                               props.listOfClientProfiles.find(
-                                (x) => x.userID === item.clientID
+                                (x) => x.userID === item.clientID,
                               ).firstName
                             }{" "}
                             {
                               props.listOfClientProfiles.find(
-                                (x) => x.userID === item.clientID
+                                (x) => x.userID === item.clientID,
                               ).lastName
                             }
                           </Text>
@@ -227,7 +225,7 @@ function mapStateToProps(state) {
         ...val,
         key: key,
       };
-    }
+    },
   );
   const listOfPilotProfiles = _.map(
     state.pilotProfilesList.pilotProfilesList,
@@ -236,7 +234,7 @@ function mapStateToProps(state) {
         ...val,
         key: key,
       };
-    }
+    },
   );
   return {
     listOfProjects,

@@ -33,7 +33,7 @@ import moment from "moment";
 function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   const navigation = useNavigation();
 
-  const [body, setBody] = useState("");
+  const [ body, setBody ] = useState("");
 
   useEffect(() => {
     props.getMessages();
@@ -115,7 +115,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
       body,
       read,
       timestamp,
-      isNewTimestamp
+      isNewTimestamp,
     );
 
     setBody("");
@@ -138,7 +138,6 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           return (
             <View
               style={{
-                elevation: 8,
                 borderRadius: 15,
                 backgroundColor: "#3E90D0",
                 marginBottom: 15,
@@ -164,7 +163,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
                   />
                 ) : (
                   // todo: filled in check circle when read, outline when not
-                  <Text></Text>
+                  <Text />
                 )}
               </View>
             </View>

@@ -170,7 +170,6 @@ const styles = StyleSheet.create({
   textWrapper: {
     marginBottom: 20,
     alignItems: "center",
-    elevation: 8,
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,

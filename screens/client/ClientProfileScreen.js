@@ -108,7 +108,6 @@ function ClientProfileScreen(props, { getClientProfiles }) {
               alignItems: "center",
               marginTop: "17%",
               marginLeft: 20,
-              elevation: 8,
               borderWidth: 4,
               borderColor: "#092455",
             }}

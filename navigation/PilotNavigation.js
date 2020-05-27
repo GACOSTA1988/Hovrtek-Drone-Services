@@ -52,7 +52,17 @@ const SupportNavigation = () => {
 
 const PilotNavigation = () => {
   return (
-    <PilotDrawer.Navigator drawerPosition="right">
+    <PilotDrawer.Navigator
+      drawerPosition="right"
+      drawerStyle={{
+        backgroundColor: '#F4EDEA',
+        width: 200,
+        marginTop: 102,
+      }}
+      drawerContentOptions={{
+        activeTintColor: '#120309'
+      }}
+    >
       <PilotDrawer.Screen name="Home" component={PilotHomeStackNavigator} />
       <PilotDrawer.Screen
         name="AboutScreen"

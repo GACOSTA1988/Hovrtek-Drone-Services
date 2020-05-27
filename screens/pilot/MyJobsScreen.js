@@ -19,7 +19,9 @@ import { useNavigation } from '@react-navigation/native';
 import { getProjects } from "../../actions/projects";
 import * as firebase from 'firebase';
 import _ from "lodash";
+
 import PilotSubheader from '../../components/pilot/PilotSubheader'
+
 
 function MyJobsScreen(props, { getProjects }) {
 
@@ -42,6 +44,7 @@ function MyJobsScreen(props, { getProjects }) {
 
   return (
     <View style={styles.projectListWrapper}>
+
       <View style={styles.subheaderWrapper}>
         <PilotSubheader />
       </View>
@@ -64,6 +67,7 @@ function MyJobsScreen(props, { getProjects }) {
                         marginBottom: 15,
                         padding: 20,
                       }}
+
                     >
                       <TouchableHighlight
                         onPress={() =>

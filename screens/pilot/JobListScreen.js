@@ -89,9 +89,11 @@ function JobListScreen(
       ) : (
         <Text></Text>
       )}
+
         <View style={styles.subheaderWrapper}>
           <PilotSubheader />
         </View>
+
       <ScrollView>
         <View style={styles.projectCard}>
           <TouchableOpacity>
@@ -163,6 +165,7 @@ function JobListScreen(
 const styles = StyleSheet.create({
   projectCard: {
     width: 380,
+    marginTop: 15
   },
   ClientProjectListTextWrapper: {
     marginBottom: 20,

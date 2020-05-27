@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
   },
   editProjectCard: {
-    // elevation: 8,
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,

@@ -27,14 +27,14 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
   console.log("PERSON ICON IN CLIENT EDIT PROFILE: ", personIcon);
   let profileDetails = props.route.params;
 
-  const [firstName, setFirstName] = useState(profileDetails.firstName);
-  const [lastName, setLastName] = useState(profileDetails.lastName);
-  const [location, setLocation] = useState(profileDetails.location);
-  const [bio, setBio] = useState(profileDetails.bio);
-  const [industry, setIndustry] = useState(profileDetails.industry);
-  const [paymentType, setPaymentType] = useState(profileDetails.paymentType);
-  const [profileImageUrl, setProfileImageUrl] = useState(
-    profileDetails.profileImageUrl
+  const [ firstName, setFirstName ] = useState(profileDetails.firstName);
+  const [ lastName, setLastName ] = useState(profileDetails.lastName);
+  const [ location, setLocation ] = useState(profileDetails.location);
+  const [ bio, setBio ] = useState(profileDetails.bio);
+  const [ industry, setIndustry ] = useState(profileDetails.industry);
+  const [ paymentType, setPaymentType ] = useState(profileDetails.paymentType);
+  const [ profileImageUrl, setProfileImageUrl ] = useState(
+    profileDetails.profileImageUrl,
   );
 
   const save = () => {
@@ -53,7 +53,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
       industry,
       paymentType,
       profileImageUrl,
-      profileDetails.key
+      profileDetails.key,
     );
 
     props.navigation.navigate("ClientProfileScreen", { ...profileDetails });
@@ -70,19 +70,20 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
         <View>
           <Image source={princePic01} style={styles.backgroundImage} />
           <View style={styles.saveButton}>
-            <TouchableOpacity
-              hitSlop={styles.hitSlop}
-              onPress={() => save()}
-            >
+            <TouchableOpacity hitSlop={styles.hitSlop} onPress={() => save()}>
               <Text style={styles.saveText}>Save Changes</Text>
             </TouchableOpacity>
           </View>
+
           {profileDetails.profileImageUrl ? (
             <TouchableOpacity
               onPress={() => Alert.alert("todo: choose image")}
               style={styles.imagePress}
             >
-              <Image source={{uri: profileDetails.profileImageUrl}} style={styles.profileImage} />
+              <Image
+                source={{ uri: profileDetails.profileImageUrl }}
+                style={styles.profileImage}
+              />
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
@@ -160,20 +161,20 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   text: {
-    fontSize: 20
+    fontSize: 20,
   },
   name: {
     fontSize: 30,
     marginLeft: 4,
-    marginRight: 4
+    marginRight: 4,
   },
   names: {
     flexDirection: "row",
     marginLeft: 16,
-    width: "65%"
+    width: "65%",
   },
   profileImage: {
     height: 100,
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     elevation: 8,
     borderWidth: 4,
-    borderColor: "#092455"
+    borderColor: "#092455",
   },
   info: {
     margin: 20,
@@ -204,11 +205,11 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 15,
-    marginBottom: 3.5
+    marginBottom: 3.5,
   },
   imagePress: {
     width: 100,
-    marginBottom: 3.5
+    marginBottom: 3.5,
   },
   saveText: {
     fontWeight: "bold",
@@ -221,19 +222,19 @@ const styles = StyleSheet.create({
   },
   inlineView: {
     flexDirection: "row",
-    marginTop: 10
+    marginTop: 10,
   },
   headerText: {
     fontSize: 20,
     marginTop: 10,
-    marginBottom: 3.5
+    marginBottom: 3.5,
   },
   hitSlop: {
     top: 30,
     left: 30,
     bottom: 30,
-    right: 30
-  }
+    right: 30,
+  },
 });
 
 export default connect(null, { editClientProfile })(ClientEditProfileScreen);

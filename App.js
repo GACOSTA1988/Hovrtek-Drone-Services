@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
 import Footer from "./components/Footer";
@@ -8,14 +8,14 @@ import {
   clientNavigation,
   pilotNavigation,
   renderLogin,
-  renderLoading
+  renderLoading,
 } from "./appNavigationUtils";
 // REDUX STUFF
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
-import { StatusBar, Platform } from 'react-native'
+import { StatusBar, Platform } from "react-native";
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
@@ -27,8 +27,8 @@ export default () => {
   // auth stuff - maybe should be elsewhere?
   const auth = firebase.auth();
 
-  let [loggedIn, setLoggedIn] = useState("loading");
-  let [userType, setUserType] = useState(null);
+  let [ loggedIn, setLoggedIn ] = useState("loading");
+  let [ userType, setUserType ] = useState(null);
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -50,17 +50,14 @@ export default () => {
     };
   }, []);
 
-  const isClientLoggedIn = loggedIn === "true" && userType === 'C';
-  const isPilotLoggedIn = loggedIn === "true" && userType === 'P';
+  const isClientLoggedIn = loggedIn === "true" && userType === "C";
+  const isPilotLoggedIn = loggedIn === "true" && userType === "P";
 
   return (
     <Provider store={state}>
-      { Platform.OS === 'ios' &&
-        <StatusBar
-        backgroundColor="white"
-        barStyle="light-content"
-        />
-      }
+      {Platform.OS === "ios" && (
+        <StatusBar backgroundColor="white" barStyle="light-content" />
+      )}
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           {isClientLoggedIn && clientNavigation}

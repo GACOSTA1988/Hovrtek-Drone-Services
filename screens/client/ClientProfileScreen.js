@@ -24,7 +24,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
 
   let passedProps = props.route.params;
 
-  const [profileDetails, setProfileDetails] = useState(null);
+  const [ profileDetails, setProfileDetails ] = useState(null);
 
   let user = null;
   let profile = null;
@@ -71,8 +71,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
                 onPress={() =>
                   props.navigation.navigate("ClientEditProfileScreen", {
                     ...profileDetails,
-                  })
-                }
+                  })}
               >
                 <AntDesign name="edit" size={40} />
               </TouchableOpacity>
@@ -83,8 +82,7 @@ function ClientProfileScreen(props, { getClientProfiles }) {
                   onPress={() =>
                     props.navigation.navigate("ChatScreen", {
                       ...profileDetails,
-                    })
-                  }
+                    })}
                 >
                   <Text style={styles.chatText}>Chat</Text>
                 </TouchableOpacity>
@@ -117,18 +115,14 @@ function ClientProfileScreen(props, { getClientProfiles }) {
                 Industry: {profileDetails.industry}
               </Text>
             ) : (
-              <Text style={styles.headerText}>
-                No industry details
-              </Text>
+              <Text style={styles.headerText}>No industry details</Text>
             )}
             {profileDetails.industry != "Set industry" ? (
               <Text style={styles.headerText}>
                 Payment type: {profileDetails.paymentType}
               </Text>
             ) : (
-              <Text style={styles.headerText}>
-                No payment type details
-              </Text>
+              <Text style={styles.headerText}>No payment type details</Text>
             )}
           </View>
         </View>
@@ -147,7 +141,7 @@ function mapStateToProps(state) {
         ...val,
         key: key,
       };
-    }
+    },
   );
   return {
     listOfClientProfiles,
@@ -156,13 +150,13 @@ function mapStateToProps(state) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   name: {
     fontSize: 30,
     marginLeft: 20,
     width: 300,
-    marginTop: 4
+    marginTop: 4,
   },
   profileImage: {
     height: 100,
@@ -210,19 +204,19 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 20,
-    marginTop: 10
+    marginTop: 10,
   },
   bioHeaderText: {
     fontSize: 20,
-    marginTop: 11
+    marginTop: 11,
   },
   bioText: {
     fontSize: 15,
     marginTop: 3.5,
-    marginBottom: 3
-  }
+    marginBottom: 3,
+  },
 });
 
 export default connect(mapStateToProps, { getClientProfiles })(
-  ClientProfileScreen
+  ClientProfileScreen,
 );

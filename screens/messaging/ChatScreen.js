@@ -135,7 +135,9 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
                   {item.isNewTimestamp ? (
                     <View>
                       <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
-                      <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
+                      <Text>
+                        Is this a new timestamp: {item.isNewTimestamp}
+                      </Text>
                     </View>
                   ) : (
                     <Text>OLD Message sent at: {item.timestamp}</Text>
@@ -149,7 +151,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
                     />
                   ) : (
                     // todo: filled in check circle when read, outline when not
-                    <Text></Text>
+                    <Text />
                   )}
                 </View>
               </View>
@@ -170,17 +172,8 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           onFocus={() => readMessages()}
           style={styles.input}
         />
-        <Ionicons
-          name="md-send"
-          size={30}
-          color="black"
-          onPress={send}
-        />
-        <AntDesign
-          style={styles.plus}
-          name="plus"
-          size={25}
-        />
+        <Ionicons name="md-send" size={30} color="black" onPress={send} />
+        <AntDesign style={styles.plus} name="plus" size={25} />
       </View>
     </View>
   );
@@ -188,14 +181,14 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%"
+    height: "100%",
   },
   messagesScroll: {
     // flex: 1,
     // height: "80%",
     backgroundColor: "white",
     padding: 10,
-    marginBottom: 70
+    marginBottom: 70,
   },
   keyClosedContainer: {
     marginTop: "90%",
@@ -206,18 +199,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#3E90D0",
     marginVertical: 15,
-    padding: 20
+    padding: 20,
   },
   messagesList: {
     width: "100%",
-    marginTop: 20
+    marginTop: 20,
   },
   writeContainer: {
     flexDirection: "row",
     alignItems: "center",
     position: "absolute",
     bottom: 0,
-    },
+  },
   input: {
     width: "80%",
     borderWidth: 2,
@@ -225,12 +218,12 @@ const styles = StyleSheet.create({
     height: 45,
     borderColor: "#092455",
     padding: 10,
-    margin: 10
+    margin: 10,
   },
   plus: {
     color: "#092455",
-    margin: 5
-  }
+    margin: 5,
+  },
 });
 
 function mapStateToProps(state) {

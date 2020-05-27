@@ -17,7 +17,7 @@ import { APP_STRINGS } from "../constants/index";
 
 const ClientLocationPicker = () => {
   const navigation = useNavigation();
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [ isModalVisible, setIsModalVisible ] = useState(false);
 
   const setLocation = useContext(PassSetLocation);
   const locationState = useContext(PassLocationState);
@@ -52,7 +52,9 @@ const ClientLocationPicker = () => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLocation} value={location}
+          style={styles.input}
+          onChangeText={setLocation}
+          value={location}
         />
       </View>
     );
@@ -68,7 +70,9 @@ const ClientLocationPicker = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
+            <Text style={styles.modalText}>
+              {APP_STRINGS.whereIsTheLocation}
+            </Text>
           </View>
           {renderTextInput(location, setLocation)}
           <View styles={styles.cancelWrapper}>

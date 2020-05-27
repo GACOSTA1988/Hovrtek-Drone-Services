@@ -7,9 +7,9 @@ import SupportScreen from "../screens/pilot/SupportScreen";
 import PilotHomeStackNavigator from "./PilotHomeStackNavigator";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
-import MessagingNavigation from './MessagingNavigation';
-import MainHeader from '../components/MainHeader';
-import NestedHeader from '../components/NestedHeader';
+import MessagingNavigation from "./MessagingNavigation";
+import MainHeader from "../components/MainHeader";
+import NestedHeader from "../components/NestedHeader";
 
 const PilotDrawer = createDrawerNavigator();
 const AboutStack = createStackNavigator();
@@ -17,18 +17,18 @@ const SupportStack = createStackNavigator();
 
 const mainHeaderStyle = {
   backgroundColor: "#092455",
-  height: 100
-}
+  height: 100,
+};
 
 const AboutNavigation = () => {
   return (
     <AboutStack.Navigator>
       <AboutStack.Screen
-        name='About'
+        name="About"
         component={AboutScreen}
         options={{
           headerTitle: () => <MainHeader />,
-          headerStyle: mainHeaderStyle
+          headerStyle: mainHeaderStyle,
         }}
       />
     </AboutStack.Navigator>
@@ -39,11 +39,11 @@ const SupportNavigation = () => {
   return (
     <SupportStack.Navigator>
       <SupportStack.Screen
-        name='Support'
+        name="Support"
         component={SupportScreen}
         options={{
           headerTitle: () => <MainHeader />,
-          headerStyle: mainHeaderStyle
+          headerStyle: mainHeaderStyle,
         }}
       />
     </SupportStack.Navigator>
@@ -55,12 +55,12 @@ const PilotNavigation = () => {
     <PilotDrawer.Navigator
       drawerPosition="right"
       drawerStyle={{
-        backgroundColor: '#F4EDEA',
+        backgroundColor: "#F4EDEA",
         width: 200,
         marginTop: 102,
       }}
       drawerContentOptions={{
-        activeTintColor: '#120309'
+        activeTintColor: "#120309",
       }}
     >
       <PilotDrawer.Screen name="Home" component={PilotHomeStackNavigator} />

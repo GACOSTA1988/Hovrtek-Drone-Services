@@ -77,7 +77,6 @@ const renderLogin = () => {
 };
 
 const renderLoading = () => {
-
   const signHeaderStyle = {
     backgroundColor: "#092455",
     width: "100%",
@@ -85,7 +84,7 @@ const renderLoading = () => {
     borderBottomColor: "grey",
     height: 110,
   };
-  
+
   const loadingScreen = (
     <RootStack.Screen
       name="Loading"
@@ -96,12 +95,8 @@ const renderLoading = () => {
       })}
     />
   );
-  return (
-    <RootStack.Navigator>
-      {loadingScreen}
-    </RootStack.Navigator>
-  );
-}
+  return <RootStack.Navigator>{loadingScreen}</RootStack.Navigator>;
+};
 
 const clientNavigation = (
   <RootStack.Navigator headerMode="none">

@@ -61,7 +61,6 @@ function MyJobsScreen(props, { getProjects }) {
                   return (
                     <View
                       style={{
-                        elevation: 8,
                         borderRadius: 15,
                         backgroundColor: "#092455",
                         marginBottom: 15,

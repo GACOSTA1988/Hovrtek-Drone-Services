@@ -15,6 +15,7 @@ import {
   PassRecordingState,
 } from "../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
+import { APP_STRINGS } from "../constants";
 
 const ClientRecordingPicker = () => {
   const navigation = useNavigation();
@@ -30,6 +31,23 @@ const ClientRecordingPicker = () => {
   const closeModal = () => {
     setIsModalVisible(false);
   };
+
+  // const renderRecordingButton = (buttonText = '') => {
+  //   return (
+  //     <TouchableOpacity
+  //       style={styles.button}
+  //       onPress={openModal}
+  //     >
+  //       <Text style={styles.buttonText}>{buttonText}</Text>
+  //     </TouchableOpacity>
+  //   );
+  // }
+
+  // const renderRecording = (recordingString = '') => {
+  //   return recordingString
+  //   ? renderRecordingButton()
+  //   : renderRecordingButton(APP_STRINGS.)
+  // }
 
   return (
     <View style={styles.container}>

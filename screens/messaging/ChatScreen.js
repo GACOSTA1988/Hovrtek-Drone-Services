@@ -122,132 +122,115 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={{
-        flex: 1,
-        height: "100%",
-        backgroundColor: "white",
-        padding: 10,
-      }}
-    >
-      <FlatList
-        style={{ width: "100%", marginTop: 20 }}
-        data={conversation}
-        keyExtractor={(item) => item.key}
-        renderItem={({ item }) => {
-          return (
-            <View
-              style={{
-                // elevation: 8,
-                borderRadius: 15,
-                backgroundColor: "#3E90D0",
-                marginBottom: 15,
-                padding: 20,
-              }}
-            >
-              <View>
-                {item.isNewTimestamp ? (
-                  <View>
-                    <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
-                    <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
-                  </View>
-                ) : (
-                  <Text>OLD Message sent at: {item.timestamp}</Text>
-                )}
-
-                <Text>Message body: {item.body} </Text>
-                {item.read ? (
-                  <FontAwesome5
-                    name="check-circle"
-                    size={15}
-                    style={{ textAlign: "right" }}
-                  />
-                ) : (
-                  // todo: filled in check circle when read, outline when not
-                  <Text></Text>
-                )}
+    <View style={styles.container}>
+      <KeyboardAwareScrollView style={styles.messagesScroll}>
+        <FlatList
+          style={styles.messagesList}
+          data={conversation}
+          keyExtractor={(item) => item.key}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.messagingContainer}>
+                <View>
+                  {item.isNewTimestamp ? (
+                    <View>
+                      <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
+                      <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
+                    </View>
+                  ) : (
+                    <Text>OLD Message sent at: {item.timestamp}</Text>
+                  )}
+                  <Text>Message body: {item.body} </Text>
+                  {item.read ? (
+                    <FontAwesome5
+                      name="check-circle"
+                      size={15}
+                      style={{ textAlign: "right" }}
+                    />
+                  ) : (
+                    // todo: filled in check circle when read, outline when not
+                    <Text></Text>
+                  )}
+                </View>
               </View>
-            </View>
-          );
-        }}
-      />
-
-      <View
-        style={{
-          backgroundColor: "white",
-          marginTop: 10,
-          marginBottom: 40,
-          alignItems: "center",
-        }}
-      >
+            );
+          }}
+        />
+      </KeyboardAwareScrollView>
+      <View style={styles.writeContainer}>
         <TextInput
-          multiline
-          numberOfLines={4}
-          placeholder=" Send message..."
+          multiline={true}
+          // onContentSizeChange={(event) => {
+          // setInputHeight(100) }}
+          placeholder="Send message..."
           placeholderTextColor="grey"
           value={body}
           onChangeText={setBody}
+          enablesReturnKeyAutomatically={true}
           onFocus={() => readMessages()}
-          style={{
-            width: "80%",
-            borderWidth: 2,
-            backgroundColor: "white",
-            borderRadius: 20,
-            height: 45,
-            marginBottom: 10,
-            marginTop: 20,
-            paddingRight: 40,
-            borderColor: "#092455",
-            paddingTop: 11,
-          }}
+          style={styles.input}
         />
-        <AntDesign
-          style={{
-            position: "absolute",
-            top: "18%",
-            right: "13%",
-            color: "#092455",
-          }}
-          name="plus"
-          size={25}
+        <Ionicons
+          name="md-send"
+          size={30}
+          color="black"
           onPress={send}
         />
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.pop()}
-        >
-          <Text style={styles.backButtonText}>Back</Text>
-        </TouchableOpacity>
+        <AntDesign
+          style={styles.plus}
+          name="plus"
+          size={25}
+        />
       </View>
-    </KeyboardAwareScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  // keyOpenContainer: {
-  //   marginBottom: "50%",
-  //   height: "50%",
-  // },
-  // input: {},
+  container: {
+    height: "100%"
+  },
+  messagesScroll: {
+    // flex: 1,
+    // height: "80%",
+    backgroundColor: "white",
+    padding: 10,
+    marginBottom: 70
+  },
   keyClosedContainer: {
     marginTop: "90%",
-    backgroundColor: "lightgray",
+    // backgroundColor: "lightgray",
   },
-  backButton: {
-    marginTop: 20,
-    marginBottom: 40,
-    width: 60,
-    height: 30,
-    backgroundColor: "#092455",
-    borderRadius: 30,
+  messagingContainer: {
+    elevation: 8,
+    borderRadius: 15,
+    backgroundColor: "#3E90D0",
+    marginVertical: 15,
+    padding: 20
+  },
+  messagesList: {
+    width: "100%",
+    marginTop: 20
+  },
+  writeContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    position: "absolute",
+    bottom: 0,
+    },
+  input: {
+    width: "80%",
+    borderWidth: 2,
+    borderRadius: 20,
+    height: 45,
+    borderColor: "#092455",
+    padding: 10,
+    margin: 10
   },
-  backButtonText: {
-    color: "white",
-    textAlign: "center",
-    // marginBottom: 40,
-  },
+  plus: {
+    color: "#092455",
+    margin: 5
+  }
 });
 
 function mapStateToProps(state) {

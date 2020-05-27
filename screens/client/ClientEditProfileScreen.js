@@ -23,7 +23,8 @@ export const PassProfileImageUrlState = React.createContext();
 const pageUnavailable = "Page unavailable";
 const saveChanges = "Save Changes";
 
-function ClientEditProfileScreen(props) {
+function ClientEditProfileScreen(props, { editClientProfile }) {
+  console.log("PERSON ICON IN CLIENT EDIT PROFILE: ", personIcon);
   let profileDetails = props.route.params;
 
   const [ firstName, setFirstName ] = useState(profileDetails.firstName);
@@ -159,6 +160,7 @@ function ClientEditProfileScreen(props) {
                 textInputStyle: styles.input,
                 textInputValue: bio,
                 onChangeText: setBio,
+                // multiline={true}
               })}
             </View>
 
@@ -205,11 +207,15 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   container: {
-    flex: 1,
+    flex: 1
+  },
+  text: {
+    fontSize: 20
   },
   name: {
     fontSize: 30,
-    marginLeft: 6,
+    marginLeft: 4,
+    marginRight: 4
   },
   hitSlop: {
     top: 30,
@@ -220,12 +226,18 @@ const styles = StyleSheet.create({
   names: {
     flexDirection: "row",
     marginLeft: 16,
+    width: "65%"
   },
   profileImage: {
-    width: 100,
     height: 100,
-    marginTop: 60,
+    width: 100,
+    borderRadius: 90,
+    alignItems: "center",
+    marginTop: "67%",
     marginLeft: 20,
+    elevation: 8,
+    borderWidth: 4,
+    borderColor: "#092455"
   },
   info: {
     margin: 20,
@@ -236,24 +248,45 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   saveButton: {
-    marginTop: 150,
+    marginTop: 140,
     position: "absolute",
-    right: 20,
+    right: 10,
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5,
   },
   input: {
     fontSize: 15,
+    marginBottom: 3.5
   },
   imagePress: {
     width: 100,
+    marginBottom: 3.5
   },
   saveText: {
     fontWeight: "bold",
     fontSize: 15,
     color: "white",
   },
+  inputBottom: {
+    fontSize: 20,
+    marginLeft: 5,
+  },
+  inlineView: {
+    flexDirection: "row",
+    marginTop: 10
+  },
+  headerText: {
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 3.5
+  },
+  hitSlop: {
+    top: 30,
+    left: 30,
+    bottom: 30,
+    right: 30
+  }
 });
 
 export default connect(null, { editClientProfile })(ClientEditProfileScreen);

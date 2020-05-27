@@ -38,13 +38,13 @@ const DroneExperiencePicker = () => {
     );
   };
 
-  // TODO Add yearsOfExp as arguement to render years of exp... ALSO, APP_STRINGIFY "no years of exp"
-  const renderYearsOfExperience = (hasYearsOfExperience = false) => {
-    return hasYearsOfExperience
-      ? renderYearsOfExperienceButton(yearsOfExperience)
-      : renderYearsOfExperienceButton(
-          setYearsOfExperience("No Years of Experience"),
-        );
+    const renderYearsOfExperience = (yearsOfExperienceString) => {
+      if(!yearsOfExperienceString){
+        setYearsOfExperience(APP_STRINGS.noYearsOfExperience);
+      }
+    return (
+      renderYearsOfExperienceButton(yearsOfExperience)
+    )
   };
 
   return (
@@ -52,7 +52,7 @@ const DroneExperiencePicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
+        animationType={APP_STRINGS.slide}
         onRequestClose={() => closeModal()}
       >
         <View style={styles.modalContainer}>
@@ -67,8 +67,8 @@ const DroneExperiencePicker = () => {
               }
             >
               <Picker.Item
-                label="No Years of Experience"
-                value="No Years of Experience"
+                label={APP_STRINGS.noYearsOfExperience}
+                value={APP_STRINGS.noYearsOfExperience}
               />
               <Picker.Item label="Less than 1" value="Less than 1" />
               <Picker.Item label="1" value="1" />
@@ -85,7 +85,7 @@ const DroneExperiencePicker = () => {
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => closeModal()} title={"Choose"}></Button>
+            <Button onPress={() => closeModal()} title={APP_STRINGS.choose}></Button>
           </View>
         </View>
       </Modal>

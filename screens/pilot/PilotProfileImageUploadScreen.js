@@ -17,6 +17,7 @@ import {
 import * as firebase from "firebase";
 import _ from "lodash";
 import ProfileUploader from "../../components/shared/ProfileUploader";
+import { APP_STRINGS } from "../../constants/index";
 
 // CONTEXT HOOK
 export const PassSetProfileImageUrlContext = React.createContext();
@@ -24,9 +25,10 @@ export const PassProfileImageUrlState = React.createContext();
 
 function PilotProfileImageUploadScreen(
   props,
-  { getPilotProfiles, editPilotProfile }
+  { getPilotProfiles, editPilotProfile },
 ) {
   const navigation = useNavigation();
+  const { goBack } = props.navigation;
 
   useEffect(() => {
     props.getPilotProfiles();
@@ -63,21 +65,25 @@ function PilotProfileImageUploadScreen(
     profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
-  const [profileImageUrl, setProfileImageUrl] = useState(
-    profileImageUrlPlaceHolder
+  const [ profileImageUrl, setProfileImageUrl ] = useState(
+    profileImageUrlPlaceHolder,
   );
 
-  const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
-  const [yearsOfExperience, setYearsOfExperience] = useState(
-    yearsOfExperiencePlaceHolder
+  const [ personalBio, setPersonalBio ] = useState(personalBioPlaceHolder);
+  const [ yearsOfExperience, setYearsOfExperience ] = useState(
+    yearsOfExperiencePlaceHolder,
   );
-  const [faaLicenseExp, setFaaLicenseExp] = useState(faaLicenseExpPlaceHolder);
-  const [insuredStatus, setInsuredStatus] = useState(insuredStatusPlaceHolder);
-  const [travelStatus, setTravelStatus] = useState(travelStatusPlaceHolder);
-  const [droneType, setDroneType] = useState(droneTypePlaceHolder);
-  const [airMap, setAirMap] = useState(airMapPlaceHolder);
-  const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
-  const [profileComplete, setProfileComplete] = useState("Yes");
+  const [ faaLicenseExp, setFaaLicenseExp ] = useState(
+    faaLicenseExpPlaceHolder,
+  );
+  const [ insuredStatus, setInsuredStatus ] = useState(
+    insuredStatusPlaceHolder,
+  );
+  const [ travelStatus, setTravelStatus ] = useState(travelStatusPlaceHolder);
+  const [ droneType, setDroneType ] = useState(droneTypePlaceHolder);
+  const [ airMap, setAirMap ] = useState(airMapPlaceHolder);
+  const [ fourHundred, setFourHundred ] = useState(fourHundredPlaceHolder);
+  const [ profileComplete, setProfileComplete ] = useState("Yes");
   const submit = (e) => {
     props.editPilotProfile(
       currentUserProps.pilotLocation,
@@ -91,14 +97,14 @@ function PilotProfileImageUploadScreen(
       fourHundred,
       profileComplete,
       profileImageUrl,
-      currentUserProps.key
+      currentUserProps.key,
     );
     navigation.popToTop();
   };
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>
-        Hello!
+        {APP_STRINGS.hello}
         {currentUserProps ? (
           <Text style={styles.subText}>
             {"\n"}
@@ -128,13 +134,11 @@ function PilotProfileImageUploadScreen(
         <Text style={styles.completeButtonText}>Complete Profile</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => props.navigation.goBack()}
-        title={"Back"}
-      >
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
+      <View style={styles.backButtonWrapper}>
+        <TouchableOpacity style={styles.backButton} onPress={goBack}>
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -194,13 +198,22 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   backButton: {
-    marginTop: 450,
-    marginBottom: 10,
-    position: "absolute",
+    marginTop: 20,
+    marginBottom: 40,
+    width: 60,
+    height: 30,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   backButtonText: {
-    color: "#0000EE",
-    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+  },
+  backButtonWrapper: {
+    marginTop: 253,
+    alignItems: "center",
   },
 });
 function mapStateToProps(state) {
@@ -211,7 +224,7 @@ function mapStateToProps(state) {
         ...val,
         key: key,
       };
-    }
+    },
   );
   return {
     listOfProfiles,
@@ -219,7 +232,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
-  PilotProfileImageUploadScreen
+  PilotProfileImageUploadScreen,
 );
 
 // marginTop: "5%",

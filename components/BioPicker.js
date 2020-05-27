@@ -34,9 +34,6 @@ const BioPicker = () => {
   const setPersonalBio = useContext(PassSetPersonalBio);
   const personalBio = useContext(PassPersonalBioState);
 
-  console.log("PERSONAL BIO", personalBio);
-  console.log("SET PERSONAL BIO", setPersonalBio);
-
   const openModal = () => {
     setIsModalVisible(true);
   };
@@ -73,7 +70,7 @@ const BioPicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType="slide"
+        animationType={APP_STRINGS.slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>

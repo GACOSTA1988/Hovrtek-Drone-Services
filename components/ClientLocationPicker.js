@@ -5,16 +5,15 @@ import {
   Button,
   Modal,
   StyleSheet,
-  Picker,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
 import {
   PassSetLocation,
   PassLocationState,
 } from "../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
+import { APP_STRINGS } from "../constants/index";
 
 const ClientLocationPicker = () => {
   const navigation = useNavigation();
@@ -31,54 +30,53 @@ const ClientLocationPicker = () => {
     setIsModalVisible(false);
   };
 
+  const renderClientLocationButton = (buttonText) => {
+    return (
+      <TouchableOpacity
+        style={styles.button}
+        onPress={openModal}
+        title={"Open modal"}
+      >
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderClientLocation = (hasClientLocation) => {
+    return hasClientLocation
+      ? renderClientLocationButton(locationState)
+      : renderClientLocationButton("Please Set Location");
+  };
+
+  const renderTextInput = (location, setLocation) => {
+    return (
+      <View>
+        <TextInput
+          style={styles.input} onChangeText={setLocation} value={location}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
-        onRequestClose={() => closeModal()}
+        animationType={APP_STRINGS.slide}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              Where is the location of your drone service?
-            </Text>
+            <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
-          <View>
-            <TextInput
-              style={{
-                height: 30,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
-              onChangeText={setLocation}
-              value={locationState}
-            />
-          </View>
+          {renderTextInput(location, setLocation)}
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
+            <Button onPress={closeModal} title={"Choose"} />
           </View>
         </View>
       </Modal>
-
-      {locationState ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{locationState}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>Please Set Location</Text>
-        </TouchableOpacity>
-      )}
+      {renderClientLocation(locationState)}
     </View>
   );
 };
@@ -121,6 +119,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontSize: 20,
+  },
+  input: {
+    marginTop: 20,
+    height: 90,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
   },
 });
 

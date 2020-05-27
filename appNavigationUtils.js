@@ -76,6 +76,33 @@ const renderLogin = () => {
   );
 };
 
+const renderLoading = () => {
+
+  const signHeaderStyle = {
+    backgroundColor: "#092455",
+    width: "100%",
+    borderBottomWidth: 10,
+    borderBottomColor: "grey",
+    height: 110,
+  };
+  
+  const loadingScreen = (
+    <RootStack.Screen
+      name="Loading"
+      component={LoadingScreen}
+      options={() => ({
+        title: "",
+        headerStyle: signHeaderStyle,
+      })}
+    />
+  );
+  return (
+    <RootStack.Navigator>
+      {loadingScreen}
+    </RootStack.Navigator>
+  );
+}
+
 const clientNavigation = (
   <RootStack.Navigator headerMode="none">
     <RootStack.Screen name="Client" component={ClientNavigation} />
@@ -88,4 +115,4 @@ const pilotNavigation = (
   </RootStack.Navigator>
 );
 
-export { clientNavigation, pilotNavigation, renderLogin };
+export { clientNavigation, pilotNavigation, renderLogin, renderLoading };

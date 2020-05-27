@@ -101,41 +101,32 @@ function ClientProfileScreen(props, { getClientProfiles }) {
             source={{
               uri: profileDetails.profileImageUrl,
             }}
-            style={{
-              height: 100,
-              width: 100,
-              borderRadius: 90,
-              alignItems: "center",
-              marginTop: "17%",
-              marginLeft: 20,
-              borderWidth: 4,
-              borderColor: "#092455",
-            }}
+            style={styles.profileImage}
           />
           <Text style={styles.name}>
             {profileDetails.firstName} {profileDetails.lastName}
           </Text>
           <View style={styles.info}>
-            <Text style={{ fontSize: 20 }}>
+            <Text style={styles.headerText}>
               Location: {profileDetails.location}
             </Text>
-            <Text style={{ fontSize: 20, marginTop: 10 }}>Bio: </Text>
-            <Text style={{ fontSize: 15 }}>{profileDetails.bio}</Text>
+            <Text style={styles.bioHeaderText}>Bio: </Text>
+            <Text style={styles.bioText}>{profileDetails.bio}</Text>
             {profileDetails.industry != "Set industry" ? (
-              <Text style={{ fontSize: 20, marginTop: 10 }}>
+              <Text style={styles.headerText}>
                 Industry: {profileDetails.industry}
               </Text>
             ) : (
-              <Text style={{ fontSize: 20, marginTop: 10 }}>
+              <Text style={styles.headerText}>
                 No industry details
               </Text>
             )}
             {profileDetails.industry != "Set industry" ? (
-              <Text style={{ fontSize: 20, marginTop: 10 }}>
+              <Text style={styles.headerText}>
                 Payment type: {profileDetails.paymentType}
               </Text>
             ) : (
-              <Text style={{ fontSize: 20, marginTop: 10 }}>
+              <Text style={styles.headerText}>
                 No payment type details
               </Text>
             )}
@@ -165,20 +156,24 @@ function mapStateToProps(state) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center"
+    flex: 1
   },
   name: {
     fontSize: 30,
     marginLeft: 20,
     width: 300,
+    marginTop: 4
   },
   profileImage: {
-    width: 100,
     height: 100,
-    marginTop: 60,
+    width: 100,
+    borderRadius: 90,
+    alignItems: "center",
+    marginTop: "17%",
     marginLeft: 20,
+    elevation: 8,
+    borderWidth: 4,
+    borderColor: "#092455",
   },
   info: {
     margin: 20,
@@ -213,6 +208,19 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     top: 60,
   },
+  headerText: {
+    fontSize: 20,
+    marginTop: 10
+  },
+  bioHeaderText: {
+    fontSize: 20,
+    marginTop: 11
+  },
+  bioText: {
+    fontSize: 15,
+    marginTop: 3.5,
+    marginBottom: 3
+  }
 });
 
 export default connect(mapStateToProps, { getClientProfiles })(

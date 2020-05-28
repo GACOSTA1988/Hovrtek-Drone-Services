@@ -22,16 +22,18 @@ import { APP_STRINGS, NAV_SCREENS } from "../../constants";
 
 const {
   abilityOver400Ft,
+  bio,
   chat,
   droneModel,
   experienceAirMap,
   insured,
   licenseExpirationDate,
+  location,
+  pilotProfileNotCreated,
+  startPilotProfile,
   willingToTravel,
   // yearsOfExperience aliased to not clash namespace of const of same name
   yearsOfExperience: yearsOfExperienceStr,
-  pilotProfileNotCreated,
-  startPilotProfile,
 } = APP_STRINGS;
 
 const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
@@ -159,8 +161,8 @@ function PilotProfileWelcomeScreen(
                 </TouchableOpacity>
               )}
             </View>
-            <Text style={styles.locationText}>Location: {pilotLocation}</Text>
-            <Text style={styles.specTitle}>Bio:</Text>
+            <Text style={styles.locationText}>{location} {pilotLocation}</Text>
+            <Text style={styles.specTitle}>{bio}</Text>
             <Text style={styles.personalBioStyle}>{personalBio}</Text>
 
             {renderProfileStatsItem(droneModel, droneType)}

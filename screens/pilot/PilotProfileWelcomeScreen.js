@@ -211,15 +211,7 @@ function PilotProfileWelcomeScreen(
               </View>
             ) : (
               <View>
-                <TouchableOpacity
-                  style={styles.chatButton}
-                  onPress={() =>
-                    props.navigation.navigate(CHAT, {
-                      ...profileDetails,
-                    })}
-                >
-                  <Text style={styles.chatText}>{chat}</Text>
-                </TouchableOpacity>
+                {renderTouchableChatIcon(profileDetails)}
 
                 <Text style={styles.nameText}>{pilotFullName()}</Text>
 

@@ -104,6 +104,8 @@ function PilotProfileWelcomeScreen(
     return <View />;
   }
 
+  // it's safe to destructure profileDetails here,
+  // because of the check above for it in the 'if' statement
   const {
     profileImageUrl,
     profileComplete,
@@ -117,7 +119,10 @@ function PilotProfileWelcomeScreen(
     travelStatus,
     airMap,
     fourHundred,
+    insuredStatus,
   } = profileDetails;
+
+  const pilotFullName = () => `${pilotFirstName} ${pilotLastName}`;
 
   const profileImg = {
     uri: profileImageUrl,
@@ -133,7 +138,7 @@ function PilotProfileWelcomeScreen(
 
             <View style={{ flexDirection: "row", display: "flex" }}>
               <Text style={styles.nameText}>
-                {pilotFirstName} {pilotLastName}
+                {pilotFullName()}
               </Text>
 
               {user.photoURL === "P" ? (
@@ -184,16 +189,13 @@ function PilotProfileWelcomeScreen(
                   }}
                 >
                   <Text style={styles.nameText}>
-                    {pilotFirstName} {pilotLastName}
+                    {pilotFullName()}
                   </Text>
                 </View>
                 <View style={{ alignItems: "center" }}>
                   <TouchableOpacity
                     style={styles.startButton}
-                    onPress={() =>
-                      props.navigation.navigate(
-                        "PilotProfilePageSetupPageOneScreen",
-                      )}
+                    onPress={() => props.navigation.navigate(PILOT_SETUP_ONE)}
                   >
                     <Text style={styles.startButtonText}>
                       {startPilotProfile}

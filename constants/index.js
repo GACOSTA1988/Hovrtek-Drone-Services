@@ -34,4 +34,8 @@ const APP_STRINGS = {
   yes: "Yes",
 };
 
-export { APP_STRINGS };
+const NAV_SCREENS = {
+  CHAT: "ChatScreen",
+}
+
+export { APP_STRINGS, NAV_SCREENS };

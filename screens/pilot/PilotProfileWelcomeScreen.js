@@ -18,7 +18,7 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import princePic01 from "../../assets/princePic01.jpg";
 import { AntDesign } from "@expo/vector-icons";
-import { APP_STRINGS } from "../../constants";
+import { APP_STRINGS, NAV_SCREENS } from "../../constants";
 
 const {
   abilityOver400Ft,
@@ -28,10 +28,12 @@ const {
   insured,
   licenseExpirationDate,
   willingToTravel,
-  yearsOfExperience,
+  yearsOfExperience: yearsOfExperienceStr,
   pilotProfileNotCreated,
   startPilotProfile,
 } = APP_STRINGS;
+
+const { CHAT } = NAV_SCREENS;
 
 function PilotProfileWelcomeScreen(
   props,
@@ -101,20 +103,36 @@ function PilotProfileWelcomeScreen(
     return <View />;
   }
 
+  const {
+    profileImageUrl,
+    profileComplete,
+    pilotFirstName,
+    pilotLastName,
+    pilotLocation,
+    personalBio,
+    droneType,
+    yearsOfExperience,
+    faaLicenseExp,
+    travelStatus,
+    airMap,
+    fourHundred,
+  } = profileDetails;
+
   const profileImg = {
-    uri: profileDetails.profileImageUrl,
+    uri: profileImageUrl,
   };
+
   return (
     <View style={styles.container}>
       <View>
-        {profileDetails.profileComplete === "Yes" ? (
+        {profileComplete === "Yes" ? (
           <ScrollView style={styles.scrollViewStyle}>
             <Image source={princePic01} style={styles.backgroundImage} />
             <Image style={styles.profilePic} source={profileImg} />
 
             <View style={{ flexDirection: "row", display: "flex" }}>
               <Text style={styles.nameText}>
-                {profileDetails.pilotFirstName} {profileDetails.pilotLastName}
+                {pilotFirstName} {pilotLastName}
               </Text>
 
               {user.photoURL === "P" ? (
@@ -128,41 +146,25 @@ function PilotProfileWelcomeScreen(
                 <TouchableOpacity
                   style={styles.chatButton}
                   onPress={() =>
-                    props.navigation.navigate("ChatScreen", {
+                    props.navigation.navigate(CHAT, {
                       ...profileDetails,
                     })}
                 >
-                  <Text style={styles.chatText}>Chat</Text>
+                  <Text style={styles.chatText}>{chat}</Text>
                 </TouchableOpacity>
               )}
             </View>
-            <Text style={styles.locationText}>
-              Location: {profileDetails.pilotLocation}
-            </Text>
+            <Text style={styles.locationText}>Location: {pilotLocation}</Text>
             <Text style={styles.specTitle}>Bio:</Text>
-            <Text style={styles.personalBioStyle}>
-              {profileDetails.personalBio}
-            </Text>
+            <Text style={styles.personalBioStyle}>{personalBio}</Text>
 
-            {renderProfileStatsItem(droneModel, profileDetails.droneType)}
-            {renderProfileStatsItem(
-              yearsOfExperience,
-              profileDetails.yearsOfExperience,
-            )}
-            {renderProfileStatsItem(
-              licenseExpirationDate,
-              profileDetails.faaLicenseExp,
-            )}
-            {renderProfileStatsItem(
-              willingToTravel,
-              profileDetails.travelStatus,
-            )}
-            {renderProfileStatsItem(insured, profileDetails.insuredStatus)}
-            {renderProfileStatsItem(experienceAirMap, profileDetails.airMap)}
-            {renderProfileStatsItem(
-              abilityOver400Ft,
-              profileDetails.fourHundred,
-            )}
+            {renderProfileStatsItem(droneModel, droneType)}
+            {renderProfileStatsItem(yearsOfExperienceStr, yearsOfExperience)}
+            {renderProfileStatsItem(licenseExpirationDate, faaLicenseExp)}
+            {renderProfileStatsItem(willingToTravel, travelStatus)}
+            {renderProfileStatsItem(insured, insuredStatus)}
+            {renderProfileStatsItem(experienceAirMap, airMap)}
+            {renderProfileStatsItem(abilityOver400Ft, fourHundred)}
           </ScrollView>
         ) : (
           <ScrollView style={styles.scrollViewStyle}>
@@ -182,8 +184,7 @@ function PilotProfileWelcomeScreen(
                   }}
                 >
                   <Text style={styles.nameText}>
-                    {profileDetails.pilotFirstName}{" "}
-                    {profileDetails.pilotLastName}
+                    {pilotFirstName} {pilotLastName}
                   </Text>
                 </View>
                 <View style={{ alignItems: "center" }}>
@@ -213,7 +214,7 @@ function PilotProfileWelcomeScreen(
                 </TouchableOpacity>
 
                 <Text style={styles.nameText}>
-                  {profileDetails.pilotFirstName} {profileDetails.pilotLastName}
+                  {pilotFirstName} {pilotLastName}
                 </Text>
 
                 <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>

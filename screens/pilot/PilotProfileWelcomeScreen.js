@@ -32,7 +32,7 @@ const {
   pilotProfileNotCreated,
   startPilotProfile,
   willingToTravel,
-  // yearsOfExperience aliased to not clash namespace of const of same name
+  // yearsOfExperience aliased to not clash with const of same name
   yearsOfExperience: yearsOfExperienceStr,
 } = APP_STRINGS;
 
@@ -44,8 +44,6 @@ function PilotProfileWelcomeScreen(
 ) {
   const navigation = useNavigation();
   const { route } = props;
-
-  // console.log("PROPS ", JSON.stringify(props, null, 4));
 
   let user = null;
   let profile = null;
@@ -73,8 +71,7 @@ function PilotProfileWelcomeScreen(
           name="edit"
           size={30}
           color="darkblue"
-          // todo move to styles
-          style={{ marginLeft: 40, marginTop: 25 }}
+          style={styles.iconStyle}
         />
       </TouchableOpacity>
     );
@@ -274,7 +271,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
   },
-
+  iconStyle: {
+    marginLeft: 40,
+    marginTop: 25,
+  },
   input: {
     borderWidth: 1,
     borderRadius: 3,

@@ -18,24 +18,48 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import princePic01 from "../../assets/princePic01.jpg";
 import { AntDesign } from "@expo/vector-icons";
+import { APP_STRINGS } from "../../constants";
+
+const {
+  abilityOver400Ft,
+  droneModel,
+  experienceAirMap,
+  insured,
+  licenseExpirationDate,
+  willingToTravel,
+  yearsOfExperience,
+} = APP_STRINGS;
 
 function PilotProfileWelcomeScreen(
   props,
-  { getPilotProfiles, editPilotProfile },
+  // { getPilotProfiles, editPilotProfile },
 ) {
   const navigation = useNavigation();
+  const { route } = props;
 
-  let passedProps = props.route.params;
-  console.log("passedProps", JSON.stringify(passedProps, null, 4));
+  // console.log("PROPS ", JSON.stringify(props, null, 4));
 
-  useEffect(() => {
-    props.getPilotProfiles();
-  }, []);
+  let passedProps = route.params;
+  // console.log("passedProps", JSON.stringify(passedProps, null, 4));
+
+  // useEffect(() => {
+  //   // props.getPilotProfiles();
+  // }, []);
+
+  const renderProfileStatsItem = (titleString = "", specsValue = "") => {
+    return (
+      <View style={styles.specView}>
+        <Text style={styles.specTitle}>{titleString}</Text>
+        <Text style={styles.specs}>{specsValue}</Text>
+      </View>
+    );
+  };
 
   const [ profileDetails, setCurrentUserProps ] = useState(null);
 
   let user = null;
   let profile = null;
+
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
     if (user.photoURL === "P") {
@@ -60,7 +84,6 @@ function PilotProfileWelcomeScreen(
   // const submit = (e) => {
   //   navigation.navigate("PilotProfileSetupPageOneScreen");
   // };
-  console.log(JSON.stringify(profileDetails, null, 4));
 
   return (
     <View style={styles.container}>
@@ -117,36 +140,26 @@ function PilotProfileWelcomeScreen(
               >
                 {profileDetails.personalBio}
               </Text>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Drone Model:</Text>
-                <Text style={styles.specs}>{profileDetails.droneType}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Years Of Experience:</Text>
-                <Text style={styles.specs}>
-                  {profileDetails.yearsOfExperience}
-                </Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>License Expiration Date:</Text>
-                <Text style={styles.specs}>{profileDetails.faaLicenseExp}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Willing To Travel:</Text>
-                <Text style={styles.specs}>{profileDetails.travelStatus}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Insured:</Text>
-                <Text style={styles.specs}>{profileDetails.insuredStatus}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Experience with Air Map:</Text>
-                <Text style={styles.specs}>{profileDetails.airMap}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Able to Fly over 400 FT:</Text>
-                <Text style={styles.specs}>{profileDetails.fourHundred}</Text>
-              </View>
+
+              {renderProfileStatsItem(droneModel, profileDetails.droneType)}
+              {renderProfileStatsItem(
+                yearsOfExperience,
+                profileDetails.yearsOfExperience,
+              )}
+              {renderProfileStatsItem(
+                licenseExpirationDate,
+                profileDetails.faaLicenseExp,
+              )}
+              {renderProfileStatsItem(
+                willingToTravel,
+                profileDetails.travelStatus,
+              )}
+              {renderProfileStatsItem(insured, profileDetails.insuredStatus)}
+              {renderProfileStatsItem(experienceAirMap, profileDetails.airMap)}
+              {renderProfileStatsItem(
+                abilityOver400Ft,
+                profileDetails.fourHundred,
+              )}
             </ScrollView>
           ) : (
             <ScrollView style={{ width: "100%" }}>

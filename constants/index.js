@@ -1,12 +1,17 @@
 const APP_STRINGS = {
+  abilityOver400Ft: "Able to Fly over 400 FT:",
   areYouWilling: "Are You Willing to Travel Out of State for a Drone Job?",
   briefSummary: "Please Give Us a Brief Summary of Your Work Experience",
   choose: "Choose",
   doYouHaveValidInsurance: "Do you have valid insurance?",
+  droneModel: "Drone Model:",
+  experienceAirMap: "Experience with Air Map:",
   experienceFlying: "Have you had experience flying over 400 Feet?",
   haveYouHadExperienceFlying: "Have you had experience flying over 400 Feet?",
   hello: "Hello!",
   insurance: "Do You Have Valid Insurance?",
+  insured: "Insured:",
+  licenseExpirationDate: "License Expiration Date:",
   modelDrone: "What Drone Model Do You Have?",
   noYearsOfExperience: "No Years of Experience",
   no: "No",
@@ -20,7 +25,9 @@ const APP_STRINGS = {
   uploadImage: "Upload Image",
   workExperienceSet: "Work Experience Set",
   whereIsTheLocation: "Were is the location of your drone service?",
+  willingToTravel: "Willing To Travel:",
   yearsExperience: "How Many Years Of Drone Experience Do You Have?",
+  yearsOfExperience: "Years Of Experience:",
   yes: "Yes",
 };
 

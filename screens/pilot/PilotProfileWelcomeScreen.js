@@ -22,12 +22,15 @@ import { APP_STRINGS } from "../../constants";
 
 const {
   abilityOver400Ft,
+  chat,
   droneModel,
   experienceAirMap,
   insured,
   licenseExpirationDate,
   willingToTravel,
   yearsOfExperience,
+  pilotProfileNotCreated,
+  startPilotProfile,
 } = APP_STRINGS;
 
 function PilotProfileWelcomeScreen(
@@ -93,6 +96,9 @@ function PilotProfileWelcomeScreen(
   // const submit = (e) => {
   //   navigation.navigate("PilotProfileSetupPageOneScreen");
   // };
+  const profileImg = {
+    uri: profileDetails.profileImageUrl,
+  };
 
   return (
     <View style={styles.container}>
@@ -101,12 +107,8 @@ function PilotProfileWelcomeScreen(
           {profileDetails.profileComplete === "Yes" ? (
             <ScrollView style={styles.scrollViewStyle}>
               <Image source={princePic01} style={styles.backgroundImage} />
-              <Image
-                style={styles.profilePic}
-                source={{
-                  uri: profileDetails.profileImageUrl,
-                }}
-              />
+              <Image style={styles.profilePic} source={profileImg} />
+
               <View style={{ flexDirection: "row", display: "flex" }}>
                 <Text style={styles.nameText}>
                   {profileDetails.pilotFirstName} {profileDetails.pilotLastName}
@@ -189,7 +191,7 @@ function PilotProfileWelcomeScreen(
                         )}
                     >
                       <Text style={styles.startButtonText}>
-                        Start Pilot Profile
+                        {startPilotProfile}
                       </Text>
                     </TouchableOpacity>
                   </View>
@@ -203,14 +205,16 @@ function PilotProfileWelcomeScreen(
                         ...profileDetails,
                       })}
                   >
-                    <Text style={styles.chatText}>Chat</Text>
+                    <Text style={styles.chatText}>{chat}</Text>
                   </TouchableOpacity>
+
                   <Text style={styles.nameText}>
                     {profileDetails.pilotFirstName}{" "}
                     {profileDetails.pilotLastName}
                   </Text>
+
                   <Text style={styles.welcomeText}>
-                    This pilot has not created their profile yet
+                    {pilotProfileNotCreated}
                   </Text>
                 </View>
               )}

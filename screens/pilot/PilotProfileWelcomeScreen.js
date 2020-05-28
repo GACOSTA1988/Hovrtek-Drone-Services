@@ -28,12 +28,13 @@ const {
   insured,
   licenseExpirationDate,
   willingToTravel,
+  // yearsOfExperience aliased to not clash namespace of const of same name
   yearsOfExperience: yearsOfExperienceStr,
   pilotProfileNotCreated,
   startPilotProfile,
 } = APP_STRINGS;
 
-const { CHAT } = NAV_SCREENS;
+const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
 
 function PilotProfileWelcomeScreen(
   props,
@@ -88,7 +89,7 @@ function PilotProfileWelcomeScreen(
         }
       } catch (error) {
         Alert.alert("User page unavailable");
-        props.navigation.navigate("JobListScreen");
+        props.navigation.navigate(JOB_LIST);
       }
     } else if (passedProps && profileDetails != passedProps) {
       setCurrentUserProps(passedProps);
@@ -137,8 +138,7 @@ function PilotProfileWelcomeScreen(
 
               {user.photoURL === "P" ? (
                 <TouchableOpacity
-                  onPress={() =>
-                    navigation.push("PilotProfilePageSetupPageOneScreen")}
+                  onPress={() => navigation.push(PILOT_SETUP_ONE)}
                 >
                   {renderIcon()}
                 </TouchableOpacity>
@@ -206,7 +206,7 @@ function PilotProfileWelcomeScreen(
                 <TouchableOpacity
                   style={styles.chatButton}
                   onPress={() =>
-                    props.navigation.navigate("ChatScreen", {
+                    props.navigation.navigate(CHAT, {
                       ...profileDetails,
                     })}
                 >

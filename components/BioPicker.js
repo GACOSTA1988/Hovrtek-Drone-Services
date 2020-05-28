@@ -20,14 +20,15 @@ import { APP_STRINGS } from "../constants/index";
 //REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const {
-  openModal,
   workExperienceSet,
   setWorkExperience,
   choose,
   briefSummary,
+  slide
 } = APP_STRINGS;
 
-const BioPicker = () => {
+const BioPicker = (props) => {
+  console.log("PROPS ON BIOPICKER", props)
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -43,7 +44,7 @@ const BioPicker = () => {
   };
 
   const renderPersonalBioButton = (buttonText = "") => {
-    const title = APP_STRINGS.openModal;
+    const title = openModal;
     return (
       <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
         <Text style={styles.buttonText}>{buttonText}</Text>
@@ -53,8 +54,8 @@ const BioPicker = () => {
 
   const renderPersonalBio = (hasPersonalBio = false) => {
     return hasPersonalBio
-      ? renderPersonalBioButton(APP_STRINGS.workExperienceSet)
-      : renderPersonalBioButton(APP_STRINGS.setWorkExperience);
+      ? renderPersonalBioButton(workExperienceSet)
+      : renderPersonalBioButton(setWorkExperience);
   };
 
   const renderTextInput = (bio, setBio) => {
@@ -70,18 +71,18 @@ const BioPicker = () => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={APP_STRINGS.slide}
+        animationType={slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>{APP_STRINGS.briefSummary}</Text>
+            <Text style={styles.modalText}>{briefSummary}</Text>
           </View>
 
           {renderTextInput(personalBio, setPersonalBio)}
 
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={APP_STRINGS.choose} />
+            <Button onPress={closeModal} title={choose} />
           </View>
         </View>
       </Modal>

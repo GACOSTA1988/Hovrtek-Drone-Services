@@ -39,7 +39,10 @@ function PilotProfileWelcomeScreen(
 
   // console.log("PROPS ", JSON.stringify(props, null, 4));
 
+  let user = null;
+  let profile = null;
   let passedProps = route.params;
+  const [ profileDetails, setCurrentUserProps ] = useState(null);
   // console.log("passedProps", JSON.stringify(passedProps, null, 4));
 
   // useEffect(() => {
@@ -55,10 +58,16 @@ function PilotProfileWelcomeScreen(
     );
   };
 
-  const [ profileDetails, setCurrentUserProps ] = useState(null);
-
-  let user = null;
-  let profile = null;
+  const renderIcon = () => {
+    return (
+      <AntDesign
+        name="edit"
+        size={30}
+        color="darkblue"
+        style={{ marginLeft: 40, marginTop: 25 }}
+      />
+    );
+  };
 
   if (firebase.auth().currentUser) {
     user = firebase.auth().currentUser;
@@ -90,7 +99,7 @@ function PilotProfileWelcomeScreen(
       {user && profileDetails ? (
         <View>
           {profileDetails.profileComplete === "Yes" ? (
-            <ScrollView style={{ width: "100%" }}>
+            <ScrollView style={styles.scrollViewStyle}>
               <Image source={princePic01} style={styles.backgroundImage} />
               <Image
                 style={styles.profilePic}
@@ -107,12 +116,7 @@ function PilotProfileWelcomeScreen(
                     onPress={() =>
                       navigation.push("PilotProfilePageSetupPageOneScreen")}
                   >
-                    <AntDesign
-                      name="edit"
-                      size={30}
-                      color="darkblue"
-                      style={{ marginLeft: 40, marginTop: 25 }}
-                    />
+                    {renderIcon()}
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
@@ -162,7 +166,7 @@ function PilotProfileWelcomeScreen(
               )}
             </ScrollView>
           ) : (
-            <ScrollView style={{ width: "100%" }}>
+            <ScrollView style={styles.scrollViewStyle}>
               <Image
                 source={princePic01}
                 style={styles.backgroundImageStartingPage}
@@ -231,6 +235,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     height: "100%",
+    width: "100%",
+  },
+  scrollViewStyle: {
     width: "100%",
   },
   button: {

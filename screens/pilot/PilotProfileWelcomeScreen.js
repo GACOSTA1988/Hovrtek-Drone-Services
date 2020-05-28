@@ -9,7 +9,6 @@ import {
   Image,
 } from "react-native";
 import { connect } from "react-redux";
-// import { useNavigation } from "@react-navigation/native";
 import {
   getPilotProfiles,
   editPilotProfile,
@@ -40,37 +39,38 @@ const {
 const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
 
 function PilotProfileWelcomeScreen(props) {
-  const { navigation, route, listOfPilotProfiles, getPilotProfiles } = props;
+  const {
+    navigation,
+    route: { params },
+    listOfPilotProfiles,
+    getPilotProfiles,
+  } = props;
 
-  let user = null;
-  let profile = null;
-  let passedProps = route.params;
-  const [ profileDetails, setCurrentUserProps ] = useState(null);
+  const [ profileDetails, setProfileDetails ] = useState(null);
+  const [ user, setComponentUser ] = useState(null);
 
-  // useEffect(() => {
-  //   // getPilotProfiles();
-  // }, []);
-
-  if (firebase.auth().currentUser) {
-    user = firebase.auth().currentUser;
-    if (user.photoURL === "P") {
-      profile = listOfPilotProfiles.find((x) => x.userID === user.uid);
-      try {
-        if (
-          (!profileDetails && profile) ||
-          (profileDetails && profileDetails != profile)
-        ) {
-          setCurrentUserProps(profile);
-          passedProps = profile;
-        }
-      } catch (error) {
-        Alert.alert("User page unavailable");
-        navigation.navigate(JOB_LIST);
+  useEffect(
+    () => {
+      const { currentUser } = firebase.auth();
+      if (!!currentUser) {
+        setComponentUser(currentUser);
       }
-    } else if (passedProps && profileDetails != passedProps) {
-      setCurrentUserProps(passedProps);
-    }
-  }
+
+      getPilotProfiles();
+      const { photoURL } = currentUser;
+
+      if (photoURL === "P") {
+        const profile = listOfPilotProfiles.find((pilot) => {
+          return pilot.userID === currentUser.uid;
+        });
+
+        setProfileDetails(profile);
+      } else if (params && profileDetails != params) {
+        setProfileDetails(params);
+      }
+    },
+    [ user ],
+  );
 
   const renderProfileStatsItem = (titleString = "", specsValue = "") => {
     return (

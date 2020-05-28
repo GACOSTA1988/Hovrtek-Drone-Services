@@ -66,14 +66,31 @@ function PilotProfileWelcomeScreen(
     );
   };
 
-  const renderIcon = () => {
+  const renderTouchableEditIcon = () => {
     return (
-      <AntDesign
-        name="edit"
-        size={30}
-        color="darkblue"
-        style={{ marginLeft: 40, marginTop: 25 }}
-      />
+      <TouchableOpacity onPress={() => navigation.push(PILOT_SETUP_ONE)}>
+        <AntDesign
+          name="edit"
+          size={30}
+          color="darkblue"
+          // todo move to styles
+          style={{ marginLeft: 40, marginTop: 25 }}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const renderTouchableChatIcon = (profileData = {}) => {
+    return (
+      <TouchableOpacity
+        style={styles.chatButton}
+        onPress={() =>
+          props.navigation.navigate(CHAT, {
+            ...profileData,
+          })}
+      >
+        <Text style={styles.chatText}>{chat}</Text>
+      </TouchableOpacity>
     );
   };
 
@@ -139,29 +156,18 @@ function PilotProfileWelcomeScreen(
             <Image style={styles.profilePic} source={profileImg} />
 
             <View style={{ flexDirection: "row", display: "flex" }}>
-              <Text style={styles.nameText}>
-                {pilotFullName()}
-              </Text>
+              <Text style={styles.nameText}>{pilotFullName()}</Text>
 
               {user.photoURL === "P" ? (
-                <TouchableOpacity
-                  onPress={() => navigation.push(PILOT_SETUP_ONE)}
-                >
-                  {renderIcon()}
-                </TouchableOpacity>
+                renderTouchableEditIcon()
               ) : (
-                <TouchableOpacity
-                  style={styles.chatButton}
-                  onPress={() =>
-                    props.navigation.navigate(CHAT, {
-                      ...profileDetails,
-                    })}
-                >
-                  <Text style={styles.chatText}>{chat}</Text>
-                </TouchableOpacity>
+                renderTouchableChatIcon(profileDetails)
               )}
             </View>
-            <Text style={styles.locationText}>{location} {pilotLocation}</Text>
+
+            <Text style={styles.locationText}>
+              {location} {pilotLocation}
+            </Text>
             <Text style={styles.specTitle}>{bio}</Text>
             <Text style={styles.personalBioStyle}>{personalBio}</Text>
 
@@ -190,9 +196,7 @@ function PilotProfileWelcomeScreen(
                     marginBottom: 40,
                   }}
                 >
-                  <Text style={styles.nameText}>
-                    {pilotFullName()}
-                  </Text>
+                  <Text style={styles.nameText}>{pilotFullName()}</Text>
                 </View>
                 <View style={{ alignItems: "center" }}>
                   <TouchableOpacity
@@ -217,9 +221,7 @@ function PilotProfileWelcomeScreen(
                   <Text style={styles.chatText}>{chat}</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.nameText}>
-                  {pilotFirstName} {pilotLastName}
-                </Text>
+                <Text style={styles.nameText}>{pilotFullName()}</Text>
 
                 <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
               </View>

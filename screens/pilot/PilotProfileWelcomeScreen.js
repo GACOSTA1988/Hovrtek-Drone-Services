@@ -119,6 +119,30 @@ function PilotProfileWelcomeScreen(props) {
     );
   };
 
+  const renderStartProfileView = () => {
+    return (
+      <View>
+        <Text style={styles.welcomeText}>{welcomeHovrtek}</Text>
+        <View style={styles.fullName}>
+          <Text style={styles.nameText}>{getPilotFullName()}</Text>
+        </View>
+        <View style={styles.alignItemsCenter}>
+          {renderTouchableStartPilotProfileText()}
+        </View>
+      </View>
+    );
+  };
+
+  const renderChatView = () => {
+    return (
+      <View>
+        {renderTouchableChatIcon(profileDetails)}
+        <Text style={styles.nameText}>{getPilotFullName()}</Text>
+        <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
+      </View>
+    );
+  };
+
   if (!user || !profileDetails) {
     return <View />;
   }
@@ -189,24 +213,9 @@ function PilotProfileWelcomeScreen(props) {
             source={princePic01}
             style={styles.backgroundImageStartingPage}
           />
-
-          {hasUserPhoto ? (
-            <View>
-              {renderTouchableChatIcon(profileDetails)}
-              <Text style={styles.nameText}>{getPilotFullName()}</Text>
-              <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
-            </View>
-          ) : (
-            <View>
-              <Text style={styles.welcomeText}>{welcomeHovrtek}</Text>
-              <View style={styles.fullName}>
-                <Text style={styles.nameText}>{getPilotFullName()}</Text>
-              </View>
-              <View style={styles.alignItemsCenter}>
-                {renderTouchableStartPilotProfileText()}
-              </View>
-            </View>
-          )}
+          {hasUserPhoto && renderChatView()}
+          {!hasUserPhoto && renderStartProfileView()}
+          }
         </ScrollView>
       )}
     </View>

@@ -134,14 +134,7 @@ function PilotProfileWelcomeScreen(
                 Location: {profileDetails.pilotLocation}
               </Text>
               <Text style={styles.specTitle}>Bio:</Text>
-              <Text
-                style={{
-                  fontSize: 15,
-                  color: "black",
-                  marginLeft: "2%",
-                  marginTop: "1%",
-                }}
-              >
+              <Text style={styles.personalBioStyle}>
                 {profileDetails.personalBio}
               </Text>
 
@@ -351,6 +344,12 @@ const styles = StyleSheet.create({
   startButtonText: {
     color: "white",
     fontSize: 20,
+  },
+  personalBioStyle: {
+    fontSize: 15,
+    color: "black",
+    marginLeft: "2%",
+    marginTop: "1%",
   },
 });
 

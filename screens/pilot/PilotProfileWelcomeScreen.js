@@ -215,7 +215,6 @@ function PilotProfileWelcomeScreen(props) {
           />
           {hasUserPhoto && renderChatView()}
           {!hasUserPhoto && renderStartProfileView()}
-          }
         </ScrollView>
       )}
     </View>

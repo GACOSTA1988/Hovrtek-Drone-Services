@@ -144,80 +144,82 @@ function PilotProfileWelcomeScreen(
     uri: profileImageUrl,
   };
 
+  // todo change this to an actual boolean, true/false
+  const isProfileComplete = profileComplete === "Yes";
+
   return (
     <View style={styles.container}>
-      <View>
-        {profileComplete === "Yes" ? (
-          <ScrollView style={styles.scrollViewStyle}>
-            <Image source={princePic01} style={styles.backgroundImage} />
-            <Image style={styles.profilePic} source={profileImg} />
+      {isProfileComplete && (
+        <ScrollView style={styles.scrollViewStyle}>
+          <Image source={princePic01} style={styles.backgroundImage} />
+          <Image style={styles.profilePic} source={profileImg} />
 
-            <View style={{ flexDirection: "row", display: "flex" }}>
-              <Text style={styles.nameText}>{pilotFullName()}</Text>
+          <View style={{ flexDirection: "row", display: "flex" }}>
+            <Text style={styles.nameText}>{pilotFullName()}</Text>
 
-              {user.photoURL === "P" ? (
-                renderTouchableEditIcon()
-              ) : (
-                renderTouchableChatIcon(profileDetails)
-              )}
-            </View>
-
-            <Text style={styles.locationText}>
-              {location} {pilotLocation}
-            </Text>
-            <Text style={styles.specTitle}>{bio}</Text>
-            <Text style={styles.personalBioStyle}>{personalBio}</Text>
-
-            {renderProfileStatsItem(droneModel, droneType)}
-            {renderProfileStatsItem(yearsOfExperienceStr, yearsOfExperience)}
-            {renderProfileStatsItem(licenseExpirationDate, faaLicenseExp)}
-            {renderProfileStatsItem(willingToTravel, travelStatus)}
-            {renderProfileStatsItem(insured, insuredStatus)}
-            {renderProfileStatsItem(experienceAirMap, airMap)}
-            {renderProfileStatsItem(abilityOver400Ft, fourHundred)}
-          </ScrollView>
-        ) : (
-          <ScrollView style={styles.scrollViewStyle}>
-            <Image
-              source={princePic01}
-              style={styles.backgroundImageStartingPage}
-            />
             {user.photoURL === "P" ? (
-              <View>
-                <Text style={styles.welcomeText}>Welcome to Hovrtek</Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginBottom: 40,
-                  }}
-                >
-                  <Text style={styles.nameText}>{pilotFullName()}</Text>
-                </View>
-                <View style={{ alignItems: "center" }}>
-                  <TouchableOpacity
-                    style={styles.startButton}
-                    onPress={() => props.navigation.navigate(PILOT_SETUP_ONE)}
-                  >
-                    <Text style={styles.startButtonText}>
-                      {startPilotProfile}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+              renderTouchableEditIcon()
             ) : (
-              <View>
-                {renderTouchableChatIcon(profileDetails)}
-
-                <Text style={styles.nameText}>{pilotFullName()}</Text>
-
-                <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
-              </View>
+              renderTouchableChatIcon(profileDetails)
             )}
-          </ScrollView>
-        )}
-      </View>
+          </View>
+
+          <Text style={styles.locationText}>
+            {location} {pilotLocation}
+          </Text>
+
+          <Text style={styles.specTitle}>{bio}</Text>
+          <Text style={styles.personalBioStyle}>{personalBio}</Text>
+
+          {renderProfileStatsItem(droneModel, droneType)}
+          {renderProfileStatsItem(yearsOfExperienceStr, yearsOfExperience)}
+          {renderProfileStatsItem(licenseExpirationDate, faaLicenseExp)}
+          {renderProfileStatsItem(willingToTravel, travelStatus)}
+          {renderProfileStatsItem(insured, insuredStatus)}
+          {renderProfileStatsItem(experienceAirMap, airMap)}
+          {renderProfileStatsItem(abilityOver400Ft, fourHundred)}
+        </ScrollView>
+      )}
+
+      {!isProfileComplete && (
+        <ScrollView style={styles.scrollViewStyle}>
+          <Image
+            source={princePic01}
+            style={styles.backgroundImageStartingPage}
+          />
+          {user.photoURL === "P" ? (
+            <View>
+              <Text style={styles.welcomeText}>Welcome to Hovrtek</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: 40,
+                }}
+              >
+                <Text style={styles.nameText}>{pilotFullName()}</Text>
+              </View>
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  style={styles.startButton}
+                  onPress={() => props.navigation.navigate(PILOT_SETUP_ONE)}
+                >
+                  <Text style={styles.startButtonText}>
+                    {startPilotProfile}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            <View>
+              {renderTouchableChatIcon(profileDetails)}
+              <Text style={styles.nameText}>{pilotFullName()}</Text>
+              <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
+            </View>
+          )}
+        </ScrollView>
+      )}
     </View>
   );
 }

@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import { connect } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 import {
   getPilotProfiles,
   editPilotProfile,
@@ -31,6 +31,7 @@ const {
   location,
   pilotProfileNotCreated,
   startPilotProfile,
+  welcomeHovrtek,
   willingToTravel,
   // yearsOfExperience aliased to not clash with const of same name
   yearsOfExperience: yearsOfExperienceStr,
@@ -39,15 +40,12 @@ const {
 const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
 
 function PilotProfileWelcomeScreen(props) {
-  // const navigation = useNavigation();
   const { navigation, route, listOfPilotProfiles, getPilotProfiles } = props;
 
   let user = null;
   let profile = null;
   let passedProps = route.params;
   const [ profileDetails, setCurrentUserProps ] = useState(null);
-
-  // console.log("passedProps", JSON.stringify(passedProps, null, 4));
 
   // useEffect(() => {
   //   // getPilotProfiles();
@@ -110,9 +108,16 @@ function PilotProfileWelcomeScreen(props) {
     );
   };
 
-  // const submit = (e) => {
-  //   navigation.navigate("PilotProfileSetupPageOneScreen");
-  // };
+  const renderTouchableStartPilotProfileText = () => {
+    return (
+      <TouchableOpacity
+        style={styles.startButton}
+        onPress={() => navigation.navigate(PILOT_SETUP_ONE)}
+      >
+        <Text style={styles.startButtonText}>{startPilotProfile}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   if (!user || !profileDetails) {
     return <View />;
@@ -136,14 +141,16 @@ function PilotProfileWelcomeScreen(props) {
     insuredStatus,
   } = profileDetails;
 
-  const pilotFullName = () => `${pilotFirstName} ${pilotLastName}`;
+  const getPilotFullName = () => `${pilotFirstName} ${pilotLastName}`;
+  const isProfileComplete = profileComplete === "Yes";
 
   const profileImg = {
     uri: profileImageUrl,
   };
 
+  const { photoURL } = user;
   // todo change this to an actual boolean, true/false
-  const isProfileComplete = profileComplete === "Yes";
+  const hasUserPhoto = photoURL !== "P";
 
   return (
     <View style={styles.container}>
@@ -153,13 +160,10 @@ function PilotProfileWelcomeScreen(props) {
           <Image style={styles.profilePic} source={profileImg} />
 
           <View style={{ flexDirection: "row", display: "flex" }}>
-            <Text style={styles.nameText}>{pilotFullName()}</Text>
+            <Text style={styles.nameText}>{getPilotFullName()}</Text>
 
-            {user.photoURL === "P" ? (
-              renderTouchableEditIcon()
-            ) : (
-              renderTouchableChatIcon(profileDetails)
-            )}
+            {hasUserPhoto && renderTouchableChatIcon(profileDetails)}
+            {!hasUserPhoto && renderTouchableEditIcon()}
           </View>
 
           <Text style={styles.locationText}>
@@ -185,35 +189,22 @@ function PilotProfileWelcomeScreen(props) {
             source={princePic01}
             style={styles.backgroundImageStartingPage}
           />
-          {user.photoURL === "P" ? (
+
+          {hasUserPhoto ? (
             <View>
-              <Text style={styles.welcomeText}>Welcome to Hovrtek</Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: 40,
-                }}
-              >
-                <Text style={styles.nameText}>{pilotFullName()}</Text>
-              </View>
-              <View style={{ alignItems: "center" }}>
-                <TouchableOpacity
-                  style={styles.startButton}
-                  onPress={() => navigation.navigate(PILOT_SETUP_ONE)}
-                >
-                  <Text style={styles.startButtonText}>
-                    {startPilotProfile}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              {renderTouchableChatIcon(profileDetails)}
+              <Text style={styles.nameText}>{getPilotFullName()}</Text>
+              <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
             </View>
           ) : (
             <View>
-              {renderTouchableChatIcon(profileDetails)}
-              <Text style={styles.nameText}>{pilotFullName()}</Text>
-              <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
+              <Text style={styles.welcomeText}>{welcomeHovrtek}</Text>
+              <View style={styles.fullName}>
+                <Text style={styles.nameText}>{getPilotFullName()}</Text>
+              </View>
+              <View style={styles.alignItemsCenter}>
+                {renderTouchableStartPilotProfileText()}
+              </View>
             </View>
           )}
         </ScrollView>
@@ -230,6 +221,15 @@ const styles = StyleSheet.create({
   },
   scrollViewStyle: {
     width: "100%",
+  },
+  fullName: {
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: 40,
+  },
+  alignItemsCenter: {
+    alignItems: "center",
   },
   button: {
     paddingHorizontal: 20,

@@ -9,15 +9,20 @@ import NestedHeader from "../components/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
+
 // todo move to app colors
 const backgroundColor = "#092455";
 
-function PilotCreateProfileNavigation() {
-  const headerStyle = {
-    backgroundColor,
-    height: 100,
-  };
+const headerStyle = {
+  backgroundColor,
+  height: 100,
+};
 
+const headerBackImage = () => (
+  <Ionicons name="ios-arrow-round-back" size={50} color={backgroundColor} />
+);
+
+function PilotCreateProfileNavigation() {
   const screensMetadata = [
     {
       name: "Profile",
@@ -38,13 +43,7 @@ function PilotCreateProfileNavigation() {
           ...headerStyle,
           justifyContent: "center",
         },
-        headerBackImage: () => (
-          <Ionicons
-            name="ios-arrow-round-back"
-            size={50}
-            color={backgroundColor}
-          />
-        ),
+        headerBackImage,
       },
     },
     {
@@ -54,13 +53,7 @@ function PilotCreateProfileNavigation() {
         title: " ",
         headerTitle: () => <NestedHeader />,
         headerStyle,
-        headerBackImage: () => (
-          <Ionicons
-            name="ios-arrow-round-back"
-            size={50}
-            color={backgroundColor}
-          />
-        ),
+        headerBackImage,
       },
     },
     {
@@ -70,13 +63,7 @@ function PilotCreateProfileNavigation() {
         title: " ",
         headerTitle: () => <NestedHeader />,
         headerStyle,
-        headerBackImage: () => (
-          <Ionicons
-            name="ios-arrow-round-back"
-            size={50}
-            color={backgroundColor}
-          />
-        ),
+        headerBackImage,
       },
     },
   ];

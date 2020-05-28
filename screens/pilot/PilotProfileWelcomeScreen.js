@@ -4,9 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
-  TextInput,
   Alert,
   Image,
 } from "react-native";
@@ -18,7 +16,6 @@ import {
 } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
-import pic from "../../assets/landingPageImage.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -29,6 +26,7 @@ function PilotProfileWelcomeScreen(
   const navigation = useNavigation();
 
   let passedProps = props.route.params;
+  console.log("passedProps", JSON.stringify(passedProps, null, 4));
 
   useEffect(() => {
     props.getPilotProfiles();
@@ -59,9 +57,10 @@ function PilotProfileWelcomeScreen(
     }
   }
 
-  const submit = (e) => {
-    navigation.navigate("PilotProfileSetupPageOneScreen");
-  };
+  // const submit = (e) => {
+  //   navigation.navigate("PilotProfileSetupPageOneScreen");
+  // };
+  console.log(JSON.stringify(profileDetails, null, 4));
 
   return (
     <View style={styles.container}>

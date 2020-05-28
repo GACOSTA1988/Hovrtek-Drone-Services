@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  ScrollView,
-  TextInput,
-} from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -25,7 +17,7 @@ export const PassProfileImageUrlState = React.createContext();
 
 function PilotProfileImageUploadScreen(
   props,
-  { getPilotProfiles, editPilotProfile },
+  // { getPilotProfiles, editPilotProfile },
 ) {
   const navigation = useNavigation();
   const { goBack } = props.navigation;
@@ -33,6 +25,7 @@ function PilotProfileImageUploadScreen(
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
+
   let user = firebase.auth().currentUser;
   let userID = user.uid;
   const list = props.listOfProfiles;
@@ -84,6 +77,7 @@ function PilotProfileImageUploadScreen(
   const [ airMap, setAirMap ] = useState(airMapPlaceHolder);
   const [ fourHundred, setFourHundred ] = useState(fourHundredPlaceHolder);
   const [ profileComplete, setProfileComplete ] = useState("Yes");
+
   const submit = (e) => {
     props.editPilotProfile(
       currentUserProps.pilotLocation,
@@ -99,8 +93,18 @@ function PilotProfileImageUploadScreen(
       profileImageUrl,
       currentUserProps.key,
     );
+
+    // navigation.navigate("PilotProfileWelcomeScreen", {
+    //   profile: profileImageUrl,
+    // });
     navigation.popToTop();
   };
+
+  const pluckImage = (imgUrl = "") => {
+    setProfileImageUrl(imgUrl);
+    console.log(profileImageUrl);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>
@@ -122,7 +126,7 @@ function PilotProfileImageUploadScreen(
       <Text>Please Upload Profile Picture</Text>
       <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
         <PassProfileImageUrlState.Provider value={profileImageUrl}>
-          <ProfileUploader hasSquareImage={true} />
+          <ProfileUploader hasSquareImage={true} pluckImage={pluckImage} />
         </PassProfileImageUrlState.Provider>
       </PassSetProfileImageUrlContext.Provider>
 
@@ -216,6 +220,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
 function mapStateToProps(state) {
   const listOfProfiles = _.map(
     state.pilotProfilesList.pilotProfilesList,
@@ -226,6 +231,7 @@ function mapStateToProps(state) {
       };
     },
   );
+
   return {
     listOfProfiles,
   };
@@ -234,10 +240,3 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
   PilotProfileImageUploadScreen,
 );
-
-// marginTop: "5%",
-//   marginBottom: "10%",
-//     fontSize: 25,
-//       color: "darkblue",
-//         fontWeight: "600",
-//           textAlign: "center",

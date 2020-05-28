@@ -183,7 +183,7 @@ function PilotProfileWelcomeScreen(props) {
           <Image source={princePic01} style={styles.backgroundImage} />
           <Image style={styles.profilePic} source={profileImg} />
 
-          <View style={{ flexDirection: "row", display: "flex" }}>
+          <View style={styles.fullNameAndIcon}>
             <Text style={styles.nameText}>{getPilotFullName()}</Text>
 
             {hasUserPhoto && renderTouchableChatIcon(profileDetails)}
@@ -235,6 +235,10 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     marginBottom: 40,
+  },
+  fullNameAndIcon: {
+    flexDirection: "row",
+    display: "flex",
   },
   alignItemsCenter: {
     alignItems: "center",

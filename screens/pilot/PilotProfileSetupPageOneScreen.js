@@ -24,6 +24,7 @@ import DroneTypePicker from "../../components/DroneTypePicker";
 import ValidInsurancePicker from "../../components/ValidInsurancePicker";
 import BioPicker from "../../components/BioPicker";
 import { APP_STRINGS } from '../../constants/index';
+import TestRadio from '../../components/TestRadio'
 
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetYearsOfExperience = React.createContext();
@@ -134,6 +135,7 @@ function PilotProfileSetupPageOneScreen(
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <TestRadio/>
         <Text style={styles.welcomeText}>
           Hello!
           {currentUserProps ? (

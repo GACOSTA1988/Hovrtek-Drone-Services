@@ -38,22 +38,41 @@ const {
 
 const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
 
-function PilotProfileWelcomeScreen(
-  props,
-  // { getPilotProfiles, editPilotProfile },
-) {
-  const navigation = useNavigation();
-  const { route } = props;
+function PilotProfileWelcomeScreen(props) {
+  // const navigation = useNavigation();
+  const { navigation, route, listOfPilotProfiles, getPilotProfiles } = props;
 
   let user = null;
   let profile = null;
   let passedProps = route.params;
   const [ profileDetails, setCurrentUserProps ] = useState(null);
+
   // console.log("passedProps", JSON.stringify(passedProps, null, 4));
 
   // useEffect(() => {
-  //   // props.getPilotProfiles();
+  //   // getPilotProfiles();
   // }, []);
+
+  if (firebase.auth().currentUser) {
+    user = firebase.auth().currentUser;
+    if (user.photoURL === "P") {
+      profile = listOfPilotProfiles.find((x) => x.userID === user.uid);
+      try {
+        if (
+          (!profileDetails && profile) ||
+          (profileDetails && profileDetails != profile)
+        ) {
+          setCurrentUserProps(profile);
+          passedProps = profile;
+        }
+      } catch (error) {
+        Alert.alert("User page unavailable");
+        navigation.navigate(JOB_LIST);
+      }
+    } else if (passedProps && profileDetails != passedProps) {
+      setCurrentUserProps(passedProps);
+    }
+  }
 
   const renderProfileStatsItem = (titleString = "", specsValue = "") => {
     return (
@@ -82,7 +101,7 @@ function PilotProfileWelcomeScreen(
       <TouchableOpacity
         style={styles.chatButton}
         onPress={() =>
-          props.navigation.navigate(CHAT, {
+          navigation.navigate(CHAT, {
             ...profileData,
           })}
       >
@@ -90,27 +109,6 @@ function PilotProfileWelcomeScreen(
       </TouchableOpacity>
     );
   };
-
-  if (firebase.auth().currentUser) {
-    user = firebase.auth().currentUser;
-    if (user.photoURL === "P") {
-      profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
-      try {
-        if (
-          (!profileDetails && profile) ||
-          (profileDetails && profileDetails != profile)
-        ) {
-          setCurrentUserProps(profile);
-          passedProps = profile;
-        }
-      } catch (error) {
-        Alert.alert("User page unavailable");
-        props.navigation.navigate(JOB_LIST);
-      }
-    } else if (passedProps && profileDetails != passedProps) {
-      setCurrentUserProps(passedProps);
-    }
-  }
 
   // const submit = (e) => {
   //   navigation.navigate("PilotProfileSetupPageOneScreen");
@@ -203,7 +201,7 @@ function PilotProfileWelcomeScreen(
               <View style={{ alignItems: "center" }}>
                 <TouchableOpacity
                   style={styles.startButton}
-                  onPress={() => props.navigation.navigate(PILOT_SETUP_ONE)}
+                  onPress={() => navigation.navigate(PILOT_SETUP_ONE)}
                 >
                   <Text style={styles.startButtonText}>
                     {startPilotProfile}

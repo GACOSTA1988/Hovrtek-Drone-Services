@@ -13,6 +13,11 @@ const Stack = createStackNavigator();
 const backgroundColor = "#092455";
 
 function PilotCreateProfileNavigation() {
+  const headerStyle = {
+    backgroundColor,
+    height: 100,
+  };
+
   const screensMetadata = [
     {
       name: "Profile",
@@ -20,10 +25,7 @@ function PilotCreateProfileNavigation() {
       options: {
         title: " ",
         headerTitle: () => <MainHeader />,
-        headerStyle: {
-          backgroundColor,
-          height: 100,
-        },
+        headerStyle,
       },
     },
     {
@@ -33,8 +35,7 @@ function PilotCreateProfileNavigation() {
         title: " ",
         headerTitle: () => <NestedHeader />,
         headerStyle: {
-          backgroundColor,
-          height: 100,
+          ...headerStyle,
           justifyContent: "center",
         },
         headerBackImage: () => (
@@ -52,10 +53,7 @@ function PilotCreateProfileNavigation() {
       options: {
         title: " ",
         headerTitle: () => <NestedHeader />,
-        headerStyle: {
-          backgroundColor,
-          height: 100,
-        },
+        headerStyle,
         headerBackImage: () => (
           <Ionicons
             name="ios-arrow-round-back"
@@ -71,10 +69,7 @@ function PilotCreateProfileNavigation() {
       options: {
         title: " ",
         headerTitle: () => <NestedHeader />,
-        headerStyle: {
-          backgroundColor,
-          height: 100,
-        },
+        headerStyle,
         headerBackImage: () => (
           <Ionicons
             name="ios-arrow-round-back"

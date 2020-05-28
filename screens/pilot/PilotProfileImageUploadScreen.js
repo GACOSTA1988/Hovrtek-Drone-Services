@@ -102,7 +102,6 @@ function PilotProfileImageUploadScreen(
 
   const pluckImage = (imgUrl = "") => {
     setProfileImageUrl(imgUrl);
-    console.log(profileImageUrl);
   };
 
   return (

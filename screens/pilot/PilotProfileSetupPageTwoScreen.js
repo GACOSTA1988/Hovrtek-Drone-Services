@@ -19,7 +19,7 @@ import * as firebase from "firebase";
 import _ from "lodash";
 
 import DatePicker from "../../components/DatePicker";
-import TravelStatusPicker from "../../components/TravelStatusPicker";
+import TravelStatusRadio from "../../components/TravelStatusRadio";
 import FourHundredPicker from "../../components/FourHundredPicker";
 import AirMapPicker from "../../components/AirMapPicker";
 import { AntDesign } from "@expo/vector-icons";
@@ -141,21 +141,17 @@ function PilotProfileSetupPageTwoScreen(
             Please Provide FAA License Expiration Date
           </Text>
         )}
-        <Text style={styles.bodyText}>
-          Are You Willing To Travel Out Of State For A Drone Job?
-        </Text>
-        {currentUserProps ? (
-          <View style={styles.pickerButtonWrapper}>
-            <PassSetTravelStatus.Provider value={setTravelStatus}>
-              <PassTravelStatusState.Provider value={travelStatus}>
-                <TravelStatusPicker />
-              </PassTravelStatusState.Provider>
-            </PassSetTravelStatus.Provider>
+
+        {currentUserProps && (
+          <View style={styles.radioWrapper}>
+            <Text style={styles.radioText}>
+              Are You Willing To Travel Out Of State For A Drone Job?
+            </Text>
+            <TravelStatusRadio
+              setTravelStatus={setTravelStatus}
+              travelStatus={travelStatus}
+            />
           </View>
-        ) : (
-          <Text style={styles.bodyText}>
-            Are You Willing To Tarvel Out Of State For A Drone Job?
-          </Text>
         )}
 
         <Text style={styles.bodyText}>
@@ -206,7 +202,6 @@ function PilotProfileSetupPageTwoScreen(
             <Text style={styles.backButtonText}>Back</Text>
           </TouchableOpacity>
         </View>
-        
       </ScrollView>
     </View>
   );
@@ -288,6 +283,13 @@ const styles = StyleSheet.create({
   },
   backButtonWrapper: {
     alignItems: "center",
+  },
+  radioWrapper: {
+    alignSelf: "center",
+    marginBottom: 25,
+  },
+  radioText: {
+    marginBottom: 7,
   },
 });
 function mapStateToProps(state) {

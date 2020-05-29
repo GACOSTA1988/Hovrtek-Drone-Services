@@ -142,7 +142,6 @@ function PilotProfileSetupPageOneScreen(
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <TestRadio/>
         <Text style={styles.welcomeText}>
           Hello!
           {currentUserProps ? (
@@ -156,26 +155,24 @@ function PilotProfileSetupPageOneScreen(
             <Text>Name:</Text>
           )}
         </Text>
-        <Text style={styles.bodyText}>
-          {briefSummary}
-        </Text>
+
+        <View style={styles.radioWrapper}>
+          <Text style={styles.radioText}>RADIO BUTTON: Do you have Valid Insurance?</Text>
+          <TestRadio />
+        </View>
+
+        <Text style={styles.bodyText}>{briefSummary}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
-            <PassSetPersonalBio.Provider value={setPersonalBio}>
-              <PassPersonalBioState.Provider value={personalBio}>
-                <BioPicker setPersonalBio={setPersonalBio} personalBio={setPersonalBio}/>
-              </PassPersonalBioState.Provider>
-            </PassSetPersonalBio.Provider>
+            <BioPicker
+              setPersonalBio={setPersonalBio}
+              personalBio={setPersonalBio}
+            />
           </View>
         ) : (
-          <Text style={styles.bodyText}>
-              {briefSummary}
-          </Text>
+          <Text style={styles.bodyText}>{briefSummary}</Text>
         )}
-
-        <Text style={styles.bodyText}>
-          {yearsExperience}
-        </Text>
+        <Text style={styles.bodyText}>{yearsExperience}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
             <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
@@ -185,9 +182,7 @@ function PilotProfileSetupPageOneScreen(
             </PassSetYearsOfExperience.Provider>
           </View>
         ) : (
-          <Text style={styles.bodyText}>
-              {yearsExperience}
-          </Text>
+          <Text style={styles.bodyText}>{yearsExperience}</Text>
         )}
         <Text style={styles.bodyText}>{modelDrone}</Text>
         {currentUserProps ? (
@@ -199,7 +194,7 @@ function PilotProfileSetupPageOneScreen(
             </PassSetDroneType.Provider>
           </View>
         ) : (
-            <Text style={styles.bodyText}>{modelDrone}</Text>
+          <Text style={styles.bodyText}>{modelDrone}</Text>
         )}
         <Text style={styles.bodyText}>{insurance}</Text>
         {currentUserProps ? (
@@ -211,15 +206,12 @@ function PilotProfileSetupPageOneScreen(
             </PassSetInsuredStatus.Provider>
           </View>
         ) : (
-            <Text style={styles.bodyText}>{insurance}</Text>
+          <Text style={styles.bodyText}>{insurance}</Text>
         )}
 
         <View style={styles.centerButton}>
           <View style={styles.saveAndContinueWrapper}>
-            <TouchableOpacity
-              onPress={submit}
-              title={saveAndContinue}
-            >
+            <TouchableOpacity onPress={submit} title={saveAndContinue}>
               <Text style={styles.saveAndContinueText}>{saveAndContinue}</Text>
             </TouchableOpacity>
           </View>
@@ -233,7 +225,6 @@ function PilotProfileSetupPageOneScreen(
             <Text style={styles.backButtonText}>Back</Text>
           </TouchableOpacity>
         </View>
-
       </ScrollView>
     </View>
   );
@@ -243,6 +234,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "lightgray",
+    alignItems: "center",
     height: "100%",
   },
   button: {
@@ -303,6 +295,7 @@ const styles = StyleSheet.create({
   },
   droneExpWrapper: {
     alignItems: "center",
+    justifyContent: "center",
   },
   backButton: {
     marginTop: 20,
@@ -320,8 +313,16 @@ const styles = StyleSheet.create({
     // marginBottom: 40,
   },
   backButtonWrapper: {
-    alignItems: 'center'
+    alignItems: "center",
   },
+  radioWrapper: {
+    alignSelf: "center",
+    marginBottom: 20
+  },
+  radioText: {
+    marginBottom: 7,
+
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

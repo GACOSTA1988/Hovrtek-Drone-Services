@@ -5,15 +5,9 @@ import {
   Button,
   Modal,
   StyleSheet,
-  Picker,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
-import {
-  PassSetPersonalBio,
-  PassPersonalBioState,
-} from "../screens/pilot/PilotProfileSetupPageOneScreen";
 import { useNavigation } from "@react-navigation/native";
 import { APP_STRINGS } from "../constants/index";
 
@@ -28,12 +22,9 @@ const {
 } = APP_STRINGS;
 
 const BioPicker = (props) => {
-  console.log("PROPS ON BIOPICKER", props)
-  const navigation = useNavigation();
+  const { personalBio, setPersonalBio } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const setPersonalBio = useContext(PassSetPersonalBio);
-  const personalBio = useContext(PassPersonalBioState);
 
   const openModal = () => {
     setIsModalVisible(true);
@@ -67,7 +58,7 @@ const BioPicker = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <Modal
         transparent={true}
         visible={isModalVisible}

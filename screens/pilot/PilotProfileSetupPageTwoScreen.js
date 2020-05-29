@@ -20,7 +20,6 @@ import _ from "lodash";
 
 import DatePicker from "../../components/DatePicker";
 import TravelStatusRadio from "../../components/TravelStatusRadio";
-import FourHundredPicker from "../../components/FourHundredPicker";
 import AirMapRadio from "../../components/AirMapRadio";
 import { AntDesign } from "@expo/vector-icons";
 import FourHundredRadio from "../../components/FourHundredRadio";

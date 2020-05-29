@@ -20,7 +20,6 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import DroneExperiencePicker from "../../components/DroneExperiencePicker";
 import DroneTypePicker from "../../components/DroneTypePicker";
-import ValidInsurancePicker from "../../components/ValidInsurancePicker";
 import BioPicker from "../../components/BioPicker";
 import { APP_STRINGS } from '../../constants/index';
 import InsuranceRadio from "../../components/InsuranceRadio";

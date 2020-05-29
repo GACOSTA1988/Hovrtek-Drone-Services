@@ -108,8 +108,12 @@ _no white bar in android google pixel, but styling still not ideal_
 
 * Refactor all local state in all modals / Forms from useContext hooks to conventional means of passing state / props - e.x., <BioPicker setBio = {setBio}> and import them in BioPicker via props.
 
+* Radio Buttons need some spacing inbewteen butons.
+
 * ClientNewProjectScreen forms
 PilotProfileSetupPageOne forms
+
+* Move Picker / Radio components into their respective client / pilot folders and update imports on appropriate page
 
 
  - change modas to cover either more of the screen or blur the background upon opening.

@@ -23,7 +23,7 @@ import DroneTypePicker from "../../components/DroneTypePicker";
 import ValidInsurancePicker from "../../components/ValidInsurancePicker";
 import BioPicker from "../../components/BioPicker";
 import { APP_STRINGS } from '../../constants/index';
-import TestRadio from '../../components/TestRadio'
+import InsuranceRadio from "../../components/InsuranceRadio";
 
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetPersonalBio = React.createContext();
@@ -156,11 +156,6 @@ function PilotProfileSetupPageOneScreen(
           )}
         </Text>
 
-        <View style={styles.radioWrapper}>
-          <Text style={styles.radioText}>RADIO BUTTON: Do you have Valid Insurance?</Text>
-          <TestRadio />
-        </View>
-
         <Text style={styles.bodyText}>{briefSummary}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
@@ -196,18 +191,20 @@ function PilotProfileSetupPageOneScreen(
         ) : (
           <Text style={styles.bodyText}>{modelDrone}</Text>
         )}
-        <Text style={styles.bodyText}>{insurance}</Text>
-        {currentUserProps ? (
-          <View style={styles.droneExpWrapper}>
-            <PassSetInsuredStatus.Provider value={setInsuredStatus}>
-              <PassInsuredStatusState.Provider value={insuredStatus}>
-                <ValidInsurancePicker />
-              </PassInsuredStatusState.Provider>
-            </PassSetInsuredStatus.Provider>
+
+     
+        {currentUserProps && (
+          <View style={styles.radioWrapper}>
+            <Text style={styles.radioText}>
+              {insurance}
+            </Text>
+            <InsuranceRadio
+              setInsuredStatus={setInsuredStatus}
+              insuredStatus={insuredStatus}
+            />
           </View>
-        ) : (
-          <Text style={styles.bodyText}>{insurance}</Text>
         )}
+        
 
         <View style={styles.centerButton}>
           <View style={styles.saveAndContinueWrapper}>

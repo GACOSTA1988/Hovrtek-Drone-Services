@@ -21,8 +21,9 @@ import _ from "lodash";
 import DatePicker from "../../components/DatePicker";
 import TravelStatusRadio from "../../components/TravelStatusRadio";
 import FourHundredPicker from "../../components/FourHundredPicker";
-import AirMapPicker from "../../components/AirMapPicker";
+import AirMapRadio from "../../components/AirMapRadio";
 import { AntDesign } from "@expo/vector-icons";
+import FourHundredRadio from "../../components/FourHundredRadio";
 
 // context hook stuff
 export const PassSetFaaLicenseContext = React.createContext();
@@ -130,11 +131,10 @@ function PilotProfileSetupPageTwoScreen(
         </Text>
         {currentUserProps ? (
           <View>
-            <PassSetFaaLicenseContext.Provider value={setFaaLicenseExp}>
-              <PassFaaLicenseState.Provider value={faaLicenseExp}>
-                <DatePicker />
-              </PassFaaLicenseState.Provider>
-            </PassSetFaaLicenseContext.Provider>
+                <DatePicker
+                  setFaaLicenseExp={setFaaLicenseExp}
+                  faaLicenseExp={faaLicenseExp}
+                />
           </View>
         ) : (
           <Text style={styles.bodyText}>
@@ -154,34 +154,25 @@ function PilotProfileSetupPageTwoScreen(
           </View>
         )}
 
-        <Text style={styles.bodyText}>
-          Have You Had Experience Flying Over 400FT?
-        </Text>
-        {currentUserProps ? (
-          <View style={styles.pickerButtonWrapper}>
-            <PassSetFourHundred.Provider value={setFourHundred}>
-              <PassFourHundredState.Provider value={fourHundred}>
-                <FourHundredPicker />
-              </PassFourHundredState.Provider>
-            </PassSetFourHundred.Provider>
+        {currentUserProps && (
+          <View style={styles.radioWrapper}>
+            <Text style={styles.radioText}>
+              Have You Had Experience Flying Over 400FT?
+            </Text>
+            <FourHundredRadio
+              setFourHundred={setFourHundred}
+              fourHundred={fourHundred}
+            />
           </View>
-        ) : (
-          <Text style={styles.bodyText}>
-            Have You Had Experience Flying Over 400FT?
-          </Text>
         )}
-        <Text style={styles.bodyText}>Have You Used AirMap?</Text>
-        {currentUserProps ? (
-          <View style={styles.pickerButtonWrapper}>
-            <PassSetAirMap.Provider value={setAirMap}>
-              <PassAirMapState.Provider value={airMap}>
-                <AirMapPicker />
-              </PassAirMapState.Provider>
-            </PassSetAirMap.Provider>
+
+        {currentUserProps && (
+          <View style={styles.radioWrapper}>
+            <Text style={styles.radioText}>Have You Used AirMap?</Text>
+            <AirMapRadio setAirMap={setAirMap} airMap={airMap} />
           </View>
-        ) : (
-          <Text style={styles.bodyText}>Have You Used AirMap?</Text>
         )}
+
         <View style={styles.centerButton}>
           <View style={styles.saveAndContinueWrapper}>
             <TouchableOpacity

@@ -9,12 +9,10 @@ import {
 } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
-import { PassSetFaaLicenseContext } from "../screens/pilot/PilotProfileSetupPageTwoScreen";
-import { PassFaaLicenseState } from "../screens/pilot/PilotProfileSetupPageTwoScreen";
-const DatePicker = () => {
-  // Context Hook Stuff
-  const setFaaLicenseContext = useContext(PassSetFaaLicenseContext);
-  const faaLicenseState = useContext(PassFaaLicenseState);
+
+const DatePicker = (props) => {
+
+  const {setFaaLicenseExp, faaLicenseExp  } = props
 
   const [date, setDate] = useState(new Date());
   const [chosenDate, setChosenDate] = useState("");
@@ -22,7 +20,7 @@ const DatePicker = () => {
 
   const handlePicker = (datetime) => {
     setIsVisible(false);
-    setFaaLicenseContext(moment(datetime).format("MMMM, DD  YYYY"));
+    setFaaLicenseExp(moment(datetime).format("MMMM, DD  YYYY"));
   };
 
   const hidePicker = () => {
@@ -36,8 +34,8 @@ const DatePicker = () => {
   return (
     <View style={styles.pickerWrapper}>
       <TouchableOpacity style={styles.button} onPress={showPicker}>
-        {faaLicenseState ? (
-          <Text style={styles.buttonText}>{faaLicenseState}</Text>
+        {faaLicenseExp ? (
+          <Text style={styles.buttonText}>{faaLicenseExp}</Text>
         ) : (
           <Text style={styles.buttonText}>Pick a Date</Text>
         )}

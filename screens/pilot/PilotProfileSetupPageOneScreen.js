@@ -318,7 +318,6 @@ const styles = StyleSheet.create({
   },
   radioText: {
     marginBottom: 7,
-
   }
 });
 function mapStateToProps(state) {

@@ -106,11 +106,17 @@ _no white bar in android google pixel, but styling still not ideal_
 
 * MessagingScreen functional, albiet a little bland? Anyone got an idea to gussy it up?
 
+* Refactor all local state in all modals / Forms from useContext hooks to conventional means of passing state / props - e.x., <BioPicker setBio = {setBio}> and import them in BioPicker via props.
+
+* Radio Buttons need some spacing inbewteen butons.
+
 * ClientNewProjectScreen forms
 PilotProfileSetupPageOne forms
 
+* Move Picker / Radio components into their respective client / pilot folders and update imports on appropriate page
 
- - change modal to cover either more of the screen or blur the background upon opening.
+
+ - change modas to cover either more of the screen or blur the background upon opening.
  - make a Choose Button as opposed to "choose" text??
 
  #### Android Only

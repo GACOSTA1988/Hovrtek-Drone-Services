@@ -5,34 +5,26 @@ import {
   Button,
   Modal,
   StyleSheet,
-  Picker,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
-import {
-  PassSetPersonalBio,
-  PassPersonalBioState,
-} from "../screens/pilot/PilotProfileSetupPageOneScreen";
 import { useNavigation } from "@react-navigation/native";
 import { APP_STRINGS } from "../constants/index";
 
 //REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 
 const {
-  openModal,
   workExperienceSet,
   setWorkExperience,
   choose,
   briefSummary,
+  slide
 } = APP_STRINGS;
 
-const BioPicker = () => {
-  const navigation = useNavigation();
+const BioPicker = (props) => {
+  const { personalBio, setPersonalBio } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const setPersonalBio = useContext(PassSetPersonalBio);
-  const personalBio = useContext(PassPersonalBioState);
 
   const openModal = () => {
     setIsModalVisible(true);
@@ -43,7 +35,7 @@ const BioPicker = () => {
   };
 
   const renderPersonalBioButton = (buttonText = "") => {
-    const title = APP_STRINGS.openModal;
+    const title = openModal;
     return (
       <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
         <Text style={styles.buttonText}>{buttonText}</Text>
@@ -53,8 +45,8 @@ const BioPicker = () => {
 
   const renderPersonalBio = (hasPersonalBio = false) => {
     return hasPersonalBio
-      ? renderPersonalBioButton(APP_STRINGS.workExperienceSet)
-      : renderPersonalBioButton(APP_STRINGS.setWorkExperience);
+      ? renderPersonalBioButton(workExperienceSet)
+      : renderPersonalBioButton(setWorkExperience);
   };
 
   const renderTextInput = (bio, setBio) => {
@@ -66,22 +58,22 @@ const BioPicker = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={APP_STRINGS.slide}
+        animationType={slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>{APP_STRINGS.briefSummary}</Text>
+            <Text style={styles.modalText}>{briefSummary}</Text>
           </View>
 
           {renderTextInput(personalBio, setPersonalBio)}
 
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={APP_STRINGS.choose} />
+            <Button onPress={closeModal} title={choose} />
           </View>
         </View>
       </Modal>

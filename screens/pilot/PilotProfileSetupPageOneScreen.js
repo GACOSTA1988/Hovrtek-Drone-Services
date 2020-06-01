@@ -10,7 +10,6 @@ import {
   Alert,
   Modal,
 } from "react-native";
-import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -21,11 +20,12 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import DroneExperiencePicker from "../../components/DroneExperiencePicker";
 import DroneTypePicker from "../../components/DroneTypePicker";
-import ValidInsurancePicker from "../../components/ValidInsurancePicker";
 import BioPicker from "../../components/BioPicker";
 import { APP_STRINGS } from '../../constants/index';
+import InsuranceRadio from "../../components/InsuranceRadio";
 
 // Context Hook Stuff - passing props to Modals / Pickers
+export const PassSetPersonalBio = React.createContext();
 export const PassSetYearsOfExperience = React.createContext();
 export const PassYearsOfExperienceState = React.createContext();
 
@@ -33,8 +33,15 @@ export const PassSetDroneType = React.createContext();
 export const PassDroneTypeState = React.createContext();
 export const PassSetInsuredStatus = React.createContext();
 export const PassInsuredStatusState = React.createContext();
-export const PassSetPersonalBio = React.createContext();
 export const PassPersonalBioState = React.createContext();
+
+const {
+  briefSummary,
+  yearsExperience,
+  modelDrone,
+  insurance,
+  saveAndContinue,
+} = APP_STRINGS;
 
 
 function PilotProfileSetupPageOneScreen(
@@ -147,26 +154,19 @@ function PilotProfileSetupPageOneScreen(
             <Text>Name:</Text>
           )}
         </Text>
-        <Text style={styles.bodyText}>
-          {APP_STRINGS.briefSummary}
-        </Text>
+
+        <Text style={styles.bodyText}>{briefSummary}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
-            <PassSetPersonalBio.Provider value={setPersonalBio}>
-              <PassPersonalBioState.Provider value={personalBio}>
-                <BioPicker />
-              </PassPersonalBioState.Provider>
-            </PassSetPersonalBio.Provider>
+            <BioPicker
+              setPersonalBio={setPersonalBio}
+              personalBio={setPersonalBio}
+            />
           </View>
         ) : (
-          <Text style={styles.bodyText}>
-              {APP_STRINGS.briefSummary}
-          </Text>
+          <Text style={styles.bodyText}>{briefSummary}</Text>
         )}
-
-        <Text style={styles.bodyText}>
-          {APP_STRINGS.yearsExperience}
-        </Text>
+        <Text style={styles.bodyText}>{yearsExperience}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
             <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
@@ -176,11 +176,9 @@ function PilotProfileSetupPageOneScreen(
             </PassSetYearsOfExperience.Provider>
           </View>
         ) : (
-          <Text style={styles.bodyText}>
-              {APP_STRINGS.yearsExperience}
-          </Text>
+          <Text style={styles.bodyText}>{yearsExperience}</Text>
         )}
-        <Text style={styles.bodyText}>{APP_STRINGS.modelDrone}</Text>
+        <Text style={styles.bodyText}>{modelDrone}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
             <PassSetDroneType.Provider value={setDroneType}>
@@ -190,28 +188,27 @@ function PilotProfileSetupPageOneScreen(
             </PassSetDroneType.Provider>
           </View>
         ) : (
-            <Text style={styles.bodyText}>{APP_STRINGS.modelDrone}</Text>
+          <Text style={styles.bodyText}>{modelDrone}</Text>
         )}
-        <Text style={styles.bodyText}>{APP_STRINGS.insurance}</Text>
-        {currentUserProps ? (
-          <View style={styles.droneExpWrapper}>
-            <PassSetInsuredStatus.Provider value={setInsuredStatus}>
-              <PassInsuredStatusState.Provider value={insuredStatus}>
-                <ValidInsurancePicker />
-              </PassInsuredStatusState.Provider>
-            </PassSetInsuredStatus.Provider>
+
+     
+        {currentUserProps && (
+          <View style={styles.radioWrapper}>
+            <Text style={styles.radioText}>
+              {insurance}
+            </Text>
+            <InsuranceRadio
+              setInsuredStatus={setInsuredStatus}
+              insuredStatus={insuredStatus}
+            />
           </View>
-        ) : (
-            <Text style={styles.bodyText}>{APP_STRINGS.insurance}</Text>
         )}
+        
 
         <View style={styles.centerButton}>
           <View style={styles.saveAndContinueWrapper}>
-            <TouchableOpacity
-              onPress={submit}
-              title={APP_STRINGS.saveAndContinue}
-            >
-              <Text style={styles.saveAndContinueText}>{APP_STRINGS.saveAndContinue}</Text>
+            <TouchableOpacity onPress={submit} title={saveAndContinue}>
+              <Text style={styles.saveAndContinueText}>{saveAndContinue}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -224,7 +221,6 @@ function PilotProfileSetupPageOneScreen(
             <Text style={styles.backButtonText}>Back</Text>
           </TouchableOpacity>
         </View>
-
       </ScrollView>
     </View>
   );
@@ -234,6 +230,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "lightgray",
+    alignItems: "center",
     height: "100%",
   },
   button: {
@@ -294,6 +291,7 @@ const styles = StyleSheet.create({
   },
   droneExpWrapper: {
     alignItems: "center",
+    justifyContent: "center",
   },
   backButton: {
     marginTop: 20,
@@ -311,8 +309,15 @@ const styles = StyleSheet.create({
     // marginBottom: 40,
   },
   backButtonWrapper: {
-    alignItems: 'center'
+    alignItems: "center",
   },
+  radioWrapper: {
+    alignSelf: "center",
+    marginBottom: 20
+  },
+  radioText: {
+    marginBottom: 7,
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

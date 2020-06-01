@@ -1,11 +1,12 @@
 import React from "react";
-import { Button, Image } from "react-native";
+import { Button, Image, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ClientNavigation from "./navigation/ClientNavigation";
 import PilotNavigation from "./navigation/PilotNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import LoadingScreen from "./screens/LoadingScreen";
+import { Ionicons } from "@expo/vector-icons";
 
 const RootStack = createStackNavigator();
 
@@ -49,7 +50,14 @@ const renderLogin = () => {
       options={({ navigation }) => ({
         title: "",
         headerLeft: () => (
-          <Button onPress={navigation.goBack} title="Back" color="#fff" />
+          <TouchableOpacity onPress={navigation.goBack}>
+            <Ionicons
+              name="ios-arrow-back"
+              size={24}
+              color="white"
+              style={{ margin: 10 }}
+            />
+          </TouchableOpacity>
         ),
         headerStyle: signHeaderStyle,
       })}

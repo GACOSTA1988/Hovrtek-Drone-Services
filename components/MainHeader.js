@@ -31,7 +31,7 @@ const MainHeader = (props, { getMessages }) => {
 
   let userID = null;
   let unreadMessages = [];
-  const [noteVisible, setNoteVisible] = useState(false);
+  const [ noteVisible, setNoteVisible ] = useState(false);
   if (firebase.auth().currentUser && props.listOfMessages) {
     userID = firebase.auth().currentUser.uid;
     props.listOfMessages.forEach((message) => {
@@ -45,14 +45,14 @@ const MainHeader = (props, { getMessages }) => {
 
   return (
     <View style={styles.MainHeaderWrapper}>
-      <NotificationContext.Provider value={[unreadMessages, noteVisible]}>
+      <NotificationContext.Provider value={[ unreadMessages, noteVisible ]}>
         <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
         {unreadMessages.length > 0 ? (
           <View style={styles.dot}>
-            <Text></Text>
+            <Text />
           </View>
         ) : (
-          <View></View>
+          <View />
         )}
         {noteVisible ? (
           <View style={styles.note}>
@@ -63,7 +63,7 @@ const MainHeader = (props, { getMessages }) => {
             </TouchableOpacity>
           </View>
         ) : (
-          <View></View>
+          <View />
         )}
         <Ionicons
           style={styles.hamburger}
@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    elevation: 4,
     flexDirection: "row",
   },
   messageText: {

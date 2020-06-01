@@ -3,41 +3,46 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   Alert,
   Image,
   TouchableOpacity,
   TextInput,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
 import { editClientProfile } from "../../actions/clientProfiles";
-import ClientProfileUploader from "../../components/client/ClientProfileUploader";
+import ProfileUploader from "../../components/shared/ProfileUploader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
+
+// todo move to app strings
+const pageUnavailable = "Page unavailable";
+const saveChanges = "Save Changes";
+
 function ClientEditProfileScreen(props, { editClientProfile }) {
-  console.log("PERSON ICON IN CLIENT EDIT PROFILE: ", personIcon);
+  // console.log("PERSON ICON IN CLIENT EDIT PROFILE: ", personIcon);
   let profileDetails = props.route.params;
 
-  const [firstName, setFirstName] = useState(profileDetails.firstName);
-  const [lastName, setLastName] = useState(profileDetails.lastName);
-  const [location, setLocation] = useState(profileDetails.location);
-  const [bio, setBio] = useState(profileDetails.bio);
-  const [industry, setIndustry] = useState(profileDetails.industry);
-  const [paymentType, setPaymentType] = useState(profileDetails.paymentType);
-  const [profileImageUrl, setProfileImageUrl] = useState(
-    profileDetails.profileImageUrl
+  const [ firstName, setFirstName ] = useState(profileDetails.firstName);
+  const [ lastName, setLastName ] = useState(profileDetails.lastName);
+  const [ location, setLocation ] = useState(profileDetails.location);
+  const [ bio, setBio ] = useState(profileDetails.bio);
+  const [ industry, setIndustry ] = useState(profileDetails.industry);
+  const [ paymentType, setPaymentType ] = useState(profileDetails.paymentType);
+
+  const [ profileImageUrl, setProfileImageUrl ] = useState(
+    profileDetails.profileImageUrl,
   );
 
-  const save = () => {
+  const pluckImage = (imgUrl = "") => {
+    setProfileImageUrl(imgUrl);
+  };
+
+  const saveEdits = () => {
     profileDetails.firstName = firstName;
     profileDetails.lastName = lastName;
     profileDetails.location = location;
@@ -45,6 +50,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
     profileDetails.industry = industry;
     profileDetails.paymentType = paymentType;
     profileDetails.profileImageUrl = profileImageUrl;
+
     props.editClientProfile(
       firstName,
       lastName,
@@ -53,102 +59,140 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
       industry,
       paymentType,
       profileImageUrl,
-      profileDetails.key
+      profileDetails.key,
     );
 
     props.navigation.navigate("ClientProfileScreen", { ...profileDetails });
   };
 
+  const renderTextInputItem = (textInputItemMetadata = {}) => {
+    const {
+      text,
+      textStyle,
+      textInputStyle,
+      textInputValue,
+      onChangeText,
+      isMultiline = false,
+    } = textInputItemMetadata;
+
+    return (
+      <React.Fragment>
+        <Text style={textStyle}>{text}</Text>
+        <TextInput
+          style={textInputStyle}
+          placeholder={textInputValue}
+          value={textInputValue}
+          onChangeText={onChangeText}
+          multiline={isMultiline}
+        />
+      </React.Fragment>
+    );
+  };
+
+  const renderFirstAndLastName = () => {
+    const names = [
+      {
+        name: firstName,
+        onChangeText: setFirstName,
+      },
+      {
+        name: lastName,
+        onChangeText: setLastName,
+      },
+    ];
+
+    return (
+      <View style={styles.names}>
+        {names.map((n) => {
+          const { name, onChangeText } = n;
+
+          return (
+            <TextInput
+              key={`name-${name}`}
+              style={styles.name}
+              placeholder={name}
+              value={name}
+              onChangeText={onChangeText}
+            />
+          );
+        })}
+      </View>
+    );
+  };
+
   return (
-    <KeyboardAwareScrollView
-      style={{
-        flex: 1,
-        height: "100%",
-      }}
-    >
+    <KeyboardAwareScrollView style={styles.keyboardView}>
+      {!profileDetails && <Text>{pageUnavailable}</Text>}
+
       {profileDetails && (
         <View>
           <Image source={princePic01} style={styles.backgroundImage} />
+
           <View style={styles.saveButton}>
-            <TouchableOpacity
-              hitSlop={styles.hitSlop}
-              onPress={() => save()}
-            >
-              <Text style={styles.saveText}>Save Changes</Text>
+            <TouchableOpacity hitSlop={styles.hitSlop} onPress={saveEdits}>
+              <Text style={styles.saveText}>{saveChanges}</Text>
             </TouchableOpacity>
           </View>
-          {profileDetails.profileImageUrl ? (
-            <TouchableOpacity
-              onPress={() => Alert.alert("todo: choose image")}
-              style={styles.imagePress}
-            >
-              <Image source={{uri: profileDetails.profileImageUrl}} style={styles.profileImage} />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => Alert.alert("todo: choose image")}
-              style={styles.imagePress}
-            >
-              <Image source={personIcon} style={styles.profileImage} />
-            </TouchableOpacity>
-          )}
-          <View style={styles.names}>
-            <TextInput
-              style={styles.name}
-              placeholder={firstName}
-              value={firstName}
-              onChangeText={setFirstName}
-            />
-            <TextInput
-              style={styles.name}
-              placeholder={lastName}
-              value={lastName}
-              onChangeText={setLastName}
-            />
-          </View>
+
+          <TouchableOpacity
+            onPress={() => Alert.alert("todo: choose image")}
+            style={styles.imagePress}
+          >
+            <Image source={personIcon} style={styles.profileImage} />
+          </TouchableOpacity>
+
+          {renderFirstAndLastName()}
+
           <View style={styles.info}>
-            <View style={styles.inlineView}>
-              <Text style={styles.text}>Location: </Text>
-              <TextInput
-                style={styles.text}
-                placeholder={location}
-                value={location}
-                onChangeText={setLocation}
-              />
+            <View style={{ flexDirection: "row" }}>
+              {renderTextInputItem({
+                text: "Client is located in ",
+                textStyle: { fontSize: 20 },
+                textInputStyle: { fontSize: 20 },
+                textInputValue: location,
+                onChangeText: setLocation,
+              })}
             </View>
+
             <View>
-              <Text style={styles.headerText}>Bio: </Text>
-              <TextInput
-                style={styles.input}
-                placeholder={bio}
-                value={bio}
-                onChangeText={setBio}
-                multiline={true}
-              />
+              {renderTextInputItem({
+                text: "Bio: ",
+                textStyle: { fontSize: 20, marginTop: 10 },
+                textInputStyle: styles.input,
+                textInputValue: bio,
+                onChangeText: setBio,
+                isMultiline: true,
+              })}
             </View>
-            <View style={styles.inlineView}>
-              <Text style={styles.text}>Industry:</Text>
-              <TextInput
-                style={styles.inputBottom}
-                placeholder={industry}
-                value={industry}
-                onChangeText={setIndustry}
-              />
+
+            <View style={{ flexDirection: "row", marginTop: 10 }}>
+              {renderTextInputItem({
+                text: "Industry: ",
+                textStyle: { fontSize: 20 },
+                textInputStyle: { fontSize: 20, marginLeft: 5 },
+                textInputValue: industry,
+                onChangeText: setIndustry,
+              })}
             </View>
-            <View style={styles.inlineView}>
-              <Text style={styles.text}>Payment type:</Text>
-              <TextInput
-                style={styles.inputBottom}
-                placeholder={paymentType}
-                value={paymentType}
-                onChangeText={setPaymentType}
-              />
+
+            <View style={{ flexDirection: "row", marginTop: 10 }}>
+              {renderTextInputItem({
+                text: "Payment type: ",
+                textStyle: { fontSize: 20 },
+                textInputStyle: { fontSize: 20, marginLeft: 5 },
+                textInputValue: paymentType,
+                onChangeText: setPaymentType,
+              })}
             </View>
           </View>
+
           <View style={{ alignItems: "center", marginBottom: 50 }}>
             <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
               <PassProfileImageUrlState.Provider value={profileImageUrl}>
-                <ClientProfileUploader />
+                <ProfileUploader
+                  hasSquareImage={false}
+                  pluckImage={(image) => pluckImage(image)}
+                />
               </PassProfileImageUrlState.Provider>
             </PassSetProfileImageUrlContext.Provider>
           </View>
@@ -159,6 +203,10 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
 }
 
 const styles = StyleSheet.create({
+  keyboardView: {
+    flex: 1,
+    height: "100%",
+  },
   container: {
     flex: 1
   },
@@ -169,6 +217,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginLeft: 4,
     marginRight: 4
+  },
+  hitSlop: {
+    top: 30,
+    left: 30,
+    bottom: 30,
+    right: 30,
   },
   names: {
     flexDirection: "row",
@@ -182,7 +236,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "67%",
     marginLeft: 20,
-    elevation: 8,
     borderWidth: 4,
     borderColor: "#092455"
   },

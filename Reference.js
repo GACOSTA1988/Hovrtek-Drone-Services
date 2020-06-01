@@ -57,9 +57,9 @@ const PilotProfileScreen = (props, { postClientProfiles, getClientProfiles }) =>
   let user = firebase.auth().currentUser;
 
   let userID = user.uid
- 
+
   let currentUserProps = props.listOfProfiles.find(x => x.userID == userID)
-  
+
 
   // async function getLocation() {
   //   await let currentUserProps = props.listOfProfiles.find(x => x.userID == userID)
@@ -222,7 +222,7 @@ function PilotSignUpScreen(props) {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (error) {
-     
+
     }
     let user = firebase.auth().currentUser;
     await user.updateProfile({
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
   textWrapper: {
     marginBottom: 20,
     alignItems: "center",
-    elevation: 8,
+    // elevation: 8,
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,

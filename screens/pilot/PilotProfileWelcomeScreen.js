@@ -4,220 +4,218 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
-  TextInput,
   Alert,
   Image,
 } from "react-native";
-import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
 import { connect } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
 import {
   getPilotProfiles,
   editPilotProfile,
 } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
-import pic from "../../assets/landingPageImage.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { AntDesign } from "@expo/vector-icons";
+import { APP_STRINGS, NAV_SCREENS } from "../../constants";
 
-function PilotProfileWelcomeScreen(
-  props,
-  { getPilotProfiles, editPilotProfile }
-) {
-  const navigation = useNavigation();
+const {
+  abilityOver400Ft,
+  bio,
+  chat,
+  droneModel,
+  experienceAirMap,
+  insured,
+  licenseExpirationDate,
+  location,
+  pilotProfileNotCreated,
+  startPilotProfile,
+  welcomeHovrtek,
+  willingToTravel,
+  // yearsOfExperience aliased to not clash with const of same name
+  yearsOfExperience: yearsOfExperienceStr,
+} = APP_STRINGS;
 
-  // getCurrentUserProps();
+const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
 
-  let passedProps = props.route.params;
+function PilotProfileWelcomeScreen(props) {
+  const {
+    navigation,
+    route: { params },
+    listOfPilotProfiles,
+    getPilotProfiles,
+  } = props;
 
-  useEffect(() => {
-    props.getPilotProfiles();
-  }, []);
+  const [ profileDetails, setProfileDetails ] = useState(null);
+  const [ user, setComponentUser ] = useState(null);
 
-  const [profileDetails, setCurrentUserProps] = useState(null);
-
-  let user = null;
-  let profile = null;
-  if (firebase.auth().currentUser) {
-    user = firebase.auth().currentUser;
-    if (user.photoURL === "P") {
-      profile = props.listOfPilotProfiles.find((x) => x.userID === user.uid);
-      try {
-        if (
-          (!profileDetails && profile) ||
-          (profileDetails && profileDetails != profile)
-        ) {
-          setCurrentUserProps(profile);
-          passedProps = profile;
-        }
-      } catch (error) {
-        Alert.alert("User page unavailable");
-        props.navigation.navigate("JobListScreen");
+  useEffect(
+    () => {
+      const { currentUser } = firebase.auth();
+      if (!!currentUser) {
+        setComponentUser(currentUser);
       }
-    } else if (passedProps && profileDetails != passedProps) {
-      setCurrentUserProps(passedProps);
-    }
+
+      getPilotProfiles();
+      const { photoURL } = currentUser;
+
+      if (photoURL === "P") {
+        const profile = listOfPilotProfiles.find((pilot) => {
+          return pilot.userID === currentUser.uid;
+        });
+
+        setProfileDetails(profile);
+      } else if (params && profileDetails != params) {
+        setProfileDetails(params);
+      }
+    },
+    [ user ],
+  );
+
+  const renderProfileStatsItem = (titleString = "", specsValue = "") => {
+    return (
+      <View style={styles.specView}>
+        <Text style={styles.specTitle}>{titleString}</Text>
+        <Text style={styles.specs}>{specsValue}</Text>
+      </View>
+    );
+  };
+
+  const renderTouchableEditIcon = () => {
+    return (
+      <TouchableOpacity onPress={() => navigation.push(PILOT_SETUP_ONE)}>
+        <AntDesign
+          name="edit"
+          size={30}
+          color="darkblue"
+          style={styles.iconStyle}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const renderTouchableChatIcon = (profileData = {}) => {
+    return (
+      <TouchableOpacity
+        style={styles.chatButton}
+        onPress={() =>
+          navigation.navigate(CHAT, {
+            ...profileData,
+          })}
+      >
+        <Text style={styles.chatText}>{chat}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderTouchableStartPilotProfileText = () => {
+    return (
+      <TouchableOpacity
+        style={styles.startButton}
+        onPress={() => navigation.navigate(PILOT_SETUP_ONE)}
+      >
+        <Text style={styles.startButtonText}>{startPilotProfile}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderStartProfileView = () => {
+    return (
+      <View>
+        <Text style={styles.welcomeText}>{welcomeHovrtek}</Text>
+        <View style={styles.fullName}>
+          <Text style={styles.nameText}>{getPilotFullName()}</Text>
+        </View>
+        <View style={styles.alignItemsCenter}>
+          {renderTouchableStartPilotProfileText()}
+        </View>
+      </View>
+    );
+  };
+
+  const renderChatView = () => {
+    return (
+      <View>
+        {renderTouchableChatIcon(profileDetails)}
+        <Text style={styles.nameText}>{getPilotFullName()}</Text>
+        <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
+      </View>
+    );
+  };
+
+  if (!user || !profileDetails) {
+    return <View />;
   }
 
-  const submit = (e) => {
-    navigation.navigate("PilotProfileSetupPageOneScreen");
+  // it's safe to destructure profileDetails here,
+  // because of the check above for it in the 'if' statement
+  const {
+    profileImageUrl,
+    profileComplete,
+    pilotFirstName,
+    pilotLastName,
+    pilotLocation,
+    personalBio,
+    droneType,
+    yearsOfExperience,
+    faaLicenseExp,
+    travelStatus,
+    airMap,
+    fourHundred,
+    insuredStatus,
+  } = profileDetails;
+
+  const getPilotFullName = () => `${pilotFirstName} ${pilotLastName}`;
+  const isProfileComplete = profileComplete === "Yes";
+
+  const profileImg = {
+    uri: profileImageUrl,
   };
+
+  const { photoURL } = user;
+  // todo change this to an actual boolean, true/false
+  const hasUserPhoto = photoURL !== "P";
 
   return (
     <View style={styles.container}>
-      {user && profileDetails ? (
-        <View>
-          {profileDetails.profileComplete === "Yes" ? (
-            <ScrollView style={{ width: "100%" }}>
-              <Image source={princePic01} style={styles.backgroundImage} />
-              <Image
-                style={styles.profilePic}
-                source={{
-                  uri: profileDetails.profileImageUrl,
-                }}
-              />
-              <View style={{ flexDirection: "row", display: "flex" }}>
-                <Text style={styles.nameText}>
-                  {profileDetails.pilotFirstName} {profileDetails.pilotLastName}
-                </Text>
-                {user.photoURL === "P" ? (
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.push("PilotProfilePageSetupPageOneScreen")
-                    }
-                  >
-                    <AntDesign
-                      name="edit"
-                      size={30}
-                      color="darkblue"
-                      style={{ marginLeft: 40, marginTop: 25 }}
-                    />
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity
-                    style={styles.chatButton}
-                    onPress={() =>
-                      props.navigation.navigate("ChatScreen", {
-                        ...profileDetails,
-                      })
-                    }
-                  >
-                    <Text style={styles.chatText}>Chat</Text>
-                  </TouchableOpacity>
-                )}
-              </View>
-              <Text style={styles.locationText}>
-                Location: {profileDetails.pilotLocation}
-              </Text>
-              <Text style={styles.specTitle}>Bio:</Text>
-              <Text
-                style={{
-                  fontSize: 15,
-                  color: "black",
-                  // fontWeight: "450",
-                  marginLeft: "2%",
-                  marginTop: "1%",
-                }}
-              >
-                {profileDetails.personalBio}
-              </Text>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Drone Model:</Text>
-                <Text style={styles.specs}>{profileDetails.droneType}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Years Of Experience:</Text>
-                <Text style={styles.specs}>
-                  {profileDetails.yearsOfExperience}
-                </Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>License Expiration Date:</Text>
-                <Text style={styles.specs}>{profileDetails.faaLicenseExp}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Willing To Travel:</Text>
-                <Text style={styles.specs}>{profileDetails.travelStatus}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Insured:</Text>
-                <Text style={styles.specs}>{profileDetails.insuredStatus}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Experience with Air Map:</Text>
-                <Text style={styles.specs}>{profileDetails.airMap}</Text>
-              </View>
-              <View style={styles.specView}>
-                <Text style={styles.specTitle}>Able to Fly over 400 FT:</Text>
-                <Text style={styles.specs}>{profileDetails.fourHundred}</Text>
-              </View>
-            </ScrollView>
-          ) : (
-            <ScrollView style={{ width: "100%" }}>
-              <Image
-                source={princePic01}
-                style={styles.backgroundImageStartingPage}
-              />
-              {user.photoURL === "P" ? (
-                <View>
-                  <Text style={styles.welcomeText}>Welcome to Hovrtek</Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      display: "flex",
-                      justifyContent: "center",
-                      marginBottom: 40,
-                    }}
-                  >
-                    <Text style={styles.nameText}>
-                      {profileDetails.pilotFirstName}{" "}
-                      {profileDetails.pilotLastName}
-                    </Text>
-                  </View>
-                  <View style={{ alignItems: "center" }}>
-                    <TouchableOpacity
-                      style={styles.startButton}
-                      onPress={() =>
-                        props.navigation.navigate(
-                          "PilotProfilePageSetupPageOneScreen"
-                        )
-                      }
-                    >
-                      <Text style={styles.startButtonText}>
-                        Start Pilot Profile
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ) : (
-                <View>
-                  <TouchableOpacity
-                    style={styles.chatButton}
-                    onPress={() =>
-                      props.navigation.navigate("ChatScreen", {
-                        ...profileDetails,
-                      })
-                    }
-                  >
-                    <Text style={styles.chatText}>Chat</Text>
-                  </TouchableOpacity>
-                  <Text style={styles.nameText}>
-                    {profileDetails.pilotFirstName}{" "}
-                    {profileDetails.pilotLastName}
-                  </Text>
-                  <Text style={styles.welcomeText}>
-                    This pilot has not created their profile yet
-                  </Text>
-                </View>
-              )}
-            </ScrollView>
-          )}
-        </View>
-      ) : (
-        <View></View>
+      {isProfileComplete && (
+        <ScrollView style={styles.scrollViewStyle}>
+          <Image source={princePic01} style={styles.backgroundImage} />
+          <Image style={styles.profilePic} source={profileImg} />
+
+          <View style={styles.fullNameAndIcon}>
+            <Text style={styles.nameText}>{getPilotFullName()}</Text>
+
+            {hasUserPhoto && renderTouchableChatIcon(profileDetails)}
+            {!hasUserPhoto && renderTouchableEditIcon()}
+          </View>
+
+          <Text style={styles.locationText}>
+            {location} {pilotLocation}
+          </Text>
+
+          <Text style={styles.specTitle}>{bio}</Text>
+          <Text style={styles.personalBioStyle}>{personalBio}</Text>
+
+          {renderProfileStatsItem(droneModel, droneType)}
+          {renderProfileStatsItem(yearsOfExperienceStr, yearsOfExperience)}
+          {renderProfileStatsItem(licenseExpirationDate, faaLicenseExp)}
+          {renderProfileStatsItem(willingToTravel, travelStatus)}
+          {renderProfileStatsItem(insured, insuredStatus)}
+          {renderProfileStatsItem(experienceAirMap, airMap)}
+          {renderProfileStatsItem(abilityOver400Ft, fourHundred)}
+        </ScrollView>
+      )}
+
+      {!isProfileComplete && (
+        <ScrollView style={styles.scrollViewStyle}>
+          <Image
+            source={princePic01}
+            style={styles.backgroundImageStartingPage}
+          />
+          {hasUserPhoto && renderChatView()}
+          {!hasUserPhoto && renderStartProfileView()}
+        </ScrollView>
       )}
     </View>
   );
@@ -225,11 +223,25 @@ function PilotProfileWelcomeScreen(
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // alignItems: "center",
     backgroundColor: "white",
     height: "100%",
     width: "100%",
+  },
+  scrollViewStyle: {
+    width: "100%",
+  },
+  fullName: {
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: 40,
+  },
+  fullNameAndIcon: {
+    flexDirection: "row",
+    display: "flex",
+  },
+  alignItemsCenter: {
+    alignItems: "center",
   },
   button: {
     paddingHorizontal: 20,
@@ -271,7 +283,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
   },
-
+  iconStyle: {
+    marginLeft: 40,
+    marginTop: 25,
+  },
   input: {
     borderWidth: 1,
     borderRadius: 3,
@@ -295,7 +310,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "17%",
     marginLeft: 20,
-    elevation: 8,
     borderWidth: 4,
     borderColor: "#092455",
   },
@@ -344,6 +358,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
+  personalBioStyle: {
+    fontSize: 15,
+    color: "black",
+    marginLeft: "2%",
+    marginTop: "1%",
+  },
 });
 
 function mapStateToProps(state) {
@@ -354,7 +374,7 @@ function mapStateToProps(state) {
         ...val,
         key: key,
       };
-    }
+    },
   );
   return {
     listOfPilotProfiles,
@@ -362,5 +382,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
-  PilotProfileWelcomeScreen
+  PilotProfileWelcomeScreen,
 );

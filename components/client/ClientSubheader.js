@@ -11,7 +11,7 @@ function ClientSubheader(props) {
     clientID = firebase.auth().currentUser.uid;
   }
 
-  const [homeActive, setHomeActive] = useState(null);
+  const [ homeActive, setHomeActive ] = useState(null);
 
   const pushHomeButton = () => {
     setHomeActive(true);
@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-    elevation: 10,
   },
   topButtonWrapperRight: {
     backgroundColor: "#092455",
@@ -109,7 +108,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
-    elevation: 10,
   },
   topButtonText: {
     color: "white",

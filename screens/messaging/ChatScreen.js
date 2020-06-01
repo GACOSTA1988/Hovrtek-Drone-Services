@@ -202,7 +202,6 @@ const styles = StyleSheet.create({
     // backgroundColor: "lightgray",
   },
   messagingContainer: {
-    elevation: 8,
     borderRadius: 15,
     backgroundColor: "#3E90D0",
     marginVertical: 15,

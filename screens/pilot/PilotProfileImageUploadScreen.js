@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  ScrollView,
-  TextInput,
-} from "react-native";
-import ProfileImageUploader from "../../components/pilot/ProfileImageUploader";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -17,19 +8,16 @@ import {
 } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
-import PilotProfileUploader from "../../components/auth/PilotProfileUploader";
+import ProfileUploader from "../../components/shared/ProfileUploader";
 import { APP_STRINGS } from "../../constants/index";
-
 
 // CONTEXT HOOK
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
 
-
-
 function PilotProfileImageUploadScreen(
   props,
-  { getPilotProfiles, editPilotProfile }
+  // { getPilotProfiles, editPilotProfile },
 ) {
   const navigation = useNavigation();
   const { goBack } = props.navigation;
@@ -37,6 +25,7 @@ function PilotProfileImageUploadScreen(
   useEffect(() => {
     props.getPilotProfiles();
   }, []);
+
   let user = firebase.auth().currentUser;
   let userID = user.uid;
   const list = props.listOfProfiles;
@@ -69,21 +58,26 @@ function PilotProfileImageUploadScreen(
     profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
-  const [profileImageUrl, setProfileImageUrl] = useState(
-    profileImageUrlPlaceHolder
+  const [ profileImageUrl, setProfileImageUrl ] = useState(
+    profileImageUrlPlaceHolder,
   );
 
-  const [personalBio, setPersonalBio] = useState(personalBioPlaceHolder);
-  const [yearsOfExperience, setYearsOfExperience] = useState(
-    yearsOfExperiencePlaceHolder
+  const [ personalBio, setPersonalBio ] = useState(personalBioPlaceHolder);
+  const [ yearsOfExperience, setYearsOfExperience ] = useState(
+    yearsOfExperiencePlaceHolder,
   );
-  const [faaLicenseExp, setFaaLicenseExp] = useState(faaLicenseExpPlaceHolder);
-  const [insuredStatus, setInsuredStatus] = useState(insuredStatusPlaceHolder);
-  const [travelStatus, setTravelStatus] = useState(travelStatusPlaceHolder);
-  const [droneType, setDroneType] = useState(droneTypePlaceHolder);
-  const [airMap, setAirMap] = useState(airMapPlaceHolder);
-  const [fourHundred, setFourHundred] = useState(fourHundredPlaceHolder);
-  const [profileComplete, setProfileComplete] = useState("Yes");
+  const [ faaLicenseExp, setFaaLicenseExp ] = useState(
+    faaLicenseExpPlaceHolder,
+  );
+  const [ insuredStatus, setInsuredStatus ] = useState(
+    insuredStatusPlaceHolder,
+  );
+  const [ travelStatus, setTravelStatus ] = useState(travelStatusPlaceHolder);
+  const [ droneType, setDroneType ] = useState(droneTypePlaceHolder);
+  const [ airMap, setAirMap ] = useState(airMapPlaceHolder);
+  const [ fourHundred, setFourHundred ] = useState(fourHundredPlaceHolder);
+  const [ profileComplete, setProfileComplete ] = useState("Yes");
+
   const submit = (e) => {
     props.editPilotProfile(
       currentUserProps.pilotLocation,
@@ -97,10 +91,19 @@ function PilotProfileImageUploadScreen(
       fourHundred,
       profileComplete,
       profileImageUrl,
-      currentUserProps.key
+      currentUserProps.key,
     );
+
+    // navigation.navigate("PilotProfileWelcomeScreen", {
+    //   profile: profileImageUrl,
+    // });
     navigation.popToTop();
   };
+
+  const pluckImage = (imgUrl = "") => {
+    setProfileImageUrl(imgUrl);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>
@@ -122,7 +125,7 @@ function PilotProfileImageUploadScreen(
       <Text>Please Upload Profile Picture</Text>
       <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
         <PassProfileImageUrlState.Provider value={profileImageUrl}>
-          <PilotProfileUploader />
+          <ProfileUploader hasSquareImage={true} pluckImage={pluckImage} />
         </PassProfileImageUrlState.Provider>
       </PassSetProfileImageUrlContext.Provider>
 
@@ -135,15 +138,10 @@ function PilotProfileImageUploadScreen(
       </TouchableOpacity>
 
       <View style={styles.backButtonWrapper}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={goBack}
-        >
+        <TouchableOpacity style={styles.backButton} onPress={goBack}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
       </View>
-
-    
     </View>
   );
 }
@@ -215,13 +213,13 @@ const styles = StyleSheet.create({
   backButtonText: {
     color: "white",
     textAlign: "center",
-   
   },
   backButtonWrapper: {
     marginTop: 253,
     alignItems: "center",
   },
 });
+
 function mapStateToProps(state) {
   const listOfProfiles = _.map(
     state.pilotProfilesList.pilotProfilesList,
@@ -230,20 +228,14 @@ function mapStateToProps(state) {
         ...val,
         key: key,
       };
-    }
+    },
   );
+
   return {
     listOfProfiles,
   };
 }
 
 export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
-  PilotProfileImageUploadScreen
+  PilotProfileImageUploadScreen,
 );
-
-// marginTop: "5%",
-//   marginBottom: "10%",
-//     fontSize: 25,
-//       color: "darkblue",
-//         fontWeight: "600",
-//           textAlign: "center",

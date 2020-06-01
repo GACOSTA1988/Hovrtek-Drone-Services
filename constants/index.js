@@ -1,26 +1,46 @@
-
 const APP_STRINGS = {
+  abilityOver400Ft: "Able to Fly over 400 FT:",
   areYouWilling: "Are You Willing to Travel Out of State for a Drone Job?",
   briefSummary: "Please Give Us a Brief Summary of Your Work Experience",
+  bio: "Bio:",
+  chat: "Chat",
   choose: "Choose",
   doYouHaveValidInsurance: "Do you have valid insurance?",
+  droneModel: "Drone Model:",
+  experienceAirMap: "Experience with Air Map:",
   experienceFlying: "Have you had experience flying over 400 Feet?",
   haveYouHadExperienceFlying: "Have you had experience flying over 400 Feet?",
-  hello: 'Hello!',
+  hello: "Hello!",
   insurance: "Do You Have Valid Insurance?",
+  insured: "Insured:",
+  licenseExpirationDate: "License Expiration Date:",
+  location: "Location: ",
   modelDrone: "What Drone Model Do You Have?",
   noYearsOfExperience: "No Years of Experience",
   no: "No",
   none: "None",
   openModal: "Open modal",
+  pilotProfileNotCreated: "This pilot has not created their profile yet",
   pleaseSetLocation: "Please Set Location",
   saveAndContinue: "Save and Continue",
   setWorkExperience: "Please Set Work Experience",
   slide: "slide",
+  successfullyUploaded: "Successfully Uploaded to the Hovrtek Database!",
+  startPilotProfile: "Start Pilot Profile",
+  uploadImage: "Upload Image",
   workExperienceSet: "Work Experience Set",
   whereIsTheLocation: "Were is the location of your drone service?",
+  welcomeHovrtek: "Welcome to Hovrtek",
+  willingToTravel: "Willing To Travel:",
   yearsExperience: "How Many Years Of Drone Experience Do You Have?",
+  yearsOfExperience: "Years Of Experience:",
   yes: "Yes",
 };
 
-export { APP_STRINGS };
+const NAV_SCREENS = {
+  CHAT: "ChatScreen",
+  JOB_LIST: "JobListScreen",
+  PILOT_SETUP_ONE: "PilotProfilePageSetupPageOneScreen",
+}
+
+export { APP_STRINGS, NAV_SCREENS };

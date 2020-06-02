@@ -70,7 +70,7 @@ const ClientLocationPicker = () => {
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
-          {renderTextInput(location, setLocation)}
+          {renderTextInput(locationState, setLocation)}
           <View styles={styles.cancelWrapper}>
             <Button onPress={closeModal} title={"Choose"} />
           </View>

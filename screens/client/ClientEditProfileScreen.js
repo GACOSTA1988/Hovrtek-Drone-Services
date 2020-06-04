@@ -134,19 +134,28 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            onPress={() => Alert.alert("todo: choose image")}
-            style={styles.imagePress}
-          >
-            <Image source={personIcon} style={styles.profileImage} />
-          </TouchableOpacity>
+          {profileDetails.profileImageUrl ? (
+            <TouchableOpacity
+              onPress={() => Alert.alert("todo: choose image")}
+              style={styles.imagePress}
+            >
+              <Image source={{uri: profileDetails.profileImageUrl}} style={styles.profileImage} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => Alert.alert("todo: choose image")}
+              style={styles.imagePress}
+            >
+              <Image source={personIcon} style={styles.profileImage} />
+            </TouchableOpacity>
+          )}
 
           {renderFirstAndLastName()}
 
           <View style={styles.info}>
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", marginTop: 10 }}>
               {renderTextInputItem({
-                text: "Client is located in ",
+                text: "Location: ",
                 textStyle: { fontSize: 20 },
                 textInputStyle: { fontSize: 20 },
                 textInputValue: location,
@@ -227,7 +236,7 @@ const styles = StyleSheet.create({
   names: {
     flexDirection: "row",
     marginLeft: 16,
-    width: "65%"
+    width: "65%",
   },
   profileImage: {
     height: 100,

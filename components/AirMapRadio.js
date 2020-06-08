@@ -30,12 +30,6 @@ const AirMapRadio = (props) => {
   const renderRadioButton = () => {
     return (
       <View style={styles.radioButtonWrapper}>
-        {/* <RadioForm
-          formHorizontal={true}
-          animation={true}
-          initial={index}
-          selectedButtonColor={"#092455"}
-        ></RadioForm> */}
         <RadioForm
           labelStyle={styles.radiobutton}
           animation={true}

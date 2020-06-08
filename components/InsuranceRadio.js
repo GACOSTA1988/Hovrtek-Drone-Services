@@ -6,6 +6,7 @@ let radio_props = [
   { label: "Yes", value: "Yes" },
   { label: "No", value: "No" },
 ];
+
 const InsuranceRadio = (props) => {
     const { insuredStatus, setInsuredStatus } = props;
     console.log("INSURED STATUS", insuredStatus);
@@ -31,13 +32,7 @@ const InsuranceRadio = (props) => {
       return (
         <View style={styles.radioButtonWrapper}>
           <RadioForm
-            formHorizontal={true}
-            animation={true}
-            initial={index}
-            selectedButtonColor={"#092455"}
-          ></RadioForm>
-          <RadioForm
-            style={styles.radioButton}
+            labelStyle={styles.radiobutton}
             animation={true}
             selectedButtonColor={"#092455"}
             labelColor={"#092455"}
@@ -62,6 +57,9 @@ const styles = StyleSheet.create({
   radioButtonWrapper: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  radiobutton: {
+    paddingRight: 25,
   },
 });
 

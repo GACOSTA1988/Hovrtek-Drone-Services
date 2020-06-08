@@ -16,7 +16,7 @@ function ProfileUploader(props) {
   // pluckImage is an injected function giving ability to
   // pluck the image from here into a parent component
   const { hasSquareImage, pluckImage } = props;
-  const [ licenseThumbnail, setlicenseThumbnail ] = useState(null);
+  const [licenseThumbnail, setlicenseThumbnail] = useState(null);
 
   useEffect(() => {
     getPermissionAsync();
@@ -42,7 +42,7 @@ function ProfileUploader(props) {
         Alert.alert(successfullyUploaded);
         console.log("got success response ", response);
 
-        persistImage(uri);
+        persistImage(response);
       }
     } catch (error) {
       return Alert.alert(error);

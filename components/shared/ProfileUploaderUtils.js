@@ -7,7 +7,7 @@ const generateUploadedImageStyle = (isSquare = false) => {
     : { width: 150, height: 150, borderWidth: 5, borderColor: "blue" };
 };
 
-async function uploadImage(uri = "", uuid = "", func = () => {}) {
+async function uploadImage(uri = "", uuid = "") {
   try {
     const response = await fetch(uri);
     const blob = await response.blob();
@@ -15,7 +15,7 @@ async function uploadImage(uri = "", uuid = "", func = () => {}) {
 
     const snapshot = await uploadTask.put(blob);
     const url = await snapshot.ref.getDownloadURL();
-    func(url);
+    return url;
   } catch (error) {
     Alert.alert("⚠️⚠️warning: uploadImage is very virus⚠️⚠️ ", error);
   }

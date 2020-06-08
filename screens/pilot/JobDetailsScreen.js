@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { getClientProfiles } from "../../actions/clientProfiles";
@@ -23,6 +23,7 @@ function JobDetailsScreen(props, { getClientProfiles }) {
   }
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.ProjectText}>Details:</Text>
       <View style={styles.line} />
@@ -90,6 +91,7 @@ function JobDetailsScreen(props, { getClientProfiles }) {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   );
 }
 

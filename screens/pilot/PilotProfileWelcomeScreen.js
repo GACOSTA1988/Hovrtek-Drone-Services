@@ -46,8 +46,8 @@ function PilotProfileWelcomeScreen(props) {
     getPilotProfiles,
   } = props;
 
-  const [ profileDetails, setProfileDetails ] = useState(null);
-  const [ user, setComponentUser ] = useState(null);
+  const [profileDetails, setProfileDetails] = useState(null);
+  const [user, setComponentUser] = useState(null);
 
   useEffect(() => {
     props.getPilotProfiles();
@@ -61,7 +61,9 @@ function PilotProfileWelcomeScreen(props) {
   const unsubscribe = navigation.addListener("focus", () => {
     if (photoURL === "P") {
       console.log("currentUser.uid", currentUser.uid);
-      const profile = listOfPilotProfiles.find((x) => x.userID === currentUser.uid);
+      const profile = listOfPilotProfiles.find(
+        (x) => x.userID === currentUser.uid,
+      );
       console.log("profile", profile);
       if (profileDetails != profile) {
         setProfileDetails(profile);
@@ -70,7 +72,6 @@ function PilotProfileWelcomeScreen(props) {
       setProfileDetails(params);
     }
   });
-
 
   const renderProfileStatsItem = (titleString = "", specsValue = "") => {
     return (
@@ -101,7 +102,8 @@ function PilotProfileWelcomeScreen(props) {
         onPress={() =>
           navigation.navigate(CHAT, {
             ...profileData,
-          })}
+          })
+        }
       >
         <Text style={styles.chatText}>{chat}</Text>
       </TouchableOpacity>
@@ -174,11 +176,11 @@ function PilotProfileWelcomeScreen(props) {
 
   return (
     <View style={styles.container}>
-      {(profileDetails.profileComplete === "Yes") ? (
+      {profileDetails.profileComplete === "Yes" ? (
         <ScrollView style={styles.scrollViewStyle}>
           <Image source={princePic01} style={styles.backgroundImage} />
           <Image style={styles.profilePic} source={profileImg} />
-
+          {renderTouchableEditIcon()}
           <View style={styles.fullNameAndIcon}>
             <Text style={styles.nameText}>{getPilotFullName()}</Text>
           </View>

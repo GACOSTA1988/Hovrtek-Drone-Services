@@ -94,10 +94,9 @@ function PilotProfileImageUploadScreen(
       currentUserProps.key,
     );
 
-    // navigation.navigate("PilotProfileWelcomeScreen", {
-    //   profile: profileImageUrl,
-    // });
-    navigation.popToTop();
+    navigation.navigate("Profile", {
+      profile: profileImageUrl,
+    });
   };
 
   const pluckImage = (imgUrl = "") => {

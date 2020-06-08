@@ -151,12 +151,11 @@ const styles = StyleSheet.create({
     height: "120%",
   },
   textMain: {
-    marginTop: "25%",
-    marginBottom: "5%",
+    marginTop: "5%",
+    marginBottom: "10%",
     fontSize: 30,
     color: "darkblue",
     fontWeight: "600",
-    textAlign: "center",
   },
   textSub: {
     marginTop: "25%",
@@ -166,7 +165,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   textWrapper: {
-    marginBottom: 20,
     alignItems: "center",
     borderRadius: 15,
     backgroundColor: "#092455",

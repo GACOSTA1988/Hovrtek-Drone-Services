@@ -146,7 +146,8 @@ const styles = StyleSheet.create({
   inputText: { 
     textAlign: "center", 
     color: "white", 
-    fontSize: 15 },
+    fontSize: 15 
+  },
   textWrapper: {
     borderRadius: 15,
     backgroundColor: "#092455",

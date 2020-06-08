@@ -121,8 +121,8 @@ function ClientSignUpScreen(props) {
             onChangeText={setPassword}
             style={styles.input}
           />
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttontext} onPress={signUp}>Sign up</Text>
+          <TouchableOpacity style={styles.button} onPress={signUp}>
+            <Text style={styles.buttontext}>Sign up</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -121,14 +121,14 @@ function PilotSignUpScreen(props) {
           />
           <TextInput
             keyboardType={"email-address"}
-            placeholder="email"
+            placeholder="Email"
             value={email}
             onChangeText={setEmail}
             style={styles.input}
             placeholderTextColor="grey"
           />
           <TextInput
-            placeholder="password"
+            placeholder="Password"
             secureTextEntry={true}
             value={password}
             onChangeText={setPassword}

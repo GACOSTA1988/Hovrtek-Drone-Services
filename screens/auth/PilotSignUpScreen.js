@@ -97,7 +97,7 @@ function PilotSignUpScreen(props) {
     >
       <View style={styles.wrapper}>
         <Text style={styles.textMain}>Create your pilot account</Text>
-        <TouchableOpacity style={styles.textWrapper}>
+        <View style={styles.textWrapper}>
           <TextInput
             placeholder="First Name"
             value={pilotFirstName}
@@ -135,9 +135,10 @@ function PilotSignUpScreen(props) {
             style={styles.input}
             placeholderTextColor="grey"
           />
-
-          <Button title="Sign up" onPress={signUp} />
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttontext} onPress={signUp}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -182,6 +183,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontSize: 15,
+  },
+  button: {
+    backgroundColor: 'lightgray',
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 35,
+    width: 200
+    // paddingLeft: 20,
+    // paddingRight: 20
+  },
+  buttontext: {
+    fontSize: 20,
+    color: 'darkblue'
   },
   dummyText: {
     marginTop: 200,

@@ -77,7 +77,7 @@ function ClientSignUpScreen(props) {
     >
       <View style={styles.wrapper}>
         <Text style={styles.text}>Create your client account</Text>
-        <TouchableOpacity style={styles.textWrapper}>
+        <View style={styles.textWrapper}>
           <TextInput
             maxLength={30}
             autoCapitalize="words"
@@ -121,12 +121,10 @@ function ClientSignUpScreen(props) {
             onChangeText={setPassword}
             style={styles.input}
           />
-          <Button
-            title="Sign up"
-            onPress={signUp}
-            style={{ fontWeight: 900 }}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttontext} onPress={signUp}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -145,13 +143,16 @@ const styles = StyleSheet.create({
     color: "darkblue",
     fontWeight: "600",
   },
-  inputText: { textAlign: "center", color: "white", fontSize: 15 },
-
+  inputText: { 
+    textAlign: "center", 
+    color: "white", 
+    fontSize: 15 },
   textWrapper: {
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,
     padding: 80,
+    alignItems: 'center'
   },
   input: {
     height: 40,
@@ -163,6 +164,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontSize: 15,
+  },
+  button: {
+    backgroundColor: 'lightgray',
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 35,
+    width: 200
+  },
+  buttontext: {
+    fontSize: 20,
+    color: 'darkblue'
   },
 });
 

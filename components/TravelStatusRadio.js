@@ -30,14 +30,14 @@ const TravelStatusRadio = (props) => {
   const renderRadioButton = () => {
     return (
       <View style={styles.radioButtonWrapper}>
-        <RadioForm
+        {/* <RadioForm
           formHorizontal={true}
           animation={true}
           initial={index}
           selectedButtonColor={"#092455"}
-        ></RadioForm>
+        ></RadioForm> */}
         <RadioForm
-          style={styles.radioButton}
+          labelStyle={styles.radiobutton}
           animation={true}
           selectedButtonColor={"#092455"}
           labelColor={"#092455"}
@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
   radioButtonWrapper: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  radiobutton: {
+    paddingRight: 25,
   },
 });
 

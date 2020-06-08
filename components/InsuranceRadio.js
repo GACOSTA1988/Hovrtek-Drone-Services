@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   radiobutton: {
     paddingRight: 25,
-  }
+  },
 });
 
 export default InsuranceRadio;

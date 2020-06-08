@@ -7,6 +7,7 @@ import {
   Button,
   ScrollView,
   TextInput,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -92,21 +93,27 @@ function PilotProfileSetupPageTwoScreen(
   );
 
   const submit = (e) => {
-    props.editPilotProfile(
-      currentUserProps.pilotLocation,
-      personalBio,
-      yearsOfExperience,
-      faaLicenseExp,
-      insuredStatus,
-      travelStatus,
-      droneType,
-      airMap,
-      fourHundred,
-      currentUserProps.profileComplete,
-      profileImageUrl,
-      currentUserProps.key
-    );
-    navigation.navigate("PilotProfileImageUploadScreen");
+    e.preventDefault();
+    if (faaLicenseExp === "") {
+      Alert.alert("Please fill in the expiration date of your FAA License");
+      return;
+    } else {
+      props.editPilotProfile(
+        currentUserProps.pilotLocation,
+        personalBio,
+        yearsOfExperience,
+        faaLicenseExp,
+        insuredStatus,
+        travelStatus,
+        droneType,
+        airMap,
+        fourHundred,
+        currentUserProps.profileComplete,
+        profileImageUrl,
+        currentUserProps.key,
+      );
+      navigation.navigate("PilotProfileImageUploadScreen");
+    }
   };
   return (
     <View style={styles.container}>

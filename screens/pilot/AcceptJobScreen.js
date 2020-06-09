@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { acceptJob } from "../../actions/projects";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -22,8 +22,14 @@ function AcceptJobScreen(props, { acceptJob }) {
   return (
     <View style={styles.container}>
       <Text style={styles.servicesText}>Are you sure?</Text>
-      <Button title="Yes" onPress={accept} />
-      <Button title="Cancel" onPress={() => props.navigation.goBack()} />
+      <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.chatButton} onPress={accept}>
+      <Text style={styles.chatText}> Yes </Text>
+      </TouchableOpacity> 
+      <TouchableOpacity style={styles.chatButton} onPress={() => props.navigation.goBack()}>
+      <Text style={styles.chatText}> Cancel </Text>  
+      </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -34,15 +40,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
-  },
   servicesText: {
     fontSize: 20,
   },
+  wrapper: {
+    flexDirection: "row",
+    margin: '5%'
+  },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '35%',
+  },
 });
+
+
+
 
 export default connect(null, { acceptJob })(AcceptJobScreen);

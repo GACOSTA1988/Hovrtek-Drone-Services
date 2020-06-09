@@ -78,7 +78,7 @@ function JobListScreen(
           >
             <View style={styles.textRow}>
               <Text style={styles.profileCompleteNoticeText}>
-                Click here to complete your profile to be eligable for jobs!
+                Click here to complete your profile to be eligible for jobs!
               </Text>
             </View>
             <View>

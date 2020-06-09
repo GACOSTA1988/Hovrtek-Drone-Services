@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { getClientProfiles } from "../../actions/clientProfiles";
 import _ from "lodash";
+import { AuthContext } from "../../context";
 
 function JobDetailsScreen(props, { getClientProfiles }) {
   const jobDetails = props.route.params;
@@ -23,7 +24,7 @@ function JobDetailsScreen(props, { getClientProfiles }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.ProjectText}>Details:</Text>
       <View style={styles.line} />
       <Text style={styles.detailsHeader}>Where</Text>
@@ -67,29 +68,35 @@ function JobDetailsScreen(props, { getClientProfiles }) {
         <Text style={styles.DetailsText}>Client:</Text>
       )}
 
-      <View>
+      <View style={styles.jobAvailabilityWrapper}>
         {!jobDetails.pilotID ? (
-          <TouchableOpacity
-            style={styles.back}
-            onPress={() =>
-              props.navigation.navigate("AcceptJobScreen", {
-                ...jobDetails,
-              })
-            }
-          >
-            <Text style={styles.accept}>Accept Job</Text>
-          </TouchableOpacity>
+          <View style={styles.acceptJobWrapper}>
+            <View style={styles.acceptJobButtonWrapper}>
+              <Text
+                style={styles.acceptJobText}
+                onPress={() =>
+                  props.navigation.navigate("AcceptJobScreen", {
+                    ...jobDetails,
+                  })
+                }
+              >
+                Accept Job
+              </Text>
+            </View>
+          </View>
         ) : (
           <Text>This job is no longer available</Text>
         )}
-        <TouchableOpacity
-          style={styles.back}
-          onPress={() => props.navigation.navigate("JobListScreen")}
-        >
-          <Text style={styles.back}>Back to Available Jobs</Text>
-        </TouchableOpacity>
+        <View style={styles.backButtonWrapper}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => props.navigation.navigate("JobListScreen")}
+          >
+            <Text style={styles.backButtonText}>Back to Available Jobs</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -155,6 +162,47 @@ const styles = StyleSheet.create({
     // borderWidth: 4,
     // borderColor: "#092455",
     marginRight: 10,
+  },
+  jobAvailabilityWrapper: {
+    marginBottom: 100,
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  backButton: {
+    marginTop: 20,
+    marginBottom: 40,
+    width: 160,
+    height: 30,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  backButtonText: {
+    color: "white",
+    textAlign: "center",
+    // marginBottom: 40,
+  },
+  backButtonWrapper: {
+    alignItems: "center",
+  },
+  acceptJobButtonWrapper: {
+    width: 170,
+    height: 60,
+    borderWidth: 2,
+    borderColor: "#092455",
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
+  },
+  acceptJobText: {
+    fontSize: 25,
+    color: "#092455",
+  },
+  acceptJobWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

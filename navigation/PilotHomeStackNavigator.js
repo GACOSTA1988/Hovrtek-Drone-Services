@@ -100,12 +100,15 @@ const PilotHomeStackNavigator = () => {
         name="MyJobsScreen"
         component={MyJobsScreen}
         options={{
-          title: "My Jobs",
+          title: " ",
           headerTitle: () => <MainHeader />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
           },
+          headerBackImage: () => (
+            <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />
+          ),
         }}
       />
     </HomeStack.Navigator>

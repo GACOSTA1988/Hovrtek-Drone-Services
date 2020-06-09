@@ -13,6 +13,7 @@ const NewProjectScreenThree = (props) => {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>There will likely be another question here.</Text>
+
             <View style={styles.saveAndContinueWrapper}>
                 <TouchableOpacity
                     style={styles.backButton}
@@ -22,6 +23,7 @@ const NewProjectScreenThree = (props) => {
                     <Text style={styles.saveAndContinueText}>Pretend to Complete Project, but will just take you back to New Project Form</Text>
                 </TouchableOpacity>
             </View>
+            
                 <Button title="Back" onPress={() => props.navigation.goBack()} />
         </View>
 
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
+        justifyContent: "center",
         marginTop: 100
     },
     header: {

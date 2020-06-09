@@ -126,6 +126,7 @@ function PilotSignUpScreen(props) {
             onChangeText={setEmail}
             style={styles.input}
             placeholderTextColor="grey"
+            autoCapitalize="none"
           />
           <TextInput
             placeholder="Password"

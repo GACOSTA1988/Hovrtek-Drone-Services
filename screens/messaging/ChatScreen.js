@@ -244,9 +244,6 @@ const styles = StyleSheet.create({
   writeContainerKeyboardOpen: {
     flexDirection: "row",
     alignItems: "center",
-    // position: "relative",
-    // bottom: 343,
-    // marginTop: 10,
     marginBottom: 10
     },
   input: {

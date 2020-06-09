@@ -72,6 +72,7 @@ function SignInScreen({ navigation }) {
             value={email}
             onChangeText={setEmail}
             style={styles.input}
+            autoCapitalize={'none'}
           />
           <TextInput
             placeholder="Password"

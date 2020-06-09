@@ -46,31 +46,32 @@ function PilotProfileWelcomeScreen(props) {
     getPilotProfiles,
   } = props;
 
-  const [ profileDetails, setProfileDetails ] = useState(null);
-  const [ user, setComponentUser ] = useState(null);
+  const [profileDetails, setProfileDetails] = useState(null);
+  const [user, setComponentUser] = useState(null);
 
-  useEffect(
-    () => {
-      const { currentUser } = firebase.auth();
-      if (!!currentUser) {
-        setComponentUser(currentUser);
-      }
+  useEffect(() => {
+    props.getPilotProfiles();
+  }, []);
 
-      getPilotProfiles();
-      const { photoURL } = currentUser;
-
-      if (photoURL === "P") {
-        const profile = listOfPilotProfiles.find((pilot) => {
-          return pilot.userID === currentUser.uid;
-        });
-
+  const { currentUser } = firebase.auth();
+  if (currentUser && user != currentUser) {
+    setComponentUser(currentUser);
+  }
+  const { photoURL } = currentUser;
+  const unsubscribe = navigation.addListener("focus", () => {
+    if (photoURL === "P") {
+      console.log("currentUser.uid", currentUser.uid);
+      const profile = listOfPilotProfiles.find(
+        (x) => x.userID === currentUser.uid,
+      );
+      console.log("profile", profile);
+      if (profileDetails != profile) {
         setProfileDetails(profile);
-      } else if (params && profileDetails != params) {
-        setProfileDetails(params);
       }
-    },
-    [ user ],
-  );
+    } else if (params && profileDetails != params) {
+      setProfileDetails(params);
+    }
+  });
 
   const renderProfileStatsItem = (titleString = "", specsValue = "") => {
     return (
@@ -101,7 +102,8 @@ function PilotProfileWelcomeScreen(props) {
         onPress={() =>
           navigation.navigate(CHAT, {
             ...profileData,
-          })}
+          })
+        }
       >
         <Text style={styles.chatText}>{chat}</Text>
       </TouchableOpacity>
@@ -172,22 +174,15 @@ function PilotProfileWelcomeScreen(props) {
     uri: profileImageUrl,
   };
 
-  const { photoURL } = user;
-  // todo change this to an actual boolean, true/false
-  const hasUserPhoto = photoURL !== "P";
-
   return (
     <View style={styles.container}>
-      {isProfileComplete && (
+      {profileDetails.profileComplete === "Yes" ? (
         <ScrollView style={styles.scrollViewStyle}>
           <Image source={princePic01} style={styles.backgroundImage} />
           <Image style={styles.profilePic} source={profileImg} />
-
+          {renderTouchableEditIcon()}
           <View style={styles.fullNameAndIcon}>
             <Text style={styles.nameText}>{getPilotFullName()}</Text>
-
-            {hasUserPhoto && renderTouchableChatIcon(profileDetails)}
-            {!hasUserPhoto && renderTouchableEditIcon()}
           </View>
 
           <Text style={styles.locationText}>
@@ -205,16 +200,13 @@ function PilotProfileWelcomeScreen(props) {
           {renderProfileStatsItem(experienceAirMap, airMap)}
           {renderProfileStatsItem(abilityOver400Ft, fourHundred)}
         </ScrollView>
-      )}
-
-      {!isProfileComplete && (
+      ) : (
         <ScrollView style={styles.scrollViewStyle}>
           <Image
             source={princePic01}
             style={styles.backgroundImageStartingPage}
           />
-          {hasUserPhoto && renderChatView()}
-          {!hasUserPhoto && renderStartProfileView()}
+          {renderStartProfileView()}
         </ScrollView>
       )}
     </View>

@@ -97,7 +97,7 @@ function PilotSignUpScreen(props) {
     >
       <View style={styles.wrapper}>
         <Text style={styles.textMain}>Create your pilot account</Text>
-        <TouchableOpacity style={styles.textWrapper}>
+        <View style={styles.textWrapper}>
           <TextInput
             placeholder="First Name"
             value={pilotFirstName}
@@ -121,23 +121,24 @@ function PilotSignUpScreen(props) {
           />
           <TextInput
             keyboardType={"email-address"}
-            placeholder="email"
+            placeholder="Email"
             value={email}
             onChangeText={setEmail}
             style={styles.input}
             placeholderTextColor="grey"
           />
           <TextInput
-            placeholder="password"
+            placeholder="Password"
             secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
             style={styles.input}
             placeholderTextColor="grey"
           />
-
-          <Button title="Sign up" onPress={signUp} />
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={signUp}>
+            <Text style={styles.buttontext}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -150,12 +151,11 @@ const styles = StyleSheet.create({
     height: "120%",
   },
   textMain: {
-    marginTop: "25%",
-    marginBottom: "5%",
+    marginTop: "5%",
+    marginBottom: "10%",
     fontSize: 30,
     color: "darkblue",
     fontWeight: "600",
-    textAlign: "center",
   },
   textSub: {
     marginTop: "25%",
@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   textWrapper: {
-    marginBottom: 20,
     alignItems: "center",
     borderRadius: 15,
     backgroundColor: "#092455",
@@ -182,6 +181,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontSize: 15,
+  },
+  button: {
+    backgroundColor: 'lightgray',
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 35,
+    width: 200
+    // paddingLeft: 20,
+    // paddingRight: 20
+  },
+  buttontext: {
+    fontSize: 20,
+    color: 'darkblue'
   },
   dummyText: {
     marginTop: 200,

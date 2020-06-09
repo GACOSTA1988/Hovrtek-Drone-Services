@@ -48,11 +48,11 @@ const ClientLocationPicker = () => {
       : renderClientLocationButton("Please Set Location");
   };
 
-  const renderTextInput = (location, setLocation) => {
+  const renderTextInput = () => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLocation} value={location}
+          style={styles.input} onChangeText={setLocation} value={locationState}
         />
       </View>
     );
@@ -70,7 +70,7 @@ const ClientLocationPicker = () => {
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
-          {renderTextInput(location, setLocation)}
+          {renderTextInput()}
           <View styles={styles.cancelWrapper}>
             <Button onPress={closeModal} title={"Choose"} />
           </View>

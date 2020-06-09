@@ -22,7 +22,7 @@ export function postProjects(
   light,
   pilotID
 ) {
-  return (dispatch) => {
+  return () => {
     firebase
       .database()
       .ref("/projects")
@@ -31,13 +31,13 @@ export function postProjects(
 }
 
 export function deleteProject(key) {
-  return (dispatch) => {
+  return () => {
     firebase.database().ref(`/projects/${key}`).remove();
   };
 }
 
 export function editProject(location, date, recording, key) {
-  return (dispatch) => {
+  return () => {
     firebase
       .database()
       .ref(`/projects`)
@@ -47,7 +47,7 @@ export function editProject(location, date, recording, key) {
 }
 
 export function acceptJob(pilotID, key) {
-  return (dispatch) => {
+  return () => {
     firebase.database().ref(`/projects`).child(key).update({ pilotID });
   };
 }

@@ -5,13 +5,14 @@ import {
   Button,
   Modal,
   StyleSheet,
-  Picker,
   TouchableOpacity,
+  TextInput
 } from "react-native";
 import {
   PassSetLight,
   PassLightState,
 } from "../screens/client/NewProjectScreenOne";
+import RadioForm from "react-native-simple-radio-button";
 
 const ClientLightPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -19,78 +20,56 @@ const ClientLightPicker = () => {
   const setLight = useContext(PassSetLight);
   const light = useContext(PassLightState);
 
-  const openModal = () => {
-    setIsModalVisible(true);
-  };
+  let radio_props = [
+    { label: "Yes", value: true },
+    { label: "No", value: false },
+  ];
 
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
-
-  const renderClientLightButton = (buttonText) => {
+  const renderTextInput = () => {
     return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={openModal}
-        title={"Open modal"}
-      >
-        <Text style={styles.buttonText}>{buttonText}</Text>
-      </TouchableOpacity>
-    )
-  }
-
-  const renderClientLight = (hasClientLight) => {
-    return hasClientLight
-      ? renderClientLightButton(light)
-      : renderClientLightButton("Set lighting")
-  }
+      <View>
+        <TextInput
+          style={styles.input} onChangeText={setLight} value={light}
+        />
+      </View>
+    );
+  };
 
   return (
-    <View style={styles.container}>
+    <View>
+    <RadioForm
+      labelStyle={styles.radiobutton}
+      animation={true}
+      selectedButtonColor={"#092455"}
+      labelColor={"#092455"}
+      buttonColor={"#092455"}
+      formHorizontal={true}
+      radio_props={radio_props}
+      initial={1}
+      onPress={(value) => {
+        setIsModalVisible(value);
+      }}
+      />
       <Modal
         transparent={true}
         visible={isModalVisible}
         animationType={"slide"}
-        onRequestClose={() => closeModal()}
+        onRequestClose={() => setIsModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              So you have any light specifications?
+              Enter light specifications:
             </Text>
           </View>
           <View>
-            <Picker
-              selectedValue={light}
-              onValueChange={(light, itemIndex) => setLight(light)}
-            >
-              <Picker.Item label="No" value="No" />
-              <Picker.Item label="Yes" value="Yes" />
-            </Picker>
+              {renderTextInput()}
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
+            <Button onPress={() => setIsModalVisible(false)} title={"Save"}></Button>
           </View>
         </View>
       </Modal>
-
-      {light ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>{light}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={openModal}
-          title={"Open modal"}
-        >
-          <Text style={styles.buttonText}>No Insurance{setLight("No")}</Text>
-        </TouchableOpacity>
-      )}
     </View>
   );
 };
@@ -111,14 +90,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  picker: {
-    height: 50,
-    width: 150,
-  },
   modalText: {
     fontSize: 20,
   },
-  cancelWrapper: {},
   button: {
     width: 250,
     height: 50,
@@ -133,6 +107,20 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
   },
+  radiobutton: {
+    paddingRight: '5%',
+  }, 
+  input: {
+    marginTop: 20,
+    height: 90,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
+    padding: 5,
+  },
+  modalShowing: {
+    opacity: .5,
+  }
 });
 
 export default ClientLightPicker;

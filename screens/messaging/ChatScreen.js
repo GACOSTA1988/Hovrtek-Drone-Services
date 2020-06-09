@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import {
   TouchableOpacity,
   View,
@@ -34,6 +34,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   const navigation = useNavigation();
 
   const [body, setBody] = useState("");
+  const listRef = useRef(null);
 
   useEffect(() => {
     props.getMessages();
@@ -123,39 +124,43 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 
   return (
     <View style={styles.container}>
-      <KeyboardAwareScrollView style={styles.messagesScroll}>
-        <FlatList
-          style={styles.messagesList}
-          data={conversation}
-          keyExtractor={(item) => item.key}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.messagingContainer}>
-                <View>
-                  {item.isNewTimestamp ? (
-                    <View>
-                      <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
-                      <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
-                    </View>
-                  ) : (
-                    <Text>OLD Message sent at: {item.timestamp}</Text>
-                  )}
-                  <Text>Message body: {item.body} </Text>
-                  {item.read ? (
-                    <FontAwesome5
-                      name="check-circle"
-                      size={15}
-                      style={{ textAlign: "right" }}
-                    />
-                  ) : (
-                    // todo: filled in check circle when read, outline when not
-                    <Text></Text>
-                  )}
+      <KeyboardAwareScrollView 
+        ref={listRef}
+        onLayout={() => listRef.current.scrollToEnd( {animated: false} )}
+        onContentSizeChange={() => listRef.current.scrollToEnd()}
+        style={styles.messagesScroll}>
+          <FlatList
+            style={styles.messagesList}
+            data={conversation}
+            keyExtractor={(item) => item.key}
+            renderItem={({ item }) => {
+              return (
+                <View style={styles.messagingContainer}>
+                  <View>
+                    {item.isNewTimestamp ? (
+                      <View>
+                        <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
+                        <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
+                      </View>
+                    ) : (
+                      <Text>OLD Message sent at: {item.timestamp}</Text>
+                    )}
+                    <Text>Message body: {item.body} </Text>
+                    {item.read ? (
+                      <FontAwesome5
+                        name="check-circle"
+                        size={15}
+                        style={{ textAlign: "right" }}
+                      />
+                    ) : (
+                      // todo: filled in check circle when read, outline when not
+                      <Text></Text>
+                    )}
+                  </View>
                 </View>
-              </View>
-            );
-          }}
-        />
+              );
+            }}
+          />
       </KeyboardAwareScrollView>
       <View style={styles.writeContainer}>
         <TextInput
@@ -188,7 +193,8 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%"
+    height: "100%",
+    // flex: 1,
   },
   messagesScroll: {
     // flex: 1,
@@ -209,7 +215,7 @@ const styles = StyleSheet.create({
   },
   messagesList: {
     width: "100%",
-    marginTop: 20
+    marginTop: 20,
   },
   writeContainer: {
     flexDirection: "row",

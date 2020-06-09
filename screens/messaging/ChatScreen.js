@@ -35,6 +35,8 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 
   const [body, setBody] = useState("");
   const listRef = useRef(null);
+  const listRef2 = useRef(null);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
     props.getMessages();
@@ -71,13 +73,15 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
         message.userOneID === sender.uid &&
         message.userTwoID === recipient.userID
       ) {
+        message.author = 'sender';
         conversation.push(message);
       } else if (
         message.userOneID === recipient.userID &&
         message.userTwoID === sender.uid
-      ) {
-        conversation.push(message);
-      }
+        ) {
+          message.author = 'recipient';
+          conversation.push(message);
+        }
     });
   }
 
@@ -125,17 +129,19 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView 
+        onKeyboardWillShow={() => setKeyboardOpen(true)}
+        onKeyboardWillHide={() => setKeyboardOpen(false)}
         ref={listRef}
         onLayout={() => listRef.current.scrollToEnd( {animated: false} )}
         onContentSizeChange={() => listRef.current.scrollToEnd()}
         style={styles.messagesScroll}>
           <FlatList
-            style={styles.messagesList}
+            style={keyboardOpen ? styles.messagesListOpen : styles.messagesList}
             data={conversation}
             keyExtractor={(item) => item.key}
             renderItem={({ item }) => {
               return (
-                <View style={styles.messagingContainer}>
+                <View style={item.author === 'sender' ? styles.messagingContainer : styles.messagingContainerRecipient}>
                   <View>
                     {item.isNewTimestamp ? (
                       <View>
@@ -161,7 +167,8 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
               );
             }}
             />
-        <View style={styles.writeContainer}>
+
+        <View style={keyboardOpen ? styles.writeContainerKeyboardOpen : styles.writeContainer}>
           <TextInput
             multiline={true}
             // onContentSizeChange={(event) => {
@@ -205,14 +212,26 @@ const styles = StyleSheet.create({
   messagingContainer: {
     borderRadius: 15,
     backgroundColor: "#3E90D0",
-    marginVertical: 15,
+    marginVertical: 5,
     padding: 20,
+    marginLeft: '15%'
+  },
+  messagingContainerRecipient: {
+    borderRadius: 15,
+    backgroundColor: "lightgray",
+    marginVertical: 5,
+    padding: 20,
+    marginRight: '15%'
   },
   messagesList: {
     width: "100%",
     marginTop: 20,
-    marginBottom: 60
-
+    marginBottom: 70,
+  },
+  messagesListOpen: {
+    width: "100%",
+    marginTop: 20,
+    marginBottom: 10,
   },
   writeContainer: {
     flexDirection: "row",
@@ -220,6 +239,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     marginTop: 10,
+    marginBottom: 10
+    },
+  writeContainerKeyboardOpen: {
+    flexDirection: "row",
+    alignItems: "center",
+    // position: "relative",
+    // bottom: 343,
+    // marginTop: 10,
     marginBottom: 10
     },
   input: {

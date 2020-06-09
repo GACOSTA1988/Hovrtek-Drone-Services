@@ -46,8 +46,8 @@ function PilotProfileWelcomeScreen(props) {
     getPilotProfiles,
   } = props;
 
-  const [profileDetails, setProfileDetails] = useState(null);
-  const [user, setComponentUser] = useState(null);
+  const [ profileDetails, setProfileDetails ] = useState(null);
+  const [ user, setComponentUser ] = useState(null);
 
   useEffect(() => {
     props.getPilotProfiles();
@@ -61,9 +61,7 @@ function PilotProfileWelcomeScreen(props) {
   const unsubscribe = navigation.addListener("focus", () => {
     if (photoURL === "P") {
       console.log("currentUser.uid", currentUser.uid);
-      const profile = listOfPilotProfiles.find(
-        (x) => x.userID === currentUser.uid,
-      );
+      const profile = listOfPilotProfiles.find((x) => x.userID === currentUser.uid);
       console.log("profile", profile);
       if (profileDetails != profile) {
         setProfileDetails(profile);
@@ -72,6 +70,7 @@ function PilotProfileWelcomeScreen(props) {
       setProfileDetails(params);
     }
   });
+
 
   const renderProfileStatsItem = (titleString = "", specsValue = "") => {
     return (
@@ -84,10 +83,10 @@ function PilotProfileWelcomeScreen(props) {
 
   const renderTouchableEditIcon = () => {
     return (
-      <TouchableOpacity onPress={() => navigation.push(PILOT_SETUP_ONE)}>
+      <TouchableOpacity onPress={() => navigation.push(PILOT_SETUP_ONE)} style={styles.iconTO}>
         <AntDesign
           name="edit"
-          size={30}
+          size={35}
           color="darkblue"
           style={styles.iconStyle}
         />
@@ -102,8 +101,7 @@ function PilotProfileWelcomeScreen(props) {
         onPress={() =>
           navigation.navigate(CHAT, {
             ...profileData,
-          })
-        }
+          })}
       >
         <Text style={styles.chatText}>{chat}</Text>
       </TouchableOpacity>
@@ -131,16 +129,6 @@ function PilotProfileWelcomeScreen(props) {
         <View style={styles.alignItemsCenter}>
           {renderTouchableStartPilotProfileText()}
         </View>
-      </View>
-    );
-  };
-
-  const renderChatView = () => {
-    return (
-      <View>
-        {renderTouchableChatIcon(profileDetails)}
-        <Text style={styles.nameText}>{getPilotFullName()}</Text>
-        <Text style={styles.welcomeText}>{pilotProfileNotCreated}</Text>
       </View>
     );
   };
@@ -176,22 +164,21 @@ function PilotProfileWelcomeScreen(props) {
 
   return (
     <View style={styles.container}>
-      {profileDetails.profileComplete === "Yes" ? (
+      {(profileDetails.profileComplete === "Yes") ? (
         <ScrollView style={styles.scrollViewStyle}>
           <Image source={princePic01} style={styles.backgroundImage} />
           <Image style={styles.profilePic} source={profileImg} />
-          {renderTouchableEditIcon()}
           <View style={styles.fullNameAndIcon}>
             <Text style={styles.nameText}>{getPilotFullName()}</Text>
+            {currentUser.photoURL === "P" ? renderTouchableEditIcon() : renderTouchableChatIcon(profileDetails)}
+
           </View>
 
           <Text style={styles.locationText}>
             {location} {pilotLocation}
           </Text>
-
           <Text style={styles.specTitle}>{bio}</Text>
           <Text style={styles.personalBioStyle}>{personalBio}</Text>
-
           {renderProfileStatsItem(droneModel, droneType)}
           {renderProfileStatsItem(yearsOfExperienceStr, yearsOfExperience)}
           {renderProfileStatsItem(licenseExpirationDate, faaLicenseExp)}
@@ -225,7 +212,6 @@ const styles = StyleSheet.create({
   fullName: {
     flexDirection: "row",
     display: "flex",
-    justifyContent: "center",
     marginBottom: 40,
   },
   fullNameAndIcon: {
@@ -252,14 +238,14 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "600",
     textAlign: "left",
-    marginLeft: "2%",
+    marginLeft: "4%",
   },
   locationText: {
     fontSize: 20,
     color: "black",
     fontWeight: "300",
     textAlign: "left",
-    marginLeft: "2%",
+    marginLeft: "4%",
   },
   button: {
     paddingHorizontal: 20,
@@ -275,9 +261,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
   },
-  iconStyle: {
-    marginLeft: 40,
-    marginTop: 25,
+  iconTO: {
+    position: "absolute",
+    right: "6%",
   },
   input: {
     borderWidth: 1,
@@ -309,14 +295,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "black",
     fontWeight: "200",
-    marginLeft: "2%",
+    marginLeft: "4%",
     marginTop: 8,
   },
   specTitle: {
     fontSize: 20,
     color: "black",
     fontWeight: "400",
-    marginLeft: "2%",
+    marginLeft: "4%",
     marginTop: 8,
   },
   specView: {
@@ -330,7 +316,7 @@ const styles = StyleSheet.create({
   },
   chatButton: {
     position: "absolute",
-    right: 0,
+    right: "4%",
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5,
@@ -353,7 +339,8 @@ const styles = StyleSheet.create({
   personalBioStyle: {
     fontSize: 15,
     color: "black",
-    marginLeft: "2%",
+    marginLeft: "4%",
+    marginRight: "5%",
     marginTop: "1%",
   },
 });

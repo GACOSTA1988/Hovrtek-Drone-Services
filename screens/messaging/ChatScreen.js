@@ -152,41 +152,41 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
                         size={15}
                         style={{ textAlign: "right" }}
                       />
-                    ) : (
-                      // todo: filled in check circle when read, outline when not
-                      <Text></Text>
-                    )}
+                      ) : (
+                        // todo: filled in check circle when read, outline when not
+                        <Text></Text>
+                        )}
                   </View>
                 </View>
               );
             }}
-          />
+            />
+        <View style={styles.writeContainer}>
+          <TextInput
+            multiline={true}
+            // onContentSizeChange={(event) => {
+              // setInputHeight(100) }}
+              placeholder="Send message..."
+              placeholderTextColor="grey"
+              value={body}
+              onChangeText={setBody}
+              enablesReturnKeyAutomatically={true}
+              onFocus={() => readMessages()}
+              style={styles.input}
+              />
+          <Ionicons
+            name="md-send"
+            size={30}
+            color="black"
+            onPress={send}
+            />
+          <AntDesign
+            style={styles.plus}
+            name="plus"
+            size={25}
+            />
+        </View>
       </KeyboardAwareScrollView>
-      <View style={styles.writeContainer}>
-        <TextInput
-          multiline={true}
-          // onContentSizeChange={(event) => {
-          // setInputHeight(100) }}
-          placeholder="Send message..."
-          placeholderTextColor="grey"
-          value={body}
-          onChangeText={setBody}
-          enablesReturnKeyAutomatically={true}
-          onFocus={() => readMessages()}
-          style={styles.input}
-        />
-        <Ionicons
-          name="md-send"
-          size={30}
-          color="black"
-          onPress={send}
-        />
-        <AntDesign
-          style={styles.plus}
-          name="plus"
-          size={25}
-        />
-      </View>
     </View>
   );
 }
@@ -194,34 +194,33 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    // flex: 1,
   },
   messagesScroll: {
-    // flex: 1,
-    // height: "80%",
     backgroundColor: "white",
     padding: 10,
-    marginBottom: 70
   },
   keyClosedContainer: {
     marginTop: "90%",
-    // backgroundColor: "lightgray",
   },
   messagingContainer: {
     borderRadius: 15,
     backgroundColor: "#3E90D0",
     marginVertical: 15,
-    padding: 20
+    padding: 20,
   },
   messagesList: {
     width: "100%",
     marginTop: 20,
+    marginBottom: 60
+
   },
   writeContainer: {
     flexDirection: "row",
     alignItems: "center",
     position: "absolute",
     bottom: 0,
+    marginTop: 10,
+    marginBottom: 10
     },
   input: {
     width: "80%",

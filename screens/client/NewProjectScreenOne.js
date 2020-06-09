@@ -67,7 +67,7 @@ function NewProjectScreenOne(props, { postProjects }) {
   return (
     <View style={styles.newProjectListWrapper}>
       <ScrollView>
-        <TouchableOpacity style={styles.newProjectListTextWrapper}>
+        <View style={styles.newProjectListTextWrapper}>
 
           <Text style={styles.newProjectText}>Create a New Project</Text>
 
@@ -105,7 +105,7 @@ function NewProjectScreenOne(props, { postProjects }) {
           </View>
 
           <Text style={styles.labelText}>
-            Do you have any light specification?
+            Do you have any light specifications?
           </Text>
           <View style={styles.modalWrapper}>
             <PassSetLight.Provider value={setLight}>
@@ -134,7 +134,7 @@ function NewProjectScreenOne(props, { postProjects }) {
             </TouchableOpacity>
           </View>
           
-        </TouchableOpacity>
+        </View>
   
       </ScrollView>
     </View>

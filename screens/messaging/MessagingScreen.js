@@ -85,7 +85,7 @@ function MessagingScreen(
       <View style={styles.titleWrapper}>
         <Text style={styles.title}>Messaging Screen</Text>
       </View>
-      {contacts ? (
+      {contacts.length > 0 ? (
         <FlatList
           data={contacts}
           keyExtractor={(item) => item.key}
@@ -176,7 +176,8 @@ function mapStateToProps(state) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    alignItems: 'center',
   },
   title: {
     marginTop: 40,

@@ -136,17 +136,30 @@ const styles = StyleSheet.create({
       android: {
         right: 10,
         top: 10,
+        marginRight: 5,
       },
     }),
   },
   dot: {
+    ...Platform.select({
+      ios: {
+        margin: 5,
+        position: "absolute",
+        bottom: 10,
+        right: 35,
+      },
+      android: {
+        margin: 10,
+        position: "absolute",
+        right: 0,
+        bottom: 6,
+      },
+    }),
     backgroundColor: "red",
-    margin: 5,
     width: 10,
     height: 10,
-    position: "absolute",
-    right: 35,
     borderRadius: 90,
+    zIndex: 2
   },
   note: {
     ...Platform.select({

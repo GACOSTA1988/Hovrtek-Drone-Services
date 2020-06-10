@@ -83,7 +83,7 @@ function MessagingScreen(
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
-        <Text style={styles.title}>Messaging Screen</Text>
+        <Text style={styles.title}>Messages</Text>
       </View>
       {contacts.length > 0 ? (
         <FlatList
@@ -134,7 +134,7 @@ function MessagingScreen(
           }}
         />
       ) : (
-        <Text>No contacts yet</Text>
+        <Text style={styles.textNoContacts}>No contacts yet</Text>
       )}
     </View>
   );
@@ -177,15 +177,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    alignItems: 'center',
   },
   title: {
     marginTop: 40,
     fontSize: 30,
     textAlign: "center",
+    color: '#092455',
   },
   contact: {
     paddingTop: 30,
+  },
+  textNoContacts:{
+    alignSelf: 'center',
+    marginTop: 20,
   },
   names: {
     fontSize: 20,

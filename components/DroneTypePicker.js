@@ -84,10 +84,9 @@ const DroneTypePicker = () => {
             </Picker>
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button
-              onPress={() => closeModal()}
-              title={APP_STRINGS.choose}
-            ></Button>
+          <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+            </TouchableOpacity> 
           </View>
         </View>
       </Modal>
@@ -135,6 +134,20 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
   },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '30%',
+  }
 });
 
 export default DroneTypePicker;

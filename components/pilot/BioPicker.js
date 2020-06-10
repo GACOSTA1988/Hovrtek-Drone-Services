@@ -8,19 +8,23 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import {
-  PassSetLocation,
-  PassLocationState,
-} from "../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
-import { APP_STRINGS } from "../constants/index";
+import { APP_STRINGS } from "../../constants/index";
 
-const ClientLocationPicker = () => {
-  const navigation = useNavigation();
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
+
+const {
+  workExperienceSet,
+  setWorkExperience,
+  choose,
+  briefSummary,
+  slide
+} = APP_STRINGS;
+
+const BioPicker = (props) => {
+  const { personalBio, setPersonalBio } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const setLocation = useContext(PassSetLocation);
-  const locationState = useContext(PassLocationState);
 
   const openModal = () => {
     setIsModalVisible(true);
@@ -30,53 +34,56 @@ const ClientLocationPicker = () => {
     setIsModalVisible(false);
   };
 
-  const renderClientLocationButton = (buttonText) => {
+  const renderPersonalBioButton = (buttonText = "") => {
+    const title = openModal;
     return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={openModal}
-        title={"Open modal"}
-      >
+      <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
         <Text style={styles.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
     );
   };
 
-  const renderClientLocation = (hasClientLocation) => {
-    return hasClientLocation
-      ? renderClientLocationButton(locationState)
-      : renderClientLocationButton("Please Set Location");
+  const renderPersonalBio = (hasPersonalBio = false) => {
+    return hasPersonalBio
+      ? renderPersonalBioButton(workExperienceSet)
+      : renderPersonalBioButton(setWorkExperience);
   };
 
-  const renderTextInput = () => {
+  const renderTextInput = (bio, setBio) => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLocation} value={locationState}
+          multiline={true}
+          style={styles.input}
+          onChangeText={setBio}
+          value={bio}
         />
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={APP_STRINGS.slide}
+        animationType={slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
+            <Text style={styles.modalText}>{briefSummary}</Text>
           </View>
-          {renderTextInput()}
+
+          {renderTextInput(personalBio, setPersonalBio)}
+
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"} />
+            <Button onPress={closeModal} title={choose} />
           </View>
         </View>
       </Modal>
-      {renderClientLocation(locationState)}
+
+      {renderPersonalBio(personalBio)}
     </View>
   );
 };
@@ -118,7 +125,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
   },
   input: {
     marginTop: 20,
@@ -129,4 +135,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ClientLocationPicker;
+export default BioPicker;

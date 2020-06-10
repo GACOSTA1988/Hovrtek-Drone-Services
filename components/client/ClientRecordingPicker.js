@@ -13,9 +13,9 @@ import {
 import {
   PassSetRecording,
   PassRecordingState,
-} from "../screens/client/NewProjectScreenOne";
+} from "../../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
-import { APP_STRINGS } from "../constants";
+import { APP_STRINGS } from "../../constants";
 
 const ClientRecordingPicker = () => {
   const navigation = useNavigation();
@@ -63,13 +63,10 @@ const ClientRecordingPicker = () => {
           </View>
           <View>
             <TextInput
-              style={{
-                height: 30,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
+              style={styles.textInput}
               onChangeText={setRecording}
               value={recordingState}
+              multiline={true}
             />
           </View>
           <View styles={styles.cancelWrapper}>
@@ -137,6 +134,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontSize: 20,
+  },
+  textInput: {
+    height: 30,
+    borderColor: "gray",
+    borderWidth: 1,
   },
 });
 

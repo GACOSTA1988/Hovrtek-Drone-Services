@@ -18,11 +18,11 @@ import {
 import * as firebase from "firebase";
 import _ from "lodash";
 
-import DatePicker from "../../components/DatePicker";
-import TravelStatusRadio from "../../components/TravelStatusRadio";
-import AirMapRadio from "../../components/AirMapRadio";
+import DatePicker from "../../components/pilot/DatePicker";
+import TravelStatusRadio from "../../components/pilot/TravelStatusRadio";
+import AirMapRadio from "../../components/pilot/AirMapRadio";
 import { AntDesign } from "@expo/vector-icons";
-import FourHundredRadio from "../../components/FourHundredRadio";
+import FourHundredRadio from "../../components/pilot/FourHundredRadio";
 
 // context hook stuff
 export const PassSetFaaLicenseContext = React.createContext();

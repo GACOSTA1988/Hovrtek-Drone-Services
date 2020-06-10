@@ -7,8 +7,8 @@ import ClientProfileScreen from "../screens/client/ClientProfileScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import MyJobsScreen from "../screens/pilot/MyJobsScreen.js";
-import MainHeader from "../components/MainHeader";
-import NestedHeader from "../components/NestedHeader";
+import MainHeader from "../components/shared/MainHeader";
+import NestedHeader from "../components/shared/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const HomeStack = createStackNavigator();

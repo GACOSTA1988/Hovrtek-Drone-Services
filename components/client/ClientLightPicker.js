@@ -11,7 +11,7 @@ import {
 import {
   PassSetLight,
   PassLightState,
-} from "../screens/client/NewProjectScreenOne";
+} from "../../screens/client/NewProjectScreenOne";
 import RadioForm from "react-native-simple-radio-button";
 
 const ClientLightPicker = () => {
@@ -29,7 +29,10 @@ const ClientLightPicker = () => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLight} value={light}
+          multiline={true}
+          style={styles.input}
+          onChangeText={setLight}
+          value={light}
         />
       </View>
     );
@@ -59,7 +62,7 @@ const ClientLightPicker = () => {
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              Enter light specifications:
+              Enter light specifications:afbsafwsg
             </Text>
           </View>
           <View>

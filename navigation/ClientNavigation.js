@@ -12,8 +12,8 @@ import MessagingNavigation from './MessagingNavigation';
 import ChatScreen from '../screens/messaging/ChatScreen';
 import GoHomeButton from '../screens/client/GoHomeButton';
 import ClientHomeStackNavigator from "./ClientHomeStackNavigator";
-import MainHeader from '../components/MainHeader';
-import NestedHeader from '../components/NestedHeader';
+import MainHeader from '../components/shared/MainHeader';
+import NestedHeader from '../components/shared/NestedHeader';
 
 const ClientDrawer = createDrawerNavigator();
 const AboutStack = createStackNavigator();

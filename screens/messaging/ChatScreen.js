@@ -37,6 +37,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   const listRef = useRef(null);
   const listRef2 = useRef(null);
   const [keyboardOpen, setKeyboardOpen] = useState(false);
+  const [behavior, setBehavior] = useState(null);
 
   useEffect(() => {
     props.getMessages();
@@ -126,11 +127,24 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
     setBody("");
   };
 
+  function openKeyboard() {
+    setBehavior('padding');
+    setKeyboardOpen(true);
+  }
+
+  function closeKeyboard() {
+    setBehavior(null);
+    setKeyboardOpen(false);
+  }
+
   return (
-    <View style={styles.container}>
-      <KeyboardAwareScrollView 
-        onKeyboardWillShow={() => setKeyboardOpen(true)}
-        onKeyboardWillHide={() => setKeyboardOpen(false)}
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS == 'ios' ? behavior : null}
+      keyboardVerticalOffset={180}>
+      <ScrollView 
+        onKeyboardWillShow={openKeyboard}
+        onKeyboardWillHide={closeKeyboard}
         ref={listRef}
         onLayout={() => listRef.current.scrollToEnd( {animated: false} )}
         onContentSizeChange={() => listRef.current.scrollToEnd()}
@@ -167,8 +181,9 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
               );
             }}
             />
+          </ScrollView>
 
-        <View style={keyboardOpen ? styles.writeContainerKeyboardOpen : styles.writeContainer}>
+        <View style={styles.writeContainer}>
           <TextInput
             multiline={true}
             // onContentSizeChange={(event) => {
@@ -193,9 +208,9 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
             size={25}
             />
         </View>
-      </KeyboardAwareScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
+  
 }
 
 const styles = StyleSheet.create({
@@ -226,7 +241,7 @@ const styles = StyleSheet.create({
   messagesList: {
     width: "100%",
     marginTop: 20,
-    marginBottom: 70,
+    marginBottom: 20,
   },
   messagesListOpen: {
     width: "100%",
@@ -236,8 +251,8 @@ const styles = StyleSheet.create({
   writeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    position: "absolute",
-    bottom: 0,
+    // position: "absolute",
+    // bottom: 0,
     marginTop: 10,
     marginBottom: 10
     },

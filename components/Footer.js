@@ -43,6 +43,13 @@ function Footer() {
         <View style={styles.footerWrapper}>
           <View style={styles.mediaButton}>
             <TouchableOpacity onPress={goToLinkedin}>
+              <Icon name="linkedin"
+              size={35}
+              style={styles.icon}
+              color="white">
+              </Icon>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={goToFacebook}>
               <Icon
               name="facebook"
               size={30}
@@ -58,13 +65,6 @@ function Footer() {
               style={styles.icon}>
               </Icon>
             </TouchableOpacity>
-            <TouchableOpacity onPress={goToFacebook}>
-              <Icon name="linkedin"
-              size={35}
-              style={styles.icon}
-              color="white">
-              </Icon>
-            </TouchableOpacity>
           </View>
         </View>
       ) : (
@@ -74,13 +74,8 @@ function Footer() {
   );
 };
 
-// todo: figure out how to put margins on icons
 const styles = StyleSheet.create({
   footerWrapper: {
-    // position: "absolute",
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
     backgroundColor: "#092455",
     height: 90,
     borderTopColor: "grey",

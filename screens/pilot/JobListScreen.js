@@ -93,6 +93,8 @@ function JobListScreen(
       <View style={styles.subheaderWrapper}>
         <PilotSubheader />
       </View>
+      
+      <Text style={styles.pilotText}>Available Projects</Text>
 
       <ScrollView>
         <View style={styles.projectCard}>
@@ -199,6 +201,10 @@ const styles = StyleSheet.create({
   },
   subheaderWrapper: {
     marginBottom: 14,
+  },
+  pilotText: {
+    fontSize: 30,
+    color: "darkblue",
   },
 });
 

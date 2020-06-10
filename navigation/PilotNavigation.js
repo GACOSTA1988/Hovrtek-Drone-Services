@@ -8,8 +8,8 @@ import PilotHomeStackNavigator from "./PilotHomeStackNavigator";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import SignOutScreen from "../screens/auth/SignOutScreen";
 import MessagingNavigation from './MessagingNavigation';
-import MainHeader from '../components/MainHeader';
-import NestedHeader from '../components/NestedHeader';
+import MainHeader from '../components/shared/MainHeader';
+import NestedHeader from '../components/shared/NestedHeader';
 
 const PilotDrawer = createDrawerNavigator();
 const AboutStack = createStackNavigator();

@@ -6,79 +6,76 @@ import {
   Modal,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
+  TextInput
 } from "react-native";
 import {
-  PassSetLocation,
-  PassLocationState,
-} from "../screens/client/NewProjectScreenOne";
-import { useNavigation } from "@react-navigation/native";
+  PassSetLight,
+  PassLightState,
+} from "../../screens/client/NewProjectScreenOne";
+import RadioForm from "react-native-simple-radio-button";
 import { APP_STRINGS } from "../constants/index";
 
-const ClientLocationPicker = () => {
-  const navigation = useNavigation();
+const ClientLightPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const setLocation = useContext(PassSetLocation);
-  const locationState = useContext(PassLocationState);
+  const setLight = useContext(PassSetLight);
+  const light = useContext(PassLightState);
 
-  const openModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
-
-  const renderClientLocationButton = (buttonText) => {
-    return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={openModal}
-        title={"Open modal"}
-      >
-        <Text style={styles.buttonText}>{buttonText}</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  const renderClientLocation = (hasClientLocation) => {
-    return hasClientLocation
-      ? renderClientLocationButton(locationState)
-      : renderClientLocationButton("Please Set Location");
-  };
+  let radio_props = [
+    { label: "Yes", value: true },
+    { label: "No", value: false },
+  ];
 
   const renderTextInput = () => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLocation} value={locationState}
+          multiline={true}
+          style={styles.input}
+          onChangeText={setLight}
+          value={light}
         />
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View>
+    <RadioForm
+      labelStyle={styles.radiobutton}
+      animation={true}
+      selectedButtonColor={"#092455"}
+      labelColor={"#092455"}
+      buttonColor={"#092455"}
+      formHorizontal={true}
+      radio_props={radio_props}
+      initial={1}
+      onPress={(value) => {
+        setIsModalVisible(value);
+      }}
+      />
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={APP_STRINGS.slide}
-        onRequestClose={closeModal}
+        animationType={"slide"}
+        onRequestClose={() => setIsModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
+            <Text style={styles.modalText}>
+              Enter light specifications:afbsafwsg
+            </Text>
           </View>
-          {renderTextInput()}
+          <View>
+              {renderTextInput()}
+          </View>
           <View styles={styles.cancelWrapper}>
-            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
-              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+          <TouchableOpacity style={styles.chatButton} onPress={() => setIsModalVisible(false)}>
+              <Text style={styles.chatText}>{APP_STRINGS.save}</Text>
             </TouchableOpacity> 
           </View>
         </View>
       </Modal>
-      {renderClientLocation(locationState)}
     </View>
   );
 };
@@ -99,14 +96,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  picker: {
-    height: 50,
-    width: 150,
-  },
   modalText: {
     fontSize: 20,
   },
-  cancelWrapper: {},
   button: {
     width: 250,
     height: 50,
@@ -120,14 +112,24 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
   },
+  radiobutton: {
+    paddingRight: '5%',
+  }, 
   input: {
     marginTop: 20,
     height: 90,
     borderColor: "gray",
     borderWidth: 1,
     marginBottom: 20,
+    padding: 5,
+  },
+  modalShowing: {
+    opacity: .5,
+  }, chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
   },
   chatText: {
     fontWeight: "bold",
@@ -145,4 +147,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ClientLocationPicker;
+export default ClientLightPicker;

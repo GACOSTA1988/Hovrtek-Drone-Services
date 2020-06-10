@@ -7,7 +7,7 @@ import {
   Alert,
   Platform,
 } from "react-native";
-import { NotificationContext } from "../context";
+import { NotificationContext } from "../../context";
 
 const Notification = () => {
   const noteContext = useContext(NotificationContext);

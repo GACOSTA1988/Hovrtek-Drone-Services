@@ -14,10 +14,10 @@ import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
-import ClientDatePicker from '../../components/ClientDatePicker';
-import ClientLocationPicker from '../../components/ClientLocationPicker';
-import ClientRecordingPicker from '../../components/ClientRecordingPicker';
-import ClientLightPicker from '../../components/ClientLightPicker';
+import ClientDatePicker from '../../components/client/ClientDatePicker';
+import ClientLocationPicker from '../../components/client/ClientLocationPicker';
+import ClientRecordingPicker from '../../components/client/ClientRecordingPicker';
+import ClientLightPicker from '../../components/client/ClientLightPicker';
 import ClientCreateNewProjectNavigation from "../../navigation/ClientCreateNewProjectNavigation";
 
 // CONTEXT HOOKS FOR MODAL FORMS

@@ -4,8 +4,8 @@ import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScree
 import PilotProfileSetupPageOneScreen from "../screens/pilot/PilotProfileSetupPageOneScreen";
 import PilotProfileSetupPageTwoScreen from "../screens/pilot/PilotProfileSetupPageTwoScreen";
 import PilotProfileImageUploadScreen from "../screens/pilot/PilotProfileImageUploadScreen";
-import MainHeader from "../components/MainHeader";
-import NestedHeader from "../components/NestedHeader";
+import MainHeader from "../components/shared/MainHeader";
+import NestedHeader from "../components/shared/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();

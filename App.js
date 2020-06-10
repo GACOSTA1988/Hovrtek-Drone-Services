@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
-import Footer from "./components/Footer";
+import Footer from "./components/shared/Footer";
 import * as firebase from "firebase";
 import {
   clientNavigation,

@@ -23,12 +23,12 @@ function AcceptJobScreen(props, { acceptJob }) {
     <View style={styles.container}>
       <Text style={styles.servicesText}>Are you sure?</Text>
       <View style={styles.wrapper}>
-      <TouchableOpacity style={styles.chatButton} onPress={accept}>
-      <Text style={styles.chatText}> Yes </Text>
-      </TouchableOpacity> 
-      <TouchableOpacity style={styles.chatButton} onPress={() => props.navigation.goBack()}>
-      <Text style={styles.chatText}> Cancel </Text>  
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.chatButton} onPress={accept}>
+          <Text style={styles.chatText}> Yes </Text>
+        </TouchableOpacity> 
+        <TouchableOpacity style={styles.chatButton} onPress={() => props.navigation.goBack()}>
+          <Text style={styles.chatText}> Cancel </Text>  
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -22,6 +22,7 @@ const APP_STRINGS = {
   openModal: "Open modal",
   pilotProfileNotCreated: "This pilot has not created their profile yet",
   pleaseSetLocation: "Please Set Location",
+  save: 'Save',
   saveAndContinue: "Save and Continue",
   setWorkExperience: "Please Set Work Experience",
   slide: "slide",

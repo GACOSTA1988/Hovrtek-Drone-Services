@@ -11,9 +11,9 @@ import {
 import {
   PassSetLocation,
   PassLocationState,
-} from "../screens/client/NewProjectScreenOne";
+} from "../../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
-import { APP_STRINGS } from "../constants/index";
+import { APP_STRINGS } from "../../constants/index";
 
 const ClientLocationPicker = () => {
   const navigation = useNavigation();
@@ -52,7 +52,10 @@ const ClientLocationPicker = () => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLocation} value={locationState}
+          style={styles.input}
+          maxLength={26}
+          onChangeText={setLocation}
+          value={locationState}
         />
       </View>
     );
@@ -72,7 +75,9 @@ const ClientLocationPicker = () => {
           </View>
           {renderTextInput()}
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"} />
+            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+            </TouchableOpacity> 
           </View>
         </View>
       </Modal>
@@ -127,6 +132,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
   },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '30%',
+  }
 });
 
 export default ClientLocationPicker;

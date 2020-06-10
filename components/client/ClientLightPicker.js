@@ -11,8 +11,9 @@ import {
 import {
   PassSetLight,
   PassLightState,
-} from "../screens/client/NewProjectScreenOne";
+} from "../../screens/client/NewProjectScreenOne";
 import RadioForm from "react-native-simple-radio-button";
+import { APP_STRINGS } from "../constants/index";
 
 const ClientLightPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -29,7 +30,10 @@ const ClientLightPicker = () => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLight} value={light}
+          multiline={true}
+          style={styles.input}
+          onChangeText={setLight}
+          value={light}
         />
       </View>
     );
@@ -59,14 +63,16 @@ const ClientLightPicker = () => {
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              Enter light specifications:
+              Enter light specifications:afbsafwsg
             </Text>
           </View>
           <View>
               {renderTextInput()}
           </View>
           <View styles={styles.cancelWrapper}>
-            <Button onPress={() => setIsModalVisible(false)} title={"Save"}></Button>
+          <TouchableOpacity style={styles.chatButton} onPress={() => setIsModalVisible(false)}>
+              <Text style={styles.chatText}>{APP_STRINGS.save}</Text>
+            </TouchableOpacity> 
           </View>
         </View>
       </Modal>
@@ -120,6 +126,24 @@ const styles = StyleSheet.create({
   },
   modalShowing: {
     opacity: .5,
+  }, chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '30%',
   }
 });
 

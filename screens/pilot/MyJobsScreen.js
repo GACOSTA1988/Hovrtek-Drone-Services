@@ -49,6 +49,7 @@ function MyJobsScreen(props, { getProjects }) {
         <PilotSubheader />
       </View>
       <View style={styles.scrollViewWrapper}>
+        <Text style={styles.pilotText}>My Jobs</Text>
         <ScrollView>
           <View style={styles.projectCard}>
             <TouchableOpacity>
@@ -111,6 +112,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   subheaderWrapper: {
+    marginBottom: 14,
+  },
+  pilotText: {
+    fontSize: 30,
+    color: "darkblue",
     marginBottom: 14,
   },
 });

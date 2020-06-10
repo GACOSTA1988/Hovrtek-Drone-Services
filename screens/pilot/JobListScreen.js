@@ -78,7 +78,7 @@ function JobListScreen(
           >
             <View style={styles.textRow}>
               <Text style={styles.profileCompleteNoticeText}>
-                Click here to complete your profile to be eligable for jobs!
+                Click here to complete your profile to be eligible for jobs!
               </Text>
             </View>
             <View>
@@ -93,10 +93,12 @@ function JobListScreen(
       <View style={styles.subheaderWrapper}>
         <PilotSubheader />
       </View>
+      
+      <Text style={styles.pilotText}>Available Projects</Text>
 
       <ScrollView>
         <View style={styles.projectCard}>
-          <TouchableOpacity>
+          <View>
             <FlatList
               style={{ width: "100%" }}
               data={availableProjects}
@@ -152,7 +154,7 @@ function JobListScreen(
                 );
               }}
             />
-          </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -183,7 +185,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     backgroundColor: "white",
-    zIndex: 1,
   },
   textRow: {
     marginRight: 10,
@@ -191,8 +192,6 @@ const styles = StyleSheet.create({
   profileCompleteNoticeWrapper: {
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 1,
-    // backgroundColor: "blue",
     marginTop: "45%",
     height: "100%",
   },
@@ -202,6 +201,10 @@ const styles = StyleSheet.create({
   },
   subheaderWrapper: {
     marginBottom: 14,
+  },
+  pilotText: {
+    fontSize: 30,
+    color: "darkblue",
   },
 });
 

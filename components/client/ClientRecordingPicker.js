@@ -13,9 +13,9 @@ import {
 import {
   PassSetRecording,
   PassRecordingState,
-} from "../screens/client/NewProjectScreenOne";
+} from "../../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
-import { APP_STRINGS } from "../constants";
+import { APP_STRINGS } from "../../constants";
 
 const ClientRecordingPicker = () => {
   const navigation = useNavigation();
@@ -63,18 +63,15 @@ const ClientRecordingPicker = () => {
           </View>
           <View>
             <TextInput
-              style={{
-                height: 30,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
+              style={styles.textInput}
               onChangeText={setRecording}
               value={recordingState}
+              multiline={true}
             />
           </View>
-          <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={"Choose"}></Button>
-          </View>
+          <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+            <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+          </TouchableOpacity> 
         </View>
       </Modal>
 
@@ -121,6 +118,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 20,
+    marginBottom: 10,
   },
   cancelWrapper: {},
   button: {
@@ -138,6 +136,25 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
+  textInput: {
+    height: 30,
+    borderColor: "gray",
+    borderWidth: 1,
+  },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '15%',
+  }
 });
 
 export default ClientRecordingPicker;

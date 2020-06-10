@@ -73,7 +73,7 @@ const BioPicker = (props) => {
           {renderTextInput(personalBio, setPersonalBio)}
 
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={choose} />
+            <Button onPress={closeModal} title='chose' />
           </View>
         </View>
       </Modal>
@@ -127,6 +127,21 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     marginBottom: 20,
+  },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '35%',
   },
 });
 

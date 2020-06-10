@@ -6,31 +6,57 @@ import {
   Modal,
   StyleSheet,
   TouchableOpacity,
-  TextInput
+  TextInput,
 } from "react-native";
-import {
-  PassSetLight,
-  PassLightState,
-} from "../screens/client/NewProjectScreenOne";
-import RadioForm from "react-native-simple-radio-button";
-import { APP_STRINGS } from "../constants/index";
+import { useNavigation } from "@react-navigation/native";
+import { APP_STRINGS } from "../../constants/index";
 
-const ClientLightPicker = () => {
+//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
+
+const {
+  workExperienceSet,
+  setWorkExperience,
+  choose,
+  briefSummary,
+  slide
+} = APP_STRINGS;
+
+const BioPicker = (props) => {
+  const { personalBio, setPersonalBio } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const setLight = useContext(PassSetLight);
-  const light = useContext(PassLightState);
 
-  let radio_props = [
-    { label: "Yes", value: true },
-    { label: "No", value: false },
-  ];
+  const openModal = () => {
+    setIsModalVisible(true);
+  };
 
-  const renderTextInput = () => {
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const renderPersonalBioButton = (buttonText = "") => {
+    const title = openModal;
+    return (
+      <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderPersonalBio = (hasPersonalBio = false) => {
+    return hasPersonalBio
+      ? renderPersonalBioButton(workExperienceSet)
+      : renderPersonalBioButton(setWorkExperience);
+  };
+
+  const renderTextInput = (bio, setBio) => {
     return (
       <View>
         <TextInput
-          style={styles.input} onChangeText={setLight} value={light}
+          multiline={true}
+          style={styles.input}
+          onChangeText={setBio}
+          value={bio}
         />
       </View>
     );
@@ -38,48 +64,35 @@ const ClientLightPicker = () => {
 
   return (
     <View>
-    <RadioForm
-      labelStyle={styles.radiobutton}
-      animation={true}
-      selectedButtonColor={"#092455"}
-      labelColor={"#092455"}
-      buttonColor={"#092455"}
-      formHorizontal={true}
-      radio_props={radio_props}
-      initial={1}
-      onPress={(value) => {
-        setIsModalVisible(value);
-      }}
-      />
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={"slide"}
-        onRequestClose={() => setIsModalVisible(false)}
+        animationType={slide}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>
-              Enter light specifications:
-            </Text>
+            <Text style={styles.modalText}>{briefSummary}</Text>
           </View>
-          <View>
-              {renderTextInput()}
-          </View>
+
+          {renderTextInput(personalBio, setPersonalBio)}
+
           <View styles={styles.cancelWrapper}>
-          <TouchableOpacity style={styles.chatButton} onPress={() => setIsModalVisible(false)}>
-              <Text style={styles.chatText}>{APP_STRINGS.save}</Text>
+            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
             </TouchableOpacity> 
           </View>
         </View>
       </Modal>
+
+      {renderPersonalBio(personalBio)}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   modalContainer: {
-    height: 300,
+    height: 330,
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
@@ -92,6 +105,10 @@ const styles = StyleSheet.create({
   innerContainer: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  picker: {
+    height: 50,
+    width: 150,
   },
   modalText: {
     fontSize: 20,
@@ -110,23 +127,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
   },
-  radiobutton: {
-    paddingRight: '5%',
-  }, 
   input: {
     marginTop: 20,
     height: 90,
     borderColor: "gray",
     borderWidth: 1,
     marginBottom: 20,
-    padding: 5,
-  },
-  modalShowing: {
-    opacity: .5,
-  }, chatText: {
-    fontWeight: "bold",
-    fontSize: 15,
-    color: "white",
   },
   chatText: {
     fontWeight: "bold",
@@ -141,7 +147,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 20,
     height: '30%',
-  }
+  },
 });
 
-export default ClientLightPicker;
+export default BioPicker;

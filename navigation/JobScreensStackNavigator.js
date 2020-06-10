@@ -6,8 +6,8 @@ import AcceptJobScreen from "../screens/pilot/AcceptJobScreen";
 import ClientProfileScreen from '../screens/client/ClientProfileScreen';
 import ChatScreen from '../screens/messaging/ChatScreen';
 import PilotCreateProfileNavigation from './PilotCreateProfileNavigation'
-import MainHeader from '../components/MainHeader';
-import NestedHeader from '../components/NestedHeader';
+import MainHeader from '../components/shared/MainHeader';
+import NestedHeader from '../components/shared/NestedHeader';
 import { Ionicons } from "@expo/vector-icons";
 
 const JobScreensStack = createStackNavigator();

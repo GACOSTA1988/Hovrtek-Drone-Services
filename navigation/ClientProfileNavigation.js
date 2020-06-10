@@ -2,8 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ClientProfileScreen from "../screens/client/ClientProfileScreen";
 import ClientEditProfileScreen from "../screens/client/ClientEditProfileScreen";
-import MainHeader from '../components/MainHeader';
-import NestedHeader from '../components/NestedHeader';
+import MainHeader from '../components/shared/MainHeader';
+import NestedHeader from '../components/shared/NestedHeader';
 import { Ionicons } from "@expo/vector-icons";
 
 

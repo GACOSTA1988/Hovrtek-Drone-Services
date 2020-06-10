@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
-import { PassSetDate } from "../screens/client/NewProjectScreenOne";
-import { PassDateState } from "../screens/client/NewProjectScreenOne";
+import { PassSetDate } from "../../screens/client/NewProjectScreenOne";
+import { PassDateState } from "../../screens/client/NewProjectScreenOne";
 const ClientDatePicker = () => {
   // Context Hook Stuff
   const setDateState = useContext(PassSetDate);

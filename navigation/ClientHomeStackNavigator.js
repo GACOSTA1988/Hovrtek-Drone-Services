@@ -9,8 +9,8 @@ import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import EditProjectScreen from "../screens/client/EditProjectScreen";
 import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
-import MainHeader from "../components/MainHeader";
-import NestedHeader from "../components/NestedHeader";
+import MainHeader from "../components/shared/MainHeader";
+import NestedHeader from "../components/shared/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const HomeStack = createStackNavigator();

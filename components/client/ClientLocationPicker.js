@@ -8,23 +8,19 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import {
+  PassSetLocation,
+  PassLocationState,
+} from "../../screens/client/NewProjectScreenOne";
 import { useNavigation } from "@react-navigation/native";
-import { APP_STRINGS } from "../constants/index";
+import { APP_STRINGS } from "../../constants/index";
 
-//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
-
-const {
-  workExperienceSet,
-  setWorkExperience,
-  choose,
-  briefSummary,
-  slide
-} = APP_STRINGS;
-
-const BioPicker = (props) => {
-  const { personalBio, setPersonalBio } = props;
+const ClientLocationPicker = () => {
+  const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const setLocation = useContext(PassSetLocation);
+  const locationState = useContext(PassLocationState);
 
   const openModal = () => {
     setIsModalVisible(true);
@@ -34,44 +30,50 @@ const BioPicker = (props) => {
     setIsModalVisible(false);
   };
 
-  const renderPersonalBioButton = (buttonText = "") => {
-    const title = openModal;
+  const renderClientLocationButton = (buttonText) => {
     return (
-      <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={openModal}
+        title={"Open modal"}
+      >
         <Text style={styles.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
     );
   };
 
-  const renderPersonalBio = (hasPersonalBio = false) => {
-    return hasPersonalBio
-      ? renderPersonalBioButton(workExperienceSet)
-      : renderPersonalBioButton(setWorkExperience);
+  const renderClientLocation = (hasClientLocation) => {
+    return hasClientLocation
+      ? renderClientLocationButton(locationState)
+      : renderClientLocationButton("Please Set Location");
   };
 
-  const renderTextInput = (bio, setBio) => {
+  const renderTextInput = () => {
     return (
       <View>
-        <TextInput style={styles.input} onChangeText={setBio} value={bio} />
+        <TextInput
+          style={styles.input}
+          maxLength={26}
+          onChangeText={setLocation}
+          value={locationState}
+        />
       </View>
     );
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Modal
         transparent={true}
         visible={isModalVisible}
-        animationType={slide}
+        animationType={APP_STRINGS.slide}
         onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>{briefSummary}</Text>
+            <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
-
-          {renderTextInput(personalBio, setPersonalBio)}
-
+          {renderTextInput()}
           <View styles={styles.cancelWrapper}>
             <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
               <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
@@ -79,15 +81,14 @@ const BioPicker = (props) => {
           </View>
         </View>
       </Modal>
-
-      {renderPersonalBio(personalBio)}
+      {renderClientLocation(locationState)}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   modalContainer: {
-    height: 330,
+    height: 300,
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 20,
   },
+  cancelWrapper: {},
   button: {
     width: 250,
     height: 50,
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
+    fontSize: 20,
   },
   input: {
     marginTop: 20,
@@ -142,7 +145,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 20,
     height: '30%',
-  },
+  }
 });
 
-export default BioPicker;
+export default ClientLocationPicker;

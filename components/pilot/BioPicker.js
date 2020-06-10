@@ -78,7 +78,9 @@ const BioPicker = (props) => {
           {renderTextInput(personalBio, setPersonalBio)}
 
           <View styles={styles.cancelWrapper}>
-            <Button onPress={closeModal} title={choose} />
+            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+            </TouchableOpacity> 
           </View>
         </View>
       </Modal>
@@ -90,7 +92,7 @@ const BioPicker = (props) => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    height: 300,
+    height: 330,
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
@@ -111,7 +113,6 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 20,
   },
-  cancelWrapper: {},
   button: {
     width: 250,
     height: 50,
@@ -132,6 +133,20 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     marginBottom: 20,
+  },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '30%',
   },
 });
 

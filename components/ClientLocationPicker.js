@@ -72,7 +72,7 @@ const ClientLocationPicker = () => {
           </View>
           {renderTextInput()}
           <View styles={styles.cancelWrapper}>
-          <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
               <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
             </TouchableOpacity> 
           </View>

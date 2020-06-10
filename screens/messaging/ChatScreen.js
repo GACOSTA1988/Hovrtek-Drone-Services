@@ -35,8 +35,6 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
 
   const [body, setBody] = useState("");
   const listRef = useRef(null);
-  const listRef2 = useRef(null);
-  const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [behavior, setBehavior] = useState(null);
 
   useEffect(() => {
@@ -127,30 +125,20 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
     setBody("");
   };
 
-  function openKeyboard() {
-    setBehavior('padding');
-    setKeyboardOpen(true);
-  }
-
-  function closeKeyboard() {
-    setBehavior(null);
-    setKeyboardOpen(false);
-  }
-
   return (
     <KeyboardAvoidingView 
       style={styles.container}
       behavior={Platform.OS == 'ios' ? behavior : null}
       keyboardVerticalOffset={180}>
       <ScrollView 
-        onKeyboardWillShow={openKeyboard}
-        onKeyboardWillHide={closeKeyboard}
+        onKeyboardWillShow={() => setBehavior("padding")}
+        onKeyboardWillHide={() => setBehavior(null)}
         ref={listRef}
         onLayout={() => listRef.current.scrollToEnd( {animated: false} )}
         onContentSizeChange={() => listRef.current.scrollToEnd()}
         style={styles.messagesScroll}>
           <FlatList
-            style={keyboardOpen ? styles.messagesListOpen : styles.messagesList}
+            style={styles.messagesList}
             data={conversation}
             keyExtractor={(item) => item.key}
             renderItem={({ item }) => {
@@ -239,11 +227,6 @@ const styles = StyleSheet.create({
     marginRight: '15%'
   },
   messagesList: {
-    width: "100%",
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  messagesListOpen: {
     width: "100%",
     marginTop: 20,
     marginBottom: 10,

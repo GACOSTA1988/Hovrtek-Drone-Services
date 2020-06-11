@@ -18,11 +18,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 function ClientSignUpScreen(props) {
   const navigation = props.navigation;
   const { updateUser } = useContext(AuthContext);
-  const [ firstName, setFirstName ] = useState("");
-  const [ lastName, setLastName ] = useState("");
-  const [ location, setLocation ] = useState("");
-  const [ email, setEmail ] = useState("");
-  const [ password, setPassword ] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [location, setLocation] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   async function signUp(e) {
     e.preventDefault();
@@ -143,17 +143,17 @@ const styles = StyleSheet.create({
     color: "darkblue",
     fontWeight: "600",
   },
-  inputText: { 
-    textAlign: "center", 
-    color: "white", 
-    fontSize: 15 
+  inputText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
   },
   textWrapper: {
     borderRadius: 15,
     backgroundColor: "#092455",
     marginBottom: 15,
     padding: 80,
-    alignItems: 'center'
+    alignItems: "center",
   },
   input: {
     height: 40,
@@ -167,16 +167,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   button: {
-    backgroundColor: 'lightgray',
+    backgroundColor: "lightgray",
     margin: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     height: 35,
-    width: 200
+    width: 200,
   },
   buttontext: {
     fontSize: 20,
-    color: 'darkblue'
+    color: "darkblue",
   },
 });
 

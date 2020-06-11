@@ -72,7 +72,7 @@ function SignInScreen({ navigation }) {
             value={email}
             onChangeText={setEmail}
             style={styles.input}
-            autoCapitalize={'none'}
+            autoCapitalize={"none"}
           />
           <TextInput
             placeholder="Password"
@@ -96,12 +96,8 @@ function SignInScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   MainContainer: {
-    // justifyContent: "center",
     alignItems: "center",
-    // position: "absolute",
-    // flex: 1,
-    // width: "100%",
-    height: 700,
+    height: "124%",
   },
 
   buttonText: {
@@ -114,10 +110,10 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "grey",
     borderWidth: 1,
-    marginTop: 8,
+    marginTop: "2%",
     width: 250,
     color: "white",
-    padding: 10,
+    padding: "2%",
   },
 
   text: {
@@ -125,21 +121,14 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 17,
   },
-  // hovrtekLogo: {
-  //   height: 50,
-  //   width: 280,
-  //   justifyContent: "center",
-
-  //   marginBottom: 50,
-  // },
 
   imageText: {
     fontSize: 30,
     fontWeight: "bold",
     color: "white",
     textAlign: "left",
-    marginLeft: 10,
-    marginTop: 160,
+    marginLeft: "3%",
+    marginTop: "40%",
   },
 
   imageTextTwo: {
@@ -147,14 +136,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#3E90D0",
     textAlign: "left",
-    margin: 10,
+    margin: "2%",
   },
 
   signIn: {
     backgroundColor: "#3E90D0",
     width: 250,
-    marginTop: 10,
-    marginBottom: 15,
+    // marginTop: 10,
+    marginTop: "2%",
+    marginBottom: "1%",
     padding: 5,
     borderRadius: 3,
   },

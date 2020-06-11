@@ -137,8 +137,11 @@ const clientNavigation = (
 
 const pilotNavigation = (
     <NavigationContainer independent={true}>
-      <PilotDrawer.Navigator>
-        <PilotDrawer.Screen />
+      <PilotDrawer.Navigator initialRouteName="Tabs" drawerContent={PilotDrawerContent}>
+      <PilotDrawer.Screen name="Tabs" component={PilotTabs}/>
+      {/* <PilotDrawer.Screen name="Profile" component={PilotPro}/> */}
+      <PilotDrawer.Screen name="About" component={AboutNavigation}/>
+      <PilotDrawer.Screen name="Support" component={SupportNavigation}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>
   )

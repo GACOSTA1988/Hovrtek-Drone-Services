@@ -65,7 +65,7 @@ export default () => {
           {loggedIn === "false" && renderLogin()}
           {loggedIn === "loading" && renderLoading()}
       {/* //SIGN OUT BUTTON */}
-      <TouchableOpacity style={{position: 'relative', marginTop: 50}} onPress={() => auth.signOut()}>
+      <TouchableOpacity style={{position: 'relative', marginTop: 10, marginBottom: 10}} onPress={() => auth.signOut()}>
         <Text>Sign Out</Text>
       </TouchableOpacity>
         </NavigationContainer>

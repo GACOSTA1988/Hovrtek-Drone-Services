@@ -30,10 +30,6 @@ function NewProjectScreenWelcome(props) {
 
     return (
         <View style={styles.newProjectListWrapper}>
-
-                    <ClientSubheader />
-
-
             <Text style={styles.welcomeText}>Welcome to</Text>
             <View style={styles.HeaderWrapper}>
                 <Image source={hovrtekLogo} style={styles.hovrtekLogo} />

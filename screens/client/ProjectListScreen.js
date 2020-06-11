@@ -43,15 +43,11 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
   return (
     <View style={styles.projectListWrapper}>
-      <View style={styles.subheaderWrapper}>
-        <ClientSubheader />
-      </View>
       <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
         <Text style={styles.clientText}>My Projects</Text>
       </TouchableOpacity>
       <ScrollView>
         <View style={styles.projectCard}>
-          <TouchableOpacity>
             <FlatList
               style={{ width: "100%" }}
               data={listOfMyProjects}
@@ -139,7 +135,6 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
                 );
               }}
             />
-          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

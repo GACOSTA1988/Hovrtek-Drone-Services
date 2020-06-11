@@ -13,7 +13,7 @@ function ClientTabs() {
 
   return (
     <NavigationContainer independent={true}>
-      <Tabs.Navigator>
+      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: 'lightblue', inactiveBackgroundColor: '#092455', activeTintColor: '#092455', inactiveTintColor: 'white'}}>
         <Tabs.Screen name="Home" component={ClientHomeStackNavigator}/>
         <Tabs.Screen name="Projects" component={ProjectListScreen}/>
         <Tabs.Screen name="Messages" component={MessagingNavigation}/>

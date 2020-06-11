@@ -24,7 +24,7 @@ const mainHeaderStyle = {
   height: 100
 }
 
-const AboutNavigation = () => {
+export const AboutNavigation = () => {
   return (
     <AboutStack.Navigator>
       <AboutStack.Screen
@@ -39,7 +39,7 @@ const AboutNavigation = () => {
   )
 }
 
-const SupportNavigation = () => {
+export const SupportNavigation = () => {
   return (
     <SupportStack.Navigator>
       <SupportStack.Screen
@@ -54,47 +54,47 @@ const SupportNavigation = () => {
   )
 }
 
-const ClientNavigation = () => {
+// const ClientNavigation = () => {
 
-  return (
-    <ClientDrawer.Navigator initialRouteName="ClientHomeStackNavigator" drawerPosition='right'
-    drawerStyle={{
-      backgroundColor: '#F4EDEA',
-      width: 200,
-      marginTop: 102,
-    }}
-    drawerContentOptions={{
-      activeTintColor: '#120309'
-    }}
-    >
-      <ClientDrawer.Screen
-        name="ClientHomeStackNavigator"
-        component={ClientHomeStackNavigator}
-        options={{ title: 'Home' }}
-      />
-      <ClientDrawer.Screen
-        name='About'
-        component={AboutNavigation}
-      />
-      <ClientDrawer.Screen
-        name='Support'
-        component={SupportNavigation}
-      />
-      <ClientDrawer.Screen
-        name='ClientProfileNavigation'
-        component={ClientProfileNavigation}
-        options={{ title: 'Public Profile' }}
-      />
-      <ClientDrawer.Screen
-        name='Messages'
-        component={MessagingNavigation}
-      />
-      <ClientDrawer.Screen
-        name="Sign Out"
-        component={SignOutScreen}
-      />
-    </ClientDrawer.Navigator>
-  );
-};
+//   return (
+//     <ClientDrawer.Navigator initialRouteName="ClientHomeStackNavigator" drawerPosition='right'
+//     drawerStyle={{
+//       backgroundColor: '#F4EDEA',
+//       width: 200,
+//       marginTop: 102,
+//     }}
+//     drawerContentOptions={{
+//       activeTintColor: '#120309'
+//     }}
+//     >
+//       <ClientDrawer.Screen
+//         name="ClientHomeStackNavigator"
+//         component={ClientHomeStackNavigator}
+//         options={{ title: 'Home' }}
+//       />
+//       <ClientDrawer.Screen
+//         name='About'
+//         component={AboutNavigation}
+//       />
+//       <ClientDrawer.Screen
+//         name='Support'
+//         component={SupportNavigation}
+//       />
+//       <ClientDrawer.Screen
+//         name='ClientProfileNavigation'
+//         component={ClientProfileNavigation}
+//         options={{ title: 'Public Profile' }}
+//       />
+//       <ClientDrawer.Screen
+//         name='Messages'
+//         component={MessagingNavigation}
+//       />
+//       <ClientDrawer.Screen
+//         name="Sign Out"
+//         component={SignOutScreen}
+//       />
+//     </ClientDrawer.Navigator>
+//   );
+// };
 
-export default ClientNavigation;
+// export default ClientNavigation;

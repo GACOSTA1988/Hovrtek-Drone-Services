@@ -13,7 +13,7 @@ import {
   PassLightState,
 } from "../../screens/client/NewProjectScreenOne";
 import RadioForm from "react-native-simple-radio-button";
-import { APP_STRINGS } from "../constants/index";
+import { APP_STRINGS } from "../../constants/index";
 
 const ClientLightPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

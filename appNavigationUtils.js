@@ -1,12 +1,21 @@
 import React from "react";
 import { Button, Image, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import ClientNavigation from "./navigation/ClientNavigation";
+import {AboutNavigation, SupportNavigation} from "./navigation/ClientNavigation";
 import PilotNavigation from "./navigation/PilotNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import LoadingScreen from "./screens/LoadingScreen";
 import { Ionicons } from "@expo/vector-icons";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { ClientDrawerContent } from './navigation/ClientDrawerContent';
+import { PilotDrawerContent } from './navigation/PilotDrawerContent';
+import ClientProfileNavigator from "./navigation/ClientProfileNavigation";
+import ClientTabs from './navigation/ClientTabs';
+import PilotTabs from './navigation/PilotTabs';
+
+
 
 const RootStack = createStackNavigator();
 
@@ -111,16 +120,39 @@ const renderLoading = () => {
   );
 }
 
+//new drawer nav
+const ClientDrawer = createDrawerNavigator();
+const PilotDrawer = createDrawerNavigator();
+
 const clientNavigation = (
-  <RootStack.Navigator headerMode="none">
-    <RootStack.Screen name="Client" component={ClientNavigation} />
-  </RootStack.Navigator>
-);
+    <NavigationContainer independent={true} >
+      <ClientDrawer.Navigator initialRouteName="Tabs" drawerContent={ClientDrawerContent}>
+        <ClientDrawer.Screen name="Tabs" component={ClientTabs}/>
+        <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
+        <ClientDrawer.Screen name="About" component={AboutNavigation}/>
+        <ClientDrawer.Screen name="Support" component={SupportNavigation}/>
+      </ClientDrawer.Navigator>
+    </NavigationContainer>
+  )
 
 const pilotNavigation = (
-  <RootStack.Navigator headerMode="none">
-    <RootStack.Screen name="Pilot" component={PilotNavigation} />
-  </RootStack.Navigator>
-);
+    <NavigationContainer independent={true}>
+      <PilotDrawer.Navigator>
+        <PilotDrawer.Screen />
+      </PilotDrawer.Navigator>
+    </NavigationContainer>
+  )
+
+// const clientNavigation = (
+//   <RootStack.Navigator headerMode="none">
+//     <RootStack.Screen name="Client" component={ClientNavigation} />
+//   </RootStack.Navigator>
+// );
+
+// const pilotNavigation = (
+//   <RootStack.Navigator headerMode="none">
+//     <RootStack.Screen name="Pilot" component={PilotNavigation} />
+//   </RootStack.Navigator>
+// );
 
 export { clientNavigation, pilotNavigation, renderLogin, renderLoading };

@@ -2,7 +2,6 @@ import React, { useState, useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
-import Footer from "./components/shared/Footer";
 import * as firebase from "firebase";
 import {
   clientNavigation,
@@ -15,7 +14,8 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
-import { StatusBar, Platform } from "react-native";
+import { StatusBar, Platform, Text, TouchableOpacity } from "react-native";
+
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
@@ -64,9 +64,15 @@ export default () => {
           {isPilotLoggedIn && pilotNavigation}
           {loggedIn === "false" && renderLogin()}
           {loggedIn === "loading" && renderLoading()}
-          <Footer />
+      {/* //SIGN OUT BUTTON */}
+      <TouchableOpacity style={{position: 'relative', marginTop: 50}} onPress={() => auth.signOut()}>
+        <Text>Sign Out</Text>
+      </TouchableOpacity>
         </NavigationContainer>
       </AuthContext.Provider>
     </Provider>
-  );
+
+);
 };
+
+

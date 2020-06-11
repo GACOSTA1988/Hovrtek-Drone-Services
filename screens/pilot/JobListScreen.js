@@ -72,19 +72,21 @@ function JobListScreen(
     <View style={styles.projectListWrapper}>
       {profileCompleteState === "No" ? (
         <View style={styles.profileCompleteNoticeWrapper}>
+            <View style={styles.profileCompleteNotice}>
+              <Text style={styles.profileCompleteNoticeText}>
+                You will need to complete your profile before you can apply for jobs.
+              </Text>
           <TouchableOpacity
-            style={styles.profileCompleteNotice}
+            style={styles.chatButton}
             onPress={() => navigation.navigate("Profile")}
           >
-            <View style={styles.textRow}>
-              <Text style={styles.profileCompleteNoticeText}>
-                Click here to complete your profile to be eligable for jobs!
-              </Text>
+            <Text style={styles.chatText}>
+              Continue
+            </Text>
+          </TouchableOpacity>
             </View>
             <View>
-              <FontAwesome5 name="check-circle" size={30} color="red" />
             </View>
-          </TouchableOpacity>
         </View>
       ) : (
         <Text />
@@ -160,6 +162,11 @@ function JobListScreen(
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   projectCard: {
     width: 380,
     marginTop: 15,
@@ -171,13 +178,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileCompleteNotice: {
-    flexDirection: "row",
     top: 0,
     bottom: 0,
     borderWidth: 3,
-    borderColor: "red",
+    borderColor: "#092455",
     width: 280,
-    height: 120,
+    height: '20%',
     borderRadius: 8,
     padding: 20,
     alignItems: "center",
@@ -203,6 +209,20 @@ const styles = StyleSheet.create({
   subheaderWrapper: {
     marginBottom: 14,
   },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '30%',
+  }
 });
 
 function mapStateToProps(state) {

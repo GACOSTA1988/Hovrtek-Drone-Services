@@ -12,8 +12,8 @@ import {
 import {
   PassSetDroneType,
   PassDroneTypeState,
-} from "../screens/pilot/PilotProfileSetupPageOneScreen";
-import { APP_STRINGS } from "../constants/index";
+} from "../../screens/pilot/PilotProfileSetupPageOneScreen";
+import { APP_STRINGS } from "../../constants/index";
 
 //REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
 

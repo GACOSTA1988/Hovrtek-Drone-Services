@@ -18,11 +18,11 @@ import {
 } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
-import DroneExperiencePicker from "../../components/DroneExperiencePicker";
-import DroneTypePicker from "../../components/DroneTypePicker";
-import BioPicker from "../../components/BioPicker";
+import DroneExperiencePicker from "../../components/pilot/DroneExperiencePicker";
+import DroneTypePicker from "../../components/pilot/DroneTypePicker";
+import BioPicker from "../../components/pilot/BioPicker";
 import { APP_STRINGS } from '../../constants/index';
-import InsuranceRadio from "../../components/InsuranceRadio";
+import InsuranceRadio from "../../components/pilot/InsuranceRadio";
 
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetPersonalBio = React.createContext();

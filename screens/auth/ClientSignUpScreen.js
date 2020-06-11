@@ -107,6 +107,7 @@ function ClientSignUpScreen(props) {
           />
           <TextInput
             placeholder=" Email"
+            autoCapitalize="none"
             keyboardType={"email-address"}
             placeholderTextColor="grey"
             value={email}

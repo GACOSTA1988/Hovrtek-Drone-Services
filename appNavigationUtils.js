@@ -127,7 +127,7 @@ const PilotDrawer = createDrawerNavigator();
 
 const clientNavigation = (
     <NavigationContainer independent={true} >
-      <ClientDrawer.Navigator initialRouteName="Home">
+      <ClientDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
         <ClientDrawer.Screen name="Home" component={ClientTabs}/>
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
@@ -140,7 +140,7 @@ const clientNavigation = (
 
 const pilotNavigation = (
     <NavigationContainer independent={true}>
-      <PilotDrawer.Navigator initialRouteName="Home">
+      <PilotDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
       <PilotDrawer.Screen name="Home" component={PilotTabs}/>
       {/* <PilotDrawer.Screen name="Profile" component={PilotPro}/> */}
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>

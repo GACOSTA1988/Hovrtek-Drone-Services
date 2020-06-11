@@ -42,13 +42,6 @@ function Footer() {
       { visible ? (
         <View style={styles.footerWrapper}>
           <View style={styles.mediaButton}>
-            <TouchableOpacity onPress={goToLinkedin}>
-              <Icon name="linkedin"
-              size={35}
-              style={styles.icon}
-              color="white">
-              </Icon>
-            </TouchableOpacity>
             <TouchableOpacity onPress={goToFacebook}>
               <Icon
               name="facebook"
@@ -63,6 +56,13 @@ function Footer() {
               size={30}
               color="white"
               style={styles.icon}>
+              </Icon>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={goToLinkedin}>
+              <Icon name="linkedin"
+              size={35}
+              style={styles.icon}
+              color="white">
               </Icon>
             </TouchableOpacity>
           </View>

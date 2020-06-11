@@ -22,23 +22,23 @@ function PilotSignUpScreen(props) {
   const navigation = props.navigation;
   const { updateUser } = useContext(AuthContext);
 
-  const [ pilotFirstName, setPilotFirstName ] = useState("");
-  const [ pilotLastName, setPilotLastName ] = useState("");
-  const [ pilotLocation, setPilotLocation ] = useState("");
-  const [ email, setEmail ] = useState("");
-  const [ password, setPassword ] = useState("");
+  const [pilotFirstName, setPilotFirstName] = useState("");
+  const [pilotLastName, setPilotLastName] = useState("");
+  const [pilotLocation, setPilotLocation] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // BLANK PLACE HOLDERS TO BE UPDATED ON PROFILE CREATION
-  const [ personalBio, setPersonalBio ] = useState("");
-  const [ yearsOfExperience, setYearsOfExperience ] = useState("");
-  const [ faaLicenseExp, setFaaLicenseExp ] = useState("");
-  const [ insuredStatus, setInsuredStatus ] = useState("");
-  const [ travelStatus, setTravelStatus ] = useState("");
-  const [ droneType, setDroneType ] = useState("");
-  const [ airMap, setAirMap ] = useState("");
-  const [ fourHundred, setFourHundred ] = useState("");
-  const [ profileImageUrl, setProfileImageUrl ] = useState("");
-  const [ profileComplete, setProfileComplete ] = useState("No");
+  const [personalBio, setPersonalBio] = useState("");
+  const [yearsOfExperience, setYearsOfExperience] = useState("");
+  const [faaLicenseExp, setFaaLicenseExp] = useState("");
+  const [insuredStatus, setInsuredStatus] = useState("");
+  const [travelStatus, setTravelStatus] = useState("");
+  const [droneType, setDroneType] = useState("");
+  const [airMap, setAirMap] = useState("");
+  const [fourHundred, setFourHundred] = useState("");
+  const [profileImageUrl, setProfileImageUrl] = useState("");
+  const [profileComplete, setProfileComplete] = useState("No");
 
   async function signUp(e) {
     e.preventDefault();
@@ -184,32 +184,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   button: {
-    backgroundColor: 'lightgray',
+    backgroundColor: "lightgray",
     margin: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     height: 35,
-    width: 200
-    // paddingLeft: 20,
-    // paddingRight: 20
+    width: 200,
   },
   buttontext: {
     fontSize: 20,
-    color: 'darkblue'
-  },
-  dummyText: {
-    marginTop: 200,
-  },
-
-  airMapPicker: {
-    height: 100,
-    width: 100,
-    color: "white",
-  },
-  airMapQuestionText: {},
-
-  imageUploaderText: {
-    marginTop: 250,
+    color: "darkblue",
   },
 });
 

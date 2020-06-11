@@ -13,7 +13,7 @@ import {
   PassLightState,
 } from "../../screens/client/NewProjectScreenOne";
 import RadioForm from "react-native-simple-radio-button";
-import { APP_STRINGS } from "../constants/index";
+import { APP_STRINGS } from "../../constants/index";
 
 const ClientLightPicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -72,7 +72,7 @@ const ClientLightPicker = () => {
           <View styles={styles.cancelWrapper}>
           <TouchableOpacity style={styles.chatButton} onPress={() => setIsModalVisible(false)}>
               <Text style={styles.chatText}>{APP_STRINGS.save}</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   radiobutton: {
     paddingRight: '5%',
-  }, 
+  },
   input: {
     marginTop: 20,
     height: 90,

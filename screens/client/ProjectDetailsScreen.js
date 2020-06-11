@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import * as firebase from "firebase";
 import { connect } from "react-redux";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
 import _ from "lodash";
@@ -22,10 +24,13 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
   }, []);
 
   let pilot = null;
+  let user = null;
 
-  if (
-    props.listOfPilotProfiles.find((x) => x.userID === projectDetails.pilotID)
-  ) {
+  if (firebase.auth().currentUser) {
+    user = firebase.auth().currentUser;
+  }
+
+  if (props.listOfPilotProfiles.find((x) => x.userID === projectDetails.pilotID)) {
     pilot = props.listOfPilotProfiles.find(
       (x) => x.userID === projectDetails.pilotID,
     );
@@ -33,6 +38,18 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
 
   return (
     <View style={styles.container}>
+      {(user.uid === projectDetails.clientID) && (
+        <TouchableOpacity
+        style={styles.editIcon}
+        onPress={() =>
+          props.navigation.navigate("EditProjectScreen", {
+            ...projectDetails,
+          })
+        }
+        >
+          <AntDesign name="edit" size={40} />
+        </TouchableOpacity>
+      )}
       <Text style={styles.ProjectText}>Details:</Text>
       <View style={styles.line} />
       <Text style={styles.detailsHeader}>Where</Text>
@@ -105,6 +122,7 @@ const styles = StyleSheet.create({
     color: "#3E90D0",
     marginBottom: 20,
     marginTop: 10,
+    zIndex: 0
   },
   DetailsText: {
     marginBottom: 20,
@@ -167,6 +185,12 @@ const styles = StyleSheet.create({
   backButtonWrapper: {
     marginTop: 20,
     alignItems: "center",
+  },
+  editIcon: {
+    top: "4%",
+    position: "absolute",
+    right: "6%",
+    zIndex: 1
   },
 });
 

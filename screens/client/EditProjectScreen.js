@@ -21,83 +21,53 @@ function EditProjectScreen(props, { editProject }) {
   const [ recording, setRecording ] = useState(projectDetails.recording);
 
   const submit = (e) => {
+    projectDetails.location = location;
+    projectDetails.date = date;
+    projectDetails.recording = recording;
     props.editProject(location, date, recording, projectDetails.key);
-    navigation.navigate("ProjectListScreen");
+    navigation.navigate("ProjectDetailsScreen", {
+      ...projectDetails
+    });
   };
 
   return (
-    <KeyboardAwareScrollView style={styles.KeyboardAwareScrollView}>
-      <View style={styles.container}>
-        <View style={styles.editProjectCard}>
-          <Text style={styles.editProjectText}>
-            Edit Project
-            {"\n"}
-          </Text>
-          <Text style={styles.labelText}>Location</Text>
-          <TextInput
-            style={styles.input}
-            placeholderTextColor="white"
-            placeholder="location"
-            onChangeText={setLocation}
-            value={location}
-          />
-          <Text style={styles.labelText}>
-            {"\n"}
-            Date
-          </Text>
-          <TextInput
-            style={styles.input}
-            placeholderTextColor="white"
-            placeholder="date"
-            onChangeText={setDate}
-            value={date}
-          />
-          <Text style={styles.labelText}>
-            {"\n"}
-            Project Description
-          </Text>
-          <TextInput
-            style={styles.input}
-            placeholder="recording"
-            onChangeText={setRecording}
-            value={recording}
-          />
-        </View>
-        {/* <Button title="Save Changes" onPress={submit} /> */}
-
-        <View style={styles.submitButtonWrapper}>
-          <TouchableOpacity style={styles.submitButton} onPress={submit}>
-            <Text style={styles.submitButtonText}>Submit Update</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.backButtonWrapper}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => props.navigation.goBack()}
-          >
-            <Text style={styles.backButtonText}>Back</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* <Button title="Back" onPress={() => props.navigation.goBack()} /> */}
+    <View style={styles.container}>
+      <View style={styles.saveButton}>
+        <TouchableOpacity hitSlop={styles.hitSlop} onPress={submit}>
+          <Text style={styles.saveText}>Save changes</Text>
+        </TouchableOpacity>
       </View>
-    </KeyboardAwareScrollView>
+      <Text style={styles.ProjectText}>Edit Details</Text>
+      <View style={styles.line} />
+      <Text style={styles.detailsHeader}>Where</Text>
+      <TextInput
+        style={styles.DetailsText}
+        onChangeText={setLocation}
+        value={location}
+      />
+      <Text style={styles.detailsHeader}>When</Text>
+      <TextInput
+        style={styles.DetailsText}
+        onChangeText={setDate}
+        value={date}
+      />
+      <Text style={styles.detailsHeader}>What</Text>
+      <TextInput
+        style={styles.DetailsText}
+        onChangeText={setRecording}
+        value={recording}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 30,
-    backgroundColor: "lightgray",
-    height: "100%",
+    padding: 20,
   },
   KeyboardAwareScrollView: {
     flex: 1,
     height: "120%",
-    backgroundColor: "lightgray",
   },
   editProjectCard: {
     borderRadius: 15,
@@ -161,6 +131,49 @@ const styles = StyleSheet.create({
   },
   backButtonWrapper: {
     alignItems: "center",
+  },
+  ProjectText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#3E90D0",
+    marginBottom: 20,
+    marginTop: 10,
+    zIndex: 0
+  },
+  DetailsText: {
+    marginBottom: 20,
+    fontSize: 17,
+    color: "grey",
+    fontWeight: "800",
+  },
+  line: {
+    borderBottomColor: "lightgrey",
+    borderBottomWidth: 1,
+    marginBottom: 20,
+  },
+  detailsHeader: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  hitSlop: {
+    top: 30,
+    left: 30,
+    bottom: 30,
+    right: 30
+  },
+  saveText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  saveButton: {
+    position: "absolute",
+    right: "6%",
+    top: "8%",
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    zIndex: 1
   },
 });
 

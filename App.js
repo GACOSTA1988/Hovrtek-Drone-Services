@@ -15,6 +15,7 @@ import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
 import { StatusBar, Platform, Text, TouchableOpacity } from "react-native";
+import Footer from './components/shared/Footer';
 
 
 SplashScreen.preventAutoHide();
@@ -50,7 +51,7 @@ export default () => {
     };
   }, []);
 
-  // todo change "true" to actual boolean true
+  // to-do change "true" to actual boolean true
   const isClientLoggedIn = loggedIn === "true" && userType === "C";
   const isPilotLoggedIn = loggedIn === "true" && userType === "P";
   const isIOS = Platform.OS === "ios";
@@ -64,10 +65,11 @@ export default () => {
           {isPilotLoggedIn && pilotNavigation}
           {loggedIn === "false" && renderLogin()}
           {loggedIn === "loading" && renderLoading()}
-      {/* //SIGN OUT BUTTON */}
-      <TouchableOpacity style={{position: 'relative', marginTop: 10, marginBottom: 10}} onPress={() => auth.signOut()}>
-        <Text>Sign Out</Text>
-      </TouchableOpacity>
+      {/* //TEMP SIGN OUT BUTTON */}
+        {/* <TouchableOpacity style={{position: 'relative', marginTop: 10, marginBottom: 10}} onPress={() => auth.signOut()}>
+          <Text>Sign Out</Text>
+        </TouchableOpacity> */}
+        <Footer />
         </NavigationContainer>
       </AuthContext.Provider>
     </Provider>

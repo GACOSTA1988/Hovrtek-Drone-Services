@@ -3,31 +3,31 @@ import { Text, View, SafeAreaView, TouchableOpacity, ScrollView } from 'react-na
 import SignOutScreen from '../screens/auth/SignOutScreen';
 
 
-function PilotDrawerContent() {
+const PilotDrawerContent = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView style={{marginLeft: 5}}>
           <TouchableOpacity
           style={{marginTop: 20}}
-          onPress={() => this.props.navigation.navigate('PilotTabs')}
+          onPress={() => props.navigation.navigate('PilotTabs')}
           >
             <Text>Home</Text>
           </TouchableOpacity>
           <TouchableOpacity
           style={{marginTop: 20}}
-          onPress={() => this.props.navigation.navigate('Profile')}
+          onPress={() => props.navigation.navigate('Profile')}
           >
             <Text>Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity
           style={{marginTop: 20}}
-          onPress={() => this.props.navigation.navigate('About')}
+          onPress={() => props.navigation.navigate('About')}
           >
             <Text>About</Text>
           </TouchableOpacity>
           <TouchableOpacity
           style={{marginTop: 20}}
-          onPress={() => this.props.navigation.navigate('Support')}
+          onPress={() => props.navigation.navigate('Support')}
           >
             <Text>Support</Text>
           </TouchableOpacity>

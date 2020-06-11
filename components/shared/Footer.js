@@ -42,7 +42,7 @@ function Footer() {
       { visible ? (
         <View style={styles.footerWrapper}>
           <View style={styles.mediaButton}>
-            <TouchableOpacity onPress={goToLinkedin}>
+            {/* <TouchableOpacity onPress={goToLinkedin}>
               <Icon name="linkedin"
               size={35}
               style={styles.icon}
@@ -64,7 +64,7 @@ function Footer() {
               color="white"
               style={styles.icon}>
               </Icon>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       ) : (
@@ -77,21 +77,10 @@ function Footer() {
 const styles = StyleSheet.create({
   footerWrapper: {
     backgroundColor: "#092455",
-    height: 90,
-    borderTopColor: "grey",
-    borderTopWidth: 10
+    height: 34,
+    margin: 0,
+    padding: 0,
   },
-  mediaButton: {
-    alignItems: "center",
-    paddingLeft: '25%',
-    flexDirection: 'row'
-  },
-  icon: {
-    margin: 20
-  },
-  space: {
-    color: "#092455"
-  }
 });
 
 export default Footer;

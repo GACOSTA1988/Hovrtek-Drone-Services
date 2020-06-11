@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {AboutNavigation, SupportNavigation} from "./navigation/ClientNavigation";
 import PilotNavigation from "./navigation/PilotNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
+import SignOutScreen from "./screens/auth/SignOutScreen";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import LoadingScreen from "./screens/LoadingScreen";
 import { Ionicons } from "@expo/vector-icons";
@@ -126,22 +127,25 @@ const PilotDrawer = createDrawerNavigator();
 
 const clientNavigation = (
     <NavigationContainer independent={true} >
-      <ClientDrawer.Navigator initialRouteName="Tabs" drawerContent={ClientDrawerContent}>
-        <ClientDrawer.Screen name="Tabs" component={ClientTabs}/>
+      <ClientDrawer.Navigator initialRouteName="Home">
+        <ClientDrawer.Screen name="Home" component={ClientTabs}/>
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
         <ClientDrawer.Screen name="Support" component={SupportNavigation}/>
+        <ClientDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
+
       </ClientDrawer.Navigator>
     </NavigationContainer>
   )
 
 const pilotNavigation = (
     <NavigationContainer independent={true}>
-      <PilotDrawer.Navigator initialRouteName="Tabs" drawerContent={PilotDrawerContent}>
-      <PilotDrawer.Screen name="Tabs" component={PilotTabs}/>
+      <PilotDrawer.Navigator initialRouteName="Home">
+      <PilotDrawer.Screen name="Home" component={PilotTabs}/>
       {/* <PilotDrawer.Screen name="Profile" component={PilotPro}/> */}
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>
       <PilotDrawer.Screen name="Support" component={SupportNavigation}/>
+      <PilotDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>
   )

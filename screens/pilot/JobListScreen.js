@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
   projectCard: {
     width: 380,
     marginTop: 15,
+    marginBottom: 100
   },
   ClientProjectListTextWrapper: {
     marginBottom: 20,

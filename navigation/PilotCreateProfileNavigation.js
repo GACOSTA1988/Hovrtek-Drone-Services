@@ -8,71 +8,43 @@ import MainHeader from "../components/shared/MainHeader";
 import NestedHeader from "../components/shared/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
 
-const Stack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 
-// todo move to app colors
-const backgroundColor = "#092455";
-
-const headerStyle = {
-  backgroundColor,
-  height: 100,
+const PilotCreateProfileNavigation = () => {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="Profile"
+        component={PilotProfileWelcomeScreen}
+        options={{
+          title: " ",
+          headerMode: 'none',
+        }}
+      />
+      <ProfileStack.Screen
+        name="PilotProfileSetupPageOneScreen"
+        component={PilotProfileSetupPageOneScreen}
+        navigationOptions={{headerMode: 'none'}}
+        options={{
+          title: " ",
+          }}
+      />
+      <ProfileStack.Screen
+        name="PilotProfileSetupPageTwoScreen"
+        component={PilotProfileSetupPageTwoScreen}
+        options={{
+          title: "Accept Job",        
+        }}
+      />
+      <ProfileStack.Screen
+        name="PilotProfileImageUploadScreen"
+        component={PilotProfileImageUploadScreen}
+        options={{
+          title: " ",
+        }}
+      />
+    </ProfileStack.Navigator>
+  );
 };
-
-const headerBackImage = () => (
-  <Ionicons name="ios-arrow-round-back" size={50} color={backgroundColor} />
-);
-
-function PilotCreateProfileNavigation() {
-  const screensMetadata = [
-    {
-      name: "Profile",
-      component: PilotProfileWelcomeScreen,
-      options: {
-        title: " ",
-        headerTitle: () => <MainHeader />,
-        headerStyle,
-      },
-    },
-    {
-      name: "PilotProfilePageSetupPageOneScreen",
-      component: PilotProfileSetupPageOneScreen,
-      options: {
-        title: " ",
-        headerTitle: () => <NestedHeader />,
-        headerStyle: {
-          ...headerStyle,
-          justifyContent: "center",
-        },
-        headerBackImage,
-      },
-    },
-    {
-      name: "PilotProfileSetupPageTwoScreen",
-      component: PilotProfileSetupPageTwoScreen,
-      options: {
-        title: " ",
-        headerTitle: () => <NestedHeader />,
-        headerStyle,
-        headerBackImage,
-      },
-    },
-    {
-      name: "PilotProfileImageUploadScreen",
-      component: PilotProfileImageUploadScreen,
-      options: {
-        title: " ",
-        headerTitle: () => <NestedHeader />,
-        headerStyle,
-        headerBackImage,
-      },
-    },
-  ];
-
-  const screens = screensMetadata.map((metadata) => {
-    return <Stack.Screen key={metadata.name} {...metadata} />;
-  });
-
-  return <Stack.Navigator>{screens}</Stack.Navigator>;
-}
 
 export default PilotCreateProfileNavigation;

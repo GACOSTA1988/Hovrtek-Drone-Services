@@ -41,7 +41,7 @@ const APP_STRINGS = {
 const NAV_SCREENS = {
   CHAT: "ChatScreen",
   JOB_LIST: "JobListScreen",
-  PILOT_SETUP_ONE: "PilotProfilePageSetupPageOneScreen",
+  PILOT_SETUP_ONE: "PilotProfileSetupPageOneScreen",
 }
 
 export { APP_STRINGS, NAV_SCREENS };

@@ -16,8 +16,8 @@ import ClientProfileNavigator from "./navigation/ClientProfileNavigation";
 import ClientTabs from './navigation/ClientTabs';
 import PilotTabs from './navigation/PilotTabs';
 import {Linking} from 'expo';
-
-
+import PilotCreateProfileNavigation from "./navigation/PilotCreateProfileNavigation";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const RootStack = createStackNavigator();
 
@@ -36,6 +36,20 @@ const LogoTitle = () => {
 
 const goToLinkedIn = ({navigation}) => {
    Linking.openURL('https://www.linkedin.com/company/hovrtek/')
+   navigation.navigate('Home')
+  navigation.closeDrawer();
+   return <Text></Text>
+}
+
+const goToFacebook = ({navigation}) => {
+   Linking.openURL('https://www.facebook.com/Hovrtek/')
+   navigation.navigate('Home')
+  navigation.closeDrawer();
+   return <Text></Text>
+}
+
+const goToInstagram = ({navigation}) => {
+   Linking.openURL('https://www.instagram.com/hovrtek/')
    navigation.navigate('Home')
   navigation.closeDrawer();
    return <Text></Text>
@@ -150,11 +164,21 @@ const pilotNavigation = (
     <NavigationContainer independent={true}>
       <PilotDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
       <PilotDrawer.Screen name="Home" component={PilotTabs}/>
-      {/* <PilotDrawer.Screen name="Profile" component={PilotPro}/> */}
+      <PilotDrawer.Screen name="Profile" component={PilotCreateProfileNavigation}/>
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>
       <PilotDrawer.Screen name="Support" component={SupportNavigation}/>
+      <PilotDrawer.Screen name="Facebook Icon" component={goToFacebook}
+      drawerIcon={() => {
+        <Icon
+              name="facebook"
+              size={30}
+              style={styles.icon}
+              color="blue">
+              </Icon>
+      }}/>
+      <PilotDrawer.Screen name="Instagram Icon" component={goToInstagram}/>
+      <PilotDrawer.Screen name="Linked In Icon" component={goToLinkedIn}/>
       <PilotDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
-      <PilotDrawer.Screen name="Linked In" component={goToLinkedIn}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>
   )

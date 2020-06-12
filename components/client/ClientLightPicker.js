@@ -72,7 +72,7 @@ const ClientLightPicker = () => {
           <View styles={styles.cancelWrapper}>
           <TouchableOpacity style={styles.chatButton} onPress={() => setIsModalVisible(false)}>
               <Text style={styles.chatText}>{APP_STRINGS.save}</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   radiobutton: {
     paddingRight: '5%',
-  }, 
+  },
   input: {
     marginTop: 20,
     height: 90,

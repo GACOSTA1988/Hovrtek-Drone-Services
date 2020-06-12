@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PilotHomeStackNavigator from "./PilotHomeStackNavigator";
+import PilotJobsStackNavigator from "./PilotJobsStackNavigator";
 import MessagingNavigation from './MessagingNavigation';
 import MyJobsScreen from '../screens/pilot/MyJobsScreen';
 import { FontAwesome } from '@expo/vector-icons';
@@ -22,7 +23,7 @@ function PilotTabs() {
         />
       <Tabs.Screen 
         name="Projects" 
-        component={MyJobsScreen}
+        component={PilotJobsStackNavigator}
         options={{
           tabBarIcon: ({color}) => (<FontAwesome5 name="helicopter" size={20} color={color}/>)
         }} />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Image, TouchableOpacity } from "react-native";
+import { Button, Image, TouchableOpacity, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {AboutNavigation, SupportNavigation} from "./navigation/ClientNavigation";
 import PilotNavigation from "./navigation/PilotNavigation";
@@ -15,6 +15,7 @@ import { PilotDrawerContent } from './navigation/PilotDrawerContent';
 import ClientProfileNavigator from "./navigation/ClientProfileNavigation";
 import ClientTabs from './navigation/ClientTabs';
 import PilotTabs from './navigation/PilotTabs';
+import {Linking} from 'expo';
 
 
 
@@ -32,6 +33,13 @@ const LogoTitle = () => {
     <Image style={imageStyle} source={require("./assets/hovrtek_logo.png")} />
   );
 };
+
+const goToLinkedIn = ({navigation}) => {
+   Linking.openURL('https://www.linkedin.com/company/hovrtek/')
+   navigation.navigate('Home')
+  navigation.closeDrawer();
+   return <Text></Text>
+}
 
 const renderLogin = () => {
   const signHeaderStyle = {
@@ -146,20 +154,9 @@ const pilotNavigation = (
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>
       <PilotDrawer.Screen name="Support" component={SupportNavigation}/>
       <PilotDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
+      <PilotDrawer.Screen name="Linked In" component={goToLinkedIn}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>
   )
-
-// const clientNavigation = (
-//   <RootStack.Navigator headerMode="none">
-//     <RootStack.Screen name="Client" component={ClientNavigation} />
-//   </RootStack.Navigator>
-// );
-
-// const pilotNavigation = (
-//   <RootStack.Navigator headerMode="none">
-//     <RootStack.Screen name="Pilot" component={PilotNavigation} />
-//   </RootStack.Navigator>
-// );
 
 export { clientNavigation, pilotNavigation, renderLogin, renderLoading };

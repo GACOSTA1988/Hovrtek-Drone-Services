@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ClientHomeStackNavigator from "./ClientHomeStackNavigator";
+import ClientProjectStackNavigator from "./ClientProjectStackNavigator";
 import MessagingNavigation from './MessagingNavigation';
 import ProjectScreensStackNavigator from './ProjectScreensStackNavigator';
 import ProjectListScreen from '../screens/client/ProjectListScreen';
@@ -23,7 +24,7 @@ function ClientTabs() {
           />
         <Tabs.Screen 
           name="Projects" 
-          component={ProjectListScreen}
+          component={ClientProjectStackNavigator}
           options={{
             tabBarIcon: ({color}) => (<FontAwesome5 name="helicopter" size={20} color={color}/>)
           }} />

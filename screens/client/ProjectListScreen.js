@@ -23,6 +23,7 @@ import { AntDesign } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import ClientSubheader from "../../components/client/ClientSubheader";
 
+
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
   useEffect(() => {
     props.getProjects();

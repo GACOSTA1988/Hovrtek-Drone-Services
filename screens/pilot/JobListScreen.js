@@ -24,7 +24,6 @@ import { getPilotProfiles } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import { render } from "react-dom";
-import PilotSubheader from "../../components/pilot/PilotSubheader";
 
 function JobListScreen(
   props,
@@ -218,7 +217,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 20,
     height: '30%',
-  }
+  },
+  pilotText: {
+    fontSize: 30,
+    color: "darkblue",
+    marginBottom: 14,
+  },
 });
 
 function mapStateToProps(state) {

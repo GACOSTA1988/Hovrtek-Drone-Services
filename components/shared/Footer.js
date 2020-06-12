@@ -25,24 +25,24 @@ function Footer() {
     setVisible(true);
   }
 
-  function goToLinkedin() {
-    Linking.openURL('https://www.linkedin.com/company/hovrtek/');
-  }
+  // function goToLinkedin() {
+  //   Linking.openURL('https://www.linkedin.com/company/hovrtek/');
+  // }
 
-  function goToFacebook() {
-    Linking.openURL('https://www.facebook.com/Hovrtek/');
-  }
+  // function goToFacebook() {
+  //   Linking.openURL('https://www.facebook.com/Hovrtek/');
+  // }
 
-  function goToInstagram() {
-    Linking.openURL('https://www.instagram.com/hovrtek/');
-  }
+  // function goToInstagram() {
+  //   Linking.openURL('https://www.instagram.com/hovrtek/');
+  // }
 
   return (
     <View>
       { visible ? (
         <View style={styles.footerWrapper}>
-          <View style={styles.mediaButton}>
-            {/* <TouchableOpacity onPress={goToLinkedin}>
+          {/* <View style={styles.mediaButton}>
+            <TouchableOpacity onPress={goToLinkedin}>
               <Icon name="linkedin"
               size={35}
               style={styles.icon}
@@ -64,8 +64,8 @@ function Footer() {
               color="white"
               style={styles.icon}>
               </Icon>
-            </TouchableOpacity> */}
-          </View>
+            </TouchableOpacity>
+          </View> */}
         </View>
       ) : (
         <View></View>

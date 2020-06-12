@@ -154,6 +154,17 @@ const clientNavigation = (
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
         <ClientDrawer.Screen name="Support" component={SupportNavigation}/>
+        <PilotDrawer.Screen name="Facebook Icon" component={goToFacebook}
+        drawerIcon={() => {
+        <Icon
+              name="facebook"
+              size={30}
+              style={styles.icon}
+              color="blue">
+              </Icon>
+        }}/>
+        <PilotDrawer.Screen name="Instagram Icon" component={goToInstagram}/>
+        <PilotDrawer.Screen name="Linked In Icon" component={goToLinkedIn}/>
         <ClientDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
 
       </ClientDrawer.Navigator>

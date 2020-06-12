@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Image, TouchableOpacity, Text } from "react-native";
+import { Image, TouchableOpacity, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {AboutNavigation, SupportNavigation} from "./navigation/ClientNavigation";
-import PilotNavigation from "./navigation/PilotNavigation";
+import {AboutNavigation, SupportNavigation} from "./navigation/AboutSupportNavigationStack";
 import SignInScreen from "./screens/auth/SignInScreen";
 import SignOutScreen from "./screens/auth/SignOutScreen";
 import SignUpNavigation from "./navigation/SignUpNavigation";
@@ -10,8 +9,6 @@ import LoadingScreen from "./screens/LoadingScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { ClientDrawerContent } from './navigation/ClientDrawerContent';
-import { PilotDrawerContent } from './navigation/PilotDrawerContent';
 import ClientProfileNavigator from "./navigation/ClientProfileNavigation";
 import ClientTabs from './navigation/ClientTabs';
 import PilotTabs from './navigation/PilotTabs';
@@ -166,7 +163,6 @@ const clientNavigation = (
         <PilotDrawer.Screen name="Instagram Icon" component={goToInstagram}/>
         <PilotDrawer.Screen name="Linked In Icon" component={goToLinkedIn}/>
         <ClientDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
-
       </ClientDrawer.Navigator>
     </NavigationContainer>
   )

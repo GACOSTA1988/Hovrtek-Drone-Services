@@ -9,9 +9,9 @@ import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import EditProjectScreen from "../screens/client/EditProjectScreen";
 import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
-import MainHeader from "../components/shared/MainHeader";
-import NestedHeader from "../components/shared/NestedHeader";
 import { Ionicons } from "@expo/vector-icons";
+import GlobalHeader from "../components/shared/GlobalHeader";
+
 
 const HomeStack = createStackNavigator();
 
@@ -31,7 +31,7 @@ const ClientHomeStackNavigator = () => {
         options={{
           headerBackTitle: " ",
           title: "Welcome",
-          headerTitle: () => <MainHeader />,
+          headerTitle: () => <GlobalHeader isHome={true}/>,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -39,9 +39,10 @@ const ClientHomeStackNavigator = () => {
         name="NewProjectScreenOne"
         component={NewProjectScreenOne}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "New Project",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -49,9 +50,10 @@ const ClientHomeStackNavigator = () => {
         name="NewProjectScreenTwo"
         component={NewProjectScreenTwo}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "New Project",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -59,9 +61,10 @@ const ClientHomeStackNavigator = () => {
         name="NewProjectScreenThree"
         component={NewProjectScreenThree}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "New Project",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -69,7 +72,8 @@ const ClientHomeStackNavigator = () => {
         name="ProjectListScreen"
         component={ProjectListScreen}
         options={{
-          headerTitle: () => <NestedHeader />,
+          headerLeft: null,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
           headerBackTitle: " ",
           title: "",
@@ -79,9 +83,10 @@ const ClientHomeStackNavigator = () => {
         name="ProjectDetailsScreen"
         component={ProjectDetailsScreen}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -89,9 +94,10 @@ const ClientHomeStackNavigator = () => {
         name="EditProjectScreen"
         component={EditProjectScreen}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "Edit",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -99,9 +105,10 @@ const ClientHomeStackNavigator = () => {
         name="PilotProfileWelcomeScreen"
         component={PilotProfileWelcomeScreen}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "Pilot Profile",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -109,7 +116,8 @@ const ClientHomeStackNavigator = () => {
         name="ChatScreen"
         component={ChatScreen}
         options={{
-          headerTitle: () => <NestedHeader />,
+          headerLeft: null,
+          headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle: mainHeaderStyle,
           headerBackTitle: " ",
           title: "Pilot Profile",

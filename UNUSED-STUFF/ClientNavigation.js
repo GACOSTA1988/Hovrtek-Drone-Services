@@ -7,11 +7,11 @@ import AccountScreen from '../screens/client/AccountScreen';
 import LocationScreen from '../screens/client/LocationScreen';
 import ServicesScreen from '../screens/client/ServicesScreen';
 import SignOutScreen from '../screens/auth/SignOutScreen';
-import ClientProfileNavigation from './ClientProfileNavigation';
-import MessagingNavigation from './MessagingNavigation';
+import ClientProfileNavigation from '../navigation/ClientProfileNavigation';
+import MessagingNavigation from '../navigation/MessagingNavigation';
 import ChatScreen from '../screens/messaging/ChatScreen';
 import GoHomeButton from '../screens/client/GoHomeButton';
-import ClientHomeStackNavigator from "./ClientHomeStackNavigator";
+import ClientHomeStackNavigator from "../navigation/ClientHomeStackNavigator";
 import MainHeader from '../components/shared/MainHeader';
 import NestedHeader from '../components/shared/NestedHeader';
 

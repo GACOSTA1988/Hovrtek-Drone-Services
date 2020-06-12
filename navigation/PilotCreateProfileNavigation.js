@@ -4,11 +4,21 @@ import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScree
 import PilotProfileSetupPageOneScreen from "../screens/pilot/PilotProfileSetupPageOneScreen";
 import PilotProfileSetupPageTwoScreen from "../screens/pilot/PilotProfileSetupPageTwoScreen";
 import PilotProfileImageUploadScreen from "../screens/pilot/PilotProfileImageUploadScreen";
-import MainHeader from "../components/shared/MainHeader";
-import NestedHeader from "../components/shared/NestedHeader";
+import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const ProfileStack = createStackNavigator();
+
+const backgroundColor = "#092455";
+
+const headerStyle = {
+  backgroundColor,
+  height: 100,
+};
+
+const headerBackImage = () => (
+  <Ionicons name="ios-arrow-round-back" size={50} color={backgroundColor} />
+);
 
 const PilotCreateProfileNavigation = () => {
   return (
@@ -18,7 +28,8 @@ const PilotCreateProfileNavigation = () => {
         component={PilotProfileWelcomeScreen}
         options={{
           title: " ",
-          headerMode: 'none',
+          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerStyle,
         }}
       />
       <ProfileStack.Screen
@@ -26,21 +37,30 @@ const PilotCreateProfileNavigation = () => {
         component={PilotProfileSetupPageOneScreen}
         navigationOptions={{headerMode: 'none'}}
         options={{
+          headerLeft: null,
           title: " ",
+          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerStyle,
           }}
       />
       <ProfileStack.Screen
         name="PilotProfileSetupPageTwoScreen"
         component={PilotProfileSetupPageTwoScreen}
         options={{
-          title: "Accept Job",        
+          headerLeft: null,
+          title: "Accept Job",  
+          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerStyle,      
         }}
       />
       <ProfileStack.Screen
         name="PilotProfileImageUploadScreen"
         component={PilotProfileImageUploadScreen}
         options={{
+          headerLeft: null,
           title: " ",
+          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerStyle,
         }}
       />
     </ProfileStack.Navigator>

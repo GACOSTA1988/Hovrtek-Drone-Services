@@ -65,10 +65,6 @@ export default () => {
           {isPilotLoggedIn && pilotNavigation}
           {loggedIn === "false" && renderLogin()}
           {loggedIn === "loading" && renderLoading()}
-      {/* //TEMP SIGN OUT BUTTON */}
-        {/* <TouchableOpacity style={{position: 'relative', marginTop: 10, marginBottom: 10}} onPress={() => auth.signOut()}>
-          <Text>Sign Out</Text>
-        </TouchableOpacity> */}
         <Footer />
         </NavigationContainer>
       </AuthContext.Provider>

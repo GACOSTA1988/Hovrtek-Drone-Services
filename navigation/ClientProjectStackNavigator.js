@@ -1,16 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import NewProjectScreenOne from "../screens/client/NewProjectScreenOne";
-import NewProjectScreenTwo from "../screens/client/NewProjectScreenTwo";
-import NewProjectScreenThree from "../screens/client/NewProjectScreenThree";
-import NewProjectScreenWelcome from "../screens/client/NewProjectScreenWelcome";
 import ProjectListScreen from "../screens/client/ProjectListScreen";
 import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import EditProjectScreen from "../screens/client/EditProjectScreen";
 import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
-import MainHeader from "../components/shared/MainHeader";
-import NestedHeader from "../components/shared/NestedHeader";
+import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const ProjectStack = createStackNavigator();
@@ -29,7 +24,7 @@ const ClientProjectStackNavigator = () => {
         name="ProjectListScreen"
         component={ProjectListScreen}
         options={{
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: mainHeaderStyle,
           headerBackTitle: " ",
           title: "",
@@ -39,9 +34,10 @@ const ClientProjectStackNavigator = () => {
         name="ProjectDetailsScreen"
         component={ProjectDetailsScreen}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -49,9 +45,10 @@ const ClientProjectStackNavigator = () => {
         name="EditProjectScreen"
         component={EditProjectScreen}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "Edit",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -59,9 +56,10 @@ const ClientProjectStackNavigator = () => {
         name="PilotProfileWelcomeScreen"
         component={PilotProfileWelcomeScreen}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "Pilot Profile",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -69,7 +67,8 @@ const ClientProjectStackNavigator = () => {
         name="ChatScreen"
         component={ChatScreen}
         options={{
-          headerTitle: () => <NestedHeader />,
+          headerLeft: null,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
           headerBackTitle: " ",
           title: "Pilot Profile",

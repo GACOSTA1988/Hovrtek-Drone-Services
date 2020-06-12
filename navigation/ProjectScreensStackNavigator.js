@@ -5,8 +5,7 @@ import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import EditProjectScreen from "../screens/client/EditProjectScreen";
 import PilotProfileWelcomeScreen from '../screens/pilot/PilotProfileWelcomeScreen';
 import ChatScreen from '../screens/messaging/ChatScreen';
-import MainHeader from '../components/shared/MainHeader';
-import NestedHeader from '../components/shared/NestedHeader';
+import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const ProjectScreensStack = createStackNavigator();
@@ -19,7 +18,7 @@ function ProjectScreensStackNavigator() {
         component={ProjectListScreen}
         options={{
           title: "Projects",
-          headerTitle: () => <MainHeader />,
+          headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
@@ -30,8 +29,9 @@ function ProjectScreensStackNavigator() {
         name="ProjectDetailsScreen"
         component={ProjectDetailsScreen}
         options={{
+          headerLeft: null,
           title: "Details",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
@@ -42,8 +42,9 @@ function ProjectScreensStackNavigator() {
         name="EditProjectScreen"
         component={EditProjectScreen}
         options={{
+          headerLeft: null,
           title: "Edit",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
@@ -54,8 +55,9 @@ function ProjectScreensStackNavigator() {
         name="PilotProfileWelcomeScreen"
         component={PilotProfileWelcomeScreen}
         options={{
+          headerLeft: null,
           title: "Profile",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
@@ -66,8 +68,9 @@ function ProjectScreensStackNavigator() {
         name="ChatScreen"
         component={ChatScreen}
         options={{
+          headerLeft: null,
           title: "Chat",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100

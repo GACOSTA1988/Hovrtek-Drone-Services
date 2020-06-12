@@ -1,7 +1,7 @@
 const APP_STRINGS = {
   abilityOver400Ft: "Able to Fly over 400 FT:",
   areYouWilling: "Are You Willing to Travel Out of State for a Drone Job?",
-  briefSummary: "Please Give Us a Brief Summary of Your Work Experience",
+  briefSummary: "Click here to show keyboard!",
   bio: "Bio:",
   chat: "Chat",
   choose: "Choose",

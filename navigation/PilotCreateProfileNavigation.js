@@ -27,7 +27,6 @@ const PilotCreateProfileNavigation = () => {
         name="Profile"
         component={PilotProfileWelcomeScreen}
         options={{
-          title: " ",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle,
         }}
@@ -38,7 +37,6 @@ const PilotCreateProfileNavigation = () => {
         navigationOptions={{headerMode: 'none'}}
         options={{
           headerLeft: null,
-          title: " ",
           headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle,
           }}
@@ -48,7 +46,6 @@ const PilotCreateProfileNavigation = () => {
         component={PilotProfileSetupPageTwoScreen}
         options={{
           headerLeft: null,
-          title: "Accept Job",  
           headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle,      
         }}
@@ -58,7 +55,6 @@ const PilotCreateProfileNavigation = () => {
         component={PilotProfileImageUploadScreen}
         options={{
           headerLeft: null,
-          title: " ",
           headerTitle: () => <GlobalHeader isHome={false}/>,
           headerStyle,
         }}

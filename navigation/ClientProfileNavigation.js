@@ -15,12 +15,10 @@ function ClientProfileNavigator() {
         component={ClientProfileScreen}
         options={{
           animationEnabled: false,
-          title: "Profile",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
-            
           },
         }}
       />
@@ -30,7 +28,6 @@ function ClientProfileNavigator() {
         options={{
           headerLeft: null,
           animationEnabled: false,
-          title: "Edit Profile",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",

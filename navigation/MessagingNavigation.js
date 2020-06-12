@@ -2,8 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import MessagingScreen from "../screens/messaging/MessagingScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
-import NestedHeader from '../components/shared/NestedHeader';
-import MainHeader from '../components/shared/MainHeader';
+import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const MessagingNavigatorStack = createStackNavigator();
@@ -17,7 +16,7 @@ function MessagingNavigation() {
         options={{
           headerBackTitle: " ",
           title: "Messaging",
-          headerTitle: () => <MainHeader />,
+          headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
@@ -28,14 +27,14 @@ function MessagingNavigation() {
         name="ChatScreen"
         component={ChatScreen}
         options={{
+          headerLeft: null,
           headerBackTitle: " ",
           title: "Chat",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
           },
-          // headerBackImage: () => <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />,
         }}
       />
     </MessagingNavigatorStack.Navigator>

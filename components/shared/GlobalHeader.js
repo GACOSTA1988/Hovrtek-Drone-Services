@@ -22,7 +22,7 @@ import * as firebase from "firebase";
 import { NotificationContext } from "../../context";
 import { HeaderContext } from "../../context";
 
-const MainHeader = (props, { getMessages }) => {
+const GlobalHeader = (props, { getMessages }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -45,27 +45,28 @@ const MainHeader = (props, { getMessages }) => {
 
   return (
     <View style={styles.MainHeaderWrapper}>
-      <NotificationContext.Provider value={[ unreadMessages, noteVisible ]}>
-        <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
-        {unreadMessages.length > 0 ? (
-          <View style={styles.dot}>
-            <Text />
-          </View>
-        ) : (
-          <View />
-        )}
-        {noteVisible ? (
-          <View style={styles.note}>
-            <TouchableOpacity onPress={() => setNoteVisible(false)}>
-              <Text style={styles.messageText}>
-                You have {unreadMessages.length} new messages
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View />
-        )}
-        <Ionicons
+         <View style={props.isHome? styles.navIconLeftHidden : styles.navIconLeft} pointerEvents={props.isHome? 'none' : 'auto'}>
+            <Ionicons
+            style={styles.backIcon}
+            onPress={() => {navigation.goBack()}}
+            name="ios-arrow-back"
+            size={45}
+            color="white"
+            resizeMode="contain"
+            />
+        </View>
+        <View styles={styles.logoContainer}>
+          <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+        </View>
+        <View style={props.isHome? styles.navIconRight : styles.navIconRightHidden} pointerEvents={props.isHome? 'auto' : 'none'}>
+          {unreadMessages.length > 0 ? (
+            <View style={styles.dot}>
+              <Text />
+            </View>
+          ) : (
+            <View />
+          )}
+          <Ionicons
           style={styles.hamburger}
           onPress={() => {
             navigation.dispatch(DrawerActions.toggleDrawer());
@@ -74,8 +75,8 @@ const MainHeader = (props, { getMessages }) => {
           size={45}
           color="white"
           resizeMode="contain"
-        />
-      </NotificationContext.Provider>
+          /> 
+        </View>
     </View>
   );
 };
@@ -84,44 +85,22 @@ const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   MainHeaderWrapper: {
-    backgroundColor: "#092455",
-    justifyContent: "center",
-    ...Platform.select({
-      ios: {
-        marginTop: 18,
-        marginBottom: 20,
-        width: 425,
-        height: 60,
-        flexDirection: "row",
-        alignItems: "center",
-        borderBottomWidth: 10,
-        borderBottomColor: "grey",
-      },
-      android: {
-        left: -16,
-        alignSelf: "stretch",
-        width: width,
-        height: 80,
-      },
-    }),
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: '100%',
+    width: width,
+    flex: 1,
   },
-
   hovrtekLogo: {
-    position: "absolute",
     ...Platform.select({
       ios: {
         width: 170,
         height: 30,
-        left: 0,
-        right: 10,
-        top: 7,
-        marginLeft: 20,
       },
       android: {
         width: 210,
         height: 40,
-        left: 10,
-        top: "35%",
       },
     }),
   },
@@ -130,13 +109,10 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     ...Platform.select({
       ios: {
-        marginLeft: 300,
-        margin: 0,
+        marginRight: 15,
       },
       android: {
-        right: 10,
-        top: 10,
-        marginRight: 5,
+        marginRight: 15,
       },
     }),
   },
@@ -161,35 +137,34 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     zIndex: 2
   },
-  note: {
-    ...Platform.select({
-      ios: {
-        top: 70,
-        right: 20,
-      },
-      android: {
-        top: 20,
-        alignSelf: "center",
-      },
-    }),
-    position: "absolute",
-    backgroundColor: "white",
-    borderRadius: 15,
-    paddingLeft: 20,
-    paddingRight: 15,
-    paddingBottom: 20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    flexDirection: "row",
-  },
   messageText: {
     paddingTop: 20,
   },
+  navIconLeft: {
+    flex: 1,
+    width: '25%',
+  },
+  navIconLeftHidden: {
+    opacity: 0,
+    flex: 1,
+    width: '25%',
+  },
+  navIconRight: {
+    flex: 1,
+    width: '25%',
+  },
+  navIconRightHidden: {
+    opacity: 0,
+    flex: 1,
+    width: '25%',
+  },
+  logoContainer: {
+    flex: 1,
+    width: '50%',
+  },
+  backIcon: {
+    marginLeft: 15,
+  }
 });
 
 function mapStateToProps(state) {
@@ -204,4 +179,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getMessages })(MainHeader);
+export default connect(mapStateToProps, { getMessages })(GlobalHeader);

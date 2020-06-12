@@ -18,7 +18,6 @@ import ClientDatePicker from '../../components/client/ClientDatePicker';
 import ClientLocationPicker from '../../components/client/ClientLocationPicker';
 import ClientRecordingPicker from '../../components/client/ClientRecordingPicker';
 import ClientLightPicker from '../../components/client/ClientLightPicker';
-import ClientCreateNewProjectNavigation from "../../navigation/ClientCreateNewProjectNavigation";
 
 // CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();

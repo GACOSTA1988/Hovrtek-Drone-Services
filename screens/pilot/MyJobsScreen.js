@@ -44,10 +44,6 @@ function MyJobsScreen(props, { getProjects }) {
 
   return (
     <View style={styles.projectListWrapper}>
-
-      <View style={styles.subheaderWrapper}>
-        <PilotSubheader />
-      </View>
       <View style={styles.scrollViewWrapper}>
         <Text style={styles.pilotText}>My Jobs</Text>
         <ScrollView>

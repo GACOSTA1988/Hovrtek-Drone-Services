@@ -1,24 +1,20 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import JobListScreen from "../screens/pilot/JobListScreen";
 import JobDetailsScreen from "../screens/pilot/JobDetailsScreen";
-import AcceptJobScreen from "../screens/pilot/AcceptJobScreen";
 import ClientProfileScreen from "../screens/client/ClientProfileScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
-import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import MyJobsScreen from "../screens/pilot/MyJobsScreen.js";
 import GlobalHeader from "../components/shared/GlobalHeader";
-
 import { Ionicons } from "@expo/vector-icons";
 
-const HomeStack = createStackNavigator();
+const JobsStack = createStackNavigator();
 
-const PilotHomeStackNavigator = () => {
+const PilotJobsStackNavigator = () => {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="JobListScreen"
-        component={JobListScreen}
+    <JobsStack.Navigator>
+      <JobsStack.Screen
+        name="MyJobsScreen"
+        component={MyJobsScreen}
         options={{
           title: " ",
           headerTitle: () => <GlobalHeader isHome={true} />,
@@ -28,7 +24,7 @@ const PilotHomeStackNavigator = () => {
           },
         }}
       />
-      <HomeStack.Screen
+      <JobsStack.Screen
         name="JobDetailsScreen"
         component={JobDetailsScreen}
         options={{
@@ -40,25 +36,10 @@ const PilotHomeStackNavigator = () => {
             height: 100,
             borderBottomColor: "grey",
             borderBottomWidth: 10,
-          },   
-        }}
-      />
-      <HomeStack.Screen
-        name="AcceptJobScreen"
-        component={AcceptJobScreen}
-        options={{
-          headerLeft: null,
-          title: "Accept Job",
-          headerTitle: () => <GlobalHeader isHome={false} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100,
-            borderBottomColor: "grey",
-            borderBottomWidth: 10,
           },
         }}
       />
-      <HomeStack.Screen
+      <JobsStack.Screen
         name="ClientProfileScreen"
         component={ClientProfileScreen}
         options={{
@@ -73,7 +54,7 @@ const PilotHomeStackNavigator = () => {
           },
         }}
       />
-      <HomeStack.Screen
+      <JobsStack.Screen
         name="ChatScreen"
         component={ChatScreen}
         options={{
@@ -88,30 +69,8 @@ const PilotHomeStackNavigator = () => {
           },
         }}
       />
-      <HomeStack.Screen
-        name="MyJobsScreen"
-        component={MyJobsScreen}
-        options={{
-          headerLeft: null,
-          title: " ",
-          headerTitle: () => <GlobalHeader isHome={true} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100,
-          },
-        }}
-      />
-      <HomeStack.Screen
-        name="Profile"
-        component={PilotCreateProfileNavigation}
-        options={{
-          headerLeft: null,
-          title: " ",
-          headerShown: false,
-        }}
-      />
-    </HomeStack.Navigator>
+    </JobsStack.Navigator>
   );
 };
 
-export default PilotHomeStackNavigator;
+export default PilotJobsStackNavigator;

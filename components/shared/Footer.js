@@ -25,23 +25,30 @@ function Footer() {
     setVisible(true);
   }
 
-  function goToLinkedin() {
-    Linking.openURL('https://www.linkedin.com/company/hovrtek/');
-  }
+  // function goToLinkedin() {
+  //   Linking.openURL('https://www.linkedin.com/company/hovrtek/');
+  // }
 
-  function goToFacebook() {
-    Linking.openURL('https://www.facebook.com/Hovrtek/');
-  }
+  // function goToFacebook() {
+  //   Linking.openURL('https://www.facebook.com/Hovrtek/');
+  // }
 
-  function goToInstagram() {
-    Linking.openURL('https://www.instagram.com/hovrtek/');
-  }
+  // function goToInstagram() {
+  //   Linking.openURL('https://www.instagram.com/hovrtek/');
+  // }
 
   return (
     <View>
       { visible ? (
         <View style={styles.footerWrapper}>
-          <View style={styles.mediaButton}>
+          {/* <View style={styles.mediaButton}>
+            <TouchableOpacity onPress={goToLinkedin}>
+              <Icon name="linkedin"
+              size={35}
+              style={styles.icon}
+              color="white">
+              </Icon>
+            </TouchableOpacity>
             <TouchableOpacity onPress={goToFacebook}>
               <Icon
               name="facebook"
@@ -58,14 +65,7 @@ function Footer() {
               style={styles.icon}>
               </Icon>
             </TouchableOpacity>
-            <TouchableOpacity onPress={goToLinkedin}>
-              <Icon name="linkedin"
-              size={35}
-              style={styles.icon}
-              color="white">
-              </Icon>
-            </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
       ) : (
         <View></View>
@@ -77,21 +77,10 @@ function Footer() {
 const styles = StyleSheet.create({
   footerWrapper: {
     backgroundColor: "#092455",
-    height: 90,
-    borderTopColor: "grey",
-    borderTopWidth: 10
+    height: 34,
+    margin: 0,
+    padding: 0,
   },
-  mediaButton: {
-    alignItems: "center",
-    paddingLeft: '25%',
-    flexDirection: 'row'
-  },
-  icon: {
-    margin: 20
-  },
-  space: {
-    color: "#092455"
-  }
 });
 
 export default Footer;

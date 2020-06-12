@@ -3,82 +3,79 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ProjectListScreen from "../screens/client/ProjectListScreen";
 import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import EditProjectScreen from "../screens/client/EditProjectScreen";
-import PilotProfileWelcomeScreen from '../screens/pilot/PilotProfileWelcomeScreen';
-import ChatScreen from '../screens/messaging/ChatScreen';
+import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScreen";
+import ChatScreen from "../screens/messaging/ChatScreen";
 import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
 
-const ProjectScreensStack = createStackNavigator();
+const ProjectStack = createStackNavigator();
 
-function ProjectScreensStackNavigator() {
+const mainHeaderStyle = {
+  backgroundColor: "#092455",
+  height: 100,
+  borderBottomColor: "grey",
+  borderBottomWidth: 10,
+};
+
+const ClientProjectStackNavigator = () => {
   return (
-    <ProjectScreensStack.Navigator>
-      <ProjectScreensStack.Screen
+    <ProjectStack.Navigator initialRouteName="ProjectListScreen">
+      <ProjectStack.Screen
         name="ProjectListScreen"
         component={ProjectListScreen}
         options={{
-          title: "Projects",
           headerTitle: () => <GlobalHeader isHome={true} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          }
+          headerStyle: mainHeaderStyle,
+          headerBackTitle: " ",
+          title: "",
         }}
       />
-      <ProjectScreensStack.Screen
+      <ProjectStack.Screen
         name="ProjectDetailsScreen"
         component={ProjectDetailsScreen}
         options={{
           headerLeft: null,
-          title: "Details",
+          headerBackTitle: " ",
+          title: "",
           headerTitle: () => <GlobalHeader isHome={false} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          }
+          headerStyle: mainHeaderStyle,
         }}
       />
-      <ProjectScreensStack.Screen
+      <ProjectStack.Screen
         name="EditProjectScreen"
         component={EditProjectScreen}
         options={{
           headerLeft: null,
+          headerBackTitle: " ",
           title: "Edit",
           headerTitle: () => <GlobalHeader isHome={false} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          }
+          headerStyle: mainHeaderStyle,
         }}
       />
-      <ProjectScreensStack.Screen
+      <ProjectStack.Screen
         name="PilotProfileWelcomeScreen"
         component={PilotProfileWelcomeScreen}
         options={{
           headerLeft: null,
-          title: "Profile",
+          headerBackTitle: " ",
+          title: "Pilot Profile",
           headerTitle: () => <GlobalHeader isHome={false} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          }
+          headerStyle: mainHeaderStyle,
         }}
       />
-      <ProjectScreensStack.Screen
+      <ProjectStack.Screen
         name="ChatScreen"
         component={ChatScreen}
         options={{
           headerLeft: null,
-          title: "Chat",
           headerTitle: () => <GlobalHeader isHome={false} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100
-          }
+          headerStyle: mainHeaderStyle,
+          headerBackTitle: " ",
+          title: "Pilot Profile",
         }}
       />
-    </ProjectScreensStack.Navigator>
+    </ProjectStack.Navigator>
   );
-}
+};
 
-export default ProjectScreensStackNavigator;
+export default ClientProjectStackNavigator;

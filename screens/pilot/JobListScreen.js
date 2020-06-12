@@ -92,10 +92,6 @@ function JobListScreen(
         <Text />
       )}
 
-      <View style={styles.subheaderWrapper}>
-        <PilotSubheader />
-      </View>
-
       <Text style={styles.pilotText}>Available Projects</Text>
 
       <ScrollView>

@@ -23,6 +23,7 @@ import { AntDesign } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import ClientSubheader from "../../components/client/ClientSubheader";
 
+
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
   useEffect(() => {
     props.getProjects();
@@ -43,68 +44,17 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
   return (
     <View style={styles.projectListWrapper}>
-      <View style={styles.subheaderWrapper}>
-        <ClientSubheader />
-      </View>
-      <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
+      <View style={styles.ClientProjectListTextWrapper}>
         <Text style={styles.clientText}>My Projects</Text>
-      </TouchableOpacity>
+      </View>
       <ScrollView>
         <View style={styles.projectCard}>
-          <FlatList
-            style={{ width: "100%" }}
-            data={listOfMyProjects}
-            keyExtractor={(item) => item.key}
-            renderItem={({ item }) => {
-              return (
-                <View
-                  style={{
-                    borderRadius: 15,
-                    backgroundColor: "#092455",
-                    marginBottom: 15,
-                    padding: 20,
-                  }}
-                >
-                  <TouchableHighlight
-                    onPress={() =>
-                      props.navigation.navigate("ProjectDetailsScreen", {
-                        ...item,
-                      })}
-                  >
-                    <View>
-                      <Text style={{ color: "white", fontWeight: "800" }}>
-                        Location: {item.location}{" "}
-                      </Text>
-                      <Text style={{ color: "white", fontWeight: "800" }}>
-                        Date: {item.date}{" "}
-                      </Text>
-                      <Text style={{ color: "white", fontWeight: "800" }}>
-                        Recording: {item.recording}{" "}
-                      </Text>
-                      {item.pilotID &&
-                      props.listOfPilotProfiles.find(
-                        (x) => x.userID === item.pilotID,
-                      ) ? (
-                        <Text style={{ color: "white", fontWeight: "800" }}>
-                          Your pilot:{" "}
-                          {
-                            props.listOfPilotProfiles.find(
-                              (x) => x.userID === item.pilotID,
-                            ).pilotFirstName
-                          }{" "}
-                          {
-                            props.listOfPilotProfiles.find(
-                              (x) => x.userID === item.pilotID,
-                            ).pilotLastName
-                          }
-                        </Text>
-                      ) : (
-                        <Text style={{ color: "white", fontWeight: "800" }}>
-                          Pending pilot
-                        </Text>
-                      )}
-                    </View>
-                  </TouchableHighlight>
+            <FlatList
+              style={{ width: "100%" }}
+              data={listOfMyProjects}
+              keyExtractor={(item) => item.key}
+              renderItem={({ item }) => {
+                return (
                   <View
                     style={{
                       flexDirection: "row",
@@ -134,10 +84,9 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
                       </View>
                     </TouchableHighlight>
                   </View>
-                </View>
-              );
-            }}
-          />
+                );
+              }}
+            />
         </View>
       </ScrollView>
     </View>

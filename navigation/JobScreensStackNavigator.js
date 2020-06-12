@@ -5,9 +5,7 @@ import JobDetailsScreen from "../screens/pilot/JobDetailsScreen";
 import AcceptJobScreen from "../screens/pilot/AcceptJobScreen";
 import ClientProfileScreen from '../screens/client/ClientProfileScreen';
 import ChatScreen from '../screens/messaging/ChatScreen';
-import PilotCreateProfileNavigation from './PilotCreateProfileNavigation'
-import MainHeader from '../components/shared/MainHeader';
-import NestedHeader from '../components/shared/NestedHeader';
+import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
 
 const JobScreensStack = createStackNavigator();
@@ -20,7 +18,7 @@ function JobScreensStackNavigator() {
         component={JobListScreen}
         options={{
           title: "Available Jobs",
-          headerTitle: () => <MainHeader />,
+          headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
@@ -31,52 +29,52 @@ function JobScreensStackNavigator() {
         name="JobDetailsScreen"
         component={JobDetailsScreen}
         options={{
+          headerLeft: null,
           title: "Job Details",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
           },
-          headerBackImage: () => <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />,
         }}
       />
       <JobScreensStack.Screen
         name="AcceptJobScreen"
         component={AcceptJobScreen}
         options={{
+          headerLeft: null,
           title: "Accept Job",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
           },
-          headerBackImage: () => <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />,
         }}
       />
       <JobScreensStack.Screen
         name="ClientProfileScreen"
         component={ClientProfileScreen}
         options={{
+          headerLeft: null,
           title: "Profile",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
           },
-          headerBackImage: () => <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />,
         }}
       />
       <JobScreensStack.Screen
         name="ChatScreen"
         component={ChatScreen}
         options={{
+          headerLeft: null,
           title: "Chat",
-          headerTitle: () => <NestedHeader />,
+          headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100
           },
-          headerBackImage: () => <Ionicons name="ios-arrow-round-back" size={50} color={"white"} />,
         }}
       />
     </JobScreensStack.Navigator>

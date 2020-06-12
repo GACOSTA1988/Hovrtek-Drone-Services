@@ -12,7 +12,7 @@ function ClientTabs() {
   const Tabs = createBottomTabNavigator();
 
   return (
-      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: 'lightblue', inactiveBackgroundColor: '#092455', activeTintColor: '#092455', inactiveTintColor: 'white'}}>
+      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: 'lightblue', inactiveBackgroundColor: '#092455', activeTintColor: '#092455', inactiveTintColor: 'white', showLabel: false}}>
         <Tabs.Screen 
           name="Home" 
           labelStyle={ {color: 'white'}}

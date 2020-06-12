@@ -70,7 +70,5 @@ export default () => {
       </AuthContext.Provider>
     </Provider>
 
-);
+  );
 };
-
-

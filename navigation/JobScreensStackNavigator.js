@@ -17,7 +17,6 @@ function JobScreensStackNavigator() {
         name="JobListScreen"
         component={JobListScreen}
         options={{
-          title: "Available Jobs",
           headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -30,7 +29,6 @@ function JobScreensStackNavigator() {
         component={JobDetailsScreen}
         options={{
           headerLeft: null,
-          title: "Job Details",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -43,7 +41,6 @@ function JobScreensStackNavigator() {
         component={AcceptJobScreen}
         options={{
           headerLeft: null,
-          title: "Accept Job",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -56,7 +53,6 @@ function JobScreensStackNavigator() {
         component={ClientProfileScreen}
         options={{
           headerLeft: null,
-          title: "Profile",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -69,7 +65,6 @@ function JobScreensStackNavigator() {
         component={ChatScreen}
         options={{
           headerLeft: null,
-          title: "Chat",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",

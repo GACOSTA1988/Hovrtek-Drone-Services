@@ -16,7 +16,6 @@ const PilotJobsStackNavigator = () => {
         name="MyJobsScreen"
         component={MyJobsScreen}
         options={{
-          title: " ",
           headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -29,13 +28,10 @@ const PilotJobsStackNavigator = () => {
         component={JobDetailsScreen}
         options={{
           headerLeft: null,
-          title: " ",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
-            borderBottomColor: "grey",
-            borderBottomWidth: 10,
           },
         }}
       />
@@ -44,13 +40,10 @@ const PilotJobsStackNavigator = () => {
         component={ClientProfileScreen}
         options={{
           headerLeft: null,
-          title: " ",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
-            borderBottomColor: "grey",
-            borderBottomWidth: 10,
           },
         }}
       />
@@ -64,8 +57,6 @@ const PilotJobsStackNavigator = () => {
           headerStyle: {
             backgroundColor: "#092455",
             height: 100,
-            borderBottomColor: "grey",
-            borderBottomWidth: 10,
           },
         }}
       />

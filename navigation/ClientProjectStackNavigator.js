@@ -13,8 +13,6 @@ const ProjectStack = createStackNavigator();
 const mainHeaderStyle = {
   backgroundColor: "#092455",
   height: 100,
-  borderBottomColor: "grey",
-  borderBottomWidth: 10,
 };
 
 const ClientProjectStackNavigator = () => {
@@ -26,8 +24,6 @@ const ClientProjectStackNavigator = () => {
         options={{
           headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: mainHeaderStyle,
-          headerBackTitle: " ",
-          title: "",
         }}
       />
       <ProjectStack.Screen
@@ -35,8 +31,6 @@ const ClientProjectStackNavigator = () => {
         component={ProjectDetailsScreen}
         options={{
           headerLeft: null,
-          headerBackTitle: " ",
-          title: "",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
         }}
@@ -46,8 +40,6 @@ const ClientProjectStackNavigator = () => {
         component={EditProjectScreen}
         options={{
           headerLeft: null,
-          headerBackTitle: " ",
-          title: "Edit",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
         }}
@@ -57,8 +49,6 @@ const ClientProjectStackNavigator = () => {
         component={PilotProfileWelcomeScreen}
         options={{
           headerLeft: null,
-          headerBackTitle: " ",
-          title: "Pilot Profile",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
         }}
@@ -70,8 +60,6 @@ const ClientProjectStackNavigator = () => {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: mainHeaderStyle,
-          headerBackTitle: " ",
-          title: "Pilot Profile",
         }}
       />
     </ProjectStack.Navigator>

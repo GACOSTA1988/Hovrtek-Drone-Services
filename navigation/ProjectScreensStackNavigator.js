@@ -17,7 +17,6 @@ function ProjectScreensStackNavigator() {
         name="ProjectListScreen"
         component={ProjectListScreen}
         options={{
-          title: "Projects",
           headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -30,7 +29,6 @@ function ProjectScreensStackNavigator() {
         component={ProjectDetailsScreen}
         options={{
           headerLeft: null,
-          title: "Details",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -43,7 +41,6 @@ function ProjectScreensStackNavigator() {
         component={EditProjectScreen}
         options={{
           headerLeft: null,
-          title: "Edit",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -56,7 +53,6 @@ function ProjectScreensStackNavigator() {
         component={PilotProfileWelcomeScreen}
         options={{
           headerLeft: null,
-          title: "Profile",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",
@@ -69,7 +65,6 @@ function ProjectScreensStackNavigator() {
         component={ChatScreen}
         options={{
           headerLeft: null,
-          title: "Chat",
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
             backgroundColor: "#092455",

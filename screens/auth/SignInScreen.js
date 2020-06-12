@@ -57,6 +57,7 @@ function SignInScreen({ navigation }) {
       style={{
         flex: 1,
         height: "100%",
+        backgroundColor: '#092455',
       }}
     >
       <ImageBackground source={landingPageImage} style={styles.MainContainer}>
@@ -97,7 +98,7 @@ function SignInScreen({ navigation }) {
 const styles = StyleSheet.create({
   MainContainer: {
     alignItems: "center",
-    height: "124%",
+    height: "125%",
   },
 
   buttonText: {

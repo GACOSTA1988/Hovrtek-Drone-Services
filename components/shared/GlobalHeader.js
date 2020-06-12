@@ -85,26 +85,6 @@ const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   MainHeaderWrapper: {
-    // backgroundColor: "#092455",
-    // justifyContent: "center",
-    // ...Platform.select({
-    //   ios: {
-    //     marginTop: 18,
-    //     marginBottom: 20,
-    //     width: 425,
-    //     height: 60,
-    //     flexDirection: "row",
-    //     alignItems: "center",
-    //     borderBottomWidth: 10,
-    //     borderBottomColor: "grey",
-    //   },
-    //   android: {
-    //     left: -16,
-    //     alignSelf: "stretch",
-    //     width: width,
-    //     height: 80,
-    //   },
-    // }),
     flexDirection: "row",
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -113,21 +93,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   hovrtekLogo: {
-    // position: "absolute",
     ...Platform.select({
       ios: {
         width: 170,
         height: 30,
-        // left: 0,
-        // right: 10,
-        // top: 7,
-        // marginLeft: 20,
       },
       android: {
         width: 210,
         height: 40,
-        // left: 10,
-        // top: "35%",
       },
     }),
   },
@@ -136,13 +109,9 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     ...Platform.select({
       ios: {
-        // marginLeft: 300,
-        // margin: 0,
         marginRight: 15,
       },
       android: {
-        // right: 10,
-        // top: 10,
         marginRight: 15,
       },
     }),
@@ -168,32 +137,6 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     zIndex: 2
   },
-  // note: {
-  //   ...Platform.select({
-  //     ios: {
-  //       top: 70,
-  //       right: 20,
-  //     },
-  //     android: {
-  //       top: 20,
-  //       alignSelf: "center",
-  //     },
-  //   }),
-  //   position: "absolute",
-  //   backgroundColor: "white",
-  //   borderRadius: 15,
-  //   paddingLeft: 20,
-  //   paddingRight: 15,
-  //   paddingBottom: 20,
-  //   shadowColor: "#000",
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 2,
-  //   },
-  //   shadowOpacity: 0.23,
-  //   shadowRadius: 2.62,
-  //   flexDirection: "row",
-  // },
   messageText: {
     paddingTop: 20,
   },

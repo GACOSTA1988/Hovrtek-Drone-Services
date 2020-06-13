@@ -99,7 +99,7 @@ const DroneExperiencePicker = () => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    height: 330,
+    height: 380,
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 20,
+    marginTop: 80,
   },
   cancelWrapper: {},
   button: {

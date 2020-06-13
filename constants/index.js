@@ -1,7 +1,7 @@
 const APP_STRINGS = {
   abilityOver400Ft: "Able to Fly over 400 FT:",
   areYouWilling: "Are You Willing to Travel Out of State for a Drone Job?",
-  briefSummary: "Click here to show keyboard!",
+  briefSummary: "Please Give Us a Brief Summary of Your Work Experience",
   bio: "Bio:",
   chat: "Chat",
   choose: "Choose",
@@ -30,7 +30,7 @@ const APP_STRINGS = {
   startPilotProfile: "Start Pilot Profile",
   uploadImage: "Upload Image",
   workExperienceSet: "Work Experience Set",
-  whereIsTheLocation: "Were is the location of your drone service?",
+  whereIsTheLocation: "Where is the location of your drone service?",
   welcomeHovrtek: "Welcome to Hovrtek",
   willingToTravel: "Willing To Travel:",
   yearsExperience: "How Many Years Of Drone Experience Do You Have?",

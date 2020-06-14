@@ -35,11 +35,11 @@ export default function MapComponent(){
         let result = firebase.database().ref("/pilotProfiles")
         let profile = result.orderByChild("userID").equalTo(id)
         profile.once("value", (snapshot) => {
-            let response = Object.entries(snapshot.val())
-            let nestedProperties = Object.entries(response[0][1])
-            let array = nestedProperties.filter(property => property[0] === "pilotCoordinates")
-            let theCoords = array[0][1]
-            console.log("the coords:", theCoords)
+            let theCoords;
+            snapshot.forEach(function(child) {
+                let object = child.val()
+                return theCoords = object.pilotCoordinates
+              });
             setInitialCoordinates(theCoords)
           });
     }, [])

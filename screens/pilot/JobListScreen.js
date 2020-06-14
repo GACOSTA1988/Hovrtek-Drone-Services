@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import {
   TouchableOpacity,
   View,
@@ -24,6 +24,7 @@ import { getPilotProfiles } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 import { render } from "react-dom";
+
 
 function JobListScreen(
   props,
@@ -67,8 +68,8 @@ function JobListScreen(
     profileCompleteState = currentUserProps.profileComplete;
   }
 
-  return (
-    <View style={styles.projectListWrapper}>
+      return (
+      <View style={styles.projectListWrapper}>
       {profileCompleteState === "No" ? (
         <View style={styles.profileCompleteNoticeWrapper}>
             <View style={styles.profileCompleteNotice}>
@@ -90,9 +91,14 @@ function JobListScreen(
       ) : (
         <Text />
       )}
-
+  
       <Text style={styles.pilotText}>Available Projects</Text>
-
+      <TouchableOpacity style={styles.mapButton}
+        onPress={() => props.navigation.navigate("MapComponent")}
+        >
+        <Text style={styles.mapText}>Map View</Text>
+      </TouchableOpacity>
+      
       <ScrollView>
         <View style={styles.projectCard}>
           <View>
@@ -155,7 +161,7 @@ function JobListScreen(
         </View>
       </ScrollView>
     </View>
-  );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -223,6 +229,17 @@ const styles = StyleSheet.create({
     color: "darkblue",
     marginBottom: 14,
   },
+  mapText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  mapButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 5,
+  }
 });
 
 function mapStateToProps(state) {

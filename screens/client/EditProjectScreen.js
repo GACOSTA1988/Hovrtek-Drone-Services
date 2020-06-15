@@ -26,8 +26,14 @@ function EditProjectScreen(props, { editProject }) {
 
   async function submit(){
     setLoadingActive(true)
-    let locationCoordinates = await convertLocation(location)
-
+    let locationCoordinates
+    if(location != projectDetails.location){
+      let locationCoordinatesResponse = await convertLocation(location)
+      locationCoordinates = locationCoordinatesResponse
+      console.log("SHOUT IT FROM THE ROOFTOPS")
+    } else {
+      locationCoordinates = projectDetails.locationCoordinates
+    }
     projectDetails.location = location;
     projectDetails.date = date;
     projectDetails.recording = recording;

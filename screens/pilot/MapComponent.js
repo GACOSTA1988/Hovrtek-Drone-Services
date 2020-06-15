@@ -14,13 +14,13 @@ function MapComponent(props){
     let result = firebase.database().ref("/pilotProfiles")
     let profile = result.orderByChild("userID").equalTo(id)
     profile.once("value", (snapshot) => {
-        let theCoords;
-        snapshot.forEach(function(child) {
-            let object = child.val()
-            return theCoords = object.pilotCoordinates
-          });
-        setInitialCoordinates(theCoords)
+      let theCoords;
+      snapshot.forEach(function(child) {
+        let object = child.val()
+        return theCoords = object.pilotCoordinates
       });
+      setInitialCoordinates(theCoords)
+    });
     props.getProjects()
   }, [])
 
@@ -36,20 +36,20 @@ function MapComponent(props){
     
 
   const mappedMarkers = availableProjects.map((project, index) => {
-      const coords = {
-        latitude: project.locationCoordinates[0],
-        longitude: project.locationCoordinates[1],
-      };
-      return (
-        <MapView.Marker
-          key={index}
-          coordinate={coords}
-          title={project.location}
-          description={project.recording} 
-          onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}
-        >
-        </MapView.Marker>
-      );
+    const coords = {
+      latitude: project.locationCoordinates[0],
+      longitude: project.locationCoordinates[1],
+    };
+    return (
+      <MapView.Marker
+        key={index}
+        coordinate={coords}
+        title={project.location}
+        description={project.recording} 
+        onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}
+      >
+      </MapView.Marker>
+    );
   })
 
   return (

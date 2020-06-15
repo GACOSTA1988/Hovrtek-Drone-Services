@@ -53,6 +53,7 @@ const ClientLocationPicker = () => {
       <View>
         <TextInput
           style={styles.input}
+          autoFocus={true}
           maxLength={26}
           onChangeText={setLocation}
           value={locationState}

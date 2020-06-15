@@ -98,7 +98,7 @@ const DroneTypePicker = () => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    height: 300,
+    height: 360,
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 20,
+    marginTop: 40,
   },
   cancelWrapper: {},
   button: {

@@ -64,6 +64,7 @@ const ClientRecordingPicker = () => {
           <View>
             <TextInput
               style={styles.textInput}
+              autoFocus={true}
               onChangeText={setRecording}
               value={recordingState}
               multiline={true}

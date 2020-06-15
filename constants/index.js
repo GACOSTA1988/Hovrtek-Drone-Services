@@ -30,7 +30,7 @@ const APP_STRINGS = {
   startPilotProfile: "Start Pilot Profile",
   uploadImage: "Upload Image",
   workExperienceSet: "Work Experience Set",
-  whereIsTheLocation: "Were is the location of your drone service?",
+  whereIsTheLocation: "Where is the location of your drone service?",
   welcomeHovrtek: "Welcome to Hovrtek",
   willingToTravel: "Willing To Travel:",
   yearsExperience: "How Many Years Of Drone Experience Do You Have?",

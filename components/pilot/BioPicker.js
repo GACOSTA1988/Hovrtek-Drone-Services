@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import {
   Text,
   View,
-  Button,
+  Keyboard,
   Modal,
   StyleSheet,
   TouchableOpacity,
@@ -56,6 +56,7 @@ const BioPicker = (props) => {
           multiline={true}
           style={styles.input}
           onChangeText={setBio}
+          autoFocus={true}
           value={bio}
         />
       </View>

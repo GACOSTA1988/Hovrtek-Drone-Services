@@ -95,7 +95,7 @@ function PilotSignUpScreen(props) {
   }
 
   async function convertLocation(location){
-    let final = await Geocoder.from(location).then(json => {
+    let finalCoords = await Geocoder.from(location).then(json => {
         const { lat, lng } = json.results[0].geometry.location;
         let pilotCoords = [lat, lng]
         return pilotCoords
@@ -103,7 +103,7 @@ function PilotSignUpScreen(props) {
         console.error(error);
       }
     );
-    return final
+    return finalCoords
   }
   return (
     <KeyboardAwareScrollView

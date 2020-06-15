@@ -18,8 +18,7 @@ import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Geocoder from "react-native-geocoding";
-require('dotenv').config()
-const {API_KEY} = process.env
+import {API_KEY} from "../../geocoder"
 Geocoder.init(API_KEY);
 
 function PilotSignUpScreen(props) {

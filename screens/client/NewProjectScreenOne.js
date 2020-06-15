@@ -18,6 +18,9 @@ import ClientDatePicker from '../../components/client/ClientDatePicker';
 import ClientLocationPicker from '../../components/client/ClientLocationPicker';
 import ClientRecordingPicker from '../../components/client/ClientRecordingPicker';
 import ClientLightPicker from '../../components/client/ClientLightPicker';
+import Geocoder from "react-native-geocoding";
+import {API_KEY} from "../../geocoder"
+Geocoder.init(API_KEY);
 
 // CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
@@ -40,8 +43,10 @@ function NewProjectScreenOne(props, { postProjects }) {
   const [recording, setRecording] = useState("");
   const [light, setLight] = useState("");
 
-  const submit = (e) => {
+  async function submit(e){
     e.preventDefault();
+
+    let locationCoordinates = await convertLocation(location)
 
     if (location.trim() === '') {
       Alert.alert("Please fill in the location of your Drone Service");
@@ -53,10 +58,22 @@ function NewProjectScreenOne(props, { postProjects }) {
       Alert.alert("Please enter what you will be recording with the drone");
     } else {
 
-    props.postProjects(clientID, location, date, recording, light, null);
+    props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
     navigation.navigate("ProjectListScreen");
     setDate(""), setLight(""), setLocation(""), setRecording("");
   };
+  }
+
+  async function convertLocation(location){
+    let locationCoordinates = await Geocoder.from(location).then(json => {
+        const { lat, lng } = json.results[0].geometry.location;
+        let projectCoords = [lat, lng]
+        return projectCoords
+      }).catch(error => {
+        console.error(error);
+      }
+    );
+    return locationCoordinates
   }
 
   const continueButton = () => {
@@ -115,7 +132,7 @@ function NewProjectScreenOne(props, { postProjects }) {
           </View>
 
           <View style={styles.backButtonWrapper}>
-            <TouchableOpacity style={styles.submitWrapper} onPress={submit}>
+            <TouchableOpacity style={styles.submitWrapper} onPress={e => submit(e)}>
               <Text style={styles.submitButton}>Submit Form</Text>
             </TouchableOpacity>
           </View>

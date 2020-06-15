@@ -4,13 +4,15 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { editProject } from "../../actions/projects";
 import { connect } from "react-redux";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import LoadingScreen from "../../screens/LoadingScreen"
+import Geocoder from "react-native-geocoding";
+import {API_KEY} from "../../geocoder"
+Geocoder.init(API_KEY);
 
 function EditProjectScreen(props, { editProject }) {
   const projectDetails = props.route.params;
@@ -19,44 +21,74 @@ function EditProjectScreen(props, { editProject }) {
   const [ location, setLocation ] = useState(projectDetails.location);
   const [ date, setDate ] = useState(projectDetails.date);
   const [ recording, setRecording ] = useState(projectDetails.recording);
+  const [loadingActive, setLoadingActive] = useState(false)
 
-  const submit = (e) => {
+
+  async function submit(){
+    setLoadingActive(true)
+    let locationCoordinates
+    if(location != projectDetails.location){
+      let locationCoordinatesResponse = await convertLocation(location)
+      locationCoordinates = locationCoordinatesResponse
+      console.log("SHOUT IT FROM THE ROOFTOPS")
+    } else {
+      locationCoordinates = projectDetails.locationCoordinates
+    }
     projectDetails.location = location;
     projectDetails.date = date;
     projectDetails.recording = recording;
-    props.editProject(location, date, recording, projectDetails.key);
+    props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
     navigation.navigate("ProjectDetailsScreen", {
       ...projectDetails
     });
+    setLoadingActive(false)
   };
 
+  async function convertLocation(location){
+    let locationCoordinates = await Geocoder.from(location).then(json => {
+        const { lat, lng } = json.results[0].geometry.location;
+        let projectCoords = [lat, lng]
+        return projectCoords
+      }).catch(error => {
+        console.error(error);
+      }
+    );
+    return locationCoordinates
+  }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.saveButton}>
-        <TouchableOpacity hitSlop={styles.hitSlop} onPress={submit}>
-          <Text style={styles.saveText}>Save changes</Text>
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.ProjectText}>Edit Details</Text>
-      <View style={styles.line} />
-      <Text style={styles.detailsHeader}>Where</Text>
-      <TextInput
-        style={styles.DetailsText}
-        onChangeText={setLocation}
-        value={location}
-      />
-      <Text style={styles.detailsHeader}>When</Text>
-      <TextInput
-        style={styles.DetailsText}
-        onChangeText={setDate}
-        value={date}
-      />
-      <Text style={styles.detailsHeader}>What</Text>
-      <TextInput
-        style={styles.DetailsText}
-        onChangeText={setRecording}
-        value={recording}
-      />
+    <View style={loadingActive ? styles.loadingWrapper : styles.container}>
+       {loadingActive ?
+        <LoadingScreen />
+        :
+        <View>
+          <View style={styles.saveButton}>
+            <TouchableOpacity hitSlop={styles.hitSlop} onPress={submit}>
+              <Text style={styles.saveText}>Save changes</Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.ProjectText}>Edit Details</Text>
+          <View style={styles.line} />
+          <Text style={styles.detailsHeader}>Where</Text>
+          <TextInput
+            style={styles.DetailsText}
+            onChangeText={setLocation}
+            value={location}
+          />
+          <Text style={styles.detailsHeader}>When</Text>
+          <TextInput
+            style={styles.DetailsText}
+            onChangeText={setDate}
+            value={date}
+          />
+          <Text style={styles.detailsHeader}>What</Text>
+          <TextInput
+            style={styles.DetailsText}
+            onChangeText={setRecording}
+            value={recording}
+          />
+        </View>
+      }
     </View>
   );
 }
@@ -64,6 +96,12 @@ function EditProjectScreen(props, { editProject }) {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+  },
+  loadingWrapper: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   KeyboardAwareScrollView: {
     flex: 1,

@@ -8,7 +8,7 @@ import ChatScreen from "../screens/messaging/ChatScreen";
 import PilotCreateProfileNavigation from "./PilotCreateProfileNavigation";
 import MyJobsScreen from "../screens/pilot/MyJobsScreen.js";
 import GlobalHeader from "../components/shared/GlobalHeader";
-
+import MapComponent from "../screens/pilot/MapComponent"
 import { Ionicons } from "@expo/vector-icons";
 
 const HomeStack = createStackNavigator();
@@ -16,16 +16,29 @@ const HomeStack = createStackNavigator();
 const PilotHomeStackNavigator = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen
+        <HomeStack.Screen
         name="JobListScreen"
         component={JobListScreen}
         options={{
-          headerTitle: () => <GlobalHeader isHome={true} />,
-          headerStyle: {
-            backgroundColor: "#092455",
-            height: 100,
-          },
-        }}
+            headerLeft: null,
+            headerTitle: () => <GlobalHeader isHome={true} />,
+            headerStyle: {
+              backgroundColor: "#092455",
+              height: 100,
+            },   
+          }}
+      />
+      <HomeStack.Screen
+        name="MapComponent"
+        component={MapComponent}
+        options={{
+            headerLeft: null,
+            headerTitle: () => <GlobalHeader isHome={false} />,
+            headerStyle: {
+              backgroundColor: "#092455",
+              height: 100,
+            },   
+          }}
       />
       <HomeStack.Screen
         name="JobDetailsScreen"

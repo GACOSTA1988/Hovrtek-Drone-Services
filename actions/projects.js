@@ -20,13 +20,14 @@ export function postProjects(
   date,
   recording,
   light,
-  pilotID
+  pilotID,
+  locationCoordinates,
 ) {
   return () => {
     firebase
       .database()
       .ref("/projects")
-      .push({ clientID, location, date, recording, light, pilotID });
+      .push({ clientID, location, date, recording, light, pilotID, locationCoordinates, });
   };
 }
 

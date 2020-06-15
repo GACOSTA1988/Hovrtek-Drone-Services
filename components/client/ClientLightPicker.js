@@ -31,6 +31,7 @@ const ClientLightPicker = () => {
       <View>
         <TextInput
           multiline={true}
+          autoFocus={true}
           style={styles.input}
           onChangeText={setLight}
           value={light}

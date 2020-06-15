@@ -130,7 +130,7 @@ function PilotSignUpScreen(props) {
             placeholderTextColor="grey"
           />
           <TextInput
-            placeholder="State"
+            placeholder="City, State"
             value={pilotLocation}
             onChangeText={setPilotLocation}
             style={styles.input}
@@ -147,6 +147,14 @@ function PilotSignUpScreen(props) {
           />
           <TextInput
             placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={setPassword}
+            style={styles.input}
+            placeholderTextColor="grey"
+          />
+          <TextInput
+            placeholder="Confirm password"
             secureTextEntry={true}
             value={password}
             onChangeText={setPassword}

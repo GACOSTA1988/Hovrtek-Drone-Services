@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
-import MapView from 'react-native-maps';
+import MapView, {Callout, Marker, CalloutSubview,} from 'react-native-maps';
 import * as firebase from "firebase";
 import { connect } from "react-redux";
 import _ from "lodash";
 import {
     StyleSheet,
+    View,
+    Text
   } from "react-native";
 import { getProjects } from "../../actions/projects";
 
@@ -47,47 +49,69 @@ function MapComponent(props, {getProjects}){
         props.getProjects()
     }, [])
 
-    const availableProjectMarkers = [];
+    const availableProjects = [];
     props.listOfProjects.forEach((project) => {
         if (!project.pilotID) {
             console.log('project', project)
-            let newMarker = {}
-            //this if should only be necessary until all projects without coordinates are purged
-            //or maybe then modified to catch if the geocoder fails and no coordinates were stored
             if(!project.locationCoordinates){
-                return newMarker =  {
-                    latitude: 45.520745,          
-                    longitude: -122.67769,          
-                    jobDescription: project.recording,
-                    jobTitle: project.location,
-                }
-            } else {
-            newMarker = {
-                latitude: project.locationCoordinates[0],
-                longitude: project.locationCoordinates[1],
-                jobDescription: project.recording,
-                jobTitle:  project.location,
-            }
+              return project.locationCoordinates = [45.5236111, -122.675]
+            } 
+            availableProjects.push(project);
         }
-  
-        availableProjectMarkers.push(newMarker);
-        console.log(newMarker)
-      }
-    });
+      });
     
 
-    const mappedMarkers = availableProjectMarkers.map((marker, index) => {
+    const mappedMarkers = availableProjects.map((project, index) => {
+        console.log("project", project)
         const coords = {
-            latitude: marker.latitude,
-            longitude: marker.longitude,
+            latitude: project.locationCoordinates[0],
+            longitude: project.locationCoordinates[1],
         };
         return (
+            // <MapView.Marker
+            //     key={index}
+            //     coordinate={coords}
+            //     title={marker.jobTitle}
+            //     description={marker.jobDescription} 
+            // >
+            //   <Callout
+            //       title={marker.jobTitle}
+            //       description={marker.jobDescription} 
+            //       onPress={() => props.navigation.navigate("JobDetailsScreen", {
+            //   ...marker,
+            //   })}
+            //   >
+            //   </Callout>
+            // </MapView.Marker>
+
             <MapView.Marker
                 key={index}
                 coordinate={coords}
-                title={marker.jobTitle}
-                description={marker.jobDescription}
-            />
+                title={project.location}
+                description={project.recording} 
+                onPress={() => props.navigation.navigate("JobDetailsScreen", {
+                  ...availableProjects[index],
+                  })}
+            >
+            </MapView.Marker>
+
+            // <Marker coordinate={coords} key={index} >
+            //   <View />
+            //   <Callout 
+            //   onPress={() => props.navigation.navigate("JobDetailsScreen", {
+            //               ...marker,
+            //             })}
+            //             >
+            //     <View>
+            //       <Text>
+            //         {marker.jobTitle}
+            //       </Text>
+            //       <Text>
+            //         {marker.jobDescription}
+            //       </Text>
+            //     </View>
+            //   </Callout>
+            // </Marker>
         );
     })
 

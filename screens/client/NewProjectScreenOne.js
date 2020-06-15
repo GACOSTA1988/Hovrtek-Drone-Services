@@ -43,9 +43,7 @@ function NewProjectScreenOne(props, { postProjects }) {
   const [recording, setRecording] = useState("");
   const [light, setLight] = useState("");
 
-  async function submit(e){
-    e.preventDefault();
-
+  async function submit(){
     let locationCoordinates = await convertLocation(location)
 
     if (location.trim() === '') {
@@ -59,8 +57,8 @@ function NewProjectScreenOne(props, { postProjects }) {
     } else {
 
     props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
-    navigation.navigate("ProjectListScreen");
     setDate(""), setLight(""), setLocation(""), setRecording("");
+    props.navigation.navigate("ProjectListScreen");
   };
   }
 
@@ -132,7 +130,7 @@ function NewProjectScreenOne(props, { postProjects }) {
           </View>
 
           <View style={styles.backButtonWrapper}>
-            <TouchableOpacity style={styles.submitWrapper} onPress={e => submit(e)}>
+            <TouchableOpacity style={styles.submitWrapper} onPress={submit}>
               <Text style={styles.submitButton}>Submit Form</Text>
             </TouchableOpacity>
           </View>

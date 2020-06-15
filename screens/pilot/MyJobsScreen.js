@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { TouchableOpacity,
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
   TextInput,
   FlatList,
@@ -19,9 +18,6 @@ import { useNavigation } from '@react-navigation/native';
 import { getProjects } from "../../actions/projects";
 import * as firebase from 'firebase';
 import _ from "lodash";
-
-import PilotSubheader from '../../components/pilot/PilotSubheader'
-
 
 function MyJobsScreen(props, { getProjects }) {
 

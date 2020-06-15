@@ -44,7 +44,6 @@ function MyJobsScreen(props, { getProjects }) {
         <Text style={styles.pilotText}>My Jobs</Text>
         <ScrollView>
           <View style={styles.projectCard}>
-            <TouchableOpacity>
               <FlatList
                 style={{ width: "100%" }}
                 data={listOfMyProjects}
@@ -84,7 +83,6 @@ function MyJobsScreen(props, { getProjects }) {
                   );
                 }}
               />
-            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

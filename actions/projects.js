@@ -37,13 +37,13 @@ export function deleteProject(key) {
   };
 }
 
-export function editProject(location, date, recording, key) {
+export function editProject(location, date, recording, locationCoordinates, key) {
   return () => {
     firebase
       .database()
       .ref(`/projects`)
       .child(key)
-      .update({ location, date, recording });
+      .update({ location, date, recording, locationCoordinates });
   };
 }
 

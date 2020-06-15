@@ -56,13 +56,13 @@ function NewProjectScreenOne(props) {
     } else if (recording.trim() === '') {
       Alert.alert("Please enter what you will be recording with the drone");
     } else {
-    props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
-    setDate(""), setLight(""), setLocation(""), setRecording("");
-    props.navigation.navigate("ProjectListScreen");
-    setLoadingActive(false)
-  };
-
+      props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
+      setDate(""), setLight(""), setLocation(""), setRecording("");
+      props.navigation.navigate("ProjectListScreen");
+      setLoadingActive(false)
+    };
   }
+
   async function convertLocation(location){
     let locationCoordinates = await Geocoder.from(location).then(json => {
         const { lat, lng } = json.results[0].geometry.location;
@@ -78,7 +78,7 @@ function NewProjectScreenOne(props) {
   const continueButton = () => {
     navigation.navigate("NewProjectScreenTwo");
   }
-  
+
   return (
     <View style={loadingActive ? styles.loadingWrapper : styles.newProjectListWrapper}>
       {loadingActive ?

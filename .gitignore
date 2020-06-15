@@ -10,7 +10,8 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-
+geocoder.js
+/geocoder.js
 # macOS
 .DS_Store
 

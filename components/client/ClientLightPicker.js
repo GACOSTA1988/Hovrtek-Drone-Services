@@ -64,7 +64,7 @@ const ClientLightPicker = () => {
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>
-              Enter light specifications:afbsafwsg
+              Enter light specifications:
             </Text>
           </View>
           <View>

@@ -17,6 +17,9 @@ import { postPilotProfiles } from "../../actions/pilotProfiles";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Geocoder from "react-native-geocoding";
+import {API_KEY} from "../../geocoder"
+Geocoder.init(API_KEY);
 
 function PilotSignUpScreen(props) {
   const navigation = props.navigation;
@@ -43,7 +46,8 @@ function PilotSignUpScreen(props) {
   async function signUp(e) {
     e.preventDefault();
     navigation.push("Loading");
-
+   
+    let pilotCoordinates = await convertLocation(pilotLocation)
     if (pilotFirstName.trim() === "") {
       Alert.alert("Please fill in your first name");
       navigation.navigate("PilotSignUpScreen");
@@ -74,6 +78,7 @@ function PilotSignUpScreen(props) {
         pilotFirstName,
         pilotLastName,
         pilotLocation,
+        pilotCoordinates,
         personalBio,
         yearsOfExperience,
         faaLicenseExp,
@@ -87,6 +92,18 @@ function PilotSignUpScreen(props) {
         profileComplete,
       );
     }
+  }
+
+  async function convertLocation(location){
+    let finalCoords = await Geocoder.from(location).then(json => {
+        const { lat, lng } = json.results[0].geometry.location;
+        let pilotCoords = [lat, lng]
+        return pilotCoords
+      }).catch(error => {
+        console.error(error);
+      }
+    );
+    return finalCoords
   }
   return (
     <KeyboardAwareScrollView

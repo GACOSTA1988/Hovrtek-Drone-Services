@@ -15,6 +15,7 @@ import PilotTabs from './navigation/PilotTabs';
 import {Linking} from 'expo';
 import PilotCreateProfileNavigation from "./navigation/PilotCreateProfileNavigation";
 import Icon from "react-native-vector-icons/FontAwesome";
+import GlobalHeader from "./components/shared/GlobalHeader";
 
 const AuthStack = createStackNavigator();
 
@@ -35,9 +36,9 @@ const renderLogin = () => {
   const signHeaderStyle = {
     backgroundColor: "#092455",
     width: "100%",
-    borderBottomWidth: 10,
-    borderBottomColor: "grey",
-    height: 110,
+    // borderBottomWidth: 10,
+    // borderBottomColor: "grey",
+    height: 100,
   };
 
   return (
@@ -47,25 +48,17 @@ const renderLogin = () => {
           name="SignIn"
           component={SignInScreen}
           options={{
-            headerTitle: (props) => <LogoTitle {...props} />,
+            headerTitle: () => <GlobalHeader isSplash={true}/>,
             headerStyle: signHeaderStyle,
+            headerRight: null,
           }}
         />
         <AuthStack.Screen
           name="SignUp"
           component={SignUpNavigation}
-          options={({ navigation }) => ({
-            title: "",
-            headerLeft: () => (
-              <TouchableOpacity onPress={navigation.goBack}>
-                <Ionicons
-                  name="ios-arrow-back"
-                  size={24}
-                  color="white"
-                  style={{ margin: 10 }}
-                />
-              </TouchableOpacity>
-            ),
+          options={() => ({
+            headerTitle: () => <GlobalHeader isHome={false}/>,
+            headerLeft: null,
             headerStyle: signHeaderStyle,
           })}
         />
@@ -73,17 +66,14 @@ const renderLogin = () => {
           name="Loading"
           component={LoadingScreen}
           options={() => ({
-            title: "",
+            headerTitle: () => <GlobalHeader isSplash={true}/>,
             headerStyle: signHeaderStyle,
+            headerLeft: null,
           })}
         />
         <AuthStack.Screen
           name="SignOut"
           component={SignOutScreen}
-          options={() => ({
-            title: "",
-            headerStyle: signHeaderStyle,
-          })}
         />
       </AuthStack.Navigator>
     </NavigationContainer>
@@ -180,7 +170,7 @@ const pilotNavigation = (
               </Icon>
       }}/>
       <PilotDrawer.Screen name="Instagram Icon" component={goToInstagram}/>
-      <PilotDrawer.Screen name="Linked In Icon" component={goToLinkedIn}/>
+      <PilotDrawer.Screen name="Linked-In Icon" component={goToLinkedIn}/>
       <PilotDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>

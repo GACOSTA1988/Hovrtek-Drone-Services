@@ -45,7 +45,7 @@ const GlobalHeader = (props, { getMessages }) => {
 
   return (
     <View style={styles.MainHeaderWrapper}>
-         <View style={props.isHome? styles.navIconLeftHidden : styles.navIconLeft} pointerEvents={props.isHome? 'none' : 'auto'}>
+         <View style={props.isSplash ? styles.navIconLeftHidden : props.isHome ? styles.navIconLeftHidden : styles.navIconLeft} pointerEvents={props.isSplash ? "none" : props.isHome? 'none' : 'auto'}>
             <Ionicons
             style={styles.backIcon}
             onPress={() => {navigation.goBack()}}
@@ -58,7 +58,7 @@ const GlobalHeader = (props, { getMessages }) => {
         <View styles={styles.logoContainer}>
           <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
         </View>
-        <View style={props.isHome? styles.navIconRight : styles.navIconRightHidden} pointerEvents={props.isHome? 'auto' : 'none'}>
+        <View style={props.isSplash ? styles.navIconRightHidden : props.isHome? styles.navIconRight : styles.navIconRightHidden} pointerEvents={ props.isSplash ? "none" :props.isHome? 'auto' : 'none'}>
           {unreadMessages.length > 0 ? (
             <View style={styles.dot}>
               <Text />

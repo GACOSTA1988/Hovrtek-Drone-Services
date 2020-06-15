@@ -100,7 +100,7 @@ function PilotSignUpScreen(props) {
         let pilotCoords = [lat, lng]
         return pilotCoords
       }).catch(error => {
-        console.error("This means that the geocode request failed... bummer", error);
+        console.error(error);
       }
     );
     return final

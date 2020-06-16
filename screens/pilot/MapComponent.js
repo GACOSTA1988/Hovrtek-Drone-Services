@@ -1,9 +1,15 @@
 import React, {useState, useEffect} from "react";
-import MapView from 'react-native-maps';
+import MapView, {Callout} from 'react-native-maps';
+import {
+  View,
+  Text,
+  StyleSheet,
+} from "react-native";
 import { getProjects } from "../../actions/projects";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as firebase from "firebase";
+import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 
 function MapComponent(props){ 
 
@@ -43,11 +49,20 @@ function MapComponent(props){
     return (
       <MapView.Marker
         key={index}
-        coordinate={coords}
-        title={project.location}
-        description={project.recording} 
-        onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}
+        coordinate={coords}        
       >
+        <Callout onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}>
+          <TouchableOpacity activeOpacity={0.3}>
+          <View style={styles.popOutContainer}>
+            <View style={styles.popOutTextBoxes}>
+              <Text style={styles.projectHeaderText}>{project.location}</Text>
+            </View>
+            <View style={styles.popOutTextBoxes}>
+              <Text>{project.recording}</Text>
+            </View>
+          </View>
+          </TouchableOpacity>
+        </Callout>
       </MapView.Marker>
     );
   })
@@ -66,6 +81,25 @@ function MapComponent(props){
     </MapView>
   );
 }
+
+const styles = StyleSheet.create({
+  popOutContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 3,
+    borderRadius: 30,
+  },
+  popOutTextBoxes: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  projectHeaderText: {
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+});
 
 function mapStateToProps(state) {
   const listOfProjects = _.map(state.projectsList.projectsList, (val, key) => {

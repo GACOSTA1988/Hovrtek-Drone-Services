@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 18,
     fontWeight: "bold",
-    color: "darkblue",
+    color: "#092455",
     textAlign: "center",
   },
   accept: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     color: "grey",
     marginTop: 20,
     fontWeight: "bold",
-    color: "darkblue",
+    color: "#092455",
   },
   unnamedText: {
     marginBottom: 20,

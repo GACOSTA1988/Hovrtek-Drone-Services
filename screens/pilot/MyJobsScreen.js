@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   pilotText: {
     fontSize: 30,
-    color: "darkblue",
+    color: "#092455",
     marginBottom: 14,
   },
 });

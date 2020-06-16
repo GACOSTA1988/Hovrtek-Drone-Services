@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     color: "grey",
     marginTop: 20,
     fontWeight: "bold",
-    color: "darkblue",
+    color: "#092455",
   },
   unnamedText: {
     marginBottom: 20,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     fontSize: 18,
     fontWeight: "bold",
-    color: "darkblue",
+    color: "#092455",
   },
   profilePic: {
     height: 50,

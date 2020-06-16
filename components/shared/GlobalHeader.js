@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     height: '100%',
-    width: width,
+    width: width - 35,
     flex: 1,
   },
   hovrtekLogo: {
@@ -99,22 +99,13 @@ const styles = StyleSheet.create({
         height: 30,
       },
       android: {
-        width: 210,
-        height: 40,
+        width: 170,
+        height: 30,
       },
     }),
   },
-
   hamburger: {
     alignSelf: "flex-end",
-    ...Platform.select({
-      ios: {
-        marginRight: 15,
-      },
-      android: {
-        marginRight: 15,
-      },
-    }),
   },
   dot: {
     ...Platform.select({
@@ -136,9 +127,6 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 90,
     zIndex: 2
-  },
-  messageText: {
-    paddingTop: 20,
   },
   navIconLeft: {
     flex: 1,
@@ -162,9 +150,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '50%',
   },
-  backIcon: {
-    marginLeft: 15,
-  }
 });
 
 function mapStateToProps(state) {

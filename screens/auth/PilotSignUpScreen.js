@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 30,
-    color: "darkblue",
+    color: "#092455",
     fontWeight: "600",
   },
   textSub: {
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     fontSize: 20,
-    color: "darkblue",
+    color: "#092455",
   },
 });
 

@@ -71,7 +71,7 @@ function JobListScreen(
       return (
       <View style={styles.projectListWrapper}>
       {profileCompleteState === "No" ? (
-        <View style={styles.profileCompleteNoticeWrapper}>
+        <View style={styles.profileCompleteNoticeWrapper}>      
             <View style={styles.profileCompleteNotice}>
               <Text style={styles.profileCompleteNoticeText}>
                 You will need to complete your profile before you can apply for jobs.
@@ -85,8 +85,54 @@ function JobListScreen(
             </Text>
           </TouchableOpacity>
             </View>
-            <View>
-            </View>
+            <FlatList
+              style={{ width: "100%", filter: `blur(10px)` }}
+              data={availableProjects}
+              keyExtractor={(item) => item.key}
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={{
+                      borderRadius: 15,
+                      backgroundColor: "#092455",
+                      marginBottom: 15,
+                      padding: 20,
+                    }}
+                  >
+                      <View>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Location: {item.location}{" "}
+                        </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Date: {item.date}{" "}
+                        </Text>
+                        <Text style={{ color: "white", fontWeight: "800" }}>
+                          Recording: {item.recording}{" "}
+                        </Text>
+                        {props.listOfClientProfiles.find(
+                          (x) => x.userID === item.clientID,
+                        ) ? (
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Posted by:{" "}
+                            {
+                              props.listOfClientProfiles.find(
+                                (x) => x.userID === item.clientID,
+                              ).firstName
+                            }{" "}
+                            {
+                              props.listOfClientProfiles.find(
+                                (x) => x.userID === item.clientID,
+                              ).lastName
+                            }
+                          </Text>
+                        ) : (
+                          <Text>Posted by:</Text>
+                        )}
+                      </View>
+                  </View>
+                );
+              }}
+            />
         </View>
       ) : (
         <Text />
@@ -187,12 +233,14 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "#092455",
     width: 280,
-    height: '20%',
+    height: '15%',
     borderRadius: 8,
     padding: 20,
     alignItems: "center",
     position: "absolute",
     backgroundColor: "white",
+    marginTop: "30%",
+    zIndex: 1
   },
   textRow: {
     marginRight: 10,
@@ -200,7 +248,6 @@ const styles = StyleSheet.create({
   profileCompleteNoticeWrapper: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "45%",
     height: "100%",
   },
   profileCompleteNoticeText: {

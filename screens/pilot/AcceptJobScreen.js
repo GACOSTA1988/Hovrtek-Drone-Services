@@ -16,7 +16,8 @@ function AcceptJobScreen(props, { acceptJob }) {
   const accept = (e) => {
     e.preventDefault();
     props.acceptJob(pilotID, jobDetails.key);
-    navigation.navigate("JobListScreen");
+    navigation.popToTop();
+    navigation.navigate("Projects");
   };
 
   return (

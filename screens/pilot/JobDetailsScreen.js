@@ -85,16 +85,28 @@ function JobDetailsScreen(props, { getClientProfiles }) {
             </View>
           </View>
         ) : (
-          <Text>This job is no longer available</Text>
+          <View />
         )}
-        <View style={styles.backButtonWrapper}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => props.navigation.navigate("JobListScreen")}
-          >
-            <Text style={styles.backButtonText}>Back to Available Jobs</Text>
-          </TouchableOpacity>
-        </View>
+        {!jobDetails.pilotID ? (
+          <View style={styles.backButtonWrapper}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => props.navigation.navigate("JobListScreen")}
+            >
+              <Text style={styles.backButtonText}>Back to Available Jobs</Text>
+            </TouchableOpacity>
+          </View> )
+          : (
+          <View style={styles.backButtonWrapper}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => props.navigation.navigate("MyJobsScreen")}
+            >
+              <Text style={styles.backButtonText}>Back to My Jobs</Text>
+            </TouchableOpacity>
+          </View> )
+        }
+
       </View>
     </ScrollView>
   );

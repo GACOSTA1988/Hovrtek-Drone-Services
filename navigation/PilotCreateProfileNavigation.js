@@ -5,7 +5,6 @@ import PilotProfileSetupPageOneScreen from "../screens/pilot/PilotProfileSetupPa
 import PilotProfileSetupPageTwoScreen from "../screens/pilot/PilotProfileSetupPageTwoScreen";
 import PilotProfileImageUploadScreen from "../screens/pilot/PilotProfileImageUploadScreen";
 import GlobalHeader from "../components/shared/GlobalHeader";
-import { Ionicons } from "@expo/vector-icons";
 
 const ProfileStack = createStackNavigator();
 
@@ -15,10 +14,6 @@ const headerStyle = {
   backgroundColor,
   height: 100,
 };
-
-const headerBackImage = () => (
-  <Ionicons name="ios-arrow-round-back" size={50} color={backgroundColor} />
-);
 
 const PilotCreateProfileNavigation = () => {
   return (

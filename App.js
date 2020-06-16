@@ -60,13 +60,11 @@ export default () => {
     <Provider store={state}>
       {isIOS && <StatusBar backgroundColor="white" barStyle="light-content" />}
       <AuthContext.Provider value={authContext}>
-        {/* <NavigationContainer> */}
           {isClientLoggedIn && clientNavigation}
           {isPilotLoggedIn && pilotNavigation}
           {loggedIn === "false" && renderLogin()}
           {loggedIn === "loading" && renderLoading()}
         <Footer />
-        {/* </NavigationContainer> */}
       </AuthContext.Provider>
     </Provider>
   );

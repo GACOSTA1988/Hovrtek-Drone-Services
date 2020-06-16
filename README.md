@@ -1,44 +1,29 @@
 # Hovrtek Drone Services
+https://www.hovrtek.com/
 
 ## Warnings on app
 * "Virtualized lists should never be nested inside plain scrollviews with the same orientation" error on PilotProfileSetupPageOneScreen
 * "possilbe unhandled promise rejection id:0" on PilotProfileSetUpPageOneScreen
 * "Require cycle: components/DatePicker.js -> screens/pilot/PilotProfileSetupPageTwoScreen.js -> components/DatePicker.js /n Require cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle." on pilot home page
 
-## Things to keep in mind / todo
+## Things to keep in mind / to-do
 
 * Deep look at conditional rendering between ios / android
-
 * accessibility - our app is not accessible right now
-
 * need to handle exceptions related to users not existing on projects they already made, etc.
-
-
-* auth headers need to be sorted out - Back button upon Sign up goes back to Landing page as oppsed to signin Screen. 
-
 * Make new Landing page for New Projects saying something like "WELCOME, MAKE A PROJECT"
 
-
-
 ## Bugggs!
-
 #### Baffling Code Gnome Bugs
 
 * Mysterious "doesn't load upon SignUp unless you tap the white, blank screen" issue
 _does not seem to be an issue after this auth refactor, at least for Lee (also uninstalled and reinstalled expo recently)_
-
 * Fix part-time uploader. Probably wait for Franks refactor.
-
 * back button in sign up stack skips back to sign in page no matter how far in the stack you are (?)
 
 #### Bugs We Should Know How to Fix
 
-* Touchable opacity on ProjectList all "Glow" upon touch, only selected should do so.
-
-* Upon scrolling on ProjectList all projects "Glow".
-
 * Bring Keyboard up at same time as as modal, eliminating the step of pressing the input to bring the keyboard up
-
 * Bug on ClientLocationPicker. Intial state is set to "where is the location of your drone service" of in TextInput when it should be blank.
 
 #### Strictly Styling Bugs

@@ -58,7 +58,7 @@ function NewProjectScreenOne(props) {
     } else {
       props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
       setDate(""), setLight(""), setLocation(""), setRecording("");
-      props.navigation.navigate("ProjectListScreen");
+      props.navigation.navigate("Projects");
       setLoadingActive(false)
     };
   }

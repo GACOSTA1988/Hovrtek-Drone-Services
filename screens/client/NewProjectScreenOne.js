@@ -84,7 +84,10 @@ function NewProjectScreenOne(props) {
       {loadingActive ?
         <LoadingScreen />
         :
-        <ScrollView>
+        <ScrollView 
+        style={styles.scrollWrapper}
+        showsVerticalScrollIndicator={false}
+        >
         <View style={styles.newProjectListTextWrapper}>
           <Text style={styles.newProjectText}>Create a New Project</Text>
           <Text style={styles.labelText}>
@@ -157,6 +160,9 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+  },
+  scrollWrapper: {
+    width: "100%",
   },
   newProjectText: {
     fontSize: 30,

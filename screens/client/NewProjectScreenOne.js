@@ -86,7 +86,7 @@ function NewProjectScreenOne(props) {
         :
         <ScrollView 
         style={styles.scrollWrapper}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={false} 
         >
         <View style={styles.newProjectListTextWrapper}>
           <Text style={styles.newProjectText}>Create a New Project</Text>

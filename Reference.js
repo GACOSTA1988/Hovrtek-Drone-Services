@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     marginTop: "25%",
     marginBottom: "5%",
     fontSize: 30,
-    color: "darkblue",
+    color: "#092455",
     fontWeight: "600",
     textAlign: "center",
   },

@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   },
   clientText: {
     fontSize: 30,
-    color: "darkblue",
+    color: "#092455",
     textAlign: "center",
   },
   ClientProjectListTextWrapper: {

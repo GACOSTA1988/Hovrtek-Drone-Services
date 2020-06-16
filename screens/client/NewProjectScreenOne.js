@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
   newProjectText: {
     fontSize: 30,
-    color: "darkblue",
+    color: "#092455",
     marginBottom: 20,
     textAlign: "center",
     marginTop: 10,

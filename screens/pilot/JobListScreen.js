@@ -10,7 +10,7 @@ import {
   FlatList,
   TouchableHighlight,
   Alert,
-} from "react-native";
+} from "react-native"
 import {
   Ionicons,
   FontAwesome5,
@@ -76,28 +76,31 @@ function JobListScreen(
               <Text style={styles.profileCompleteNoticeText}>
                 You will need to complete your profile before you can apply for jobs.
               </Text>
+              <View style={styles.blurredView}>
           <TouchableOpacity
-            style={styles.chatButton}
+            style={styles.continueButton}
             onPress={() => navigation.navigate("Profile")}
-          >
-            <Text style={styles.chatText}>
+            >
+            <Text style={styles.continueText}>
               Continue
             </Text>
           </TouchableOpacity>
+          </View>
             </View>
             <FlatList
-              style={{ width: "100%", filter: `blur(10px)` }}
+              style={{ width: "100%", marginTop: 15 }}
               data={availableProjects}
               keyExtractor={(item) => item.key}
               renderItem={({ item }) => {
                 return (
                   <View
-                    style={{
-                      borderRadius: 15,
-                      backgroundColor: "#092455",
-                      marginBottom: 15,
-                      padding: 20,
-                    }}
+                  style={{
+                    borderRadius: 15,
+                    backgroundColor: "#092455",
+                    marginBottom: 15,
+                    padding: 20,
+                    opacity: 0.2,
+                  }}
                   >
                       <View>
                         <Text style={{ color: "white", fontWeight: "800" }}>
@@ -111,28 +114,28 @@ function JobListScreen(
                         </Text>
                         {props.listOfClientProfiles.find(
                           (x) => x.userID === item.clientID,
-                        ) ? (
-                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          ) ? (
+                            <Text style={{ color: "white", fontWeight: "800" }}>
                             Posted by:{" "}
                             {
                               props.listOfClientProfiles.find(
                                 (x) => x.userID === item.clientID,
-                              ).firstName
-                            }{" "}
+                                ).firstName
+                              }{" "}
                             {
                               props.listOfClientProfiles.find(
                                 (x) => x.userID === item.clientID,
-                              ).lastName
-                            }
+                                ).lastName
+                              }
                           </Text>
                         ) : (
                           <Text>Posted by:</Text>
-                        )}
+                          )}
                       </View>
                   </View>
                 );
               }}
-            />
+              />
         </View>
       ) : (
         <Text />
@@ -149,7 +152,7 @@ function JobListScreen(
         <View style={styles.projectCard}>
           <View>
             <FlatList
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginTop: 15, }}
               data={availableProjects}
               keyExtractor={(item) => item.key}
               renderItem={({ item }) => {
@@ -257,19 +260,19 @@ const styles = StyleSheet.create({
   subheaderWrapper: {
     marginBottom: 14,
   },
-  chatText: {
+  continueText: {
     fontWeight: "bold",
     fontSize: 15,
     color: "white",
   },
-  chatButton: {
+  continueButton: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5,
     margin: 20,
-    height: '30%',
+    height: '40%',
   },
   pilotText: {
     fontSize: 30,
@@ -286,7 +289,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: "#092455",
     padding: 5,
-  }
+  },
 });
 
 function mapStateToProps(state) {

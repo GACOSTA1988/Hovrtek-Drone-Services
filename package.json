@@ -44,7 +44,10 @@
     "react-navigation-tabs": "^2.8.13",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "@react-native-community/blur": "^3.2.2",
+    "expo-blur": "~8.1.0",
+    "expo-constants": "~9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

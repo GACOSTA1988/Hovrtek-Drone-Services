@@ -60,11 +60,13 @@ const GlobalHeader = (props, { getMessages }) => {
         </View>
         <View style={props.isSplash ? styles.navIconRightHidden : props.isHome? styles.navIconRight : styles.navIconRightHidden} pointerEvents={ props.isSplash ? "none" :props.isHome? 'auto' : 'none'}>
           {unreadMessages.length > 0 ? (
-            <View style={styles.dot}>
+            <View style={styles.outerDot}>
+              <View style={styles.innerDot}>
               <Text />
             </View>
+            </View>
           ) : (
-            <View />
+            null
           )}
           <Ionicons
           style={styles.hamburger}
@@ -107,24 +109,41 @@ const styles = StyleSheet.create({
   hamburger: {
     alignSelf: "flex-end",
   },
-  dot: {
+  innerDot: {
     ...Platform.select({
       ios: {
-        margin: 5,
         position: "absolute",
-        bottom: 10,
-        right: 35,
+        bottom: 2,
+        right: 2,
       },
       android: {
-        margin: 10,
         position: "absolute",
-        right: 0,
-        bottom: 6,
+        right: 2,
+        bottom: 2,
       },
     }),
     backgroundColor: "red",
     width: 10,
     height: 10,
+    borderRadius: 90,
+    zIndex: 3
+  },
+  outerDot: {
+    ...Platform.select({
+      ios: {
+        position: "absolute",
+        bottom: 12,
+        right: -5,
+      },
+      android: {
+        position: "absolute",
+        right: -5,
+        bottom: 9,
+      },
+    }),
+    backgroundColor: "#092455",
+    width: 15,
+    height: 15,
     borderRadius: 90,
     zIndex: 2
   },

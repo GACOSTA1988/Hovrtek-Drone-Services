@@ -12,7 +12,7 @@ import { editProject } from "../../actions/projects";
 import { connect } from "react-redux";
 import LoadingScreen from "../../screens/LoadingScreen"
 import Geocoder from "react-native-geocoding";
-import {API_KEY} from "../../geocoder";
+import { API_KEY } from "../../geocoder";
 import { APP_STRINGS } from "../../constants/index";
 Geocoder.init(API_KEY);
 
@@ -24,9 +24,9 @@ function EditProjectScreen(props, { editProject }) {
   const projectDetails = props.route.params;
   const navigation = useNavigation();
 
-  const [ location, setLocation ] = useState(projectDetails.location);
-  const [ date, setDate ] = useState(projectDetails.date);
-  const [ recording, setRecording ] = useState(projectDetails.recording);
+  const [location, setLocation] = useState(projectDetails.location);
+  const [date, setDate] = useState(projectDetails.date);
+  const [recording, setRecording] = useState(projectDetails.recording);
   const [loadingActive, setLoadingActive] = useState(false)
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -41,10 +41,10 @@ function EditProjectScreen(props, { editProject }) {
   };
 
 
-  async function submit(){
+  async function submit() {
     setLoadingActive(true)
     let locationCoordinates
-    if(location != projectDetails.location){
+    if (location != projectDetails.location) {
       let locationCoordinatesResponse = await convertLocation(location)
       locationCoordinates = locationCoordinatesResponse
       console.log("SHOUT IT FROM THE ROOFTOPS")
@@ -61,21 +61,21 @@ function EditProjectScreen(props, { editProject }) {
     setLoadingActive(false)
   };
 
-  async function convertLocation(location){
+  async function convertLocation(location) {
     let locationCoordinates = await Geocoder.from(location).then(json => {
-        const { lat, lng } = json.results[0].geometry.location;
-        let projectCoords = [lat, lng]
-        return projectCoords
-      }).catch(error => {
-        console.error(error);
-      }
+      const { lat, lng } = json.results[0].geometry.location;
+      let projectCoords = [lat, lng]
+      return projectCoords
+    }).catch(error => {
+      console.error(error);
+    }
     );
     return locationCoordinates
   }
 
   return (
     <View style={loadingActive ? styles.loadingWrapper : styles.container}>
-       {loadingActive ?
+      {loadingActive ?
         <LoadingScreen />
         :
         <View>
@@ -91,95 +91,95 @@ function EditProjectScreen(props, { editProject }) {
           <Text style={styles.detailsHeader}>Where</Text>
 
           <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
-        <Text style={styles.buttonText}>Project Location</Text>
-      </TouchableOpacity>
+            <Text style={styles.buttonText}>Project Location</Text>
+          </TouchableOpacity>
           <Modal
-        transparent={true}
-        visible={isModalVisible}
-        animationType={slide}
-        onRequestClose={closeModal}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Project Location</Text>
-          </View>
+            transparent={true}
+            visible={isModalVisible}
+            animationType={slide}
+            onRequestClose={closeModal}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.innerContainer}>
+                <Text style={styles.modalText}>Project Location</Text>
+              </View>
 
-          <TextInput
-          multiline={true}
-          style={styles.input}
-          onChangeText={setLocation}
-          autoFocus={true}
-          value={location}
-        />
+              <TextInput
+                multiline={true}
+                style={styles.input}
+                onChangeText={setLocation}
+                autoFocus={true}
+                value={location}
+              />
 
-<View styles={styles.cancelWrapper}>
-            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
-              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
-            </TouchableOpacity> 
-          </View>
-        </View>
-      </Modal>
+              <View styles={styles.cancelWrapper}>
+                <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+                  <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
 
           <Text style={styles.detailsHeader}>When</Text>
           <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
-        <Text style={styles.buttonText}>Project Date</Text>
-      </TouchableOpacity>
+            <Text style={styles.buttonText}>Project Date</Text>
+          </TouchableOpacity>
           <Modal
-        transparent={true}
-        visible={isModalVisible}
-        animationType={slide}
-        onRequestClose={closeModal}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Project Recording</Text>
-          </View>
+            transparent={true}
+            visible={isModalVisible}
+            animationType={slide}
+            onRequestClose={closeModal}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.innerContainer}>
+                <Text style={styles.modalText}>Project Recording</Text>
+              </View>
 
-          <TextInput
-          multiline={true}
-          style={styles.input}
-          onChangeText={setDate}
-          autoFocus={true}
-          value={date}
-        />
+              <TextInput
+                multiline={true}
+                style={styles.input}
+                onChangeText={setDate}
+                autoFocus={true}
+                value={date}
+              />
 
-<View styles={styles.cancelWrapper}>
-            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
-              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
-            </TouchableOpacity> 
-          </View>
-        </View>
-      </Modal>
+              <View styles={styles.cancelWrapper}>
+                <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+                  <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
           <Text style={styles.detailsHeader}>What</Text>
           <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
-        <Text style={styles.buttonText}>Project Recording</Text>
-      </TouchableOpacity>
+            <Text style={styles.buttonText}>Project Recording</Text>
+          </TouchableOpacity>
           <Modal
-        transparent={true}
-        visible={isModalVisible}
-        animationType={slide}
-        onRequestClose={closeModal}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Project Recording</Text>
-          </View>
+            transparent={true}
+            visible={isModalVisible}
+            animationType={slide}
+            onRequestClose={closeModal}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.innerContainer}>
+                <Text style={styles.modalText}>Project Recording</Text>
+              </View>
 
-          <TextInput
-          multiline={true}
-          style={styles.input}
-          onChangeText={setRecording}
-          autoFocus={true}
-          value={recording}
-        />
+              <TextInput
+                multiline={true}
+                style={styles.input}
+                onChangeText={setRecording}
+                autoFocus={true}
+                value={recording}
+              />
 
-<View styles={styles.cancelWrapper}>
-            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
-              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
-            </TouchableOpacity> 
-          </View>
-        </View>
-      </Modal>
+              <View styles={styles.cancelWrapper}>
+                <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+                  <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </View>
       }
     </View>

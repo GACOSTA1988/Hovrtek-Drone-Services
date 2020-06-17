@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
-import sunsetDrone from "../../assets/sunsetDrone.png";
+import sunsetDrone from "../assets/sunsetDrone.png";
 
 const SupportScreen = () => {
+
   return (
     <View style={styles.container}>
       <Image source={sunsetDrone} style={styles.backgroundImage}></Image>

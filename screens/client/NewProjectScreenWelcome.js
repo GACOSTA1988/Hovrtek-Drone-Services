@@ -61,7 +61,12 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     bodyTextOne: {
-        marginTop: 100
+        marginTop: 100,
+        textAlign: 'center'
+    },
+    bodyTextTwo: {
+        marginTop: 10,
+        textAlign: 'center'
     },
     continueButton: {
         width: 250,

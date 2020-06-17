@@ -164,6 +164,9 @@ function PilotSignUpScreen(props) {
           <TouchableOpacity style={styles.button} onPress={signUp}>
             <Text style={styles.buttontext}>Sign up</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+            <Text style={styles.linkText}>or return to sign in</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAwareScrollView>
@@ -219,6 +222,11 @@ const styles = StyleSheet.create({
   buttontext: {
     fontSize: 20,
     color: "#092455",
+  },
+  linkText: {
+    textAlign: "center",
+    color: "grey",
+    fontSize: 17,
   },
 });
 

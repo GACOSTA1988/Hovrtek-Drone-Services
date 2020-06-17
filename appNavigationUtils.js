@@ -40,7 +40,7 @@ const renderLogin = () => {
   };
 
   return (
-    <NavigationContainer independent={true}>
+    <NavigationContainer>
       <AuthStack.Navigator>
         <AuthStack.Screen
           name="SignIn"

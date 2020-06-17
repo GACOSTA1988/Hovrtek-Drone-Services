@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import MapView, {Callout} from 'react-native-maps';
+import MapView, {Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as firebase from "firebase";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import mapStyles from "../../assets/mapStyles.json";
 
 function MapComponent(props){ 
 
@@ -70,6 +71,8 @@ function MapComponent(props){
   return (
     <MapView
       style={{flex: 1}}
+      customMapStyle={mapStyles}
+      provider={PROVIDER_GOOGLE}
       region={{
         latitude: initialCoordinates[0],          
         longitude: initialCoordinates[1],          

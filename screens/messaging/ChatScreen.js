@@ -198,7 +198,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
         </View>
     </KeyboardAvoidingView>
   );
-  
+
 }
 
 const styles = StyleSheet.create({

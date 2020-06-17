@@ -15,7 +15,8 @@ import {API_KEY} from "../../geocoder"
 Geocoder.init(API_KEY);
 
 function EditProjectScreen(props, { editProject }) {
-  const projectDetails = props.route.params;
+  const { projectDetails } = props.route.params;
+  const { fromList } = props.route.params;
   const navigation = useNavigation();
 
   const [ location, setLocation ] = useState(projectDetails.location);
@@ -30,7 +31,6 @@ function EditProjectScreen(props, { editProject }) {
     if(location != projectDetails.location){
       let locationCoordinatesResponse = await convertLocation(location)
       locationCoordinates = locationCoordinatesResponse
-      console.log("SHOUT IT FROM THE ROOFTOPS")
     } else {
       locationCoordinates = projectDetails.locationCoordinates
     }
@@ -38,8 +38,8 @@ function EditProjectScreen(props, { editProject }) {
     projectDetails.date = date;
     projectDetails.recording = recording;
     props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
-    navigation.navigate("ProjectDetailsScreen", {
-      ...projectDetails
+    fromList ? navigation.navigate("ProjectListScreen") :
+    navigation.navigate("ProjectDetailsScreen", { projectDetails: projectDetails
     });
     setLoadingActive(false)
   };

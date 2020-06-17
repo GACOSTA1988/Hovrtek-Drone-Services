@@ -35,11 +35,13 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     marginBottom: 20,
-    color: "white"
+    color: "white",
+    textAlign: "center",
   },
   body: {
     fontSize: 20,
-    color: "white"
+    color: "white",
+    textAlign: "center"
   },
   boldText: {
     fontWeight: "bold"

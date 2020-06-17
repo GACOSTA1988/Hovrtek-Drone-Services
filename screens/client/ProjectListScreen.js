@@ -113,7 +113,8 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
                       <TouchableHighlight
                         onPress={() =>
                           props.navigation.navigate("EditProjectScreen", {
-                            ...item,
+                            projectDetails: item,
+                            fromList: true
                           })}
                       >
                         <View style={{ marginRight: 15 }}>

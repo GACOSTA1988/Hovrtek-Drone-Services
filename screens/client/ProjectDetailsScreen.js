@@ -43,7 +43,8 @@ function ProjectDetailsScreen(props, { getPilotProfiles }) {
         style={styles.editIcon}
         onPress={() =>
           props.navigation.navigate("EditProjectScreen", {
-            ...projectDetails,
+            projectDetails: projectDetails,
+            fromList: false
           })
         }
         >

@@ -82,6 +82,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           conversation.push(message);
         }
     });
+    readMessages();
   }
 
   function readMessages() {
@@ -181,7 +182,6 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
               value={body}
               onChangeText={setBody}
               enablesReturnKeyAutomatically={true}
-              onFocus={() => readMessages()}
               style={styles.input}
               />
           <Ionicons

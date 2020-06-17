@@ -5,14 +5,20 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Modal
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { editProject } from "../../actions/projects";
 import { connect } from "react-redux";
 import LoadingScreen from "../../screens/LoadingScreen"
 import Geocoder from "react-native-geocoding";
-import {API_KEY} from "../../geocoder"
+import {API_KEY} from "../../geocoder";
+import { APP_STRINGS } from "../../constants/index";
 Geocoder.init(API_KEY);
+
+const {
+  slide
+} = APP_STRINGS;
 
 function EditProjectScreen(props, { editProject }) {
   const projectDetails = props.route.params;
@@ -22,6 +28,17 @@ function EditProjectScreen(props, { editProject }) {
   const [ date, setDate ] = useState(projectDetails.date);
   const [ recording, setRecording ] = useState(projectDetails.recording);
   const [loadingActive, setLoadingActive] = useState(false)
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+
+  const openModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
 
 
   async function submit(){
@@ -62,31 +79,107 @@ function EditProjectScreen(props, { editProject }) {
         <LoadingScreen />
         :
         <View>
-          <View style={styles.saveButton}>
-            <TouchableOpacity hitSlop={styles.hitSlop} onPress={submit}>
-              <Text style={styles.saveText}>Save changes</Text>
-            </TouchableOpacity>
+          <View style={styles.headerContainer}>
+            <Text style={styles.ProjectText}>Edit Details</Text>
+            <View style={styles.saveButton}>
+              <TouchableOpacity hitSlop={styles.hitSlop} onPress={submit}>
+                <Text style={styles.saveText}>Save changes</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <Text style={styles.ProjectText}>Edit Details</Text>
           <View style={styles.line} />
           <Text style={styles.detailsHeader}>Where</Text>
+
+          <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
+        <Text style={styles.buttonText}>Project Location</Text>
+      </TouchableOpacity>
+          <Modal
+        transparent={true}
+        visible={isModalVisible}
+        animationType={slide}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.modalText}>Project Location</Text>
+          </View>
+
           <TextInput
-            style={styles.DetailsText}
-            onChangeText={setLocation}
-            value={location}
-          />
+          multiline={true}
+          style={styles.input}
+          onChangeText={setLocation}
+          autoFocus={true}
+          value={location}
+        />
+
+<View styles={styles.cancelWrapper}>
+            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+            </TouchableOpacity> 
+          </View>
+        </View>
+      </Modal>
+
           <Text style={styles.detailsHeader}>When</Text>
+          <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
+        <Text style={styles.buttonText}>Project Date</Text>
+      </TouchableOpacity>
+          <Modal
+        transparent={true}
+        visible={isModalVisible}
+        animationType={slide}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.modalText}>Project Recording</Text>
+          </View>
+
           <TextInput
-            style={styles.DetailsText}
-            onChangeText={setDate}
-            value={date}
-          />
+          multiline={true}
+          style={styles.input}
+          onChangeText={setDate}
+          autoFocus={true}
+          value={date}
+        />
+
+<View styles={styles.cancelWrapper}>
+            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+            </TouchableOpacity> 
+          </View>
+        </View>
+      </Modal>
           <Text style={styles.detailsHeader}>What</Text>
+          <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
+        <Text style={styles.buttonText}>Project Recording</Text>
+      </TouchableOpacity>
+          <Modal
+        transparent={true}
+        visible={isModalVisible}
+        animationType={slide}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.modalText}>Project Recording</Text>
+          </View>
+
           <TextInput
-            style={styles.DetailsText}
-            onChangeText={setRecording}
-            value={recording}
-          />
+          multiline={true}
+          style={styles.input}
+          onChangeText={setRecording}
+          autoFocus={true}
+          value={recording}
+        />
+
+<View styles={styles.cancelWrapper}>
+            <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
+              <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
+            </TouchableOpacity> 
+          </View>
+        </View>
+      </Modal>
         </View>
       }
     </View>
@@ -211,7 +304,64 @@ const styles = StyleSheet.create({
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5,
-    zIndex: 1
+    zIndex: 1,
+  },
+  modalContainer: {
+    height: 330,
+    justifyContent: "center",
+    paddingTop: 10,
+    padding: 10,
+    backgroundColor: "#f5f5f5",
+    marginTop: 200,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 5,
+  },
+  innerContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  picker: {
+    height: 50,
+    width: 150,
+  },
+  modalText: {
+    fontSize: 20,
+  },
+  button: {
+    width: 250,
+    height: 50,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 30,
+    color: "white",
+  },
+  buttonText: {
+    color: "white",
+  },
+  input: {
+    marginTop: 20,
+    height: 90,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
+  },
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+    margin: 20,
+    height: '30%',
   },
 });
 

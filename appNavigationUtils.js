@@ -36,8 +36,6 @@ const renderLogin = () => {
   const signHeaderStyle = {
     backgroundColor: "#092455",
     width: "100%",
-    // borderBottomWidth: 10,
-    // borderBottomColor: "grey",
     height: 100,
   };
 
@@ -56,11 +54,9 @@ const renderLogin = () => {
         <AuthStack.Screen
           name="SignUp"
           component={SignUpNavigation}
-          options={() => ({
-            headerTitle: () => <GlobalHeader isHome={false}/>,
-            headerLeft: null,
-            headerStyle: signHeaderStyle,
-          })}
+          options={{
+            headerShown: false,
+          }}
         />
         <AuthStack.Screen
           name="Loading"

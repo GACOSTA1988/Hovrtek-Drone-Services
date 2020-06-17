@@ -3,26 +3,48 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WhichSignUpScreen from "../screens/auth/WhichSignUpScreen";
 import PilotSignUpScreen from "../screens/auth/PilotSignUpScreen";
 import ClientSignUpScreen from "../screens/auth/ClientSignUpScreen";
+import GlobalHeader from "../components/shared/GlobalHeader";
 
 const SignUpStack = createStackNavigator();
 
 const SignUpNavigation = () => {
   return (
-    <SignUpStack.Navigator headerMode="none">
+    <SignUpStack.Navigator>
       <SignUpStack.Screen
         name="WhichSignUpScreen"
         component={WhichSignUpScreen}
-        headerMode="none"
+        options={{
+          headerLeft: null,
+          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerStyle: {
+            backgroundColor: "#092455",
+            height: 100,
+          }, 
+        }}
       />
       <SignUpStack.Screen
         name="PilotSignUpScreen"
         component={PilotSignUpScreen}
-        headerMode="none"
+        options={{
+          headerLeft: null,
+          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerStyle: {
+            backgroundColor: "#092455",
+            height: 100,
+          }, 
+        }}
       />
       <SignUpStack.Screen
         name="ClientSignUpScreen"
         component={ClientSignUpScreen}
-        headerMode="none"
+        options={{
+          headerLeft: null,
+          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerStyle: {
+            backgroundColor: "#092455",
+            height: 100,
+          }, 
+        }}     
       />
     </SignUpStack.Navigator>
   );

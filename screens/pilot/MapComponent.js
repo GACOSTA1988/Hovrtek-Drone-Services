@@ -9,12 +9,11 @@ import { getProjects } from "../../actions/projects";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as firebase from "firebase";
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import mapStyles from "../../assets/mapStyles.json";
-import { getDistance } from 'geolib';
+import { getDistance, isPointWithinRadius } from 'geolib';
 
 function MapComponent(props){ 
-
   const [initialCoordinates, setInitialCoordinates] = useState([45.5236111, -122.675])
 
   useEffect(() => {
@@ -62,28 +61,39 @@ function MapComponent(props){
       {latitude: project.locationCoordinates[0],longitude: project.locationCoordinates[1]}
     );
     let distanceFromPin = distanceAway(distanceinMeters)
-    return (
-      <MapView.Marker
-        key={index}
-        coordinate={coords}        
-      >
-        <Callout onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}>
-          <TouchableOpacity activeOpacity={0.3} style={styles.touchableContainer}>
-          <View style={styles.popOutContainer}>
-            <View style={styles.popOutTextBoxes}>
-              <Text style={styles.projectHeaderText}>{project.location}</Text>
-            </View>
-            <View style={styles.popOutTextBoxes}>
-              <Text style={styles.distanceText}>{distanceFromPin}</Text>
-            </View>
-            <View style={styles.popOutTextBoxes}>
-              <Text>{project.recording}</Text>
-            </View>
-          </View>
-          </TouchableOpacity>
-        </Callout>
-      </MapView.Marker>
-    );
+
+    //this is an alternate way evaluating distance, this allows us to filter by the distance
+    // let distanceInM = distanceFilter * 1.6 * 1000;
+    // let isWithinFilterRange = isPointWithinRadius(
+    //   {latitude: initialCoordinates[0],longitude: initialCoordinates[1]},
+    //   {latitude: project.locationCoordinates[0],longitude: project.locationCoordinates[1]},
+    //   distanceInM
+    // );
+    // isWithinFilterRange  is a boolean based on whether or not the pin falls within the specified range 
+    //and can be used to conditionally render it into mappedMarkers
+
+        return (
+          <MapView.Marker
+            key={index}
+            coordinate={coords}        
+          >
+            <Callout onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}>
+              <TouchableOpacity activeOpacity={0.3} style={styles.touchableContainer}>
+              <View style={styles.popOutContainer}>
+                <View style={styles.popOutTextBoxes}>
+                  <Text style={styles.projectHeaderText}>{project.location}</Text>
+                </View>
+                <View style={styles.popOutTextBoxes}>
+                  <Text style={styles.distanceText}>{distanceFromPin}</Text>
+                </View>
+                <View style={styles.popOutTextBoxes}>
+                  <Text>{project.recording}</Text>
+                </View>
+              </View>
+              </TouchableOpacity>
+            </Callout>
+          </MapView.Marker>
+        );
   })
 
   return (

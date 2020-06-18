@@ -68,25 +68,74 @@ function JobListScreen(
   }
 
       return (
-      <View style={styles.projectListWrapper}>
-      {profileCompleteState === "No" ? (
-        <View style={styles.profileCompleteNoticeWrapper}>
-            <View style={styles.profileCompleteNotice}>
-              <Text style={styles.profileCompleteNoticeText}>
-                You will need to complete your profile before you can apply for jobs.
+        <View style={styles.projectListWrapper}>
+        {profileCompleteState === "No" ? (
+          <View style={styles.profileCompleteNoticeWrapper}>      
+              <View style={styles.profileCompleteNotice}>
+                <Text style={styles.profileCompleteNoticeText}>
+                  You will need to complete your profile before you can apply for jobs.
+                </Text>
+                <View style={styles.blurredView}>
+            <TouchableOpacity
+              style={styles.continueButton}
+              onPress={() => navigation.navigate("Profile")}
+              >
+              <Text style={styles.continueText}>
+                Continue
               </Text>
-          <TouchableOpacity
-            style={styles.chatButton}
-            onPress={() => navigation.navigate("Profile")}
-          >
-            <Text style={styles.chatText}>
-              Continue
-            </Text>
-          </TouchableOpacity>
+            </TouchableOpacity>
             </View>
-            <View>
-            </View>
-        </View>
+              </View>
+              <FlatList
+                style={{ width: "100%", marginTop: 15 }}
+                data={availableProjects}
+                keyExtractor={(item) => item.key}
+                renderItem={({ item }) => {
+                  return (
+                    <View
+                    style={{
+                      borderRadius: 15,
+                      backgroundColor: "#092455",
+                      marginBottom: 15,
+                      padding: 20,
+                      opacity: 0.2,
+                    }}
+                    >
+                        <View>
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Location: {item.location}{" "}
+                          </Text>
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Date: {item.date}{" "}
+                          </Text>
+                          <Text style={{ color: "white", fontWeight: "800" }}>
+                            Recording: {item.recording}{" "}
+                          </Text>
+                          {props.listOfClientProfiles.find(
+                            (x) => x.userID === item.clientID,
+                            ) ? (
+                              <Text style={{ color: "white", fontWeight: "800" }}>
+                              Posted by:{" "}
+                              {
+                                props.listOfClientProfiles.find(
+                                  (x) => x.userID === item.clientID,
+                                  ).firstName
+                                }{" "}
+                              {
+                                props.listOfClientProfiles.find(
+                                  (x) => x.userID === item.clientID,
+                                  ).lastName
+                                }
+                            </Text>
+                          ) : (
+                            <Text>Posted by:</Text>
+                            )}
+                        </View>
+                    </View>
+                  );
+                }}
+                />
+          </View>
       ) : (
         <Text />
       )}
@@ -172,7 +221,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   projectCard: {
-    width: "100%",
+    width: 380,
     marginTop: 15,
     marginBottom: 100
   },
@@ -182,22 +231,20 @@ const styles = StyleSheet.create({
   projectListWrapper: {
     alignItems: "center",
   },
-  scrollContainer: {
-    width: "100%",
-    paddingHorizontal: 10,
-  },
   profileCompleteNotice: {
     top: 0,
     bottom: 0,
     borderWidth: 3,
     borderColor: "#092455",
     width: 280,
-    height: '20%',
+    height: '15%',
     borderRadius: 8,
     padding: 20,
     alignItems: "center",
     position: "absolute",
     backgroundColor: "white",
+    marginTop: "30%",
+    zIndex: 1
   },
   textRow: {
     marginRight: 10,
@@ -205,47 +252,45 @@ const styles = StyleSheet.create({
   profileCompleteNoticeWrapper: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "45%",
     height: "100%",
   },
   profileCompleteNoticeText: {
     fontSize: 15,
     fontWeight: "600",
   },
-  chatText: {
+  subheaderWrapper: {
+    marginBottom: 14,
+  },
+  continueText: {
     fontWeight: "bold",
     fontSize: 15,
     color: "white",
   },
-  chatButton: {
+  continueButton: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "#092455",
     padding: 7,
     borderRadius: 5,
     margin: 20,
-    height: '30%',
+    height: '40%',
   },
   pilotText: {
     fontSize: 30,
-    color: "#092455",
-    marginBottom: 10,
+    color: "darkblue",
+    marginBottom: 14,
   },
   mapText: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 15,
     color: "white",
-    marginLeft: 10,
   },
   mapButton: {
-    flexDirection: "row",
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "#092455",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 30,
-    marginBottom: 10,
-  }
+    padding: 5,
+  },
 });
 
 function mapStateToProps(state) {

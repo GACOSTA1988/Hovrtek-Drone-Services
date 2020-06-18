@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import {
   Text,
   View,
-  Button,
   Modal,
   StyleSheet,
   TouchableOpacity,

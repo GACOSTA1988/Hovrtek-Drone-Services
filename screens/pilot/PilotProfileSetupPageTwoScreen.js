@@ -4,9 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
-  TextInput,
   Alert
 } from "react-native";
 import { connect } from "react-redux";
@@ -21,7 +19,6 @@ import _ from "lodash";
 import DatePicker from "../../components/pilot/DatePicker";
 import TravelStatusRadio from "../../components/pilot/TravelStatusRadio";
 import AirMapRadio from "../../components/pilot/AirMapRadio";
-import { AntDesign } from "@expo/vector-icons";
 import FourHundredRadio from "../../components/pilot/FourHundredRadio";
 
 // context hook stuff
@@ -34,10 +31,7 @@ export const PassFourHundredState = React.createContext();
 export const PassSetAirMap = React.createContext();
 export const PassAirMapState = React.createContext();
 
-function PilotProfileSetupPageTwoScreen(
-  props,
-  { getPilotProfiles, editPilotProfile }
-) {
+function PilotProfileSetupPageTwoScreen(props) {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -226,12 +220,6 @@ const styles = StyleSheet.create({
   saveAndContinueText: {
     fontSize: 15,
     color: "#092455",
-  },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
   },
   welcomeText: {
     marginTop: "5%",

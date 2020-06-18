@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Header, Image, TouchableOpacity, Keyboard, Alert } from "react-native";
+import { View, StyleSheet, Keyboard } from "react-native";
 
 function Footer() {
 
@@ -24,7 +24,13 @@ function Footer() {
   }
 
   return (
-    <View style={styles.footerWrapper}>
+    <View>
+      { visible ? (
+        <View style={styles.footerWrapper}>
+        </View>
+      ) : (
+        <View></View>
+      )}
     </View>
   );
 };
@@ -32,7 +38,7 @@ function Footer() {
 const styles = StyleSheet.create({
   footerWrapper: {
     backgroundColor: "#092455",
-    height: 0,
+    height: 34,
     margin: 0,
     padding: 0,
   },

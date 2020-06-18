@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
-  Button,
   FlatList,
   ScrollView,
 } from "react-native";
@@ -14,15 +12,13 @@ import { getProjects, deleteProject } from "../../actions/projects";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
 import _ from "lodash";
 import {
-  Ionicons,
   FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
-import { AntDesign } from "@expo/vector-icons";
 import * as firebase from "firebase";
 
-function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
+function ProjectListScreen(props) {
   useEffect(() => {
     props.getProjects();
     props.getPilotProfiles();

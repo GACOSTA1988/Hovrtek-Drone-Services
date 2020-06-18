@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import {
   Text,
   View,
-  Button,
   Modal,
   StyleSheet,
   Picker,
@@ -14,7 +13,7 @@ import {
 } from "../../screens/pilot/PilotProfileSetupPageOneScreen";
 import { APP_STRINGS } from "../../constants/index";
 
-//REFACTORED with APP_STRINGS and TURNARY VIA FRANKS SPECIFICATIONS
+//REFACTORED with APP_STRINGS and TERNARY VIA FRANKS SPECIFICATIONS
 
 const DroneExperiencePicker = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

@@ -151,12 +151,6 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
     height: "100%",
   },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
-  },
   completeButton: {
     width: 250,
     height: 50,

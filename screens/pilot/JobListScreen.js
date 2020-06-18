@@ -1,20 +1,15 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useEffect } from "react";
 import {
   TouchableOpacity,
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
-  TextInput,
   FlatList,
   TouchableHighlight,
-  Alert,
 } from "react-native";
 import {
   Ionicons,
-  FontAwesome5,
-  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -23,12 +18,8 @@ import { getClientProfiles } from "../../actions/clientProfiles";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
-import { render } from "react-dom";
 
-function JobListScreen(
-  props,
-  { getProjects, getClientProfiles, getPilotProfiles },
-) {
+function JobListScreen(props) {
   const navigation = useNavigation();
 
   useEffect(() => {

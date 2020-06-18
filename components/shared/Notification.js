@@ -58,8 +58,6 @@ const styles = StyleSheet.create({
   },
   messageText: {
     paddingTop: 20,
-    // left: 10,
-    // color: "white"
   },
   ex: {
     paddingLeft: 10,

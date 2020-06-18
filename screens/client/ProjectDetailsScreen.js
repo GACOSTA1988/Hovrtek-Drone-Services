@@ -3,8 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  Button,
   TouchableOpacity,
   Image,
 } from "react-native";
@@ -15,7 +13,7 @@ import { getPilotProfiles } from "../../actions/pilotProfiles";
 import _ from "lodash";
 import { useNavigation } from "@react-navigation/native";
 
-function ProjectDetailsScreen(props, { getPilotProfiles }) {
+function ProjectDetailsScreen(props) {
   const projectDetails = props.route.params;
   const navigation = useNavigation();
 
@@ -165,8 +163,6 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 90,
     marginTop: 5,
-    // borderWidth: 4,
-    // borderColor: "#092455",
     marginRight: 10,
   },
   backButton: {

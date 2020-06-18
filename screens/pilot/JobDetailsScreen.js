@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { getClientProfiles } from "../../actions/clientProfiles";
 import _ from "lodash";
-import { AuthContext } from "../../context";
 
-function JobDetailsScreen(props, { getClientProfiles }) {
+function JobDetailsScreen(props) {
   const jobDetails = props.route.params;
 
   useEffect(() => {

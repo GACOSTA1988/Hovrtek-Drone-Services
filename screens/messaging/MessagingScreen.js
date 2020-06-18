@@ -1,9 +1,8 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  Button,
   TouchableOpacity,
   FlatList,
   Image,
@@ -15,10 +14,7 @@ import { getClientProfiles } from "../../actions/clientProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
 
-function MessagingScreen(
-  props,
-  { getMessages, getPilotProfiles, getClientProfiles }
-) {
+function MessagingScreen(props) {
   useEffect(() => {
     props.getMessages();
     props.getPilotProfiles();
@@ -65,16 +61,6 @@ function MessagingScreen(
       }
     });
   }
-
-  // if (listOfMyMessages && listOfProfiles) {
-  //   listOfProfiles.forEach((profile) => {
-  //     listOfMessages.forEach((message) => {
-  //       if ((message.userOneID === profile.userID) || (message.userTwoID === profile.userID)) {
-  //
-  //       }
-  //     })
-  //   })
-  // }
 
   function goToChat(item) {
     props.navigation.navigate("ChatScreen", { ...item });

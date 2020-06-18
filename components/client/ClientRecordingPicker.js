@@ -2,13 +2,11 @@ import React, { useState, useContext } from "react";
 import {
   Text,
   View,
-  Button,
   Modal,
   StyleSheet,
   Picker,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
 import {
   PassSetRecording,
@@ -31,23 +29,6 @@ const ClientRecordingPicker = () => {
   const closeModal = () => {
     setIsModalVisible(false);
   };
-
-  // const renderRecordingButton = (buttonText = '') => {
-  //   return (
-  //     <TouchableOpacity
-  //       style={styles.button}
-  //       onPress={openModal}
-  //     >
-  //       <Text style={styles.buttonText}>{buttonText}</Text>
-  //     </TouchableOpacity>
-  //   );
-  // }
-
-  // const renderRecording = (recordingString = '') => {
-  //   return recordingString
-  //   ? renderRecordingButton()
-  //   : renderRecordingButton(APP_STRINGS.)
-  // }
 
   return (
     <View style={styles.container}>

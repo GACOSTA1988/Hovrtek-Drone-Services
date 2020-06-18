@@ -1,25 +1,18 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
-  TouchableOpacity,
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
   TextInput,
   FlatList,
-  TouchableHighlight,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
   Platform,
-  Container,
   Alert,
 } from "react-native";
 import {
   Ionicons,
   FontAwesome5,
-  MaterialCommunityIcons,
   AntDesign,
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
@@ -27,7 +20,6 @@ import { useNavigation } from "@react-navigation/native";
 import { getMessages, postMessages, readMessage } from "../../actions/messages";
 import * as firebase from "firebase";
 import _ from "lodash";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import moment from "moment";
 
 function ChatScreen(props, { getMessages, postMessages, readMessage }) {
@@ -145,26 +137,21 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
             renderItem={({ item }) => {
               return (
                 <View style={item.author === 'sender' ? styles.messagingContainer : styles.messagingContainerRecipient}>
-                  <View>
-                    {item.isNewTimestamp ? (
-                      <View>
-                        <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
-                        <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
-                      </View>
-                    ) : (
-                      <Text>OLD Message sent at: {item.timestamp}</Text>
-                    )}
-                    <Text>Message body: {item.body} </Text>
+                  <View style={styles.bodyContainer}>
+                    <Text style={styles.bodyText}>{item.body}</Text>
+                  </View>
+                  <View style={styles.messageFooter}>
+                    <Text style={styles.timestamp}>{item.timestamp}</Text>
                     {item.read ? (
-                      <FontAwesome5
-                        name="check-circle"
-                        size={15}
-                        style={{ textAlign: "right" }}
-                      />
-                      ) : (
-                        // todo: filled in check circle when read, outline when not
-                        <Text></Text>
-                        )}
+                    <FontAwesome5
+                      name="check-circle"
+                      size={15}
+                      style={{ textAlign: "right" }}
+                    />
+                    ) : (
+                      // todo: filled in check circle when read, outline when not
+                      <Text></Text>
+                    )}
                   </View>
                 </View>
               );
@@ -175,26 +162,24 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
         <View style={styles.writeContainer}>
           <TextInput
             multiline={true}
-            // onContentSizeChange={(event) => {
-              // setInputHeight(100) }}
-              placeholder="Send message..."
-              placeholderTextColor="grey"
-              value={body}
-              onChangeText={setBody}
-              enablesReturnKeyAutomatically={true}
-              style={styles.input}
-              />
+            placeholder="Send message..."
+            placeholderTextColor="grey"
+            value={body}
+            onChangeText={setBody}
+            enablesReturnKeyAutomatically={true}
+            style={styles.input}
+          />
           <Ionicons
             name="md-send"
             size={30}
             color="black"
             onPress={send}
-            />
+          />
           <AntDesign
             style={styles.plus}
             name="plus"
             size={25}
-            />
+          />
         </View>
     </KeyboardAvoidingView>
   );
@@ -209,22 +194,44 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10,
   },
+  messageFooter: {
+    marginTop: 10,
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  bodyContainer: {
+    margin: 5,
+  },
   keyClosedContainer: {
     marginTop: "90%",
+  },
+  timestamp: {
+    fontSize: 12,
+  },
+  bodyText: {
+    fontWeight: "300",
+    fontSize: 16,
   },
   messagingContainer: {
     borderRadius: 15,
     backgroundColor: "#3E90D0",
     marginVertical: 5,
-    padding: 20,
-    marginLeft: '15%'
+    padding: 15,
+    marginLeft: '15%',
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-end",
   },
   messagingContainerRecipient: {
     borderRadius: 15,
     backgroundColor: "lightgray",
     marginVertical: 5,
-    padding: 20,
-    marginRight: '15%'
+    padding: 15,
+    marginRight: '15%',
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-end",
   },
   messagesList: {
     width: "100%",
@@ -234,8 +241,6 @@ const styles = StyleSheet.create({
   writeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    // position: "absolute",
-    // bottom: 0,
     marginTop: 10,
     marginBottom: 10
     },
@@ -250,8 +255,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 45,
     borderColor: "#092455",
-    padding: 10,
-    margin: 10
+    margin: 10,
+    paddingLeft: "3%",
+    paddingTop: "3%", 
   },
   plus: {
     color: "#092455",

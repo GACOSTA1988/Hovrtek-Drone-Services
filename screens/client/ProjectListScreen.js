@@ -21,8 +21,6 @@ import {
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import * as firebase from "firebase";
-import ClientSubheader from "../../components/client/ClientSubheader";
-
 
 function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
   useEffect(() => {
@@ -47,7 +45,10 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
       <TouchableOpacity style={styles.ClientProjectListTextWrapper}>
         <Text style={styles.clientText}>My Projects</Text>
       </TouchableOpacity>
-      <ScrollView>
+      <ScrollView
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false} 
+        >
         <View style={styles.projectCard}>
             <FlatList
               style={{ width: "100%" }}
@@ -145,8 +146,12 @@ function ProjectListScreen(props, { getProjects, getPilotProfiles }) {
 
 const styles = StyleSheet.create({
   projectCard: {
-    width: "95%",
+    width: "100%",
     marginBottom: 140,
+  },
+  scrollContainer: {
+    width: "100%",
+    paddingHorizontal: 12,
   },
   clientText: {
     fontSize: 30,
@@ -159,9 +164,7 @@ const styles = StyleSheet.create({
   projectListWrapper: {
     alignItems: "center",
     marginTop: 15,
-  },
-  subheaderWrapper: {
-    marginBottom: 10,
+    width: "100%",
   },
 });
 

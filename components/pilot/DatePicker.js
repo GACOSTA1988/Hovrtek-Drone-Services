@@ -12,7 +12,7 @@ import moment from "moment";
 
 const DatePicker = (props) => {
 
-  const {setFaaLicenseExp, faaLicenseExp  } = props
+  const {setFaaLicenseExp, faaLicenseExp, setIsModalActive } = props
 
   const [date, setDate] = useState(new Date());
   const [chosenDate, setChosenDate] = useState("");
@@ -20,15 +20,18 @@ const DatePicker = (props) => {
 
   const handlePicker = (datetime) => {
     setIsVisible(false);
+    setIsModalActive(false);
     setFaaLicenseExp(moment(datetime).format("MMMM, DD  YYYY"));
   };
 
   const hidePicker = () => {
     setIsVisible(false);
+    setIsModalActive(false);
   };
 
   const showPicker = () => {
     setIsVisible(true);
+    setIsModalActive(true);
   };
 
   return (

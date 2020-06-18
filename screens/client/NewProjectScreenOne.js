@@ -80,13 +80,15 @@ function NewProjectScreenOne(props) {
     navigation.navigate("NewProjectScreenTwo");
   }
 
+  const [isModalActive, setIsModalActive] = useState(false);
+
   return (
     <View style={loadingActive ? styles.loadingWrapper : styles.newProjectListWrapper}>
       {loadingActive ?
         <LoadingScreen />
         :
         <ScrollView 
-        style={styles.scrollWrapper}
+        style={[styles.scrollWrapper, isModalActive ? styles.opaque : '']}
         showsVerticalScrollIndicator={false} 
         >
         <View style={styles.newProjectListTextWrapper}>
@@ -97,7 +99,7 @@ function NewProjectScreenOne(props) {
           <View style={styles.modalWrapper}>
             <PassSetLocation.Provider value={setLocation}>
               <PassLocationState.Provider value={location}>
-                <ClientLocationPicker />
+                <ClientLocationPicker setIsModalActive={setIsModalActive}/>
               </PassLocationState.Provider>
             </PassSetLocation.Provider>
           </View>
@@ -107,7 +109,7 @@ function NewProjectScreenOne(props) {
           <View style={styles.modalWrapper}>
             <PassSetDate.Provider value={setDate}>
               <PassDateState.Provider value={date}>
-                <ClientDatePicker />
+                <ClientDatePicker setIsModalActive={setIsModalActive}/>
               </PassDateState.Provider>
             </PassSetDate.Provider>
           </View>
@@ -117,7 +119,7 @@ function NewProjectScreenOne(props) {
           <View style={styles.modalWrapper}>
             <PassSetRecording.Provider value={setRecording}>
               <PassRecordingState.Provider value={recording}>
-                <ClientRecordingPicker />
+                <ClientRecordingPicker setIsModalActive={setIsModalActive}/>
               </PassRecordingState.Provider>
             </PassSetRecording.Provider>
           </View>
@@ -224,5 +226,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20
   },
+  opaque: {
+    opacity: 0.2
+  }
 });
 export default connect(null, { postProjects })(NewProjectScreenOne);

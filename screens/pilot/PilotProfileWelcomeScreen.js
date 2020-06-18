@@ -123,9 +123,7 @@ function PilotProfileWelcomeScreen(props) {
     return (
       <View>
         <Text style={styles.welcomeText}>{welcomeHovrtek}</Text>
-        <View style={styles.fullName}>
           <Text style={styles.nameText}>{getPilotFullName()}</Text>
-        </View>
         <View style={styles.alignItemsCenter}>
           {renderTouchableStartPilotProfileText()}
         </View>
@@ -209,11 +207,6 @@ const styles = StyleSheet.create({
   scrollViewStyle: {
     width: "100%",
   },
-  // fullName: {
-  //   flexDirection: "row",
-  //   display: "flex",
-  //   marginBottom: 40,
-  // },
   fullNameAndIcon: {
     flexDirection: "row",
     display: "flex",

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import sunsetDrone from '../assets/sunsetDrone.png';
 import sunsetDroneClean from "../assets/sunsetDroneClean.jpg";
 import { Entypo } from '@expo/vector-icons'; 
+import {Linking} from 'expo';
 
 const AboutScreen = () => {
   return (

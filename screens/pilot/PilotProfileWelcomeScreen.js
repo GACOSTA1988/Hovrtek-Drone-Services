@@ -5,7 +5,6 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  Alert,
   Image,
 } from "react-native";
 import { connect } from "react-redux";
@@ -214,12 +213,6 @@ const styles = StyleSheet.create({
   alignItemsCenter: {
     alignItems: "center",
   },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
-  },
   welcomeText: {
     marginTop: "40%",
     textAlign: "center",
@@ -240,12 +233,6 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     textAlign: "left",
     marginLeft: "4%",
-  },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
   },
   subHeaderText: {
     marginTop: "5%",

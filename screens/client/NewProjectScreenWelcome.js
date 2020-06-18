@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
     Text,
     View,
@@ -6,13 +6,9 @@ import {
     Image, 
     TouchableOpacity
 } from "react-native";
-import { StatusBar } from 'react-native'
-
-import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
 import hovrtekLogo from '../../assets/hovrtek_logo.png';
-import ClientSubheader from '../../components/client/ClientSubheader'
 
 
 function NewProjectScreenWelcome(props) {

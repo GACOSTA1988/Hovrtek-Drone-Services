@@ -1,16 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Text,
-  View,
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Button,
   Alert,
-  KeyboardAvoidingView,
-  ScrollView,
   ImageBackground,
-  Image,
 } from "react-native";
 import * as firebase from "firebase";
 import landingPageImage from "../../assets/landingPageImage.png";

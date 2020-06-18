@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Button,
   Alert,
 } from "react-native";
 import { AuthContext } from "../../context";

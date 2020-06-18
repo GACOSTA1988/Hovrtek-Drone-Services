@@ -4,11 +4,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
-  TextInput,
   Alert,
-  Modal,
 } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -44,10 +41,7 @@ const {
 } = APP_STRINGS;
 
 
-function PilotProfileSetupPageOneScreen(
-  props,
-  { getPilotProfiles, editPilotProfile }
-) {
+function PilotProfileSetupPageOneScreen(props) {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -223,12 +217,6 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgray",
     alignItems: "center",
     height: "100%",
-  },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginVertical: 10,
-    borderRadius: 5,
   },
   centerButton: {
     alignItems: "center",

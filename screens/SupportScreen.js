@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Button } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import sunsetDroneClean from "../assets/sunsetDroneClean.jpg";
 import { Entypo } from '@expo/vector-icons'; 
 import {Linking} from 'expo';

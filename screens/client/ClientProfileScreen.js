@@ -3,12 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   Alert,
   Image,
   TouchableOpacity,
 } from "react-native";
-import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import * as firebase from "firebase";
@@ -16,7 +15,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { getClientProfiles } from "../../actions/clientProfiles";
 
-function ClientProfileScreen(props, { getClientProfiles }) {
+function ClientProfileScreen(props) {
   useEffect(() => {
     props.getClientProfiles();
   }, []);

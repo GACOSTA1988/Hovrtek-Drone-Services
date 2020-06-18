@@ -5,11 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Button,
-  Picker,
-  ScrollView,
   Alert,
-  Image,
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";

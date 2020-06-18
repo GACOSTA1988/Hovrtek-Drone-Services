@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import {
   Text,
   View,
-  Button,
   Modal,
   StyleSheet,
   TouchableOpacity,
@@ -99,20 +98,6 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 20,
-  },
-  button: {
-    width: 250,
-    height: 50,
-    backgroundColor: "#092455",
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
-    marginBottom: 30,
-    color: "white",
-  },
-  buttonText: {
-    color: "white",
   },
   radiobutton: {
     paddingRight: '5%',

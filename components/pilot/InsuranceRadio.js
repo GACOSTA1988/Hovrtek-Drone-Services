@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import RadioForm from "react-native-simple-radio-button";
 
 let radio_props = [
@@ -9,7 +9,6 @@ let radio_props = [
 
 const InsuranceRadio = (props) => {
     const { insuredStatus, setInsuredStatus } = props;
-    console.log("INSURED STATUS", insuredStatus);
 
   let index = 0
   const getIndexOfState = () => {

@@ -30,7 +30,7 @@ function PilotTabs() {
         name="Messages" 
         component={MessagingNavigation}
         options={{
-          tabBarIcon: ({color}) => (<Entypo name="message" size={24} color={color}/>)
+          tabBarIcon: ({color}) => (<Entypo name="message" size={24} color={color} />),
         }} />
     </Tabs.Navigator>
   );

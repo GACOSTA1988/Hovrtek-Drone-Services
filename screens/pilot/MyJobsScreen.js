@@ -42,7 +42,10 @@ function MyJobsScreen(props, { getProjects }) {
     <View style={styles.projectListWrapper}>
       <View style={styles.scrollViewWrapper}>
         <Text style={styles.pilotText}>My Jobs</Text>
-        <ScrollView>
+        <ScrollView
+         style={styles.scrollContainer}
+         showsVerticalScrollIndicator={false} 
+         >
           <View style={styles.projectCard}>
               <FlatList
                 style={{ width: "100%" }}
@@ -92,17 +95,19 @@ function MyJobsScreen(props, { getProjects }) {
 
 const styles = StyleSheet.create({
   projectCard: {
-    width: 380,
+    width: "100%",
   },
   projectListWrapper: {
     alignItems: "center",
     marginTop: 13,
   },
+  scrollContainer: {
+    width: "100%",
+  },
   scrollViewWrapper: {
     alignItems: "center",
-  },
-  subheaderWrapper: {
-    marginBottom: 14,
+    width: "100%",
+    padding: 12,
   },
   pilotText: {
     fontSize: 30,

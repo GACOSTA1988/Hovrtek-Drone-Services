@@ -30,6 +30,7 @@ function PilotSignUpScreen(props) {
   const [pilotLocation, setPilotLocation] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   // BLANK PLACE HOLDERS TO BE UPDATED ON PROFILE CREATION
   const [personalBio, setPersonalBio] = useState("");
@@ -47,7 +48,6 @@ function PilotSignUpScreen(props) {
     e.preventDefault();
     navigation.push("Loading");
    
-    let pilotCoordinates = await convertLocation(pilotLocation)
     if (pilotFirstName.trim() === "") {
       Alert.alert("Please fill in your first name");
       navigation.navigate("PilotSignUpScreen");
@@ -55,12 +55,16 @@ function PilotSignUpScreen(props) {
       Alert.alert("Please fill in your last name");
       navigation.navigate("PilotSignUpScreen");
     } else if (pilotLocation.trim() == "") {
-      Alert.alert("Please fill in your loaction");
+      Alert.alert("Please fill in your location");
       navigation.navigate("PilotSignUpScreen");
     } else if (password.length < 6) {
       Alert.alert("Password must be longer than 6 characters");
       navigation.navigate("PilotSignUpScreen");
+    } else if (password !== passwordConfirm) {
+      Alert.alert("Passwords don't match, please try again");
+      navigation.navigate("PilotSignUpScreen");
     } else {
+      let pilotCoordinates = await convertLocation(pilotLocation)
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
       } catch (error) {
@@ -105,6 +109,14 @@ function PilotSignUpScreen(props) {
     );
     return finalCoords
   }
+
+  function passwordsDontMatch() {
+    setPasswordFail(true);
+    setTimeout(() => {
+      setPasswordFail(false)
+      }, 3000);
+  }
+
   return (
     <KeyboardAwareScrollView
       style={{
@@ -156,8 +168,8 @@ function PilotSignUpScreen(props) {
           <TextInput
             placeholder="Confirm password"
             secureTextEntry={true}
-            value={password}
-            onChangeText={setPassword}
+            value={passwordConfirm}
+            onChangeText={setPasswordConfirm}
             style={styles.input}
             placeholderTextColor="grey"
           />

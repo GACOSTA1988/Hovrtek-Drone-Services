@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, TouchableOpacity, Text } from "react-native";
+import { Image, TouchableOpacity, Text, View} from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {AboutNavigation, SupportNavigation} from "./navigation/AboutSupportNavigationStack";
 import SignInScreen from "./screens/auth/SignInScreen";
@@ -7,6 +7,7 @@ import SignOutScreen from "./screens/auth/SignOutScreen";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import LoadingScreen from "./screens/LoadingScreen";
 import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from '@expo/vector-icons'; 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import ClientProfileNavigator from "./navigation/ClientProfileNavigation";
@@ -133,17 +134,15 @@ const clientNavigation = (
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
         <ClientDrawer.Screen name="Support" component={SupportNavigation}/>
-        <ClientDrawer.Screen name="Facebook Icon" component={goToFacebook}
-        drawerIcon={() => {
-        <Icon
-              name="facebook"
-              size={30}
-              style={styles.icon}
-              color="blue">
-              </Icon>
-        }}/>
-        <ClientDrawer.Screen name="Instagram Icon" component={goToInstagram}/>
-        <ClientDrawer.Screen name="Linked In Icon" component={goToLinkedIn}/>
+        <ClientDrawer.Screen name=" " component={goToFacebook}
+        options={() => ({drawerIcon: () => <Entypo name="facebook" size={24} color="#092455" />})}
+        />
+        <ClientDrawer.Screen name="  " component={goToInstagram}
+          options={() => ({drawerIcon: () => <Entypo name="instagram" size={24} color="#092455" />})}
+          />
+        <ClientDrawer.Screen name="    " component={goToLinkedIn}
+          options={() => ({drawerIcon: () => <Entypo name="linkedin" size={24} color="#092455" />})}
+          />
         <ClientDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
       </ClientDrawer.Navigator>
     </NavigationContainer>
@@ -156,17 +155,15 @@ const pilotNavigation = (
       <PilotDrawer.Screen name="Profile" component={PilotCreateProfileNavigation}/>
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>
       <PilotDrawer.Screen name="Support" component={SupportNavigation}/>
-      <PilotDrawer.Screen name="Facebook Icon" component={goToFacebook}
-      drawerIcon={() => {
-        <Icon
-              name="facebook"
-              size={30}
-              style={styles.icon}
-              color="blue">
-              </Icon>
-      }}/>
-      <PilotDrawer.Screen name="Instagram Icon" component={goToInstagram}/>
-      <PilotDrawer.Screen name="Linked-In Icon" component={goToLinkedIn}/>
+      <PilotDrawer.Screen name=" " component={goToFacebook}
+        options={() => ({drawerIcon: () => <Entypo name="facebook" size={24} color="#092455" />})}
+        />
+      <PilotDrawer.Screen name="  " component={goToInstagram}
+        options={() => ({drawerIcon: () => <Entypo name="instagram" size={24} color="#092455" />})}
+        />
+      <PilotDrawer.Screen name="    " component={goToLinkedIn}
+        options={() => ({drawerIcon: () => <Entypo name="linkedin" size={24} color="#092455" />})}
+        />
       <PilotDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>

@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   projectCard: {
-    width: 380,
+    width: "100%",
     marginTop: 15,
     marginBottom: 100
   },
@@ -230,6 +230,10 @@ const styles = StyleSheet.create({
   },
   projectListWrapper: {
     alignItems: "center",
+  },
+  scrollContainer: {
+    width: "100%",
+    paddingHorizontal: 10,
   },
   profileCompleteNotice: {
     top: 0,
@@ -277,19 +281,23 @@ const styles = StyleSheet.create({
   },
   pilotText: {
     fontSize: 30,
-    color: "darkblue",
-    marginBottom: 14,
+    color: "#092455",
+    marginBottom: 10,
   },
   mapText: {
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 20,
     color: "white",
+    marginLeft: 10,
   },
   mapButton: {
-    justifyContent: 'center',
+    flexDirection: "row",
     alignItems: 'center',
     backgroundColor: "#092455",
-    padding: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 30,
+    marginBottom: 10,
   },
 });
 

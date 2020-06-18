@@ -1,21 +1,17 @@
 import React from "react";
-import { Image, TouchableOpacity, Text, View} from "react-native";
+import { Image} from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {AboutNavigation, SupportNavigation} from "./navigation/AboutSupportNavigationStack";
-import SignInScreen from "./screens/auth/SignInScreen";
-import SignOutScreen from "./screens/auth/SignOutScreen";
-import SignUpNavigation from "./navigation/SignUpNavigation";
-import LoadingScreen from "./screens/LoadingScreen";
-import { Ionicons } from "@expo/vector-icons";
-import { Entypo } from '@expo/vector-icons'; 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import {AboutNavigation, SupportNavigation} from "./navigation/AboutSupportNavigationStack";
+import PilotCreateProfileNavigation from "./navigation/PilotCreateProfileNavigation";
 import ClientProfileNavigator from "./navigation/ClientProfileNavigation";
+import SignUpNavigation from "./navigation/SignUpNavigation";
+import SignInScreen from "./screens/auth/SignInScreen";
+import SignOutScreen from "./screens/auth/SignOutScreen";
+import LoadingScreen from "./screens/LoadingScreen";
 import ClientTabs from './navigation/ClientTabs';
 import PilotTabs from './navigation/PilotTabs';
-import {Linking} from 'expo';
-import PilotCreateProfileNavigation from "./navigation/PilotCreateProfileNavigation";
-import Icon from "react-native-vector-icons/FontAwesome";
 import GlobalHeader from "./components/shared/GlobalHeader";
 
 const AuthStack = createStackNavigator();
@@ -106,27 +102,6 @@ const renderLoading = () => {
 const ClientDrawer = createDrawerNavigator();
 const PilotDrawer = createDrawerNavigator();
 
-const goToLinkedIn = ({navigation}) => {
-  Linking.openURL('https://www.linkedin.com/company/hovrtek/')
-  navigation.navigate('Home')
- navigation.closeDrawer();
-  return <Text></Text>
-}
-
-const goToFacebook = ({navigation}) => {
-  Linking.openURL('https://www.facebook.com/Hovrtek/')
-  navigation.navigate('Home')
- navigation.closeDrawer();
-  return <Text></Text>
-}
-
-const goToInstagram = ({navigation}) => {
-  Linking.openURL('https://www.instagram.com/hovrtek/')
-  navigation.navigate('Home')
- navigation.closeDrawer();
-  return <Text></Text>
-}
-
 const clientNavigation = (
     <NavigationContainer independent={true} >
       <ClientDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
@@ -134,15 +109,6 @@ const clientNavigation = (
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
         <ClientDrawer.Screen name="Support" component={SupportNavigation}/>
-        <ClientDrawer.Screen name=" " component={goToFacebook}
-        options={() => ({drawerIcon: () => <Entypo name="facebook" size={24} color="#092455" />})}
-        />
-        <ClientDrawer.Screen name="  " component={goToInstagram}
-          options={() => ({drawerIcon: () => <Entypo name="instagram" size={24} color="#092455" />})}
-          />
-        <ClientDrawer.Screen name="    " component={goToLinkedIn}
-          options={() => ({drawerIcon: () => <Entypo name="linkedin" size={24} color="#092455" />})}
-          />
         <ClientDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
       </ClientDrawer.Navigator>
     </NavigationContainer>
@@ -155,15 +121,6 @@ const pilotNavigation = (
       <PilotDrawer.Screen name="Profile" component={PilotCreateProfileNavigation}/>
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>
       <PilotDrawer.Screen name="Support" component={SupportNavigation}/>
-      <PilotDrawer.Screen name=" " component={goToFacebook}
-        options={() => ({drawerIcon: () => <Entypo name="facebook" size={24} color="#092455" />})}
-        />
-      <PilotDrawer.Screen name="  " component={goToInstagram}
-        options={() => ({drawerIcon: () => <Entypo name="instagram" size={24} color="#092455" />})}
-        />
-      <PilotDrawer.Screen name="    " component={goToLinkedIn}
-        options={() => ({drawerIcon: () => <Entypo name="linkedin" size={24} color="#092455" />})}
-        />
       <PilotDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>

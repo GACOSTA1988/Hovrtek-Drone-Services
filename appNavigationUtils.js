@@ -1,5 +1,4 @@
 import React from "react";
-import { Image} from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -14,20 +13,8 @@ import ClientTabs from './navigation/ClientTabs';
 import PilotTabs from './navigation/PilotTabs';
 import GlobalHeader from "./components/shared/GlobalHeader";
 
+// auth stack navigator
 const AuthStack = createStackNavigator();
-
-const LogoTitle = () => {
-  const imageStyle = {
-    width: 290,
-    height: 55,
-    marginBottom: 10,
-    alignItems: "center",
-  };
-
-  return (
-    <Image style={imageStyle} source={require("./assets/hovrtek_logo.png")} />
-  );
-};
 
 const renderLogin = () => {
   const signHeaderStyle = {
@@ -73,6 +60,7 @@ const renderLogin = () => {
   );
 };
 
+// loading screen
 const renderLoading = () => {
   const signHeaderStyle = {
     backgroundColor: "#092455",

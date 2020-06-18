@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   title: {
-    marginTop: 40,
+    marginTop: 12,
     fontSize: 30,
     textAlign: "center",
     color: '#092455',

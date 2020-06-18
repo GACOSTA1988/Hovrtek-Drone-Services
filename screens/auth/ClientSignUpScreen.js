@@ -23,6 +23,7 @@ function ClientSignUpScreen(props) {
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   async function signUp(e) {
     e.preventDefault();
@@ -33,6 +34,9 @@ function ClientSignUpScreen(props) {
       navigation.navigate("ClientSignUpScreen");
     } else if (location.trim() == "") {
       Alert.alert("Please fill in your loaction.");
+      navigation.navigate("ClientSignUpScreen");
+    } else if (password !== passwordConfirm) {
+      Alert.alert("Passwords don't match, please try again");
       navigation.navigate("ClientSignUpScreen");
     } else {
       try {
@@ -126,8 +130,8 @@ function ClientSignUpScreen(props) {
             placeholder="Confirm password"
             placeholderTextColor="grey"
             secureTextEntry={true}
-            value={password}
-            onChangeText={setPassword}
+            value={passwordConfirm}
+            onChangeText={setPasswordConfirm}
             style={styles.input}
           />
           <TouchableOpacity style={styles.button} onPress={signUp}>

@@ -262,9 +262,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
   },
-  subheaderWrapper: {
-    marginBottom: 14,
-  },
   continueText: {
     fontWeight: "bold",
     fontSize: 15,

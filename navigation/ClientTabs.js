@@ -10,6 +10,7 @@ import * as firebase from "firebase";
 import { getMessages } from "../actions/messages";
 import { connect } from "react-redux";
 import _ from "lodash";
+// import { Entypo } from '@expo/vector-icons';
 
 function ClientTabs(props) {
   const Tabs = createBottomTabNavigator();
@@ -54,6 +55,8 @@ function ClientTabs(props) {
           options={unreadMessages.length > 0 ? {
             tabBarIcon: ({color}) => (<Ionicons name="md-mail-unread" size={24} color={color} />) } : {
               tabBarIcon: ({color}) => (<Ionicons name="md-mail" size={24} color={color} />) } }
+              // <Entypo name="message" size={24} color={color}/>
+
         />
       </Tabs.Navigator>
   );

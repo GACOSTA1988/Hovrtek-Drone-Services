@@ -9,11 +9,11 @@ import { getProjects } from "../../actions/projects";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as firebase from "firebase";
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import mapStyles from "../../assets/mapStyles.json";
+import { getDistance, isPointWithinRadius } from 'geolib';
 
 function MapComponent(props){ 
-
   const [initialCoordinates, setInitialCoordinates] = useState([45.5236111, -122.675])
 
   useEffect(() => {
@@ -39,33 +39,61 @@ function MapComponent(props){
       } 
       availableProjects.push(project);
     }
-  });
-    
+  });    
+
+  function distanceAway(distanceinMeters){
+    let distance;
+    let distanceInFeet = distanceinMeters * 3.28084;
+    if (distanceInFeet < 1000) {
+      let distanceCalc = distanceInFeet.toFixed(0)
+      distance = distanceCalc + " feet away";
+    } else {
+      let distanceCalc = (distanceInFeet / 5280).toFixed(1)
+      distance = distanceCalc + " miles away";
+    }
+    return distance
+  };
 
   const mappedMarkers = availableProjects.map((project, index) => {
-    const coords = {
-      latitude: project.locationCoordinates[0],
-      longitude: project.locationCoordinates[1],
-    };
-    return (
-      <MapView.Marker
-        key={index}
-        coordinate={coords}        
-      >
-        <Callout onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}>
-          <TouchableOpacity activeOpacity={0.3}>
-          <View style={styles.popOutContainer}>
-            <View style={styles.popOutTextBoxes}>
-              <Text style={styles.projectHeaderText}>{project.location}</Text>
-            </View>
-            <View style={styles.popOutTextBoxes}>
-              <Text>{project.recording}</Text>
-            </View>
-          </View>
-          </TouchableOpacity>
-        </Callout>
-      </MapView.Marker>
+    const coords = {latitude: project.locationCoordinates[0], longitude: project.locationCoordinates[1]};
+    let distanceinMeters = getDistance(
+      {latitude: initialCoordinates[0],longitude: initialCoordinates[1]},
+      {latitude: project.locationCoordinates[0],longitude: project.locationCoordinates[1]}
     );
+    let distanceFromPin = distanceAway(distanceinMeters)
+
+    //this is an alternate way evaluating distance, this allows us to filter by the distance
+    // let distanceInM = distanceFilter * 1.6 * 1000;
+    // let isWithinFilterRange = isPointWithinRadius(
+    //   {latitude: initialCoordinates[0],longitude: initialCoordinates[1]},
+    //   {latitude: project.locationCoordinates[0],longitude: project.locationCoordinates[1]},
+    //   distanceInM
+    // );
+    // isWithinFilterRange  is a boolean based on whether or not the pin falls within the specified range 
+    //and can be used to conditionally render it into mappedMarkers
+
+        return (
+          <MapView.Marker
+            key={index}
+            coordinate={coords}        
+          >
+            <Callout onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}>
+              <TouchableOpacity activeOpacity={0.3} style={styles.touchableContainer}>
+              <View style={styles.popOutContainer}>
+                <View style={styles.popOutTextBoxes}>
+                  <Text style={styles.projectHeaderText}>{project.location}</Text>
+                </View>
+                <View style={styles.popOutTextBoxes}>
+                  <Text style={styles.distanceText}>{distanceFromPin}</Text>
+                </View>
+                <View style={styles.popOutTextBoxes}>
+                  <Text>{project.recording}</Text>
+                </View>
+              </View>
+              </TouchableOpacity>
+            </Callout>
+          </MapView.Marker>
+        );
   })
 
   return (
@@ -90,8 +118,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: 3,
-    borderRadius: 30,
+    padding: 5,
   },
   popOutTextBoxes: {
     flex: 1,
@@ -100,6 +127,11 @@ const styles = StyleSheet.create({
   },
   projectHeaderText: {
     fontWeight: "bold",
+    marginBottom: 5,
+  },
+  distanceText: {
+    fontSize: 12,
+    fontWeight: "200",
     marginBottom: 5,
   },
 });

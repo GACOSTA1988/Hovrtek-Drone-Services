@@ -71,7 +71,7 @@ function MapComponent(props){
     // );
     // isWithinFilterRange  is a boolean based on whether or not the pin falls within the specified range 
     //and can be used to conditionally render it into mappedMarkers
-      customPinColor="#E4723A"
+      const customPinColor="#E4723A"
         return (
           <MapView.Marker
             key={index}

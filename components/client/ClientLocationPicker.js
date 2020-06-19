@@ -14,7 +14,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { APP_STRINGS } from "../../constants/index";
 
-const ClientLocationPicker = () => {
+const ClientLocationPicker = (props) => {
+  const { setIsModalActive } = props
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -23,10 +24,12 @@ const ClientLocationPicker = () => {
 
   const openModal = () => {
     setIsModalVisible(true);
+    setIsModalActive(true);
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
+    setIsModalActive(false);
   };
 
   const renderClientLocationButton = (buttonText) => {

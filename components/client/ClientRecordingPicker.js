@@ -15,7 +15,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { APP_STRINGS } from "../../constants";
 
-const ClientRecordingPicker = () => {
+const ClientRecordingPicker = (props) => {
+  const { setIsModalActive } = props
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -24,10 +25,12 @@ const ClientRecordingPicker = () => {
 
   const openModal = () => {
     setIsModalVisible(true);
+    setIsModalActive(true);
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
+    setIsModalActive(false);
   };
 
   return (

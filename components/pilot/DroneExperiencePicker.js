@@ -15,7 +15,9 @@ import { APP_STRINGS } from "../../constants/index";
 
 //REFACTORED with APP_STRINGS and TERNARY VIA FRANKS SPECIFICATIONS
 
-const DroneExperiencePicker = () => {
+const DroneExperiencePicker = (props) => {
+ 
+  const { setIsModalActive } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const setYearsOfExperience = useContext(PassSetYearsOfExperience);
@@ -23,10 +25,12 @@ const DroneExperiencePicker = () => {
 
   const openModal = () => {
     setIsModalVisible(true);
+    setIsModalActive(true);
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
+    setIsModalActive(false);
   };
 
   const renderYearsOfExperienceButton = (buttonText = "") => {
@@ -103,6 +107,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     padding: 10,
     backgroundColor: "#f5f5f5",
+    borderWidth: 2,
+    borderColor: '#b3b3cc',
     marginTop: 200,
     marginLeft: 5,
     marginRight: 5,

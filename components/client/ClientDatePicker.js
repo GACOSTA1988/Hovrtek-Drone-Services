@@ -10,7 +10,8 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { PassSetDate } from "../../screens/client/NewProjectScreenOne";
 import { PassDateState } from "../../screens/client/NewProjectScreenOne";
-const ClientDatePicker = () => {
+
+const ClientDatePicker = (props) => {
   // Context Hook Stuff
   const setDateState = useContext(PassSetDate);
   const dateState = useContext(PassDateState);
@@ -19,17 +20,22 @@ const ClientDatePicker = () => {
 
   const [isVisible, setIsVisible] = useState(false);
 
+  const { setIsModalActive } = props
+
   const handlePicker = (datetime) => {
     setIsVisible(false);
+    setIsModalActive(false);
     setDateState(moment(datetime).format("MMMM, DD  YYYY"));
   };
 
   const hidePicker = () => {
     setIsVisible(false);
+    setIsModalActive(false);
   };
 
   const showPicker = () => {
     setIsVisible(true);
+    setIsModalActive(true);
   };
 
   return (

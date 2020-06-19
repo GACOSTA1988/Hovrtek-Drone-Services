@@ -99,6 +99,8 @@ function PilotProfileSetupPageOneScreen(props) {
     profileCompletePlaceHolder
   );
 
+  const [isModalActive, setIsModalActive] = useState(false);
+
   const submit = (e) => {
     e.preventDefault();
     if (personalBio.trim() === "") {
@@ -124,7 +126,7 @@ function PilotProfileSetupPageOneScreen(props) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isModalActive ? styles.opaque : '']}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={styles.welcomeText}>
           Hello!
@@ -146,8 +148,10 @@ function PilotProfileSetupPageOneScreen(props) {
             <BioPicker
               setPersonalBio={setPersonalBio}
               personalBio={setPersonalBio}
+              setIsModalActive={setIsModalActive}
             />
           </View>
+          
         ) : (
           <Text style={styles.bodyText}>{briefSummary}</Text>
         )}
@@ -156,7 +160,7 @@ function PilotProfileSetupPageOneScreen(props) {
           <View style={styles.droneExpWrapper}>
             <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
               <PassYearsOfExperienceState.Provider value={yearsOfExperience}>
-                <DroneExperiencePicker />
+                <DroneExperiencePicker setIsModalActive={setIsModalActive}/>
               </PassYearsOfExperienceState.Provider>
             </PassSetYearsOfExperience.Provider>
           </View>
@@ -168,7 +172,7 @@ function PilotProfileSetupPageOneScreen(props) {
           <View style={styles.droneExpWrapper}>
             <PassSetDroneType.Provider value={setDroneType}>
               <PassDroneTypeState.Provider value={droneType}>
-                <DroneTypePicker />
+                <DroneTypePicker setIsModalActive={setIsModalActive}/>
               </PassDroneTypeState.Provider>
             </PassSetDroneType.Provider>
           </View>
@@ -214,7 +218,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "lightgray",
+    backgroundColor: "lightgrey",
     alignItems: "center",
     height: "100%",
   },
@@ -296,6 +300,9 @@ const styles = StyleSheet.create({
   },
   radioText: {
     marginBottom: 7,
+  },
+  opaque: {
+    opacity: 0.2
   }
 });
 function mapStateToProps(state) {

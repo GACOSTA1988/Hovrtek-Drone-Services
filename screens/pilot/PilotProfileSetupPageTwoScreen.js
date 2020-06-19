@@ -69,6 +69,8 @@ function PilotProfileSetupPageTwoScreen(props) {
     profileImageUrlPlaceHolder = currentUserProps.profileImageUrl;
   }
 
+  const [isModalActive, setIsModalActive] = useState(false);
+
   const [profileImageUrl, setProfileImageUrl] = useState(
     profileImageUrlPlaceHolder
   );
@@ -110,7 +112,7 @@ function PilotProfileSetupPageTwoScreen(props) {
     }
   };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isModalActive ? styles.opaque : '']}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={styles.welcomeText}>
           Hello!
@@ -133,6 +135,7 @@ function PilotProfileSetupPageTwoScreen(props) {
                 <DatePicker
                   setFaaLicenseExp={setFaaLicenseExp}
                   faaLicenseExp={faaLicenseExp}
+                  setIsModalActive={setIsModalActive}
                 />
           </View>
         ) : (
@@ -275,6 +278,9 @@ const styles = StyleSheet.create({
   radioText: {
     marginBottom: 7,
   },
+  opaque: {
+    opacity: 0.2
+  }
 });
 function mapStateToProps(state) {
   const listOfProfiles = _.map(

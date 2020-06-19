@@ -22,16 +22,18 @@ const {
 } = APP_STRINGS;
 
 const BioPicker = (props) => {
-  const { personalBio, setPersonalBio } = props;
+  const { personalBio, setPersonalBio, setIsModalActive } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
 
   const openModal = () => {
     setIsModalVisible(true);
+    setIsModalActive(true);
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
+    setIsModalActive(false);
   };
 
   const renderPersonalBioButton = (buttonText = "") => {
@@ -98,6 +100,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     padding: 10,
     backgroundColor: "#f5f5f5",
+    borderWidth: 2,
+    borderColor: '#b3b3cc',
     marginTop: 200,
     marginLeft: 5,
     marginRight: 5,

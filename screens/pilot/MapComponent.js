@@ -71,11 +71,12 @@ function MapComponent(props){
     // );
     // isWithinFilterRange  is a boolean based on whether or not the pin falls within the specified range 
     //and can be used to conditionally render it into mappedMarkers
-
+      customPinColor="#E4723A"
         return (
           <MapView.Marker
             key={index}
-            coordinate={coords}        
+            coordinate={coords}  
+            pinColor={customPinColor}      
           >
             <Callout onPress={() => props.navigation.navigate("JobDetailsScreen", {...availableProjects[index]})}>
               <TouchableOpacity activeOpacity={0.3} style={styles.touchableContainer}>

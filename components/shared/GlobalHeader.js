@@ -62,8 +62,8 @@ const GlobalHeader = (props, { getMessages }) => {
           {unreadMessages.length > 0 ? (
             <View style={styles.outerDot}>
               <View style={styles.innerDot}>
-              <Text />
-            </View>
+                <Text />
+              </View>
             </View>
           ) : (
             null

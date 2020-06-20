@@ -21,9 +21,9 @@ const PilotHomeStackNavigator = () => {
         component={JobListScreen}
         options={{
             headerLeft: null,
-            headerTitle: () => <GlobalHeader isHome={true} />,
+            headerTitle: () => <GlobalHeader isHome={true} isMappable={true} isMap={false} subheaderTitle={"Projects"} />,
             headerStyle: {
-              backgroundColor: "#092455",
+              backgroundColor: "#161616",
               height: 100,
             },   
           }}
@@ -33,9 +33,9 @@ const PilotHomeStackNavigator = () => {
         component={MapComponent}
         options={{
             headerLeft: null,
-            headerTitle: () => <GlobalHeader isHome={false} />,
+            headerTitle: () => <GlobalHeader isHome={true}  isMappable={true} isMap={true} subheaderTitle={"Projects"} />,
             headerStyle: {
-              backgroundColor: "#092455",
+              backgroundColor: "#161616",
               height: 100,
             },   
           }}
@@ -45,9 +45,9 @@ const PilotHomeStackNavigator = () => {
         component={JobDetailsScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false}  subheaderTitle={"Details"} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           },   
         }}
@@ -59,7 +59,7 @@ const PilotHomeStackNavigator = () => {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
             borderBottomColor: "grey",
             borderBottomWidth: 10,
@@ -73,7 +73,7 @@ const PilotHomeStackNavigator = () => {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           },
         }}
@@ -83,9 +83,9 @@ const PilotHomeStackNavigator = () => {
         component={ChatScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           },
         }}
@@ -95,9 +95,9 @@ const PilotHomeStackNavigator = () => {
         component={MyJobsScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={true} />,
+          headerTitle: () => <GlobalHeader isHome={true} subheaderTitle={"My Jobs"} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           },
         }}

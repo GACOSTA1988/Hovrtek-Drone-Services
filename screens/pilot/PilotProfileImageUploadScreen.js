@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   completeButton: {
     width: 250,
     height: 50,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: 60,
     height: 30,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",

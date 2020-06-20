@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 30,
-    color: "#092455",
+    color: "#161616",
     fontWeight: "600",
   },
   textSub: {
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   textWrapper: {
     alignItems: "center",
     borderRadius: 15,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     marginBottom: 15,
     padding: 80,
   },
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     fontSize: 20,
-    color: "#092455",
+    color: "#161616",
   },
   linkText: {
     textAlign: "center",

@@ -52,7 +52,7 @@ function SignInScreen({ navigation }) {
       style={{
         flex: 1,
         height: "100%",
-        backgroundColor: '#092455',
+        backgroundColor: '#161616',
       }}
     >
       <ImageBackground source={landingPageImage} style={styles.MainContainer}>

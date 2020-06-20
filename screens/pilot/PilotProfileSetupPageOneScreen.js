@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     width: 170,
     height: 50,
     borderWidth: 2,
-    borderColor: "#092455",
+    borderColor: "#161616",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   },
   saveAndContinueText: {
     fontSize: 15,
-    color: "#092455",
+    color: "#161616",
   },
   welcomeText: {
     marginTop: "5%",
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: 60,
     height: 30,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
 
   topButtonWrapperLeft: {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     height: 40,
     width: 160,
     alignSelf: "flex-start",
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topButtonWrapperLeftPressed: {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     height: 40,
     width: 160,
     alignSelf: "flex-start",
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
   },
   topButtonWrapperRight: {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     height: 40,
     width: 160,
     alignSelf: "flex-start",
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   topButtonWrapperRightPressed: {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     height: 40,
     width: 160,
     alignSelf: "flex-start",

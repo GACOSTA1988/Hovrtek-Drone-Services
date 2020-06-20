@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   },
   newProjectText: {
     fontSize: 30,
-    color: "#092455",
+    color: "#161616",
     marginBottom: 20,
     textAlign: "center",
     marginTop: 10,
@@ -186,14 +186,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: "center",
     fontSize: 30,
-    color: "#092455",
+    color: "#161616",
   },
   continueButton: {
     marginTop: 10,
     marginBottom: 10,
     textAlign: "center",
     fontSize: 9,
-    color: "#092455",
+    color: "#161616",
   },
   modalWrapper: {
     alignItems: 'center'
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: 60,
     height: 30,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 60,
     borderWidth: 2,
-    borderColor: "#092455",
+    borderColor: "#161616",
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',

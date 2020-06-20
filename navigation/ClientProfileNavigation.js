@@ -17,7 +17,7 @@ function ClientProfileNavigator() {
           animationEnabled: false,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "rgb(35,35,36)",
             height: 100,
           },
         }}
@@ -30,7 +30,7 @@ function ClientProfileNavigator() {
           animationEnabled: false,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "rgb(35,35,36)",
             height: 100
           },
         }}

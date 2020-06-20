@@ -163,7 +163,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           <TextInput
             multiline={true}
             placeholder="Send message..."
-            placeholderTextColor="grey"
+            placeholderTextColor="black"
             value={body}
             onChangeText={setBody}
             enablesReturnKeyAutomatically={true}
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   messagesScroll: {
-    backgroundColor: "white",
+    backgroundColor: 	"#161616",
     padding: 10,
   },
   messageFooter: {
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   messagingContainer: {
     borderRadius: 15,
-    backgroundColor: "#3E90D0",
+    backgroundColor: "#D9B08C",
     marginVertical: 5,
     padding: 15,
     marginLeft: '15%',
@@ -225,13 +225,14 @@ const styles = StyleSheet.create({
   },
   messagingContainerRecipient: {
     borderRadius: 15,
-    backgroundColor: "lightgray",
+    backgroundColor: "#9B6A6C",
     marginVertical: 5,
     padding: 15,
     marginRight: '15%',
     flex: 1,
     flexDirection: "column",
     justifyContent: "flex-end",
+    color: "white",
   },
   messagesList: {
     width: "100%",
@@ -241,8 +242,8 @@ const styles = StyleSheet.create({
   writeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginBottom: 10
+    padding: 10,
+    backgroundColor: "#9B6A6C", 
     },
   writeContainerKeyboardOpen: {
     flexDirection: "row",
@@ -254,13 +255,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     height: 45,
-    borderColor: "#092455",
+    borderColor: "#161616",
     margin: 10,
     paddingLeft: "3%",
     paddingTop: "3%", 
   },
   plus: {
-    color: "#092455",
+    color: "#161616",
     margin: 5
   }
 });

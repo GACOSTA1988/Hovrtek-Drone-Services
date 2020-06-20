@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     color: "grey",
     marginTop: 20,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#161616",
   },
   unnamedText: {
     marginBottom: 20,
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#161616",
   },
   profilePic: {
     height: 50,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   backButton: {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     height: 40,
     width: 160,
     alignSelf: "flex-start",

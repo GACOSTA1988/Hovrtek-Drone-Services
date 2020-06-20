@@ -8,7 +8,7 @@ const AboutStack = createStackNavigator();
 const SupportStack = createStackNavigator();
 
 const mainHeaderStyle = {
-  backgroundColor: "#092455",
+  backgroundColor: "#161616",
   height: 100
 }
 

@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   ProjectText: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#3E90D0",
+    color: "#D9B08C",
     marginBottom: 20,
     marginTop: 10,
   },
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#161616",
     textAlign: "center",
   },
   accept: {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     color: "grey",
     marginTop: 20,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#161616",
   },
   unnamedText: {
     marginBottom: 20,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     marginTop: 5,
     // borderWidth: 4,
-    // borderColor: "#092455",
+    // borderColor: "#161616",
     marginRight: 10,
   },
   jobAvailabilityWrapper: {
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: 160,
     height: 30,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     width: 170,
     height: 60,
     borderWidth: 2,
-    borderColor: "#092455",
+    borderColor: "#161616",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   },
   acceptJobText: {
     fontSize: 25,
-    color: "#092455",
+    color: "#161616",
   },
   acceptJobWrapper: {
     alignItems: "center",

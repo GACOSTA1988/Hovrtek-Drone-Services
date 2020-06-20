@@ -17,7 +17,7 @@ const SignUpNavigation = () => {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           }, 
         }}
@@ -29,7 +29,7 @@ const SignUpNavigation = () => {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           }, 
         }}
@@ -41,7 +41,7 @@ const SignUpNavigation = () => {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           }, 
         }}     

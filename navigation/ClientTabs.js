@@ -34,7 +34,7 @@ function ClientTabs(props) {
   }
 
   return (
-      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: 'lightblue', inactiveBackgroundColor: '#092455', activeTintColor: '#092455', inactiveTintColor: 'white', showLabel: false}}>
+      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: "rgb(217, 176, 140)", inactiveBackgroundColor: "#161616", activeTintColor: "#161616", inactiveTintColor: "rgb(217, 176, 140)", showLabel: false}}>
         <Tabs.Screen 
           name="Home" 
           labelStyle={ {color: 'white'}}

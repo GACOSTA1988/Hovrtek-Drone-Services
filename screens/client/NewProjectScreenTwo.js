@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         width: 170,
         height: 50,
         borderWidth: 2,
-        borderColor: "#092455",
+        borderColor: "#161616",
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     saveAndContinueText: {
         fontSize: 15,
-        color: "#092455",
+        color: "#161616",
     },
 });
 

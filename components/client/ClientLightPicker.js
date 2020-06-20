@@ -44,9 +44,9 @@ const ClientLightPicker = () => {
     <RadioForm
       labelStyle={styles.radiobutton}
       animation={true}
-      selectedButtonColor={"#092455"}
-      labelColor={"#092455"}
-      buttonColor={"#092455"}
+      selectedButtonColor={"#161616"}
+      labelColor={"#161616"}
+      buttonColor={"#161616"}
       formHorizontal={true}
       radio_props={radio_props}
       initial={1}
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   chatButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     padding: 7,
     borderRadius: 5,
     margin: 20,

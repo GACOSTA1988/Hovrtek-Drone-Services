@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     marginTop: "67%",
     marginLeft: 20,
     borderWidth: 4,
-    borderColor: "#092455"
+    borderColor: "#161616"
   },
   info: {
     margin: 20,
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     marginTop: 140,
     position: "absolute",
     right: 10,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     padding: 7,
     borderRadius: 5,
   },

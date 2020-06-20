@@ -18,7 +18,7 @@ const AuthStack = createStackNavigator();
 
 const renderLogin = () => {
   const signHeaderStyle = {
-    backgroundColor: "#092455",
+    backgroundColor: "rgb(35,35,36)",
     width: "100%",
     height: 100,
   };
@@ -63,7 +63,7 @@ const renderLogin = () => {
 // loading screen
 const renderLoading = () => {
   const signHeaderStyle = {
-    backgroundColor: "#092455",
+    backgroundColor: "rgb(35,35,36)",
     width: "100%",
     borderBottomWidth: 10,
     borderBottomColor: "grey",
@@ -92,7 +92,11 @@ const PilotDrawer = createDrawerNavigator();
 
 const clientNavigation = (
     <NavigationContainer independent={true} >
-      <ClientDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
+      <ClientDrawer.Navigator initialRouteName="Home" 
+      drawerPosition={"right"}
+      drawerStyle={{backgroundColor: "#161616", color: "white"}}
+      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "rgba(217, 176, 140, 0.2)"}}
+      >
         <ClientDrawer.Screen name="Home" component={ClientTabs}/>
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
@@ -104,7 +108,13 @@ const clientNavigation = (
 
 const pilotNavigation = (
     <NavigationContainer independent={true}>
-      <PilotDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
+      <PilotDrawer.Navigator 
+      initialRouteName="Home" 
+      drawerPosition={"right"} 
+      drawerStyle={{backgroundColor: "#161616", color: "white"}}
+      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "rgba(217, 176, 140, 0.2)"}}
+      sceneContainerStyle={{color: "white"}}
+      >
       <PilotDrawer.Screen name="Home" component={PilotTabs}/>
       <PilotDrawer.Screen name="Profile" component={PilotCreateProfileNavigation}/>
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>

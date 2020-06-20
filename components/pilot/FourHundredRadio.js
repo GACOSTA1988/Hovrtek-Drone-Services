@@ -32,9 +32,9 @@ const FourHundredRadio = (props) => {
         <RadioForm
           labelStyle={styles.radiobutton}
           animation={true}
-          selectedButtonColor={"#092455"}
-          labelColor={"#092455"}
-          buttonColor={"#092455"}
+          selectedButtonColor={"#161616"}
+          labelColor={"#161616"}
+          buttonColor={"#161616"}
           formHorizontal={true}
           radio_props={radio_props}
           initial={index}

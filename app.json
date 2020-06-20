@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/hovrtek_logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#092455"
+      "backgroundColor": "#161616"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

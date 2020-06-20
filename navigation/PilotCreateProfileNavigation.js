@@ -8,7 +8,7 @@ import GlobalHeader from "../components/shared/GlobalHeader";
 
 const ProfileStack = createStackNavigator();
 
-const backgroundColor = "#092455";
+const backgroundColor = "#161616";
 
 const headerStyle = {
   backgroundColor,

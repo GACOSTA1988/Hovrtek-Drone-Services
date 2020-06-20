@@ -9,7 +9,7 @@
               onPress={(value) => {
                 setTestRadioAnswer(value);
               }}
-              labelStyle={{ fontSize: 20, color: "#092455" }}
+              labelStyle={{ fontSize: 20, color: "#161616" }}
               labelWrapStyle={{}}
             />
             <RadioButtonInput

@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     marginTop: "17%",
     marginLeft: 20,
     borderWidth: 4,
-    borderColor: "#092455",
+    borderColor: "#161616",
   },
   info: {
     margin: 20,
@@ -193,14 +193,14 @@ const styles = StyleSheet.create({
   chatButton: {
     position: "absolute",
     right: 0,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     padding: 7,
     borderRadius: 5,
   },
   backButton: {
     position: "absolute",
     right: 0,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     padding: 7,
     borderRadius: 5,
     top: 60,

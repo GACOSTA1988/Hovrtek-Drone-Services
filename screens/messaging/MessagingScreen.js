@@ -68,9 +68,6 @@ function MessagingScreen(props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleWrapper}>
-        <Text style={styles.title}>Messages</Text>
-      </View>
       {contacts.length > 0 ? (
         <FlatList
           data={contacts}
@@ -163,12 +160,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-  },
-  title: {
-    marginTop: 12,
-    fontSize: 30,
-    textAlign: "center",
-    color: '#092455',
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(217, 176, 140, 0.6)",
   },
   contact: {
     paddingTop: 30,
@@ -186,7 +180,7 @@ const styles = StyleSheet.create({
     width: 70,
     borderRadius: 90,
     borderWidth: 4,
-    borderColor: "#092455",
+    borderColor: "#161616",
     margin: 15,
   },
 });

@@ -27,7 +27,7 @@ const ClientHomeStackNavigator = () => {
         name="NewProjectScreenWelcome"
         component={NewProjectScreenWelcome}
         options={{
-          headerTitle: () => <GlobalHeader isHome={true} subheaderTitle={"Projects"} />,
+          headerTitle: () => <GlobalHeader isHome={true} subheaderTitle=" " />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -36,7 +36,7 @@ const ClientHomeStackNavigator = () => {
         component={NewProjectScreenOne}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle="Create a New Project" />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -45,7 +45,7 @@ const ClientHomeStackNavigator = () => {
         component={NewProjectScreenTwo}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle=" " />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -54,7 +54,7 @@ const ClientHomeStackNavigator = () => {
         component={NewProjectScreenThree}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle=" " />,
           headerStyle: mainHeaderStyle,
         }}
       />

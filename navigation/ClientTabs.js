@@ -34,13 +34,13 @@ function ClientTabs(props) {
   }
 
   return (
-      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: "rgb(217, 176, 140)", inactiveBackgroundColor: "#161616", activeTintColor: "#161616", inactiveTintColor: "rgb(217, 176, 140)", showLabel: false}}>
+      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: "#DDE2E4", inactiveBackgroundColor: "#161616", activeTintColor: "#161616", inactiveTintColor: "#DDE2E4", showLabel: false}}>
         <Tabs.Screen 
           name="Home" 
           labelStyle={ {color: 'white'}}
           component={ClientHomeStackNavigator} 
           options={{
-            tabBarIcon: ({color}) => (<FontAwesome name="home" size={24} color={color} />),
+            tabBarIcon: ({color}) => (<FontAwesome name="plus" size={24} color={color} />),
           }}
           />
         <Tabs.Screen 

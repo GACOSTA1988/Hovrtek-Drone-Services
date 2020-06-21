@@ -44,9 +44,10 @@ const ClientLightPicker = () => {
     <RadioForm
       labelStyle={styles.radiobutton}
       animation={true}
-      selectedButtonColor={"#161616"}
-      labelColor={"#161616"}
-      buttonColor={"#161616"}
+      selectedButtonColor={"#DDE2E4"}
+      selectedLabelColor={"#DDE2E4"}
+      labelColor={"#DDE2E4"}
+      buttonColor={"#DDE2E4"}
       formHorizontal={true}
       radio_props={radio_props}
       initial={1}
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#474A49",
     marginTop: 200,
     marginLeft: 5,
     marginRight: 5,
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 20,
+    color: "#DDE2E4"
   },
   radiobutton: {
     paddingRight: '5%',
@@ -105,27 +107,29 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 20,
     height: 90,
-    borderColor: "gray",
+    borderColor: "#DDE2E4",
     borderWidth: 1,
     marginBottom: 20,
     padding: 5,
+    color: "#DDE2E4"
   },
   modalShowing: {
     opacity: .5,
-  }, chatText: {
+  }, 
+  chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#DDE2E4",
   },
   chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   chatButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
     margin: 20,

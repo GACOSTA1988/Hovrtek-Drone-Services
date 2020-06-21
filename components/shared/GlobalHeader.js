@@ -69,7 +69,7 @@ const GlobalHeader = (props, { getMessages }) => {
             onPress={() => {navigation.goBack()}}
             name="ios-arrow-back"
             size={45}
-            color="#D9B08C"
+            color="#DDE2E4"
             resizeMode="contain"
             />
             }
@@ -98,7 +98,7 @@ const GlobalHeader = (props, { getMessages }) => {
           }}
           name="ios-menu"
           size={45}
-          color="#D9B08C"
+          color="#DDE2E4"
           resizeMode="contain"
           /> 
         </View>

@@ -95,7 +95,7 @@ const clientNavigation = (
       <ClientDrawer.Navigator initialRouteName="Home" 
       drawerPosition={"right"}
       drawerStyle={{backgroundColor: "#161616", color: "white"}}
-      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "rgba(217, 176, 140, 0.2)"}}
+      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "#535756"}}
       >
         <ClientDrawer.Screen name="Home" component={ClientTabs}/>
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>

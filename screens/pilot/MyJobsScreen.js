@@ -36,48 +36,39 @@ function MyJobsScreen(props, { getProjects }) {
 
   return (
     <View style={styles.projectListWrapper}>
-      <View style={styles.scrollViewWrapper}>
-        <ScrollView
-         style={styles.scrollContainer}
-         showsVerticalScrollIndicator={false} 
-         >
+        <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
           <View style={styles.projectCard}>
               <FlatList
-                style={{ width: "100%", borderTopWidth: 10, borderColor: "#161616",}}
+                style={{ borderTopWidth: 10, borderColor: "#161616"}}
                 data={listOfMyProjects}
-                // showsVerticalScrollIndicator={true}
                 keyExtractor={(item) => item.key}
                 renderItem={({ item }) => {
                   return (
                     <View
                       style={{
                         width: "100%",
-                        padding: 20,
                         borderBottomWidth: 10,
                         borderColor: "#161616",
+                        backgroundColor: "rgb(35,35,36)"
                       }}
-
                     >
-                      <TouchableHighlight
-                        onPress={() =>
-                          props.navigation.navigate("JobDetailsScreen", {
-                            ...item,
-                          })
-                        }
-                      >
-                        <View style={{flex: 1, flexDirection: "column", justifyContent: "center", alignItems:"center", width: "100%"}}> 
-                          <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%", borderBottomWidth: 1, borderBottomColor: "#D9B08C", marginBottom: 10, }}>
-                            <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 13,  }}>
-                              <Entypo name="location" size={14} color="#D9B08C" /> {item.location}
-                            </Text>
-                            <Text style={{ color: "white", fontWeight: "800", fontSize: 12, }}>
-                              {item.date}
-                            </Text>
-                          </View>
-                          <View style={{backgroundColor: "rgba(217, 176, 140, 0.2)", padding:10, width: "100%", borderRadius: 5, }}>
-                            <Text style={{ color: "white", fontWeight: "500", fontSize: 14, }}>
-                              {item.recording}
-                            </Text>
+                      <TouchableHighlight 
+                      style={{padding: 20, width: "100%"}}
+                      onPress={() => navigation.navigate("JobDetailsScreen", {...item,})}>
+                        <View>
+                          <View style={{flex: 1, flexDirection: "column", justifyContent: "space-between", alignItems:"center", width: "100%"}}> 
+                            <View style={{flex: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center", width: "100%", borderBottomWidth: 1, borderBottomColor: "#D9B08C", marginBottom: 10}}>
+                              <Entypo name="location" size={14} color="#D9B08C" /> 
+                              <View>
+                                <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 13}}>{item.location}</Text>
+                              </View>
+                            </View>
+                            <View>
+                              <Text style={{ color: "white", fontWeight: "800", fontSize: 12}}>{item.date}</Text>
+                            </View>
+                            <View style={{backgroundColor: "rgba(217, 176, 140, 0.2)", padding:10, width: "100%", borderRadius: 5}}>
+                              <Text style={{ color: "white", fontWeight: "500", fontSize: 14}}>{item.recording}</Text>
+                            </View>
                           </View>
                         </View>
                       </TouchableHighlight>
@@ -87,29 +78,23 @@ function MyJobsScreen(props, { getProjects }) {
               />
           </View>
         </ScrollView>
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   projectCard: {
-    width: "100%",
     backgroundColor: "rgb(35,35,36)",
   },
   projectListWrapper: {
     alignItems: "center",
-  },
-  scrollContainer: {
-    width: "100%",
-    backgroundColor: "#161616",
-    height: "100%"
-  },
-  scrollViewWrapper: {
-    alignItems: "center",
     width: "100%",
     height: "100%",
     backgroundColor: "#161616"
+  },
+  scrollContainer: {
+    backgroundColor: "#161616",
+    width: "100%",
   },
 });
 

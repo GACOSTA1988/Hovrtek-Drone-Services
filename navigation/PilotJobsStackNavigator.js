@@ -28,7 +28,7 @@ const PilotJobsStackNavigator = () => {
         component={JobDetailsScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Job Details"}  />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"My Jobs"}  />,
           headerStyle: {
             backgroundColor:"#161616",
             height: 100,

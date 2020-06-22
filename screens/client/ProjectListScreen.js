@@ -73,7 +73,7 @@ function ProjectListScreen(props) {
                             {item.date}
                           </Text>
                         </View>
-                        <View style={{backgroundColor: "rgba(221,226,228, 0.2)", padding:10, width: "100%", borderRadius: 5,}}>
+                        <View style={{backgroundColor: "rgba(221,226,228, 0.2)", padding:10, width: "100%", marginTop: 10, borderRadius: 5,}}>
                           <Text style={{ color: "#DDE2E4", fontWeight: "500", fontSize: 14, }}>
                             {item.recording}
                           </Text>

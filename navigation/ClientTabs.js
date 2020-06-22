@@ -10,7 +10,6 @@ import * as firebase from "firebase";
 import { getMessages } from "../actions/messages";
 import { connect } from "react-redux";
 import _ from "lodash";
-// import { Entypo } from '@expo/vector-icons';
 
 function ClientTabs(props) {
   const Tabs = createBottomTabNavigator();

@@ -24,8 +24,6 @@ function JobDetailsScreen(props) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.ProjectText}>Details:</Text>
-      <View style={styles.line} />
       <Text style={styles.detailsHeader}>Where</Text>
       <Text style={styles.DetailsText}>{jobDetails.location}</Text>
       <Text style={styles.detailsHeader}>When</Text>
@@ -86,26 +84,6 @@ function JobDetailsScreen(props) {
         ) : (
           <View />
         )}
-        {!jobDetails.pilotID ? (
-          <View style={styles.backButtonWrapper}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => props.navigation.navigate("JobListScreen")}
-            >
-              <Text style={styles.backButtonText}>Back to Available Jobs</Text>
-            </TouchableOpacity>
-          </View> )
-          : (
-          <View style={styles.backButtonWrapper}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => props.navigation.navigate("MyJobsScreen")}
-            >
-              <Text style={styles.backButtonText}>Back to My Jobs</Text>
-            </TouchableOpacity>
-          </View> )
-        }
-
       </View>
     </ScrollView>
   );
@@ -118,7 +96,7 @@ const styles = StyleSheet.create({
   ProjectText: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#D9B08C",
+    color: "#161616",
     marginBottom: 20,
     marginTop: 10,
   },

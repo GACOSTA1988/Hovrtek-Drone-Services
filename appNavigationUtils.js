@@ -18,7 +18,7 @@ const AuthStack = createStackNavigator();
 
 const renderLogin = () => {
   const signHeaderStyle = {
-    backgroundColor: "rgb(35,35,36)",
+    backgroundColor: "#161616",
     width: "100%",
     height: 100,
   };
@@ -63,7 +63,7 @@ const renderLogin = () => {
 // loading screen
 const renderLoading = () => {
   const signHeaderStyle = {
-    backgroundColor: "rgb(35,35,36)",
+    backgroundColor: "#161616",
     width: "100%",
     borderBottomWidth: 10,
     borderBottomColor: "grey",
@@ -112,7 +112,7 @@ const pilotNavigation = (
       initialRouteName="Home" 
       drawerPosition={"right"} 
       drawerStyle={{backgroundColor: "#161616", color: "white"}}
-      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "rgba(217, 176, 140, 0.2)"}}
+      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "rgba(35, 35, 36, 0.2)"}}
       sceneContainerStyle={{color: "white"}}
       >
       <PilotDrawer.Screen name="Home" component={PilotTabs}/>

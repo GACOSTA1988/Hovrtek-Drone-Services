@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   projectCard: {
     width: "100%",
-    backgroundColor: "rgb(35, 35, 36)"
+    backgroundColor: "rgba(171, 205, 239, 0.2)"
   },
   ClientProjectListTextWrapper: {
     marginBottom: 20,

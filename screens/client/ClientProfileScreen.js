@@ -79,9 +79,10 @@ function ClientProfileScreen(props) {
                 <TouchableOpacity
                   style={styles.chatButton}
                   onPress={() =>
+                    (props.navigation.popToTop(),
                     props.navigation.navigate("ChatScreen", {
                       ...profileDetails,
-                    })
+                    }))
                   }
                 >
                   <Text style={styles.chatText}>Chat</Text>

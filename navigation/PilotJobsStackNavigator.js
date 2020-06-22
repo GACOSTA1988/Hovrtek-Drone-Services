@@ -6,6 +6,7 @@ import ChatScreen from "../screens/messaging/ChatScreen";
 import MyJobsScreen from "../screens/pilot/MyJobsScreen.js";
 import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
+import MessagingNavigation from "./MessagingNavigation";
 
 const JobsStack = createStackNavigator();
 
@@ -43,19 +44,6 @@ const PilotJobsStackNavigator = () => {
           headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={" "}/>,
           headerStyle: {
             backgroundColor: "#161616",
-            height: 100,
-          },
-        }}
-      />
-      <JobsStack.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{
-          headerLeft: null,
-          title: " ",
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
-          headerStyle: {
-            backgroundColor:"#161616",
             height: 100,
           },
         }}

@@ -98,9 +98,9 @@ function PilotProfileWelcomeScreen(props) {
       <TouchableOpacity
         style={styles.chatButton}
         onPress={() =>
-          navigation.navigate(CHAT, {
-            ...profileData,
-          })}
+          (navigation.popToTop(), navigation.navigate("ChatScreen", {
+            ...profileData
+          }))}
       >
         <Text style={styles.chatText}>{chat}</Text>
       </TouchableOpacity>
@@ -292,12 +292,12 @@ const styles = StyleSheet.create({
   chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   chatButton: {
     position: "absolute",
     right: "4%",
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
   },

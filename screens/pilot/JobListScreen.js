@@ -24,6 +24,10 @@ function JobListScreen(props) {
     props.getProjects();
     props.getClientProfiles();
     props.getPilotProfiles();
+    navigation.navigate("Messages");
+    setTimeout(() => 
+      navigation.navigate("Home")
+    )
   }, []);
 
   const availableProjects = [];

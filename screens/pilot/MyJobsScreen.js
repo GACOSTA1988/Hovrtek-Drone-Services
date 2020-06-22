@@ -54,7 +54,6 @@ function MyJobsScreen(props, { getProjects, getClientProfiles }) {
                         width: "100%",
                         borderBottomWidth: 10,
                         borderColor: "#161616",
-                        backgroundColor: "rgb(35,35,36)"
                       }}
                     >
                       <TouchableHighlight 
@@ -107,7 +106,7 @@ function MyJobsScreen(props, { getProjects, getClientProfiles }) {
 
 const styles = StyleSheet.create({
   projectCard: {
-    backgroundColor: "rgb(35,35,36)",
+    backgroundColor: "rgba(171, 205, 239, 0.2)",
     width: "100%",
   },
   projectListWrapper: {

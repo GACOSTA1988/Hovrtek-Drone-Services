@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableOpacity,
   FlatList,
   ScrollView,
 } from "react-native";
@@ -11,11 +10,7 @@ import { connect } from "react-redux";
 import { getProjects, deleteProject } from "../../actions/projects";
 import { getPilotProfiles } from "../../actions/pilotProfiles";
 import _ from "lodash";
-import {
-  FontAwesome5,
-  MaterialIcons,
-  Entypo,
-} from "@expo/vector-icons";
+import {Entypo} from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import * as firebase from "firebase";
 
@@ -45,18 +40,13 @@ function ProjectListScreen(props) {
         >
         <View style={styles.projectCard}>
             <FlatList
-              style={{ width: "100%" }}
+              style={styles.projectListContainer}
               data={listOfMyProjects}
               keyExtractor={(item) => item.key}
               renderItem={({ item }) => {
                 return (
                   <View
-                    style={{
-                      borderTopColor: "#161616",
-                      borderTopWidth: 10,
-                      paddingHorizontal: 20,
-                      paddingVertical: 20,
-                    }}
+                    style={styles.projectCardContainer}
                   >
                     <TouchableHighlight
                       onPress={() =>
@@ -65,16 +55,16 @@ function ProjectListScreen(props) {
                         })}
                     >
                       <View>
-                        <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderBottomWidth: 1, borderBottomColor: "#DDE2E4",  }}>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 13,  }}>
+                        <View style={styles.textContainer}>
+                          <Text style={styles.locationText}>
                             <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
                           </Text>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 12, }}>
+                          <Text style={styles.dateText}>
                             {item.date}
                           </Text>
                         </View>
-                        <View style={{backgroundColor: "rgba(221,226,228, 0.2)", padding:10, width: "100%", marginTop: 10, borderRadius: 5,}}>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "500", fontSize: 14, }}>
+                        <View style={styles.descriptionContainer}>
+                          <Text style={styles.descriptionText}>
                             {item.recording}
                           </Text>
                         </View>
@@ -82,7 +72,7 @@ function ProjectListScreen(props) {
                         props.listOfPilotProfiles.find(
                           (x) => x.userID === item.pilotID,
                         ) ? (
-                          <Text style={{ color: "#DDE2E4", fontWeight: "200", alignSelf: "center", fontSize: 12, marginTop: 10,}}>
+                          <Text style={styles.pilotText}>
                             {"@"}
                             {
                               props.listOfPilotProfiles.find(
@@ -96,7 +86,7 @@ function ProjectListScreen(props) {
                             }
                           </Text>
                         ) : (
-                          <Text style={{ color: "white", fontWeight: "800", fontWeight: "200", alignSelf: "center", marginTop: 10, }}>
+                          <Text style={styles.pendingText}>
                             Pending pilot
                           </Text>
                         )}
@@ -117,8 +107,25 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "rgba(171, 205, 239, 0.2)"
   },
+  projectListContainer:{ 
+    width: "100%" 
+  },
+  projectCardContainer:{
+    borderTopColor: "#161616",
+    borderTopWidth: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
   scrollContainer: {
     width: "100%",
+  },
+  textContainer:{
+    flex: 1, 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    borderBottomWidth: 1, 
+    borderBottomColor: "#DDE2E4",  
   },
   clientText: {
     fontSize: 30,
@@ -133,6 +140,42 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "#161616"
+  },
+  pendingText:{ 
+    color: "white", 
+    fontWeight: "800", 
+    fontWeight: "200", 
+    alignSelf: "center", 
+    marginTop: 10, 
+  },
+  pilotText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "200", 
+    alignSelf: "center", 
+    fontSize: 12, 
+    marginTop: 10,
+  },
+  descriptionContainer:{
+    backgroundColor: "rgba(221,226,228, 0.2)", 
+    padding:10, 
+    width: "100%", 
+    marginTop: 10, 
+    borderRadius: 5,
+  },
+  descriptionText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "500", 
+    fontSize: 14, 
+  },
+  dateText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "800", 
+    fontSize: 12, 
+  },
+  locationText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "800", 
+    fontSize: 13, 
   },
 });
 

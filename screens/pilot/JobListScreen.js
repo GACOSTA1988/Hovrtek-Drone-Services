@@ -93,19 +93,19 @@ function JobListScreen(props) {
                     }}
                     >
                         <View>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "800" }}>
+                          <Text style={styles.cardText}>
                             Location: {item.location}{" "}
                           </Text>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "800" }}>
+                          <Text style={styles.cardText}>
                             Date: {item.date}{" "}
                           </Text>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "800" }}>
+                          <Text style={styles.cardText}>
                             Recording: {item.recording}{" "}
                           </Text>
                           {props.listOfClientProfiles.find(
                             (x) => x.userID === item.clientID,
                             ) ? (
-                              <Text style={{ color: "#DDE2E4", fontWeight: "800" }}>
+                              <Text style={styles.cardText}>
                               Posted by:{" "}
                               {
                                 props.listOfClientProfiles.find(
@@ -130,13 +130,7 @@ function JobListScreen(props) {
       ) : (
         null
       )}
-      {/* <TouchableOpacity style={styles.mapButton}
-        onPress={() => props.navigation.navigate("MapComponent")}
-      >
-        <Ionicons name="md-globe" size={30} color="silver" />       
-        <Text style={styles.mapText}>Map View</Text>
-      </TouchableOpacity> */}
-      
+
       <ScrollView 
       style={styles.scrollContainer}
       showsVerticalScrollIndicator={false} 
@@ -149,13 +143,7 @@ function JobListScreen(props) {
               renderItem={({ item }) => {
                 return (
                   <View
-                    style={{
-                      borderTopWidth: 10,
-                      borderColor: "#161616",
-                      paddingTop: 20,
-                      paddingHorizontal: 20,
-                      paddingBottom: 5,
-                    }}
+                    style={styles.flatListContainer}
                   >
                     <TouchableHighlight
                       onPress={() =>
@@ -164,23 +152,23 @@ function JobListScreen(props) {
                         })}
                     >
                       <View>
-                        <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10, borderBottomWidth: 1, borderBottomColor: "#DDE2E4",  }}>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 13,  }}>
+                        <View style={styles.cardContainer}>
+                          <Text style={styles.locationText}>
                             <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
                           </Text>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 12, }}>
+                          <Text style={styles.dateText}>
                             {item.date}
                           </Text>
                         </View>
-                        <View style={{backgroundColor: "rgba(221,226,228, 0.2)", padding:10, width: "100%", borderRadius: 5,}}>
-                          <Text style={{ color: "#DDE2E4", fontWeight: "500", fontSize: 14, }}>
+                        <View style={styles.descriptionTextView}>
+                          <Text style={styles.descriptionText}>
                             {item.recording}
                           </Text>
                         </View>
                         {props.listOfClientProfiles.find(
                           (x) => x.userID === item.clientID,
                         ) ? (
-                          <Text style={{ color: "#DDE2E4", fontWeight: "200", alignSelf: "center", fontSize: 12, marginTop: 10, marginBottom: 5, }}>
+                          <Text style={styles.pilotDisplay}>
                             {"@"}
                             {
                               props.listOfClientProfiles.find(
@@ -213,6 +201,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  flatListContainer:{
+    borderTopWidth: 10,
+    borderColor: "#161616",
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 5,
+  },
+  cardContainer:{
+    flex: 1, 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginBottom: 10, 
+    borderBottomWidth: 1, 
+    borderBottomColor: "#DDE2E4",  
+  },
+  cardText: { 
+    color: "#DDE2E4", 
+    fontWeight: "800" 
   },
   projectCard: {
     width: "100%",
@@ -280,6 +288,35 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color:  "silver",
     marginLeft: 10,
+  },
+  locationText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "800", 
+    fontSize: 13,  
+  },
+  dateText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "800", 
+    fontSize: 12, 
+  },
+  descriptionTextView:{
+    backgroundColor: "rgba(221,226,228, 0.2)", 
+    padding:10, 
+    width: "100%", 
+    borderRadius: 5,
+  },
+  descriptionText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "500", 
+    fontSize: 14, 
+  },
+  pilotDisplay:{ 
+    color: "#DDE2E4", 
+    fontWeight: "200", 
+    alignSelf: "center", 
+    fontSize: 12, 
+    marginTop: 10, 
+    marginBottom: 5, 
   },
   mapButton: {
     flexDirection: "row",

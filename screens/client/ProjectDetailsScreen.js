@@ -125,6 +125,11 @@ const styles = StyleSheet.create({
     zIndex: 0
   },
   DetailsText: {
+    backgroundColor: "rgba(221,226,228, 0.2)", 
+    padding:10, 
+    width: "100%", 
+    marginTop: 10, 
+    borderRadius: 5,
     marginBottom: 20,
     fontSize: 17,
     color: "#DDE2E4",

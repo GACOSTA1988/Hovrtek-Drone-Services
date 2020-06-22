@@ -163,15 +163,14 @@ function PilotProfileSetupPageTwoScreen(props) {
         )}
 
         <View style={styles.centerButton}>
-          <View style={styles.saveAndContinueWrapper}>
             <TouchableOpacity
-              style={styles.submitButton}
+              // style={styles.submitButton}
               onPress={submit}
               title={"Save and Continue"}
+              style={styles.saveAndContinueWrapper}
             >
               <Text style={styles.saveAndContinueText}>Save and Continue</Text>
             </TouchableOpacity>
-          </View>
         </View>
       </ScrollView>
     </View>

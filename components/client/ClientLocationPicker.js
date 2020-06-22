@@ -50,20 +50,6 @@ const ClientLocationPicker = (props) => {
       : renderClientLocationButton("Please Set Location");
   };
 
-  const renderTextInput = () => {
-    return (
-      <View>
-        <TextInput
-          style={styles.input}
-          autoFocus={true}
-          maxLength={26}
-          onChangeText={setLocation}
-          value={locationState}
-        />
-      </View>
-    );
-  };
-
   return (
     <View style={styles.container}>
       <Modal
@@ -76,7 +62,15 @@ const ClientLocationPicker = (props) => {
           <View style={styles.innerContainer}>
             <Text style={styles.modalText}>{APP_STRINGS.whereIsTheLocation}</Text>
           </View>
-          {renderTextInput()}
+          <View>
+            <TextInput
+              style={styles.input}
+              autoFocus={true}
+              maxLength={26}
+              onChangeText={setLocation}
+              value={locationState}
+            />
+          </View>
           <View styles={styles.cancelWrapper}>
             <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
               <Text style={styles.chatText}>{APP_STRINGS.choose}</Text>
@@ -95,7 +89,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
-    backgroundColor: "#474A49",
+    // backgroundColor: "#474A49",
+    backgroundColor: "#161616",
+    borderColor: "#DDE2E4",
+    borderWidth: 1,
     marginTop: 200,
     marginLeft: 5,
     marginRight: 5,
@@ -128,6 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   input: {
+    margin: 20,
     marginTop: 20,
     height: 90,
     borderColor: "#DDE2E4",

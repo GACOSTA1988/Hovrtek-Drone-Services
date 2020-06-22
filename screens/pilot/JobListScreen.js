@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
   projectListWrapper: {
     alignItems: "center",
     backgroundColor: "#161616",
+    height: "100%",
   },
   scrollContainer: {
     width: "100%",

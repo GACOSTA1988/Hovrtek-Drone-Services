@@ -212,13 +212,14 @@ const styles = StyleSheet.create({
   },
   projectCard: {
     width: "100%",
+    backgroundColor: "rgb(35, 35, 36)"
   },
   ClientProjectListTextWrapper: {
     marginBottom: 20,
   },
   projectListWrapper: {
     alignItems: "center",
-    backgroundColor: "rgb(35,35,36)",
+    backgroundColor: "#161616",
   },
   scrollContainer: {
     width: "100%",

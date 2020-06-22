@@ -55,10 +55,10 @@ const GlobalHeader = (props, { getMessages }) => {
          <View style={props.isMappable ? styles.navIconLeft : props.isSplash ? styles.navIconLeftHidden : props.isHome ? styles.navIconLeftHidden : styles.navIconLeft} pointerEvents={props.isMappable ? "auto" : props.isSplash ? "none" : props.isHome? 'none' : 'auto'}>
             {props.isMappable ? 
             <View style={{flexDirection:"row", flex:1, alignItems:"center", }}>
-            <Ionicons name="md-globe" size={30} color="#D9B08C" style={{marginHorizontal: 5,}}/>       
+            <Ionicons name="md-globe" size={30} color="#DDE2E4" style={{marginHorizontal: 5,}}/>       
             <Switch
-            trackColor={{ false: "#767577", true: "sienna" }}
-            thumbColor={isEnabled ? "#D9B08C" : "#D9B08C"}
+            trackColor={{ false: "#767577", true: "darkgrey" }}
+            thumbColor={isEnabled ? "#DDE2E4" : "#DDE2E4"}
             onValueChange={toggleSwitch}
             value={isEnabled}
             />

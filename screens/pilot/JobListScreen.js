@@ -160,15 +160,15 @@ function JobListScreen(props) {
                         })}
                     >
                       <View>
-                        <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10, borderBottomWidth: 1, borderBottomColor: "#D9B08C",  }}>
+                        <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10, borderBottomWidth: 1, borderBottomColor: "#DDE2E4",  }}>
                           <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 13,  }}>
-                            <Entypo name="location" size={14} color="#D9B08C" /> {item.location}{" "}
+                            <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
                           </Text>
                           <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 12, }}>
                             {item.date}
                           </Text>
                         </View>
-                        <View style={{backgroundColor: "rgba(217, 176, 140, 0.2)", padding:10, width: "100%", borderRadius: 5,}}>
+                        <View style={{backgroundColor: "rgba(221,226,228, 0.2)", padding:10, width: "100%", borderRadius: 5,}}>
                           <Text style={{ color: "#DDE2E4", fontWeight: "500", fontSize: 14, }}>
                             {item.recording}
                           </Text>

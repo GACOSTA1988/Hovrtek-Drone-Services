@@ -30,7 +30,7 @@ const renderLogin = () => {
           name="SignIn"
           component={SignInScreen}
           options={{
-            headerTitle: () => <GlobalHeader isSplash={true}/>,
+            headerTitle: () => <GlobalHeader isSplash={true} subheaderTitle={" "}/>,
             headerStyle: signHeaderStyle,
             headerRight: null,
           }}
@@ -46,7 +46,7 @@ const renderLogin = () => {
           name="Loading"
           component={LoadingScreen}
           options={() => ({
-            headerTitle: () => <GlobalHeader isSplash={true}/>,
+            headerTitle: () => <GlobalHeader isSplash={true} subheaderTitle={" "}/>,
             headerStyle: signHeaderStyle,
             headerLeft: null,
           })}

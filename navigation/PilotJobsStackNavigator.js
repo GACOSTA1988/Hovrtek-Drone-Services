@@ -6,6 +6,7 @@ import ChatScreen from "../screens/messaging/ChatScreen";
 import MyJobsScreen from "../screens/pilot/MyJobsScreen.js";
 import GlobalHeader from "../components/shared/GlobalHeader";
 import { Ionicons } from "@expo/vector-icons";
+import MessagingNavigation from "./MessagingNavigation";
 
 const JobsStack = createStackNavigator();
 

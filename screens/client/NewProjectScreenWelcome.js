@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Text,
     View,
@@ -13,6 +13,12 @@ import hovrtekLogo from '../../assets/hovrtek_logo.png';
 
 function NewProjectScreenWelcome(props) {
 
+    useEffect(() => {
+        navigation.navigate("Messages");
+        setTimeout(() => 
+            navigation.navigate("Home")
+        )
+    })
 
     const navigation = useNavigation();
     let clientID = null;

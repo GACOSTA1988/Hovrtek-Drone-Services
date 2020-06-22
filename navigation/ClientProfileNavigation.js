@@ -15,9 +15,9 @@ function ClientProfileNavigator() {
         component={ClientProfileScreen}
         options={{
           animationEnabled: false,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Profile"} />,
           headerStyle: {
-            backgroundColor: "rgb(35,35,36)",
+            backgroundColor: "#161616",
             height: 100,
           },
         }}
@@ -28,9 +28,9 @@ function ClientProfileNavigator() {
         options={{
           headerLeft: null,
           animationEnabled: false,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Edit Profile"} />,
           headerStyle: {
-            backgroundColor: "rgb(35,35,36)",
+            backgroundColor: "#161616",
             height: 100
           },
         }}

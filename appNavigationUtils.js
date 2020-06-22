@@ -75,7 +75,6 @@ const renderLoading = () => {
           name="Loading"
           component={LoadingScreen}
           options={() => ({
-            title: "",
             headerStyle: signHeaderStyle,
           })}
         />    

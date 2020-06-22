@@ -31,7 +31,7 @@ const ClientProjectStackNavigator = () => {
         component={ProjectDetailsScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"My Projects"} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Project Details"} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -40,7 +40,7 @@ const ClientProjectStackNavigator = () => {
         component={EditProjectScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"My Projects"} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Edit Details"} />,
           headerStyle: mainHeaderStyle,
         }}
       />

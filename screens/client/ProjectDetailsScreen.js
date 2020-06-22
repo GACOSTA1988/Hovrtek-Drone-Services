@@ -49,8 +49,7 @@ function ProjectDetailsScreen(props) {
           <AntDesign name="edit" size={40} color={"#DDE2E4"}/>
         </TouchableOpacity>
       )}
-      <Text style={styles.ProjectText}>Project Details</Text>
-      <View style={styles.line} />
+      <Text style={styles.ProjectText}> </Text>
       <Text style={styles.detailsHeader}>Where:</Text>
       <Text style={styles.DetailsText}>{projectDetails.location}</Text>
       <Text style={styles.detailsHeader}>When:</Text>
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
     color: "#DDE2E4",
     marginTop: 20,
     fontWeight: "bold",
-    color: "#161616",
+    color: "#DDE2E4",
   },
   unnamedText: {
     marginBottom: 20,

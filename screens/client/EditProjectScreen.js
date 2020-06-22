@@ -79,15 +79,14 @@ function EditProjectScreen(props, { editProject }) {
         :
         <View>
           <View style={styles.headerContainer}>
-            <Text style={styles.ProjectText}>Edit Details</Text>
+            <Text style={styles.ProjectText}> </Text>
             <View style={styles.saveButton}>
               <TouchableOpacity hitSlop={styles.hitSlop} onPress={submit}>
                 <Text style={styles.saveText}>Save changes</Text>
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.line} />
-          <Text style={styles.detailsHeader}>Where</Text>
+          <Text style={styles.detailsHeader}>Where:</Text>
 
           <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
         <Text style={styles.buttonText}>Project Location</Text>
@@ -119,7 +118,7 @@ function EditProjectScreen(props, { editProject }) {
         </View>
       </Modal>
 
-          <Text style={styles.detailsHeader}>When</Text>
+          <Text style={styles.detailsHeader}>When:</Text>
           <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
         <Text style={styles.buttonText}>Project Date</Text>
       </TouchableOpacity>
@@ -149,7 +148,7 @@ function EditProjectScreen(props, { editProject }) {
           </View>
         </View>
       </Modal>
-          <Text style={styles.detailsHeader}>What</Text>
+          <Text style={styles.detailsHeader}>What:</Text>
           <TouchableOpacity style={styles.button} onPress={openModal} title={openModal}>
         <Text style={styles.buttonText}>Project Recording</Text>
       </TouchableOpacity>
@@ -188,6 +187,8 @@ function EditProjectScreen(props, { editProject }) {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: "#161616",
+    height: "100%"
   },
   loadingWrapper: {
     width: "100%",
@@ -207,13 +208,13 @@ const styles = StyleSheet.create({
   },
   editProjectText: {
     fontSize: 30,
-    color: "white",
+    color: "#161616",
     fontWeight: "600",
     textAlign: "center",
   },
   labelText: {
     fontSize: 20,
-    color: "white",
+    color: "#161616",
     fontWeight: "500",
     textAlign: "center",
   },
@@ -223,7 +224,7 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 2,
-    color: "white",
+    color: "red",
   },
   submitButton: {
     width: 220,
@@ -276,31 +277,21 @@ const styles = StyleSheet.create({
     color: "grey",
     fontWeight: "800",
   },
-  line: {
-    borderBottomColor: "lightgrey",
-    borderBottomWidth: 1,
-    marginBottom: 20,
-  },
   detailsHeader: {
     fontSize: 20,
     fontWeight: "bold",
-  },
-  hitSlop: {
-    top: 30,
-    left: 30,
-    bottom: 30,
-    right: 30
+    color: "#DDE2E4"
   },
   saveText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   saveButton: {
     position: "absolute",
     right: "6%",
     top: "8%",
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
     zIndex: 1,
@@ -310,11 +301,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#161616",
     marginTop: 200,
     marginLeft: 5,
     marginRight: 5,
     borderRadius: 5,
+    borderColor: "#DDE2E4",
+    borderWidth: 2
   },
   innerContainer: {
     alignItems: "center",
@@ -326,37 +319,40 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 20,
+    color: "#DDE2E4"
   },
   button: {
     width: 250,
     height: 50,
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
     marginBottom: 30,
-    color: "white",
   },
   buttonText: {
-    color: "white",
+    color: "#161616",
   },
   input: {
     marginTop: 20,
     height: 90,
-    borderColor: "gray",
+    borderColor: "#DDE2E4",
     borderWidth: 1,
     marginBottom: 20,
+    marginHorizontal: 20,
+    color: "#DDE2E4",
+    padding: 5,
   },
   editText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   editButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
     margin: 20,

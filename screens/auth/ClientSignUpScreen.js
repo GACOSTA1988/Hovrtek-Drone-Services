@@ -5,14 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  ImageBackground,
   Alert,
+  Dimensions,
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
-import { ScrollView } from "react-native-gesture-handler";
+import landingPageImage from "../../assets/backgroundImage.jpg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+const windowHeight = Dimensions.get('window').height;
+
 
 function ClientSignUpScreen(props) {
   const navigation = props.navigation;
@@ -78,14 +82,13 @@ function ClientSignUpScreen(props) {
         height: "100%",
       }}
     >
-      <View style={styles.wrapper}>
-        <Text style={styles.text}>Create your client account</Text>
+      <ImageBackground source={landingPageImage} style={styles.MainContainer}>
         <View style={styles.textWrapper}>
           <TextInput
             maxLength={30}
             autoCapitalize="words"
             placeholder=" First Name"
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             value={firstName}
             onChangeText={setFirstName}
             style={styles.input}
@@ -95,7 +98,7 @@ function ClientSignUpScreen(props) {
             maxLength={30}
             autoCapitalize="words"
             placeholder=" Last Name"
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             value={lastName}
             onChangeText={setLastName}
             style={styles.input}
@@ -103,7 +106,7 @@ function ClientSignUpScreen(props) {
 
           <TextInput
             placeholder=" Location"
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             value={location}
             onChangeText={setLocation}
             style={styles.input}
@@ -112,14 +115,14 @@ function ClientSignUpScreen(props) {
             placeholder=" Email"
             autoCapitalize="none"
             keyboardType={"email-address"}
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             value={email}
             onChangeText={setEmail}
             style={styles.input}
           />
           <TextInput
             placeholder=" Password"
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
@@ -127,7 +130,7 @@ function ClientSignUpScreen(props) {
           />
           <TextInput
             placeholder="Confirm password"
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             secureTextEntry={true}
             value={passwordConfirm}
             onChangeText={setPasswordConfirm}
@@ -140,16 +143,16 @@ function ClientSignUpScreen(props) {
             <Text style={styles.linkText}>or return to sign in</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ImageBackground>
     </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    alignItems: "center",
-    backgroundColor: "lightgray",
-    height: "120%",
+  MainContainer: {
+    height: windowHeight,
+    width: "100%",
+    resizeMode: "contain",
   },
   text: {
     marginTop: "5%",
@@ -164,17 +167,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   textWrapper: {
-    borderRadius: 15,
-    backgroundColor: "#161616",
-    marginBottom: 15,
-    padding: 80,
+    padding: 50,
     alignItems: "center",
+    backgroundColor: "rgba(16,16,16,0.7)",
+    width: "100%",
+    height: windowHeight,
   },
   input: {
+    backgroundColor: "#161616",
     height: 40,
-    borderColor: "grey",
+    borderColor: "#DDE2E4",
     borderWidth: 2,
-    margin: 10,
+    margin: 13,
     width: 200,
     alignItems: "center",
     textAlign: "center",
@@ -182,8 +186,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   button: {
-    backgroundColor: "lightgray",
-    margin: 5,
+    backgroundColor: "#DDE2E4",
+    margin: 13,
     alignItems: "center",
     justifyContent: "center",
     height: 35,
@@ -195,7 +199,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     textAlign: "center",
-    color: "grey",
+    color: "#DDE2E4",
     fontSize: 17,
   },
 });

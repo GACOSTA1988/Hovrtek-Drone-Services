@@ -57,9 +57,10 @@ const GlobalHeader = (props, { getMessages }) => {
             <View style={{flexDirection:"row", flex:1, alignItems:"center", }}>
             <Ionicons name="md-globe" size={25} color="#DDE2E4" style={{marginHorizontal: 1,}}/>       
             <Switch
-            trackColor={{ false: "#767577", true: "darkgrey" }}
+            trackColor={{ false: "red", true: "darkgrey" }}
             thumbColor={isEnabled ? "#DDE2E4" : "#DDE2E4"}
             onValueChange={toggleSwitch}
+            ios_backgroundColor={"rgba(221,226,228, 0.2)"}
             value={isEnabled}
             style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }}
             />

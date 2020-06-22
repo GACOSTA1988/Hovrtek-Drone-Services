@@ -59,47 +59,11 @@ const ClientHomeStackNavigator = () => {
         }}
       />
       <HomeStack.Screen
-        name="ProjectListScreen"
-        component={ProjectListScreen}
-        options={{
-          headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
-          headerStyle: mainHeaderStyle,
-        }}
-      />
-      <HomeStack.Screen
-        name="ProjectDetailsScreen"
-        component={ProjectDetailsScreen}
-        options={{
-          headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
-          headerStyle: mainHeaderStyle,
-        }}
-      />
-      <HomeStack.Screen
-        name="EditProjectScreen"
-        component={EditProjectScreen}
-        options={{
-          headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
-          headerStyle: mainHeaderStyle,
-        }}
-      />
-      <HomeStack.Screen
         name="PilotProfileWelcomeScreen"
         component={PilotProfileWelcomeScreen}
         options={{
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false}/>,
-          headerStyle: mainHeaderStyle,
-        }}
-      />
-      <HomeStack.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{
-          headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
           headerStyle: mainHeaderStyle,
         }}
       />

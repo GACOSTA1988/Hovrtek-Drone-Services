@@ -53,15 +53,6 @@ const ClientProjectStackNavigator = () => {
           headerStyle: mainHeaderStyle,
         }}
       />
-      <ProjectStack.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{
-          headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
-          headerStyle: mainHeaderStyle,
-        }}
-      />
     </ProjectStack.Navigator>
   );
 };

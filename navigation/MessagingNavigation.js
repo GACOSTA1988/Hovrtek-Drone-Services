@@ -26,7 +26,7 @@ function MessagingNavigation(props) {
         component={ChatScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={props.route.state.routes[1].params ? (props.route.state.routes[1].params.firstName + " " + props.route.state.routes[1].params.lastName) : " "} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={props.route.state.routes[1].params.firstName ? (props.route.state.routes[1].params.firstName + " " + props.route.state.routes[1].params.lastName) : props.route.state.routes[1].params.pilotFirstName ? props.route.state.routes[1].params.pilotFirstName + " " + props.route.state.routes[1].params.pilotLastName : " "} />,
           headerStyle: {
             backgroundColor: "#161616",
             height: 100

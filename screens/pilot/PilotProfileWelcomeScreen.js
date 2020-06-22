@@ -98,9 +98,9 @@ function PilotProfileWelcomeScreen(props) {
       <TouchableOpacity
         style={styles.chatButton}
         onPress={() =>
-          navigation.navigate(CHAT, {
-            ...profileData,
-          })}
+          (navigation.popToTop(), navigation.navigate("ChatScreen", {
+            ...profileData
+          }))}
       >
         <Text style={styles.chatText}>{chat}</Text>
       </TouchableOpacity>

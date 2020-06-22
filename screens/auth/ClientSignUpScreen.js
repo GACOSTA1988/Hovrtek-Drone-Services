@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   textWrapper: {
     padding: 50,
     alignItems: "center",
-    backgroundColor: "rgba(16,16,16,0.7)",
+    backgroundColor: "rgba(16,16,16,0.4)",
     width: "100%",
     height: windowHeight,
   },

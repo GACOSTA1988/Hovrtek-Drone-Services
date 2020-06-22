@@ -67,21 +67,23 @@ const DroneTypePicker = (props) => {
               selectedValue={droneType}
               onValueChange={(droneType, itemIndex) => setDroneType(droneType)}
             >
-              <Picker.Item label={APP_STRINGS.none} value={APP_STRINGS.none} />
-              <Picker.Item label="Power Lord 3000" value="Power Lord 3000" />
-              <Picker.Item label="Power Lord 30001" value="Power Lord 30001" />
-              <Picker.Item label="The Drone Zone" value="The Drone Zone" />
-              <Picker.Item label="MegaDrone 12" value="MegaDrone 12" />
-              <Picker.Item label="Sky Master 50" value="Sky Master 50" />
+              <Picker.Item label={APP_STRINGS.none} value={APP_STRINGS.none} color={"#DDE2E4"}/>
+              <Picker.Item label="Power Lord 3000" value="Power Lord 3000" color={"#DDE2E4"} />
+              <Picker.Item label="Power Lord 30001" value="Power Lord 30001" color={"#DDE2E4"} />
+              <Picker.Item label="The Drone Zone" value="The Drone Zone" color={"#DDE2E4"} />
+              <Picker.Item label="MegaDrone 12" value="MegaDrone 12" color={"#DDE2E4"} />
+              <Picker.Item label="Sky Master 50" value="Sky Master 50" color={"#DDE2E4"} />
               <Picker.Item
                 label="Lord of the Sky 21"
                 value="Lord of the Sky 21"
+                color={"#DDE2E4"}
               />
-              <Picker.Item label="Flown Drone" value="Flown Drone" />
-              <Picker.Item label="Drone Clone" value="Drone Clone" />
+              <Picker.Item label="Flown Drone" value="Flown Drone"  color={"#DDE2E4"}/>
+              <Picker.Item label="Drone Clone" value="Drone Clone"  color={"#DDE2E4"}/>
               <Picker.Item
                 label="The Drone Zone Advanced"
                 value="The Drone Zone Advanced"
+                color={"#DDE2E4"}
               />
             </Picker>
           </View>
@@ -104,9 +106,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#161616",
     borderWidth: 2,
-    borderColor: '#b3b3cc',
+    borderColor: '#DDE2E4',
     marginTop: 200,
     marginLeft: 5,
     marginRight: 5,
@@ -123,31 +125,32 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 20,
     marginTop: 40,
+    color: "#DDE2E4"
   },
   cancelWrapper: {},
   button: {
     width: 250,
     height: 50,
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
     marginBottom: 30,
-    color: "white",
+    color: "#161616",
   },
   buttonText: {
-    color: "white",
+    color: "#161616",
   },
   chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   chatButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
     margin: 20,

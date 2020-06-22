@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 20,
     marginTop: 80,
-    color: "#DDE2E4"
+    color: "#DDE2E4",
+    textAlign: "center"
   },
   cancelWrapper: {},
   button: {

@@ -48,7 +48,6 @@ function MyJobsScreen(props, { getProjects, getClientProfiles }) {
                 data={listOfMyProjects}
                 keyExtractor={(item) => item.key}
                 renderItem={({ item }) => {
-                  console.log(item)
                   return (
                     <View
                       style={{

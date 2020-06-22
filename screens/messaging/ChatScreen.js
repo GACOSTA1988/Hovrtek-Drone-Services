@@ -250,8 +250,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     backgroundColor: "#161616", 
-    borderTopColor: "rgba(234,252,235, 0.4)",
-    borderTopWidth: 1,
     },
   writeContainerKeyboardOpen: {
     flexDirection: "row",

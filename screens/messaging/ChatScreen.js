@@ -172,7 +172,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           <Ionicons
             name="md-send"
             size={30}
-            color="black"
+            color="#DDE2E4"
             onPress={send}
           />
           <AntDesign

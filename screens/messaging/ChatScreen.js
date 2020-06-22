@@ -179,6 +179,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
             style={styles.plus}
             name="plus"
             size={25}
+            // onPress={this needs to do something}
           />
         </View>
     </KeyboardAvoidingView>

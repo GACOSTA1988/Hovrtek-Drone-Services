@@ -65,8 +65,6 @@ const renderLoading = () => {
   const signHeaderStyle = {
     backgroundColor: "#161616",
     width: "100%",
-    borderBottomWidth: 10,
-    borderBottomColor: "grey",
     height: 110,
   };
   

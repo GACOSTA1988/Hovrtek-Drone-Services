@@ -57,12 +57,10 @@ const PilotHomeStackNavigator = () => {
         component={AcceptJobScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={" "} />,
           headerStyle: {
             backgroundColor: "#161616",
             height: 100,
-            borderBottomColor: "grey",
-            borderBottomWidth: 10,
           },
         }}
       />
@@ -71,7 +69,7 @@ const PilotHomeStackNavigator = () => {
         component={ClientProfileScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={" "} />,
           headerStyle: {
             backgroundColor: "#161616",
             height: 100,

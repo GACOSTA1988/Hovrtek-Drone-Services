@@ -40,9 +40,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#161616"
   },
   servicesText: {
     fontSize: 20,
+    color: "#DDE2E4"
   },
   wrapper: {
     flexDirection: "row",
@@ -51,13 +53,13 @@ const styles = StyleSheet.create({
   chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   chatButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
     margin: 20,

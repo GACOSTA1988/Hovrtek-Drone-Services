@@ -36,7 +36,7 @@ function PilotTabs(props) {
     <Tabs.Navigator tabBarOptions={{activeBackgroundColor: "#DDE2E4", inactiveBackgroundColor: "#161616", activeTintColor: "#161616", inactiveTintColor: "#DDE2E4", showLabel: false}}>
       <Tabs.Screen 
         name="Home" 
-        labelStyle={ {color: 'white'}}
+        // labelStyle={ {color: 'white'}}
         component={PilotHomeStackNavigator} 
         options={{
           tabBarIcon: ({color}) => (<FontAwesome name="home" size={24} color={color} />),

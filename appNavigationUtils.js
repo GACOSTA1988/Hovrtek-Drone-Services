@@ -112,7 +112,7 @@ const pilotNavigation = (
       initialRouteName="Home" 
       drawerPosition={"right"} 
       drawerStyle={{backgroundColor: "#161616", color: "white"}}
-      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "rgba(35, 35, 36, 0.2)"}}
+      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "#535756"}}
       sceneContainerStyle={{color: "white"}}
       >
       <PilotDrawer.Screen name="Home" component={PilotTabs}/>

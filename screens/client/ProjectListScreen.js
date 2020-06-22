@@ -54,8 +54,8 @@ function ProjectListScreen(props) {
                     style={{
                       borderTopColor: "#161616",
                       borderTopWidth: 10,
-                      backgroundColor: "rgb(35,35,36)",
-                      padding: 20,
+                      paddingHorizontal: 20,
+                      paddingVertical: 20,
                     }}
                   >
                     <TouchableHighlight
@@ -65,40 +65,15 @@ function ProjectListScreen(props) {
                         })}
                     >
                       <View>
-                        <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10, borderBottomWidth: 1, borderBottomColor: "#D9B08C",  }}>
+                        <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderBottomWidth: 1, borderBottomColor: "#DDE2E4",  }}>
                           <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 13,  }}>
-                            <Entypo name="location" size={14} color="white" /> {item.location}{" "}
-                            <View
-                              style={{
-                                flexDirection: "row",
-                                justifyContent: "flex-end",
-                              }}
-                            >
-                              <TouchableHighlight
-                                onPress={() =>
-                                  props.navigation.navigate("EditProjectScreen", {
-                                    projectDetails: item,
-                                    fromList: true
-                                  })}
-                              >
-                                <View>
-                                  <FontAwesome5 name="edit" size={32} color="white" />
-                                </View>
-                              </TouchableHighlight>
-                              <TouchableHighlight
-                                onPress={() => props.deleteProject(item.key)}
-                              >
-                                <View>
-                                  <MaterialIcons name="delete" size={24} color="white" />
-                                </View>
-                              </TouchableHighlight>
-                            </View>
+                            <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
                           </Text>
-                        </View>
                           <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 12, }}>
                             {item.date}
                           </Text>
-                        <View style={{backgroundColor: "rgba(217, 176, 140, 0.2)", padding:10, width: "100%", borderRadius: 5,}}>
+                        </View>
+                        <View style={{backgroundColor: "rgba(221,226,228, 0.2)", padding:10, width: "100%", marginTop: 10, borderRadius: 5,}}>
                           <Text style={{ color: "#DDE2E4", fontWeight: "500", fontSize: 14, }}>
                             {item.recording}
                           </Text>
@@ -107,8 +82,8 @@ function ProjectListScreen(props) {
                         props.listOfPilotProfiles.find(
                           (x) => x.userID === item.pilotID,
                         ) ? (
-                          <Text style={{ color: "white", fontWeight: "800" }}>
-                            Your pilot:{" "}
+                          <Text style={{ color: "#DDE2E4", fontWeight: "200", alignSelf: "center", fontSize: 12, marginTop: 10,}}>
+                            {"@"}
                             {
                               props.listOfPilotProfiles.find(
                                 (x) => x.userID === item.pilotID,
@@ -121,7 +96,7 @@ function ProjectListScreen(props) {
                             }
                           </Text>
                         ) : (
-                          <Text style={{ color: "white", fontWeight: "800" }}>
+                          <Text style={{ color: "white", fontWeight: "800", fontWeight: "200", alignSelf: "center", marginTop: 10, }}>
                             Pending pilot
                           </Text>
                         )}
@@ -140,6 +115,7 @@ function ProjectListScreen(props) {
 const styles = StyleSheet.create({
   projectCard: {
     width: "100%",
+    backgroundColor: "rgba(171, 205, 239, 0.2)"
   },
   scrollContainer: {
     width: "100%",
@@ -187,3 +163,29 @@ export default connect(mapStateToProps, {
   deleteProject,
   getPilotProfiles,
 })(ProjectListScreen);
+
+{/* <View
+style={{
+  flexDirection: "row",
+  justifyContent: "flex-end",
+}}
+>
+<TouchableHighlight
+  onPress={() =>
+    props.navigation.navigate("EditProjectScreen", {
+      projectDetails: item,
+      fromList: true
+    })}
+>
+  <View>
+    <FontAwesome5 name="edit" size={32} color="white" />
+  </View>
+</TouchableHighlight>
+<TouchableHighlight
+  onPress={() => props.deleteProject(item.key)}
+>
+  <View>
+    <MaterialIcons name="delete" size={24} color="white" />
+  </View>
+</TouchableHighlight>
+</View> */}

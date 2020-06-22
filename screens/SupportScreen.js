@@ -10,7 +10,6 @@ const SupportScreen = () => {
     <View style={styles.container}>
       <Image source={sunsetDroneClean} style={styles.backgroundImage}></Image>
       <View style={styles.textWrapper}>
-        <Text style={styles.h1}>SUPPORT</Text>
         <Text style={styles.h2}>
         If you have any questions or concerns, feel free to contact us. Email is our preferred method of communication. Thank you.
         </Text>

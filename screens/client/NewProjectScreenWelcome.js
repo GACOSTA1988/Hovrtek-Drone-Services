@@ -30,8 +30,8 @@ function NewProjectScreenWelcome(props) {
             <View style={styles.HeaderWrapper}>
                 <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
             </View>
-            <Text style={styles.bodyTextOne}>Press the button below to create a new project.</Text>
-            <Text style={styles.bodyTextTwo}>Upon completion, your project will be transmitted to Hovrtek's pool of FAA Certified Pilots ready to take the job!</Text>
+            <Text style={styles.bodyTextOne}>Press the button below to create a new project</Text>
+            <Text style={styles.bodyTextTwo}>Upon submission, your project will be available to Hovrtek's pool of FAA Certified Pilots</Text>
             <TouchableOpacity style={styles.continueButton} onPress={continueButton}>
                 <Text style={styles.buttonText}>Create a Project</Text>
             </TouchableOpacity>

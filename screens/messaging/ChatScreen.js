@@ -138,7 +138,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
               return (
                 <View style={item.author === 'sender' ? styles.messagingContainer : styles.messagingContainerRecipient}>
                   <View style={styles.bodyContainer}>
-                    <Text style={styles.bodyText}>{item.body}</Text>
+                    <Text style={item.author === 'sender' ? styles.bodyText : styles.bodyTextRecipient}>{item.body}</Text>
                   </View>
                   <View style={styles.messageFooter}>
                     <Text style={styles.timestamp}>{item.timestamp}</Text>
@@ -163,7 +163,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           <TextInput
             multiline={true}
             placeholder="Send message..."
-            placeholderTextColor="black"
+            placeholderTextColor="#DDE2E4"
             value={body}
             onChangeText={setBody}
             enablesReturnKeyAutomatically={true}
@@ -212,10 +212,16 @@ const styles = StyleSheet.create({
   bodyText: {
     fontWeight: "300",
     fontSize: 16,
+    color: "#161616"
+  },
+  bodyTextRecipient: {
+    fontWeight: "300",
+    fontSize: 16,
+    color: "#DDE2E4"
   },
   messagingContainer: {
     borderRadius: 15,
-    backgroundColor: "#D9B08C",
+    backgroundColor: "#909695",
     marginVertical: 5,
     padding: 15,
     marginLeft: '15%',
@@ -225,14 +231,13 @@ const styles = StyleSheet.create({
   },
   messagingContainerRecipient: {
     borderRadius: 15,
-    backgroundColor: "#9B6A6C",
+    backgroundColor: "#474A49",
     marginVertical: 5,
     padding: 15,
     marginRight: '15%',
     flex: 1,
     flexDirection: "column",
     justifyContent: "flex-end",
-    color: "white",
   },
   messagesList: {
     width: "100%",
@@ -243,7 +248,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
-    backgroundColor: "#9B6A6C", 
+    backgroundColor: "#161616", 
     },
   writeContainerKeyboardOpen: {
     flexDirection: "row",
@@ -255,13 +260,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     height: 45,
-    borderColor: "#161616",
+    borderColor: "#DDE2E4",
+    color: "#DDE2E4",
     margin: 10,
     paddingLeft: "3%",
     paddingTop: "3%", 
   },
   plus: {
-    color: "#161616",
+    color: "#DDE2E4",
     margin: 5
   }
 });

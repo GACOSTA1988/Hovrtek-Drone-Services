@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(217, 176, 140, 0.6)",
+    backgroundColor: "#161616",
   },
   contact: {
     paddingTop: 30,
@@ -170,17 +170,19 @@ const styles = StyleSheet.create({
   textNoContacts:{
     alignSelf: 'center',
     marginTop: 20,
+    color: "#DDE2E4"
   },
   names: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#DDE2E4"
   },
   profilePic: {
     height: 70,
     width: 70,
     borderRadius: 90,
     borderWidth: 4,
-    borderColor: "#161616",
+    borderColor: "#DDE2E4",
     margin: 15,
   },
 });

@@ -26,7 +26,7 @@ function MessagingNavigation() {
         component={ChatScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Pilot's Name"} />,
           headerStyle: {
             backgroundColor: "#161616",
             height: 100

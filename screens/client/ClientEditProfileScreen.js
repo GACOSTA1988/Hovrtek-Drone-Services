@@ -129,7 +129,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           <Image source={princePic01} style={styles.backgroundImage} />
 
           <View style={styles.saveButton}>
-            <TouchableOpacity hitSlop={styles.hitSlop} onPress={saveEdits}>
+            <TouchableOpacity onPress={saveEdits}>
               <Text style={styles.saveText}>{saveChanges}</Text>
             </TouchableOpacity>
           </View>
@@ -230,12 +230,6 @@ const styles = StyleSheet.create({
     marginRight: 4,
     color: "#DDE2E4",
   },
-  hitSlop: {
-    top: 30,
-    left: 30,
-    bottom: 30,
-    right: 30,
-  },
   names: {
     flexDirection: "row",
     marginLeft: 16,
@@ -294,12 +288,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 3.5,
   },
-  hitSlop: {
-    top: 30,
-    left: 30,
-    bottom: 30,
-    right: 30
-  }
 });
 
 export default connect(null, { editClientProfile })(ClientEditProfileScreen);

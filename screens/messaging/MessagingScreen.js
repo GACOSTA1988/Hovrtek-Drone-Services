@@ -64,7 +64,6 @@ function MessagingScreen(props) {
 
   function goToChat(item) {
     props.navigation.navigate("ChatScreen", { ...item });
-    console.log("FUCK YES", item)
   }
 
   return (

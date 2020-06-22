@@ -24,15 +24,13 @@ function JobDetailsScreen(props) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.ProjectText}>Details:</Text>
-      <View style={styles.line} />
-      <Text style={styles.detailsHeader}>Where</Text>
+      <Text style={styles.detailsHeader}>Where:</Text>
       <Text style={styles.DetailsText}>{jobDetails.location}</Text>
-      <Text style={styles.detailsHeader}>When</Text>
+      <Text style={styles.detailsHeader}>When:</Text>
       <Text style={styles.DetailsText}>{jobDetails.date}</Text>
-      <Text style={styles.detailsHeader}>What</Text>
+      <Text style={styles.detailsHeader}>What:</Text>
       <Text style={styles.DetailsText}>{jobDetails.recording}</Text>
-      <Text style={styles.detailsHeader}>Client</Text>
+      <Text style={styles.detailsHeader}>Client:</Text>
       {client ? (
         <TouchableOpacity
           onPress={() =>
@@ -86,26 +84,6 @@ function JobDetailsScreen(props) {
         ) : (
           <View />
         )}
-        {!jobDetails.pilotID ? (
-          <View style={styles.backButtonWrapper}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => props.navigation.navigate("JobListScreen")}
-            >
-              <Text style={styles.backButtonText}>Back to Available Jobs</Text>
-            </TouchableOpacity>
-          </View> )
-          : (
-          <View style={styles.backButtonWrapper}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => props.navigation.navigate("MyJobsScreen")}
-            >
-              <Text style={styles.backButtonText}>Back to My Jobs</Text>
-            </TouchableOpacity>
-          </View> )
-        }
-
       </View>
     </ScrollView>
   );
@@ -114,34 +92,41 @@ function JobDetailsScreen(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: "#161616"
   },
   ProjectText: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#3E90D0",
+    color: "#DDE2E4",
     marginBottom: 20,
     marginTop: 10,
   },
   DetailsText: {
-    marginBottom: 20,
-    fontSize: 17,
-    color: "grey",
-    fontWeight: "800",
+  backgroundColor: "rgba(221,226,228, 0.2)", 
+  padding:10, 
+  width: "100%", 
+  marginTop: 10, 
+  borderRadius: 5,
+  marginBottom: 20,
+  fontSize: 17,
+  color: "#DDE2E4",
+  fontWeight: "800",
   },
   line: {
-    borderBottomColor: "lightgrey",
+    borderBottomColor: "#DDE2E4",
     borderBottomWidth: 1,
     marginBottom: 20,
   },
   detailsHeader: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#DDE2E4"
   },
   back: {
     marginTop: 10,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#DDE2E4",
     textAlign: "center",
   },
   accept: {
@@ -154,15 +139,15 @@ const styles = StyleSheet.create({
   nameText: {
     marginBottom: 20,
     fontSize: 17,
-    color: "grey",
+    color: "#DDE2E4",
     marginTop: 20,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#DDE2E4",
   },
   unnamedText: {
     marginBottom: 20,
     fontSize: 17,
-    color: "grey",
+    color: "#DDE2E4",
     marginTop: 20,
   },
   profilePic: {
@@ -171,8 +156,10 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     marginTop: 5,
     // borderWidth: 4,
-    // borderColor: "#092455",
+    // borderColor: "#DDE2E4",
     marginRight: 10,
+    borderWidth: 2,
+    borderColor: "#DDE2E4"
   },
   jobAvailabilityWrapper: {
     marginBottom: 100,
@@ -184,7 +171,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: 160,
     height: 30,
-    backgroundColor: "#092455",
+    backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -201,7 +188,7 @@ const styles = StyleSheet.create({
     width: 170,
     height: 60,
     borderWidth: 2,
-    borderColor: "#092455",
+    borderColor: "#DDE2E4",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
@@ -209,7 +196,7 @@ const styles = StyleSheet.create({
   },
   acceptJobText: {
     fontSize: 25,
-    color: "#092455",
+    color: "#DDE2E4",
   },
   acceptJobWrapper: {
     alignItems: "center",

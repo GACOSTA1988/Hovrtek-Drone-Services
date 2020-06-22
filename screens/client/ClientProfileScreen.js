@@ -72,7 +72,7 @@ function ClientProfileScreen(props) {
                   })
                 }
               >
-                <AntDesign name="edit" size={40} />
+                <AntDesign name="edit" size={40} color={"#DDE2E4"}/>
               </TouchableOpacity>
             ) : (
               <View>
@@ -85,12 +85,6 @@ function ClientProfileScreen(props) {
                   }
                 >
                   <Text style={styles.chatText}>Chat</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.backButton}
-                  onPress={() => props.navigation.pop()}
-                >
-                  <Text style={styles.chatText}>Back</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -154,13 +148,15 @@ function mapStateToProps(state) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#161616"
   },
   name: {
     fontSize: 30,
     marginLeft: 20,
     width: 300,
-    marginTop: 4
+    marginTop: 4,
+    color: "#DDE2E4"
   },
   profileImage: {
     height: 100,
@@ -170,7 +166,7 @@ const styles = StyleSheet.create({
     marginTop: "17%",
     marginLeft: 20,
     borderWidth: 4,
-    borderColor: "#092455",
+    borderColor: "#DDE2E4",
   },
   info: {
     margin: 20,
@@ -188,35 +184,30 @@ const styles = StyleSheet.create({
   chatText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   chatButton: {
     position: "absolute",
     right: 0,
-    backgroundColor: "#092455",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
-  },
-  backButton: {
-    position: "absolute",
-    right: 0,
-    backgroundColor: "#092455",
-    padding: 7,
-    borderRadius: 5,
-    top: 60,
   },
   headerText: {
     fontSize: 20,
-    marginTop: 10
+    marginTop: 10,
+    color: "#DDE2E4"
   },
   bioHeaderText: {
     fontSize: 20,
-    marginTop: 11
+    marginTop: 11,
+    color: "#DDE2E4"
   },
   bioText: {
     fontSize: 15,
     marginTop: 3.5,
-    marginBottom: 3
+    marginBottom: 3,
+    color: "#DDE2E4"
   }
 });
 

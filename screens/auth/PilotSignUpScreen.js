@@ -5,17 +5,22 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  ImageBackground,
   Alert,
+  Dimensions,
 } from "react-native";
 import { AuthContext } from "../../context";
 import * as firebase from "firebase";
 import { postPilotProfiles } from "../../actions/pilotProfiles";
 import { connect } from "react-redux";
 import AirDrop from "../../components/pilot/AirMapDropDown";
+import landingPageImage from "../../assets/backgroundImage.jpg";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Geocoder from "react-native-geocoding";
 import {API_KEY} from "../../geocoder"
 Geocoder.init(API_KEY);
+const windowHeight = Dimensions.get('window').height;
+
 
 function PilotSignUpScreen(props) {
   const navigation = props.navigation;
@@ -120,29 +125,28 @@ function PilotSignUpScreen(props) {
         height: "100%",
       }}
     >
-      <View style={styles.wrapper}>
-        <Text style={styles.textMain}>Create your pilot account</Text>
+      <ImageBackground source={landingPageImage} style={styles.MainContainer}>
         <View style={styles.textWrapper}>
           <TextInput
             placeholder="First Name"
             value={pilotFirstName}
             onChangeText={setPilotFirstName}
             style={styles.input}
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
           />
           <TextInput
             placeholder="Last Name"
             value={pilotLastName}
             onChangeText={setPilotLastName}
             style={styles.input}
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
           />
           <TextInput
             placeholder="City, State"
             value={pilotLocation}
             onChangeText={setPilotLocation}
             style={styles.input}
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
           />
           <TextInput
             keyboardType={"email-address"}
@@ -150,7 +154,7 @@ function PilotSignUpScreen(props) {
             value={email}
             onChangeText={setEmail}
             style={styles.input}
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             autoCapitalize="none"
           />
           <TextInput
@@ -159,7 +163,7 @@ function PilotSignUpScreen(props) {
             value={password}
             onChangeText={setPassword}
             style={styles.input}
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
           />
           <TextInput
             placeholder="Confirm password"
@@ -167,7 +171,7 @@ function PilotSignUpScreen(props) {
             value={passwordConfirm}
             onChangeText={setPasswordConfirm}
             style={styles.input}
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
           />
           <TouchableOpacity style={styles.button} onPress={signUp}>
             <Text style={styles.buttontext}>Sign up</Text>
@@ -176,26 +180,24 @@ function PilotSignUpScreen(props) {
             <Text style={styles.linkText}>or return to sign in</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ImageBackground>
     </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    alignItems: "center",
-    backgroundColor: "lightgray",
-    height: "120%",
+  MainContainer: {
+    height: windowHeight,
+    width: "100%",
+    resizeMode: "contain",
   },
   textMain: {
-    marginTop: "5%",
     marginBottom: "10%",
     fontSize: 30,
-    color: "#092455",
+    color: "#DDE2E4",
     fontWeight: "600",
   },
   textSub: {
-    marginTop: "25%",
     fontSize: 20,
     color: "white",
     fontWeight: "400",
@@ -203,25 +205,27 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     alignItems: "center",
-    borderRadius: 15,
-    backgroundColor: "#092455",
-    marginBottom: 15,
-    padding: 80,
+    justifyContent: "flex-start",
+    backgroundColor: "rgba(16,16,16,0.7)",
+    padding: 50,
+    width: "100%",
+    height: "100%",
   },
   input: {
     height: 40,
-    borderColor: "grey",
+    borderColor: "#DDE2E4",
     borderWidth: 2,
-    margin: 10,
+    margin: 13,
     width: 200,
     alignItems: "center",
     textAlign: "center",
     color: "white",
     fontSize: 15,
+    backgroundColor: "#161616"
   },
   button: {
-    backgroundColor: "lightgray",
-    margin: 5,
+    backgroundColor: "#DDE2E4",
+    margin: 13,
     alignItems: "center",
     justifyContent: "center",
     height: 35,
@@ -229,11 +233,11 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     fontSize: 20,
-    color: "#092455",
+    color: "#161616",
   },
   linkText: {
     textAlign: "center",
-    color: "grey",
+    color: "#DDE2E4",
     fontSize: 17,
   },
 });

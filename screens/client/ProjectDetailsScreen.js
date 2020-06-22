@@ -46,18 +46,17 @@ function ProjectDetailsScreen(props) {
           })
         }
         >
-          <AntDesign name="edit" size={40} />
+          <AntDesign name="edit" size={40} color={"#DDE2E4"}/>
         </TouchableOpacity>
       )}
-      <Text style={styles.ProjectText}>Details:</Text>
-      <View style={styles.line} />
-      <Text style={styles.detailsHeader}>Where</Text>
+      <Text style={styles.ProjectText}> </Text>
+      <Text style={styles.detailsHeader}>Where:</Text>
       <Text style={styles.DetailsText}>{projectDetails.location}</Text>
-      <Text style={styles.detailsHeader}>When</Text>
+      <Text style={styles.detailsHeader}>When:</Text>
       <Text style={styles.DetailsText}>{projectDetails.date}</Text>
-      <Text style={styles.detailsHeader}>What</Text>
+      <Text style={styles.detailsHeader}>What:</Text>
       <Text style={styles.DetailsText}>{projectDetails.recording}</Text>
-      <Text style={styles.detailsHeader}>Your pilot</Text>
+      <Text style={styles.detailsHeader}>Pilot:</Text>
       {pilot ? (
         <TouchableOpacity
           onPress={() =>
@@ -99,14 +98,14 @@ function ProjectDetailsScreen(props) {
           <Text style={styles.unnamedText}>Pending Pilot</Text>
         </View>
       )}
-      <View style={styles.backButtonWrapper}>
+      {/* <View style={styles.backButtonWrapper}>
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => props.navigation.pop()}
         >
           <Text style={styles.backButtonText}>Back to projects</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -114,11 +113,13 @@ function ProjectDetailsScreen(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: "#161616",
+    height: "100%"
   },
   ProjectText: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#3E90D0",
+    color: "#DDE2E4",
     marginBottom: 20,
     marginTop: 10,
     zIndex: 0
@@ -126,37 +127,38 @@ const styles = StyleSheet.create({
   DetailsText: {
     marginBottom: 20,
     fontSize: 17,
-    color: "grey",
+    color: "#DDE2E4",
     fontWeight: "800",
   },
   nameText: {
     marginBottom: 20,
     fontSize: 17,
-    color: "grey",
+    color: "#DDE2E4",
     marginTop: 20,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#DDE2E4",
   },
   unnamedText: {
     marginBottom: 20,
     fontSize: 17,
-    color: "grey",
+    color: "#DDE2E4",
     marginTop: 20,
   },
   line: {
-    borderBottomColor: "lightgrey",
+    borderBottomColor: "#DDE2E4",
     borderBottomWidth: 1,
     marginBottom: 20,
   },
   detailsHeader: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#DDE2E4"
   },
   back: {
     marginTop: 40,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#092455",
+    color: "#161616",
   },
   profilePic: {
     height: 50,
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   backButton: {
-    backgroundColor: "#092455",
+    backgroundColor: "#DDE2E4",
     height: 40,
     width: 160,
     alignSelf: "flex-start",
@@ -177,7 +179,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   backButtonText: {
-    color: "white",
+    color: "#161616",
   },
   backButtonWrapper: {
     marginTop: 20,
@@ -187,7 +189,8 @@ const styles = StyleSheet.create({
     top: "4%",
     position: "absolute",
     right: "6%",
-    zIndex: 1
+    zIndex: 1,
+    color: "#DDE2E4"
   },
 });
 

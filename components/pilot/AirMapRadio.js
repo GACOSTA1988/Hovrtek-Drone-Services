@@ -33,9 +33,9 @@ const AirMapRadio = (props) => {
         <RadioForm
           labelStyle={styles.radiobutton}
           animation={true}
-          selectedButtonColor={"#092455"}
-          labelColor={"#092455"}
-          buttonColor={"#092455"}
+          selectedButtonColor={"#DDE2E4"}
+          labelColor={"#DDE2E4"}
+          buttonColor={"#DDE2E4"}
           formHorizontal={true}
           radio_props={radio_props}
           initial={index}
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   },
   radiobutton: {
     paddingRight: 25,
+    color: "#DDE2E4"
   },
 });
 

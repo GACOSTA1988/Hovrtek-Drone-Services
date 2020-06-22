@@ -16,9 +16,9 @@ const PilotJobsStackNavigator = () => {
         name="MyJobsScreen"
         component={MyJobsScreen}
         options={{
-          headerTitle: () => <GlobalHeader isHome={true} />,
+          headerTitle: () => <GlobalHeader isHome={true} subheaderTitle={"My Jobs"}  />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor:"#161616",
             height: 100,
           },
         }}
@@ -28,9 +28,9 @@ const PilotJobsStackNavigator = () => {
         component={JobDetailsScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Job Details"}  />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor:"#161616",
             height: 100,
           },
         }}
@@ -40,9 +40,9 @@ const PilotJobsStackNavigator = () => {
         component={ClientProfileScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={" "}/>,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           },
         }}
@@ -53,9 +53,9 @@ const PilotJobsStackNavigator = () => {
         options={{
           headerLeft: null,
           title: " ",
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor:"#161616",
             height: 100,
           },
         }}

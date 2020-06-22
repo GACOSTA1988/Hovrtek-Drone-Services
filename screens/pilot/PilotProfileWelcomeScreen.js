@@ -86,7 +86,7 @@ function PilotProfileWelcomeScreen(props) {
         <AntDesign
           name="edit"
           size={35}
-          color="darkblue"
+          color="#DDE2E4"
           style={styles.iconStyle}
         />
       </TouchableOpacity>
@@ -199,9 +199,8 @@ function PilotProfileWelcomeScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#161616",
     height: "100%",
-    width: "100%",
   },
   scrollViewStyle: {
     width: "100%",
@@ -221,7 +220,7 @@ const styles = StyleSheet.create({
   nameText: {
     marginTop: "5%",
     fontSize: 30,
-    color: "black",
+    color: "#DDE2E4",
     fontWeight: "600",
     textAlign: "center",
     marginLeft: "4%",
@@ -229,7 +228,7 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontSize: 20,
-    color: "black",
+    color: "#DDE2E4",
     fontWeight: "300",
     textAlign: "left",
     marginLeft: "4%",
@@ -238,7 +237,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "10%",
     fontSize: 20,
-    color: "black",
+    color: "#DDE2E4",
     fontWeight: "600",
     textAlign: "center",
   },
@@ -270,18 +269,18 @@ const styles = StyleSheet.create({
     marginTop: "17%",
     marginLeft: 20,
     borderWidth: 4,
-    borderColor: "#092455",
+    borderColor: "#DDE2E4",
   },
   specs: {
     fontSize: 20,
-    color: "black",
+    color: "#DDE2E4",
     fontWeight: "200",
     marginLeft: "4%",
     marginTop: 8,
   },
   specTitle: {
     fontSize: 20,
-    color: "black",
+    color: "#DDE2E4",
     fontWeight: "400",
     marginLeft: "4%",
     marginTop: 8,
@@ -298,14 +297,14 @@ const styles = StyleSheet.create({
   chatButton: {
     position: "absolute",
     right: "4%",
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     padding: 7,
     borderRadius: 5,
   },
   startButton: {
     width: 250,
     height: 50,
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -319,7 +318,7 @@ const styles = StyleSheet.create({
   },
   personalBioStyle: {
     fontSize: 15,
-    color: "black",
+    color: "#DDE2E4",
     marginLeft: "4%",
     marginRight: "5%",
     marginTop: "1%",

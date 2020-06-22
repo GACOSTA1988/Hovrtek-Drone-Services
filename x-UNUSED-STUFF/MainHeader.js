@@ -84,7 +84,7 @@
 
 // const styles = StyleSheet.create({
 //   MainHeaderWrapper: {
-//     backgroundColor: "#092455",
+//     backgroundColor: "#161616",
 //     justifyContent: "center",
 //     ...Platform.select({
 //       ios: {

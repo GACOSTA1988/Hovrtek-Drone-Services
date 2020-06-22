@@ -92,7 +92,7 @@ function NewProjectScreenOne(props) {
         showsVerticalScrollIndicator={false} 
         >
         <View style={styles.newProjectListTextWrapper}>
-          <Text style={styles.newProjectText}>Create a New Project</Text>
+          {/* <Text style={styles.newProjectText}>Create a New Project</Text> */}
           <Text style={styles.labelText}>
             Where is the location of your drone service?
           </Text>
@@ -133,7 +133,7 @@ function NewProjectScreenOne(props) {
               </PassLightState.Provider>
             </PassSetLight.Provider>
           </View>
-          <View style={styles.backButtonWrapper}>
+          <View style={styles.buttonWrapper}>
             <TouchableOpacity style={styles.submitWrapper} onPress={submit}>
               <Text style={styles.submitButton}>Submit Form</Text>
             </TouchableOpacity>
@@ -141,14 +141,14 @@ function NewProjectScreenOne(props) {
           <TouchableOpacity onPress={continueButton}>
             <Text style={styles.continueButton}>Fake Continue With Form Route Link</Text>
           </TouchableOpacity>
-          <View style={styles.backButtonWrapper}>
+          {/* <View style={styles.backButtonWrapper}>
             <TouchableOpacity
               style={styles.backButton}
               onPress={() => props.navigation.goBack()}
             >
               <Text style={styles.backButtonText}>Back</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
       </ScrollView>}
     </View>
@@ -157,6 +157,8 @@ function NewProjectScreenOne(props) {
 const styles = StyleSheet.create({
   newProjectListWrapper: {
     alignItems: "center",
+    backgroundColor: "#161616",
+    height: "100%"
   },
   loadingWrapper: {
     width: "100%",
@@ -166,61 +168,64 @@ const styles = StyleSheet.create({
   },
   scrollWrapper: {
     width: "100%",
+    paddingTop: "10%",
   },
-  newProjectText: {
-    fontSize: 30,
-    color: "#092455",
-    marginBottom: 20,
-    textAlign: "center",
-    marginTop: 10,
-  },
+  // newProjectText: {
+  //   fontSize: 30,
+  //   color: "white",
+  //   marginBottom: 20,
+  //   textAlign: "center",
+  //   marginTop: 10,
+  //   // backgroundColor: "white"
+  // },
   newProjectListTextWrapper: {
-    marginBottom: 100
+    marginBottom: 100,
   },
   labelText: {
     marginBottom: 10,
     textAlign: "center",
+    color: "#DDE2E4"
   },
   submitButton: {
     marginTop: 10,
     marginBottom: 10,
     textAlign: "center",
     fontSize: 30,
-    color: "#092455",
+    color: "#DDE2E4",
   },
   continueButton: {
     marginTop: 10,
     marginBottom: 10,
     textAlign: "center",
     fontSize: 9,
-    color: "#092455",
+    color: "#DDE2E4",
   },
   modalWrapper: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  backButton: {
-    marginTop: 20,
-    marginBottom: 40,
-    width: 60,
-    height: 30,
-    backgroundColor: "#092455",
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  backButtonText: {
-    color: "white",
-    textAlign: "center",
-    // marginBottom: 40,
-  },
-  backButtonWrapper:{
+  // backButton: {
+  //   marginTop: 20,
+  //   marginBottom: 40,
+  //   width: 60,
+  //   height: 30,
+  //   backgroundColor: "#DDE2E4",
+  //   borderRadius: 30,
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  // backButtonText: {
+  //   color: "#161616",
+  //   textAlign: "center",
+  //   // marginBottom: 40,
+  // },
+  buttonWrapper:{
     alignItems: 'center'
   },
   submitWrapper: {
     width: 200,
     height: 60,
     borderWidth: 2,
-    borderColor: "#092455",
+    borderColor: "#DDE2E4",
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',

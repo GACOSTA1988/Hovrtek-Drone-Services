@@ -129,7 +129,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           <Image source={princePic01} style={styles.backgroundImage} />
 
           <View style={styles.saveButton}>
-            <TouchableOpacity hitSlop={styles.hitSlop} onPress={saveEdits}>
+            <TouchableOpacity onPress={saveEdits}>
               <Text style={styles.saveText}>{saveChanges}</Text>
             </TouchableOpacity>
           </View>
@@ -156,8 +156,8 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
             <View style={{ flexDirection: "row", marginTop: 10 }}>
               {renderTextInputItem({
                 text: "Location: ",
-                textStyle: { fontSize: 20 },
-                textInputStyle: { fontSize: 20 },
+                textStyle: { fontSize: 20, color: "#DDE2E4" },
+                textInputStyle: { fontSize: 20, color: "#DDE2E4" },
                 textInputValue: location,
                 onChangeText: setLocation,
               })}
@@ -166,7 +166,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
             <View>
               {renderTextInputItem({
                 text: "Bio: ",
-                textStyle: { fontSize: 20, marginTop: 10 },
+                textStyle: { fontSize: 20, marginTop: 10, color: "#DDE2E4" },
                 textInputStyle: styles.input,
                 textInputValue: bio,
                 onChangeText: setBio,
@@ -177,8 +177,8 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
             <View style={{ flexDirection: "row", marginTop: 10 }}>
               {renderTextInputItem({
                 text: "Industry: ",
-                textStyle: { fontSize: 20 },
-                textInputStyle: { fontSize: 20, marginLeft: 5 },
+                textStyle: { fontSize: 20, color: "#DDE2E4" },
+                textInputStyle: { fontSize: 20, marginLeft: 5, color: "#DDE2E4" },
                 textInputValue: industry,
                 onChangeText: setIndustry,
               })}
@@ -187,8 +187,8 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
             <View style={{ flexDirection: "row", marginTop: 10 }}>
               {renderTextInputItem({
                 text: "Payment type: ",
-                textStyle: { fontSize: 20 },
-                textInputStyle: { fontSize: 20, marginLeft: 5 },
+                textStyle: { fontSize: 20, color: "#DDE2E4" },
+                textInputStyle: { fontSize: 20, marginLeft: 5, color: "#DDE2E4" },
                 textInputValue: paymentType,
                 onChangeText: setPaymentType,
               })}
@@ -215,23 +215,20 @@ const styles = StyleSheet.create({
   keyboardView: {
     flex: 1,
     height: "100%",
+    backgroundColor: "#161616"
   },
-  container: {
-    flex: 1
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: "#161616"
+  // },
   text: {
-    fontSize: 20
+    fontSize: 20,
   },
   name: {
     fontSize: 30,
     marginLeft: 4,
-    marginRight: 4
-  },
-  hitSlop: {
-    top: 30,
-    left: 30,
-    bottom: 30,
-    right: 30,
+    marginRight: 4,
+    color: "#DDE2E4",
   },
   names: {
     flexDirection: "row",
@@ -246,7 +243,7 @@ const styles = StyleSheet.create({
     marginTop: "67%",
     marginLeft: 20,
     borderWidth: 4,
-    borderColor: "#092455"
+    borderColor: "#DDE2E4"
   },
   info: {
     margin: 20,
@@ -260,13 +257,14 @@ const styles = StyleSheet.create({
     marginTop: 140,
     position: "absolute",
     right: 10,
-    backgroundColor: "#092455",
+    backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
   },
   input: {
     fontSize: 15,
-    marginBottom: 3.5
+    marginBottom: 3.5,
+    color: "#DDE2E4",
   },
   imagePress: {
     width: 100,
@@ -275,7 +273,7 @@ const styles = StyleSheet.create({
   saveText: {
     fontWeight: "bold",
     fontSize: 15,
-    color: "white",
+    color: "#161616",
   },
   inputBottom: {
     fontSize: 20,
@@ -288,14 +286,8 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     marginTop: 10,
-    marginBottom: 3.5
+    marginBottom: 3.5,
   },
-  hitSlop: {
-    top: 30,
-    left: 30,
-    bottom: 30,
-    right: 30
-  }
 });
 
 export default connect(null, { editClientProfile })(ClientEditProfileScreen);

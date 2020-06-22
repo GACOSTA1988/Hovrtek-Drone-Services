@@ -8,7 +8,7 @@ const AboutStack = createStackNavigator();
 const SupportStack = createStackNavigator();
 
 const mainHeaderStyle = {
-  backgroundColor: "#092455",
+  backgroundColor: "#161616",
   height: 100
 }
 
@@ -19,7 +19,7 @@ export const AboutNavigation = () => {
         name='About'
         component={AboutScreen}
         options={{
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"About"}/>,
           headerStyle: mainHeaderStyle
         }}
       />
@@ -35,7 +35,7 @@ export const SupportNavigation = () => {
         component={SupportScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Support"}/>,
           headerStyle: mainHeaderStyle
         }}
       />

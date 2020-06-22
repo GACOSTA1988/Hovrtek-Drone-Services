@@ -19,7 +19,7 @@ function ProjectScreensStackNavigator() {
         options={{
           headerTitle: () => <GlobalHeader isHome={true} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100
           }
         }}
@@ -31,7 +31,7 @@ function ProjectScreensStackNavigator() {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100
           }
         }}
@@ -43,7 +43,7 @@ function ProjectScreensStackNavigator() {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100
           }
         }}
@@ -55,7 +55,7 @@ function ProjectScreensStackNavigator() {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100
           }
         }}
@@ -67,7 +67,7 @@ function ProjectScreensStackNavigator() {
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100
           }
         }}

@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     height: 45,
-    borderColor: "#092455",
+    borderColor: "#161616",
     padding: 10
   },
   messagesList: {
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   plus: {
-    color: "#092455",
+    color: "#161616",
   }
 });
 

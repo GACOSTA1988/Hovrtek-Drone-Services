@@ -15,9 +15,9 @@ const SignUpNavigation = () => {
         component={WhichSignUpScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={" "} />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           }, 
         }}
@@ -27,9 +27,9 @@ const SignUpNavigation = () => {
         component={PilotSignUpScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Create Account"}  />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           }, 
         }}
@@ -39,9 +39,9 @@ const SignUpNavigation = () => {
         component={ClientSignUpScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Create Account"}  />,
           headerStyle: {
-            backgroundColor: "#092455",
+            backgroundColor: "#161616",
             height: 100,
           }, 
         }}     

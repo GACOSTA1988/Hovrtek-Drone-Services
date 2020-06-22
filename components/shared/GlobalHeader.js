@@ -3,13 +3,10 @@ import {
   Text,
   View,
   StyleSheet,
-  Header,
-  Image,
-  ShadowPropTypesIOS,
   Platform,
   Dimensions,
-  TouchableOpacity,
-  Alert,
+  Switch,
+  Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../../assets/hovrtek_logo.png";
@@ -21,14 +18,15 @@ import _ from "lodash";
 import * as firebase from "firebase";
 import { NotificationContext } from "../../context";
 import { HeaderContext } from "../../context";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const GlobalHeader = (props, { getMessages }) => {
+  const [isEnabled, setIsEnabled] = useState(props.isMap ?? false);
   const navigation = useNavigation();
-
   useEffect(() => {
     props.getMessages();
   }, []);
-
+  
   let userID = null;
   let unreadMessages = [];
   const [ noteVisible, setNoteVisible ] = useState(false);
@@ -42,21 +40,48 @@ const GlobalHeader = (props, { getMessages }) => {
       }
     });
   }
+  
+  function toggleSwitch (value){
+    if(value){
+      navigation.navigate("MapComponent")
+    } else {
+      navigation.navigate("JobListScreen")
+      setIsEnabled(value)
+    }
+  }
 
   return (
     <View style={styles.MainHeaderWrapper}>
-         <View style={props.isSplash ? styles.navIconLeftHidden : props.isHome ? styles.navIconLeftHidden : styles.navIconLeft} pointerEvents={props.isSplash ? "none" : props.isHome? 'none' : 'auto'}>
+         <View style={props.isMappable ? styles.navIconLeft : props.isSplash ? styles.navIconLeftHidden : props.isHome ? styles.navIconLeftHidden : styles.navIconLeft} pointerEvents={props.isMappable ? "auto" : props.isSplash ? "none" : props.isHome? 'none' : 'auto'}>
+            {props.isMappable ? 
+            <View style={{flexDirection:"row", flex:1, alignItems:"center", }}>
+            <Ionicons name="md-globe" size={25} color="#DDE2E4" style={{marginHorizontal: 1,}}/>       
+            <Switch
+            trackColor={{ false: "red", true: "darkgrey" }}
+            thumbColor={isEnabled ? "#DDE2E4" : "#DDE2E4"}
+            onValueChange={toggleSwitch}
+            ios_backgroundColor={"rgba(221,226,228, 0.2)"}
+            value={isEnabled}
+            style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }}
+            />
+            </View>
+            :
             <Ionicons
             style={styles.backIcon}
             onPress={() => {navigation.goBack()}}
             name="ios-arrow-back"
             size={45}
-            color="white"
+            color="#DDE2E4"
             resizeMode="contain"
             />
+            }
         </View>
         <View styles={styles.logoContainer}>
+          {props.subheaderTitle ? 
+            <Text style={{fontSize: 30, fontWeight: "200", color: "white", }}>{props.subheaderTitle}</Text> 
+          :
           <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
+          }
         </View>
         <View style={props.isSplash ? styles.navIconRightHidden : props.isHome? styles.navIconRight : styles.navIconRightHidden} pointerEvents={ props.isSplash ? "none" :props.isHome? 'auto' : 'none'}>
           {unreadMessages.length > 0 ? (
@@ -75,7 +100,7 @@ const GlobalHeader = (props, { getMessages }) => {
           }}
           name="ios-menu"
           size={45}
-          color="white"
+          color="#DDE2E4"
           resizeMode="contain"
           /> 
         </View>
@@ -141,7 +166,7 @@ const styles = StyleSheet.create({
         bottom: 9,
       },
     }),
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     width: 15,
     height: 15,
     borderRadius: 90,
@@ -150,6 +175,7 @@ const styles = StyleSheet.create({
   navIconLeft: {
     flex: 1,
     width: '25%',
+
   },
   navIconLeftHidden: {
     opacity: 0,

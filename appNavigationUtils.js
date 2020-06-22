@@ -18,7 +18,7 @@ const AuthStack = createStackNavigator();
 
 const renderLogin = () => {
   const signHeaderStyle = {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     width: "100%",
     height: 100,
   };
@@ -30,7 +30,7 @@ const renderLogin = () => {
           name="SignIn"
           component={SignInScreen}
           options={{
-            headerTitle: () => <GlobalHeader isSplash={true}/>,
+            headerTitle: () => <GlobalHeader isSplash={true} subheaderTitle={" "}/>,
             headerStyle: signHeaderStyle,
             headerRight: null,
           }}
@@ -46,7 +46,7 @@ const renderLogin = () => {
           name="Loading"
           component={LoadingScreen}
           options={() => ({
-            headerTitle: () => <GlobalHeader isSplash={true}/>,
+            headerTitle: () => <GlobalHeader isSplash={true} subheaderTitle={" "}/>,
             headerStyle: signHeaderStyle,
             headerLeft: null,
           })}
@@ -63,10 +63,8 @@ const renderLogin = () => {
 // loading screen
 const renderLoading = () => {
   const signHeaderStyle = {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     width: "100%",
-    borderBottomWidth: 10,
-    borderBottomColor: "grey",
     height: 110,
   };
   
@@ -77,7 +75,6 @@ const renderLoading = () => {
           name="Loading"
           component={LoadingScreen}
           options={() => ({
-            title: "",
             headerStyle: signHeaderStyle,
           })}
         />    
@@ -92,7 +89,11 @@ const PilotDrawer = createDrawerNavigator();
 
 const clientNavigation = (
     <NavigationContainer independent={true} >
-      <ClientDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
+      <ClientDrawer.Navigator initialRouteName="Home" 
+      drawerPosition={"right"}
+      drawerStyle={{backgroundColor: "#161616", color: "white"}}
+      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "#535756"}}
+      >
         <ClientDrawer.Screen name="Home" component={ClientTabs}/>
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
@@ -104,7 +105,13 @@ const clientNavigation = (
 
 const pilotNavigation = (
     <NavigationContainer independent={true}>
-      <PilotDrawer.Navigator initialRouteName="Home" drawerPosition={"right"}>
+      <PilotDrawer.Navigator 
+      initialRouteName="Home" 
+      drawerPosition={"right"} 
+      drawerStyle={{backgroundColor: "#161616", color: "white"}}
+      drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "#535756"}}
+      sceneContainerStyle={{color: "white"}}
+      >
       <PilotDrawer.Screen name="Home" component={PilotTabs}/>
       <PilotDrawer.Screen name="Profile" component={PilotCreateProfileNavigation}/>
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>

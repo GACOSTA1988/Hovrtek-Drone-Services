@@ -10,7 +10,6 @@ const SupportScreen = () => {
     <View style={styles.container}>
       <Image source={sunsetDroneClean} style={styles.backgroundImage}></Image>
       <View style={styles.textWrapper}>
-        <Text style={styles.h1}>SUPPORT</Text>
         <Text style={styles.h2}>
         If you have any questions or concerns, feel free to contact us. Email is our preferred method of communication. Thank you.
         </Text>
@@ -38,7 +37,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    backgroundColor: 'rgba(9,36,85, 0.6)',
+    height: "100%",
+    backgroundColor: 'rgba(16,16,16, 0.5)',
     paddingVertical: 50,
     paddingHorizontal: 15,
   },

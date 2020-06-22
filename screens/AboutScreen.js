@@ -10,7 +10,6 @@ const AboutScreen = () => {
     <View style={styles.container}>
       <Image source={sunsetDroneClean} style={styles.backgroundImage}></Image>
       <View style={styles.textWrapper} >
-        <Text style={styles.header}>DRONE PHOTOGRAPHY AND VIDEO</Text>
         <Text style={styles.body}>Hovrtek is a drone company that specializes in capturing <Text style={styles.boldText}>cost-effective images, video, and data</Text> with sUAS (Small Unmanned Aircraft Systems) for analysis, surveying, mapping, and more. We are constantly exploring ways to help our clients save time and money with software and drones.  All of our pilots are <Text style={styles.boldText}>FAA licensed and insured</Text> to complete aerial missions.</Text>
         <View style={styles.socialMediaContainer}>
           <Entypo name="facebook" size={35} color="white" onPress={() => Linking.openURL('https://www.facebook.com/Hovrtek/')} />
@@ -40,7 +39,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    backgroundColor: 'rgba(9,36,85, 0.6)',
+    height: "100%",
+    backgroundColor: "rgba(16,16,16, 0.5)",
     paddingVertical: 40,
     paddingHorizontal: 20,
   },

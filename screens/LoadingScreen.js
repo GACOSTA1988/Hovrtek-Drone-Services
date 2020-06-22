@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
   loadingBody: {
     alignItems: "center",
     justifyContent: "center",
-    flex: .8
+    backgroundColor: "#161616",
+    height: "100%"
   },
   loadingImage: {
     width: 300,

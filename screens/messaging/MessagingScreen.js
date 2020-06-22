@@ -64,13 +64,11 @@ function MessagingScreen(props) {
 
   function goToChat(item) {
     props.navigation.navigate("ChatScreen", { ...item });
+    console.log("FUCK YES", item)
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleWrapper}>
-        <Text style={styles.title}>Messages</Text>
-      </View>
       {contacts.length > 0 ? (
         <FlatList
           data={contacts}
@@ -163,12 +161,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-  },
-  title: {
-    marginTop: 12,
-    fontSize: 30,
-    textAlign: "center",
-    color: '#092455',
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#161616",
   },
   contact: {
     paddingTop: 30,
@@ -176,17 +171,19 @@ const styles = StyleSheet.create({
   textNoContacts:{
     alignSelf: 'center',
     marginTop: 20,
+    color: "#DDE2E4"
   },
   names: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#DDE2E4"
   },
   profilePic: {
     height: 70,
     width: 70,
     borderRadius: 90,
     borderWidth: 4,
-    borderColor: "#092455",
+    borderColor: "#DDE2E4",
     margin: 15,
   },
 });

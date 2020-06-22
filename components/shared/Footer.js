@@ -37,7 +37,7 @@ function Footer() {
 
 const styles = StyleSheet.create({
   footerWrapper: {
-    backgroundColor: "#092455",
+    backgroundColor: "#161616",
     height: 34,
     margin: 0,
     padding: 0,

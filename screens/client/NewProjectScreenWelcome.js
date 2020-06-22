@@ -30,8 +30,8 @@ function NewProjectScreenWelcome(props) {
             <View style={styles.HeaderWrapper}>
                 <Image source={hovrtekLogo} style={styles.hovrtekLogo} />
             </View>
-            <Text style={styles.bodyTextOne}>Press the button below to create a new project.</Text>
-            <Text style={styles.bodyTextTwo}>Upon completion, your project will be transmitted to Hovrtek's pool of FAA Certified Pilots ready to take the job!</Text>
+            <Text style={styles.bodyTextOne}>Press the button below to create a new project</Text>
+            <Text style={styles.bodyTextTwo}>Upon submission, your project will be available to Hovrtek's pool of FAA Certified Pilots</Text>
             <TouchableOpacity style={styles.continueButton} onPress={continueButton}>
                 <Text style={styles.buttonText}>Create a Project</Text>
             </TouchableOpacity>
@@ -42,7 +42,9 @@ function NewProjectScreenWelcome(props) {
 const styles = StyleSheet.create({
     newProjectListWrapper: {
         alignItems: "center",
-        marginTop: 15
+        paddingTop: "5%",
+        height: "100%",
+        backgroundColor: "#161616"
     },
     hovrtekLogo: {
         width: 320,
@@ -50,24 +52,27 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         position: 'absolute',
         top: 10,
-        tintColor: '#092455'
+        tintColor: '#A8C7BC'
     },
     welcomeText: {
         fontSize: 30,
         marginTop: 40,
+        color: "#DDE2E4"
     },
     bodyTextOne: {
         marginTop: 100,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: "#DDE2E4"
     },
     bodyTextTwo: {
         marginTop: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: "#DDE2E4"
     },
     continueButton: {
         width: 250,
         height: 50,
-        backgroundColor: "#092455",
+        backgroundColor: "#DDE2E4",
         borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'center',
@@ -75,7 +80,7 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
     buttonText: {
-        color: 'white',
+        color: '#161616',
         fontSize: 20
     },
 });

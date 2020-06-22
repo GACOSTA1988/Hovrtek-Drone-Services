@@ -52,7 +52,7 @@
 //         alignSelf: 'center',
 //         position: 'absolute',
 //         top: 10,
-//         tintColor: '#092455'
+//         tintColor: '#161616'
 //     },
 //     welcomeText: {
 //         fontSize: 30,
@@ -67,7 +67,7 @@
 //     continueButton: {
 //         width: 250,
 //         height: 50,
-//         backgroundColor: "#092455",
+//         backgroundColor: "#161616",
 //         borderRadius: 30,
 //         alignItems: 'center',
 //         justifyContent: 'center',

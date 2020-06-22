@@ -138,7 +138,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
               return (
                 <View style={item.author === 'sender' ? styles.messagingContainer : styles.messagingContainerRecipient}>
                   <View style={styles.bodyContainer}>
-                    <Text style={styles.bodyText}>{item.body}</Text>
+                    <Text style={item.author === 'sender' ? styles.bodyText : styles.bodyTextRecipient}>{item.body}</Text>
                   </View>
                   <View style={styles.messageFooter}>
                     <Text style={styles.timestamp}>{item.timestamp}</Text>
@@ -163,7 +163,7 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           <TextInput
             multiline={true}
             placeholder="Send message..."
-            placeholderTextColor="grey"
+            placeholderTextColor="#DDE2E4"
             value={body}
             onChangeText={setBody}
             enablesReturnKeyAutomatically={true}
@@ -172,13 +172,14 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
           <Ionicons
             name="md-send"
             size={30}
-            color="black"
+            color="#DDE2E4"
             onPress={send}
           />
           <AntDesign
             style={styles.plus}
             name="plus"
             size={25}
+            // onPress={this needs to do something}
           />
         </View>
     </KeyboardAvoidingView>
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   messagesScroll: {
-    backgroundColor: "white",
+    backgroundColor: 	"#161616",
     padding: 10,
   },
   messageFooter: {
@@ -212,10 +213,16 @@ const styles = StyleSheet.create({
   bodyText: {
     fontWeight: "300",
     fontSize: 16,
+    color: "#161616"
+  },
+  bodyTextRecipient: {
+    fontWeight: "300",
+    fontSize: 16,
+    color: "#DDE2E4"
   },
   messagingContainer: {
     borderRadius: 15,
-    backgroundColor: "#3E90D0",
+    backgroundColor: "#909695",
     marginVertical: 5,
     padding: 15,
     marginLeft: '15%',
@@ -225,7 +232,7 @@ const styles = StyleSheet.create({
   },
   messagingContainerRecipient: {
     borderRadius: 15,
-    backgroundColor: "lightgray",
+    backgroundColor: "#474A49",
     marginVertical: 5,
     padding: 15,
     marginRight: '15%',
@@ -241,8 +248,8 @@ const styles = StyleSheet.create({
   writeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginBottom: 10
+    padding: 10,
+    backgroundColor: "#161616", 
     },
   writeContainerKeyboardOpen: {
     flexDirection: "row",
@@ -254,13 +261,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     height: 45,
-    borderColor: "#092455",
+    borderColor: "#DDE2E4",
+    color: "#DDE2E4",
     margin: 10,
     paddingLeft: "3%",
     paddingTop: "3%", 
   },
   plus: {
-    color: "#092455",
+    color: "#DDE2E4",
     margin: 5
   }
 });

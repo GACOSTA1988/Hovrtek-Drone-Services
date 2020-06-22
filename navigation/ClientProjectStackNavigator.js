@@ -11,7 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 const ProjectStack = createStackNavigator();
 
 const mainHeaderStyle = {
-  backgroundColor: "#092455",
+  backgroundColor: "#161616",
   height: 100,
 };
 
@@ -22,7 +22,7 @@ const ClientProjectStackNavigator = () => {
         name="ProjectListScreen"
         component={ProjectListScreen}
         options={{
-          headerTitle: () => <GlobalHeader isHome={true} />,
+          headerTitle: () => <GlobalHeader isHome={true} subheaderTitle={"My Projects"} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -31,7 +31,7 @@ const ClientProjectStackNavigator = () => {
         component={ProjectDetailsScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Project Details"} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -40,7 +40,7 @@ const ClientProjectStackNavigator = () => {
         component={EditProjectScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Edit Details"} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -58,7 +58,7 @@ const ClientProjectStackNavigator = () => {
         component={ChatScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
           headerStyle: mainHeaderStyle,
         }}
       />

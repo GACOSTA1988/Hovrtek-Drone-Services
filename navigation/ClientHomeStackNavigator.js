@@ -16,7 +16,7 @@ import GlobalHeader from "../components/shared/GlobalHeader";
 const HomeStack = createStackNavigator();
 
 const mainHeaderStyle = {
-  backgroundColor: "#092455",
+  backgroundColor: "#161616",
   height: 100,
 };
 
@@ -27,7 +27,7 @@ const ClientHomeStackNavigator = () => {
         name="NewProjectScreenWelcome"
         component={NewProjectScreenWelcome}
         options={{
-          headerTitle: () => <GlobalHeader isHome={true}/>,
+          headerTitle: () => <GlobalHeader isHome={true} subheaderTitle=" " />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -36,7 +36,7 @@ const ClientHomeStackNavigator = () => {
         component={NewProjectScreenOne}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle="Create a New Project" />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -45,7 +45,7 @@ const ClientHomeStackNavigator = () => {
         component={NewProjectScreenTwo}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle=" " />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -54,7 +54,7 @@ const ClientHomeStackNavigator = () => {
         component={NewProjectScreenThree}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle=" " />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -63,7 +63,7 @@ const ClientHomeStackNavigator = () => {
         component={ProjectListScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -72,7 +72,7 @@ const ClientHomeStackNavigator = () => {
         component={ProjectDetailsScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -81,7 +81,7 @@ const ClientHomeStackNavigator = () => {
         component={EditProjectScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Projects"} />,
           headerStyle: mainHeaderStyle,
         }}
       />
@@ -99,7 +99,7 @@ const ClientHomeStackNavigator = () => {
         component={ChatScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
           headerStyle: mainHeaderStyle,
         }}
       />

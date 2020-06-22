@@ -10,7 +10,6 @@ import * as firebase from "firebase";
 import { getMessages } from "../actions/messages";
 import { connect } from "react-redux";
 import _ from "lodash";
-// import { Entypo } from '@expo/vector-icons';
 
 function ClientTabs(props) {
   const Tabs = createBottomTabNavigator();
@@ -34,13 +33,13 @@ function ClientTabs(props) {
   }
 
   return (
-      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: 'lightblue', inactiveBackgroundColor: '#092455', activeTintColor: '#092455', inactiveTintColor: 'white', showLabel: false}}>
+      <Tabs.Navigator tabBarOptions={{activeBackgroundColor: "#DDE2E4", inactiveBackgroundColor: "#161616", activeTintColor: "#161616", inactiveTintColor: "#DDE2E4", showLabel: false}}>
         <Tabs.Screen 
           name="Home" 
-          labelStyle={ {color: 'white'}}
+          // labelStyle={ {color: 'white'}}
           component={ClientHomeStackNavigator} 
           options={{
-            tabBarIcon: ({color}) => (<FontAwesome name="home" size={24} color={color} />),
+            tabBarIcon: ({color}) => (<FontAwesome name="plus" size={24} color={color} />),
           }}
           />
         <Tabs.Screen 

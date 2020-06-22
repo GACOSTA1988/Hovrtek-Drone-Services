@@ -128,20 +128,6 @@ function PilotProfileSetupPageOneScreen(props) {
   return (
     <View style={[styles.container, isModalActive ? styles.opaque : '']}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={styles.welcomeText}>
-          Hello!
-          {currentUserProps ? (
-            <Text style={styles.subText}>
-              {"\n"}
-              {currentUserProps.pilotFirstName +
-                " " +
-                currentUserProps.pilotLastName}
-            </Text>
-          ) : (
-            <Text>Name:</Text>
-          )}
-        </Text>
-
         <Text style={styles.bodyText}>{briefSummary}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
@@ -195,20 +181,9 @@ function PilotProfileSetupPageOneScreen(props) {
         
 
         <View style={styles.centerButton}>
-          <View style={styles.saveAndContinueWrapper}>
-            <TouchableOpacity onPress={submit} title={saveAndContinue}>
+            <TouchableOpacity style={styles.saveAndContinueWrapper} onPress={submit} title={saveAndContinue}>
               <Text style={styles.saveAndContinueText}>{saveAndContinue}</Text>
             </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.backButtonWrapper}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => props.navigation.goBack()}
-          >
-            <Text style={styles.backButtonText}>Back</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -218,9 +193,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "lightgrey",
+    backgroundColor: "#161616",
     alignItems: "center",
     height: "100%",
+    paddingTop: "15%"
   },
   centerButton: {
     alignItems: "center",
@@ -230,7 +206,7 @@ const styles = StyleSheet.create({
     width: 170,
     height: 50,
     borderWidth: 2,
-    borderColor: "#092455",
+    borderColor: "#DDE2E4",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
@@ -238,27 +214,19 @@ const styles = StyleSheet.create({
   },
   saveAndContinueText: {
     fontSize: 15,
-    color: "#092455",
-  },
-  welcomeText: {
-    marginTop: "5%",
-    marginBottom: "10%",
-    fontSize: 25,
-    color: "#4593e7",
-    fontWeight: "600",
-    textAlign: "center",
+    color: "#DDE2E4",
   },
   subText: {
     marginTop: "25%",
     marginBottom: "10%",
     fontSize: 25,
-    color: "black",
+    color: "#DDE2E4",
     fontWeight: "600",
     textAlign: "center",
   },
   bodyText: {
     fontSize: 15,
-    color: "black",
+    color: "#DDE2E4",
     textAlign: "center",
   },
   input: {
@@ -269,30 +237,11 @@ const styles = StyleSheet.create({
   },
   dummyText: {
     marginTop: 200,
-
-    color: "lightgray",
+    color: "#DDE2E4",
   },
   droneExpWrapper: {
     alignItems: "center",
     justifyContent: "center",
-  },
-  backButton: {
-    marginTop: 20,
-    marginBottom: 40,
-    width: 60,
-    height: 30,
-    backgroundColor: "#092455",
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  backButtonText: {
-    color: "white",
-    textAlign: "center",
-    // marginBottom: 40,
-  },
-  backButtonWrapper: {
-    alignItems: "center",
   },
   radioWrapper: {
     alignSelf: "center",
@@ -300,6 +249,7 @@ const styles = StyleSheet.create({
   },
   radioText: {
     marginBottom: 7,
+    color: "#DDE2E4"
   },
   opaque: {
     opacity: 0.2

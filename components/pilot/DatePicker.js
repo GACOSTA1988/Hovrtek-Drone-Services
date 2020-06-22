@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   button: {
     width: 250,
     height: 50,
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   buttonText: {
-    color: "white",
+    color: "#161616",
     fontSize: 20,
   },
   pickerWrapper: {
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
   },
   datePicked: {
     fontSize: 20,
+    color: "#DDE2E4"
   },
 });
 

@@ -33,9 +33,9 @@ const InsuranceRadio = (props) => {
           <RadioForm
             labelStyle={styles.radiobutton}
             animation={true}
-            selectedButtonColor={"#161616"}
-            labelColor={"#161616"}
-            buttonColor={"#161616"}
+            selectedButtonColor={"#DDE2E4"}
+            labelColor={"#DDE2E4"}
+            buttonColor={"#DDE2E4"}
             formHorizontal={true}
             radio_props={radio_props}
             initial={index}
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   },
   radiobutton: {
     paddingRight: 25,
+    color: "#DDE2E4"
   },
 });
 

@@ -3,13 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PilotHomeStackNavigator from "./PilotHomeStackNavigator";
 import PilotJobsStackNavigator from "./PilotJobsStackNavigator";
 import MessagingNavigation from './MessagingNavigation';
-import { FontAwesome } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, Entypo } from '@expo/vector-icons';
 import * as firebase from "firebase";
 import { getMessages } from "../actions/messages";
 import { connect } from "react-redux";
 import _ from "lodash";
+import { StyleSheet, View, Text } from "react-native";
 
 function PilotTabs(props) {
   const Tabs = createBottomTabNavigator();
@@ -36,7 +35,6 @@ function PilotTabs(props) {
     <Tabs.Navigator tabBarOptions={{activeBackgroundColor: "#DDE2E4", inactiveBackgroundColor: "#161616", activeTintColor: "#161616", inactiveTintColor: "#DDE2E4", showLabel: false}}>
       <Tabs.Screen 
         name="Home" 
-        // labelStyle={ {color: 'white'}}
         component={PilotHomeStackNavigator} 
         options={{
           tabBarIcon: ({color}) => (<FontAwesome name="home" size={24} color={color} />),
@@ -52,12 +50,64 @@ function PilotTabs(props) {
         name="Messages" 
         component={MessagingNavigation}
         options={unreadMessages.length > 0 ? {
-          tabBarIcon: ({color}) => (<Ionicons name="md-mail-unread" size={24} color={color} />) } : {
-            tabBarIcon: ({color}) => (<Ionicons name="md-mail" size={24} color={color} />) } }
+          tabBarIcon: ({color}) => (
+            <View>
+              <View style={styles.outerDot}>
+                <View style={styles.innerDot}>
+                  <Text />
+                </View>
+              </View>
+              <Entypo name="message" size={30} color={color} resizeMode="contain" style={styles.messageIcon}/>
+            </View>  ) } : {
+            tabBarIcon: ({color}) => (<Entypo name="message" size={30} color={color} />) } }
       />
     </Tabs.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  innerDot: {
+    ...Platform.select({
+      ios: {
+        position: "absolute",
+        bottom: 2,
+        right: 2,
+      },
+      android: {
+        position: "absolute",
+        right: 2,
+        bottom: 2,
+      },
+    }),
+    backgroundColor: "red",
+    width: 10,
+    height: 10,
+    borderRadius: 90,
+    zIndex: 3
+  },
+  outerDot: {
+    ...Platform.select({
+      ios: {
+        position: "absolute",
+        bottom: 18,
+        right: -5,
+      },
+      android: {
+        position: "absolute",
+        right: -5,
+        bottom: 9,
+      },
+    }),
+    // backgroundColor: "#DDE2E4",
+    width: 15,
+    height: 15,
+    borderRadius: 90,
+    zIndex: 2
+  },
+  msesageIcon: {
+    flex: 1
+  }
+});
 
 function mapStateToProps(state) {
   const listOfMessages = _.map(state.messagesList.messagesList, (val, key) => {

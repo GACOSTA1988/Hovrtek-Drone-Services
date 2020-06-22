@@ -37,14 +37,14 @@ function PilotTabs(props) {
         name="Home" 
         component={PilotHomeStackNavigator} 
         options={{
-          tabBarIcon: ({color}) => (<FontAwesome name="home" size={24} color={color} />),
+          tabBarIcon: ({color}) => (<FontAwesome name="home" size={26} color={color} />),
         }}
         />
       <Tabs.Screen 
         name="Projects" 
         component={PilotJobsStackNavigator}
         options={{
-          tabBarIcon: ({color}) => (<FontAwesome5 name="helicopter" size={20} color={color}/>)
+          tabBarIcon: ({color}) => (<FontAwesome5 name="helicopter" size={22} color={color}/>)
         }} />
       <Tabs.Screen 
         name="Messages" 

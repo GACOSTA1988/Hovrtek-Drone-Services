@@ -37,14 +37,14 @@ function ClientTabs(props) {
           name="Home" 
           component={ClientHomeStackNavigator} 
           options={{
-            tabBarIcon: ({color}) => (<FontAwesome name="plus" size={30} color={color} />),
+            tabBarIcon: ({color}) => (<FontAwesome name="plus" size={28} color={color} />),
           }}
           />
         <Tabs.Screen 
           name="Projects" 
           component={ClientProjectStackNavigator}
           options={{
-            tabBarIcon: ({color}) => (<FontAwesome5 name="helicopter" size={23} color={color}/>)
+            tabBarIcon: ({color}) => (<FontAwesome5 name="helicopter" size={22} color={color}/>)
           }} />
         <Tabs.Screen 
           name="Messages" 

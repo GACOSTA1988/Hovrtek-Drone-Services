@@ -105,23 +105,7 @@ function PilotProfileImageUploadScreen(
 
   return (
     <View style={styles.container}>
-      <Text style={styles.welcomeText}>
-        {APP_STRINGS.hello}
-        {currentUserProps ? (
-          <Text style={styles.subText}>
-            {"\n"}
-            {currentUserProps.pilotFirstName +
-              " " +
-              currentUserProps.pilotLastName}
-
-            {}
-          </Text>
-        ) : (
-          <Text>Name:</Text>
-        )}
-      </Text>
-
-      <Text>Please Upload Profile Picture</Text>
+      <Text style={styles.text}>Please Upload Profile Picture</Text>
       <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
         <PassProfileImageUrlState.Provider value={profileImageUrl}>
           <ProfileUploader hasSquareImage={true} pluckImage={pluckImage} />
@@ -137,9 +121,6 @@ function PilotProfileImageUploadScreen(
       </TouchableOpacity>
 
       <View style={styles.backButtonWrapper}>
-        <TouchableOpacity style={styles.backButton} onPress={goBack}>
-          <Text style={styles.backButtonText}>Back</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -150,11 +131,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "lightgray",
     height: "100%",
+    paddingTop: "30%",
+    backgroundColor: "#161616"
   },
   completeButton: {
     width: 250,
     height: 50,
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -163,28 +146,15 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   completeButtonText: {
-    color: "white",
+    color: "#161616",
     fontSize: 20,
   },
-  welcomeText: {
-    marginTop: "5%",
-    marginBottom: "10%",
-    fontSize: 25,
-    color: "#4593e7",
-    fontWeight: "600",
-    textAlign: "center",
-  },
-  subText: {
-    marginTop: "25%",
-    marginBottom: "10%",
-    fontSize: 25,
-    color: "black",
-    fontWeight: "600",
-    textAlign: "center",
+  text: {
+    color: "#DDE2E4"
   },
   bodyText: {
     fontSize: 15,
-    color: "black",
+    color: "#DDE2E4",
     textAlign: "center",
   },
   input: {
@@ -192,24 +162,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     height: 30,
     marginBottom: 80,
-  },
-  backButton: {
-    marginTop: 20,
-    marginBottom: 40,
-    width: 60,
-    height: 30,
-    backgroundColor: "#161616",
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  backButtonText: {
-    color: "white",
-    textAlign: "center",
-  },
-  backButtonWrapper: {
-    marginTop: 253,
-    alignItems: "center",
   },
 });
 

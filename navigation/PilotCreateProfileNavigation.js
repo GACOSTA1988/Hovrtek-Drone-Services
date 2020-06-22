@@ -22,7 +22,7 @@ const PilotCreateProfileNavigation = () => {
         name="Profile"
         component={PilotProfileWelcomeScreen}
         options={{
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Profile"}/>,
           headerStyle,
         }}
       />
@@ -32,7 +32,7 @@ const PilotCreateProfileNavigation = () => {
         navigationOptions={{headerMode: 'none'}}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Edit Profile"}/>,
           headerStyle,
           }}
       />
@@ -41,7 +41,7 @@ const PilotCreateProfileNavigation = () => {
         component={PilotProfileSetupPageTwoScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Edit Profile"}/>,
           headerStyle,      
         }}
       />
@@ -50,7 +50,7 @@ const PilotCreateProfileNavigation = () => {
         component={PilotProfileImageUploadScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false}/>,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Add Image"}/>,
           headerStyle,
         }}
       />

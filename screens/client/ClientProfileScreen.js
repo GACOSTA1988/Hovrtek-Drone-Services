@@ -86,12 +86,6 @@ function ClientProfileScreen(props) {
                 >
                   <Text style={styles.chatText}>Chat</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.backButton}
-                  onPress={() => props.navigation.pop()}
-                >
-                  <Text style={styles.chatText}>Back</Text>
-                </TouchableOpacity>
               </View>
             )}
           </View>
@@ -198,14 +192,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#DDE2E4",
     padding: 7,
     borderRadius: 5,
-  },
-  backButton: {
-    position: "absolute",
-    right: 0,
-    backgroundColor: "#DDE2E4",
-    padding: 7,
-    borderRadius: 5,
-    top: 60,
   },
   headerText: {
     fontSize: 20,

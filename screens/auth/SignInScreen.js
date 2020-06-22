@@ -105,12 +105,12 @@ const styles = StyleSheet.create({
       ios: {
         width: 270,
         height: 50,
-        marginBottom: 15,
+        marginBottom: 35,
       },
       android: {
         width: 270,
         height: 50,
-        marginBottom: 15,
+        marginBottom: 35,
       },
     }),
   },
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     borderColor: "#DDE2E4",
     borderWidth: 1,
     borderRadius: 10,
-    marginTop: "2%",
+    margin: 5,
     width: 250,
     color: "#DDE2E4",
     backgroundColor: "rgba(16,16,16,0.8)",
@@ -167,7 +167,8 @@ const styles = StyleSheet.create({
   signIn: {
     backgroundColor: "rgb(16,16,16)",
     width: 250,
-    marginVertical: 10,
+    marginTop: 15,
+    marginBottom: 10,
     padding: 5,
     borderRadius: 5,
   },

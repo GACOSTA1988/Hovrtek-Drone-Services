@@ -76,18 +76,6 @@ const PilotHomeStackNavigator = () => {
         }}
       />
       <HomeStack.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{
-          headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
-          headerStyle: {
-            backgroundColor: "#161616",
-            height: 100,
-          },
-        }}
-      />
-      <HomeStack.Screen
         name="MyJobsScreen"
         component={MyJobsScreen}
         options={{

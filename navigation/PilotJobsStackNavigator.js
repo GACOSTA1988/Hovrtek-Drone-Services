@@ -47,19 +47,6 @@ const PilotJobsStackNavigator = () => {
           },
         }}
       />
-      <JobsStack.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{
-          headerLeft: null,
-          title: " ",
-          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Messages"} />,
-          headerStyle: {
-            backgroundColor:"#161616",
-            height: 100,
-          },
-        }}
-      />
     </JobsStack.Navigator>
   );
 };

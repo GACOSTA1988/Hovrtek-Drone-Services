@@ -68,18 +68,17 @@ function JobDetailsScreen(props) {
       <View style={styles.jobAvailabilityWrapper}>
         {!jobDetails.pilotID ? (
           <View style={styles.acceptJobWrapper}>
-            <View style={styles.acceptJobButtonWrapper}>
-              <Text
-                style={styles.acceptJobText}
-                onPress={() =>
-                  props.navigation.navigate("AcceptJobScreen", {
-                    ...jobDetails,
-                  })
-                }
-              >
+            <TouchableOpacity 
+              style={styles.acceptJobButtonWrapper}
+              onPress={() =>
+                props.navigation.navigate("AcceptJobScreen", {
+                  ...jobDetails,
+                })
+              } >
+              <Text style={styles.acceptJobText}>
                 Accept Job
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
         ) : (
           <View />

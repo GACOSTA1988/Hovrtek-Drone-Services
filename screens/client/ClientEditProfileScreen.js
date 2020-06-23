@@ -24,7 +24,6 @@ const pageUnavailable = "Page unavailable";
 const saveChanges = "Save Changes";
 
 function ClientEditProfileScreen(props, { editClientProfile }) {
-  // console.log("PERSON ICON IN CLIENT EDIT PROFILE: ", personIcon);
   let profileDetails = props.route.params;
 
   const [ firstName, setFirstName ] = useState(profileDetails.firstName);

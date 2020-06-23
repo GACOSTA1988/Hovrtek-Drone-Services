@@ -38,10 +38,7 @@ function ProfileUploader(props) {
       if (!result.cancelled) {
         const { uri } = result;
         const response = await uploadImage(uri, uuid);
-
         Alert.alert(successfullyUploaded);
-        console.log("got success response ", response);
-
         persistImage(response);
       }
     } catch (error) {

@@ -59,9 +59,7 @@ function PilotProfileWelcomeScreen(props) {
   const { photoURL } = currentUser;
   const unsubscribe = navigation.addListener("focus", () => {
     if (photoURL === "P") {
-      console.log("currentUser.uid", currentUser.uid);
       const profile = listOfPilotProfiles.find((x) => x.userID === currentUser.uid);
-      console.log("profile", profile);
       if (profileDetails != profile) {
         setProfileDetails(profile);
       }
@@ -171,11 +169,12 @@ function PilotProfileWelcomeScreen(props) {
 
           </View>
 
-          <Text style={styles.locationText}>
-            {location} {pilotLocation}
+          <Text style={styles.specTitle}>{location}
+            <Text style={styles.locationText}>{pilotLocation}</Text>
           </Text>
-          <Text style={styles.specTitle}>{bio}</Text>
-          <Text style={styles.personalBioStyle}>{personalBio}</Text>
+          <Text style={styles.specTitle}>{bio}
+            <Text style={styles.personalBioStyle}> {personalBio}</Text>
+          </Text>
           {renderProfileStatsItem(droneModel, droneType)}
           {renderProfileStatsItem(yearsOfExperienceStr, yearsOfExperience)}
           {renderProfileStatsItem(licenseExpirationDate, faaLicenseExp)}

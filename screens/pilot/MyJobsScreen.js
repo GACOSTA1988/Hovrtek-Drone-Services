@@ -42,7 +42,7 @@ function MyJobsScreen(props, { getProjects, getClientProfiles }) {
   return (
     <View style={styles.projectListWrapper}>
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        {listOfMyProjects.length < 1 ? <Text style={styles.emptyText}>(No accepted jobs yet)</Text> : null}
+        {listOfMyProjects.length < 1 ? <Text style={styles.emptyText}>( No accepted jobs yet )</Text> : null}
         <View style={styles.projectCard}>
             <FlatList
               style={styles.flatListStyles}
@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
   },
   emptyText:{ 
     color: "#DDE2E4", 
-    fontWeight: "500", 
     fontSize: 14,
     textAlign: "center",
     padding: "15%"

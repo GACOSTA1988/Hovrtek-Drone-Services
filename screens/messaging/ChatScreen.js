@@ -22,6 +22,7 @@ import * as firebase from "firebase";
 import _ from "lodash";
 import moment from "moment";
 
+
 function ChatScreen(props, { getMessages, postMessages, readMessage }) {
   const navigation = useNavigation();
 
@@ -101,11 +102,12 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
     let userOneID = sender.uid;
     let userTwoID = recipient.userID;
 
-    let timestamp = moment(new Date()).format("LLLL");
+    let timeZoneOffsetMinutes = new Date().getTimezoneOffset() 
 
-    // TIMESTAMP WITHOUT MOMENT FORMATTING
-    // let timestamp = new Date()
-
+    let timestamp = moment()
+    .utcOffset(-timeZoneOffsetMinutes)
+    .format('M/D h:mm A');
+   
     props.postMessages(
       userOneID,
       userTwoID,
@@ -141,11 +143,12 @@ function ChatScreen(props, { getMessages, postMessages, readMessage }) {
                     <Text style={item.author === 'sender' ? styles.bodyText : styles.bodyTextRecipient}>{item.body}</Text>
                   </View>
                   <View style={styles.messageFooter}>
-                    <Text style={styles.timestamp}>{item.timestamp}</Text>
+                    <Text style={item.author === 'sender' ? styles.timestamp : styles.timestampRecipient}>{item.timestamp}</Text>
                     {item.read ? (
                     <FontAwesome5
                       name="check-circle"
                       size={15}
+                      color={item.author === 'sender' ? "rgba(16,16,16,0.8)" : "rgba(236,236,236,0.8)"}
                       style={{ textAlign: "right" }}
                     />
                     ) : (
@@ -207,8 +210,13 @@ const styles = StyleSheet.create({
   keyClosedContainer: {
     marginTop: "90%",
   },
+  timestampRecipient: {
+    fontSize: 10,
+    color: "rgba(236,236,236,0.6)",
+  },
   timestamp: {
-    fontSize: 12,
+    fontSize: 10,
+    color: "rgba(16,16,16,0.8)",
   },
   bodyText: {
     fontWeight: "300",

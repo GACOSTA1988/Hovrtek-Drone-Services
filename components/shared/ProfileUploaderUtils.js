@@ -17,7 +17,7 @@ async function uploadImage(uri = "", uuid = "") {
     const url = await snapshot.ref.getDownloadURL();
     return url;
   } catch (error) {
-    Alert.alert("⚠️⚠️warning: uploadImage is very virus⚠️⚠️ ", error);
+    Alert.alert("uploadImage failure ", error);
   }
 }
 

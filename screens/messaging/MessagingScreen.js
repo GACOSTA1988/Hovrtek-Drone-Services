@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import * as firebase from "firebase";
 import _ from "lodash";
 
 function MessagingScreen(props) {
+  
   useEffect(() => {
     props.getMessages();
     props.getPilotProfiles();
@@ -46,6 +47,15 @@ function MessagingScreen(props) {
     });
   }
 
+  const unreadMessageList = props.listOfMessages.filter(message => {
+    if (message.userOneID === user.uid || message.userTwoID === user.uid) {
+      if(!message.read){
+        return message.userTwoID === user.uid
+      }
+    }
+  })
+  const unreadContactsUserID = unreadMessageList.map(contact => contact.userOneID)
+  
   if (props.listOfMessages && listOfProfiles) {
     props.listOfMessages.forEach((message) => {
       if (message.userOneID === user.uid) {
@@ -74,7 +84,7 @@ function MessagingScreen(props) {
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => {
             return (
-              <View style={{ flexDirection: "row" }}>
+              <View style={styles.headerRow}>
                 {item.profileImageUrl ? (
                   <Image
                     source={{
@@ -93,14 +103,15 @@ function MessagingScreen(props) {
                 )}
                 {item.pilotFirstName ? (
                   <TouchableOpacity
-                    style={styles.contact}
-                    onPress={() => {
-                      goToChat(item);
-                    }}
+                  style={styles.contact}
+                  onPress={() => {
+                    goToChat(item);
+                  }}
                   >
                     <Text style={styles.names}>
                       {item.pilotFirstName} {item.pilotLastName}
                     </Text>
+                    {unreadContactsUserID.includes(item.userID) ? <View style={styles.dot}/>: null}
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
@@ -110,6 +121,7 @@ function MessagingScreen(props) {
                     <Text style={styles.names}>
                       {item.firstName} {item.lastName}
                     </Text>
+                    {unreadContactsUserID.includes(item.userID) ? <View style={styles.dot}/>: null}
                   </TouchableOpacity>
                 )}
               </View>
@@ -165,7 +177,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#161616",
   },
   contact: {
-    paddingTop: 30,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerRow: { 
+    flexDirection: "row",
+    alignItems: "center",
   },
   textNoContacts:{
     alignSelf: 'center',
@@ -175,16 +192,24 @@ const styles = StyleSheet.create({
   names: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#DDE2E4"
+    color: "#DDE2E4",
+    marginHorizontal: 10,
   },
   profilePic: {
     height: 70,
     width: 70,
     borderRadius: 90,
     borderWidth: 4,
-    borderColor: "#DDE2E4",
+    borderColor: "rgb(221, 226, 228)",
     margin: 15,
-  },
+    },
+  dot:{
+    backgroundColor: "red",
+    width: 10,
+    height: 10,
+    borderRadius: 90,
+    zIndex: 3,
+  }
 });
 
 export default connect(mapStateToProps, {

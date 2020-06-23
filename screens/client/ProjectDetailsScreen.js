@@ -98,14 +98,6 @@ function ProjectDetailsScreen(props) {
           <Text style={styles.unnamedText}>Pending Pilot</Text>
         </View>
       )}
-      {/* <View style={styles.backButtonWrapper}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => props.navigation.pop()}
-        >
-          <Text style={styles.backButtonText}>Back to projects</Text>
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 }

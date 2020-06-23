@@ -49,7 +49,7 @@ const ClientProjectStackNavigator = () => {
         component={PilotProfileWelcomeScreen}
         options={{
           headerLeft: null,
-          headerTitle: () => <GlobalHeader isHome={false} />,
+          headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Pilot Profile"}/>,
           headerStyle: mainHeaderStyle,
         }}
       />

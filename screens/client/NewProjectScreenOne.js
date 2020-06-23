@@ -46,7 +46,7 @@ function NewProjectScreenOne(props) {
   const [light, setLight] = useState("");
 
   async function submit(){
-    setLoadingActive(true)
+    // setLoadingActive(true)
     let locationCoordinates = await convertLocation(location)
     if (location.trim() === '') {
       Alert.alert("Please fill in the location of your Drone Service");
@@ -98,7 +98,6 @@ function NewProjectScreenOne(props) {
         showsVerticalScrollIndicator={false} 
         >
         <View style={styles.newProjectListTextWrapper}>
-          {/* <Text style={styles.newProjectText}>Create a New Project</Text> */}
           <Text style={styles.labelText}>
             Where is the location of your drone service?
           </Text>
@@ -144,17 +143,9 @@ function NewProjectScreenOne(props) {
               <Text style={styles.submitButton}>Submit Form</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={continueButton}>
+          {/* <TouchableOpacity onPress={continueButton}>
             <Text style={styles.continueButton}>Fake Continue With Form Route Link</Text>
-          </TouchableOpacity>
-          {/* <View style={styles.backButtonWrapper}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => props.navigation.goBack()}
-            >
-              <Text style={styles.backButtonText}>Back</Text>
-            </TouchableOpacity>
-          </View> */}
+          </TouchableOpacity> */}
         </View>
       </ScrollView>}
     </View>
@@ -169,9 +160,8 @@ const styles = StyleSheet.create({
   loadingWrapper: {
     width: "100%",
     height: "100%",
-    alignItems: "center",
     justifyContent: "center",
-  },
+  }, 
   scrollWrapper: {
     width: "100%",
     paddingTop: "10%",

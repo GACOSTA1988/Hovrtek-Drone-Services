@@ -41,61 +41,62 @@ function MyJobsScreen(props, { getProjects, getClientProfiles }) {
 
   return (
     <View style={styles.projectListWrapper}>
-        <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-          <View style={styles.projectCard}>
-              <FlatList
-                style={styles.flatListStyles}
-                data={listOfMyProjects}
-                keyExtractor={(item) => item.key}
-                renderItem={({ item }) => {
-                  return (
-                    <View
-                      style={styles.flatListContainer}
-                    >
-                      <TouchableHighlight 
-                      style={styles.touchableContainer}
-                      onPress={() => navigation.navigate("JobDetailsScreen", {...item,})}>
-                        <View>
-                          <View style={styles.textContainer}> 
-                            <View style={styles.topRowDisplay}>
-                              <Text style={styles.locationText}>
-                                <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
-                              </Text>
-                              <Text style={styles.dateText}>
-                                {item.date}
-                              </Text>
-                            </View>
-                            <View style={styles.descriptionBox}>
-                              <Text style={styles.descriptionText}>{item.recording}</Text>
-                            </View>
+      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        {listOfMyProjects.length < 1 ? <Text style={styles.emptyText}>( No accepted jobs yet )</Text> : null}
+        <View style={styles.projectCard}>
+            <FlatList
+              style={styles.flatListStyles}
+              data={listOfMyProjects}
+              keyExtractor={(item) => item.key}
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={styles.flatListContainer}
+                  >
+                    <TouchableHighlight 
+                    style={styles.touchableContainer}
+                    onPress={() => navigation.navigate("JobDetailsScreen", {...item,})}>
+                      <View>
+                        <View style={styles.textContainer}> 
+                          <View style={styles.topRowDisplay}>
+                            <Text style={styles.locationText}>
+                              <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
+                            </Text>
+                            <Text style={styles.dateText}>
+                              {item.date}
+                            </Text>
                           </View>
-                          {props.listOfClientProfiles.find(
-                          (x) => x.userID === item.clientID,
-                        ) ? (
-                          <Text style={styles.pilotText}>
-                            {"@"}
-                            {
-                              props.listOfClientProfiles.find(
-                                (x) => x.userID === item.clientID,
-                              ).firstName
-                            }{" "}
-                            {
-                              props.listOfClientProfiles.find(
-                                (x) => x.userID === item.clientID,
-                              ).lastName
-                            }
-                          </Text>
-                        ) : (
-                          null
-                        )}
+                          <View style={styles.descriptionBox}>
+                            <Text style={styles.descriptionText}>{item.recording}</Text>
+                          </View>
                         </View>
-                      </TouchableHighlight>
-                    </View>
-                  );
-                }}
-              />
-          </View>
-        </ScrollView>
+                        {props.listOfClientProfiles.find(
+                        (x) => x.userID === item.clientID,
+                      ) ? (
+                        <Text style={styles.pilotText}>
+                          {"@"}
+                          {
+                            props.listOfClientProfiles.find(
+                              (x) => x.userID === item.clientID,
+                            ).firstName
+                          }{" "}
+                          {
+                            props.listOfClientProfiles.find(
+                              (x) => x.userID === item.clientID,
+                            ).lastName
+                          }
+                        </Text>
+                      ) : (
+                        null
+                      )}
+                      </View>
+                    </TouchableHighlight>
+                  </View>
+                );
+              }}
+            />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -170,9 +171,15 @@ const styles = StyleSheet.create({
     fontSize: 12, 
   },
   descriptionText:{ 
-    color: "white", 
+    color: "#DDE2E4", 
     fontWeight: "500", 
     fontSize: 14
+  },
+  emptyText:{ 
+    color: "#DDE2E4", 
+    fontSize: 14,
+    textAlign: "center",
+    padding: "15%"
   },
 });
 

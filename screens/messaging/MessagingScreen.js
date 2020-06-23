@@ -117,7 +117,7 @@ function MessagingScreen(props) {
           }}
         />
       ) : (
-        <Text style={styles.textNoContacts}>No contacts yet</Text>
+        <Text style={styles.textNoContacts}>( No contacts yet )</Text>
       )}
     </View>
   );
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   },
   textNoContacts:{
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: "15%",
     color: "#DDE2E4"
   },
   names: {

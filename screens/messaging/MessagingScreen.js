@@ -111,7 +111,7 @@ function MessagingScreen(props) {
                     <Text style={styles.names}>
                       {item.pilotFirstName} {item.pilotLastName}
                     </Text>
-                    {unreadContactsUserID.includes(item.userID) ? <View style={styles.dot}/> : null}
+                    {unreadContactsUserID.includes(item.userID) ? <View style={styles.dot}/>: null}
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
@@ -121,6 +121,7 @@ function MessagingScreen(props) {
                     <Text style={styles.names}>
                       {item.firstName} {item.lastName}
                     </Text>
+                    {unreadContactsUserID.includes(item.userID) ? <View style={styles.dot}/>: null}
                   </TouchableOpacity>
                 )}
               </View>

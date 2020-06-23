@@ -17,6 +17,7 @@ import _ from "lodash";
 import princePic01 from "../../assets/princePic01.jpg";
 import { AntDesign } from "@expo/vector-icons";
 import { APP_STRINGS, NAV_SCREENS } from "../../constants";
+import logo from "../../assets/hovrtek_logo.png";
 
 const {
   abilityOver400Ft,
@@ -118,12 +119,11 @@ function PilotProfileWelcomeScreen(props) {
 
   const renderStartProfileView = () => {
     return (
-      <View>
-        <Text style={styles.welcomeText}>{welcomeHovrtek}</Text>
-          <Text style={styles.nameText}>{getPilotFullName()}</Text>
-        <View style={styles.alignItemsCenter}>
-          {renderTouchableStartPilotProfileText()}
-        </View>
+      <View style={styles.alignItemsCenter}>
+        <Text style={styles.welcomeText}>Welcome to</Text> 
+        <Image style={styles.logo} source={logo}/>
+        {/* <Text style={styles.nameText}>{getPilotFullName()}</Text> */}
+        {renderTouchableStartPilotProfileText()}
       </View>
     );
   };
@@ -210,20 +210,14 @@ const styles = StyleSheet.create({
   },
   alignItemsCenter: {
     alignItems: "center",
-  },
-  welcomeText: {
-    marginTop: "40%",
-    textAlign: "center",
-    fontSize: 30,
+    marginTop: "50%",
   },
   nameText: {
-    marginTop: "5%",
     fontSize: 30,
     color: "#DDE2E4",
     fontWeight: "600",
     textAlign: "center",
-    marginLeft: "4%",
-    marginBottom: "15%",
+    marginBottom: "10%",
   },
   locationText: {
     fontSize: 20,
@@ -252,12 +246,12 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     width: "100%",
-    height: "20%",
+    height: "30%",
     position: "absolute",
   },
   backgroundImageStartingPage: {
     width: "100%",
-    height: "40%",
+    height: "60%",
     position: "absolute",
   },
   profilePic: {
@@ -303,16 +297,14 @@ const styles = StyleSheet.create({
   startButton: {
     width: 250,
     height: 50,
-    backgroundColor: "#161616",
+    backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 10,
-    marginBottom: 30,
-    color: "white",
+    marginTop: 25,
   },
   startButtonText: {
-    color: "white",
+    color: "#161616",
     fontSize: 20,
   },
   personalBioStyle: {
@@ -322,6 +314,14 @@ const styles = StyleSheet.create({
     marginRight: "5%",
     marginTop: "1%",
   },
+  welcomeText: {
+    color: "#DDE2E4"
+  },
+  logo: {
+    width: "50%",
+    resizeMode: "contain",
+    height: "30%"
+  }
 });
 
 function mapStateToProps(state) {

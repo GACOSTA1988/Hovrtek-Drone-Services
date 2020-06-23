@@ -55,7 +55,6 @@ function SignInScreen({ navigation }) {
     <KeyboardAwareScrollView
       style={{
         flex: 1,
-        height: windowHeight,
         backgroundColor: '#161616',
       }}
     >
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   MainContainer: {
     alignItems: "center",
     justifyContent: "flex-start",
-    height: windowHeight,
+    height: windowHeight * 0.8,
     width: "100%",
     resizeMode: "contain",
   },

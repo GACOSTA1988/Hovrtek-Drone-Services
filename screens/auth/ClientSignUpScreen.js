@@ -77,9 +77,12 @@ function ClientSignUpScreen(props) {
 
   return (
     <KeyboardAwareScrollView
+      showsVerticalScrollIndicator={false}
+      scrollToOverflowEnabled={false}
       style={{
         flex: 1,
         height: "100%",
+        backgroundColor: "#161616",
       }}
     >
       <ImageBackground source={landingPageImage} style={styles.MainContainer}>

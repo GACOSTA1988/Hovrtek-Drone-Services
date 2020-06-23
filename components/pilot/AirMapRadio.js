@@ -8,7 +8,6 @@ let radio_props = [
 ];
 const AirMapRadio = (props) => {
   const { airMap, setAirMap } = props;
-  console.log("INSURED STATUS", airMap);
 
   let index = 0;
   const getIndexOfState = () => {

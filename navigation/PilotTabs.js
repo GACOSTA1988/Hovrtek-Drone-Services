@@ -52,10 +52,8 @@ function PilotTabs(props) {
         options={unreadMessages.length > 0 ? {
           tabBarIcon: ({color}) => (
             <View>
-              <View style={styles.outerDot}>
-                <View style={styles.innerDot}>
-                  <Text />
-                </View>
+              <View style={styles.dot}>
+                <Text />
               </View>
               <Entypo name="message" size={30} color={color} resizeMode="contain" style={styles.messageIcon}/>
             </View>  ) } : {
@@ -66,17 +64,17 @@ function PilotTabs(props) {
 }
 
 const styles = StyleSheet.create({
-  innerDot: {
+  dot: {
     ...Platform.select({
       ios: {
         position: "absolute",
-        bottom: 2,
-        right: 2,
+        top: 4,
+        right: -2,
       },
       android: {
         position: "absolute",
-        right: 2,
-        bottom: 2,
+        right: -1,
+        top: 4,
       },
     }),
     backgroundColor: "red",
@@ -84,25 +82,6 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 90,
     zIndex: 3
-  },
-  outerDot: {
-    ...Platform.select({
-      ios: {
-        position: "absolute",
-        bottom: 18,
-        right: -5,
-      },
-      android: {
-        position: "absolute",
-        right: -5,
-        bottom: 9,
-      },
-    }),
-    // backgroundColor: "#DDE2E4",
-    width: 15,
-    height: 15,
-    borderRadius: 90,
-    zIndex: 2
   },
   msesageIcon: {
     flex: 1

@@ -100,15 +100,20 @@ function PilotSignUpScreen(props) {
   }
 
   async function convertLocation(location){
-    let finalCoords = await Geocoder.from(location).then(json => {
+    let coordinates
+    try {
+      coordinates = await Geocoder.from(location).then(json => {
         const { lat, lng } = json.results[0].geometry.location;
         let pilotCoords = [lat, lng]
         return pilotCoords
       }).catch(error => {
-        console.error(error);
-      }
-    );
-    return finalCoords
+        console.log(error)
+        return coordinates = [45.523064, -122.676483]      
+      });
+    } catch (error) {
+      coordinates = [45.523064, -122.676483]
+    }
+    return coordinates
   }
 
   function passwordsDontMatch() {

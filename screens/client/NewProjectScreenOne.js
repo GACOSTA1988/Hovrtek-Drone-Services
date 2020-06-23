@@ -30,6 +30,7 @@ export const PassSetRecording = React.createContext();
 export const PassRecordingState = React.createContext();
 export const PassSetLight = React.createContext();
 export const PassLightState = React.createContext();
+
 function NewProjectScreenOne(props) {
   const navigation = useNavigation();
 

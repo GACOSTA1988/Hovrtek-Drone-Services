@@ -44,39 +44,35 @@ function MyJobsScreen(props, { getProjects, getClientProfiles }) {
         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
           <View style={styles.projectCard}>
               <FlatList
-                style={{ borderTopWidth: 10, borderColor: "#161616"}}
+                style={styles.flatListStyles}
                 data={listOfMyProjects}
                 keyExtractor={(item) => item.key}
                 renderItem={({ item }) => {
                   return (
                     <View
-                      style={{
-                        width: "100%",
-                        borderBottomWidth: 10,
-                        borderColor: "#161616",
-                      }}
+                      style={styles.flatListContainer}
                     >
                       <TouchableHighlight 
-                      style={{paddingTop: 20, paddingHorizontal: 20, width: "100%"}}
+                      style={styles.touchableContainer}
                       onPress={() => navigation.navigate("JobDetailsScreen", {...item,})}>
                         <View>
-                          <View style={{flex: 1, flexDirection: "column", justifyContent: "center", alignItems:"center", width: "100%"}}> 
-                            <View style={{flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10, borderBottomWidth: 1, borderBottomColor: "#DDE2E4", width: "100%", }}>
-                              <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 13,  }}>
+                          <View style={styles.textContainer}> 
+                            <View style={styles.topRowDisplay}>
+                              <Text style={styles.locationText}>
                                 <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
                               </Text>
-                              <Text style={{ color: "#DDE2E4", fontWeight: "800", fontSize: 12, }}>
+                              <Text style={styles.dateText}>
                                 {item.date}
                               </Text>
                             </View>
-                            <View style={{backgroundColor: "rgba(221,226,228, 0.2)", padding:10, width: "100%", borderRadius: 5}}>
-                              <Text style={{ color: "white", fontWeight: "500", fontSize: 14}}>{item.recording}</Text>
+                            <View style={styles.descriptionBox}>
+                              <Text style={styles.descriptionText}>{item.recording}</Text>
                             </View>
                           </View>
                           {props.listOfClientProfiles.find(
                           (x) => x.userID === item.clientID,
                         ) ? (
-                          <Text style={{ color: "#DDE2E4", fontWeight: "200", alignSelf: "center", fontSize: 12, marginTop: 10, marginBottom: 10, }}>
+                          <Text style={styles.pilotText}>
                             {"@"}
                             {
                               props.listOfClientProfiles.find(
@@ -118,6 +114,65 @@ const styles = StyleSheet.create({
   scrollContainer: {
     backgroundColor: "#161616",
     width: "100%",
+  },
+  flatListContainer:{
+    width: "100%",
+    borderBottomWidth: 10,
+    borderColor: "#161616",
+  },
+  flatListStyles:{ 
+    borderTopWidth: 10, 
+    borderColor: "#161616"
+  },
+  topRowDisplay:{
+    flex: 1, 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginBottom: 10, 
+    borderBottomWidth: 1, 
+    borderBottomColor: "#DDE2E4", 
+    width: "100%", 
+  },
+  touchableContainer:{
+    paddingTop: 20, 
+    paddingHorizontal: 20, 
+    width: "100%",
+  },
+  textContainer:{
+    flex: 1, 
+    flexDirection: "column", 
+    justifyContent: "center", 
+    alignItems:"center", 
+    width: "100%"
+  },
+  pilotText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "200", 
+    alignSelf: "center", 
+    fontSize: 12, 
+    marginTop: 10, 
+    marginBottom: 10, 
+  },
+  locationText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "800", 
+    fontSize: 13,  
+  },
+  descriptionBox:{
+    backgroundColor: "rgba(221,226,228, 0.2)", 
+    padding:10, width: "100%", 
+    borderRadius: 5
+  },
+  dateText:{ 
+    color: "#DDE2E4", 
+    fontWeight: "800", 
+    fontSize: 12, 
+  },
+  descriptionText:{ 
+    color: "white", 
+    fontWeight: "500", 
+    fontSize: 14
   },
 });
 

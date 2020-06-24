@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, View, Alert } from "react-native";
+import { TouchableOpacity, Image, View, Alert, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as firebase from "firebase";
 import * as Permissions from "expo-permissions";
@@ -26,22 +26,26 @@ function ProfileUploader(props) {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
   }
 
-  persistImage = (uri = "") => {
+  function persistImage(uri){
     setlicenseThumbnail(uri);
     pluckImage(uri);
   };
 
   async function setImage() {
+    props.triggerLoading()
     try {
       let result = await ImagePicker.launchImageLibraryAsync();
 
       if (!result.cancelled) {
         const { uri } = result;
         const response = await uploadImage(uri, uuid);
-        Alert.alert(successfullyUploaded);
         persistImage(response);
+        props.pullURI(response)
+        props.disableLoading()
+        Alert.alert(successfullyUploaded);
       }
     } catch (error) {
+      props.disableLoading()
       return Alert.alert(error);
     }
   }
@@ -50,9 +54,22 @@ function ProfileUploader(props) {
   const style = generateUploadedImageStyle(hasSquareImage);
 
   return (
-    <View>
-      <Button title={uploadImageStr} onPress={setImage} />
-      {!!licenseThumbnail && <Image source={source} style={style} />}
+    <View style={{width: "100%", justifyContent: "center", alignItems: "center", flexDirection:"column",}}>
+      <TouchableOpacity
+        style={{
+          width: 250,
+          height: 50,
+          backgroundColor: "#DDE2E4",
+          borderRadius: 30,
+          alignItems: "center",
+          justifyContent: "center",
+          marginVertical: 15,
+        }}
+        onPress={setImage}
+      >
+        <Text style={{color: "#161616", fontSize: 20,}}>{uploadImageStr}</Text>
+      </TouchableOpacity>
+      {!!licenseThumbnail && <Image source={source} style={{width: 200, height: 200}} />}
     </View>
   );
 }

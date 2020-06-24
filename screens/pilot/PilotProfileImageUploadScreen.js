@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -9,16 +9,14 @@ import {
 import * as firebase from "firebase";
 import _ from "lodash";
 import ProfileUploader from "../../components/shared/ProfileUploader";
+import LoadingScreen from "../../screens/LoadingScreen"
 import { APP_STRINGS } from "../../constants/index";
 
 // CONTEXT HOOK
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
 
-function PilotProfileImageUploadScreen(
-  props,
-  // { getPilotProfiles, editPilotProfile },
-) {
+function PilotProfileImageUploadScreen(props) {
   const navigation = useNavigation();
   const { goBack } = props.navigation;
 
@@ -62,6 +60,8 @@ function PilotProfileImageUploadScreen(
     profileImageUrlPlaceHolder,
   );
 
+  const [loadingActive, setLoadingActive] = useState(false)
+  const [imagePreview, setImagePreview] = useState("")
   const [ personalBio, setPersonalBio ] = useState(personalBioPlaceHolder);
   const [ yearsOfExperience, setYearsOfExperience ] = useState(
     yearsOfExperiencePlaceHolder,
@@ -105,23 +105,33 @@ function PilotProfileImageUploadScreen(
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Please Upload Profile Picture</Text>
-      <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
-        <PassProfileImageUrlState.Provider value={profileImageUrl}>
-          <ProfileUploader hasSquareImage={true} pluckImage={pluckImage} />
-        </PassProfileImageUrlState.Provider>
-      </PassSetProfileImageUrlContext.Provider>
+      {loadingActive ?
+      <LoadingScreen />
+      :
+      <View style={styles.uploadContainer}>
+        <Text style={styles.text}>Please Upload Profile Picture</Text>
+        <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
+          <PassProfileImageUrlState.Provider value={profileImageUrl}>
+            <ProfileUploader 
+              hasSquareImage={true} 
+              pluckImage={pluckImage} 
+              triggerLoading={() => setLoadingActive(true)} 
+              disableLoading={() => setLoadingActive(false)}
+              pullURI={(uri) => setImagePreview(uri)}
+            />
+            {imagePreview.length ? <Image source={{uri: imagePreview}} style={{width: 200, height: 200, borderWidth: 1, borderColor: "#DDE2E4", marginBottom: 20, marginTop: 10}} /> : null}
+          </PassProfileImageUrlState.Provider>
+        </PassSetProfileImageUrlContext.Provider>
 
-      <TouchableOpacity
-        style={styles.completeButton}
-        onPress={submit}
-        title={"Complete Profile"}
-      >
-        <Text style={styles.completeButtonText}>Complete Profile</Text>
-      </TouchableOpacity>
-
-      <View style={styles.backButtonWrapper}>
+        <TouchableOpacity
+          style={styles.completeButton}
+          onPress={submit}
+          title={"Complete Profile"}
+        >
+          <Text style={styles.completeButtonText}>Complete Profile</Text>
+        </TouchableOpacity>
       </View>
+      }
     </View>
   );
 }
@@ -129,10 +139,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "lightgray",
+    justifyContent: "center",
     height: "100%",
-    paddingTop: "30%",
+    width: "100%",
     backgroundColor: "#161616"
+  },
+  uploadContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
   },
   completeButton: {
     width: 250,
@@ -141,9 +157,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 390,
-    marginBottom: 10,
-    position: "absolute",
   },
   completeButtonText: {
     color: "#161616",
@@ -161,7 +174,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     height: 30,
-    marginBottom: 80,
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -8,12 +8,17 @@ import {
   Modal,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import DateTimePicker from "react-native-modal-datetime-picker";
 import { editProject } from "../../actions/projects";
 import { connect } from "react-redux";
 import LoadingScreen from "../../screens/LoadingScreen"
 import Geocoder from "react-native-geocoding";
+import NewProjectScreenOne from './NewProjectScreenOne'
+import moment from "moment";
 import {API_KEY} from "../../geocoder"
 import { APP_STRINGS } from "../../constants/index";
+import { PassSetDate } from "../../screens/client/NewProjectScreenOne";
+import { PassDateState } from "../../screens/client/NewProjectScreenOne";
 Geocoder.init(API_KEY);
 
 const {
@@ -21,188 +26,67 @@ const {
 } = APP_STRINGS;
 
 function EditProjectScreen(props, { editProject }) {
-  const { projectDetails } = props.route.params;
-  const { fromList } = props.route.params;
-  const navigation = useNavigation();
+  // const { projectDetails } = props.route.params;
+  // const { fromList } = props.route.params;
+  // const navigation = useNavigation();
 
-  const [ location, setLocation ] = useState(projectDetails.location);
-  const [ date, setDate ] = useState(projectDetails.date);
-  const [ recording, setRecording ] = useState(projectDetails.recording);
-  const [loadingActive, setLoadingActive] = useState(false)
+  // const [ location, setLocation ] = useState(projectDetails.location);
+  // const [ recording, setRecording ] = useState(projectDetails.recording);
+  // const [loadingActive, setLoadingActive] = useState(false)
 
-  const [isLocationModalVisible, setIsLocationModalVisible] = useState(false);
-  const [isDateModalVisible, setIsDateModalVisible] = useState(false);
-  const [isRecordingModalVisible, setIsRecordingModalVisible] = useState(false);
+  // const setDateState = useContext(PassSetDate);
+  // const dateState = useContext(PassDateState);
+  
+  // const [isLocationModalVisible, setIsLocationModalVisible] = useState(false);
+  // const [isDateModalVisible, setIsDateModalVisible] = useState(false);
+  // const [isRecordingModalVisible, setIsRecordingModalVisible] = useState(false);
+  
+  // const [ date, setDate ] = useState(projectDetails.date);
 
+  // const handlePicker = (datetime) => {
+  //   setIsDateModalVisible(false)
+  //   setDateState(moment(datetime).format("MMMM, DD  YYYY"));
+  // };
 
-  const openLocationModal = () => {
-    setIsLocationModalVisible(true);
-  };
+  // async function submit(){
+  //   setLoadingActive(true)
+  //   let locationCoordinates
+  //   if(location != projectDetails.location){
+  //     let locationCoordinatesResponse = await convertLocation(location)
+  //     locationCoordinates = locationCoordinatesResponse
+  //   } else {
+  //     locationCoordinates = projectDetails.locationCoordinates
+  //   }
+  //   projectDetails.location = location;
+  //   projectDetails.date = date;
+  //   projectDetails.recording = recording;
+  //   props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
+  //   fromList ? navigation.navigate("ProjectListScreen") :
+  //   navigation.navigate("ProjectDetailsScreen", { projectDetails: projectDetails
+  //   });
+  //   setLoadingActive(false)
+  // };
 
-  const closeLocationModal = () => {
-    setIsLocationModalVisible(false);
-  };
-
-  const openDateModal = () => {
-    setIsDateModalVisible(true);
-  };
-
-  const closeDateModal = () => {
-    setIsDateModalVisible(false);
-  };
-
-  const openRecordingModal = () => {
-    setIsRecordingModalVisible(true);
-  };
-
-  const closeRecordingModal = () => {
-    setIsRecordingModalVisible(false);
-  };
-
-  async function submit(){
-    setLoadingActive(true)
-    let locationCoordinates
-    if(location != projectDetails.location){
-      let locationCoordinatesResponse = await convertLocation(location)
-      locationCoordinates = locationCoordinatesResponse
-    } else {
-      locationCoordinates = projectDetails.locationCoordinates
-    }
-    projectDetails.location = location;
-    projectDetails.date = date;
-    projectDetails.recording = recording;
-    props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
-    fromList ? navigation.navigate("ProjectListScreen") :
-    navigation.navigate("ProjectDetailsScreen", { projectDetails: projectDetails
-    });
-    setLoadingActive(false)
-  };
-
-  async function convertLocation(location){
-    let coordinates
-    try {
-      coordinates = await Geocoder.from(location).then(json => {
-        const { lat, lng } = json.results[0].geometry.location;
-        let pilotCoords = [lat, lng]
-        return pilotCoords
-      }).catch(error => {
-        console.log(error)
-        return coordinates = [45.523064, -122.676483]      
-      });
-    } catch (error) {
-      coordinates = [45.523064, -122.676483]
-    }
-    return coordinates
-  }
+  // async function convertLocation(location){
+  //   let coordinates
+  //   try {
+  //     coordinates = await Geocoder.from(location).then(json => {
+  //       const { lat, lng } = json.results[0].geometry.location;
+  //       let pilotCoords = [lat, lng]
+  //       return pilotCoords
+  //     }).catch(error => {
+  //       console.log(error)
+  //       return coordinates = [45.523064, -122.676483]      
+  //     });
+  //   } catch (error) {
+  //     coordinates = [45.523064, -122.676483]
+  //   }
+  //   return coordinates
+  // }
 
   return (
-    <View style={loadingActive ? styles.loadingWrapper : styles.container}>
-       {loadingActive ?
-        <LoadingScreen />
-        :
-        <View>
-          <View style={styles.headerContainer}>
-            <Text style={styles.ProjectText}> </Text>
-            <View style={styles.saveButton}>
-              <TouchableOpacity hitSlop={styles.hitSlop} onPress={submit}>
-                <Text style={styles.saveText}>Save changes</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <Text style={styles.detailsHeader}>Where:</Text>
-
-          <TouchableOpacity style={styles.button} onPress={openLocationModal} title={openLocationModal}>
-        <Text style={styles.buttonText}>Project Location</Text>
-      </TouchableOpacity>
-          <Modal
-        transparent={true}
-        visible={isLocationModalVisible}
-        animationType={slide}
-        onRequestClose={closeLocationModal}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Project Location</Text>
-          </View>
-
-          <TextInput
-          multiline={true}
-          style={styles.input}
-          onChangeText={setLocation}
-          autoFocus={true}
-          value={location}
-        />
-
-<View styles={styles.cancelWrapper}>
-            <TouchableOpacity style={styles.editButton} onPress={closeLocationModal}>
-              <Text style={styles.editText}>{APP_STRINGS.choose}</Text>
-            </TouchableOpacity> 
-          </View>
-        </View>
-      </Modal>
-
-          <Text style={styles.detailsHeader}>When:</Text>
-          <TouchableOpacity style={styles.button} onPress={openDateModal} title={openDateModal}>
-        <Text style={styles.buttonText}>Project Date</Text>
-      </TouchableOpacity>
-          <Modal
-        transparent={true}
-        visible={isDateModalVisible}
-        animationType={slide}
-        onRequestClose={closeDateModal}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Project Recording</Text>
-          </View>
-
-          <TextInput
-          multiline={true}
-          style={styles.input}
-          onChangeText={setDate}
-          autoFocus={true}
-          value={date}
-        />
-
-<View styles={styles.cancelWrapper}>
-            <TouchableOpacity style={styles.editButton} onPress={closeDateModal}>
-              <Text style={styles.editText}>{APP_STRINGS.choose}</Text>
-            </TouchableOpacity> 
-          </View>
-        </View>
-      </Modal>
-          <Text style={styles.detailsHeader}>What:</Text>
-          <TouchableOpacity style={styles.button} onPress={openRecordingModal} title={openRecordingModal}>
-        <Text style={styles.buttonText}>Project Recording</Text>
-      </TouchableOpacity>
-          <Modal
-        transparent={true}
-        visible={isRecordingModalVisible}
-        animationType={slide}
-        onRequestClose={closeRecordingModal}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.modalText}>Project Recording</Text>
-          </View>
-
-          <TextInput
-          multiline={true}
-          style={styles.input}
-          onChangeText={setRecording}
-          autoFocus={true}
-          value={recording}
-        />
-
-<View styles={styles.cancelWrapper}>
-            <TouchableOpacity style={styles.editButton} onPress={closeRecordingModal}>
-              <Text style={styles.editText}>{APP_STRINGS.choose}</Text>
-            </TouchableOpacity> 
-          </View>
-        </View>
-      </Modal>
-        </View>
-      }
+    <View>
+      <NewProjectScreenOne />
     </View>
   );
 }
@@ -216,6 +100,7 @@ const styles = StyleSheet.create({
   loadingWrapper: {
     width: "100%",
     height: "100%",
+    alignItems: "center",
     justifyContent: "center",
   },
   KeyboardAwareScrollView: {

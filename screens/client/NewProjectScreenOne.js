@@ -8,7 +8,8 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import { postProjects } from "../../actions/projects";
+import { connect } from "react-redux";
+import { getProjects, postProjects } from "../../actions/projects";
 import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -34,9 +35,28 @@ export const PassLightState = React.createContext();
 function NewProjectScreenOne(props) {
   const navigation = useNavigation();
 
+  useEffect(() => {
+    props.getProjects();
+  }, []);
+
   let clientID = null;
   if (firebase.auth().currentUser) {
     clientID = firebase.auth().currentUser.uid;
+  }
+
+  const list = props.listOfProjects;
+  let currentProjectProps = list.find((x) => x.projectID === projectID);
+
+    let projectLocationPlaceholder = '';
+    let projectDatePlaceholder = '';
+    let projectRecordingPlaceholder = '';
+    let projectLightPlaceholder = '';
+  
+  if (currentProjectProps) {
+    projectLocationPlaceholder = currentProjectProps.location;
+    projectDatePlaceholder = currentProjectProps.date;
+    projectRecordingPlaceholder = currentProjectProps.recording;
+    projectLightPlaceholder = currentProjectProps.light;
   }
 
   const [loadingActive, setLoadingActive] = useState(false)

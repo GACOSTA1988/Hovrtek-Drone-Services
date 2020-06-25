@@ -42,7 +42,8 @@ function ProjectDetailsScreen(props) {
         onPress={() =>
           props.navigation.navigate("EditProjectScreen", {
             projectDetails: projectDetails,
-            fromList: false
+            fromList: false,
+            isEditing: true
           })
         }
         >

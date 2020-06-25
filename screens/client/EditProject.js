@@ -1,4 +1,3 @@
-  
 import React, { useState, useEffect } from "react";
 import {
   Text,
@@ -39,21 +38,33 @@ function NewProjectScreenOne(props) {
     props.getProjects();
   }, []);
 
+  const { projectDetails } = props.route.params;
+
+  // let clientID = null;
+  // if (firebase.auth().currentUser) {
+  //   clientID = firebase.auth().currentUser.uid;
+  // }
+
+  // const list = props.listOfProjects;
+  // let currentProjectProps = list.find((x) => x.clientID === clientID);
+
+  //   let projectLocationPlaceholder = '';
+  //   let projectDatePlaceholder = '';
+  //   let projectRecordingPlaceholder = '';
+  //   let projectLightPlaceholder = '';
+  
+  // if (currentProjectProps) {
+  //   projectLocationPlaceholder = currentProjectProps.location;
+  //   projectDatePlaceholder = currentProjectProps.date;
+  //   projectRecordingPlaceholder = currentProjectProps.recording;
+  //   projectLightPlaceholder = currentProjectProps.light;
+  // }
+
   const [loadingActive, setLoadingActive] = useState(false)
-  const [ location, setLocation ] = useState("");
-  const [ date, setDate ] = useState("");
-  const [ recording, setRecording ] = useState("");
-  const [ light, setLight ] = useState("");
-
-  if (props.route.params.isEditing) {
-    const { projectDetails } = props.route.params;
-    setLocation(projectDetails.location);
-    setDate(projectDetails.date);
-    setRecording(projectDetails.recording);
-    setLight(projectDetails.light);
-  }
-
-
+  const [ location, setLocation ] = useState(projectDetails.location);
+  const [ date, setDate ] = useState(projectDetails.date);
+  const [ recording, setRecording ] = useState(projectDetails.recording);
+  const [ light, setLight ] = useState(projectDetails.light);
 
   async function submit(){
     setLoadingActive(true)

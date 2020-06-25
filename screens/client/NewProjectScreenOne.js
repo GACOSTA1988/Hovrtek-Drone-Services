@@ -18,7 +18,7 @@ import ClientDatePicker from '../../components/client/ClientDatePicker';
 import ClientLocationPicker from '../../components/client/ClientLocationPicker';
 import ClientRecordingPicker from '../../components/client/ClientRecordingPicker';
 import ClientLightPicker from '../../components/client/ClientLightPicker';
-import LoadingScreen from "../../screens/LoadingScreen"
+import LoadingScreen from "../LoadingScreen"
 import Geocoder from "react-native-geocoding";
 import {API_KEY} from "../../geocoder"
 Geocoder.init(API_KEY);
@@ -35,23 +35,19 @@ export const PassLightState = React.createContext();
 function NewProjectScreenOne(props) {
   const navigation = useNavigation();
 
-  useEffect(() => {
-    props.getProjects();
-  }, []);
-
-  const [loadingActive, setLoadingActive] = useState(false)
-  const [ location, setLocation ] = useState("");
-  const [ date, setDate ] = useState("");
-  const [ recording, setRecording ] = useState("");
-  const [ light, setLight ] = useState("");
-
-  if (props.route.params.isEditing) {
-    const { projectDetails } = props.route.params;
-    setLocation(projectDetails.location);
-    setDate(projectDetails.date);
-    setRecording(projectDetails.recording);
-    setLight(projectDetails.light);
+  let clientID = null;
+  if (firebase.auth().currentUser) {
+    clientID = firebase.auth().currentUser.uid;
   }
+
+    const { projectDetails } = props.route.params;
+    const [ location, setLocation ] = (props.route.params.isEditing? useState(projectDetails.location) : useState(""));
+    const [ date, setDate ] = (props.route.params.isEditing? useState(projectDetails.date) : useState(""));
+    const [ recording, setRecording ] = (props.route.params.isEditing? useState(projectDetails.recording) : useState(""));
+    const [ light, setLight ] = (props.route.params.isEditing? useState(projectDetails.light) : useState(""));
+  
+  const [ loadingActive, setLoadingActive ] = useState(false);
+
 
 
 
@@ -64,7 +60,14 @@ function NewProjectScreenOne(props) {
     } else if (recording.trim() === '') {
       Alert.alert("Please enter what you will be recording with the drone");
     } else {
-      props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
+      if (props.route.params.isEditing) {
+        projectDetails.location = location;
+    projectDetails.date = date;
+    projectDetails.recording = recording;
+    props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
+      } else {
+        props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
+      }
       setDate(""), setLight(""), setLocation(""), setRecording("");
       props.navigation.popToTop();
       props.navigation.navigate("Projects");

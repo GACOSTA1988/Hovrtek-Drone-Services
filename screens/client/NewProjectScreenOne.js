@@ -1,17 +1,15 @@
   
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
   Alert,
   ScrollView,
 } from "react-native";
 import { connect } from "react-redux";
 import { getProjects, postProjects, editProject } from "../../actions/projects";
-import { postClientProfiles } from "../../actions/clientProfiles";
 import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
 import ClientDatePicker from '../../components/client/ClientDatePicker';
@@ -47,9 +45,6 @@ function NewProjectScreenOne(props) {
     const [ light, setLight ] = (props.route.params.isEditing? useState(projectDetails.light) : useState(""));
   
   const [ loadingActive, setLoadingActive ] = useState(false);
-
-
-
 
   async function submit(){
     setLoadingActive(true)
@@ -90,10 +85,6 @@ function NewProjectScreenOne(props) {
       coordinates = [45.523064, -122.676483]
     }
     return coordinates
-  }
-
-  const continueButton = () => {
-    navigation.navigate("NewProjectScreenTwo");
   }
 
   const [isModalActive, setIsModalActive] = useState(false);
@@ -173,14 +164,6 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingTop: "10%",
   },
-  // newProjectText: {
-  //   fontSize: 30,
-  //   color: "white",
-  //   marginBottom: 20,
-  //   textAlign: "center",
-  //   marginTop: 10,
-  //   // backgroundColor: "white"
-  // },
   newProjectListTextWrapper: {
     marginBottom: 100,
   },
@@ -206,21 +189,6 @@ const styles = StyleSheet.create({
   modalWrapper: {
     alignItems: 'center',
   },
-  // backButton: {
-  //   marginTop: 20,
-  //   marginBottom: 40,
-  //   width: 60,
-  //   height: 30,
-  //   backgroundColor: "#DDE2E4",
-  //   borderRadius: 30,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
-  // backButtonText: {
-  //   color: "#161616",
-  //   textAlign: "center",
-  //   // marginBottom: 40,
-  // },
   buttonWrapper:{
     alignItems: 'center'
   },
@@ -238,18 +206,4 @@ const styles = StyleSheet.create({
     opacity: 0.2
   }
 });
-// function mapStateToProps(state) {
-//   const listOfProjects = _.map(
-//     state.projectsList.projectsList,
-//     (val, key) => {
-//       return {
-//         ...val,
-//         key: key,
-//       };
-//     }
-//   );
-//   return {
-//     listOfProjects,
-//   };
-// }
 export default connect(null, { getProjects, postProjects, editProject })(NewProjectScreenOne);

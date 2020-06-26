@@ -3,12 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ProjectListScreen from "../screens/client/ProjectListScreen";
 import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
 import NewProjectScreenOne from "../screens/client/NewProjectScreenOne";
-import EditProjectScreen from "../screens/client/EditProjectScreen";
 import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScreen";
-import ChatScreen from "../screens/messaging/ChatScreen";
 import GlobalHeader from "../components/shared/GlobalHeader";
-import { Ionicons } from "@expo/vector-icons";
-import { editProject } from "../actions/projects";
 
 const ProjectStack = createStackNavigator();
 

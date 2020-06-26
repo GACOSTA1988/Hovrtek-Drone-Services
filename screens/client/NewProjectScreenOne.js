@@ -47,19 +47,26 @@ function NewProjectScreenOne(props) {
   const [ loadingActive, setLoadingActive ] = useState(false);
 
   async function submit(){
-    setLoadingActive(true)
     let locationCoordinates = await convertLocation(location)
+    setLoadingActive(true)
     if (location.trim() === '') {
       Alert.alert("Please fill in the location of your Drone Service");
+      setLoadingActive(false)
+      return
+    } else if (date.trim() === '') {
+      Alert.alert("Please enter when the recording will be scheduled");
+      setLoadingActive(false)
       return
     } else if (recording.trim() === '') {
       Alert.alert("Please enter what you will be recording with the drone");
+      setLoadingActive(false)
+      return
     } else {
       if (props.route.params.isEditing) {
         projectDetails.location = location;
-    projectDetails.date = date;
-    projectDetails.recording = recording;
-    props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
+        projectDetails.date = date;
+        projectDetails.recording = recording;
+        props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
       } else {
         props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
       }

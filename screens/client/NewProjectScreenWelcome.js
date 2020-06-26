@@ -12,6 +12,7 @@ import hovrtekLogo from '../../assets/hovrtek_logo.png';
 
 
 function NewProjectScreenWelcome(props) {
+    const projectDetails = {} ;
 
     useEffect(() => {
         navigation.navigate("Messages");
@@ -27,7 +28,11 @@ function NewProjectScreenWelcome(props) {
     }
 
     const continueButton = () => {
-        navigation.navigate("NewProjectScreenOne");
+        props.navigation.navigate("NewProjectScreenOne", {
+            projectDetails: projectDetails,
+            fromList: false,
+            isEditing: false
+          })
     }
 
     return (

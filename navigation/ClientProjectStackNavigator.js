@@ -2,11 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ProjectListScreen from "../screens/client/ProjectListScreen";
 import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
-import EditProjectScreen from "../screens/client/EditProjectScreen";
+import NewProjectScreenOne from "../screens/client/NewProjectScreenOne";
 import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScreen";
-import ChatScreen from "../screens/messaging/ChatScreen";
 import GlobalHeader from "../components/shared/GlobalHeader";
-import { Ionicons } from "@expo/vector-icons";
 
 const ProjectStack = createStackNavigator();
 
@@ -37,7 +35,7 @@ const ClientProjectStackNavigator = () => {
       />
       <ProjectStack.Screen
         name="EditProjectScreen"
-        component={EditProjectScreen}
+        component={NewProjectScreenOne}
         options={{
           headerLeft: null,
           headerTitle: () => <GlobalHeader isHome={false} subheaderTitle={"Edit Details"} />,

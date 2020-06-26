@@ -6,7 +6,6 @@ import NewProjectScreenThree from "../screens/client/NewProjectScreenThree";
 import NewProjectScreenWelcome from "../screens/client/NewProjectScreenWelcome";
 import ProjectListScreen from "../screens/client/ProjectListScreen";
 import ProjectDetailsScreen from "../screens/client/ProjectDetailsScreen";
-import EditProjectScreen from "../screens/client/EditProjectScreen";
 import PilotProfileWelcomeScreen from "../screens/pilot/PilotProfileWelcomeScreen";
 import ChatScreen from "../screens/messaging/ChatScreen";
 import { Ionicons } from "@expo/vector-icons";

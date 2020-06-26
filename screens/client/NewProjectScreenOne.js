@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+  
+import React, { useState } from "react";
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
   Alert,
   ScrollView,
 } from "react-native";
-import { postProjects } from "../../actions/projects";
-import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
+import { getProjects, postProjects, editProject } from "../../actions/projects";
 import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
 import ClientDatePicker from '../../components/client/ClientDatePicker';
 import ClientLocationPicker from '../../components/client/ClientLocationPicker';
 import ClientRecordingPicker from '../../components/client/ClientRecordingPicker';
 import ClientLightPicker from '../../components/client/ClientLightPicker';
-import LoadingScreen from "../../screens/LoadingScreen"
+import LoadingScreen from "../LoadingScreen"
 import Geocoder from "react-native-geocoding";
 import {API_KEY} from "../../geocoder"
 Geocoder.init(API_KEY);
@@ -39,25 +38,31 @@ function NewProjectScreenOne(props) {
     clientID = firebase.auth().currentUser.uid;
   }
 
-  const [loadingActive, setLoadingActive] = useState(false)
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState("");
-  const [recording, setRecording] = useState("");
-  const [light, setLight] = useState("");
+    const { projectDetails } = props.route.params;
+    const [ location, setLocation ] = (props.route.params.isEditing? useState(projectDetails.location) : useState(""));
+    const [ date, setDate ] = (props.route.params.isEditing? useState(projectDetails.date) : useState(""));
+    const [ recording, setRecording ] = (props.route.params.isEditing? useState(projectDetails.recording) : useState(""));
+    const [ light, setLight ] = (props.route.params.isEditing? useState(projectDetails.light) : useState(""));
+  
+  const [ loadingActive, setLoadingActive ] = useState(false);
 
   async function submit(){
-    // setLoadingActive(true)
+    setLoadingActive(true)
     let locationCoordinates = await convertLocation(location)
     if (location.trim() === '') {
       Alert.alert("Please fill in the location of your Drone Service");
       return
-    } else if (date.trim() === '') {
-      Alert.alert("Please enter the date of your drone service");
-      return
     } else if (recording.trim() === '') {
       Alert.alert("Please enter what you will be recording with the drone");
     } else {
-      props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
+      if (props.route.params.isEditing) {
+        projectDetails.location = location;
+    projectDetails.date = date;
+    projectDetails.recording = recording;
+    props.editProject(location, date, recording, locationCoordinates, projectDetails.key);
+      } else {
+        props.postProjects(clientID, location, date, recording, light, null, locationCoordinates);
+      }
       setDate(""), setLight(""), setLocation(""), setRecording("");
       props.navigation.popToTop();
       props.navigation.navigate("Projects");
@@ -80,10 +85,6 @@ function NewProjectScreenOne(props) {
       coordinates = [45.523064, -122.676483]
     }
     return coordinates
-  }
-
-  const continueButton = () => {
-    navigation.navigate("NewProjectScreenTwo");
   }
 
   const [isModalActive, setIsModalActive] = useState(false);
@@ -143,9 +144,6 @@ function NewProjectScreenOne(props) {
               <Text style={styles.submitButton}>Submit Form</Text>
             </TouchableOpacity>
           </View>
-          {/* <TouchableOpacity onPress={continueButton}>
-            <Text style={styles.continueButton}>Fake Continue With Form Route Link</Text>
-          </TouchableOpacity> */}
         </View>
       </ScrollView>}
     </View>
@@ -166,14 +164,6 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingTop: "10%",
   },
-  // newProjectText: {
-  //   fontSize: 30,
-  //   color: "white",
-  //   marginBottom: 20,
-  //   textAlign: "center",
-  //   marginTop: 10,
-  //   // backgroundColor: "white"
-  // },
   newProjectListTextWrapper: {
     marginBottom: 100,
   },
@@ -199,21 +189,6 @@ const styles = StyleSheet.create({
   modalWrapper: {
     alignItems: 'center',
   },
-  // backButton: {
-  //   marginTop: 20,
-  //   marginBottom: 40,
-  //   width: 60,
-  //   height: 30,
-  //   backgroundColor: "#DDE2E4",
-  //   borderRadius: 30,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
-  // backButtonText: {
-  //   color: "#161616",
-  //   textAlign: "center",
-  //   // marginBottom: 40,
-  // },
   buttonWrapper:{
     alignItems: 'center'
   },
@@ -231,4 +206,4 @@ const styles = StyleSheet.create({
     opacity: 0.2
   }
 });
-export default connect(null, { postProjects })(NewProjectScreenOne);
+export default connect(null, { getProjects, postProjects, editProject })(NewProjectScreenOne);

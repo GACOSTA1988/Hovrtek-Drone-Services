@@ -79,53 +79,53 @@ function JobListScreen(props) {
             </TouchableOpacity>
             </View>
               </View>
-              <FlatList
-                style={{ width: "100%", marginTop: 15 }}
-                data={availableProjects}
-                keyExtractor={(item) => item.key}
-                renderItem={({ item }) => {
-                  return (
-                    <View
-                    style={{
-                      borderRadius: 15,
-                      padding: 20,
-                      opacity: 0.2,
-                    }}
-                    >
-                        <View>
-                          <Text style={styles.cardText}>
-                            Location: {item.location}{" "}
+               <FlatList
+              style={{ width: "100%", color: "#DDE2E4"}}
+              data={availableProjects}
+              keyExtractor={(item) => item.key}
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={styles.flatListContainer, {opacity: 0.1}}
+                  >
+                      <View>
+                        <View style={styles.cardContainer}>
+                          <Text style={styles.locationText}>
+                            <Entypo name="location" size={14} color="#DDE2E4" /> {item.location}{" "}
                           </Text>
-                          <Text style={styles.cardText}>
-                            Date: {item.date}{" "}
+                          <Text style={styles.dateText}>
+                            {item.date}
                           </Text>
-                          <Text style={styles.cardText}>
-                            Recording: {item.recording}{" "}
-                          </Text>
-                          {props.listOfClientProfiles.find(
-                            (x) => x.userID === item.clientID,
-                            ) ? (
-                              <Text style={styles.cardText}>
-                              Posted by:{" "}
-                              {
-                                props.listOfClientProfiles.find(
-                                  (x) => x.userID === item.clientID,
-                                  ).firstName
-                                }{" "}
-                              {
-                                props.listOfClientProfiles.find(
-                                  (x) => x.userID === item.clientID,
-                                  ).lastName
-                                }
-                            </Text>
-                          ) : (
-                            <Text></Text>
-                            )}
                         </View>
-                    </View>
-                  );
-                }}
-                />
+                        <View style={styles.descriptionTextView}>
+                          <Text style={styles.descriptionText}>
+                            {item.recording}
+                          </Text>
+                        </View>
+                        {props.listOfClientProfiles.find(
+                          (x) => x.userID === item.clientID,
+                        ) ? (
+                          <Text style={styles.pilotDisplay}>
+                            {"@"}
+                            {
+                              props.listOfClientProfiles.find(
+                                (x) => x.userID === item.clientID,
+                              ).firstName
+                            }{" "}
+                            {
+                              props.listOfClientProfiles.find(
+                                (x) => x.userID === item.clientID,
+                              ).lastName
+                            }
+                          </Text>
+                        ) : (
+                          null
+                        )}
+                      </View>
+                  </View>
+                );
+              }}
+            />
           </View>
       ) : (
         null
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "#161616",
     width: 280,
-    height: '15%',
+    height: '25%',
     borderRadius: 8,
     padding: 20,
     alignItems: "center",

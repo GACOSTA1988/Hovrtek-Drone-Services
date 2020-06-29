@@ -11,7 +11,7 @@ import {
 import personIcon from "../../assets/personIcon.png";
 import princePic01 from "../../assets/princePic01.jpg";
 import { connect } from "react-redux";
-import { editClientProfile } from "../../actions/clientProfiles";
+import { editClientProfile, deleteClientProfile } from "../../actions/clientProfiles";
 import ProfileUploader from "../../components/shared/ProfileUploader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DeleteUser from "../auth/DeleteUser"
@@ -23,7 +23,7 @@ export const PassProfileImageUrlState = React.createContext();
 const pageUnavailable = "Page unavailable";
 const saveChanges = "Save Changes";
 
-function ClientEditProfileScreen(props, { editClientProfile }) {
+function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile }) {
   let profileDetails = props.route.params;
 
   const [ firstName, setFirstName ] = useState(profileDetails.firstName);
@@ -121,6 +121,7 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
 
   function deleteProfile() {
     DeleteUser();
+    props.deleteClientProfile(profileDetails.key);
   }
 
   return (
@@ -298,4 +299,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { editClientProfile })(ClientEditProfileScreen);
+export default connect(null, { editClientProfile, deleteClientProfile })(ClientEditProfileScreen);

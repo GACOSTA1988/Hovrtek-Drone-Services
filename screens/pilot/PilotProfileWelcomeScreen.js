@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  Platform
 } from "react-native";
 import { connect } from "react-redux";
 import {
@@ -318,8 +319,11 @@ const styles = StyleSheet.create({
     color: "#DDE2E4"
   },
   logo: {
+    ...Platform.select({
+      ios: {
+        resizeMode: "contain",
+      },
     width: 220,
-    // resizeMode: "contain",
     height: 40,
   }
 });

@@ -48,7 +48,7 @@ function PilotSignUpScreen(props) {
   async function signUp(e) {
     e.preventDefault();
     navigation.push("Loading");
-   
+
     if (pilotFirstName.trim() === "") {
       Alert.alert("Please fill in your first name");
       navigation.navigate("PilotSignUpScreen");
@@ -83,6 +83,7 @@ function PilotSignUpScreen(props) {
         pilotFirstName,
         pilotLastName,
         pilotLocation,
+        email,
         pilotCoordinates,
         personalBio,
         yearsOfExperience,
@@ -108,7 +109,7 @@ function PilotSignUpScreen(props) {
         return pilotCoords
       }).catch(error => {
         console.log(error)
-        return coordinates = [45.523064, -122.676483]      
+        return coordinates = [45.523064, -122.676483]
       });
     } catch (error) {
       coordinates = [45.523064, -122.676483]

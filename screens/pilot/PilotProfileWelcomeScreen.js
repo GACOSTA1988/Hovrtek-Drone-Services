@@ -323,6 +323,7 @@ const styles = StyleSheet.create({
       ios: {
         resizeMode: "contain",
       },
+    }),
     width: 220,
     height: 40,
   }

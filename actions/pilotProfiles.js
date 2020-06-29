@@ -84,3 +84,13 @@ export function editPilotProfile(
     });
   };
 }
+
+export function deletePilotProfile(key) {
+  return (dispatch) => {
+    firebase
+      .database()
+      .ref(`/pilotProfiles`)
+      .child(key)
+      .remove();
+  };
+}

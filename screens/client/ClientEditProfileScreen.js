@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 import { editClientProfile } from "../../actions/clientProfiles";
 import ProfileUploader from "../../components/shared/ProfileUploader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import DeleteUser from "../auth/DeleteUser"
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
@@ -119,6 +119,10 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
     );
   };
 
+  function deleteProfile() {
+    DeleteUser();
+  }
+
   return (
     <KeyboardAwareScrollView style={styles.keyboardView}>
       {!profileDetails && <Text>{pageUnavailable}</Text>}
@@ -206,6 +210,11 @@ function ClientEditProfileScreen(props, { editClientProfile }) {
           </View>
         </View>
       )}
+      <TouchableOpacity
+        onPress={() => deleteProfile()}
+        >
+        <Text style={{color: "white"}}>Delete Profile</Text>
+      </TouchableOpacity>
     </KeyboardAwareScrollView>
   );
 }

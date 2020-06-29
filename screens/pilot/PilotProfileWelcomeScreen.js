@@ -120,7 +120,7 @@ function PilotProfileWelcomeScreen(props) {
   const renderStartProfileView = () => {
     return (
       <View style={styles.alignItemsCenter}>
-        <Text style={styles.welcomeText}>Welcome to</Text> 
+        <Text style={styles.welcomeText}>Welcome to</Text>
         <Image style={styles.logo} source={logo}/>
         {/* <Text style={styles.nameText}>{getPilotFullName()}</Text> */}
         {renderTouchableStartPilotProfileText()}
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   },
   startButton: {
     width: 250,
-    height: 50,
+    height: 200,
     backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",

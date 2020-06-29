@@ -6,15 +6,21 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
+import {
+  PassSetFaaLicenseExp,
+  PassFaaLicenseExpState,
+} from "../../screens/pilot/PilotProfileSetupPageOneScreen";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
 
 const DatePicker = (props) => {
 
-  const {setFaaLicenseExp, faaLicenseExp, setIsModalActive } = props
+  const { setIsModalActive } = props
+
+  const setFaaLicenseExp = useContext(PassSetFaaLicenseExp);
+  const faaLicenseExp = useContext(PassFaaLicenseExpState);
 
   const [date, setDate] = useState(new Date());
-  const [chosenDate, setChosenDate] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
   const handlePicker = (datetime) => {

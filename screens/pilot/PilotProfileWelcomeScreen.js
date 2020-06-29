@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   },
   startButton: {
     width: 250,
-    height: 200,
+    height: 50,
     backgroundColor: "#DDE2E4",
     borderRadius: 30,
     alignItems: "center",
@@ -318,9 +318,9 @@ const styles = StyleSheet.create({
     color: "#DDE2E4"
   },
   logo: {
-    width: "50%",
-    resizeMode: "contain",
-    height: "30%"
+    width: 220,
+    // resizeMode: "contain",
+    height: 40,
   }
 });
 

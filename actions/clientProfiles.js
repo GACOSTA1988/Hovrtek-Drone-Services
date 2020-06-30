@@ -66,3 +66,13 @@ export function editClientProfile(
       });
   };
 }
+
+export function deleteClientProfile(key) {
+  return (dispatch) => {
+    firebase
+      .database()
+      .ref(`/clientProfiles`)
+      .child(key)
+      .remove();
+  };
+}

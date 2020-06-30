@@ -1,248 +1,371 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TouchableOpacity,
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
-  TextInput,
-  FlatList,
-  TouchableHighlight,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
-  Container,
   Alert,
+  Image,
 } from "react-native";
-import {
-  Ionicons,
-  FontAwesome5,
-  MaterialCommunityIcons,
-  AntDesign,
-} from "@expo/vector-icons";
 import { connect } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
-import { getMessages, postMessages, readMessage } from "../../actions/messages";
+import {
+  getPilotProfiles,
+  editPilotProfile,
+} from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import moment from "moment";
+import princePic01 from "../../assets/princePic01.jpg";
+import { AntDesign } from "@expo/vector-icons";
+import { APP_STRINGS, NAV_SCREENS } from "../../constants";
 
-function ChatScreen(props, { getMessages, postMessages, readMessage }) {
-  const navigation = useNavigation();
+const {
+  abilityOver400Ft,
+  bio,
+  chat,
+  droneModel,
+  experienceAirMap,
+  insured,
+  licenseExpirationDate,
+  location,
+  pilotProfileNotCreated,
+  startPilotProfile,
+  welcomeHovrtek,
+  willingToTravel,
+  // yearsOfExperience aliased to not clash with const of same name
+  yearsOfExperience: yearsOfExperienceStr,
+} = APP_STRINGS;
 
-  const [body, setBody] = useState("");
+const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
+
+function PilotProfileWelcomeScreen(props) {
+  const {
+    navigation,
+    route: { params },
+    listOfPilotProfiles,
+    getPilotProfiles,
+  } = props;
+
+  const [ profileDetails, setProfileDetails ] = useState(null);
+  const [ user, setComponentUser ] = useState(null);
 
   useEffect(() => {
-    props.getMessages();
+    props.getPilotProfiles();
   }, []);
 
-  let sender = null;
-  if (firebase.auth().currentUser) {
-    sender = firebase.auth().currentUser;
+  const { currentUser } = firebase.auth();
+  if (currentUser && user != currentUser) {
+    setComponentUser(currentUser);
   }
-
-  let recipient = null;
-  if (props.route.params) {
-    recipient = props.route.params;
-  }
-
-  let hour = 3.6e6;
-  let oneDay = 86400000;
-  // let yesterday = date - 1000 * 60 * 60 * 24 * 1;
-  let currentTimestamp = new Date();
-  let databaseTimestamp = null;
-  props.listOfMessages.forEach((message) => {
-    if (
-      message.userOneID === sender.uid &&
-      message.userTwoID === recipient.userID
-    ) {
-      databaseTimestamp = message.timestamp;
+  const { photoURL } = currentUser;
+  const unsubscribe = navigation.addListener("focus", () => {
+    if (photoURL === "P") {
+      console.log("currentUser.uid", currentUser.uid);
+      const profile = listOfPilotProfiles.find((x) => x.userID === currentUser.uid);
+      console.log("profile", profile);
+      if (profileDetails != profile) {
+        setProfileDetails(profile);
+      }
+    } else if (params && profileDetails != params) {
+      setProfileDetails(params);
     }
   });
 
-  let conversation = [];
-  if (sender && recipient) {
-    props.listOfMessages.forEach((message) => {
-      if (
-        message.userOneID === sender.uid &&
-        message.userTwoID === recipient.userID
-      ) {
-        conversation.push(message);
-      } else if (
-        message.userOneID === recipient.userID &&
-        message.userTwoID === sender.uid
-      ) {
-        conversation.push(message);
-      }
-    });
-  }
 
-  function readMessages() {
-    conversation.forEach((message) => {
-      if (
-        message.userTwoID === sender.uid &&
-        message.userOneID === recipient.userID
-      ) {
-        props.readMessage(true, message.key);
-      }
-    });
-  }
-
-  const send = (e) => {
-    e.preventDefault();
-
-    if (!body) {
-      Alert.alert("Message is empty!");
-      return;
-    }
-
-    let isNewTimestamp = false;
-    let read = false;
-    let userOneID = sender.uid;
-    let userTwoID = recipient.userID;
-
-    let timestamp = moment(new Date()).format("LLLL");
-
-    // TIMESTAMP WITHOUT MOMENT FORMATTING
-    // let timestamp = new Date()
-
-    props.postMessages(
-      userOneID,
-      userTwoID,
-      body,
-      read,
-      timestamp,
-      isNewTimestamp
+  const renderProfileStatsItem = (titleString = "", specsValue = "") => {
+    return (
+      <View style={styles.specView}>
+        <Text style={styles.specTitle}>{titleString}</Text>
+        <Text style={styles.specs}>{specsValue}</Text>
+      </View>
     );
+  };
 
-    setBody("");
+  const renderTouchableEditIcon = () => {
+    return (
+      <TouchableOpacity onPress={() => navigation.push(PILOT_SETUP_ONE)} style={styles.iconTO}>
+        <AntDesign
+          name="edit"
+          size={35}
+          color="darkblue"
+          style={styles.iconStyle}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const renderTouchableChatIcon = (profileData = {}) => {
+    return (
+      <TouchableOpacity
+        style={styles.chatButton}
+        onPress={() =>
+          navigation.navigate(CHAT, {
+            ...profileData,
+          })}
+      >
+        <Text style={styles.chatText}>{chat}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderTouchableStartPilotProfileText = () => {
+    return (
+      <TouchableOpacity
+        style={styles.startButton}
+        onPress={() => navigation.navigate(PILOT_SETUP_ONE)}
+      >
+        <Text style={styles.startButtonText}>{startPilotProfile}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderStartProfileView = () => {
+    return (
+      <View>
+        <Text style={styles.welcomeText}>{welcomeHovrtek}</Text>
+        <View style={styles.fullName}>
+          <Text style={styles.nameText}>{getPilotFullName()}</Text>
+        </View>
+        <View style={styles.alignItemsCenter}>
+          {renderTouchableStartPilotProfileText()}
+        </View>
+      </View>
+    );
+  };
+
+  if (!user || !profileDetails) {
+    return <View />;
+  }
+
+  // it's safe to destructure profileDetails here,
+  // because of the check above for it in the 'if' statement
+  const {
+    profileImageUrl,
+    profileComplete,
+    pilotFirstName,
+    pilotLastName,
+    pilotLocation,
+    personalBio,
+    droneType,
+    yearsOfExperience,
+    faaLicenseExp,
+    travelStatus,
+    airMap,
+    fourHundred,
+    insuredStatus,
+  } = profileDetails;
+
+  const getPilotFullName = () => `${pilotFirstName} ${pilotLastName}`;
+  const isProfileComplete = profileComplete === "Yes";
+
+  const profileImg = {
+    uri: profileImageUrl,
   };
 
   return (
-    <View>
-      <KeyboardAwareScrollView style={styles.container}>
-        <FlatList
-          style={styles.messagesList}
-          data={conversation}
-          keyExtractor={(item) => item.key}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.messagingContainer}>
-                <View>
-                  {item.isNewTimestamp ? (
-                    <View>
-                      <Text>NEW Message sent at: {item.isNewTimestamp}</Text>
-                      <Text>Is this a new timestamp: {item.isNewTimestamp}</Text>
-                    </View>
-                  ) : (
-                    <Text>OLD Message sent at: {item.timestamp}</Text>
-                  )}
-                  <Text>Message body: {item.body} </Text>
-                  {item.read ? (
-                    <FontAwesome5
-                      name="check-circle"
-                      size={15}
-                      style={{ textAlign: "right" }}
-                    />
-                  ) : (
-                    // todo: filled in check circle when read, outline when not
-                    <Text></Text>
-                  )}
-                </View>
-              </View>
-            );
-          }}
-        />
-      </KeyboardAwareScrollView>
-      <View style={styles.writeContainer}>
-        <TextInput
-          multiline
-          numberOfLines={4}
-          placeholder="Send message..."
-          placeholderTextColor="grey"
-          value={body}
-          onChangeText={setBody}
-          onFocus={() => readMessages()}
-          style={styles.input}
-        />
-        <Ionicons
-          name="md-send"
-          size={24}
-          color="black"
-        />
-        <AntDesign
-          style={styles.plus}
-          name="plus"
-          size={25}
-          onPress={send}
-        />
-      </View>
+    <View style={styles.container}>
+      {(profileDetails.profileComplete === "Yes") ? (
+        <ScrollView style={styles.scrollViewStyle}>
+          <Image source={princePic01} style={styles.backgroundImage} />
+          <Image style={styles.profilePic} source={profileImg} />
+          <View style={styles.fullNameAndIcon}>
+            <Text style={styles.nameText}>{getPilotFullName()}</Text>
+            {currentUser.photoURL === "P" ? renderTouchableEditIcon() : renderTouchableChatIcon(profileDetails)}
+
+          </View>
+
+          <Text style={styles.locationText}>
+            {location} {pilotLocation}
+          </Text>
+          <Text style={styles.specTitle}>{bio}</Text>
+          <Text style={styles.personalBioStyle}>{personalBio}</Text>
+          {renderProfileStatsItem(droneModel, droneType)}
+          {renderProfileStatsItem(yearsOfExperienceStr, yearsOfExperience)}
+          {renderProfileStatsItem(licenseExpirationDate, faaLicenseExp)}
+          {renderProfileStatsItem(willingToTravel, travelStatus)}
+          {renderProfileStatsItem(insured, insuredStatus)}
+          {renderProfileStatsItem(experienceAirMap, airMap)}
+          {renderProfileStatsItem(abilityOver400Ft, fourHundred)}
+        </ScrollView>
+      ) : (
+        <ScrollView style={styles.scrollViewStyle}>
+          <Image
+            source={princePic01}
+            style={styles.backgroundImageStartingPage}
+          />
+          {renderStartProfileView()}
+        </ScrollView>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: "80%",
-    backgroundColor: "white",
-    padding: 10,
+    backgroundColor: "#161616",
+    height: "100%",
+    width: "100%",
   },
-  keyClosedContainer: {
-    marginTop: "90%",
-    backgroundColor: "lightgray",
+  scrollViewStyle: {
+    width: "100%",
   },
-  messagingContainer: {
-    elevation: 8,
-    borderRadius: 15,
-    backgroundColor: "#3E90D0",
-    marginBottom: 15,
-    padding: 20,
-    marginTop: 20,
-    paddingRight: 40,
-    paddingTop: 11,
+  fullName: {
+    flexDirection: "row",
+    display: "flex",
+    marginBottom: 40,
+  },
+  fullNameAndIcon: {
+    flexDirection: "row",
+    display: "flex",
+  },
+  alignItemsCenter: {
+    alignItems: "center",
+  },
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+  },
+  welcomeText: {
+    marginTop: "40%",
+    textAlign: "center",
+    fontSize: 30,
+    color: "#DDE2E4"
+  },
+  nameText: {
+    marginTop: "5%",
+    fontSize: 30,
+    color: "black",
+    fontWeight: "600",
+    textAlign: "left",
+    marginLeft: "4%",
+  },
+  locationText: {
+    fontSize: 20,
+    color: "black",
+    fontWeight: "300",
+    textAlign: "left",
+    marginLeft: "4%",
+  },
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+  },
+  subHeaderText: {
+    marginTop: "5%",
+    marginBottom: "10%",
+    fontSize: 20,
+    color: "black",
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  iconTO: {
+    position: "absolute",
+    right: "6%",
   },
   input: {
-    width: "80%",
-    borderWidth: 2,
-    borderRadius: 20,
-    height: 45,
-    borderColor: "#161616",
-    padding: 10
+    borderWidth: 1,
+    borderRadius: 3,
+    height: 30,
+    marginBottom: 80,
   },
-  messagesList: {
+  backgroundImage: {
     width: "100%",
-    marginTop: 20
+    height: "20%",
+    position: "absolute",
   },
-  writeContainer: {
+  backgroundImageStartingPage: {
+    width: "100%",
+    height: "40%",
+    position: "absolute",
+  },
+  logo: {
+    // width: "50%",
+    // resizeMode: "contain",
+    // height: "30%"
+  },
+  profilePic: {
+    height: 100,
+    width: 100,
+    borderRadius: 90,
+    alignItems: "center",
+    marginTop: "17%",
+    marginLeft: 20,
+    borderWidth: 4,
+    borderColor: "#092455",
+  },
+  specs: {
+    fontSize: 20,
+    color: "black",
+    fontWeight: "200",
+    marginLeft: "4%",
+    marginTop: 8,
+  },
+  specTitle: {
+    fontSize: 20,
+    color: "black",
+    fontWeight: "400",
+    marginLeft: "4%",
+    marginTop: 8,
+  },
+  specView: {
     flexDirection: "row",
-    backgroundColor: "white",
-    marginTop: 10,
-    marginBottom: 40,
-    alignItems: "center"
+    display: "flex",
   },
-  plus: {
+  chatText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "white",
+  },
+  chatButton: {
+    position: "absolute",
+    right: "4%",
+    backgroundColor: "#092455",
+    padding: 7,
+    borderRadius: 5,
+  },
+  startButton: {
+    width: 250,
+    height: 50,
+    backgroundColor: "#092455",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 30,
+    color: "white",
+  },
+  startButtonText: {
     color: "#161616",
-  }
+    fontSize: 20,
+  },
+  personalBioStyle: {
+    fontSize: 15,
+    color: "#DDE2E4",
+    marginLeft: "4%",
+    marginRight: "5%",
+    marginTop: "1%",
+  },
 });
 
 function mapStateToProps(state) {
-  const listOfMessages = _.map(state.messagesList.messagesList, (val, key) => {
-    return {
-      ...val,
-      key: key,
-    };
-  });
+  const listOfPilotProfiles = _.map(
+    state.pilotProfilesList.pilotProfilesList,
+    (val, key) => {
+      return {
+        ...val,
+        key: key,
+      };
+    },
+  );
   return {
-    listOfMessages,
+    listOfPilotProfiles,
   };
 }
 
-export default connect(mapStateToProps, {
-  getMessages,
-  postMessages,
-  readMessage,
-})(ChatScreen);
+export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
+  PilotProfileWelcomeScreen,
+);

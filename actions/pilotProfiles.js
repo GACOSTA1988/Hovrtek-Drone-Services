@@ -18,6 +18,7 @@ export function postPilotProfiles(
   pilotFirstName,
   pilotLastName,
   pilotLocation,
+  email,
   pilotCoordinates,
   personalBio,
   yearsOfExperience,
@@ -36,6 +37,7 @@ export function postPilotProfiles(
       pilotFirstName,
       pilotLastName,
       pilotLocation,
+      email,
       pilotCoordinates,
       personalBio,
       yearsOfExperience,
@@ -80,5 +82,15 @@ export function editPilotProfile(
       profileComplete,
       profileImageUrl,
     });
+  };
+}
+
+export function deletePilotProfile(key) {
+  return (dispatch) => {
+    firebase
+      .database()
+      .ref(`/pilotProfiles`)
+      .child(key)
+      .remove();
   };
 }

@@ -6,11 +6,13 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  Platform
 } from "react-native";
 import { connect } from "react-redux";
 import {
   getPilotProfiles,
   editPilotProfile,
+  deletePilotProfile
 } from "../../actions/pilotProfiles";
 import * as firebase from "firebase";
 import _ from "lodash";
@@ -18,6 +20,7 @@ import princePic01 from "../../assets/princePic01.jpg";
 import { AntDesign } from "@expo/vector-icons";
 import { APP_STRINGS, NAV_SCREENS } from "../../constants";
 import logo from "../../assets/hovrtek_logo.png";
+import DeleteUser from "../auth/DeleteUser"
 
 const {
   abilityOver400Ft,
@@ -38,7 +41,7 @@ const {
 
 const { CHAT, JOB_LIST, PILOT_SETUP_ONE } = NAV_SCREENS;
 
-function PilotProfileWelcomeScreen(props) {
+function PilotProfileWelcomeScreen(props, {deletePilotProfile}) {
   const {
     navigation,
     route: { params },
@@ -69,6 +72,10 @@ function PilotProfileWelcomeScreen(props) {
     }
   });
 
+  function deleteProfile() {
+    DeleteUser();
+    props.deletePilotProfile(profileDetails.key);
+  }
 
   const renderProfileStatsItem = (titleString = "", specsValue = "") => {
     return (
@@ -120,7 +127,7 @@ function PilotProfileWelcomeScreen(props) {
   const renderStartProfileView = () => {
     return (
       <View style={styles.alignItemsCenter}>
-        <Text style={styles.welcomeText}>Welcome to</Text> 
+        <Text style={styles.welcomeText}>Welcome to</Text>
         <Image style={styles.logo} source={logo}/>
         {/* <Text style={styles.nameText}>{getPilotFullName()}</Text> */}
         {renderTouchableStartPilotProfileText()}
@@ -192,6 +199,11 @@ function PilotProfileWelcomeScreen(props) {
           {renderStartProfileView()}
         </ScrollView>
       )}
+      <TouchableOpacity
+        onPress={() => deleteProfile()}
+        >
+        <Text style={{color: "white"}}>Delete Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -318,9 +330,13 @@ const styles = StyleSheet.create({
     color: "#DDE2E4"
   },
   logo: {
-    width: "50%",
-    resizeMode: "contain",
-    height: "30%"
+    ...Platform.select({
+      ios: {
+        resizeMode: "contain",
+      },
+    }),
+    width: 220,
+    height: 40,
   }
 });
 
@@ -339,6 +355,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile })(
+export default connect(mapStateToProps, { getPilotProfiles, editPilotProfile, deletePilotProfile })(
   PilotProfileWelcomeScreen,
 );

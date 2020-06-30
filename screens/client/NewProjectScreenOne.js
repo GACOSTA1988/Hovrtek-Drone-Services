@@ -142,7 +142,7 @@ function NewProjectScreenOne(props) {
           <View style={styles.modalWrapper}>
             <PassSetLight.Provider value={setLight}>
               <PassLightState.Provider value={light}>
-                <ClientLightPicker />
+                <ClientLightPicker setIsModalActive={setIsModalActive}/>
               </PassLightState.Provider>
             </PassSetLight.Provider>
           </View>

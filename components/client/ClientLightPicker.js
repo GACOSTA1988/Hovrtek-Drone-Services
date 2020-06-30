@@ -14,8 +14,9 @@ import {
 import RadioForm from "react-native-simple-radio-button";
 import { APP_STRINGS } from "../../constants/index";
 
-const ClientLightPicker = () => {
+const ClientLightPicker = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { setIsModalActive } = props
 
   const setLight = useContext(PassSetLight);
   const light = useContext(PassLightState);
@@ -24,6 +25,11 @@ const ClientLightPicker = () => {
     { label: "Yes", value: true },
     { label: "No", value: false },
   ];
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setIsModalActive(false);
+  };
 
   const renderTextInput = () => {
     return (
@@ -53,13 +59,14 @@ const ClientLightPicker = () => {
       initial={1}
       onPress={(value) => {
         setIsModalVisible(value);
+        setIsModalActive(value);
       }}
       />
       <Modal
         transparent={true}
         visible={isModalVisible}
         animationType={"slide"}
-        onRequestClose={() => setIsModalVisible(false)}
+        onRequestClose={closeModal}
       >
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
@@ -71,7 +78,7 @@ const ClientLightPicker = () => {
               {renderTextInput()}
           </View>
           <View styles={styles.cancelWrapper}>
-          <TouchableOpacity style={styles.chatButton} onPress={() => setIsModalVisible(false)}>
+          <TouchableOpacity style={styles.chatButton} onPress={closeModal}>
               <Text style={styles.chatText}>{APP_STRINGS.save}</Text>
             </TouchableOpacity>
           </View>
@@ -87,7 +94,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 10,
     padding: 10,
-    backgroundColor: "#474A49",
+    // backgroundColor: "#474A49",
+    backgroundColor: "#161616",
+    borderColor: "#DDE2E4",
+    borderWidth: 1,
     marginTop: 200,
     marginLeft: 5,
     marginRight: 5,

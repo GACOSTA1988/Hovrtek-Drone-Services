@@ -8,6 +8,10 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import {
+  PassSetPersonalBio,
+  PassPersonalBioState,
+} from "../../screens/pilot/PilotProfileSetupPageOneScreen";
 import { useNavigation } from "@react-navigation/native";
 import { APP_STRINGS } from "../../constants/index";
 
@@ -22,8 +26,11 @@ const {
 } = APP_STRINGS;
 
 const BioPicker = (props) => {
-  const { personalBio, setPersonalBio, setIsModalActive } = props;
+  const { setIsModalActive } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const setPersonalBio = useContext(PassSetPersonalBio);
+  const personalBio = useContext(PassPersonalBioState);
 
 
   const openModal = () => {
@@ -40,7 +47,11 @@ const BioPicker = (props) => {
     const title = openModal;
     return (
       <TouchableOpacity style={styles.button} onPress={openModal} title={title}>
-        <Text style={styles.buttonText}>{buttonText}</Text>
+        {personalBio ? (
+          <Text style={styles.buttonText}>{personalBio}</Text>
+        ) : (
+          <Text style={styles.buttonText}>Brief Summary</Text>
+        )}
       </TouchableOpacity>
     );
   };

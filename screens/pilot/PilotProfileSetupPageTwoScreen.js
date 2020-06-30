@@ -114,23 +114,6 @@ function PilotProfileSetupPageTwoScreen(props) {
   return (
     <View style={[styles.container, isModalActive ? styles.opaque : '']}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={styles.bodyText}>
-          Please Provide FAA License Expiration Date
-        </Text>
-        {currentUserProps ? (
-          <View>
-                <DatePicker
-                  setFaaLicenseExp={setFaaLicenseExp}
-                  faaLicenseExp={faaLicenseExp}
-                  setIsModalActive={setIsModalActive}
-                />
-          </View>
-        ) : (
-          <Text style={styles.bodyText}>
-            Please Provide FAA License Expiration Date
-          </Text>
-        )}
-
         {currentUserProps && (
           <View style={styles.radioWrapper}>
             <Text style={styles.radioText}>

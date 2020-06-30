@@ -18,19 +18,23 @@ import _ from "lodash";
 import DroneExperiencePicker from "../../components/pilot/DroneExperiencePicker";
 import DroneTypePicker from "../../components/pilot/DroneTypePicker";
 import BioPicker from "../../components/pilot/BioPicker";
+import DatePicker from "../../components/pilot/DatePicker";
 import { APP_STRINGS } from '../../constants/index';
 import InsuranceRadio from "../../components/pilot/InsuranceRadio";
 
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetPersonalBio = React.createContext();
+export const PassPersonalBioState = React.createContext();
 export const PassSetYearsOfExperience = React.createContext();
 export const PassYearsOfExperienceState = React.createContext();
+
+export const PassSetFaaLicenseExp = React.createContext();
+export const PassFaaLicenseExpState = React.createContext();
 
 export const PassSetDroneType = React.createContext();
 export const PassDroneTypeState = React.createContext();
 export const PassSetInsuredStatus = React.createContext();
 export const PassInsuredStatusState = React.createContext();
-export const PassPersonalBioState = React.createContext();
 
 const {
   briefSummary,
@@ -72,7 +76,7 @@ function PilotProfileSetupPageOneScreen(props) {
     pilotLocationPlaceHolder = currentUserProps.pilotLocation;
     personalBioPlaceHolder = currentUserProps.personalBio;
     yearsOfExperiencePlaceHolder = currentUserProps.yearsOfExperience;
-    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExpPlace;
+    faaLicenseExpPlaceHolder = currentUserProps.faaLicenseExp;
     insuredStatusPlaceHolder = currentUserProps.insuredStatus;
     travelStatusPlaceHolder = currentUserProps.travelStatus;
     droneTypePlaceHolder = currentUserProps.droneType;
@@ -126,16 +130,16 @@ function PilotProfileSetupPageOneScreen(props) {
   };
 
   return (
-    <View style={[styles.container, isModalActive ? styles.opaque : '']}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={[{ flexGrow: 1, backgroundColor: "#161616",  }, isModalActive ? styles.opaque : '']}>
         <Text style={styles.bodyText}>{briefSummary}</Text>
         {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
-            <BioPicker
-              setPersonalBio={setPersonalBio}
-              personalBio={setPersonalBio}
-              setIsModalActive={setIsModalActive}
-            />
+             <PassSetPersonalBio.Provider value={setPersonalBio}>
+              <PassPersonalBioState.Provider value={personalBio}>
+            <BioPicker setIsModalActive={setIsModalActive}/>
+               </PassPersonalBioState.Provider>
+            </PassSetPersonalBio.Provider>
           </View>
           
         ) : (
@@ -166,7 +170,23 @@ function PilotProfileSetupPageOneScreen(props) {
           <Text style={styles.bodyText}>{modelDrone}</Text>
         )}
 
-     
+<Text style={styles.bodyText}>
+             Please Provide FAA License Expiration Date
+          </Text>
+        {currentUserProps ? (
+          <View style={styles.droneExpWrapper}>
+            <PassSetFaaLicenseExp.Provider value={setFaaLicenseExp}>
+              <PassFaaLicenseExpState.Provider value={faaLicenseExp}>
+                <DatePicker setIsModalActive={setIsModalActive}/>
+              </PassFaaLicenseExpState.Provider>
+            </PassSetFaaLicenseExp.Provider>
+          </View>
+        ) : (
+          <Text style={styles.bodyText}>
+             Please Provide FAA License Expiration Date
+          </Text>
+        )}
+
         {currentUserProps && (
           <View style={styles.radioWrapper}>
             <Text style={styles.radioText}>
@@ -194,7 +214,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#161616",
-    alignItems: "center",
     height: "100%",
     paddingTop: "15%"
   },

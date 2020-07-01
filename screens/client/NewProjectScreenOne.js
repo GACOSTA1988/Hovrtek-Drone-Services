@@ -93,6 +93,8 @@ function NewProjectScreenOne(props) {
 
   const [isModalActive, setIsModalActive] = useState(false);
 
+  const [focus, setFocus] = useState(false);
+
   return (
     <View style={loadingActive ? styles.loadingWrapper : styles.newProjectListWrapper}>
       {loadingActive ?
@@ -103,12 +105,15 @@ function NewProjectScreenOne(props) {
         showsVerticalScrollIndicator={false}
         >
         <View style={styles.newProjectListTextWrapper}>
-          <Text style={styles.detailsHeader}>Where?</Text>
+          <Text style={styles.detailsHeader}>What?</Text>
           <TextInput
-            placeholder={"Enter the location of your drone service"}
+            placeholder={"Enter a short description of what you are recording"}
             style={styles.input}
-            value={location}
+            value={recording}
+            onChangeText={setRecording}
             onChangeText={setLocation}
+            returnKeyType={"next"}
+            underlineColorAndroid={"grey"}
           />
           <Text style={styles.detailsHeader}>When?</Text>
           <View>
@@ -118,17 +123,18 @@ function NewProjectScreenOne(props) {
               </PassDateState.Provider>
             </PassSetDate.Provider>
           </View>
-          <Text style={styles.detailsHeader}>What?</Text>
+          <View style={styles.hr}/>
+          <Text style={styles.detailsHeader}>Where?</Text>
           <TextInput
-            placeholder={"Enter a short description of what you are recording"}
+            placeholder={"Enter the location of your drone service"}
             style={styles.input}
-            value={recording}
-            onChangeText={setRecording}
+            value={location}
+            onChangeText={setLocation}
+            returnKeyType={"next"}
+            underlineColorAndroid={"grey"}
           />
-          <Text style={styles.detailsHeader}>
-            Do you have any light specifications?
-          </Text>
-          <View>
+          <Text style={styles.detailsHeader}>Light specifications?</Text>
+          <View style={styles.radio}>
             <PassSetLight.Provider value={setLight}>
               <PassLightState.Provider value={light}>
                 <ClientLightPicker setIsModalActive={setIsModalActive}/>
@@ -137,7 +143,10 @@ function NewProjectScreenOne(props) {
           </View>
           <View style={styles.buttonWrapper}>
             <TouchableOpacity style={styles.submitWrapper} onPress={submit}>
-              <Text style={styles.submitButton}>Submit Form</Text>
+              {props.route.params.isEditing ?
+              <Text style={styles.submitButton}>Save Changes</Text> :
+              <Text style={styles.submitButton}>Submit Project</Text>
+            }
             </TouchableOpacity>
           </View>
         </View>
@@ -147,10 +156,10 @@ function NewProjectScreenOne(props) {
 }
 const styles = StyleSheet.create({
   newProjectListWrapper: {
-    alignItems: "center",
     backgroundColor: "#161616",
     height: "100%",
-    padding: 20
+    paddingLeft: 20,
+    paddingRight: 20
   },
   loadingWrapper: {
     width: "100%",
@@ -166,16 +175,23 @@ const styles = StyleSheet.create({
   },
   detailsHeader: {
     marginBottom: 10,
+    marginTop: 15,
     fontSize: 20,
     fontWeight: "bold",
     color: "#DDE2E4"
   },
   submitButton: {
-    marginTop: 10,
-    marginBottom: 10,
+    // marginTop: 10,
+    // marginBottom: 10,
     textAlign: "center",
-    fontSize: 30,
-    color: "#DDE2E4",
+    fontSize: 17,
+    // color: "#DDE2E4",
+    backgroundColor: "#DDE2E4",
+    width: 250,
+    marginTop: 15,
+    marginBottom: 10,
+    padding: 5,
+    borderRadius: 5,
   },
   continueButton: {
     marginTop: 10,
@@ -202,14 +218,22 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: "#2e2f30",
-    borderRadius: 15,
-    borderWidth: 1,
-    paddingLeft: 10,
+    paddingLeft: 5,
+    paddingBottom: 15,
     marginBottom: 10,
-    color: "white",
-    fontSize: 15,
-    backgroundColor: "#161616"
+    color: "#a8acad",
+    fontSize: 17,
   },
+  hr: {
+    borderBottomColor: "grey",
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    width: "96%",
+    alignSelf: "center"
+  },
+  radio: {
+    marginLeft: "2%",
+    marginTop: 5
+  }
 });
 export default connect(null, { getProjects, postProjects, editProject })(NewProjectScreenOne);

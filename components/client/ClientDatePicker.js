@@ -26,7 +26,7 @@ const ClientDatePicker = (props) => {
   const handlePicker = (datetime) => {
     setIsVisible(false);
     setIsModalActive(false);
-    setDateState(moment(datetime).format("MMMM, DD  YYYY"));
+    setDateState(moment(datetime).format("MMMM DD, YYYY"));
   };
 
   const hidePicker = () => {
@@ -42,14 +42,14 @@ const ClientDatePicker = (props) => {
   return (
     <View style={styles.pickerWrapper}>
       <TouchableOpacity style={styles.button} onPress={showPicker}>
+      <View style={{flexDirection: 'row'}}>
+        <AntDesign name="calendar" size={27} color="#a8acad" />
         {dateState ? (
-          <Text style={styles.buttonTextSelected}>{dateState}</Text>
+          <Text style={styles.buttonText}>{dateState}</Text>
         ) : (
-          <View style={{flexDirection: 'row'}}>
-            <AntDesign name="calendar" size={24} color="white" />
-            <Text style={styles.buttonText}>Pick a date for your drone service</Text>
-          </View>
+          <Text style={styles.buttonText}>Pick a date for your drone service</Text>
         )}
+        </View>
 
         <DateTimePicker
           isVisible={isVisible}
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   buttonText: {
-    color: "white",
-    fontSize: 16,
+    color: "#a8acad",
+    fontSize: 17,
     marginLeft: 10
   },
   buttonTextSelected: {

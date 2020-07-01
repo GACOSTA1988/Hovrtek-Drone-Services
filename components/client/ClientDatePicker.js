@@ -10,6 +10,7 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { PassSetDate } from "../../screens/client/NewProjectScreenOne";
 import { PassDateState } from "../../screens/client/NewProjectScreenOne";
+import { AntDesign } from '@expo/vector-icons';
 
 const ClientDatePicker = (props) => {
   // Context Hook Stuff
@@ -44,7 +45,10 @@ const ClientDatePicker = (props) => {
         {dateState ? (
           <Text style={styles.buttonText}>{dateState}</Text>
         ) : (
-          <Text style={styles.buttonText}>Pick a Date</Text>
+          <View style={{flexDirection: 'row'}}>
+            <AntDesign name="calendar" size={24} color="white" />
+            <Text style={styles.buttonText}>Pick a date for your drone service</Text>
+          </View>
         )}
 
         <DateTimePicker
@@ -61,21 +65,23 @@ const ClientDatePicker = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    width: 250,
+    // width: 250,
     height: 50,
-    backgroundColor: "#DDE2E4",
-    borderRadius: 30,
-    alignItems: "center",
+    backgroundColor: "#161616",
+    borderRadius: 15,
+    // alignItems: "center",
     justifyContent: "center",
-    marginTop: 10,
-    marginBottom: 30,
+    // marginTop: 10,
+    // marginBottom: 30,
+    paddingLeft: 10
   },
   buttonText: {
-    color: "#161616",
-    fontSize: 20,
+    color: "white",
+    fontSize: 16,
+    marginLeft: 10
   },
   pickerWrapper: {
-    alignItems: "center",
+    // alignItems: "center",
   },
   datePicked: {
     fontSize: 20,

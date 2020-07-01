@@ -37,9 +37,6 @@ export const PassDroneTypeState = React.createContext();
 export const PassSetInsuredStatus = React.createContext();
 export const PassInsuredStatusState = React.createContext();
 
-export const PassSetLocation = React.createContext();
-export const PassLocationState = React.createContext();
-
 const {
   briefSummary,
   yearsExperience,

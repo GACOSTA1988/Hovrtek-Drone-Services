@@ -1,4 +1,4 @@
-  
+
 import React, { useState } from "react";
 import {
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
+  TextInput
 } from "react-native";
 import { connect } from "react-redux";
 import { getProjects, postProjects, editProject } from "../../actions/projects";
@@ -23,10 +24,6 @@ Geocoder.init(API_KEY);
 // CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
 export const PassDateState = React.createContext();
-export const PassSetLocation= React.createContext();
-export const PassLocationState = React.createContext();
-export const PassSetRecording = React.createContext();
-export const PassRecordingState = React.createContext();
 export const PassSetLight = React.createContext();
 export const PassLightState = React.createContext();
 
@@ -43,7 +40,7 @@ function NewProjectScreenOne(props) {
     const [ date, setDate ] = (props.route.params.isEditing? useState(projectDetails.date) : useState(""));
     const [ recording, setRecording ] = (props.route.params.isEditing? useState(projectDetails.recording) : useState(""));
     const [ light, setLight ] = (props.route.params.isEditing? useState(projectDetails.light) : useState(""));
-  
+
   const [ loadingActive, setLoadingActive ] = useState(false);
 
   async function submit(){
@@ -86,7 +83,7 @@ function NewProjectScreenOne(props) {
         return pilotCoords
       }).catch(error => {
         console.log(error)
-        return coordinates = [45.523064, -122.676483]      
+        return coordinates = [45.523064, -122.676483]
       });
     } catch (error) {
       coordinates = [45.523064, -122.676483]
@@ -101,45 +98,37 @@ function NewProjectScreenOne(props) {
       {loadingActive ?
         <LoadingScreen />
         :
-        <ScrollView 
+        <ScrollView
         style={[styles.scrollWrapper, isModalActive ? styles.opaque : '']}
-        showsVerticalScrollIndicator={false} 
+        showsVerticalScrollIndicator={false}
         >
         <View style={styles.newProjectListTextWrapper}>
-          <Text style={styles.labelText}>
-            Where is the location of your drone service?
-          </Text>
-          <View style={styles.modalWrapper}>
-            <PassSetLocation.Provider value={setLocation}>
-              <PassLocationState.Provider value={location}>
-                <ClientLocationPicker setIsModalActive={setIsModalActive}/>
-              </PassLocationState.Provider>
-            </PassSetLocation.Provider>
-          </View>
-          <Text style={styles.labelText}>
-            What is the date of your Drone shoot?
-          </Text>
-          <View style={styles.modalWrapper}>
+          <Text style={styles.detailsHeader}>Where?</Text>
+          <TextInput
+            placeholder={"Enter the location of your drone service"}
+            style={styles.input}
+            value={location}
+            onChangeText={setLocation}
+          />
+          <Text style={styles.detailsHeader}>When?</Text>
+          <View>
             <PassSetDate.Provider value={setDate}>
               <PassDateState.Provider value={date}>
                 <ClientDatePicker setIsModalActive={setIsModalActive}/>
               </PassDateState.Provider>
             </PassSetDate.Provider>
           </View>
-          <Text style={styles.labelText}>
-            What will the Drone Service be recording?
-          </Text>
-          <View style={styles.modalWrapper}>
-            <PassSetRecording.Provider value={setRecording}>
-              <PassRecordingState.Provider value={recording}>
-                <ClientRecordingPicker setIsModalActive={setIsModalActive}/>
-              </PassRecordingState.Provider>
-            </PassSetRecording.Provider>
-          </View>
-          <Text style={styles.labelText}>
+          <Text style={styles.detailsHeader}>What?</Text>
+          <TextInput
+            placeholder={"Enter a short description of what you are recording"}
+            style={styles.input}
+            value={recording}
+            onChangeText={setRecording}
+          />
+          <Text style={styles.detailsHeader}>
             Do you have any light specifications?
           </Text>
-          <View style={styles.modalWrapper}>
+          <View>
             <PassSetLight.Provider value={setLight}>
               <PassLightState.Provider value={light}>
                 <ClientLightPicker setIsModalActive={setIsModalActive}/>
@@ -166,7 +155,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     justifyContent: "center",
-  }, 
+  },
   scrollWrapper: {
     width: "100%",
     paddingTop: "10%",
@@ -174,9 +163,10 @@ const styles = StyleSheet.create({
   newProjectListTextWrapper: {
     marginBottom: 100,
   },
-  labelText: {
+  detailsHeader: {
     marginBottom: 10,
-    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
     color: "#DDE2E4"
   },
   submitButton: {
@@ -193,9 +183,6 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: "#DDE2E4",
   },
-  modalWrapper: {
-    alignItems: 'center',
-  },
   buttonWrapper:{
     alignItems: 'center'
   },
@@ -211,6 +198,17 @@ const styles = StyleSheet.create({
   },
   opaque: {
     opacity: 0.2
-  }
+  },
+  input: {
+    height: 40,
+    borderColor: "#2e2f30",
+    borderRadius: 15,
+    borderWidth: 1,
+    paddingLeft: 10,
+    marginBottom: 10,
+    color: "white",
+    fontSize: 15,
+    backgroundColor: "#161616"
+  },
 });
 export default connect(null, { getProjects, postProjects, editProject })(NewProjectScreenOne);

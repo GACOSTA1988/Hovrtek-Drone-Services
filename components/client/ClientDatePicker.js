@@ -43,7 +43,7 @@ const ClientDatePicker = (props) => {
     <View style={styles.pickerWrapper}>
       <TouchableOpacity style={styles.button} onPress={showPicker}>
         {dateState ? (
-          <Text style={styles.buttonText}>{dateState}</Text>
+          <Text style={styles.buttonTextSelected}>{dateState}</Text>
         ) : (
           <View style={{flexDirection: 'row'}}>
             <AntDesign name="calendar" size={24} color="white" />
@@ -65,20 +65,20 @@ const ClientDatePicker = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    // width: 250,
     height: 50,
     backgroundColor: "#161616",
     borderRadius: 15,
-    // alignItems: "center",
     justifyContent: "center",
-    // marginTop: 10,
-    // marginBottom: 30,
     paddingLeft: 10
   },
   buttonText: {
     color: "white",
     fontSize: 16,
     marginLeft: 10
+  },
+  buttonTextSelected: {
+    color: "white",
+    fontSize: 16
   },
   pickerWrapper: {
     // alignItems: "center",

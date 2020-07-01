@@ -14,7 +14,8 @@ import { connect } from "react-redux";
 import { editClientProfile, deleteClientProfile } from "../../actions/clientProfiles";
 import ProfileUploader from "../../components/shared/ProfileUploader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DeleteUser from "../auth/DeleteUser"
+import deleteUser from "../../actions/users"
+
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
 export const PassProfileImageUrlState = React.createContext();
@@ -120,7 +121,7 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
   };
 
   function deleteProfile() {
-    DeleteUser();
+    deleteUser();
     props.deleteClientProfile(profileDetails.key);
   }
 

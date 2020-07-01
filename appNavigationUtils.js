@@ -7,7 +7,7 @@ import PilotCreateProfileNavigation from "./navigation/PilotCreateProfileNavigat
 import ClientProfileNavigator from "./navigation/ClientProfileNavigation";
 import SignUpNavigation from "./navigation/SignUpNavigation";
 import SignInScreen from "./screens/auth/SignInScreen";
-import SignOutScreen from "./screens/auth/SignOutScreen";
+import signOut from "./actions/sessions";
 import LoadingScreen from "./screens/LoadingScreen";
 import ClientTabs from './navigation/ClientTabs';
 import PilotTabs from './navigation/PilotTabs';
@@ -53,7 +53,7 @@ const renderLogin = () => {
         />
         <AuthStack.Screen
           name="SignOut"
-          component={SignOutScreen}
+          component={signOut}
         />
       </AuthStack.Navigator>
     </NavigationContainer>
@@ -67,7 +67,7 @@ const renderLoading = () => {
     width: "100%",
     height: 110,
   };
-  
+
   return (
     <NavigationContainer>
       <AuthStack.Navigator>
@@ -77,7 +77,7 @@ const renderLoading = () => {
           options={() => ({
             headerStyle: signHeaderStyle,
           })}
-        />    
+        />
       </AuthStack.Navigator>
     </NavigationContainer>
   );
@@ -89,7 +89,7 @@ const PilotDrawer = createDrawerNavigator();
 
 const clientNavigation = (
     <NavigationContainer independent={true} >
-      <ClientDrawer.Navigator initialRouteName="Home" 
+      <ClientDrawer.Navigator initialRouteName="Home"
       drawerPosition={"right"}
       drawerStyle={{backgroundColor: "#161616", color: "white"}}
       drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "#535756"}}
@@ -98,16 +98,16 @@ const clientNavigation = (
         <ClientDrawer.Screen name="Profile" component={ClientProfileNavigator}/>
         <ClientDrawer.Screen name="About" component={AboutNavigation}/>
         <ClientDrawer.Screen name="Support" component={SupportNavigation}/>
-        <ClientDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
+        <ClientDrawer.Screen name="Sign out" component={() => signOut()}/>
       </ClientDrawer.Navigator>
     </NavigationContainer>
   )
 
 const pilotNavigation = (
     <NavigationContainer independent={true}>
-      <PilotDrawer.Navigator 
-      initialRouteName="Home" 
-      drawerPosition={"right"} 
+      <PilotDrawer.Navigator
+      initialRouteName="Home"
+      drawerPosition={"right"}
       drawerStyle={{backgroundColor: "#161616", color: "white"}}
       drawerContentOptions={{activeTintColor: "white",inactiveTintColor: "#DDE2E4", height: "100%", activeBackgroundColor: "#535756"}}
       sceneContainerStyle={{color: "white"}}
@@ -116,7 +116,7 @@ const pilotNavigation = (
       <PilotDrawer.Screen name="Profile" component={PilotCreateProfileNavigation}/>
       <PilotDrawer.Screen name="About" component={AboutNavigation}/>
       <PilotDrawer.Screen name="Support" component={SupportNavigation}/>
-      <PilotDrawer.Screen name="Sign out" component={() => SignOutScreen()}/>
+      <PilotDrawer.Screen name="Sign out" component={() => signOut()}/>
       </PilotDrawer.Navigator>
     </NavigationContainer>
   )

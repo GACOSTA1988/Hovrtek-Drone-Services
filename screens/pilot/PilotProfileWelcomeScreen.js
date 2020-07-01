@@ -20,7 +20,7 @@ import princePic01 from "../../assets/princePic01.jpg";
 import { AntDesign } from "@expo/vector-icons";
 import { APP_STRINGS, NAV_SCREENS } from "../../constants";
 import logo from "../../assets/hovrtek_logo.png";
-import DeleteUser from "../auth/DeleteUser"
+import deleteUser from "../../actions/users"
 
 const {
   abilityOver400Ft,
@@ -73,7 +73,7 @@ function PilotProfileWelcomeScreen(props, {deletePilotProfile}) {
   });
 
   function deleteProfile() {
-    DeleteUser();
+    deleteUser();
     props.deletePilotProfile(profileDetails.key);
   }
 

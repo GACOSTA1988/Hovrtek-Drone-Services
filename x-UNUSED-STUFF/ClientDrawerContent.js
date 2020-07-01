@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
-import SignOutScreen from '../screens/auth/SignOutScreen';
+import signOut from '../screens/auth/signOut';
 
 
 const ClientDrawerContent = (props) => {
@@ -35,7 +35,7 @@ const ClientDrawerContent = (props) => {
 
       <TouchableOpacity
       style={{marginTop: 20, marginLeft: 5}}
-      onPress={() => SignOutScreen()}
+      onPress={() => signOut()}
       >
         <Text>Sign out</Text>
       </TouchableOpacity>

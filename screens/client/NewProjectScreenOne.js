@@ -107,11 +107,10 @@ function NewProjectScreenOne(props) {
         <View style={styles.newProjectListTextWrapper}>
           <Text style={styles.detailsHeader}>What?</Text>
           <TextInput
-            placeholder={"Enter a short description of what you are recording"}
+            placeholder={"Enter a short description"}
             style={styles.input}
             value={recording}
             onChangeText={setRecording}
-            onChangeText={setLocation}
             returnKeyType={"next"}
             underlineColorAndroid={"grey"}
           />
@@ -126,7 +125,7 @@ function NewProjectScreenOne(props) {
           <View style={styles.hr}/>
           <Text style={styles.detailsHeader}>Where?</Text>
           <TextInput
-            placeholder={"Enter the location of your drone service"}
+            placeholder={"Enter the location"}
             style={styles.input}
             value={location}
             onChangeText={setLocation}
@@ -181,17 +180,16 @@ const styles = StyleSheet.create({
     color: "#DDE2E4"
   },
   submitButton: {
-    // marginTop: 10,
-    // marginBottom: 10,
     textAlign: "center",
     fontSize: 17,
-    // color: "#DDE2E4",
     backgroundColor: "#DDE2E4",
     width: 250,
-    marginTop: 15,
-    marginBottom: 10,
+    marginTop: 30,
     padding: 5,
     borderRadius: 5,
+    fontWeight: "bold",
+    borderColor: "#a8acab",
+    borderWidth: 2
   },
   continueButton: {
     marginTop: 10,
@@ -203,16 +201,6 @@ const styles = StyleSheet.create({
   buttonWrapper:{
     alignItems: 'center'
   },
-  submitWrapper: {
-    width: 200,
-    height: 60,
-    borderWidth: 2,
-    borderColor: "#DDE2E4",
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20
-  },
   opaque: {
     opacity: 0.2
   },
@@ -221,7 +209,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingBottom: 15,
     marginBottom: 10,
-    color: "#a8acad",
+    color: "#a8acab",
     fontSize: 17,
   },
   hr: {

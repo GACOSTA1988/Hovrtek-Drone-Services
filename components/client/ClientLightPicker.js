@@ -50,10 +50,10 @@ const ClientLightPicker = (props) => {
     <RadioForm
       labelStyle={styles.radiobutton}
       animation={true}
-      selectedButtonColor={"#a8acad"}
-      selectedLabelColor={"#a8acad"}
-      labelColor={"#a8acad"}
-      buttonColor={"#a8acad"}
+      selectedButtonColor={"#a8acab"}
+      selectedLabelColor={"#a8acab"}
+      labelColor={"#a8acab"}
+      buttonColor={"#a8acab"}
       // formHorizontal={true}
       buttonSize={15}
       radio_props={radio_props}

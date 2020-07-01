@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Alert,
+  TextInput
 } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -35,6 +36,9 @@ export const PassSetDroneType = React.createContext();
 export const PassDroneTypeState = React.createContext();
 export const PassSetInsuredStatus = React.createContext();
 export const PassInsuredStatusState = React.createContext();
+
+export const PassSetLocation = React.createContext();
+export const PassLocationState = React.createContext();
 
 const {
   briefSummary,
@@ -102,6 +106,7 @@ function PilotProfileSetupPageOneScreen(props) {
   const [profileComplete, setProfileComplete] = useState(
     profileCompletePlaceHolder
   );
+  const [location, setLocation] = useState(pilotLocationPlaceHolder);
 
   const [isModalActive, setIsModalActive] = useState(false);
 
@@ -112,7 +117,7 @@ function PilotProfileSetupPageOneScreen(props) {
       return;
     } else {
       props.editPilotProfile(
-        currentUserProps.pilotLocation,
+        location,
         personalBio,
         yearsOfExperience,
         faaLicenseExp,
@@ -133,7 +138,6 @@ function PilotProfileSetupPageOneScreen(props) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={[{ flexGrow: 1, backgroundColor: "#161616",  }, isModalActive ? styles.opaque : '']}>
         <Text style={styles.bodyText}>{briefSummary}</Text>
-        {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
              <PassSetPersonalBio.Provider value={setPersonalBio}>
               <PassPersonalBioState.Provider value={personalBio}>
@@ -141,12 +145,7 @@ function PilotProfileSetupPageOneScreen(props) {
                </PassPersonalBioState.Provider>
             </PassSetPersonalBio.Provider>
           </View>
-          
-        ) : (
-          <Text style={styles.bodyText}>{briefSummary}</Text>
-        )}
         <Text style={styles.bodyText}>{yearsExperience}</Text>
-        {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
             <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
               <PassYearsOfExperienceState.Provider value={yearsOfExperience}>
@@ -154,56 +153,42 @@ function PilotProfileSetupPageOneScreen(props) {
               </PassYearsOfExperienceState.Provider>
             </PassSetYearsOfExperience.Provider>
           </View>
-        ) : (
-          <Text style={styles.bodyText}>{yearsExperience}</Text>
-        )}
         <Text style={styles.bodyText}>{modelDrone}</Text>
-        {currentUserProps ? (
-          <View style={styles.droneExpWrapper}>
-            <PassSetDroneType.Provider value={setDroneType}>
-              <PassDroneTypeState.Provider value={droneType}>
-                <DroneTypePicker setIsModalActive={setIsModalActive}/>
-              </PassDroneTypeState.Provider>
-            </PassSetDroneType.Provider>
-          </View>
-        ) : (
-          <Text style={styles.bodyText}>{modelDrone}</Text>
-        )}
-
-<Text style={styles.bodyText}>
-             Please Provide FAA License Expiration Date
-          </Text>
-        {currentUserProps ? (
-          <View style={styles.droneExpWrapper}>
-            <PassSetFaaLicenseExp.Provider value={setFaaLicenseExp}>
-              <PassFaaLicenseExpState.Provider value={faaLicenseExp}>
-                <DatePicker setIsModalActive={setIsModalActive}/>
-              </PassFaaLicenseExpState.Provider>
-            </PassSetFaaLicenseExp.Provider>
-          </View>
-        ) : (
-          <Text style={styles.bodyText}>
-             Please Provide FAA License Expiration Date
-          </Text>
-        )}
-
-        {currentUserProps && (
-          <View style={styles.radioWrapper}>
-            <Text style={styles.radioText}>
-              {insurance}
-            </Text>
-            <InsuranceRadio
-              setInsuredStatus={setInsuredStatus}
-              insuredStatus={insuredStatus}
-            />
-          </View>
-        )}
-        
-
+        <View style={styles.droneExpWrapper}>
+          <PassSetDroneType.Provider value={setDroneType}>
+            <PassDroneTypeState.Provider value={droneType}>
+              <DroneTypePicker setIsModalActive={setIsModalActive}/>
+            </PassDroneTypeState.Provider>
+          </PassSetDroneType.Provider>
+        </View>
+        <Text style={styles.bodyText}>Please Provide FAA License Expiration Date</Text>
+        <View style={styles.droneExpWrapper}>
+          <PassSetFaaLicenseExp.Provider value={setFaaLicenseExp}>
+            <PassFaaLicenseExpState.Provider value={faaLicenseExp}>
+              <DatePicker setIsModalActive={setIsModalActive}/>
+            </PassFaaLicenseExpState.Provider>
+          </PassSetFaaLicenseExp.Provider>
+        </View>
+        <View style={styles.radioWrapper}>
+          <Text style={styles.radioText}>{insurance}</Text>
+          <InsuranceRadio
+            setInsuredStatus={setInsuredStatus}
+            insuredStatus={insuredStatus}
+          />
+        </View>
+        <View style={styles.radioWrapper}>
+          <Text style={styles.radioText}>Location:</Text>
+          <TextInput
+            value={location}
+            onChangeText={setLocation}
+            style={{color: "white"}}
+            placeholderTextColor="#DDE2E4"
+          />
+        </View>
         <View style={styles.centerButton}>
-            <TouchableOpacity style={styles.saveAndContinueWrapper} onPress={submit} title={saveAndContinue}>
-              <Text style={styles.saveAndContinueText}>{saveAndContinue}</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.saveAndContinueWrapper} onPress={submit} title={saveAndContinue}>
+            <Text style={styles.saveAndContinueText}>{saveAndContinue}</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

@@ -81,6 +81,7 @@ function PilotProfileImageUploadScreen(props) {
   const submit = (e) => {
     props.editPilotProfile(
       currentUserProps.pilotLocation,
+      currentUserProps.pilotCoordinates,
       personalBio,
       yearsOfExperience,
       faaLicenseExp,

@@ -96,6 +96,7 @@ function PilotProfileSetupPageTwoScreen(props) {
     } else {
       props.editPilotProfile(
         currentUserProps.pilotLocation,
+        currentUserProps.pilotCoordinates,
         personalBio,
         yearsOfExperience,
         faaLicenseExp,

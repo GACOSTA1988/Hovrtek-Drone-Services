@@ -23,6 +23,11 @@ import DatePicker from "../../components/pilot/DatePicker";
 import { APP_STRINGS } from '../../constants/index';
 import InsuranceRadio from "../../components/pilot/InsuranceRadio";
 
+import LoadingScreen from "../LoadingScreen"
+import Geocoder from "react-native-geocoding";
+import {API_KEY} from "../../geocoder"
+Geocoder.init(API_KEY);
+
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetPersonalBio = React.createContext();
 export const PassPersonalBioState = React.createContext();
@@ -106,15 +111,18 @@ function PilotProfileSetupPageOneScreen(props) {
   const [location, setLocation] = useState(pilotLocationPlaceHolder);
 
   const [isModalActive, setIsModalActive] = useState(false);
+  const [loadingActive, setLoadingActive ] = useState(false);
 
-  const submit = (e) => {
-    e.preventDefault();
+  async function submit(){
+    setLoadingActive(true)
+    let locationCoordinates = await convertLocation(location)
     if (personalBio.trim() === "") {
       Alert.alert("Please fill in your personal bio");
       return;
     } else {
       props.editPilotProfile(
         location,
+        locationCoordinates,
         personalBio,
         yearsOfExperience,
         faaLicenseExp,
@@ -127,12 +135,33 @@ function PilotProfileSetupPageOneScreen(props) {
         profileImageUrl,
         currentUserProps.key
       );
+      setLoadingActive(false)
       navigation.navigate("PilotProfileSetupPageTwoScreen");
     }
   };
 
+  async function convertLocation(location){
+    let coordinates
+    try {
+      coordinates = await Geocoder.from(location).then(json => {
+        const { lat, lng } = json.results[0].geometry.location;
+        let pilotCoords = [lat, lng]
+        return pilotCoords
+      }).catch(error => {
+        console.log(error)
+        return coordinates = [45.523064, -122.676483]
+      });
+    } catch (error) {
+      coordinates = [45.523064, -122.676483]
+    }
+    return coordinates
+  }
+
   return (
     <View style={styles.container}>
+      {loadingActive ?
+        <LoadingScreen />
+        :
       <ScrollView contentContainerStyle={[{ flexGrow: 1, backgroundColor: "#161616",  }, isModalActive ? styles.opaque : '']}>
         <Text style={styles.bodyText}>{briefSummary}</Text>
           <View style={styles.droneExpWrapper}>
@@ -188,6 +217,7 @@ function PilotProfileSetupPageOneScreen(props) {
           </TouchableOpacity>
         </View>
       </ScrollView>
+    }
     </View>
   );
 }

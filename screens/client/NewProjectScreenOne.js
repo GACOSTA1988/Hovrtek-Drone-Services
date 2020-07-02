@@ -21,6 +21,7 @@ import LoadingScreen from "../LoadingScreen"
 import Geocoder from "react-native-geocoding";
 import {API_KEY} from "../../geocoder"
 Geocoder.init(API_KEY);
+
 // CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
 export const PassDateState = React.createContext();
@@ -44,8 +45,8 @@ function NewProjectScreenOne(props) {
   const [ loadingActive, setLoadingActive ] = useState(false);
 
   async function submit(){
-    let locationCoordinates = await convertLocation(location)
     setLoadingActive(true)
+    let locationCoordinates = await convertLocation(location)
     if (location.trim() === '') {
       Alert.alert("Please fill in the location of your Drone Service");
       setLoadingActive(false)

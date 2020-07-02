@@ -34,10 +34,7 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
   const [ bio, setBio ] = useState(profileDetails.bio);
   const [ industry, setIndustry ] = useState(profileDetails.industry);
   const [ paymentType, setPaymentType ] = useState(profileDetails.paymentType);
-
-  const [ profileImageUrl, setProfileImageUrl ] = useState(
-    profileDetails.profileImageUrl,
-  );
+  const [ profileImageUrl, setProfileImageUrl ] = useState(profileDetails.profileImageUrl);
 
   const [loadingActive, setLoadingActive] = useState(false);
 

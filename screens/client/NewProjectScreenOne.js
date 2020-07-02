@@ -102,8 +102,9 @@ function NewProjectScreenOne(props) {
         <LoadingScreen />
         :
         <ScrollView
-        style={[styles.scrollWrapper, isModalActive ? styles.opaque : '']}
-        showsVerticalScrollIndicator={false}
+          style={[styles.scrollWrapper, isModalActive ? styles.opaque : '']}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps='handled'
         >
         <View style={styles.newProjectListTextWrapper}>
           <Text style={styles.detailsHeader}>What?</Text>

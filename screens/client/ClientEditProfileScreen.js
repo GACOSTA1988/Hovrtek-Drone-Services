@@ -126,7 +126,10 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
   }
 
   return (
-    <KeyboardAwareScrollView style={styles.keyboardView}>
+    <KeyboardAwareScrollView
+      style={styles.keyboardView}
+      keyboardShouldPersistTaps='handled'
+    >
     {loadingActive ?
       <LoadingScreen />
       :

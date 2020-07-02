@@ -133,6 +133,7 @@ function PilotSignUpScreen(props) {
         height: "100%",
         backgroundColor: "#161616",
       }}
+      keyboardShouldPersistTaps='handled'
     >
       <ImageBackground source={landingPageImage} style={styles.MainContainer}>
         <View style={styles.textWrapper}>

@@ -79,6 +79,7 @@ function ClientSignUpScreen(props) {
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       scrollToOverflowEnabled={false}
+      keyboardShouldPersistTaps='handled'
       style={{
         flex: 1,
         height: "100%",

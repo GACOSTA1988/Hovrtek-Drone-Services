@@ -1,7 +1,7 @@
 import React from "react";
 import * as firebase from "firebase";
 
-const DeleteUser = (props) => {
+const deleteUser = (props) => {
   let user = firebase.auth().currentUser;
   try {
     user.delete();
@@ -11,4 +11,4 @@ const DeleteUser = (props) => {
   return null;
 };
 
-export default DeleteUser;
+export default deleteUser;

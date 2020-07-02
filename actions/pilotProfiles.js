@@ -56,6 +56,7 @@ export function postPilotProfiles(
 
 export function editPilotProfile(
   pilotLocation = "",
+  pilotCoordinates= "",
   personalBio = "",
   yearsOfExperience = "",
   faaLicenseExp = "",
@@ -71,6 +72,7 @@ export function editPilotProfile(
   return (dispatch) => {
     firebase.database().ref(`/pilotProfiles`).child(key).update({
       pilotLocation,
+      pilotCoordinates,
       personalBio,
       yearsOfExperience,
       faaLicenseExp,

@@ -1,7 +1,6 @@
-import React from "react";
 import * as firebase from "firebase";
 
-const SignOutScreen = (props) => {
+const signOut = (props) => {
   try {
     firebase.auth().signOut();
     props.navigation.navigate("SignIn");
@@ -9,4 +8,4 @@ const SignOutScreen = (props) => {
   return null;
 };
 
-export default SignOutScreen;
+export default signOut;

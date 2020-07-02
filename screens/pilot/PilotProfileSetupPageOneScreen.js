@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Alert,
+  TextInput
 } from "react-native";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -21,6 +22,11 @@ import BioPicker from "../../components/pilot/BioPicker";
 import DatePicker from "../../components/pilot/DatePicker";
 import { APP_STRINGS } from '../../constants/index';
 import InsuranceRadio from "../../components/pilot/InsuranceRadio";
+
+import LoadingScreen from "../LoadingScreen"
+import Geocoder from "react-native-geocoding";
+import {API_KEY} from "../../geocoder"
+Geocoder.init(API_KEY);
 
 // Context Hook Stuff - passing props to Modals / Pickers
 export const PassSetPersonalBio = React.createContext();
@@ -102,17 +108,21 @@ function PilotProfileSetupPageOneScreen(props) {
   const [profileComplete, setProfileComplete] = useState(
     profileCompletePlaceHolder
   );
+  const [location, setLocation] = useState(pilotLocationPlaceHolder);
 
   const [isModalActive, setIsModalActive] = useState(false);
+  const [loadingActive, setLoadingActive ] = useState(false);
 
-  const submit = (e) => {
-    e.preventDefault();
+  async function submit(){
+    setLoadingActive(true)
+    let locationCoordinates = await convertLocation(location)
     if (personalBio.trim() === "") {
       Alert.alert("Please fill in your personal bio");
       return;
     } else {
       props.editPilotProfile(
-        currentUserProps.pilotLocation,
+        location,
+        locationCoordinates,
         personalBio,
         yearsOfExperience,
         faaLicenseExp,
@@ -125,15 +135,35 @@ function PilotProfileSetupPageOneScreen(props) {
         profileImageUrl,
         currentUserProps.key
       );
+      setLoadingActive(false)
       navigation.navigate("PilotProfileSetupPageTwoScreen");
     }
   };
 
+  async function convertLocation(location){
+    let coordinates
+    try {
+      coordinates = await Geocoder.from(location).then(json => {
+        const { lat, lng } = json.results[0].geometry.location;
+        let pilotCoords = [lat, lng]
+        return pilotCoords
+      }).catch(error => {
+        console.log(error)
+        return coordinates = [45.523064, -122.676483]
+      });
+    } catch (error) {
+      coordinates = [45.523064, -122.676483]
+    }
+    return coordinates
+  }
+
   return (
     <View style={styles.container}>
+      {loadingActive ?
+        <LoadingScreen />
+        :
       <ScrollView contentContainerStyle={[{ flexGrow: 1, backgroundColor: "#161616",  }, isModalActive ? styles.opaque : '']}>
         <Text style={styles.bodyText}>{briefSummary}</Text>
-        {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
              <PassSetPersonalBio.Provider value={setPersonalBio}>
               <PassPersonalBioState.Provider value={personalBio}>
@@ -141,12 +171,7 @@ function PilotProfileSetupPageOneScreen(props) {
                </PassPersonalBioState.Provider>
             </PassSetPersonalBio.Provider>
           </View>
-          
-        ) : (
-          <Text style={styles.bodyText}>{briefSummary}</Text>
-        )}
         <Text style={styles.bodyText}>{yearsExperience}</Text>
-        {currentUserProps ? (
           <View style={styles.droneExpWrapper}>
             <PassSetYearsOfExperience.Provider value={setYearsOfExperience}>
               <PassYearsOfExperienceState.Provider value={yearsOfExperience}>
@@ -154,58 +179,45 @@ function PilotProfileSetupPageOneScreen(props) {
               </PassYearsOfExperienceState.Provider>
             </PassSetYearsOfExperience.Provider>
           </View>
-        ) : (
-          <Text style={styles.bodyText}>{yearsExperience}</Text>
-        )}
         <Text style={styles.bodyText}>{modelDrone}</Text>
-        {currentUserProps ? (
-          <View style={styles.droneExpWrapper}>
-            <PassSetDroneType.Provider value={setDroneType}>
-              <PassDroneTypeState.Provider value={droneType}>
-                <DroneTypePicker setIsModalActive={setIsModalActive}/>
-              </PassDroneTypeState.Provider>
-            </PassSetDroneType.Provider>
-          </View>
-        ) : (
-          <Text style={styles.bodyText}>{modelDrone}</Text>
-        )}
-
-<Text style={styles.bodyText}>
-             Please Provide FAA License Expiration Date
-          </Text>
-        {currentUserProps ? (
-          <View style={styles.droneExpWrapper}>
-            <PassSetFaaLicenseExp.Provider value={setFaaLicenseExp}>
-              <PassFaaLicenseExpState.Provider value={faaLicenseExp}>
-                <DatePicker setIsModalActive={setIsModalActive}/>
-              </PassFaaLicenseExpState.Provider>
-            </PassSetFaaLicenseExp.Provider>
-          </View>
-        ) : (
-          <Text style={styles.bodyText}>
-             Please Provide FAA License Expiration Date
-          </Text>
-        )}
-
-        {currentUserProps && (
-          <View style={styles.radioWrapper}>
-            <Text style={styles.radioText}>
-              {insurance}
-            </Text>
-            <InsuranceRadio
-              setInsuredStatus={setInsuredStatus}
-              insuredStatus={insuredStatus}
-            />
-          </View>
-        )}
-        
-
+        <View style={styles.droneExpWrapper}>
+          <PassSetDroneType.Provider value={setDroneType}>
+            <PassDroneTypeState.Provider value={droneType}>
+              <DroneTypePicker setIsModalActive={setIsModalActive}/>
+            </PassDroneTypeState.Provider>
+          </PassSetDroneType.Provider>
+        </View>
+        <Text style={styles.bodyText}>Please Provide FAA License Expiration Date</Text>
+        <View style={styles.droneExpWrapper}>
+          <PassSetFaaLicenseExp.Provider value={setFaaLicenseExp}>
+            <PassFaaLicenseExpState.Provider value={faaLicenseExp}>
+              <DatePicker setIsModalActive={setIsModalActive}/>
+            </PassFaaLicenseExpState.Provider>
+          </PassSetFaaLicenseExp.Provider>
+        </View>
+        <View style={styles.radioWrapper}>
+          <Text style={styles.radioText}>{insurance}</Text>
+          <InsuranceRadio
+            setInsuredStatus={setInsuredStatus}
+            insuredStatus={insuredStatus}
+          />
+        </View>
+        <View style={styles.radioWrapper}>
+          <Text style={styles.radioText}>Location:</Text>
+          <TextInput
+            value={location}
+            onChangeText={setLocation}
+            style={{color: "white"}}
+            placeholderTextColor="#DDE2E4"
+          />
+        </View>
         <View style={styles.centerButton}>
-            <TouchableOpacity style={styles.saveAndContinueWrapper} onPress={submit} title={saveAndContinue}>
-              <Text style={styles.saveAndContinueText}>{saveAndContinue}</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.saveAndContinueWrapper} onPress={submit} title={saveAndContinue}>
+            <Text style={styles.saveAndContinueText}>{saveAndContinue}</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
+    }
     </View>
   );
 }

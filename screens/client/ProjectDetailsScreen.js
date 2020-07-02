@@ -51,12 +51,15 @@ function ProjectDetailsScreen(props) {
         </TouchableOpacity>
       )}
       <Text style={styles.ProjectText}> </Text>
-      <Text style={styles.detailsHeader}>Where:</Text>
-      <Text style={styles.DetailsText}>{projectDetails.location}</Text>
-      <Text style={styles.detailsHeader}>When:</Text>
-      <Text style={styles.DetailsText}>{projectDetails.date}</Text>
       <Text style={styles.detailsHeader}>What:</Text>
       <Text style={styles.DetailsText}>{projectDetails.recording}</Text>
+      <View style={styles.hr}/>
+      <Text style={styles.detailsHeader}>When:</Text>
+      <Text style={styles.DetailsText}>{projectDetails.date}</Text>
+      <View style={styles.hr}/>
+      <Text style={styles.detailsHeader}>Where:</Text>
+      <Text style={styles.DetailsText}>{projectDetails.location}</Text>
+      <View style={styles.hr}/>
       <Text style={styles.detailsHeader}>Pilot:</Text>
       {pilot ? (
         <TouchableOpacity
@@ -65,7 +68,7 @@ function ProjectDetailsScreen(props) {
               ...pilot,
             })}
         >
-          <View style={{ flexDirection: "row" }}>
+          <View style={styles.pilotInfo}>
             {pilot.profileImageUrl ? (
               <Image
                 source={{
@@ -88,7 +91,7 @@ function ProjectDetailsScreen(props) {
           </View>
         </TouchableOpacity>
       ) : (
-        <View style={{ flexDirection: "row" }}>
+        <View style={styles.pilotInfo}>
           <Image
             source={{
               uri:
@@ -118,12 +121,10 @@ const styles = StyleSheet.create({
     zIndex: 0
   },
   DetailsText: {
-    backgroundColor: "rgba(221,226,228, 0.2)", 
-    padding:10, 
-    width: "100%", 
-    marginTop: 10, 
+    padding:10,
+    width: "100%",
+    marginTop: 10,
     borderRadius: 5,
-    marginBottom: 20,
     fontSize: 17,
     color: "#DDE2E4",
     fontWeight: "800",
@@ -142,10 +143,12 @@ const styles = StyleSheet.create({
     color: "#DDE2E4",
     marginTop: 20,
   },
-  line: {
-    borderBottomColor: "#DDE2E4",
+  hr: {
+    borderBottomColor: "grey",
     borderBottomWidth: 1,
     marginBottom: 20,
+    width: "100%",
+    alignSelf: "center"
   },
   detailsHeader: {
     fontSize: 20,
@@ -190,6 +193,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
     color: "#DDE2E4"
   },
+  pilotInfo: {
+    flexDirection: "row",
+    marginTop: 15
+  }
 });
 
 function mapStateToProps(state) {

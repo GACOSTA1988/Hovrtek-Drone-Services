@@ -6,7 +6,7 @@ import SupportScreen from "../screens/client/SupportScreen";
 import AccountScreen from '../screens/client/AccountScreen';
 import LocationScreen from '../screens/client/LocationScreen';
 import ServicesScreen from '../screens/client/ServicesScreen';
-import SignOutScreen from '../screens/auth/SignOutScreen';
+import signOut from '../screens/auth/signOut';
 import ClientProfileNavigation from '../navigation/ClientProfileNavigation';
 import MessagingNavigation from '../navigation/MessagingNavigation';
 import ChatScreen from '../screens/messaging/ChatScreen';
@@ -91,7 +91,7 @@ export const SupportNavigation = () => {
 //       />
 //       <ClientDrawer.Screen
 //         name="Sign Out"
-//         component={SignOutScreen}
+//         component={signOut}
 //       />
 //     </ClientDrawer.Navigator>
 //   );

@@ -50,11 +50,12 @@ const ClientLightPicker = (props) => {
     <RadioForm
       labelStyle={styles.radiobutton}
       animation={true}
-      selectedButtonColor={"#DDE2E4"}
-      selectedLabelColor={"#DDE2E4"}
-      labelColor={"#DDE2E4"}
-      buttonColor={"#DDE2E4"}
-      formHorizontal={true}
+      selectedButtonColor={"#a8acab"}
+      selectedLabelColor={"#a8acab"}
+      labelColor={"#a8acab"}
+      buttonColor={"#a8acab"}
+      // formHorizontal={true}
+      buttonSize={15}
       radio_props={radio_props}
       initial={1}
       onPress={(value) => {
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
   },
   modalShowing: {
     opacity: .5,
-  }, 
+  },
   chatText: {
     fontWeight: "bold",
     fontSize: 15,

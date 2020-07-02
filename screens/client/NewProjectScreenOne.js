@@ -1,4 +1,4 @@
-  
+
 import React, { useState } from "react";
 import {
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
+  TextInput
 } from "react-native";
 import { connect } from "react-redux";
 import { getProjects, postProjects, editProject } from "../../actions/projects";
@@ -20,13 +21,10 @@ import LoadingScreen from "../LoadingScreen"
 import Geocoder from "react-native-geocoding";
 import {API_KEY} from "../../geocoder"
 Geocoder.init(API_KEY);
+
 // CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
 export const PassDateState = React.createContext();
-export const PassSetLocation= React.createContext();
-export const PassLocationState = React.createContext();
-export const PassSetRecording = React.createContext();
-export const PassRecordingState = React.createContext();
 export const PassSetLight = React.createContext();
 export const PassLightState = React.createContext();
 
@@ -43,12 +41,12 @@ function NewProjectScreenOne(props) {
     const [ date, setDate ] = (props.route.params.isEditing? useState(projectDetails.date) : useState(""));
     const [ recording, setRecording ] = (props.route.params.isEditing? useState(projectDetails.recording) : useState(""));
     const [ light, setLight ] = (props.route.params.isEditing? useState(projectDetails.light) : useState(""));
-  
+
   const [ loadingActive, setLoadingActive ] = useState(false);
 
   async function submit(){
-    let locationCoordinates = await convertLocation(location)
     setLoadingActive(true)
+    let locationCoordinates = await convertLocation(location)
     if (location.trim() === '') {
       Alert.alert("Please fill in the location of your Drone Service");
       setLoadingActive(false)
@@ -86,7 +84,7 @@ function NewProjectScreenOne(props) {
         return pilotCoords
       }).catch(error => {
         console.log(error)
-        return coordinates = [45.523064, -122.676483]      
+        return coordinates = [45.523064, -122.676483]
       });
     } catch (error) {
       coordinates = [45.523064, -122.676483]
@@ -96,50 +94,47 @@ function NewProjectScreenOne(props) {
 
   const [isModalActive, setIsModalActive] = useState(false);
 
+  const [focus, setFocus] = useState(false);
+
   return (
     <View style={loadingActive ? styles.loadingWrapper : styles.newProjectListWrapper}>
       {loadingActive ?
         <LoadingScreen />
         :
-        <ScrollView 
+        <ScrollView
         style={[styles.scrollWrapper, isModalActive ? styles.opaque : '']}
-        showsVerticalScrollIndicator={false} 
+        showsVerticalScrollIndicator={false}
         >
         <View style={styles.newProjectListTextWrapper}>
-          <Text style={styles.labelText}>
-            Where is the location of your drone service?
-          </Text>
-          <View style={styles.modalWrapper}>
-            <PassSetLocation.Provider value={setLocation}>
-              <PassLocationState.Provider value={location}>
-                <ClientLocationPicker setIsModalActive={setIsModalActive}/>
-              </PassLocationState.Provider>
-            </PassSetLocation.Provider>
-          </View>
-          <Text style={styles.labelText}>
-            What is the date of your Drone shoot?
-          </Text>
-          <View style={styles.modalWrapper}>
+          <Text style={styles.detailsHeader}>What?</Text>
+          <TextInput
+            placeholder={"Enter a short description"}
+            style={styles.input}
+            value={recording}
+            onChangeText={setRecording}
+            returnKeyType={"next"}
+            underlineColorAndroid={"grey"}
+          />
+          <Text style={styles.detailsHeader}>When?</Text>
+          <View>
             <PassSetDate.Provider value={setDate}>
               <PassDateState.Provider value={date}>
                 <ClientDatePicker setIsModalActive={setIsModalActive}/>
               </PassDateState.Provider>
             </PassSetDate.Provider>
           </View>
-          <Text style={styles.labelText}>
-            What will the Drone Service be recording?
-          </Text>
-          <View style={styles.modalWrapper}>
-            <PassSetRecording.Provider value={setRecording}>
-              <PassRecordingState.Provider value={recording}>
-                <ClientRecordingPicker setIsModalActive={setIsModalActive}/>
-              </PassRecordingState.Provider>
-            </PassSetRecording.Provider>
-          </View>
-          <Text style={styles.labelText}>
-            Do you have any light specifications?
-          </Text>
-          <View style={styles.modalWrapper}>
+          <View style={styles.hr}/>
+          <Text style={styles.detailsHeader}>Where?</Text>
+          <TextInput
+            placeholder={"Enter the location"}
+            style={styles.input}
+            value={location}
+            onChangeText={setLocation}
+            returnKeyType={"next"}
+            underlineColorAndroid={"grey"}
+          />
+          <Text style={styles.detailsHeader}>Light specifications?</Text>
+          <View style={styles.radio}>
             <PassSetLight.Provider value={setLight}>
               <PassLightState.Provider value={light}>
                 <ClientLightPicker setIsModalActive={setIsModalActive}/>
@@ -148,7 +143,10 @@ function NewProjectScreenOne(props) {
           </View>
           <View style={styles.buttonWrapper}>
             <TouchableOpacity style={styles.submitWrapper} onPress={submit}>
-              <Text style={styles.submitButton}>Submit Form</Text>
+              {props.route.params.isEditing ?
+              <Text style={styles.submitButton}>Save Changes</Text> :
+              <Text style={styles.submitButton}>Submit Project</Text>
+            }
             </TouchableOpacity>
           </View>
         </View>
@@ -158,15 +156,16 @@ function NewProjectScreenOne(props) {
 }
 const styles = StyleSheet.create({
   newProjectListWrapper: {
-    alignItems: "center",
     backgroundColor: "#161616",
-    height: "100%"
+    height: "100%",
+    paddingLeft: 20,
+    paddingRight: 20
   },
   loadingWrapper: {
     width: "100%",
     height: "100%",
     justifyContent: "center",
-  }, 
+  },
   scrollWrapper: {
     width: "100%",
     paddingTop: "10%",
@@ -174,17 +173,24 @@ const styles = StyleSheet.create({
   newProjectListTextWrapper: {
     marginBottom: 100,
   },
-  labelText: {
+  detailsHeader: {
     marginBottom: 10,
-    textAlign: "center",
+    marginTop: 15,
+    fontSize: 20,
+    fontWeight: "bold",
     color: "#DDE2E4"
   },
   submitButton: {
-    marginTop: 10,
-    marginBottom: 10,
     textAlign: "center",
-    fontSize: 30,
-    color: "#DDE2E4",
+    fontSize: 17,
+    backgroundColor: "#DDE2E4",
+    width: 250,
+    marginTop: 30,
+    padding: 5,
+    borderRadius: 5,
+    fontWeight: "bold",
+    borderColor: "#a8acab",
+    borderWidth: 2
   },
   continueButton: {
     marginTop: 10,
@@ -193,24 +199,30 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: "#DDE2E4",
   },
-  modalWrapper: {
-    alignItems: 'center',
-  },
   buttonWrapper:{
     alignItems: 'center'
   },
-  submitWrapper: {
-    width: 200,
-    height: 60,
-    borderWidth: 2,
-    borderColor: "#DDE2E4",
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20
-  },
   opaque: {
     opacity: 0.2
+  },
+  input: {
+    height: 40,
+    paddingLeft: 5,
+    paddingBottom: 15,
+    marginBottom: 10,
+    color: "#a8acab",
+    fontSize: 17,
+  },
+  hr: {
+    borderBottomColor: "grey",
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    width: "96%",
+    alignSelf: "center"
+  },
+  radio: {
+    marginLeft: "2%",
+    marginTop: 5
   }
 });
 export default connect(null, { getProjects, postProjects, editProject })(NewProjectScreenOne);

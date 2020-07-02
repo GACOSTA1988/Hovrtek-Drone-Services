@@ -47,19 +47,16 @@ function ProjectDetailsScreen(props) {
           })
         }
         >
-          <AntDesign name="edit" size={40} color={"#DDE2E4"}/>
+          <AntDesign name="edit" size={30} color={"#DDE2E4"}/>
         </TouchableOpacity>
       )}
       <Text style={styles.ProjectText}> </Text>
       <Text style={styles.detailsHeader}>What:</Text>
       <Text style={styles.DetailsText}>{projectDetails.recording}</Text>
-      <View style={styles.hr}/>
       <Text style={styles.detailsHeader}>When:</Text>
       <Text style={styles.DetailsText}>{projectDetails.date}</Text>
-      <View style={styles.hr}/>
       <Text style={styles.detailsHeader}>Where:</Text>
       <Text style={styles.DetailsText}>{projectDetails.location}</Text>
-      <View style={styles.hr}/>
       <Text style={styles.detailsHeader}>Pilot:</Text>
       {pilot ? (
         <TouchableOpacity
@@ -108,7 +105,8 @@ function ProjectDetailsScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingLeft: "5%",
+    paddingRight: "5%",
     backgroundColor: "#161616",
     height: "100%"
   },
@@ -126,7 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 5,
     fontSize: 17,
-    color: "#DDE2E4",
+    color: "#a8acab",
     fontWeight: "800",
   },
   nameText: {

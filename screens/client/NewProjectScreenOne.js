@@ -25,8 +25,8 @@ Geocoder.init(API_KEY);
 // CONTEXT HOOKS FOR MODAL FORMS
 export const PassSetDate = React.createContext();
 export const PassDateState = React.createContext();
-export const PassSetLight = React.createContext();
-export const PassLightState = React.createContext();
+// export const PassSetLight = React.createContext();
+// export const PassLightState = React.createContext();
 
 function NewProjectScreenOne(props) {
   const navigation = useNavigation();
@@ -113,6 +113,7 @@ function NewProjectScreenOne(props) {
             value={recording}
             onChangeText={setRecording}
             returnKeyType={"next"}
+            autoFocus={true}
             underlineColorAndroid={"grey"}
           />
           <Text style={styles.detailsHeader}>When?</Text>
@@ -123,7 +124,6 @@ function NewProjectScreenOne(props) {
               </PassDateState.Provider>
             </PassSetDate.Provider>
           </View>
-          <View style={styles.hr}/>
           <Text style={styles.detailsHeader}>Where?</Text>
           <TextInput
             placeholder={"Enter the location"}
@@ -134,13 +134,14 @@ function NewProjectScreenOne(props) {
             underlineColorAndroid={"grey"}
           />
           <Text style={styles.detailsHeader}>Light specifications?</Text>
-          <View style={styles.radio}>
-            <PassSetLight.Provider value={setLight}>
-              <PassLightState.Provider value={light}>
-                <ClientLightPicker setIsModalActive={setIsModalActive}/>
-              </PassLightState.Provider>
-            </PassSetLight.Provider>
-          </View>
+          <TextInput
+            placeholder={"(Optional) Enter light specifications"}
+            style={styles.input}
+            value={light}
+            onChangeText={setLight}
+            returnKeyType={"next"}
+            underlineColorAndroid={"grey"}
+          />
           <View style={styles.buttonWrapper}>
             <TouchableOpacity style={styles.submitWrapper} onPress={submit}>
               {props.route.params.isEditing ?

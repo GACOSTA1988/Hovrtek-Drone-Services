@@ -32,7 +32,8 @@ function ProfileUploader(props) {
   };
 
   async function setImage() {
-    props.triggerLoading()
+    console.log(props);
+    props.triggerLoading();
     try {
       let result = await ImagePicker.launchImageLibraryAsync();
 

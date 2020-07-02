@@ -15,6 +15,7 @@ import { editClientProfile, deleteClientProfile } from "../../actions/clientProf
 import ProfileUploader from "../../components/shared/ProfileUploader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import deleteUser from "../../actions/users"
+import LoadingScreen from "../../screens/LoadingScreen"
 
 // CONTEXT HOOKS PROFILE IMAGE URL
 export const PassSetProfileImageUrlContext = React.createContext();
@@ -37,6 +38,8 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
   const [ profileImageUrl, setProfileImageUrl ] = useState(
     profileDetails.profileImageUrl,
   );
+
+  const [loadingActive, setLoadingActive] = useState(false);
 
   const pluckImage = (imgUrl = "") => {
     setProfileImageUrl(imgUrl);
@@ -127,96 +130,103 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
 
   return (
     <KeyboardAwareScrollView style={styles.keyboardView}>
-      {!profileDetails && <Text>{pageUnavailable}</Text>}
+    {loadingActive ?
+      <LoadingScreen />
+      :
+      <View>
+        {!profileDetails && <Text>{pageUnavailable}</Text>}
+        {profileDetails && (
+          <View>
+            <Image source={princePic01} style={styles.backgroundImage} />
 
-      {profileDetails && (
-        <View>
-          <Image source={princePic01} style={styles.backgroundImage} />
+            <View style={styles.saveButton}>
+              <TouchableOpacity onPress={saveEdits}>
+                <Text style={styles.saveText}>{saveChanges}</Text>
+              </TouchableOpacity>
+            </View>
 
-          <View style={styles.saveButton}>
-            <TouchableOpacity onPress={saveEdits}>
-              <Text style={styles.saveText}>{saveChanges}</Text>
-            </TouchableOpacity>
+            {profileDetails.profileImageUrl ? (
+              <TouchableOpacity
+                onPress={() => Alert.alert("todo: choose image")}
+                style={styles.imagePress}
+              >
+                <Image source={{uri: profileDetails.profileImageUrl}} style={styles.profileImage} />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={() => Alert.alert("todo: choose image")}
+                style={styles.imagePress}
+              >
+                <Image source={personIcon} style={styles.profileImage} />
+              </TouchableOpacity>
+            )}
+
+            {renderFirstAndLastName()}
+
+            <View style={styles.info}>
+              <View style={styles.inlineView}>
+                {renderTextInputItem({
+                  text: "Location: ",
+                  textStyle: styles.otherInput,
+                  textInputStyle: styles.otherInput,
+                  textInputValue: location,
+                  onChangeText: setLocation,
+                })}
+              </View>
+
+              <View>
+                {renderTextInputItem({
+                  text: "Bio: ",
+                  textStyle: { fontSize: 20, marginTop: 10, color: "#DDE2E4" },
+                  textInputStyle: styles.input,
+                  textInputValue: bio,
+                  onChangeText: setBio,
+                  isMultiline: true,
+                })}
+              </View>
+
+              <View style={styles.inlineView}>
+                {renderTextInputItem({
+                  text: "Industry: ",
+                  textStyle: styles.otherInput,
+                  textInputStyle: styles.inputBottom,
+                  textInputValue: industry,
+                  onChangeText: setIndustry,
+                })}
+              </View>
+
+              <View style={styles.inlineView}>
+                {renderTextInputItem({
+                  text: "Payment type: ",
+                  textStyle: styles.otherInput,
+                  textInputStyle: styles.inputBottom,
+                  textInputValue: paymentType,
+                  onChangeText: setPaymentType,
+                })}
+              </View>
+            </View>
+
+            <View style={{ alignItems: "center", marginBottom: 50 }}>
+              <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
+                <PassProfileImageUrlState.Provider value={profileImageUrl}>
+                  <ProfileUploader
+                    hasSquareImage={false}
+                    triggerLoading={() => setLoadingActive(true)}
+                    disableLoading={() => setLoadingActive(false)}
+                    pluckImage={(image) => pluckImage(image)}
+                  />
+                </PassProfileImageUrlState.Provider>
+              </PassSetProfileImageUrlContext.Provider>
+            </View>
           </View>
-
-          {profileDetails.profileImageUrl ? (
-            <TouchableOpacity
-              onPress={() => Alert.alert("todo: choose image")}
-              style={styles.imagePress}
-            >
-              <Image source={{uri: profileDetails.profileImageUrl}} style={styles.profileImage} />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => Alert.alert("todo: choose image")}
-              style={styles.imagePress}
-            >
-              <Image source={personIcon} style={styles.profileImage} />
-            </TouchableOpacity>
-          )}
-
-          {renderFirstAndLastName()}
-
-          <View style={styles.info}>
-            <View style={{ flexDirection: "row", marginTop: 10 }}>
-              {renderTextInputItem({
-                text: "Location: ",
-                textStyle: { fontSize: 20, color: "#DDE2E4" },
-                textInputStyle: { fontSize: 20, color: "#DDE2E4" },
-                textInputValue: location,
-                onChangeText: setLocation,
-              })}
-            </View>
-
-            <View>
-              {renderTextInputItem({
-                text: "Bio: ",
-                textStyle: { fontSize: 20, marginTop: 10, color: "#DDE2E4" },
-                textInputStyle: styles.input,
-                textInputValue: bio,
-                onChangeText: setBio,
-                isMultiline: true,
-              })}
-            </View>
-
-            <View style={{ flexDirection: "row", marginTop: 10 }}>
-              {renderTextInputItem({
-                text: "Industry: ",
-                textStyle: { fontSize: 20, color: "#DDE2E4" },
-                textInputStyle: { fontSize: 20, marginLeft: 5, color: "#DDE2E4" },
-                textInputValue: industry,
-                onChangeText: setIndustry,
-              })}
-            </View>
-
-            <View style={{ flexDirection: "row", marginTop: 10 }}>
-              {renderTextInputItem({
-                text: "Payment type: ",
-                textStyle: { fontSize: 20, color: "#DDE2E4" },
-                textInputStyle: { fontSize: 20, marginLeft: 5, color: "#DDE2E4" },
-                textInputValue: paymentType,
-                onChangeText: setPaymentType,
-              })}
-            </View>
-          </View>
-
-          <View style={{ alignItems: "center", marginBottom: 50 }}>
-            <PassSetProfileImageUrlContext.Provider value={setProfileImageUrl}>
-              <PassProfileImageUrlState.Provider value={profileImageUrl}>
-                <ProfileUploader
-                  hasSquareImage={false}
-                  pluckImage={(image) => pluckImage(image)}
-                />
-              </PassProfileImageUrlState.Provider>
-            </PassSetProfileImageUrlContext.Provider>
-          </View>
-        </View>
-      )}
-      <TouchableOpacity
-        onPress={() => deleteProfile()}
-        >
-        <Text style={{color: "white"}}>Delete Profile</Text>
-      </TouchableOpacity>
+        )}
+        <TouchableOpacity
+          onPress={() => deleteProfile()}
+          >
+          <Text style={{color: "white"}}>Delete Profile</Text>
+        </TouchableOpacity>
+      </View>
+    }
     </KeyboardAwareScrollView>
   );
 }
@@ -227,10 +237,6 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#161616"
   },
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: "#161616"
-  // },
   text: {
     fontSize: 20,
   },
@@ -276,6 +282,10 @@ const styles = StyleSheet.create({
     marginBottom: 3.5,
     color: "#DDE2E4",
   },
+  otherInput: {
+    fontSize: 15,
+    color: "#DDE2E4",
+  },
   imagePress: {
     width: 100,
     marginBottom: 3.5
@@ -288,6 +298,7 @@ const styles = StyleSheet.create({
   inputBottom: {
     fontSize: 20,
     marginLeft: 5,
+    color: "#DDE2E4"
   },
   inlineView: {
     flexDirection: "row",

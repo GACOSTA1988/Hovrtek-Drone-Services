@@ -72,10 +72,10 @@ function PilotProfileWelcomeScreen(props, {deletePilotProfile}) {
     }
   });
 
-  function deleteProfile() {
-    deleteUser();
-    props.deletePilotProfile(profileDetails.key);
-  }
+  // function deleteProfile() {
+  //   deleteUser();
+  //   props.deletePilotProfile(profileDetails.key);
+  // }
 
   const renderProfileStatsItem = (titleString = "", specsValue = "") => {
     return (
@@ -199,11 +199,11 @@ function PilotProfileWelcomeScreen(props, {deletePilotProfile}) {
           {renderStartProfileView()}
         </ScrollView>
       )}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => deleteProfile()}
         >
         <Text style={{color: "white"}}>Delete Profile</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }

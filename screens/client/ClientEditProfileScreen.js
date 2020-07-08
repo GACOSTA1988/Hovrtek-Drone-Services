@@ -120,10 +120,10 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
     );
   };
 
-  function deleteProfile() {
-    deleteUser();
-    props.deleteClientProfile(profileDetails.key);
-  }
+  // function deleteProfile() {
+  //   deleteUser();
+  //   props.deleteClientProfile(profileDetails.key);
+  // }
 
   return (
     <KeyboardAwareScrollView style={styles.keyboardView}>
@@ -139,7 +139,11 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
             </TouchableOpacity>
           </View>
 
-          {profileDetails.profileImageUrl ? (
+          <View style={styles.imagePress}>
+              <Image source={personIcon} style={styles.profileImage} />
+            </View>
+
+          {/* {profileDetails.profileImageUrl ? (
             <TouchableOpacity
               onPress={() => Alert.alert("todo: choose image")}
               style={styles.imagePress}
@@ -153,7 +157,7 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
             >
               <Image source={personIcon} style={styles.profileImage} />
             </TouchableOpacity>
-          )}
+          )} */}
 
           {renderFirstAndLastName()}
 
@@ -212,11 +216,11 @@ function ClientEditProfileScreen(props, { editClientProfile, deleteClientProfile
           </View>
         </View>
       )}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => deleteProfile()}
         >
         <Text style={{color: "white"}}>Delete Profile</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </KeyboardAwareScrollView>
   );
 }

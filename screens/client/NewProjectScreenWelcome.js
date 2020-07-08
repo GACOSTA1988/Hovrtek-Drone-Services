@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         position: 'absolute',
         top: 10,
-        tintColor: '#A8C7BC'
+        tintColor: '#B4C889'
     },
     welcomeText: {
         fontSize: 30,

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Image, View, StyleSheet } from 'react-native';
 import loading from '../assets/loading.gif';
+import GreenLoading from '../assets/GreenLoading.gif';
 
 const LoadingScreen = () => {
   return (
     <View style={styles.loadingBody}>
-      <Image source={loading} style={styles.loadingImage}/>
+      <Image source={GreenLoading} style={styles.loadingImage}/>
     </View>
   )
 }

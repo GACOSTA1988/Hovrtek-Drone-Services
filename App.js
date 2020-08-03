@@ -12,7 +12,6 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
-import { StatusBar, Platform } from "react-native";
 import Footer from './components/shared/Footer';
 
 SplashScreen.preventAutoHide();
@@ -22,7 +21,7 @@ export default () => {
   // REDUX STATE
   const state = createStore(reducers, {}, applyMiddleware(ReduxThunk));
   console.disableYellowBox = true;
-  // auth stuff - maybe should be elsewhere?
+
   const auth = firebase.auth();
 
   let [ loggedIn, setLoggedIn ] = useState("loading");
@@ -30,10 +29,10 @@ export default () => {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      setLoggedIn("true");
+      setLoggedIn(true);
       setUserType(user.photoURL);
     } else {
-      setLoggedIn("false");
+      setLoggedIn(false);
       setUserType(null);
     }
   });
@@ -48,18 +47,15 @@ export default () => {
     };
   }, []);
 
-  // to-do change "true" to actual boolean true
-  const isClientLoggedIn = loggedIn === "true" && userType === "C";
-  const isPilotLoggedIn = loggedIn === "true" && userType === "P";
-  const isIOS = Platform.OS === "ios";
+  const isClientLoggedIn = loggedIn === true && userType === "C";
+  const isPilotLoggedIn = loggedIn === true && userType === "P";
 
   return (
     <Provider store={state}>
-      {isIOS && <StatusBar backgroundColor="white" barStyle="light-content" />}
       <AuthContext.Provider value={authContext}>
           {isClientLoggedIn && clientNavigation}
           {isPilotLoggedIn && pilotNavigation}
-          {loggedIn === "false" && renderLogin()}
+          {loggedIn === false && renderLogin()}
           {loggedIn === "loading" && renderLoading()}
         <Footer />
       </AuthContext.Provider>

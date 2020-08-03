@@ -4,12 +4,12 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   Platform,
 } from "react-native";
-import { NotificationContext } from "../../context";
+import { createContext } from "react";
 
 const Notification = () => {
+  const NotificationContext = createContext();
   const noteContext = useContext(NotificationContext);
   const messages = noteContext[0];
   const [ visible, setVisible ] = useState(noteContext[1]);

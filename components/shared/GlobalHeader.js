@@ -11,14 +11,10 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import hovrtekLogo from "../../assets/hovrtek_logo.png";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
-import Notification from "./Notification";
 import { getMessages } from "../../actions/messages.js";
 import { connect } from "react-redux";
 import _ from "lodash";
 import * as firebase from "firebase";
-import { NotificationContext } from "../../context";
-import { HeaderContext } from "../../context";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const GlobalHeader = (props, { getMessages }) => {
   const [isEnabled, setIsEnabled] = useState(props.isMap ?? false);

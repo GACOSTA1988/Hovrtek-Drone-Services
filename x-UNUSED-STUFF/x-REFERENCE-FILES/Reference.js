@@ -37,7 +37,7 @@ export default class LicenserUploader extends React.Component {
 
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, Text, StyleSheet, Button, ScrollView, TextInput, FlatList } from "react-native";
-import { AuthContext } from "../../context";
+import { AuthContext } from "../../App";
 import ProfileImageUploader from '../../components/pilot/ProfileImageUploader';
 import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
@@ -190,7 +190,7 @@ import {
   ScrollView,
   Alert
 } from "react-native";
-import { AuthContext } from "../../context";
+import { AuthContext } from "../../App";
 import * as firebase from "firebase";
 import { connect } from "react-redux";
 

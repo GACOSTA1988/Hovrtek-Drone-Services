@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from "react";
-import { AuthContext } from "./context";
 import { SplashScreen } from "expo";
 import * as firebase from "firebase";
 import {
@@ -13,9 +12,11 @@ import { createStore, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers/index";
 import Footer from './components/shared/Footer';
+import { createContext } from "react";
 
 SplashScreen.preventAutoHide();
 setTimeout(SplashScreen.hide, 3500);
+export const AuthContext = createContext();
 
 export default () => {
   // REDUX STATE

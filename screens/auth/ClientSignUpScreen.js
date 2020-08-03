@@ -9,7 +9,7 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
-import { AuthContext } from "../../context";
+import { AuthContext } from "../../App";
 import * as firebase from "firebase";
 import { postClientProfiles } from "../../actions/clientProfiles";
 import { connect } from "react-redux";
